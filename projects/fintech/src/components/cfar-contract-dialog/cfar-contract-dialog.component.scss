@@ -1,0 +1,78 @@
+@import '../../styles/helper.scss';
+@import '../../styles/dialog.scss';
+
+
+// How to use : https://tomastrajan.medium.com/the-complete-guide-to-angular-material-themes-4d165a9d24d1
+@mixin cfar-contract-dialog-theme($theme) {
+
+    // Colors used for element backgrounds
+    $bg-palette: map-get($theme, background);
+
+    // Colors used for texts and icons
+    $fg-palette: map-get($theme, foreground);
+
+    // Main color most widely used across all screens and components
+    $primary-palette: map-get($theme, primary);
+
+    // Also known as the secondary color. Used for floating action buttons and interactive elements.
+    $accent-palette: map-get($theme, accent);
+
+    // Color to convey error state
+    $warn-palette: map-get($theme, warn);
+
+    // If it's dark theme or not
+    $is-dark: map-get($theme, is-dark);
+
+    // ----------------------------------------------
+
+    hopper-cfar-contract-dialog {
+        .mat-dialog-title {
+            background-color: map-get($accent-palette, 800);
+            color: map-get($accent-palette, "800-contrast");
+            margin: 0px;
+
+            .big-icon {
+                font-size: 40px;
+                height: 100%;
+            }
+        }
+
+        .mat-dialog-content {
+            .fat-icon {
+                font-weight: 700;
+            }
+
+            mat-card {
+                color: map-get($fg-palette, default);
+
+                &:hover {
+                    @include mat.elevation(4);
+                }
+
+                &.active {
+                    border: 2px solid map-get($accent-palette, default);
+                }
+
+                .offer-title {
+                    font-weight: bold;
+                }
+
+                .price-per-traveler {
+                    font-style: bold;
+                    color: map-get($fg-palette, "secondary-text")
+                }
+            }
+        }
+
+        .mat-dialog-actions .mat-button-base+.mat-button-base,
+        .mat-dialog-actions .mat-mdc-button-base+.mat-mdc-button-base {
+            margin: 0px;
+        }
+
+        @if ($is-dark) {
+
+        } @else {
+            
+        }
+    }
+}

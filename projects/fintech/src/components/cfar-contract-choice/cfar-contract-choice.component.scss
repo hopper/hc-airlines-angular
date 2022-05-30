@@ -1,0 +1,71 @@
+@import '../../styles/helper.scss';
+
+
+// How to use : https://tomastrajan.medium.com/the-complete-guide-to-angular-material-themes-4d165a9d24d1
+@mixin cfar-contract-choice-theme($theme) {
+
+    // Colors used for element backgrounds
+    $bg-palette: map-get($theme, background);
+
+    // Colors used for texts and icons
+    $fg-palette: map-get($theme, foreground);
+
+    // Main color most widely used across all screens and components
+    $primary-palette: map-get($theme, primary);
+
+    // Also known as the secondary color. Used for floating action buttons and interactive elements.
+    $accent-palette: map-get($theme, accent);
+
+    // Color to convey error state
+    $warn-palette: map-get($theme, warn);
+
+    // If it's dark theme or not
+    $is-dark: map-get($theme, is-dark);
+
+    // ----------------------------------------------
+
+    hopper-cfar-contract-choice {
+        .mat-card {
+            &:hover {
+                @include mat.elevation(4);
+            }
+    
+            .big-icon {
+                width: 32px;
+                height: 32px;
+                font-size: 32px;
+                border: 16px solid map-get($primary-palette, default);
+                background: map-get($primary-palette, default);
+                color: white;
+                border-radius: 32px;
+
+                @include media-breakpoint('lt-md') {
+                    width: 24px;
+                    height: 24px;
+                    font-size: 24px;
+                }
+        
+                @include media-breakpoint('lt-sm') {
+                    width: 16px;
+                    height: 16px;
+                    font-size: 16px;
+                }
+            }
+    
+            .fat-icon {
+                font-weight: 700;
+            }
+    
+            .offer-title {
+                font-weight: bold;
+                margin: 0px;
+            }
+        }
+    
+        @if ($is-dark) {
+    
+        } @else {
+            
+        }
+    }
+}

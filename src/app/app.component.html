@@ -1,0 +1,31 @@
+<div class="app-container">
+
+  <p>
+    <mat-toolbar class="mat-elevation-z6" color="primary" fxLayout="row" fxLayoutAlign="space-between center">
+      <span>Hopper Application</span>
+
+      <button mat-icon-button (click)="switchThemeMode()">
+        <mat-icon mat-icon-button *ngIf="!isDarkMode()">dark_mode</mat-icon>
+        <mat-icon mat-icon-button *ngIf="isDarkMode()">light_mode</mat-icon>
+      </button>
+    </mat-toolbar>
+  </p>
+
+  <hopper-event-button></hopper-event-button>
+
+  <hr> 
+
+  <div class="buttons-container">
+    <button mat-flat-button style="background: '#c5f48b';" (click)="onOpenCfarContractDialog()">Open CFAR Contract dialog</button>
+    <button mat-flat-button color="primary" (click)="onOpenCfarExerciseDialog()">Open CFAR Exercise dialog</button>
+  </div>
+
+  <hr>
+
+  <div class="cfar-contract-choice-container">
+    <h3>CFAR contract choice</h3>
+  
+    <hopper-cfar-contract-choice></hopper-cfar-contract-choice>
+  </div>
+
+</div>

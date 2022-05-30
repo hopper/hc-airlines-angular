@@ -1,0 +1,55 @@
+<div mat-dialog-title class="p-32" ngClass.lt-md="px-16" fxLayout="row wrap" fxLayout="start center">
+    
+    <div fxFlex="80" fxLayoutAlign="center start" fxLayout="column">
+        <mat-icon class="big-icon">cached</mat-icon>
+        <h2>Cancel For Any Reason</h2>
+    </div>
+    <div fxFlex="20" fxLayoutAlign="end start">
+        <button mat-mini-fab matTooltip="Close" (click)="onClose()">
+            <mat-icon>clear</mat-icon>
+        </button>
+    </div>
+
+</div>
+
+<mat-dialog-content class="mat-typography">
+  
+    <div class="p-32" ngClass.lt-md="px-16" fxLayout="row wrap" fxLayoutAlign="start center">
+        
+        <div fxFlex="100">
+            <span class="powered-by">Powered by Hopper</span>
+        </div>
+
+        <div fxFlex="100" class="p-16" *ngFor="let rule of rules" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
+            <mat-icon class="fat-icon">check</mat-icon>
+            <span>{{ rule }}</span>
+        </div>
+    
+    </div>
+
+    <div class="px-32" ngClass.lt-md="px-16" fxLayout="row wrap" fxLayout.lt-md="column" fxLayoutAlign="center center">
+
+        <mat-card class="m-16" fxFlex fxLayout="row wrap" *ngFor="let offer of offers" 
+            [ngClass]="{ 'active': offer == selectedOffer }"
+            [ngClass.lt-md]="{ 'active': offer == selectedOffer, 'full-width': true }">
+            <div fxFlex="100" (click)="onSelectOffer(offer)">
+                <h3 class="offer-title">{{ offer?.title }}</h3>
+                <span class="price-per-traveler">$/traveler</span>
+            </div>
+            <div fxFlex="100" fxLayoutAlign="end center">
+                <button mat-button color="primary" (click)="onViewDetails(offer)">View details</button>
+            </div>
+        </mat-card>
+
+    </div>
+    
+</mat-dialog-content>
+
+<mat-dialog-actions>
+
+    <div class="p-32" ngClass.lt-md="px-16" fxFlex="100" fxLayout="row wrap" fxLayout.lt-sm="column" fxLayoutAlign="end center">
+        <button mat-button color="primary" ngClass.lt-sm="full-width" (click)="onClose()">Decline Coverage</button>
+        <button mat-flat-button color="primary" ngClass.lt-sm="full-width" (click)="onSubmit()">Get XX% Coverage | $YY</button>
+    </div>
+  
+</mat-dialog-actions>

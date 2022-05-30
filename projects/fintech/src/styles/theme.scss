@@ -1,0 +1,13 @@
+// Import component mixins here to enable theming for them
+@import "../components/cfar-contract-choice/cfar-contract-choice.component.scss";
+@import "../components/cfar-contract-dialog/cfar-contract-dialog.component.scss";
+@import "../components/cfar-exercise-dialog/cfar-exercise-dialog.component.scss";
+@import "../components/event-button/event-button.component.scss";
+
+// Define a mixin for easier access
+@mixin custom-components-theme($theme) {
+  @include cfar-contract-choice-theme($theme);
+  @include cfar-contract-dialog-theme($theme);
+  @include cfar-exercise-dialog-theme($theme);
+  @include event-button-theme($theme);
+}

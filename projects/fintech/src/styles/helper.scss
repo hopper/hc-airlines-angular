@@ -1,0 +1,131 @@
+// -----------------------------------------------------------------------------------------------------
+// @ Spacing helpers [m | p] [x? | y?] - [0-4-8-12-...-256 | auto]
+// -----------------------------------------------------------------------------------------------------
+
+@each $prop, $abbrev in (margin: m, padding: p) {
+  @for $index from 0 through 64 {
+    $size: $index * 4;
+    $length: #{$size}px;
+
+    .#{$abbrev}-#{$size} {
+      #{$prop}: $length !important;
+    }
+  }
+
+  @for $index from 0 through 64 {
+    $size: $index * 4;
+    $length: #{$size}px;
+
+    .#{$abbrev}x-#{$size} {
+      #{$prop}-right: $length !important;
+      #{$prop}-left: $length !important;
+    }
+
+    .#{$abbrev}y-#{$size} {
+      #{$prop}-top: $length !important;
+      #{$prop}-bottom: $length !important;
+    }
+  }
+
+  @for $index from 0 through 64 {
+    $size: $index * 4;
+    $length: #{$size}px;
+
+    .#{$abbrev}t-#{$size} {
+      #{$prop}-top: $length !important;
+    }
+
+    .#{$abbrev}r-#{$size} {
+      #{$prop}-right: $length !important;
+    }
+
+    .#{$abbrev}b-#{$size} {
+      #{$prop}-bottom: $length !important;
+    }
+
+    .#{$abbrev}l-#{$size} {
+      #{$prop}-left: $length !important;
+    }
+  }
+
+  @if ($abbrev == m) {
+    // Some special margin utils for flex alignments
+    .m-auto {
+      margin: auto !important;
+    }
+
+    .mt-auto {
+      margin-top: auto !important;
+    }
+
+    .mr-auto {
+      margin-right: auto !important;
+    }
+
+    .mb-auto {
+      margin-bottom: auto !important;
+    }
+
+    .ml-auto {
+      margin-left: auto !important;
+    }
+
+    .mx-auto {
+      margin-right: auto !important;
+      margin-left: auto !important;
+    }
+
+    .my-auto {
+      margin-top: auto !important;
+      margin-bottom: auto !important;
+    }
+  }
+}
+
+// -----------------------------------------------------------------------------------------------------
+// @ Font helpers
+// -----------------------------------------------------------------------------------------------------
+
+.bold {
+  font-weight: bold;
+}
+
+.italic {
+  font-weight: italic;
+}
+
+// -----------------------------------------------------------------------------------------------------
+// @ Alignment helpers
+// -----------------------------------------------------------------------------------------------------
+
+.left {
+  text-align: left;
+}
+
+.right {
+  text-align: right;
+}
+
+.center {
+  text-align: center;
+}
+
+// -----------------------------------------------------------------------------------------------------
+// @ General helpers
+// -----------------------------------------------------------------------------------------------------
+
+.pointer {
+  cursor: pointer;
+}
+
+.mid-width {
+  width: 50%;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.hidden {
+  display: none!important;
+}

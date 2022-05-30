@@ -1,0 +1,110 @@
+<div mat-dialog-title class="p-32" ngClass.lt-md="px-16" fxLayout="row wrap" fxLayout="start center">
+    
+    <div fxFlex="80" fxLayoutAlign="center start" fxLayout="column">
+        <h2 class="m-0">Cancel flight</h2>
+    </div>
+    <div fxFlex="20" fxLayoutAlign="end start">
+        <button mat-mini-fab matTooltip="Close" (click)="onClose()">
+            <mat-icon>clear</mat-icon>
+        </button>
+    </div>
+
+</div>
+
+<mat-dialog-content class="mat-typography">
+  
+    <div class="p-32" ngClass.lt-md="px-16" fxLayout="row wrap" fxLayoutAlign="start center">
+        
+        <div fxFlex="100" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px" class="mb-16">
+            <mat-icon color="primary">cached</mat-icon>
+            <span class="title">Cancel For Any Reason</span>
+        </div>
+
+        <div fxFlex="100">
+            <p>Cancel your booking free of charge until <b>{{ cancelDate | date: 'EEEE, MMMM d, y, h:mm:ss a z' }}</b></p>
+            <p>You'll receive a confirmation email and the trip status will be updated.</p>
+        </div>
+
+    </div>
+
+    <mat-divider></mat-divider>
+
+    <div class="p-32" ngClass.lt-md="px-16" fxLayout="row" fxLayoutAlign="start start">
+        <div fxFlex fxLayout="column" fxLayoutAlign="center start">
+            <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px" class="mb-16">
+                <mat-icon color="primary" class="rotate-90">flight</mat-icon>
+                <span class="subtitle">Toronto to New York</span>
+            </div>
+
+            <div class="ml-32">
+                <p>MM/DD/YYYY</p>
+                <p>HH:MM - HH:MM</p>
+                <p>#REF</p>
+            </div>
+        </div>
+
+        <div fxFlex fxLayout="column" fxLayoutAlign="center start">
+            <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px" class="mb-16">
+                <mat-icon color="primary">person</mat-icon>
+                <span class="subtitle" *ngIf="passengers && passengers.length > 1">{{ passengers?.length }} passengers</span>
+                <span class="subtitle" *ngIf="passengers && passengers.length <= 1">{{ passengers?.length }} passenger</span>
+            </div>
+
+            <div class="ml-32">
+                <p *ngFor="let passenger of passengers">{{ passenger?.firstName }} {{ passenger?.lastName }}</p>
+            </div>
+        </div>
+    </div>
+
+    <mat-divider></mat-divider>
+
+    <div class="p-32" ngClass.lt-md="px-16" fxLayout="row wrap" fxLayoutAlign="center center">
+
+        <div fxFlex="100" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px" class="mb-16">
+            <mat-icon color="primary">monetization_on</mat-icon>
+            <span class="subtitle">Choose your refund type</span>
+        </div>
+
+        <div fxFlex="100" fxLayout="row wrap" fxLayoutAlign="center center" fxLayout.lt-md="column">
+            <mat-card class="m-16 pointer" fxFlex fxLayout="row wrap" *ngFor="let offer of offers" 
+                [ngClass]="{ 'active': offer == selectedOffer }"
+                [ngClass.lt-md]="{ 'active': offer == selectedOffer, 'full-width': true }"
+                (click)="onSelectOffer(offer)">
+                <div fxFlex="100">
+                    <h3 class="offer-title">{{ offer?.title }}</h3>
+                    <p>{{ offer?.description }}</p>
+                </div>
+            </mat-card>
+        </div>
+
+    </div>
+
+    <mat-divider></mat-divider>
+
+    <div class="p-32" ngClass.lt-md="px-16" fxLayout="row wrap" fxLayoutAlign="center center">
+
+        <div fxFlex="100" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px" class="mb-16">
+            <mat-icon color="primary">credit_card</mat-icon>
+            <span class="subtitle">Refund method</span>
+        </div>
+
+        <mat-form-field fxFlex="100" appearance="outline">
+            <mat-select>
+              <mat-option *ngFor="let refundMethod of refundMethods" [value]="refundMethod.value">
+                {{ refundMethod?.label }}
+              </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+    </div>
+    
+</mat-dialog-content>
+
+<mat-dialog-actions>
+
+    <div class="p-32" ngClass.lt-md="px-16" fxFlex="100" fxLayout="row wrap" fxLayout.lt-sm="column" fxLayoutAlign="end center">
+        <button mat-button color="primary" ngClass.lt-sm="full-width" (click)="onClose()">Cancel</button>
+        <button mat-flat-button color="primary" ngClass.lt-sm="full-width" (click)="onSubmit()">Submit</button>
+    </div>
+  
+</mat-dialog-actions>

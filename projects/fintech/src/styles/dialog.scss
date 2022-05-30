@@ -1,0 +1,50 @@
+@import './breakpoints.scss';
+
+::ng-deep {
+    // CENTERED DIALOG
+    .hopper-center-dialog-container {
+        max-width: 60% !important;
+
+        @include media-breakpoint('lt-md') {
+            max-width: 80% !important;
+        }
+
+        @include media-breakpoint('lt-sm') {
+            max-width: 90% !important;
+        }
+    
+        .mat-dialog-container {
+            padding: 0px !important;
+
+            .mat-dialog-content,
+            .mat-dialog-actions {
+                padding: 0px !important;
+                margin: 0px !important;
+            }
+        }
+    }
+    
+    // ASIDE DIALOG
+    .hopper-aside-dialog-container {
+        max-width: 60% !important;
+        height: 100% !important;
+
+        @include media-breakpoint('lt-md') {
+            max-width: 80% !important;
+        }
+
+        @include media-breakpoint('lt-sm') {
+            max-width: 90% !important;
+        }
+
+        .mat-dialog-container {
+            padding: 0px !important;
+
+            .mat-dialog-content,
+            .mat-dialog-actions {
+                padding: 0px !important;
+                margin: 0px !important;
+            }
+        }
+    }
+}
