@@ -1,6 +1,6 @@
 {
-  "name": "@hopper/hc-airlines-angular/fintech",
-  "version": "0.0.1",
+  "name": "@hopper/fintech",
+  "version": "0.0.3",
   "peerDependencies": {
     "@angular/common": "^12.2.0",
     "@angular/core": "^12.2.0",
