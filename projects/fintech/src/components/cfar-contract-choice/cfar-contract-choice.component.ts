@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 
 @Component({
   selector: 'hopper-cfar-contract-choice',
@@ -8,7 +8,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 export class CfarContractChoiceComponent implements OnInit {
 
   public rules!: string[];
-
+  
   constructor(
   ) {}
 

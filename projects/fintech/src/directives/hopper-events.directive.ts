@@ -1,5 +1,5 @@
 import { Directive, ElementRef, HostListener, Input } from '@angular/core';
-import { HopperEventsService } from '../../services/hopper-events/hopper-events.service';
+import { HopperEventsService } from '../services/hopper-events.service';
 import { take } from 'rxjs/operators';
 
 @Directive({

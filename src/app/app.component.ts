@@ -3,7 +3,6 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { CfarContractDialogComponent } from 'projects/fintech/src/components/cfar-contract-dialog/cfar-contract-dialog.component';
 import { CfarExerciseDialogComponent } from 'projects/fintech/src/components/cfar-exercise-dialog/cfar-exercise-dialog.component';
-import { DialogPositionEnum } from 'projects/fintech/src/enums/dialog-position.enum';
 import { DialogUtils } from 'projects/fintech/src/utils/dialog.utils';
 import { take } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
@@ -27,7 +26,7 @@ export class AppComponent implements OnInit {
 
   onOpenCfarContractDialog(): void {
     const dialogData = { };
-    const dialogConfig = DialogUtils.getDialogConfig(DialogPositionEnum.CENTER, dialogData);
+    const dialogConfig = DialogUtils.getDialogConfig(dialogData);
     const dialogRef = this._dialog.open(CfarContractDialogComponent, dialogConfig);
 
     dialogRef.afterClosed()
@@ -40,7 +39,7 @@ export class AppComponent implements OnInit {
 
   onOpenCfarExerciseDialog(): void {
     const dialogData = { };
-    const dialogConfig = DialogUtils.getDialogConfig(DialogPositionEnum.CENTER, dialogData);
+    const dialogConfig = DialogUtils.getDialogConfig(dialogData);
     const dialogRef = this._dialog.open(CfarExerciseDialogComponent, dialogConfig);
 
     dialogRef.afterClosed()

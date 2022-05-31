@@ -9,7 +9,7 @@ import { CfarContractDialogComponent } from './components/cfar-contract-dialog/c
 import { CfarExerciseDialogComponent } from './components/cfar-exercise-dialog/cfar-exercise-dialog.component';
 import { EventButtonComponent } from './components/event-button/event-button.component';
 
-import { HopperEventsDirective } from './directives/hopper-events/hopper-events.directive';
+import { HopperEventsDirective } from './directives/hopper-events.directive';
 
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
@@ -18,6 +18,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatSelectModule } from '@angular/material/select';
+import { ApiModule } from './apis/hopper-cloud-airlines/v1';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,9 @@ import { MatSelectModule } from '@angular/material/select';
     MatSlideToggleModule,
     MatDividerModule,
     MatSelectModule,
+
+    // APIs
+    ApiModule
   ],
   exports: [
     // Component
