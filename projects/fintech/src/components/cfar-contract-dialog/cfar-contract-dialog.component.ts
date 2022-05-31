@@ -1,20 +1,30 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
+import { CfarOffer } from '../../apis/hopper-cloud-airline/v1';
+import { AbstractComponent } from '../abstract.component';
 
 @Component({
   selector: 'hopper-cfar-contract-dialog',
   templateUrl: './cfar-contract-dialog.component.html',
   styleUrls: ['./cfar-contract-dialog.component.scss']
 })
-export class CfarContractDialogComponent implements OnInit {
+export class CfarContractDialogComponent extends AbstractComponent implements OnInit {
 
   public rules!: string[];
   public offers!: any[];
   public selectedOffer: any;
+  
+  @Output() emitSubmit = new EventEmitter();
 
   constructor(
     private _dialogRef: MatDialogRef<CfarContractDialogComponent>
-  ) {}
+  ) {
+    super();
+  }
+
+  // ################################################
+  // Life Cycle Hooks
+  // ################################################
 
   ngOnInit(): void {
     this.rules = [
@@ -37,6 +47,10 @@ export class CfarContractDialogComponent implements OnInit {
     this.selectedOffer = this.offers[0];
   }
 
+  // ################################################
+  // Publics Methods
+  // ################################################
+
   /**
    * @description Triggered when clicking on the 'Close' button.
    */
@@ -45,14 +59,14 @@ export class CfarContractDialogComponent implements OnInit {
   }
 
   onSubmit(): void {
-    // TODO
+    this.emitSubmit.emit();
   }
 
-  onSelectOffer(offer: any): void {
+  onSelectOffer(offer: CfarOffer): void {
     this.selectedOffer = offer;
   }
 
-  onViewDetails(offer: any): void {
+  onViewDetails(offer: CfarOffer): void {
     this.onSelectOffer(offer);
 
     // TODO

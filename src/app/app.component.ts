@@ -26,7 +26,7 @@ export class AppComponent implements OnInit {
 
   onOpenCfarContractDialog(): void {
     const dialogData = { };
-    const dialogConfig = DialogUtils.getDialogConfig(dialogData);
+    const dialogConfig = DialogUtils.getDialogConfig(dialogData, "hopper-theme-A");
     const dialogRef = this._dialog.open(CfarContractDialogComponent, dialogConfig);
 
     dialogRef.afterClosed()

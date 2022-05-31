@@ -18,7 +18,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatSelectModule } from '@angular/material/select';
-import { ApiModule } from './apis/hopper-cloud-airlines/v1';
+import { ApiModule } from './apis/hopper-cloud-airline/v1';
 
 @NgModule({
   declarations: [

@@ -1,12 +1,13 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
+import { AbstractComponent } from '../abstract.component';
 
 @Component({
   selector: 'hopper-cfar-exercise-dialog',
   templateUrl: './cfar-exercise-dialog.component.html',
   styleUrls: ['./cfar-exercise-dialog.component.scss']
 })
-export class CfarExerciseDialogComponent implements OnInit {
+export class CfarExerciseDialogComponent extends AbstractComponent implements OnInit {
 
   public offers: any[] = [];
   public selectedOffer: any;
@@ -16,7 +17,13 @@ export class CfarExerciseDialogComponent implements OnInit {
 
   constructor(
     private _dialogRef: MatDialogRef<CfarExerciseDialogComponent>
-  ) {}
+  ) {
+    super();
+  }
+
+  // ################################################
+  // Life Cycle Hooks
+  // ################################################
 
   ngOnInit(): void {
     this.offers = [
@@ -45,6 +52,10 @@ export class CfarExerciseDialogComponent implements OnInit {
     this.cancelDate = new Date();
     this.selectedOffer = this.offers[0];
   }
+
+  // ################################################
+  // Publics Methods
+  // ################################################
 
   /**
    * @description Triggered when clicking on the 'Close' button.

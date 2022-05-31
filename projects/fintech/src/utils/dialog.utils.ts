@@ -4,18 +4,16 @@ export class DialogUtils {
 
   /**
    * Get Dialog config
-   * @param position 
-   * @param width 
-   * @param height 
    * @param dialogData 
+   * @param theme
    * @returns 
    */
-  public static getDialogConfig(dialogData: any): MatDialogConfig {
+  public static getDialogConfig(dialogData: any, theme?: string): MatDialogConfig {
     const dialogConfig = new MatDialogConfig();
 
     dialogConfig.disableClose = false;
     dialogConfig.autoFocus = true;
-    dialogConfig.panelClass = 'hopper-dialog-container';
+    dialogConfig.panelClass = ["hopper-dialog-container", (theme || "")];
      
     if (dialogData) {
       dialogConfig.data = dialogData;

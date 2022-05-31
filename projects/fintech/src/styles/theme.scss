@@ -1,3 +1,7 @@
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@use '~@angular/material' as mat;
+
 // Import component mixins here to enable theming for them
 @import "../components/cfar-contract-choice/cfar-contract-choice.component.scss";
 @import "../components/cfar-contract-dialog/cfar-contract-dialog.component.scss";
@@ -10,4 +14,27 @@
   @include cfar-contract-dialog-theme($theme);
   @include cfar-exercise-dialog-theme($theme);
   @include event-button-theme($theme);
+}
+
+// ------------------------------------------
+// THEMING
+// ------------------------------------------
+
+$theme-A-primary: mat.define-palette(mat.$amber-palette);
+$theme-A-accent: mat.define-palette(mat.$cyan-palette);
+$theme-A-warn: mat.define-palette(mat.$red-palette);
+$theme-A-theme: mat.define-light-theme((
+  color: (
+    primary: $theme-A-primary,
+    accent: $theme-A-accent,
+    warn: $theme-A-warn,
+  )
+));
+
+.hopper-theme-A {
+  // Apply the theme to all Angular Material Components
+  @include mat.all-component-themes($theme-A-theme);
+
+  // Apply the theme to our custom components
+  @include custom-components-theme($theme-A-theme);
 }

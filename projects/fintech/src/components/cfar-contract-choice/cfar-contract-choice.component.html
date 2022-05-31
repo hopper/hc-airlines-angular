@@ -24,7 +24,7 @@
                 </div>
         
                 <div fxFlex="100" fxLayoutAlign="end center">
-                    <button mat-stroked-button color="primary">Add for $YY</button>
+                    <button mat-stroked-button color="primary" (click)="onSubmit()">Add for {{ offer?.coverage }}</button>
                 </div>
     
             </div>
