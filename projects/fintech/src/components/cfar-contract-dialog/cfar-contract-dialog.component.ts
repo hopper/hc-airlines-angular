@@ -79,6 +79,63 @@ export class CfarContractDialogComponent extends AbstractComponent implements On
       'Get instant resolution through Air Canada, no form or claims required!',
     ];
 
+    // ----------- MOCK -----------
+    this.cfarOffers = [
+      {
+        id: "1ecdc0ec-8ea8-6c3d-84a2-a7c5ee1c8713",
+        premium: "27.00",
+        coverage: "73.32",
+        currency: "CAD",
+        requestType: RequestType.Ancillary,
+        toUsdExchangeRate: "0.7792270535165348084620941103681614",
+        contractExpiryDateTime: new Date("2022-05-27T22:34:30Z"),
+        createdDateTime: new Date("2022-05-25T09:41:00.011Z"),
+        itinerary: {
+          passengerPricing: [
+            {
+              passengerCount: {
+                count: 3,
+                type: "adult"
+              }
+            }
+          ],
+          currency: "CAD",
+          slices: [
+            {
+              segments: [
+                {
+                  originAirport: "LGA",
+                  destinationAirport: "BOS",
+                  departureDateTime: "2022-05-28T18:34:30",
+                  arrivalDateTime: "2022-05-28T19:12:30",
+                  flightNumber: "JB776",
+                  validatingCarrierCode: "B6",
+                  fareClass: FareClass.BasicEconomy
+                }
+              ]
+            }
+          ],
+          ancillaries: [
+            {
+              totalPrice: "30.55",
+              type: "travel_insurance"
+            }
+          ],
+          totalPrice: "91.65"
+        },
+        offerDescription: [
+            ""
+        ],
+        extAttributes: {
+          property1: "test1",
+          property2: "test2"
+        }
+      }
+    ];
+    this.selectedCfarOffer = this.cfarOffers[0];
+    // ----------------------------
+
+    /*
     // Create offers
     this._cancelForAnyReasonCFARService
       .postCfarOffers(this._buildCreateCfarOfferRequest(), this._hCSessionId)
@@ -88,6 +145,7 @@ export class CfarContractDialogComponent extends AbstractComponent implements On
         // The first one by default
         this.selectedCfarOffer = cfarOffers[0];  
       });
+    */
   }
 
   // -----------------------------------------------

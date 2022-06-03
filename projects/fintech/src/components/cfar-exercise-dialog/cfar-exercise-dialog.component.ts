@@ -182,6 +182,7 @@ export class CfarExerciseDialogComponent extends AbstractComponent implements On
         totalPrice: "91.65"
       }
     };
+    // ----------------------------
 
     /*
 
