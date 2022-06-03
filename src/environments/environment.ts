@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  defaultTheme: "theme-dark-hopper",
+  defaultTheme: "theme-light-hopper",
   apiUrl: "http://localhost:8080/"
 };
 

@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
-  defaultTheme: "theme-dark-hopper",
+  defaultTheme: "theme-light-hopper",
   apiUrl: "http://localhost:8080/"
 };

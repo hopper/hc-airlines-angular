@@ -42,9 +42,9 @@
                     </div>
         
                     <div class="ml-32">
-                        <p>Departure : {{ segment?.departureDateTime | date: 'dd/MM/yyyy hh:mm' }}</p>
-                        <p>Arrival : {{ segment?.arrivalDateTime | date: 'dd/MM/yyyy hh:mm' }}</p>
-                        <p>Flight : {{ segment?.flightNumber }}</p>
+                        <p><b>Departure :</b> {{ segment?.departureDateTime | date: 'dd/MM/yyyy hh:mm' }}</p>
+                        <p><b>Arrival :</b> {{ segment?.arrivalDateTime | date: 'dd/MM/yyyy hh:mm' }}</p>
+                        <p><b>Flight :</b> {{ segment?.flightNumber }}</p>
                     </div>
 
                 </ng-container>
@@ -62,7 +62,7 @@
 
             <div class="ml-32">
                 <p *ngFor="let passenger of getMapPassengers(cfarContract.itinerary) | keyvalue">
-                    <b>{{ passenger?.key }}</b> : {{ passenger?.value }}
+                    <b class="passenger-type">{{ passenger?.key }}</b> : {{ passenger?.value }}
                 </p>
             </div>
         </div>

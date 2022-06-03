@@ -37,6 +37,8 @@
         }
 
         .mat-dialog-content {
+            background-color: map-get($bg-palette, background);
+
             .title {
                 color: map-get($primary-palette, default);
                 font-size: 20px;
@@ -46,6 +48,10 @@
             .subtitle {
                 font-size: 16px;
                 font-weight: bold;
+            }
+
+            .passenger-type {
+                text-transform: capitalize;
             }
 
             .rotate-90 {
@@ -58,7 +64,7 @@
                 }
 
                 &.active {
-                    border: 2px solid map-get($accent-palette, default);
+                    border: 2px solid map-get($primary-palette, default);
                 }
 
                 .offer-title {
@@ -67,16 +73,13 @@
             }
         }
 
-        .mat-dialog-actions .mat-button-base+.mat-button-base,
-        .mat-dialog-actions .mat-mdc-button-base+.mat-mdc-button-base {
-            margin: 0px;
-        }
+        .mat-dialog-actions {
+            background-color: map-get($bg-palette, background);
 
-        @if ($is-dark) {
-
-        } @else {
-            
+            .mat-button-base+.mat-button-base,
+            .mat-mdc-button-base+.mat-mdc-button-base {
+                margin: 0px;
+            }
         }
-    }
-           
+    }      
 }

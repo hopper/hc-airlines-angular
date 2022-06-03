@@ -152,8 +152,14 @@ export class CfarExerciseDialogComponent extends AbstractComponent implements On
         passengerPricing: [
           {
             passengerCount: {
-              count: 3,
+              count: 2,
               type: "adult"
+            }
+          },
+          {
+            passengerCount: {
+              count: 1,
+              type: "child"
             }
           }
         ],
@@ -167,6 +173,15 @@ export class CfarExerciseDialogComponent extends AbstractComponent implements On
                 departureDateTime: "2022-05-28T18:34:30",
                 arrivalDateTime: "2022-05-28T19:12:30",
                 flightNumber: "JB776",
+                validatingCarrierCode: "B6",
+                fareClass: "basic_economy"
+              },
+              {
+                originAirport: "BOS",
+                destinationAirport: "LGA",
+                departureDateTime: "2022-06-28T18:34:30",
+                arrivalDateTime: "2022-06-28T19:12:30",
+                flightNumber: "JB777",
                 validatingCarrierCode: "B6",
                 fareClass: "basic_economy"
               }
