@@ -70,4 +70,4 @@ import { ApiModule } from './apis/hopper-cloud-airline/v1';
     HopperEventsDirective
   ]
 })
-export class HopperFintechModule { }
+export class HopperCloudAirlinesAngularSdkModule { }

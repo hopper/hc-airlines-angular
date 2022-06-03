@@ -1,9 +1,9 @@
 import { DOCUMENT } from '@angular/common';
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { CfarContractDialogComponent } from 'projects/fintech/src/components/cfar-contract-dialog/cfar-contract-dialog.component';
-import { CfarExerciseDialogComponent } from 'projects/fintech/src/components/cfar-exercise-dialog/cfar-exercise-dialog.component';
-import { DialogUtils } from 'projects/fintech/src/utils/dialog.utils';
+import { CfarContractDialogComponent } from 'projects/cloud-airlines-angular-sdk/src/components/cfar-contract-dialog/cfar-contract-dialog.component';
+import { CfarExerciseDialogComponent } from 'projects/cloud-airlines-angular-sdk/src/components/cfar-exercise-dialog/cfar-exercise-dialog.component';
+import { DialogUtils } from 'projects/cloud-airlines-angular-sdk/src/utils/dialog.utils';
 import { take } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 

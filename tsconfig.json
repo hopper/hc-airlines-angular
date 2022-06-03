@@ -7,9 +7,9 @@
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "paths": {
-      "fintech": [
-        "dist/fintech/fintech",
-        "dist/fintech"
+      "cloud-airlines-angular-sdk": [
+        "dist/cloud-airlines-angular-sdk/cloud-airlines-angular-sdk",
+        "dist/cloud-airlines-angular-sdk"
       ]
     },
     "noImplicitReturns": true,

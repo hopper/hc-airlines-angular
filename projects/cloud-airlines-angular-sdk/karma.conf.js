@@ -25,7 +25,7 @@ module.exports = function (config) {
       suppressAll: true // removes the duplicated traces
     },
     coverageReporter: {
-      dir: require('path').join(__dirname, '../../coverage/fintech'),
+      dir: require('path').join(__dirname, '../../coverage/cloud-airlines-angular-sdk'),
       subdir: '.',
       reporters: [
         { type: 'html' },

@@ -8,7 +8,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 
 // Custom LIB (from local access)
-import { HopperFintechModule } from 'projects/fintech/src/fintech.module';
+import { HopperCloudAirlinesAngularSdkModule } from 'projects/cloud-airlines-angular-sdk/src/cloud-airlines-angular-sdk.module';
 import { MatIconModule } from '@angular/material/icon';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
@@ -21,7 +21,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     BrowserAnimationsModule,
 
     // My library
-    HopperFintechModule,
+    HopperCloudAirlinesAngularSdkModule,
 
     // Angular Material
     MatToolbarModule,
