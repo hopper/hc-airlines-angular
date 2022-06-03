@@ -12,4 +12,6 @@
 
 export interface MapString extends Record<string, string> { 
   [key: string]: string;
+
+
 }

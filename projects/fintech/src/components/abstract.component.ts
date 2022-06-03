@@ -1,5 +1,5 @@
-import { DOCUMENT } from "@angular/common";
-import { Directive, Inject, Input, OnChanges, SimpleChanges } from "@angular/core";
+import { Directive } from "@angular/core";
+import { CancelForAnyReasonCFARService } from "../apis/hopper-cloud-airline/v1";
 
 @Directive({
     selector: '[HopperAbstractComponent]'
@@ -7,6 +7,7 @@ import { Directive, Inject, Input, OnChanges, SimpleChanges } from "@angular/cor
 export abstract class AbstractComponent {
     
     constructor(
+        protected cancelForAnyReasonCFARService: CancelForAnyReasonCFARService
     ) {
     }
 

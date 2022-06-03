@@ -4,17 +4,13 @@ import { HttpClient } from '@angular/common/http';
 
 
 import { CancelForAnyReasonCFARService } from './api/cancelForAnyReasonCFAR.service';
-import { GeneralService } from './api/general.service';
-import { SessionsService } from './api/sessions.service';
 
 @NgModule({
   imports:      [],
   declarations: [],
   exports:      [],
   providers: [
-    CancelForAnyReasonCFARService,
-    GeneralService,
-    SessionsService ]
+    CancelForAnyReasonCFARService ]
 })
 export class ApiModule {
     public static forRoot(configurationFactory: () => Configuration): ModuleWithProviders<ApiModule> {

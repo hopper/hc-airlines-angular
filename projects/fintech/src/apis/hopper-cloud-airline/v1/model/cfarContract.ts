@@ -11,6 +11,7 @@
  */
 import { CfarContractExercise } from './cfarContractExercise';
 import { CfarContractStatus } from './cfarContractStatus';
+import { CfarItinerary } from './cfarItinerary';
 import { CfarOffer } from './cfarOffer';
 import { MapString } from './mapString';
 
@@ -46,4 +47,5 @@ export interface CfarContract {
     contractExercise?: CfarContractExercise;
     pnrReference?: string;
     extAttributes: MapString;
+    itinerary: CfarItinerary;
 }
