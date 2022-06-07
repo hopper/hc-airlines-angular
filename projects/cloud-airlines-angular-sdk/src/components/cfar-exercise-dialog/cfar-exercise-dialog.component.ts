@@ -3,6 +3,8 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { map, take } from 'rxjs/operators';
 import { CancelForAnyReasonCFARService, CfarContract, CfarOffer, CfarContractExercise, CreateCfarContractExerciseRequest, PassengerPricing, FareClass, CfarItinerary } from '../../apis/hopper-cloud-airline/v1';
 import { AbstractComponent } from '../abstract.component';
+import { TranslateService } from '@ngx-translate/core';
+import { DateAdapter } from "@angular/material/core";
 
 @Component({
   selector: 'hopper-cfar-exercise-dialog',
@@ -38,11 +40,13 @@ export class CfarExerciseDialogComponent extends AbstractComponent implements On
   private _airlineRefundAllowance?: string;
 
   constructor(
+    private _adapter: DateAdapter<any>,
+    private _translateService: TranslateService,
     private _cancelForAnyReasonCFARService: CancelForAnyReasonCFARService,
     private _dialogRef: MatDialogRef<CfarExerciseDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
-    super(_cancelForAnyReasonCFARService);
+    super(_adapter, _translateService, _cancelForAnyReasonCFARService);
 
     // Mandatory data
     this._hCSessionId = data.hCSessionId;
@@ -64,6 +68,10 @@ export class CfarExerciseDialogComponent extends AbstractComponent implements On
     // Optional data
     this._currency = data.currency;
     this._airlineRefundAllowance = data.airlineRefundAllowance;
+
+    // Update CurrentLang manually (Dialog limitation)
+    this.currentLang = data.currentLang;
+    this._translateService.use(data.currentLang);
   }
 
   // -----------------------------------------------

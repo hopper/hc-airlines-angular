@@ -27,6 +27,7 @@ export interface CfarContract {
      * An offer associated with this contract
      */
     offers: Array<CfarOffer>;
+    itinerary: CfarItinerary;
     /**
      * Total amount to be refunded to user upon CFAR exercise
      */
@@ -47,5 +48,4 @@ export interface CfarContract {
     contractExercise?: CfarContractExercise;
     pnrReference?: string;
     extAttributes: MapString;
-    itinerary: CfarItinerary;
 }

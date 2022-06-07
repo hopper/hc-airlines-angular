@@ -1,7 +1,9 @@
-import { Component, EventEmitter, Inject, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Inject, OnChanges, OnDestroy, OnInit, Output, SimpleChanges } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { take } from 'rxjs/operators';
 import { CancelForAnyReasonCFARService, CfarContract, CfarOffer, CreateCfarContractRequest, CreateCfarOfferRequest, FareClass, PassengerPricing, RequestType } from '../../apis/hopper-cloud-airline/v1';
+import { TranslateService } from '@ngx-translate/core';
+import { DateAdapter } from "@angular/material/core";
 import { AbstractComponent } from '../abstract.component';
 
 @Component({
@@ -9,7 +11,7 @@ import { AbstractComponent } from '../abstract.component';
   templateUrl: './cfar-contract-dialog.component.html',
   styleUrls: ['./cfar-contract-dialog.component.scss']
 })
-export class CfarContractDialogComponent extends AbstractComponent implements OnInit {
+export class CfarContractDialogComponent extends AbstractComponent implements OnInit, OnChanges {
 
   public rules!: string[];
   public cfarOffers!: CfarOffer[];
@@ -39,11 +41,13 @@ export class CfarContractDialogComponent extends AbstractComponent implements On
   @Output() emitSubmit = new EventEmitter();
 
   constructor(
+    private _adapter: DateAdapter<any>,
+    private _translateService: TranslateService,
     private _cancelForAnyReasonCFARService: CancelForAnyReasonCFARService,
     private _dialogRef: MatDialogRef<CfarContractDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
-    super(_cancelForAnyReasonCFARService);
+    super(_adapter, _translateService, _cancelForAnyReasonCFARService);
 
     // Mandatory data
     this._partnerId = data.partnerId;
@@ -65,6 +69,10 @@ export class CfarContractDialogComponent extends AbstractComponent implements On
 
     // Optional data
     this._pnrReference = data.pnrReference;
+
+    // Update CurrentLang manually (Dialog limitation)
+    this.currentLang = data.currentLang;
+    this._translateService.use(this.currentLang);
   }
 
   // -----------------------------------------------

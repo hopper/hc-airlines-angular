@@ -17,6 +17,7 @@ import { CustomHttpUrlEncodingCodec }                        from '../encoder';
 
 import { Observable }                                        from 'rxjs';
 
+import { BadRequest } from '../model/badRequest';
 import { CfarContract } from '../model/cfarContract';
 import { CfarContractExercise } from '../model/cfarContractExercise';
 import { CfarOffer } from '../model/cfarOffer';
@@ -24,10 +25,11 @@ import { CreateCfarContractExerciseRequest } from '../model/createCfarContractEx
 import { CreateCfarContractRequest } from '../model/createCfarContractRequest';
 import { CreateCfarOfferRequest } from '../model/createCfarOfferRequest';
 import { MarkCfarContractExerciseCompleteRequest } from '../model/markCfarContractExerciseCompleteRequest';
+import { UnprocessableEntity } from '../model/unprocessableEntity';
 import { UpdateCfarContractRequest } from '../model/updateCfarContractRequest';
 
-import { BASE_PATH }                     from '../variables';
-import { Configuration }                 from '../configuration';
+import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
+import { Configuration }                                     from '../configuration';
 
 
 @Injectable()
@@ -46,6 +48,21 @@ export class CancelForAnyReasonCFARService {
             this.basePath = basePath || configuration.basePath || this.basePath;
         }
     }
+
+    /**
+     * @param consumes string[] mime-types
+     * @return true: consumes contains 'multipart/form-data', false: otherwise
+     */
+    private canConsumeForm(consumes: string[]): boolean {
+        const form = 'multipart/form-data';
+        for (const consume of consumes) {
+            if (form === consume) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 
     /**
      * Get a CFAR Contract

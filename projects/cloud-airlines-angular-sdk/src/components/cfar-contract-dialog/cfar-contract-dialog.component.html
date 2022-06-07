@@ -2,7 +2,7 @@
     
     <div fxFlex="80" fxLayoutAlign="center start" fxLayout="column">
         <mat-icon class="big-icon">cached</mat-icon>
-        <h2>Cancel For Any Reason</h2>
+        <h2>{{ 'CFAR_CONTRACT_DIALOG.TITLE' | translate }}</h2>
     </div>
     <div fxFlex="20" fxLayoutAlign="end start">
         <button mat-mini-fab matTooltip="Close" (click)="onClose()">
@@ -17,7 +17,7 @@
     <div class="p-32" ngClass.lt-md="px-16" fxLayout="row wrap" fxLayoutAlign="start center">
         
         <div fxFlex="100">
-            <span class="powered-by">Powered by Hopper</span>
+            <span class="powered-by">{{ 'CFAR_CONTRACT_DIALOG.POWERED_BY' | translate }}</span>
         </div>
 
         <div fxFlex="100" class="p-16" *ngFor="let rule of rules" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
@@ -37,7 +37,7 @@
                 <span class="price">{{ offer?.premium | currency:offer?.currency:'symbol' }}</span>
             </div>
             <div fxFlex="100" fxLayoutAlign="end center">
-                <button mat-button color="primary" (click)="onViewDetails(offer)">View details</button>
+                <button mat-button color="primary" (click)="onViewDetails(offer)">{{ 'CFAR_CONTRACT_DIALOG.VIEW_DETAILS' | translate }}</button>
             </div>
         </mat-card>
 
@@ -48,9 +48,14 @@
 <mat-dialog-actions>
 
     <div class="p-32" ngClass.lt-md="px-16" fxFlex="100" fxLayout="row wrap" fxLayout.lt-sm="column" fxLayoutAlign="end center">
-        <button mat-button color="primary" ngClass.lt-sm="full-width" (click)="onClose()">Decline Coverage</button>
+        <button mat-button color="primary" ngClass.lt-sm="full-width" (click)="onClose()">
+            {{ 'CFAR_CONTRACT_DIALOG.BUTTON.CANCEL' | translate }}
+        </button>
         <button mat-flat-button color="primary" ngClass.lt-sm="full-width" (click)="onSubmit()">
-            Get {{ computePercentage(selectedCfarOffer) | percent }} Coverage | {{ selectedCfarOffer?.premium | currency:selectedCfarOffer?.currency:'symbol' }}
+            {{ 'CFAR_CONTRACT_DIALOG.BUTTON.SUBMIT' | translate: { 
+                percentage: (computePercentage(selectedCfarOffer) | percent),
+                price: (selectedCfarOffer?.premium | currency:selectedCfarOffer?.currency:'symbol':undefined:currentLang) 
+            } }}
         </button>
     </div>
   

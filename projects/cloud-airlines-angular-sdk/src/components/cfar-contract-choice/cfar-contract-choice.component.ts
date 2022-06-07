@@ -2,6 +2,8 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { take } from 'rxjs/operators';
 import { CancelForAnyReasonCFARService, CfarOffer, CreateCfarOfferRequest, FareClass, PassengerPricing, PassengerType, RequestType } from '../../apis/hopper-cloud-airline/v1';
 import { AbstractComponent } from '../abstract.component';
+import { TranslateService } from '@ngx-translate/core';
+import { DateAdapter } from "@angular/material/core";
 
 @Component({
   selector: 'hopper-cfar-contract-choice',
@@ -32,9 +34,11 @@ export class CfarContractChoiceComponent extends AbstractComponent implements On
   @Output() emitSubmit = new EventEmitter();
   
   constructor(
+    private _adapter: DateAdapter<any>,
+    private _translateService: TranslateService,
     private _cancelForAnyReasonCFARService: CancelForAnyReasonCFARService
   ) {
-    super(_cancelForAnyReasonCFARService);
+    super(_adapter, _translateService, _cancelForAnyReasonCFARService);
   }
 
   // -----------------------------------------------

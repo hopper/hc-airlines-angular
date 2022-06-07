@@ -13,4 +13,8 @@ import { PassengerCount } from './passengerCount';
 
 export interface PassengerPricing { 
     passengerCount: PassengerCount;
+    /**
+     * Price per passenger
+     */
+    individualPrice?: string;
 }

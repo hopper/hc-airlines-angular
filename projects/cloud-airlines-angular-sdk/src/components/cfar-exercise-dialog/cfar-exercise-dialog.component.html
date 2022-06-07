@@ -1,7 +1,7 @@
 <div mat-dialog-title class="p-32" ngClass.lt-md="px-16" fxLayout="row wrap" fxLayout="start center">
     
     <div fxFlex="80" fxLayoutAlign="center start" fxLayout="column">
-        <h2 class="m-0">Cancel flight</h2>
+        <h2 class="m-0">{{ 'CFAR_EXERCISE_DIALOG.TITLE' | translate }}</h2>
     </div>
     <div fxFlex="20" fxLayoutAlign="end start">
         <button mat-mini-fab matTooltip="Close" (click)="onClose()">
@@ -17,12 +17,15 @@
         
         <div fxFlex="100" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px" class="mb-16">
             <mat-icon color="primary">cached</mat-icon>
-            <span class="title">Cancel For Any Reason</span>
+            <span class="title">{{ 'CFAR_EXERCISE_DIALOG.SUBTITLE' | translate }}</span>
         </div>
 
         <div fxFlex="100">
-            <p>Cancel your booking free of charge until <b>{{ cfarContract?.expiryDateTime | date: 'EEEE, MMMM d, y, h:mm:ss a z' }}</b></p>
-            <p>You'll receive a confirmation email and the trip status will be updated.</p>
+            <p>
+                {{ 'CFAR_EXERCISE_DIALOG.DEADLINE_SENTENCE_1' | translate }}
+                <b>{{ cfarContract?.expiryDateTime | date: ('COMMON.DATE_FORMAT' | translate):'':currentLang }}</b>
+            </p>
+            <p>{{ 'CFAR_EXERCISE_DIALOG.DEADLINE_SENTENCE_2' | translate }}</p>
         </div>
 
     </div>
@@ -38,13 +41,26 @@
                     
                     <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px" class="mb-16">
                         <mat-icon color="primary" class="rotate-90">flight</mat-icon>
-                        <span class="subtitle">{{ segment?.originAirport }} to {{ segment?.destinationAirport }}</span>
+                        <span class="subtitle">
+                            {{ segment?.originAirport }}
+                            {{ 'CFAR_EXERCISE_DIALOG.TO' | translate }}
+                            {{ segment?.destinationAirport }}
+                        </span>
                     </div>
         
                     <div class="ml-32">
-                        <p><b>Departure :</b> {{ segment?.departureDateTime | date: 'dd/MM/yyyy hh:mm' }}</p>
-                        <p><b>Arrival :</b> {{ segment?.arrivalDateTime | date: 'dd/MM/yyyy hh:mm' }}</p>
-                        <p><b>Flight :</b> {{ segment?.flightNumber }}</p>
+                        <p>
+                            <b>{{ 'CFAR_EXERCISE_DIALOG.DEPARTURE' | translate }}</b>
+                            {{ segment?.departureDateTime | date: ('COMMON.DATE_FORMAT_SHORT' | translate):'':currentLang }}
+                        </p>
+                        <p>
+                            <b>{{ 'CFAR_EXERCISE_DIALOG.ARRIVAL' | translate }}</b>
+                            {{ segment?.arrivalDateTime | date: ('COMMON.DATE_FORMAT_SHORT' | translate):'':currentLang }}
+                        </p>
+                        <p>
+                            <b>{{ 'CFAR_EXERCISE_DIALOG.FLIGHT' | translate }}</b>
+                            {{ segment?.flightNumber }}
+                        </p>
                     </div>
 
                 </ng-container>
@@ -56,8 +72,16 @@
         <div fxFlex fxLayout="column" fxLayoutAlign="center start">
             <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px" class="mb-16">
                 <mat-icon color="primary">person</mat-icon>
-                <span class="subtitle" *ngIf="getNbPassengers(cfarContract.itinerary) <= 1">{{ getNbPassengers(cfarContract.itinerary) }} passenger</span>
-                <span class="subtitle" *ngIf="getNbPassengers(cfarContract.itinerary) > 1">{{ getNbPassengers(cfarContract.itinerary) }} passengers</span>
+                <span class="subtitle" *ngIf="getNbPassengers(cfarContract.itinerary) <= 1">
+                    {{ 'CFAR_EXERCISE_DIALOG.PASSENGER' | translate: {
+                        nbPassenger: getNbPassengers(cfarContract.itinerary) 
+                    } }}
+                </span>
+                <span class="subtitle" *ngIf="getNbPassengers(cfarContract.itinerary) > 1">
+                    {{ 'CFAR_EXERCISE_DIALOG.PASSENGERS' | translate: {
+                        nbPassenger: getNbPassengers(cfarContract.itinerary) 
+                    } }}
+                </span>
             </div>
 
             <div class="ml-32">
@@ -74,7 +98,7 @@
 
         <div fxFlex="100" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px" class="mb-16">
             <mat-icon color="primary">monetization_on</mat-icon>
-            <span class="subtitle">Choose your refund type</span>
+            <span class="subtitle">{{ 'CFAR_EXERCISE_DIALOG.CHOOSE_REFUND_TYPE' | translate }}</span>
         </div>
         
         <div fxFlex="100" fxLayout="row wrap" fxLayoutAlign="center center" fxLayout.lt-md="column">
@@ -86,9 +110,15 @@
                     [ngClass.lt-md]="{ 'active': isHopperRefund, 'full-width': true }"
                     (click)="onSelectRefundType('hopper')">
                     <div fxFlex="100">
-                        <h3 class="offer-title">Hopper refund</h3>
-                        <p>Method : {{ cfarContract?.contractExercise?.hopperRefundMethod }}</p>
-                        <p>Amount : {{ cfarContract?.contractExercise?.hopperRefund }}</p>
+                        <h3 class="offer-title">{{ 'CFAR_EXERCISE_DIALOG.HOPPER_REFUND' | translate }}</h3>
+                        <p>
+                            {{ 'CFAR_EXERCISE_DIALOG.METHOD' | translate }}
+                            {{ cfarContract?.contractExercise?.hopperRefundMethod }}
+                        </p>
+                        <p>
+                            {{ 'CFAR_EXERCISE_DIALOG.AMOUNT' | translate }}
+                            {{ cfarContract?.contractExercise?.hopperRefund | currency:cfarContract?.contractExercise?.currency:'symbol':undefined:currentLang }}
+                        </p>
                     </div>
                 </mat-card>
 
@@ -101,9 +131,15 @@
                     [ngClass.lt-md]="{ 'active': !isHopperRefund, 'full-width': true }"
                     (click)="onSelectRefundType('airline')">
                     <div fxFlex="100">
-                        <h3 class="offer-title">Airline refund</h3>
-                        <p>Method : {{ cfarContract?.contractExercise?.airlineRefundMethod }}</p>
-                        <p>Amount : {{ cfarContract?.contractExercise?.airlineRefundAllowance }}</p>
+                        <h3 class="offer-title">{{ 'CFAR_EXERCISE_DIALOG.AIRLINE_REFUND' | translate }}</h3>
+                        <p>
+                            {{ 'CFAR_EXERCISE_DIALOG.METHOD' | translate }}
+                            {{ cfarContract?.contractExercise?.airlineRefundMethod }}
+                        </p>
+                        <p>
+                            {{ 'CFAR_EXERCISE_DIALOG.AMOUNT' | translate }}
+                            {{ cfarContract?.contractExercise?.airlineRefundAllowance | currency:cfarContract?.contractExercise?.currency:'symbol':undefined:currentLang }}
+                        </p>
                     </div>
                 </mat-card>
 
@@ -119,7 +155,7 @@
 
         <div fxFlex="100" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px" class="mb-16">
             <mat-icon color="primary">credit_card</mat-icon>
-            <span class="subtitle">Refund method</span>
+            <span class="subtitle">{{ 'CFAR_EXERCISE_DIALOG.REFUND_METHOD' | translate }}</span>
         </div>
 
         <mat-form-field fxFlex="100" appearance="outline">
@@ -137,8 +173,12 @@
 <mat-dialog-actions>
 
     <div class="p-32" ngClass.lt-md="px-16" fxFlex="100" fxLayout="row wrap" fxLayout.lt-sm="column" fxLayoutAlign="end center">
-        <button mat-button color="primary" ngClass.lt-sm="full-width" (click)="onClose()">Cancel</button>
-        <button mat-flat-button color="primary" ngClass.lt-sm="full-width" (click)="onSubmit()">Submit</button>
+        <button mat-button color="primary" ngClass.lt-sm="full-width" (click)="onClose()">
+            {{ 'CFAR_EXERCISE_DIALOG.BUTTON.CANCEL' | translate }}
+        </button>
+        <button mat-flat-button color="primary" ngClass.lt-sm="full-width" (click)="onSubmit()">
+            {{ 'CFAR_EXERCISE_DIALOG.BUTTON.SUBMIT' | translate }}
+        </button>
     </div>
   
 </mat-dialog-actions>
