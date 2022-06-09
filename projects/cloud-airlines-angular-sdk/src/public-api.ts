@@ -16,6 +16,7 @@ export * from './components/event-button/event-button.component';
 
 // UTILIY CLASSES
 export * from './utils/dialog.utils';
+export * from './utils/api-translator.utils';
 
 // MODULES
 export * from './cloud-airlines-angular-sdk.module';

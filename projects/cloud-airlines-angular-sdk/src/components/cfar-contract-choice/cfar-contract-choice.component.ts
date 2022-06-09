@@ -4,6 +4,7 @@ import { CancelForAnyReasonCFARService, CfarOffer, CreateCfarOfferRequest, FareC
 import { AbstractComponent } from '../abstract.component';
 import { TranslateService } from '@ngx-translate/core';
 import { DateAdapter } from "@angular/material/core";
+import { ApiTranslatorUtils } from '../../utils/api-translator.utils';
 
 @Component({
   selector: 'hopper-cfar-contract-choice',
@@ -14,6 +15,7 @@ export class CfarContractChoiceComponent extends AbstractComponent implements On
 
   public rules!: string[];
   public cfarOffers!: CfarOffer[];
+  public isLoading!: boolean;
 
   @Input() partnerId!: string;
   @Input() hCSessionId!: string;
@@ -52,67 +54,26 @@ export class CfarContractChoiceComponent extends AbstractComponent implements On
       'No forms or claims required, without talking to customer service',
     ];
 
-    // ----------- MOCK -----------
-    this.cfarOffers = [
-      {
-        id: "1ecdc0ec-8ea8-6c3d-84a2-a7c5ee1c8713",
-        premium: "27.00",
-        coverage: "73.32",
-        currency: "CAD",
-        requestType: RequestType.Ancillary,
-        toUsdExchangeRate: "0.7792270535165348084620941103681614",
-        contractExpiryDateTime: new Date("2022-05-27T22:34:30Z"),
-        createdDateTime: new Date("2022-05-25T09:41:00.011Z"),
-        itinerary: {
-          passengerPricing: [
-            {
-              passengerCount: {
-                count: 3,
-                type: "adult"
-              }
-            }
-          ],
-          currency: "CAD",
-          slices: [
-            {
-              segments: [
-                {
-                  originAirport: "LGA",
-                  destinationAirport: "BOS",
-                  departureDateTime: "2022-05-28T18:34:30",
-                  arrivalDateTime: "2022-05-28T19:12:30",
-                  flightNumber: "JB776",
-                  validatingCarrierCode: "B6",
-                  fareClass: FareClass.BasicEconomy
-                }
-              ]
-            }
-          ],
-          ancillaries: [
-            {
-              totalPrice: "30.55",
-              type: "travel_insurance"
-            }
-          ],
-          totalPrice: "91.65"
-        },
-        offerDescription: [
-            ""
-        ],
-        extAttributes: {
-          property1: "test1",
-          property2: "test2"
-        }
-      }
-    ];
-    // ----------------------------
+    this.isLoading = true;
 
-    /*
     this._cancelForAnyReasonCFARService
-      .postCfarOffers(this._buildCreateCfarOfferRequest(), this.hCSessionId)
+      .postCfarOffers(ApiTranslatorUtils.modelToSnakeCase(this._buildCreateCfarOfferRequest()), this.hCSessionId)
       .pipe(take(1))
-      .subscribe(cfarOffers => this.cfarOffers = cfarOffers);
-    */
+      .subscribe(
+        (cfarOffers) => {
+          let results: CfarOffer[] = [];
+
+          if (cfarOffers) {
+            cfarOffers.forEach(cfarOffer => {
+              results.push(ApiTranslatorUtils.modelToCamelCase(cfarOffer) as CfarOffer);
+            });
+          }
+          
+          this.cfarOffers = results;
+          this.isLoading = false;
+        },
+        (error) => this.isLoading = false);
+    
   }
 
   // -----------------------------------------------

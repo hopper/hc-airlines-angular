@@ -3,10 +3,10 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
+import { CfarOffer } from 'projects/cloud-airlines-angular-sdk/src/apis/hopper-cloud-airline/v1';
 import { CfarContractDialogComponent } from 'projects/cloud-airlines-angular-sdk/src/components/cfar-contract-dialog/cfar-contract-dialog.component';
 import { CfarExerciseDialogComponent } from 'projects/cloud-airlines-angular-sdk/src/components/cfar-exercise-dialog/cfar-exercise-dialog.component';
 import { Locales } from 'projects/cloud-airlines-angular-sdk/src/i18n';
-import { I18n } from 'projects/cloud-airlines-angular-sdk/src/i18n/i18n.interface';
 import { DialogUtils } from 'projects/cloud-airlines-angular-sdk/src/utils/dialog.utils';
 import { take } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
@@ -20,6 +20,30 @@ export class AppComponent implements OnInit {
 
   public currentLang!: string;
   public languages!: string[];
+
+  // Mock
+  public partnerId = "23459807-1a9a-4227-a7aa-226e3c5552d1";
+  public hCSessionId = "51ce7ded-730e-4a26-8366-9f137112d8e7";
+  public originAirport = "LGA";
+  public destinationAirport = "BOS";
+  public departureDateTime = "2022-06-28T18:34:30";
+  public arrivalDateTime = "2022-06-28T19:12:30";
+  public flightNumber = "JB776";
+  public carrierCode = "B6";
+  public fareClass: any = "basic_economy";
+  public currency = "EUR";
+  public totalPrice = "91.65";
+  public passengers: any[] = [
+    {
+      passengerCount: {
+        count: 3,
+        type: "adult"
+      }
+    }
+  ];
+  public ancillaryPrice = "30.55";
+  public ancillaryType= "travel_insurance";
+  public bookingDateTime = new Date();
 
   constructor(
     @Inject(DOCUMENT) private _document: Document,
@@ -45,7 +69,7 @@ export class AppComponent implements OnInit {
 
   onOpenCfarContractDialog(): void {
     const dialogData = { currentLang: this.currentLang };
-    const dialogConfig = DialogUtils.getDialogConfig(dialogData, "hopper-theme-A");
+    const dialogConfig = DialogUtils.getDialogConfig(dialogData);
     const dialogRef = this._dialog.open(CfarContractDialogComponent, dialogConfig);
 
     dialogRef.afterClosed()
@@ -85,5 +109,10 @@ export class AppComponent implements OnInit {
 
   onSetCurrentLang(newLanguage: string): void {
     this.currentLang = newLanguage;
+  }
+
+  onEmitSubmitCfarContractChoice(cfarOffer: CfarOffer): void {
+    console.log("cfar offer callback");
+    console.log(cfarOffer);
   }
 }

@@ -30,6 +30,14 @@ export abstract class AbstractComponent implements OnChanges {
 
         // Set default language for datepickers
         this.adapter.setLocale(this.translateService.getBrowserLang());
+
+        // Init API configuration
+        this.cancelForAnyReasonCFARService.configuration = {
+            accessToken: "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6ImtjN2FjWmV4bHBvZk1QY3V6UF9HTyJ9.eyJpc3MiOiJodHRwczovL2hvcHBlci1hcGkuYXV0aDAuY29tLyIsInN1YiI6IkJQczlscFdSN2dOR28xS1M5RzBySlhLa1lqSGF6N3BiQGNsaWVudHMiLCJhdWQiOiJodHRwczovL2RldmVsb3BtZW50LmFwaS5ob3BwZXIuY29tIiwiaWF0IjoxNjU0NzY0MDQxLCJleHAiOjE2NTQ4NTA0NDEsImF6cCI6IkJQczlscFdSN2dOR28xS1M5RzBySlhLa1lqSGF6N3BiIiwic2NvcGUiOiJhbGw6Y2ZhciBhbGw6Z2VuZXJhbCBhbGw6cHJpY2VmcmVlemUgYWxsOmtheWFrIGFsbDpmbGlnaHQgYWxsOnBheW1lbnQgYWxsOnVzZXIgYWxsOmV2ZW50IiwiZ3R5IjoiY2xpZW50LWNyZWRlbnRpYWxzIn0.ik9TwZfAJa7BEeIvksQkEblgzp0QrJ83ROzQ098k7qqgYnOuV2OkgeDQD0zcviC4p89LA3mvKrIgPLzboYYZfrAJi-66Ucwarq4TOXhMenoJV_kEB6d2JI3dUPIga0kvZqkj4TuCRuOCXI9Hp9TJSeFgBF1_GfcXoB879kYKC79M6O1BlC3vx6xbG4Wn5HxVAQFTdfHTlxcr4iFtCV-7zVfKcGSoWQePAEhvbHfR-yR-p1oON8ryV1b3seleuTzdSdwGW7D1DARfcKY41EottC9vrqB5vGfVoI6E0WHwfGQjC7Cs7Mc8JfrtoGo2Vj2P0-njue02S5CWf2KsLVRylA",
+            selectHeaderAccept: (accepts: ['application/json']) => 'application/json',
+            selectHeaderContentType: (contentsTypes: ['application/json']) => 'application/json',
+            isJsonMime: (mime: 'application/json') => true
+        };
     }
     
     // -----------------------------------------------

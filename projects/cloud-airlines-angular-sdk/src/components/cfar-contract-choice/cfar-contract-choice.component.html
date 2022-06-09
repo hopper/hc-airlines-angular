@@ -1,38 +1,49 @@
 <div class="px-32" ngClass.lt-md="px-16" fxLayout="row" fxLayoutAlign="center center">
 
-    <mat-card class="m-16 pointer" fxFlex fxLayout="row wrap" *ngFor="let offer of cfarOffers">
-
-        <div fxFlex="100" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="16px">
-            <div fxFlex="96px" fxFlex.lt-md="88px" fxFlex.lt-sm="48px" class="p-16" ngClass.lt-sm="px-0">
-                <mat-icon class="big-icon">cached</mat-icon>
-            </div>
-
-            <div fxFlex="calc(100% - 112px)" fxFlex.lt-md="calc(100% - 104px)" fxFlex.lt-sm="calc(100% - 48px)" 
-                fxLayout="row wrap" fxLayoutAlign="start center">
-                <h2 class="offer-title">{{ 'CFAR_CONTRACT_CHOICE.TITLE' | translate }}</h2>
-            </div>
-        </div>
-
-        <div fxFlex="100">
-
-            <div fxFlexOffset="112px" fxFlexOffset.lt-md="104px" fxFlexOffset.lt-sm="0px"
-                fxFlex fxLayout="row wrap" fxLayoutAlign="start center">
-
-                <div fxFlex="100" class="py-16" *ngFor="let rule of rules" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
-                    <mat-icon class="fat-icon" color="primary">check</mat-icon>
-                    <span>[{{ rule }}]</span>
+    <ng-container *ngIf="!isLoading">
+        <mat-card class="m-16 pointer" fxFlex fxLayout="row wrap" *ngFor="let offer of cfarOffers">
+    
+            <div fxFlex="100" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="16px">
+                <div fxFlex="96px" fxFlex.lt-md="88px" fxFlex.lt-sm="48px" class="p-16" ngClass.lt-sm="px-0">
+                    <mat-icon class="big-icon">cached</mat-icon>
                 </div>
+    
+                <div fxFlex="calc(100% - 112px)" fxFlex.lt-md="calc(100% - 104px)" fxFlex.lt-sm="calc(100% - 48px)" 
+                    fxLayout="row wrap" fxLayoutAlign="start center">
+                    <h2 class="offer-title">{{ 'CFAR_CONTRACT_CHOICE.TITLE' | translate }}</h2>
+                </div>
+            </div>
+    
+            <div fxFlex="100">
+    
+                <div fxFlexOffset="112px" fxFlexOffset.lt-md="104px" fxFlexOffset.lt-sm="0px"
+                    fxFlex fxLayout="row wrap" fxLayoutAlign="start center">
+    
+                    <div fxFlex="100" class="py-16" *ngFor="let rule of rules" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
+                        <mat-icon class="fat-icon" color="primary">check</mat-icon>
+                        <span>[{{ rule }}]</span>
+                    </div>
+            
+                    <div fxFlex="100" fxLayoutAlign="end center">
+                        <button mat-stroked-button color="primary" (click)="onSubmit(offer)">
+                            {{ 'CFAR_CONTRACT_CHOICE.PRICE' | translate: { price : (offer?.premium | currency:offer?.currency:'symbol':undefined:currentLang) } }}
+                        </button>
+                    </div>
         
-                <div fxFlex="100" fxLayoutAlign="end center">
-                    <button mat-stroked-button color="primary" (click)="onSubmit(offer)">
-                        {{ 'CFAR_CONTRACT_CHOICE.PRICE' | translate: { price : (offer?.premium | currency:offer?.currency:'symbol':undefined:currentLang) } }}
-                    </button>
                 </div>
     
             </div>
+            
+        </mat-card>
 
-        </div>
-        
-    </mat-card>
+        <ng-container *ngIf="!cfarOffers || cfarOffers?.length == 0">
+            <p>{{ 'CFAR_CONTRACT_CHOICE.NO_OFFERS' | translate }}</p>
+        </ng-container>
+    </ng-container>
+
+    <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="16px" *ngIf="isLoading">
+        <mat-spinner></mat-spinner>
+        <p>{{ 'CFAR_CONTRACT_CHOICE.LOADING' | translate }}</p>
+    </div>
 
 </div>

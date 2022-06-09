@@ -43,7 +43,25 @@
     <h3>CFAR contract choice</h3>
   
     <div class="hopper-theme-blue">
-      <hopper-cfar-contract-choice [currentLang]="currentLang"></hopper-cfar-contract-choice>
+      <hopper-cfar-contract-choice
+        [currentLang]="currentLang"
+        [partnerId]="partnerId"
+        [hCSessionId]="hCSessionId"
+        [originAirport]="originAirport"
+        [destinationAirport]="destinationAirport"
+        [departureDateTime]="departureDateTime"
+        [arrivalDateTime]="arrivalDateTime"
+        [flightNumber]="flightNumber"
+        [carrierCode]="carrierCode"
+        [fareClass]="fareClass"
+        [currency]="currency"
+        [totalPrice]="totalPrice"
+        [passengers]="passengers"
+        [ancillaryPrice]="ancillaryPrice"
+        [ancillaryType]="ancillaryType"
+        [bookingDateTime]="bookingDateTime"
+        (emitSubmit)="onEmitSubmitCfarContractChoice($event)"
+    ></hopper-cfar-contract-choice>
     </div>
   </div>
 

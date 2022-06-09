@@ -9,7 +9,9 @@ export const locale: I18n = {
         },
         CFAR_CONTRACT_CHOICE: {
             TITLE: "Cancele su vuelo en cualquier momento, por cualquier motivo.",
-            PRICE: "Agregar por {{ price }}"
+            PRICE: "Agregar por {{ price }}",
+            NO_OFFERS: "No hay ofertas disponibles",
+            LOADING: "Cargando ofertas en curso..."
         },
         CFAR_CONTRACT_DIALOG: {
             TITLE: "Cancelar por cualquier motivo",
