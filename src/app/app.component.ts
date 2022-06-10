@@ -3,7 +3,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
-import { CfarOffer } from 'projects/cloud-airlines-angular-sdk/src/apis/hopper-cloud-airline/v1';
+import { CfarContract, CfarOffer } from 'projects/cloud-airlines-angular-sdk/src/apis/hopper-cloud-airline/v1';
 import { CfarContractDialogComponent } from 'projects/cloud-airlines-angular-sdk/src/components/cfar-contract-dialog/cfar-contract-dialog.component';
 import { CfarExerciseDialogComponent } from 'projects/cloud-airlines-angular-sdk/src/components/cfar-exercise-dialog/cfar-exercise-dialog.component';
 import { Locales } from 'projects/cloud-airlines-angular-sdk/src/i18n';
@@ -23,7 +23,7 @@ export class AppComponent implements OnInit {
 
   // Mock
   public partnerId = "23459807-1a9a-4227-a7aa-226e3c5552d1";
-  public hCSessionId = "51ce7ded-730e-4a26-8366-9f137112d8e7";
+  public hCSessionId = "62526748-1244-4fa5-88bd-446cecf7961c";
   public originAirport = "LGA";
   public destinationAirport = "BOS";
   public departureDateTime = "2022-06-28T18:34:30";
@@ -42,8 +42,9 @@ export class AppComponent implements OnInit {
     }
   ];
   public ancillaryPrice = "30.55";
-  public ancillaryType= "travel_insurance";
+  public ancillaryType = "travel_insurance";
   public bookingDateTime = new Date();
+  public paymentType = "offline_reconciliation";
 
   constructor(
     @Inject(DOCUMENT) private _document: Document,
@@ -68,16 +69,41 @@ export class AppComponent implements OnInit {
   }
 
   onOpenCfarContractDialog(): void {
-    const dialogData = { currentLang: this.currentLang };
+    const dialogData = { 
+      currentLang: this.currentLang,
+      partnerId: this.partnerId,
+      hCSessionId: this.hCSessionId,
+      originAirport: this.originAirport,
+      destinationAirport: this.destinationAirport,
+      departureDateTime: this.departureDateTime,
+      arrivalDateTime: this.arrivalDateTime,
+      flightNumber: this.flightNumber,
+      carrierCode: this.carrierCode,
+      fareClass: this.fareClass,
+      currency: this.currency,
+      totalPrice: this.totalPrice,
+      passengers: this.passengers,
+      ancillaryPrice: this.ancillaryPrice,
+      ancillaryType: this.ancillaryType,
+      bookingDateTime: this.bookingDateTime,
+      paymentType: this.paymentType
+    };
     const dialogConfig = DialogUtils.getDialogConfig(dialogData);
     const dialogRef = this._dialog.open(CfarContractDialogComponent, dialogConfig);
 
     dialogRef.afterClosed()
       .pipe(take(1))
-      .subscribe(result => {
-        // No action when dialog is closed  
-        console.log(result);
-      });
+      .subscribe(
+        (result: CfarContract) => {
+          if (result) {
+            console.log("Submit cfar contract dialog :")
+            console.log(result);
+          } else {
+            console.log("Close dialog")
+          }
+        },
+        (error) => console.log(error)
+      );
   }
 
   onOpenCfarExerciseDialog(): void {

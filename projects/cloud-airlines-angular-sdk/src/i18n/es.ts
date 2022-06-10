@@ -20,7 +20,9 @@ export const locale: I18n = {
             BUTTON: {
                 CANCEL: "Rechazar Cobertura",
                 SUBMIT: "Obtenga {{ percentage }} de cobertura | {{ price }}"
-            }
+            },
+            NO_OFFERS: "No hay ofertas disponibles",
+            LOADING: "Cargando ofertas en curso..."
         },
         CFAR_EXERCISE_DIALOG: {
             TITLE: "Cancelar vuelo",

@@ -2,22 +2,43 @@ import { camelCase, snakeCase } from 'lodash';
 
 export class ApiTranslatorUtils {
 
-    public static modelToSnakeCase(model: any): any { 
-        const apiModel: any = {};
+    public static modelToSnakeCase(apiModel: any): any {
+        if (!apiModel)	{ return; }
 
-        if (model) {
-            for (const key of Object.keys(model)) {
-                if (!!model[key] && model[key] instanceof Array) {
-                    apiModel[snakeCase(key)] = model[key].map((value: any) => this.modelToSnakeCase(value));
-                } else if (!!model[key] && typeof model[key] === 'object' && !(model[key] instanceof Date)) {
-                    apiModel[snakeCase(key)] = this.modelToSnakeCase(model[key]);
+        const modelData: any = {};
+
+        for (const key of Object.keys(apiModel)) {
+            if (apiModel[key] === null && apiModel[key] === undefined) {
+                return;
+            }
+
+            if (Array.isArray(apiModel[key])) {
+                const array = [];
+
+                for (const item of apiModel[key]) {
+                    switch (typeof item) {
+                    case 'string':
+                        array.push(item);
+                        break;
+                    case 'number':
+                        array.push(item);
+                        break;
+                    default:
+                        array.push(this.modelToSnakeCase(item));
+                    }
+                }
+                
+                modelData[snakeCase(key)] = array;
+            } else {
+                if (typeof(apiModel[key]) === 'object' && !(apiModel[key] instanceof Date)) {
+                    modelData[snakeCase(key)] = this.modelToSnakeCase(apiModel[key]);
                 } else {
-                    apiModel[snakeCase(key)] = model[key];
+                    modelData[snakeCase(key)] = apiModel[key];
                 }
             }
         }
 
-        return apiModel;
+        return modelData;
     }
 	
     public static modelToCamelCase(apiModel: any): any {

@@ -1,10 +1,11 @@
-import { Component, EventEmitter, Inject, OnChanges, OnDestroy, OnInit, Output, SimpleChanges } from '@angular/core';
+import { Component, Inject, OnChanges, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { take } from 'rxjs/operators';
 import { CancelForAnyReasonCFARService, CfarContract, CfarOffer, CreateCfarContractRequest, CreateCfarOfferRequest, FareClass, PassengerPricing, RequestType } from '../../apis/hopper-cloud-airline/v1';
 import { TranslateService } from '@ngx-translate/core';
 import { DateAdapter } from "@angular/material/core";
 import { AbstractComponent } from '../abstract.component';
+import { ApiTranslatorUtils } from '../../utils/api-translator.utils';
 
 @Component({
   selector: 'hopper-cfar-contract-dialog',
@@ -16,6 +17,7 @@ export class CfarContractDialogComponent extends AbstractComponent implements On
   public rules!: string[];
   public cfarOffers!: CfarOffer[];
   public selectedCfarOffer!: CfarOffer;
+  public isLoading!: boolean;
 
   // Mandatory data
   private _partnerId!: string;
@@ -37,8 +39,6 @@ export class CfarContractDialogComponent extends AbstractComponent implements On
 
   // Optional data
   private _pnrReference?: string;
-
-  @Output() emitSubmit = new EventEmitter();
 
   constructor(
     private _adapter: DateAdapter<any>,
@@ -87,174 +87,27 @@ export class CfarContractDialogComponent extends AbstractComponent implements On
       'Get instant resolution through Air Canada, no form or claims required!',
     ];
 
-    // ----------- MOCK -----------
-    this.cfarOffers = [
-      {
-        id: "1ecdc0ec-8ea8-6c3d-84a2-a7c5ee1c8713",
-        premium: "27.00",
-        coverage: "73.32",
-        currency: "CAD",
-        requestType: RequestType.Ancillary,
-        toUsdExchangeRate: "0.7792270535165348084620941103681614",
-        contractExpiryDateTime: new Date("2022-05-27T22:34:30Z"),
-        createdDateTime: new Date("2022-05-25T09:41:00.011Z"),
-        itinerary: {
-          passengerPricing: [
-            {
-              passengerCount: {
-                count: 3,
-                type: "adult"
-              }
-            }
-          ],
-          currency: "CAD",
-          slices: [
-            {
-              segments: [
-                {
-                  originAirport: "LGA",
-                  destinationAirport: "BOS",
-                  departureDateTime: "2022-05-28T18:34:30",
-                  arrivalDateTime: "2022-05-28T19:12:30",
-                  flightNumber: "JB776",
-                  validatingCarrierCode: "B6",
-                  fareClass: FareClass.BasicEconomy
-                }
-              ]
-            }
-          ],
-          ancillaries: [
-            {
-              totalPrice: "30.55",
-              type: "travel_insurance"
-            }
-          ],
-          totalPrice: "91.65"
-        },
-        offerDescription: [
-            ""
-        ],
-        extAttributes: {
-          property1: "test1",
-          property2: "test2"
-        }
-      },
-      {
-        id: "1ecdc0ec-8ea8-6c3d-84a2-a7c5ee1c8713",
-        premium: "32.00",
-        coverage: "83.32",
-        currency: "CAD",
-        requestType: RequestType.Ancillary,
-        toUsdExchangeRate: "0.7792270535165348084620941103681614",
-        contractExpiryDateTime: new Date("2022-05-27T22:34:30Z"),
-        createdDateTime: new Date("2022-05-25T09:41:00.011Z"),
-        itinerary: {
-          passengerPricing: [
-            {
-              passengerCount: {
-                count: 2,
-                type: "adult"
-              }
-            }
-          ],
-          currency: "CAD",
-          slices: [
-            {
-              segments: [
-                {
-                  originAirport: "LGA",
-                  destinationAirport: "BOS",
-                  departureDateTime: "2022-05-28T18:34:30",
-                  arrivalDateTime: "2022-05-28T19:12:30",
-                  flightNumber: "JB776",
-                  validatingCarrierCode: "B6",
-                  fareClass: FareClass.BasicEconomy
-                }
-              ]
-            }
-          ],
-          ancillaries: [
-            {
-              totalPrice: "40.55",
-              type: "travel_insurance"
-            }
-          ],
-          totalPrice: "101.65"
-        },
-        offerDescription: [
-            ""
-        ],
-        extAttributes: {
-          property1: "test1",
-          property2: "test2"
-        }
-      },
-      {
-        id: "1ecdc0ec-8ea8-6c3d-84a2-a7c5ee1c8713",
-        premium: "72.00",
-        coverage: "173.32",
-        currency: "CAD",
-        requestType: RequestType.Ancillary,
-        toUsdExchangeRate: "0.7792270535165348084620941103681614",
-        contractExpiryDateTime: new Date("2022-05-27T22:34:30Z"),
-        createdDateTime: new Date("2022-05-25T09:41:00.011Z"),
-        itinerary: {
-          passengerPricing: [
-            {
-              passengerCount: {
-                count: 3,
-                type: "adult"
-              }
-            }
-          ],
-          currency: "CAD",
-          slices: [
-            {
-              segments: [
-                {
-                  originAirport: "LGA",
-                  destinationAirport: "BOS",
-                  departureDateTime: "2022-05-28T18:34:30",
-                  arrivalDateTime: "2022-05-28T19:12:30",
-                  flightNumber: "JB776",
-                  validatingCarrierCode: "B6",
-                  fareClass: FareClass.BasicEconomy
-                }
-              ]
-            }
-          ],
-          ancillaries: [
-            {
-              totalPrice: "130.55",
-              type: "travel_insurance"
-            }
-          ],
-          totalPrice: "191.65"
-        },
-        offerDescription: [
-            ""
-        ],
-        extAttributes: {
-          property1: "test1",
-          property2: "test2"
-        }
-      }
-    ];
+    this.isLoading = true;
 
-    this.selectedCfarOffer = this.cfarOffers[0];
-    // ----------------------------
-
-    /*
-    // Create offers
     this._cancelForAnyReasonCFARService
-      .postCfarOffers(this._buildCreateCfarOfferRequest(), this._hCSessionId)
+      .postCfarOffers(ApiTranslatorUtils.modelToSnakeCase(this._buildCreateCfarOfferRequest()), this._hCSessionId)
       .pipe(take(1))
-      .subscribe((cfarOffers: CfarOffer[]) => {
-        this.cfarOffers = cfarOffers;
-        // The first one by default
-        this.selectedCfarOffer = cfarOffers[0];  
-      });
-    */
+      .subscribe(
+        (cfarOffers) => {
+          let results: CfarOffer[] = [];
+
+          if (cfarOffers) {
+            cfarOffers.forEach(cfarOffer => {
+              results.push(ApiTranslatorUtils.modelToCamelCase(cfarOffer) as CfarOffer);
+            });
+          }
+          
+          this.cfarOffers = results;
+          // The first one by default
+          this.selectedCfarOffer = results[0];
+          this.isLoading = false;
+        },
+        (error) => this.isLoading = false);
   }
 
   // -----------------------------------------------
@@ -266,11 +119,18 @@ export class CfarContractDialogComponent extends AbstractComponent implements On
   }
 
   onSubmit(): void {
+    this.isLoading = true;
+
     // Create CFAR Contract
     this._cancelForAnyReasonCFARService
-      .postCfarContracts(this._buildCreateCfarContractRequest(), this._hCSessionId)
+      .postCfarContracts(ApiTranslatorUtils.modelToSnakeCase(this._buildCreateCfarContractRequest()), this._hCSessionId)
       .pipe(take(1))
-      .subscribe((cfarContract: CfarContract) => this.emitSubmit.emit(cfarContract));
+      .subscribe(
+        (cfarContract: CfarContract) => {
+          this._dialogRef.close(ApiTranslatorUtils.modelToCamelCase(cfarContract) as CfarContract);
+        },
+        (error) => this.isLoading = false
+      );
   }
 
   onSelectOffer(cfarOffer: CfarOffer): void {

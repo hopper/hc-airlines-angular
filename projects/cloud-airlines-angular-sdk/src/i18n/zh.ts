@@ -20,7 +20,9 @@ export const locale: I18n = {
             BUTTON: {
                 CANCEL: "拒绝覆盖",
                 SUBMIT: "获得 {{ percentage }} 覆盖率 | {{ price }}"
-            }
+            },
+            NO_OFFERS: "没有可用的优惠",
+            LOADING: "正在加载优惠..."
         },
         CFAR_EXERCISE_DIALOG: {
             TITLE: "取消航班",

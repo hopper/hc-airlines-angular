@@ -14,44 +14,57 @@
 
 <mat-dialog-content class="mat-typography">
   
-    <div class="p-32" ngClass.lt-md="px-16" fxLayout="row wrap" fxLayoutAlign="start center">
+    <ng-container *ngIf="!isLoading">
+        <div class="p-32" ngClass.lt-md="px-16" fxLayout="row wrap" fxLayoutAlign="start center">
+            
+            <div fxFlex="100">
+                <span class="powered-by">{{ 'CFAR_CONTRACT_DIALOG.POWERED_BY' | translate }}</span>
+            </div>
+    
+            <div fxFlex="100" class="p-16" *ngFor="let rule of rules" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
+                <mat-icon class="fat-icon">check</mat-icon>
+                <span>[ {{ rule }} ]</span>
+            </div>
         
-        <div fxFlex="100">
-            <span class="powered-by">{{ 'CFAR_CONTRACT_DIALOG.POWERED_BY' | translate }}</span>
-        </div>
-
-        <div fxFlex="100" class="p-16" *ngFor="let rule of rules" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
-            <mat-icon class="fat-icon">check</mat-icon>
-            <span>[ {{ rule }} ]</span>
         </div>
     
-    </div>
+        <div class="px-32" ngClass.lt-md="px-16" fxLayout="row wrap" fxLayout.lt-md="column" fxLayoutAlign="center center">
+    
+            <mat-card class="m-16" fxFlex fxLayout="row wrap" *ngFor="let offer of cfarOffers" 
+                [ngClass]="{ 'active': offer == selectedCfarOffer }"
+                [ngClass.lt-md]="{ 'active': offer == selectedCfarOffer, 'full-width': true }">
+                <div fxFlex="100" (click)="onSelectOffer(offer)">
+                    <h3 class="offer-title">{{ computePercentage(offer) | percent }} Flight cost covered</h3>
+                    <span class="price">{{ offer?.premium | currency:offer?.currency:'symbol' }}</span>
+                </div>
+                <div fxFlex="100" fxLayoutAlign="end center">
+                    <button mat-button color="primary" (click)="onViewDetails(offer)">{{ 'CFAR_CONTRACT_DIALOG.VIEW_DETAILS' | translate }}</button>
+                </div>
+            </mat-card>
 
-    <div class="px-32" ngClass.lt-md="px-16" fxLayout="row wrap" fxLayout.lt-md="column" fxLayoutAlign="center center">
+            <ng-container *ngIf="!cfarOffers || cfarOffers?.length == 0">
+                <p>{{ 'CFAR_CONTRACT_DIALOG.NO_OFFERS' | translate }}</p>
+            </ng-container>
+    
+        </div>
+    </ng-container>
 
-        <mat-card class="m-16" fxFlex fxLayout="row wrap" *ngFor="let offer of cfarOffers" 
-            [ngClass]="{ 'active': offer == selectedCfarOffer }"
-            [ngClass.lt-md]="{ 'active': offer == selectedCfarOffer, 'full-width': true }">
-            <div fxFlex="100" (click)="onSelectOffer(offer)">
-                <h3 class="offer-title">{{ computePercentage(offer) | percent }} Flight cost covered</h3>
-                <span class="price">{{ offer?.premium | currency:offer?.currency:'symbol' }}</span>
-            </div>
-            <div fxFlex="100" fxLayoutAlign="end center">
-                <button mat-button color="primary" (click)="onViewDetails(offer)">{{ 'CFAR_CONTRACT_DIALOG.VIEW_DETAILS' | translate }}</button>
-            </div>
-        </mat-card>
-
-    </div>
+    <ng-container>
+        <div class="p-32" ngClass.lt-md="px-16" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="16px" *ngIf="isLoading">
+            <mat-spinner></mat-spinner>
+            <p>{{ 'CFAR_CONTRACT_DIALOG.LOADING' | translate }}</p>
+        </div>
+    </ng-container>
     
 </mat-dialog-content>
 
 <mat-dialog-actions>
 
     <div class="p-32" ngClass.lt-md="px-16" fxFlex="100" fxLayout="row wrap" fxLayout.lt-sm="column" fxLayoutAlign="end center">
-        <button mat-button color="primary" ngClass.lt-sm="full-width" (click)="onClose()">
+        <button mat-button color="primary" ngClass.lt-sm="full-width" (click)="onClose()" [disabled]="isLoading">
             {{ 'CFAR_CONTRACT_DIALOG.BUTTON.CANCEL' | translate }}
         </button>
-        <button mat-flat-button color="primary" ngClass.lt-sm="full-width" (click)="onSubmit()">
+        <button mat-flat-button color="primary" ngClass.lt-sm="full-width" (click)="onSubmit()" [disabled]="isLoading">
             {{ 'CFAR_CONTRACT_DIALOG.BUTTON.SUBMIT' | translate: { 
                 percentage: (computePercentage(selectedCfarOffer) | percent),
                 price: (selectedCfarOffer?.premium | currency:selectedCfarOffer?.currency:'symbol':undefined:currentLang) 

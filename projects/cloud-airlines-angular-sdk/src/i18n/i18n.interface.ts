@@ -18,7 +18,9 @@ export interface I18n {
             BUTTON: {
                 CANCEL: string;
                 SUBMIT: string;
-            }
+            },
+            NO_OFFERS: string;
+            LOADING: string;
         },
         CFAR_EXERCISE_DIALOG: {
             TITLE: string;
