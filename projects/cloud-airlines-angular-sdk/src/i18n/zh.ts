@@ -44,7 +44,9 @@ export const locale: I18n = {
             BUTTON: {
                 CANCEL: "取消",
                 SUBMIT: "提交"
-            }
+            },
+            NO_CONTRACT: "没有可用的合同",
+            LOADING: "正在加载..."
         }
     }
 }

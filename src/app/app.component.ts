@@ -23,7 +23,7 @@ export class AppComponent implements OnInit {
 
   // Mock
   public partnerId = "23459807-1a9a-4227-a7aa-226e3c5552d1";
-  public hCSessionId = "62526748-1244-4fa5-88bd-446cecf7961c";
+  public hCSessionId = "16767763-4cd2-401c-b358-d5eacd36fd87";
   public originAirport = "LGA";
   public destinationAirport = "BOS";
   public departureDateTime = "2022-06-28T18:34:30";
@@ -45,6 +45,8 @@ export class AppComponent implements OnInit {
   public ancillaryType = "travel_insurance";
   public bookingDateTime = new Date();
   public paymentType = "offline_reconciliation";
+  public pnrReference = "123456";
+  public contractId = "1ece89da-263c-6689-bec4-f56934b83f44";
 
   constructor(
     @Inject(DOCUMENT) private _document: Document,
@@ -107,7 +109,24 @@ export class AppComponent implements OnInit {
   }
 
   onOpenCfarExerciseDialog(): void {
-    const dialogData = { currentLang: this.currentLang };
+    const dialogData = { 
+      currentLang: this.currentLang,
+      hCSessionId: this.hCSessionId,
+      pnrReference: this.pnrReference,
+      contractId: this.contractId,
+      currency: this.currency,
+      originAirport: this.originAirport,
+      destinationAirport: this.destinationAirport,
+      departureDateTime: this.departureDateTime,
+      arrivalDateTime: this.arrivalDateTime,
+      flightNumber: this.flightNumber,
+      carrierCode: this.carrierCode,
+      fareClass: this.fareClass,
+      totalPrice: this.totalPrice,
+      passengers: this.passengers,
+      ancillaryPrice: this.ancillaryPrice,
+      ancillaryType: this.ancillaryType
+    };
     const dialogConfig = DialogUtils.getDialogConfig(dialogData);
     const dialogRef = this._dialog.open(CfarExerciseDialogComponent, dialogConfig);
 

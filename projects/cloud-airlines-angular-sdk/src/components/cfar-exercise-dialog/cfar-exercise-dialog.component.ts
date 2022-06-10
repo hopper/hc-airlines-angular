@@ -5,6 +5,7 @@ import { CancelForAnyReasonCFARService, CfarContract, CfarOffer, CfarContractExe
 import { AbstractComponent } from '../abstract.component';
 import { TranslateService } from '@ngx-translate/core';
 import { DateAdapter } from "@angular/material/core";
+import { ApiTranslatorUtils } from '../../utils/api-translator.utils';
 
 @Component({
   selector: 'hopper-cfar-exercise-dialog',
@@ -14,10 +15,11 @@ import { DateAdapter } from "@angular/material/core";
 export class CfarExerciseDialogComponent extends AbstractComponent implements OnInit {
 
   public selectedCfarOffer!: CfarOffer;
-  public selectedRefundMethod!: 'ftc' | 'cash';
+  public selectedRefundMethod?: 'ftc' | 'cash';
   public cfarContract!: CfarContract;
   public refundMethods!: { value: 'ftc' | 'cash', label: string }[];
   public isHopperRefund!: boolean;
+  public isLoading!: boolean;
 
   // Mandatory data
   private _hCSessionId!: string;
@@ -79,153 +81,29 @@ export class CfarExerciseDialogComponent extends AbstractComponent implements On
   // -----------------------------------------------
 
   ngOnInit(): void {
-    // ----------- MOCK -----------
-    this.cfarContract = {
-      id: "1ecdc0ed-2d10-6868-84a2-fd8a8e4ae6c1",
-      offers: [
-        {
-          id: "1ecdc0ec-8ea8-6c3d-84a2-a7c5ee1c8713",
-          premium: "27.00",
-          coverage: "73.32",
-          currency: "CAD",
-          requestType: "fare",
-          toUsdExchangeRate: "0.7792270535165348084620941103681614",
-          contractExpiryDateTime: new Date("2022-05-27T22:34:30Z"),
-          createdDateTime: new Date("2022-05-25T09:41:00.011Z"),
-          itinerary: {
-            passengerPricing: [
-              {
-                passengerCount: {
-                  count: 3,
-                  type: "adult"
-                }
-              }
-            ],
-            currency: "CAD",
-            slices: [
-              {
-                segments: [
-                  {
-                    originAirport: "LGA",
-                    destinationAirport: "BOS",
-                    departureDateTime: "2022-05-28T18:34:30",
-                    arrivalDateTime: "2022-05-28T19:12:30",
-                    flightNumber: "JB776",
-                    validatingCarrierCode: "B6",
-                    fareClass: "basic_economy"
-                  }
-                ]
-              }
-            ],
-            ancillaries: [
-              {
-                totalPrice: "30.55",
-                type: "travel_insurance"
-              }
-            ],
-            totalPrice: "91.65"
-          },
-          offerDescription: [
-              ""
-          ],
-          extAttributes: {
-            property1: "test1",
-            property2: "test2"
-          }
-        }
-      ],
-      coverage: "146.64",
-      premium: "51.00",
-      currency: "CAD",
-      createdDateTime: new Date("2022-05-25T09:41:16.621Z"),
-      expiryDateTime: new Date("2022-05-27T22:34:30Z"),
-      status: "created",
-      contractExercise: {
-        contractId: '123456',
-        exerciseInitiatedDateTime: new Date(),
-        hopperRefund: '25.0',
-        hopperRefundMethod: 'cash',
-        airlineRefundAllowance: '50.0',
-        airlineRefundMethod: 'cash',
-        id: '1',
-        currency: 'CAD',
-        extAttributes: {}
-      },
-      pnrReference: "ABC123",
-      extAttributes: {
-          property1: "azerty",
-          property2: "qwerty"
-      }, 
-      itinerary: {
-        passengerPricing: [
-          {
-            passengerCount: {
-              count: 2,
-              type: "adult"
-            }
-          },
-          {
-            passengerCount: {
-              count: 1,
-              type: "child"
-            }
-          }
-        ],
-        currency: "CAD",
-        slices: [
-          {
-            segments: [
-              {
-                originAirport: "LGA",
-                destinationAirport: "BOS",
-                departureDateTime: "2022-05-28T18:34:30",
-                arrivalDateTime: "2022-05-28T19:12:30",
-                flightNumber: "JB776",
-                validatingCarrierCode: "B6",
-                fareClass: "basic_economy"
-              },
-              {
-                originAirport: "BOS",
-                destinationAirport: "LGA",
-                departureDateTime: "2022-06-28T18:34:30",
-                arrivalDateTime: "2022-06-28T19:12:30",
-                flightNumber: "JB777",
-                validatingCarrierCode: "B6",
-                fareClass: "basic_economy"
-              }
-            ]
-          }
-        ],
-        ancillaries: [
-          {
-            totalPrice: "30.55",
-            type: "travel_insurance"
-          }
-        ],
-        totalPrice: "91.65"
-      }
-    };
-    // ----------------------------
-
-    /*
+    this.isLoading = true;
 
     // Create Contract Exercise
     this.cancelForAnyReasonCFARService
-      .postCfarContractExercises(this._buildCreateCfarContractExerciseRequest(), this._hCSessionId)
+      .postCfarContractExercises(ApiTranslatorUtils.modelToSnakeCase(this._buildCreateCfarContractExerciseRequest()), this._hCSessionId)
       .pipe(take(1))
-      .subscribe((cfarContractExercise: CfarContractExercise) => {
-        // Get the contract with the exercise
-        this.cancelForAnyReasonCFARService
-          .getCfarContractsId(this._contractId, this._hCSessionId)
-          .pipe(take(1))
-          .subscribe((cfarContract: CfarContract) => {
-            this.cfarContract = cfarContract;
-            // Hopper offer by default
-            this.isHopperRefund = true;
-          });
-      });
+      .subscribe(
+        (cfarContractExercise: CfarContractExercise) => {
+          // Get the contract with the exercise
+          this.cancelForAnyReasonCFARService
+            .getCfarContractsId(this._contractId, this._hCSessionId)
+            .pipe(take(1))
+            .subscribe((cfarContract: CfarContract) => {
+              const result = ApiTranslatorUtils.modelToCamelCase(cfarContract) as CfarContract;
 
-    */
+              this.cfarContract = result;
+
+              // Hopper offer by default
+              this.isHopperRefund = true;
+            });
+        },
+        (error) => this.isLoading = false
+      );
 
     this.refundMethods = [
       { value: 'ftc', label: 'FTC' },

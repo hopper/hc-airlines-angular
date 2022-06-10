@@ -1,10 +1,10 @@
-<div mat-dialog-title class="p-32" ngClass.lt-md="px-16" fxLayout="row wrap" fxLayout="start center">
+<div mat-dialog-title class="p-32" ngClass.lt-md="px-16" fxLayout="row" fxLayout="start center" fxLayoutGap="16px">
     
-    <div fxFlex="80" fxLayoutAlign="center start" fxLayout="column">
+    <div fxFlex="calc(80% - 16px)"  fxLayoutAlign="center start" fxLayout="column">
         <mat-icon class="big-icon">cached</mat-icon>
         <h2>{{ 'CFAR_CONTRACT_DIALOG.TITLE' | translate }}</h2>
     </div>
-    <div fxFlex="20" fxLayoutAlign="end start">
+    <div fxFlex="calc(20% - 16px)" fxLayoutAlign="end start">
         <button mat-mini-fab matTooltip="Close" (click)="onClose()">
             <mat-icon>clear</mat-icon>
         </button>
@@ -15,42 +15,48 @@
 <mat-dialog-content class="mat-typography">
   
     <ng-container *ngIf="!isLoading">
-        <div class="p-32" ngClass.lt-md="px-16" fxLayout="row wrap" fxLayoutAlign="start center">
+
+        <ng-container *ngIf="cfarOffers && cfarOffers.length > 0">
+            <div class="p-32" ngClass.lt-md="px-16" fxLayout="row wrap" fxLayoutAlign="start center">
             
-            <div fxFlex="100">
-                <span class="powered-by">{{ 'CFAR_CONTRACT_DIALOG.POWERED_BY' | translate }}</span>
-            </div>
-    
-            <div fxFlex="100" class="p-16" *ngFor="let rule of rules" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
-                <mat-icon class="fat-icon">check</mat-icon>
-                <span>[ {{ rule }} ]</span>
+                <div fxFlex="100">
+                    <span class="powered-by">{{ 'CFAR_CONTRACT_DIALOG.POWERED_BY' | translate }}</span>
+                </div>
+        
+                <div fxFlex="100" class="p-16" *ngFor="let rule of rules" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
+                    <mat-icon class="fat-icon">check</mat-icon>
+                    <span>[ {{ rule }} ]</span>
+                </div>
+            
             </div>
         
-        </div>
-    
-        <div class="px-32" ngClass.lt-md="px-16" fxLayout="row wrap" fxLayout.lt-md="column" fxLayoutAlign="center center">
-    
-            <mat-card class="m-16" fxFlex fxLayout="row wrap" *ngFor="let offer of cfarOffers" 
-                [ngClass]="{ 'active': offer == selectedCfarOffer }"
-                [ngClass.lt-md]="{ 'active': offer == selectedCfarOffer, 'full-width': true }">
-                <div fxFlex="100" (click)="onSelectOffer(offer)">
-                    <h3 class="offer-title">{{ computePercentage(offer) | percent }} Flight cost covered</h3>
-                    <span class="price">{{ offer?.premium | currency:offer?.currency:'symbol' }}</span>
-                </div>
-                <div fxFlex="100" fxLayoutAlign="end center">
-                    <button mat-button color="primary" (click)="onViewDetails(offer)">{{ 'CFAR_CONTRACT_DIALOG.VIEW_DETAILS' | translate }}</button>
-                </div>
-            </mat-card>
+            <div class="px-32" ngClass.lt-md="px-16" fxLayout="row wrap" fxLayout.lt-md="column" fxLayoutAlign="center center">
+        
+                <mat-card class="m-16" fxFlex fxLayout="row wrap" *ngFor="let offer of cfarOffers" 
+                    [ngClass]="{ 'active': offer == selectedCfarOffer }"
+                    [ngClass.lt-md]="{ 'active': offer == selectedCfarOffer, 'full-width': true }">
+                    <div fxFlex="100" (click)="onSelectOffer(offer)">
+                        <h3 class="offer-title">{{ computePercentage(offer) | percent }} Flight cost covered</h3>
+                        <span class="price">{{ offer?.premium | currency:offer?.currency:'symbol' }}</span>
+                    </div>
+                    <div fxFlex="100" fxLayoutAlign="end center">
+                        <button mat-button color="primary" (click)="onViewDetails(offer)">{{ 'CFAR_CONTRACT_DIALOG.VIEW_DETAILS' | translate }}</button>
+                    </div>
+                </mat-card>
 
-            <ng-container *ngIf="!cfarOffers || cfarOffers?.length == 0">
+            </div>
+        </ng-container>
+
+        <ng-container *ngIf="!cfarOffers || cfarOffers?.length == 0">
+            <div class="px-32" ngClass.lt-md="px-16" fxLayout="row wrap" fxLayoutAlign="center center">
                 <p>{{ 'CFAR_CONTRACT_DIALOG.NO_OFFERS' | translate }}</p>
-            </ng-container>
-    
-        </div>
+            </div>
+        </ng-container>
+
     </ng-container>
 
-    <ng-container>
-        <div class="p-32" ngClass.lt-md="px-16" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="16px" *ngIf="isLoading">
+    <ng-container *ngIf="isLoading">
+        <div class="p-32" ngClass.lt-md="px-16" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="16px">
             <mat-spinner></mat-spinner>
             <p>{{ 'CFAR_CONTRACT_DIALOG.LOADING' | translate }}</p>
         </div>

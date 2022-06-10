@@ -44,7 +44,9 @@ export const locale: I18n = {
             BUTTON: {
                 CANCEL: "Cancel",
                 SUBMIT: "Submit"
-            }
+            },
+            NO_CONTRACT: "No contract available",
+            LOADING: "Loading in progress..."
         }
     }
 }

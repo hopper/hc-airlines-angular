@@ -42,7 +42,9 @@ export interface I18n {
             BUTTON: {
                 CANCEL: string;
                 SUBMIT: string;
-            }
+            },
+            NO_CONTRACT: string;
+            LOADING: string;
         }
     }
 }
