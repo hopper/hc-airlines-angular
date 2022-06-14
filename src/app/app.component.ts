@@ -23,7 +23,7 @@ export class AppComponent implements OnInit {
 
   // Mock
   public partnerId = "23459807-1a9a-4227-a7aa-226e3c5552d1";
-  public hCSessionId = "16767763-4cd2-401c-b358-d5eacd36fd87";
+  public hCSessionId = "a697a468-ce34-4786-9546-bd094c5f5a66";
   public originAirport = "LGA";
   public destinationAirport = "BOS";
   public departureDateTime = "2022-06-28T18:34:30";
