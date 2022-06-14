@@ -1,24 +1,22 @@
 # cloud-airlines-angular-sdk
 
-This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.0.
-
-## Code scaffolding
-
-Run `ng generate component component-name --project cloud-airlines-angular-sdk` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module --project cloud-airlines-angular-sdk`.
-> Note: Don't forget to add `--project cloud-airlines-angular-sdk` or else it will be added to the default project in your `angular.json` file. 
+This project aims to provide a set of Angular components to subscribe to Hopper services such as "Cancel for any reason".
 
 ## Build
+---
 
 Run `ng build cloud-airlines-angular-sdk` to build the project. The build artifacts will be stored in the `dist/` directory.
 
 ## Publishing
+---
 
-After building your library with `ng build cloud-airlines-angular-sdk`, go to the dist folder `cd dist/cloud-airlines-angular-sdk` and run `npm publish`.
+1. Update the `package.json version`
+2. Run `ng build cloud-airlines-angular-sdk`
+3. Move to `dist/cloud-airlines-angular-sdk` folder
+4. Run `npm pack` in order to generate a tgz file
+5. Run `npm publish` to push the new version
 
 ## Running unit tests
+---
 
 Run `ng test cloud-airlines-angular-sdk` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
