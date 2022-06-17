@@ -1,0 +1,33 @@
+<div class="cfar-contract-dialog-page-container p-32" fxLayout="row wrap" fxLayoutAlign="start start">
+
+    <p fxFlex="100">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+        industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled
+        it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic
+        typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset
+        sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker
+        including versions of Lorem Ipsum.</p>
+
+    <mat-tab-group fxFlex="100" backgroundColor="primary" class="tab-group mb-16">
+
+        <mat-tab label="Overview">
+            <div class="p-16">
+                <button mat-flat-button color="primary" (click)="onOpenCfarContractDialog()">Open CFAR Contract
+                    dialog</button>
+            </div>
+        </mat-tab>
+
+        <mat-tab label="TS">
+            <pre><code [highlight]="tsCode"></code></pre>
+        </mat-tab>
+
+        <mat-tab label="HTML">
+            <pre><code [highlight]="htmlCode"></code></pre>
+        </mat-tab>
+
+    </mat-tab-group>
+
+    <app-inputs fxFlex="100" [inputs]="getInputs()"></app-inputs>
+
+    <app-outputs fxFlex="100" [outputs]="getOutputs()"></app-outputs>
+
+</div>

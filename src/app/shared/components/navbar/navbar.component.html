@@ -1,0 +1,31 @@
+<mat-toolbar class="mat-elevation-z6" color="primary" fxLayout="row" fxLayoutAlign="space-between center">
+    <div fxLayout="row" fxLayoutAlign="start center">
+        <span routerLink="/" class="pointer">Hopper Application</span>
+    </div>
+
+    <div fxLayout="row" fxLayoutAlign="end center">
+        <button mat-button [matMenuTriggerFor]="themeMenu">
+            <mat-icon class="mr-8">palette</mat-icon>
+            <span>{{ currentTheme }}</span>
+        </button>
+
+        <mat-menu #themeMenu="matMenu">
+            <button mat-menu-item *ngFor="let theme of themes" (click)="onSetTheme(theme)">
+                <mat-icon>palette</mat-icon>
+                <span>{{ theme }}</span>
+            </button>
+        </mat-menu>
+
+        <button mat-button [matMenuTriggerFor]="languageMenu">
+            <mat-icon class="mr-8" svgIcon="flag_{{ currentLang }}"></mat-icon>
+            <span>{{ currentLang | uppercase }}</span>
+        </button>
+
+        <mat-menu #languageMenu="matMenu">
+            <button mat-menu-item *ngFor="let language of languages" (click)="onSetLanguage(language)">
+                <mat-icon svgIcon="flag_{{ language }}"></mat-icon>
+                <span>{{ language | uppercase }}</span>
+            </button>
+        </mat-menu>
+    </div>
+</mat-toolbar>

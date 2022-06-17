@@ -4,38 +4,49 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatButtonModule } from '@angular/material/button';
-
-// Custom LIB (from local access)
-import { HopperCloudAirlinesAngularSdkModule } from 'projects/cloud-airlines-angular-sdk/src/cloud-airlines-angular-sdk.module';
-
-import { MatIconModule } from '@angular/material/icon';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { MatMenuModule } from '@angular/material/menu';
+import { SharedModule } from 'src/app/shared/shared.module';
+import { AppRoutingModule } from './app-routing.module';
+import { HighlightModule, HIGHLIGHT_OPTIONS } from 'ngx-highlightjs';
+import { environment } from 'src/environments/environment';
+import { MetaReducer, StoreModule } from '@ngrx/store';
+import { storeFreeze } from 'ngrx-store-freeze';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { reducers } from './shared/ngrx';
 
-
+const metaReducers: MetaReducer<any>[] = !environment.production ? [storeFreeze] : [];
 @NgModule({
   declarations: [
     AppComponent
   ],
   imports: [
+    // Angular Modules
     BrowserModule,
     BrowserAnimationsModule,
+    
+    // Misc Modules
+    FlexLayoutModule,
 
-    // My library
-    HopperCloudAirlinesAngularSdkModule,
-
-    // Angular Material
-    MatToolbarModule,
-    MatButtonModule,
-    MatIconModule,
-    MatMenuModule,
-
-    // FlexLayoutModule
-    FlexLayoutModule
+    // Custom Modules
+    SharedModule,
+    AppRoutingModule,
+    HighlightModule,
+    StoreModule.forRoot(reducers, { metaReducers }),
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production })
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HIGHLIGHT_OPTIONS,
+      useValue: {
+        coreLibraryLoader: () => import('highlight.js/lib/core'),
+        languages: {
+          typescript: () => import('highlight.js/lib/languages/typescript'),
+          css: () => import('highlight.js/lib/languages/css'),
+          xml: () => import('highlight.js/lib/languages/xml')
+        }
+      }
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

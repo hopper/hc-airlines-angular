@@ -1,7 +1,9 @@
 // How to use : https://tomastrajan.medium.com/the-complete-guide-to-angular-material-themes-4d165a9d24d1
-@mixin app-component-theme($theme) {
+@mixin cfar-exercise-dialog-page-component-theme($theme) {
 
     // Colors used for element backgrounds
+    // Values : status-bar, app-bar, background, hover, card, dialog, disabled-button, raised-button,
+    // focused-button, selected-button, disabled-button-toggle, unselected-chip, disabled-list-option, tooltip
     $bg-palette: map-get($theme, background);
 
     // Colors used for texts and icons
@@ -21,30 +23,17 @@
 
     // ----------------------------------------------
 
-    app-root {
-        .app-container {
-            background-color: map-get($bg-palette, background);
-            color: map-get($fg-palette, text);
-            height: 100vh;
+    app-cfar-exercise-dialog {
 
-            .buttons-container {
-                padding: 16px;
+        .cfar-exercise-dialog-page-container {
+
+            .tab-group {
+                @include mat.elevation(4);
     
-                button {
-                    margin-right: 16px;
+                mat-tab-body {
+                    background-color: map-get($bg-palette, card);
                 }
             }
-    
-            .cfar-contract-choice-container {
-                padding: 16px;
-                max-width: 800px;
-            }
-        }
-    
-        @if ($is-dark) {
-    
-        } @else {
-            
         }
     }
 }

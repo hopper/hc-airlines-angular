@@ -1,0 +1,19 @@
+<div class="layout-container" fxLayout="row" fxLayoutAlign="stretch center">
+    
+    <div fxFlex="20" fxFill class="aside">
+
+        <mat-selection-list #componentsList [multiple]="false">
+            <mat-list-option *ngFor="let component of components;" [routerLink]="component?.link"
+                [selected]="selectedPath === component?.link">
+                {{ component?.name }}
+            </mat-list-option>
+        </mat-selection-list>
+
+    </div>
+
+    <div fxFlex="80" fxFill class="content" id="scroll-anchor">
+
+        <router-outlet (activate)="onScrollToTop($event)"></router-outlet>
+
+    </div>
+</div>

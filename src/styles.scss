@@ -12,14 +12,45 @@ $dark-primary-text: rgba(black, 0.87);
 $light-primary-text: white;
 
 // ------------------------------------------
+// HIGHLIGHT JS
+// ------------------------------------------
+
+@import '~highlight.js/styles/github.css';
+
+// ------------------------------------------
 // COMPONENT THEMING
 // ------------------------------------------
 
 // cloud-airlines-angular-sdk Lib
 @import "../projects/cloud-airlines-angular-sdk/src/styles/theme.scss";
 
-// My App Component
-@import "./app/app.theme.scss";
+// Components
+@import "./app/pages/guides/guides.component.scss";
+@import "./app/pages/guides/cfar-contract-choice/cfar-contract-choice.component.scss";
+@import "./app/pages/guides/cfar-contract-dialog/cfar-contract-dialog.component.scss";
+@import "./app/pages/guides/cfar-exercise-dialog/cfar-exercise-dialog.component.scss";
+
+@import "./app/pages/not-found/not-found.component.scss";
+
+@import "./app/shared/components/inputs/inputs.component.scss";
+@import "./app/shared/components/layout/layout.component.scss";
+@import "./app/shared/components/navbar/navbar.component.scss";
+@import "./app/shared/components/outputs/outputs.component.scss";
+
+// Mixin for easier access
+@mixin hopper-components-theme($theme) {
+  @include guides-page-component-theme($theme);
+  @include cfar-contract-choice-page-component-theme($theme);
+  @include cfar-contract-dialog-page-component-theme($theme);
+  @include cfar-exercise-dialog-page-component-theme($theme);
+
+  @include not-found-page-component-theme($theme);
+
+  @include inputs-component-theme($theme);
+  @include layout-component-theme($theme);
+  @include navbar-component-theme($theme);
+  @include outputs-component-theme($theme);
+}
 
 // ------------------------------------------
 // HOPPER THEME
@@ -117,24 +148,26 @@ $hopper-light-theme: mat.define-light-theme((
   )
 ));
 
-// Add ".theme-dark-hopper" class to the body to active this theme
-// Class name must starts with "theme-" !
-body.theme-dark-hopper {
+.theme-dark-hopper {
   // Apply the theme to all Angular Material Components
   @include mat.all-component-themes($hopper-dark-theme);
 
-  // Apply the theme to our custom components
+  // Apply the theme to the librairy components
   @include custom-components-theme($hopper-dark-theme);
-  @include app-component-theme($hopper-dark-theme);
+
+  // Apply the theme to the project components
+  @include hopper-components-theme($hopper-dark-theme);
 }
 
-body.theme-light-hopper {
+.theme-light-hopper {
   // Apply the theme to all Angular Material Components
   @include mat.all-component-themes($hopper-light-theme);
 
-  // Apply the theme to our custom components
+  // Apply the theme to the librairy components
   @include custom-components-theme($hopper-light-theme);
-  @include app-component-theme($hopper-light-theme);
+
+  // Apply the theme to the project components
+  @include hopper-components-theme($hopper-light-theme);
 }
 
 // ------------------------------------------
@@ -143,5 +176,6 @@ body.theme-light-hopper {
 
 /* You can add global styles to this file, and also import other style files */
 
-// html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.pointer { cursor: pointer; }
+.main-container { height: 100vh; }
