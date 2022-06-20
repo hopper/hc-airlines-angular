@@ -64,77 +64,121 @@ export class CfarContractChoicePageComponent extends CommonGuidesComponent {
       },
       {
         name: 'partnerId',
-        description: 'TODO',
-        required: true
+        description: `
+          The partner's unique identifier provided by Hopper
+        `,
+        required: false
       },
       {
         name: 'hCSessionId',
-        description: 'TODO',
+        description: `
+          Example: 9fd3f2f9-e5aa-4128-ace9-3c4ee37b685f <br />
+          The ID of the current airline session.
+        `,
         required: true
       },
       {
         name: 'originAirport',
-        description: 'TODO',
+        description: `
+          IATA airport code of origin (3 characters)
+        `,
         required: true
       },
       {
         name: 'destinationAirport',
-        description: 'TODO',
+        description: `
+          IATA airport code of destination (3 characters)
+        `,
         required: true
       },
       {
         name: 'departureDateTime',
-        description: 'TODO',
+        description: `
+          The local date and time of departure in ISO Local Date Time format
+        `,
         required: true
       },
       {
         name: 'arrivalDateTime',
-        description: 'TODO',
+        description: `
+          The local date and time of arrival in ISO Local Date Time format
+        `,
         required: true
       },
       {
         name: 'flightNumber',
-        description: 'TODO',
+        description: `
+          The number of the flight. <br />
+          Format: [A-Z0-9]{2}[0-9]{1,4}
+        `,
         required: true
       },
       {
         name: 'carrierCode',
-        description: 'TODO',
+        description: `
+          The IATA airline code of the validating carrier for this segment. <br />
+          Format: [A-Z0-9]{2}
+        `,
         required: true
       },
       {
         name: 'fareClass',
-        description: 'TODO',
+        description: `
+          Fare class of the segment. <br />
+          Possible value (FareClass enum) : "basic_economy", "economy", "premium_economy", "business", "first"
+        `,
         required: true
       },
       {
         name: 'currency',
-        description: 'TODO',
+        description: `
+          Currency of pricing fields
+        `,
         required: true
       },
       {
         name: 'totalPrice',
-        description: 'TODO',
+        description: `
+          Total price of ancillaries of this type attached to fare. (>= 0)
+        `,
         required: true
       },
       {
         name: 'passengers',
-        description: 'TODO',
+        description: `
+          List of passenger for a fare <br />
+          { count: number; type: string; }[] <br />
+          count : Number of passenger type (> 0)<br />
+          type (enum): "adult" "child" "seated_infant" "lap_infant" <br />
+          The type of passenger:
+          <ul>
+            <li>adult - 12+ years of age</li>
+            <li>child - 2-11 years of age</li>
+            <li>seated_infant - < 2 years of age, in their own seat</li>
+            <li>lap_infant - < 2 years of age, not in their own seat</li>
+          </ul>
+        `,
         required: true
       },
       {
         name: 'ancillaryPrice',
-        description: 'TODO',
+        description: `
+          Total price of ancillaries of this type attached to fare
+        `,
         required: true
       },
       {
         name: 'ancillaryType',
-        description: 'TODO',
+        description: `
+          'travel_insurance' or 'unclassified'
+        `,
         required: true
       },
       {
         name: 'bookingDateTime',
-        description: 'TODO',
+        description: `
+          string date-time
+        `,
         required: true
       }
     ];
@@ -144,7 +188,7 @@ export class CfarContractChoicePageComponent extends CommonGuidesComponent {
     return [
       {
         name: 'emitSubmit',
-        description: 'TODO'
+        description: 'Event triggered when the user clicks on the button'
       }
     ];
   }

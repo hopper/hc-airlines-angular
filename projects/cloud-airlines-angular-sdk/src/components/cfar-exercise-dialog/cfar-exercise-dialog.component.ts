@@ -71,7 +71,8 @@ export class CfarExerciseDialogComponent extends AbstractComponent implements On
     this._currency = data.currency;
     this._airlineRefundAllowance = data.airlineRefundAllowance;
 
-    // Update CurrentLang manually (Dialog limitation)
+    // Update parents @inputs manually (Dialog limitation)
+    this.isFakeBackend = data.isFakeBackend;
     this.currentLang = data.currentLang;
     this._translateService.use(data.currentLang);
   }
@@ -81,29 +82,33 @@ export class CfarExerciseDialogComponent extends AbstractComponent implements On
   // -----------------------------------------------
 
   ngOnInit(): void {
-    this.isLoading = true;
-
-    // Create Contract Exercise
-    this.cancelForAnyReasonCFARService
-      .postCfarContractExercises(ApiTranslatorUtils.modelToSnakeCase(this._buildCreateCfarContractExerciseRequest()), this._hCSessionId)
-      .pipe(take(1))
-      .subscribe(
-        (cfarContractExercise: CfarContractExercise) => {
-          // Get the contract with the exercise
-          this.cancelForAnyReasonCFARService
-            .getCfarContractsId(this._contractId, this._hCSessionId)
-            .pipe(take(1))
-            .subscribe((cfarContract: CfarContract) => {
-              const result = ApiTranslatorUtils.modelToCamelCase(cfarContract) as CfarContract;
-
-              this.cfarContract = result;
-
-              // Hopper offer by default
-              this.isHopperRefund = true;
-            });
-        },
-        (error) => this.isLoading = false
-      );
+    if (this.isFakeBackend) {
+      this.cfarContract = this._buildFakeCfarContractExercisesResponse();
+    } else {
+      this.isLoading = true;
+  
+      // Create Contract Exercise
+      this.cancelForAnyReasonCFARService
+        .postCfarContractExercises(ApiTranslatorUtils.modelToSnakeCase(this._buildCreateCfarContractExerciseRequest()), this._hCSessionId)
+        .pipe(take(1))
+        .subscribe(
+          (cfarContractExercise: CfarContractExercise) => {
+            // Get the contract with the exercise
+            this.cancelForAnyReasonCFARService
+              .getCfarContractsId(this._contractId, this._hCSessionId)
+              .pipe(take(1))
+              .subscribe((cfarContract: CfarContract) => {
+                const result = ApiTranslatorUtils.modelToCamelCase(cfarContract) as CfarContract;
+  
+                this.cfarContract = result;
+  
+                // Hopper offer by default
+                this.isHopperRefund = true;
+              });
+          },
+          (error) => this.isLoading = false
+        );
+    }
 
     this.refundMethods = [
       { value: 'ftc', label: 'FTC' },
@@ -193,6 +198,161 @@ export class CfarExerciseDialogComponent extends AbstractComponent implements On
       airlineRefundMethod: this.selectedRefundMethod,
       currency: this._currency,
       extAttributes: {}
+    };
+  }
+
+  private _buildFakeCfarContractExercisesResponse(): CfarContract {
+    return {
+      "id": "1ecdc0ed-2d10-6868-84a2-fd8a8e4ae6c1",
+      "offers": [
+        {
+          "id": "1ecdc0ec-8ea8-6c3d-84a2-a7c5ee1c8713",
+          "premium": "27.00",
+          "coverage": "73.32",
+          "currency": "CAD",
+          "requestType": "fare",
+          "toUsdExchangeRate": "0.7792270535165348084620941103681614",
+          "contractExpiryDateTime": new Date("2022-05-27T22:34:30Z"),
+          "createdDateTime": new Date("2022-05-25T09:41:00.011Z"),
+          "itinerary": {
+            "passengerPricing": [
+              {
+                "passengerCount": {
+                  "count": 3,
+                  "type": "adult"
+                },
+                "individualPrice": "0.0"
+              }
+            ],
+            "currency": "CAD",
+            "slices": [
+              {
+                "segments": [
+                  {
+                    "originAirport": "LGA",
+                    "destinationAirport": "BOS",
+                    "departureDateTime": "2022-05-28T18:34:30",
+                    "arrivalDateTime": "2022-05-28T19:12:30",
+                    "flightNumber": "JB776",
+                    "validatingCarrierCode": "B6",
+                    "fareClass": "basic_economy"
+                  }
+                ]
+              }
+            ],
+            "ancillaries": [
+              {
+                "totalPrice": "30.55",
+                "type": "travel_insurance"
+              }
+            ],
+            "totalPrice": "91.65"
+          },
+          "offerDescription": [
+            ""
+          ],
+          "extAttributes": {
+            "property1": "test1",
+            "property2": "test2"
+          }
+        },
+        {
+          "id": "1ecdc0ec-9117-652e-84a2-f1b1c8c82794",
+          "premium": "24.00",
+          "coverage": "73.32",
+          "currency": "CAD",
+          "requestType": "fare",
+          "toUsdExchangeRate": "0.7792270535165348084620941103681614",
+          "contractExpiryDateTime": new Date("2022-05-27T22:34:30Z"),
+          "createdDateTime": new Date("2022-05-25T09:41:00.266Z"),
+          "itinerary": {
+            "passengerPricing": [
+              {
+                "passengerCount": {
+                    "count": 3,
+                    "type": "adult"
+                },
+                "individualPrice": "0.0"
+              }
+            ],
+            "currency": "CAD",
+            "slices": [
+              {
+                "segments": [
+                  {
+                    "originAirport": "LGA",
+                    "destinationAirport": "BOS",
+                    "departureDateTime": "2022-05-28T18:34:30",
+                    "arrivalDateTime": "2022-05-28T19:12:30",
+                    "flightNumber": "JB777",
+                    "validatingCarrierCode": "B6",
+                    "fareClass": "basic_economy"
+                  }
+                ]
+              }
+            ],
+            "ancillaries": [
+              {
+                "totalPrice": "30.55",
+                "type": "travel_insurance"
+              }
+            ],
+            "totalPrice": "91.65"
+          },
+          "offerDescription": [
+            ""
+          ],
+          "extAttributes": {
+            "property1": "test1",
+            "property2": "test2"
+          }
+        }
+      ],
+      "itinerary": {
+        "passengerPricing": [
+          {
+            "passengerCount": {
+                "count": 3,
+                "type": "adult"
+            },
+            "individualPrice": "0.0"
+          }
+        ],
+        "currency": "CAD",
+        "slices": [
+          {
+            "segments": [
+              {
+                "originAirport": "LGA",
+                "destinationAirport": "BOS",
+                "departureDateTime": "2022-05-28T18:34:30",
+                "arrivalDateTime": "2022-05-28T19:12:30",
+                "flightNumber": "JB777",
+                "validatingCarrierCode": "B6",
+                "fareClass": "basic_economy"
+              }
+            ]
+          }
+        ],
+        "ancillaries": [
+          {
+            "totalPrice": "30.55",
+            "type": "travel_insurance"
+          }
+        ],
+        "totalPrice": "91.65"
+      },
+      "coverage": "146.64",
+      "premium": "51.00",
+      "currency": "CAD",
+      "createdDateTime": new Date("2022-05-25T09:41:16.621Z"),
+      "expiryDateTime": new Date("2022-05-27T22:34:30Z"),
+      "status": "created",
+      "pnrReference": "ABC123",
+      "extAttributes": {
+        "property1": "string",
+        "property2": "string"
+      }
     };
   }
 }

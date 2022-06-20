@@ -54,26 +54,30 @@ export class CfarContractChoiceComponent extends AbstractComponent implements On
       'No forms or claims required, without talking to customer service',
     ];
 
-    this.isLoading = true;
+    if (this.isFakeBackend) {
+      this.cfarOffers = this._buildFakePostCfarOffersResponse();
+    } else {
+      this.isLoading = true;
 
-    this._cancelForAnyReasonCFARService
-      .postCfarOffers(ApiTranslatorUtils.modelToSnakeCase(this._buildCreateCfarOfferRequest()), this.hCSessionId)
-      .pipe(take(1))
-      .subscribe(
-        (cfarOffers) => {
-          let results: CfarOffer[] = [];
+      this._cancelForAnyReasonCFARService
+        .postCfarOffers(ApiTranslatorUtils.modelToSnakeCase(this._buildCreateCfarOfferRequest()), this.hCSessionId)
+        .pipe(take(1))
+        .subscribe(
+          (cfarOffers) => {
+            let results: CfarOffer[] = [];
 
-          if (cfarOffers) {
-            cfarOffers.forEach(cfarOffer => {
-              results.push(ApiTranslatorUtils.modelToCamelCase(cfarOffer) as CfarOffer);
-            });
-          }
-          
-          this.cfarOffers = results;
-          this.isLoading = false;
-        },
-        (error) => this.isLoading = false);
-    
+            if (cfarOffers) {
+              cfarOffers.forEach(cfarOffer => {
+                results.push(ApiTranslatorUtils.modelToCamelCase(cfarOffer) as CfarOffer);
+              });
+            }
+            
+            this.cfarOffers = results;
+            this.isLoading = false;
+          },
+          (error) => this.isLoading = false
+        );
+    }
   }
 
   // -----------------------------------------------
@@ -123,5 +127,61 @@ export class CfarContractChoiceComponent extends AbstractComponent implements On
       bookingDateTime: this.bookingDateTime,
       extAttributes: {}
     };
+  }
+
+  private _buildFakePostCfarOffersResponse(): CfarOffer[] {
+    return [
+      {
+        "id": "1ecf0aa8-8892-6ace-8c08-63e55c467dd8",
+        "premium": "180.00",
+        "coverage": "481.32",
+        "currency": "CAD",
+        "requestType": "fare",
+        "toUsdExchangeRate": "0.7658463176194433063117224266606420",
+        "contractExpiryDateTime": new Date("2022-07-09T22:34:30Z"),
+        "createdDateTime": new Date("2022-06-20T15:06:16.744Z"),
+        "itinerary": {
+          "passengerPricing": [
+            {
+              "passengerCount": {
+                "count": 3,
+                "type": "adult"
+              },
+              "individualPrice": "0.0"
+            }
+          ],
+          "currency": "CAD",
+          "slices": [
+            {
+              "segments": [
+                {
+                  "originAirport": "LGA",
+                  "destinationAirport": "BOS",
+                  "departureDateTime": "2022-07-10T18:34:30",
+                  "arrivalDateTime": "2022-07-10T19:12:30",
+                  "flightNumber": "JB776",
+                  "validatingCarrierCode": "B6",
+                  "fareClass": "basic_economy"
+                }
+              ]
+            }
+          ],
+          "ancillaries": [
+            {
+              "totalPrice": "200.55",
+              "type": "travel_insurance"
+            }
+          ],
+          "totalPrice": "601.65"
+        },
+        "offerDescription": [
+          ""
+        ],
+        "extAttributes": {
+          "property1": "test1",
+          "property2": "test2"
+        }
+      }
+    ];
   }
 }

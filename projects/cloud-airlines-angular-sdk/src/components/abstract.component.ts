@@ -11,6 +11,7 @@ import { DateAdapter } from "@angular/material/core";
 export abstract class AbstractComponent implements OnChanges {
     
     @Input() currentLang!: string;
+    @Input() isFakeBackend!: boolean;
 
     constructor(
         protected adapter: DateAdapter<any>,
@@ -33,7 +34,7 @@ export abstract class AbstractComponent implements OnChanges {
 
         // Init API configuration
         this.cancelForAnyReasonCFARService.configuration = {
-            accessToken: "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6ImtjN2FjWmV4bHBvZk1QY3V6UF9HTyJ9.eyJpc3MiOiJodHRwczovL2hvcHBlci1hcGkuYXV0aDAuY29tLyIsInN1YiI6IkJQczlscFdSN2dOR28xS1M5RzBySlhLa1lqSGF6N3BiQGNsaWVudHMiLCJhdWQiOiJodHRwczovL2RldmVsb3BtZW50LmFwaS5ob3BwZXIuY29tIiwiaWF0IjoxNjU1NDU5NTE1LCJleHAiOjE2NTU1NDU5MTUsImF6cCI6IkJQczlscFdSN2dOR28xS1M5RzBySlhLa1lqSGF6N3BiIiwic2NvcGUiOiJhbGw6Y2ZhciBhbGw6Z2VuZXJhbCBhbGw6cHJpY2VmcmVlemUgYWxsOmtheWFrIGFsbDpmbGlnaHQgYWxsOnBheW1lbnQgYWxsOnVzZXIgYWxsOmV2ZW50IiwiZ3R5IjoiY2xpZW50LWNyZWRlbnRpYWxzIn0.XlCtTubugTvm1cJ2EX8tSAvUllVIjf-bN23mPqQdScRkOZdWdA8mGqwnAqzPTp8yNLuKuXoUttHvY7_Dp7fzgUzREOpChE9csv1O0HddQC8L0blYBNYB7sfiAB_Rm7alLOdPCqU9Ar8Vhxk7srJh74fQMI87cIwNEb9eOObCTuVnqqkoh-PfVsasD1znUzKXQVECJ1ElP-KT_Jbo4ZFSAiKO2hdtIqVL4hp567kt9xo-Eq7JMYfWg1QfIt7rFLkTJCyXwD1x2NESjkoufA4E8bZbDcpp_5EivDheN41iOQ7eOOIEFmMtgMVReWfBqUymLUoMGS4Pjun5Sw5OngX5tQ",
+            accessToken: "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6ImtjN2FjWmV4bHBvZk1QY3V6UF9HTyJ9.eyJpc3MiOiJodHRwczovL2hvcHBlci1hcGkuYXV0aDAuY29tLyIsInN1YiI6IkJQczlscFdSN2dOR28xS1M5RzBySlhLa1lqSGF6N3BiQGNsaWVudHMiLCJhdWQiOiJodHRwczovL2RldmVsb3BtZW50LmFwaS5ob3BwZXIuY29tIiwiaWF0IjoxNjU1NzI5MjQ0LCJleHAiOjE2NTU4MTU2NDQsImF6cCI6IkJQczlscFdSN2dOR28xS1M5RzBySlhLa1lqSGF6N3BiIiwic2NvcGUiOiJhbGw6Y2ZhciBhbGw6Z2VuZXJhbCBhbGw6cHJpY2VmcmVlemUgYWxsOmtheWFrIGFsbDpmbGlnaHQgYWxsOnBheW1lbnQgYWxsOnVzZXIgYWxsOmV2ZW50IiwiZ3R5IjoiY2xpZW50LWNyZWRlbnRpYWxzIn0.VNC8GABOBPicc3bHyB23zVH81oJ5jCk3qALx-_oOv3yaZSPTX8EMEegZu6S2WOnaD6Pa5hISyJEKXCnYoENn2M8Bo4kRUV_8PsrEQj8GtlczcV-UUMA_8v6514ysfzb4_sU-P6eRnoptomCRmqkcdZuBlTOO6peUvazoO1GjVxnqS_t6yaL8St4JJ1jt_hJaSSSbWtkseUoW5CxMurf2BOI5kaFDDbX2Xkm-3IIgI7lAkgbo4j6SeZ9LgdfAbe-rG0GAoPzpqtXbvey0w1B-UJv22T6W8qoubvmFtYD-vrNZZ2mY2i2PQh_zxq-u7ABwT_bSgc8bXhr4Jfrlw2X2jw",
             selectHeaderAccept: (accepts: ['application/json']) => 'application/json',
             selectHeaderContentType: (contentsTypes: ['application/json']) => 'application/json',
             isJsonMime: (mime: 'application/json') => true

@@ -70,7 +70,8 @@ export class CfarContractDialogComponent extends AbstractComponent implements On
     // Optional data
     this._pnrReference = data.pnrReference;
 
-    // Update CurrentLang manually (Dialog limitation)
+    // Update parents @inputs manually (Dialog limitation)
+    this.isFakeBackend = data.isFakeBackend;
     this.currentLang = data.currentLang;
     this._translateService.use(this.currentLang);
   }
@@ -87,27 +88,33 @@ export class CfarContractDialogComponent extends AbstractComponent implements On
       'Get instant resolution through Air Canada, no form or claims required!',
     ];
 
-    this.isLoading = true;
-
-    this._cancelForAnyReasonCFARService
-      .postCfarOffers(ApiTranslatorUtils.modelToSnakeCase(this._buildCreateCfarOfferRequest()), this._hCSessionId)
-      .pipe(take(1))
-      .subscribe(
-        (cfarOffers) => {
-          let results: CfarOffer[] = [];
-
-          if (cfarOffers) {
-            cfarOffers.forEach(cfarOffer => {
-              results.push(ApiTranslatorUtils.modelToCamelCase(cfarOffer) as CfarOffer);
-            });
-          }
-          
-          this.cfarOffers = results;
-          // The first one by default
-          this.selectedCfarOffer = results[0];
-          this.isLoading = false;
-        },
-        (error) => this.isLoading = false);
+    if (this.isFakeBackend) {
+      this.cfarOffers = this._buildFakePostCfarOffersResponse();
+      this.selectedCfarOffer = this.cfarOffers[0];
+    } else {
+      this.isLoading = true;
+  
+      this._cancelForAnyReasonCFARService
+        .postCfarOffers(ApiTranslatorUtils.modelToSnakeCase(this._buildCreateCfarOfferRequest()), this._hCSessionId)
+        .pipe(take(1))
+        .subscribe(
+          (cfarOffers) => {
+            let results: CfarOffer[] = [];
+  
+            if (cfarOffers) {
+              cfarOffers.forEach(cfarOffer => {
+                results.push(ApiTranslatorUtils.modelToCamelCase(cfarOffer) as CfarOffer);
+              });
+            }
+            
+            this.cfarOffers = results;
+            // The first one by default
+            this.selectedCfarOffer = results[0];
+            this.isLoading = false;
+          },
+          (error) => this.isLoading = false
+        );
+    }
   }
 
   // -----------------------------------------------
@@ -231,4 +238,111 @@ export class CfarContractDialogComponent extends AbstractComponent implements On
       pnrReference: this._pnrReference
     };
   } 
+
+  private _buildFakePostCfarOffersResponse(): CfarOffer[] {
+    return [
+      {
+        "id": "1ecf0aa8-8892-6ace-8c08-63e55c467dd8",
+        "premium": "180.00",
+        "coverage": "481.32",
+        "currency": "CAD",
+        "requestType": "fare",
+        "toUsdExchangeRate": "0.7658463176194433063117224266606420",
+        "contractExpiryDateTime": new Date("2022-07-09T22:34:30Z"),
+        "createdDateTime": new Date("2022-06-20T15:06:16.744Z"),
+        "itinerary": {
+          "passengerPricing": [
+            {
+              "passengerCount": {
+                "count": 3,
+                "type": "adult"
+              },
+              "individualPrice": "0.0"
+            }
+          ],
+          "currency": "CAD",
+          "slices": [
+            {
+              "segments": [
+                {
+                  "originAirport": "LGA",
+                  "destinationAirport": "BOS",
+                  "departureDateTime": "2022-07-10T18:34:30",
+                  "arrivalDateTime": "2022-07-10T19:12:30",
+                  "flightNumber": "JB776",
+                  "validatingCarrierCode": "B6",
+                  "fareClass": "basic_economy"
+                }
+              ]
+            }
+          ],
+          "ancillaries": [
+            {
+              "totalPrice": "200.55",
+              "type": "travel_insurance"
+            }
+          ],
+          "totalPrice": "601.65"
+        },
+        "offerDescription": [
+          ""
+        ],
+        "extAttributes": {
+          "property1": "test1",
+          "property2": "test2"
+        }
+      },
+      {
+        "id": "1ecf0aa8-88ca-6d3f-8c08-27bc3e4e8e42",
+        "premium": "84.00",
+        "coverage": "481.32",
+        "currency": "CAD",
+        "requestType": "fare",
+        "toUsdExchangeRate": "0.7658463176194433063117224266606420",
+        "contractExpiryDateTime": new Date("2022-07-09T22:34:30Z"),
+        "createdDateTime": new Date("2022-06-20T15:06:16.767Z"),
+        "itinerary": {
+          "passengerPricing": [
+            {
+              "passengerCount": {
+                "count": 3,
+                "type": "adult"
+              },
+              "individualPrice": "0.0"
+            }
+          ],
+          "currency": "CAD",
+          "slices": [
+            {
+              "segments": [
+                {
+                  "originAirport": "LGA",
+                  "destinationAirport": "BOS",
+                  "departureDateTime": "2022-07-10T18:34:30",
+                  "arrivalDateTime": "2022-07-10T19:12:30",
+                  "flightNumber": "JB777",
+                  "validatingCarrierCode": "B6",
+                  "fareClass": "basic_economy"
+                }
+              ]
+            }
+          ],
+          "ancillaries": [
+            {
+              "totalPrice": "200.55",
+              "type": "travel_insurance"
+            }
+          ],
+          "totalPrice": "601.65"
+        },
+        "offerDescription": [
+          ""
+        ],
+        "extAttributes": {
+          "property1": "test1",
+          "property2": "test2"
+        }
+      }
+    ];
+  }
 }
