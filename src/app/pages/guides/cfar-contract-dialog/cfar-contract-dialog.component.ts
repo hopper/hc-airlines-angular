@@ -1,5 +1,6 @@
 import { ChangeDetectorRef, Component } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
+import { MatSnackBar } from "@angular/material/snack-bar";
 import { Store } from "@ngrx/store";
 import { CfarContract } from "projects/cloud-airlines-angular-sdk/src/apis/hopper-cloud-airline/v1";
 import { CfarContractDialogComponent } from "projects/cloud-airlines-angular-sdk/src/components/cfar-contract-dialog/cfar-contract-dialog.component";
@@ -9,6 +10,8 @@ import { take } from "rxjs/operators";
 import { InputModel, OutputModel } from "src/app/shared/models";
 import { AppState } from "src/app/shared/ngrx";
 import { CommonGuidesComponent } from "../common-guides.component";
+import { Clipboard } from '@angular/cdk/clipboard';
+
 
 @Component({
   selector: "app-cfar-contract-dialog",
@@ -61,10 +64,12 @@ export class CfarContractDialogPageComponent extends CommonGuidesComponent {
   `;
 
   constructor(
-    private _dialog: MatDialog,
-    protected _store: Store<AppState>
+    protected _store: Store<AppState>,
+    protected _clipboard: Clipboard,
+    protected _snackBar: MatSnackBar,
+    private _dialog: MatDialog
   ) {
-    super(_store);
+    super(_store, _clipboard, _snackBar);
   }
 
   // -----------------------------------------------

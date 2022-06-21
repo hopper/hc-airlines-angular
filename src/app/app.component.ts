@@ -32,7 +32,14 @@ export class AppComponent implements OnDestroy {
     this._store.pipe(
       select(getCurrentTheme),
       takeUntil(this._unsubcriber)
-    ).subscribe((currentTheme: string) => this.currentTheme = currentTheme);
+    ).subscribe((currentTheme: string) => {
+      // Remove active theme
+      document.body.classList.remove(this.currentTheme);  
+
+      // Activate the new theme
+      this.currentTheme = currentTheme;
+      document.body.classList.add(this.currentTheme);
+    });
 
     // Set Default theme
     this._store.dispatch(globalActions.setCurrentTheme({ currentTheme: environment.defaultTheme }));

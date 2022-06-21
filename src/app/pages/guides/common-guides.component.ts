@@ -5,6 +5,8 @@ import { takeUntil } from "rxjs/operators";
 import { InputModel, OutputModel } from "src/app/shared/models";
 import { AppState } from "src/app/shared/ngrx";
 import { getCurrentLang, getCurrentTheme } from "src/app/shared/ngrx/global/global.selectors";
+import { Clipboard } from '@angular/cdk/clipboard';
+import { MatSnackBar } from "@angular/material/snack-bar";
 
 @Directive({
   selector: '[CommonGuidesComponent]'
@@ -48,7 +50,9 @@ export abstract class CommonGuidesComponent implements OnInit, OnDestroy {
   public contractId = "1ece89da-263c-6689-bec4-f56934b83f44";
 
   constructor(
-    protected _store: Store<AppState>
+    protected _store: Store<AppState>,
+    protected _clipboard: Clipboard,
+    protected _snackBar: MatSnackBar
   ) {
     this._unsubcriber = new Subject<any>();
     // Active fake data in components
@@ -85,4 +89,14 @@ export abstract class CommonGuidesComponent implements OnInit, OnDestroy {
   public abstract getInputs(): InputModel[];
 
   public abstract getOutputs(): OutputModel[];
+
+  public onCopySourceCode(sourceCode: string): void {
+    // Copy the text in the clipboard
+    this._clipboard.copy(sourceCode);
+
+    // Display a snackbar
+    this._snackBar.open('Code copied', 'close', {
+      duration: 2500
+    })
+  }
 }

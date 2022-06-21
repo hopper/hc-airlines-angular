@@ -152,7 +152,7 @@ $hopper-light-theme: mat.define-light-theme((
   // Apply the theme to all Angular Material Components
   @include mat.all-component-themes($hopper-dark-theme);
 
-  // Apply the theme to the librairy components
+  // Apply the theme to the library components
   @include custom-components-theme($hopper-dark-theme);
 
   // Apply the theme to the project components
@@ -163,7 +163,7 @@ $hopper-light-theme: mat.define-light-theme((
   // Apply the theme to all Angular Material Components
   @include mat.all-component-themes($hopper-light-theme);
 
-  // Apply the theme to the librairy components
+  // Apply the theme to the library components
   @include custom-components-theme($hopper-light-theme);
 
   // Apply the theme to the project components

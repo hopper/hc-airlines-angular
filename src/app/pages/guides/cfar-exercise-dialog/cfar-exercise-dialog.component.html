@@ -17,11 +17,31 @@
         </mat-tab>
 
         <mat-tab label="TS">
-            <pre><code [highlight]="tsCode"></code></pre>
+            <div fxLayout="row" fxLayout="start start">
+                
+                <pre fxFlex="80"><code [highlight]="tsCode"></code></pre>
+
+                <div fxFlex="20" fxLayout="row" fxLayoutAlign="end start" class="p-16">
+                    <button mat-icon-button aria-label="Copy example source" (click)="onCopySourceCode(tsCode)">
+                        <mat-icon>content_copy</mat-icon>
+                    </button>
+                </div>
+
+            </div>
         </mat-tab>
 
         <mat-tab label="HTML">
-            <pre><code [highlight]="htmlCode"></code></pre>
+            <div fxLayout="row" fxLayout="start start">
+                
+                <pre fxFlex="80"><code [highlight]="htmlCode"></code></pre>
+
+                <div fxFlex="20" fxLayout="row" fxLayoutAlign="end start" class="p-16">
+                    <button mat-icon-button aria-label="Copy example source" (click)="onCopySourceCode(htmlCode)">
+                        <mat-icon>content_copy</mat-icon>
+                    </button>
+                </div>
+
+            </div>
         </mat-tab>
 
     </mat-tab-group>

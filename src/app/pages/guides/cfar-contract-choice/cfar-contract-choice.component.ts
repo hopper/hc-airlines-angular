@@ -1,10 +1,12 @@
 import { Component } from "@angular/core";
+import { MatSnackBar } from "@angular/material/snack-bar";
 import { Store } from "@ngrx/store";
 import { CfarOffer } from "projects/cloud-airlines-angular-sdk/src/apis/hopper-cloud-airline/v1";
 import { Locales } from "projects/cloud-airlines-angular-sdk/src/i18n";
 import { InputModel, OutputModel } from "src/app/shared/models";
 import { AppState } from "src/app/shared/ngrx";
 import { CommonGuidesComponent } from "../common-guides.component";
+import { Clipboard } from '@angular/cdk/clipboard';
 
 @Component({
   selector: "app-cfar-contract-choice",
@@ -42,9 +44,11 @@ export class CfarContractChoicePageComponent extends CommonGuidesComponent {
   `;
 
   constructor(
-    protected _store: Store<AppState>
+    protected _store: Store<AppState>,
+    protected _clipboard: Clipboard,
+    protected _snackBar: MatSnackBar
   ) {
-    super(_store);
+    super(_store, _clipboard, _snackBar);
   }
 
   // -----------------------------------------------
