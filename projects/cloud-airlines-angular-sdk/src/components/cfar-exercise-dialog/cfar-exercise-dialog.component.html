@@ -191,11 +191,11 @@
 
 <mat-dialog-actions>
 
-    <div class="p-32" ngClass.lt-md="px-16" fxFlex="100" fxLayout="row wrap" fxLayout.lt-sm="column" fxLayoutAlign="end center">
-        <button mat-button color="primary" ngClass.lt-sm="full-width" (click)="onClose()" [disabled]="isLoading">
+    <div class="p-32" *ngIf="!isLoading" ngClass.lt-md="px-16" fxFlex="100" fxLayout="row wrap" fxLayout.lt-sm="column" fxLayoutAlign="end center">
+        <button mat-button color="primary" ngClass.lt-sm="full-width" (click)="onClose()">
             {{ 'CFAR_EXERCISE_DIALOG.BUTTON.CANCEL' | translate }}
         </button>
-        <button mat-flat-button color="primary" ngClass.lt-sm="full-width" (click)="onSubmit()" [disabled]="isLoading">
+        <button mat-flat-button color="primary" ngClass.lt-sm="full-width" (click)="onSubmit()">
             {{ 'CFAR_EXERCISE_DIALOG.BUTTON.SUBMIT' | translate }}
         </button>
     </div>

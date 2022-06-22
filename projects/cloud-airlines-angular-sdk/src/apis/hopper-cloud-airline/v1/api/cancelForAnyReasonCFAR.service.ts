@@ -41,14 +41,11 @@ export class CancelForAnyReasonCFARService {
 
     constructor(protected httpClient: HttpClient, @Optional()@Inject(BASE_PATH) basePath: string, @Optional() configuration: Configuration) {
         if (basePath) {
-            console.log(basePath)
             this.basePath = basePath;
         }
         if (configuration) {
             this.configuration = configuration;
-            console.log(this.configuration)
             this.basePath = basePath || configuration.basePath || this.basePath;
-            console.log(this.basePath)
         }
     }
 

@@ -23,9 +23,9 @@
                     <span class="powered-by">{{ 'CFAR_CONTRACT_DIALOG.POWERED_BY' | translate }}</span>
                 </div>
         
-                <div fxFlex="100" class="p-16" *ngFor="let rule of rules" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
-                    <mat-icon class="fat-icon">check</mat-icon>
-                    <span>[ {{ rule }} ]</span>
+                <div fxFlex="100" class="py-16" *ngFor="let desc of selectedCfarOffer?.offerDescription" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
+                    <mat-icon class="fat-icon" color="primary">check</mat-icon>
+                    <span>{{ desc }}</span>
                 </div>
             
             </div>
@@ -66,11 +66,11 @@
 
 <mat-dialog-actions>
 
-    <div class="p-32" ngClass.lt-md="px-16" fxFlex="100" fxLayout="row wrap" fxLayout.lt-sm="column" fxLayoutAlign="end center">
-        <button mat-button color="primary" ngClass.lt-sm="full-width" (click)="onClose()" [disabled]="isLoading">
+    <div class="p-32" *ngIf="!isLoading" ngClass.lt-md="px-16" fxFlex="100" fxLayout="row wrap" fxLayout.lt-sm="column" fxLayoutAlign="end center">
+        <button mat-button color="primary" ngClass.lt-sm="full-width" (click)="onClose()">
             {{ 'CFAR_CONTRACT_DIALOG.BUTTON.CANCEL' | translate }}
         </button>
-        <button mat-flat-button color="primary" ngClass.lt-sm="full-width" (click)="onSubmit()" [disabled]="isLoading">
+        <button mat-flat-button color="primary" ngClass.lt-sm="full-width" (click)="onSubmit()">
             {{ 'CFAR_CONTRACT_DIALOG.BUTTON.SUBMIT' | translate: { 
                 percentage: (computePercentage(selectedCfarOffer) | percent),
                 price: (selectedCfarOffer?.premium | currency:selectedCfarOffer?.currency:'symbol':undefined:currentLang) 

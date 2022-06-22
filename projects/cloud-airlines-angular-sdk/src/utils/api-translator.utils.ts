@@ -57,7 +57,7 @@ export class ApiTranslatorUtils {
                 for (const item of apiModel[key]) {
                     switch (typeof item) {
                     case 'string':
-                        array.push(camelCase(item));
+                        array.push(item);
                         break;
                     case 'number':
                         array.push(item);
