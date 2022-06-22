@@ -4,6 +4,7 @@
 
 // SERVICES
 export * from './services/hopper-events.service';
+export * from './services/hopper-proxy.service';
 
 // DIRECTIVES
 export * from './directives/hopper-events.directive';

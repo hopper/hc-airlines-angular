@@ -1,10 +1,11 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { take } from 'rxjs/operators';
-import { CancelForAnyReasonCFARService, CfarOffer, CreateCfarOfferRequest, FareClass, PassengerPricing, PassengerType, RequestType } from '../../apis/hopper-cloud-airline/v1';
+import { CfarOffer, CreateCfarOfferRequest, FareClass, PassengerPricing, RequestType } from '../../apis/hopper-cloud-airline/v1';
 import { AbstractComponent } from '../abstract.component';
 import { TranslateService } from '@ngx-translate/core';
 import { DateAdapter } from "@angular/material/core";
 import { ApiTranslatorUtils } from '../../utils/api-translator.utils';
+import { HopperProxyService } from '../../services/hopper-proxy.service';
 
 @Component({
   selector: 'hopper-cfar-contract-choice',
@@ -38,9 +39,9 @@ export class CfarContractChoiceComponent extends AbstractComponent implements On
   constructor(
     private _adapter: DateAdapter<any>,
     private _translateService: TranslateService,
-    private _cancelForAnyReasonCFARService: CancelForAnyReasonCFARService
+    private _hopperProxyService: HopperProxyService
   ) {
-    super(_adapter, _translateService, _cancelForAnyReasonCFARService);
+    super(_adapter, _translateService);
   }
 
   // -----------------------------------------------
@@ -59,8 +60,8 @@ export class CfarContractChoiceComponent extends AbstractComponent implements On
     } else {
       this.isLoading = true;
 
-      this._cancelForAnyReasonCFARService
-        .postCfarOffers(ApiTranslatorUtils.modelToSnakeCase(this._buildCreateCfarOfferRequest()), this.hCSessionId)
+      this._hopperProxyService
+        .postCfarOffers(this.basePath, this.hCSessionId, ApiTranslatorUtils.modelToSnakeCase(this._buildCreateCfarOfferRequest()))
         .pipe(take(1))
         .subscribe(
           (cfarOffers) => {

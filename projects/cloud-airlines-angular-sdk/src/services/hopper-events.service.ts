@@ -1,7 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
-import { environment } from "../environments/environment";
 
 @Injectable({
   providedIn: 'root'
@@ -9,14 +8,14 @@ import { environment } from "../environments/environment";
 export class HopperEventsService {
 
   constructor(
-    private http: HttpClient,
+    private _httpClient: HttpClient
   ) {}
 
   // ----------------------------------------------------------
   // TEMPLATE
   // ----------------------------------------------------------
 
-  pushEvents(hopperEventId: string): Observable<any> {
-    return this.http.put<any>(`${environment.apiUrl}/api/events`, hopperEventId);
+  pushEvents(basePath: string, hopperEventId: string): Observable<any> {
+    return this._httpClient.put<any>(`${basePath}/events`, hopperEventId);
   }
 }

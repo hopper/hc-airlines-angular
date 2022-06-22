@@ -26,6 +26,7 @@ export class CfarExerciseDialogPageComponent extends CommonGuidesComponent {
     onOpenCfarExerciseDialog(): void {
       const dialogData = { 
         currentLang: this.currentLang,
+        basePath: this.basePath,
         hCSessionId: this.hCSessionId,
         pnrReference: this.pnrReference,
         contractId: this.contractId,
@@ -76,6 +77,13 @@ export class CfarExerciseDialogPageComponent extends CommonGuidesComponent {
           <b>By default</b> : en
         `,
         required: false
+      },
+      {
+        name: 'basePath',
+        description: `
+          The Hopper API url base path
+        `,
+        required: true
       },
       {
         name: 'currentTheme',
@@ -240,6 +248,7 @@ export class CfarExerciseDialogPageComponent extends CommonGuidesComponent {
   public onOpenCfarExerciseDialog(): void {
     const dialogData = { 
       isFakeBackend: this.isFakeBackend,
+      basePath: this.basePath,
       currentLang: this.currentLang,
       hCSessionId: this.hCSessionId,
       pnrReference: this.pnrReference,

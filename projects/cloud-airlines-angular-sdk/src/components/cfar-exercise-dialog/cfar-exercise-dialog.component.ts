@@ -1,11 +1,12 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { map, take } from 'rxjs/operators';
-import { CancelForAnyReasonCFARService, CfarContract, CfarOffer, CfarContractExercise, CreateCfarContractExerciseRequest, PassengerPricing, FareClass, CfarItinerary } from '../../apis/hopper-cloud-airline/v1';
+import { take } from 'rxjs/operators';
+import { CfarContract, CfarOffer, CfarContractExercise, CreateCfarContractExerciseRequest, PassengerPricing, FareClass, CfarItinerary } from '../../apis/hopper-cloud-airline/v1';
 import { AbstractComponent } from '../abstract.component';
 import { TranslateService } from '@ngx-translate/core';
 import { DateAdapter } from "@angular/material/core";
 import { ApiTranslatorUtils } from '../../utils/api-translator.utils';
+import { HopperProxyService } from '../../services/hopper-proxy.service';
 
 @Component({
   selector: 'hopper-cfar-exercise-dialog',
@@ -44,11 +45,11 @@ export class CfarExerciseDialogComponent extends AbstractComponent implements On
   constructor(
     private _adapter: DateAdapter<any>,
     private _translateService: TranslateService,
-    private _cancelForAnyReasonCFARService: CancelForAnyReasonCFARService,
     private _dialogRef: MatDialogRef<CfarExerciseDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private _hopperProxyService: HopperProxyService
   ) {
-    super(_adapter, _translateService, _cancelForAnyReasonCFARService);
+    super(_adapter, _translateService);
 
     // Mandatory data
     this._hCSessionId = data.hCSessionId;
@@ -74,6 +75,8 @@ export class CfarExerciseDialogComponent extends AbstractComponent implements On
     // Update parents @inputs manually (Dialog limitation)
     this.isFakeBackend = data.isFakeBackend;
     this.currentLang = data.currentLang;
+    this.basePath = data.basePath;
+
     this._translateService.use(data.currentLang);
   }
 
@@ -86,16 +89,19 @@ export class CfarExerciseDialogComponent extends AbstractComponent implements On
       this.cfarContract = this._buildFakeCfarContractExercisesResponse();
     } else {
       this.isLoading = true;
-  
+
       // Create Contract Exercise
-      this.cancelForAnyReasonCFARService
-        .postCfarContractExercises(ApiTranslatorUtils.modelToSnakeCase(this._buildCreateCfarContractExerciseRequest()), this._hCSessionId)
+      this._hopperProxyService
+        .postCfarContractExercises(
+          this.basePath, this._hCSessionId, 
+          ApiTranslatorUtils.modelToSnakeCase(this._buildCreateCfarContractExerciseRequest())
+        )
         .pipe(take(1))
         .subscribe(
           (cfarContractExercise: CfarContractExercise) => {
             // Get the contract with the exercise
-            this.cancelForAnyReasonCFARService
-              .getCfarContractsId(this._contractId, this._hCSessionId)
+            this._hopperProxyService
+              .getCfarContractsId(this.basePath, this._contractId, this._hCSessionId)
               .pipe(take(1))
               .subscribe((cfarContract: CfarContract) => {
                 const result = ApiTranslatorUtils.modelToCamelCase(cfarContract) as CfarContract;

@@ -1,11 +1,12 @@
 import { Component, Inject, OnChanges, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { take } from 'rxjs/operators';
-import { CancelForAnyReasonCFARService, CfarContract, CfarOffer, CreateCfarContractRequest, CreateCfarOfferRequest, FareClass, PassengerPricing, RequestType } from '../../apis/hopper-cloud-airline/v1';
+import { CfarContract, CfarOffer, CreateCfarContractRequest, CreateCfarOfferRequest, FareClass, PassengerPricing, RequestType } from '../../apis/hopper-cloud-airline/v1';
 import { TranslateService } from '@ngx-translate/core';
 import { DateAdapter } from "@angular/material/core";
 import { AbstractComponent } from '../abstract.component';
 import { ApiTranslatorUtils } from '../../utils/api-translator.utils';
+import { HopperProxyService } from '../../services/hopper-proxy.service';
 
 @Component({
   selector: 'hopper-cfar-contract-dialog',
@@ -43,11 +44,11 @@ export class CfarContractDialogComponent extends AbstractComponent implements On
   constructor(
     private _adapter: DateAdapter<any>,
     private _translateService: TranslateService,
-    private _cancelForAnyReasonCFARService: CancelForAnyReasonCFARService,
     private _dialogRef: MatDialogRef<CfarContractDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private _hopperProxyService: HopperProxyService
   ) {
-    super(_adapter, _translateService, _cancelForAnyReasonCFARService);
+    super(_adapter, _translateService);
 
     // Mandatory data
     this._partnerId = data.partnerId;
@@ -73,6 +74,8 @@ export class CfarContractDialogComponent extends AbstractComponent implements On
     // Update parents @inputs manually (Dialog limitation)
     this.isFakeBackend = data.isFakeBackend;
     this.currentLang = data.currentLang;
+    this.basePath = data.basePath;
+
     this._translateService.use(this.currentLang);
   }
 
@@ -94,8 +97,8 @@ export class CfarContractDialogComponent extends AbstractComponent implements On
     } else {
       this.isLoading = true;
   
-      this._cancelForAnyReasonCFARService
-        .postCfarOffers(ApiTranslatorUtils.modelToSnakeCase(this._buildCreateCfarOfferRequest()), this._hCSessionId)
+      this._hopperProxyService
+        .postCfarOffers(this.basePath, this._hCSessionId, ApiTranslatorUtils.modelToSnakeCase(this._buildCreateCfarOfferRequest()))
         .pipe(take(1))
         .subscribe(
           (cfarOffers) => {
@@ -129,8 +132,8 @@ export class CfarContractDialogComponent extends AbstractComponent implements On
     this.isLoading = true;
 
     // Create CFAR Contract
-    this._cancelForAnyReasonCFARService
-      .postCfarContracts(ApiTranslatorUtils.modelToSnakeCase(this._buildCreateCfarContractRequest()), this._hCSessionId)
+    this._hopperProxyService
+      .postCfarContracts(this.basePath, this._hCSessionId, ApiTranslatorUtils.modelToSnakeCase(this._buildCreateCfarContractRequest()))
       .pipe(take(1))
       .subscribe(
         (cfarContract: CfarContract) => {

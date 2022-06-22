@@ -28,6 +28,7 @@ export class CfarContractDialogPageComponent extends CommonGuidesComponent {
     public onOpenCfarContractDialog(): void {
       const dialogData = { 
         currentLang: this.currentLang,
+        basePath: this.basePath,
         partnerId: this.partnerId,
         hCSessionId: this.hCSessionId,
         originAirport: this.originAirport,
@@ -86,6 +87,13 @@ export class CfarContractDialogPageComponent extends CommonGuidesComponent {
           <b>By default</b> : en
         `,
         required: false
+      },
+      {
+        name: 'basePath',
+        description: `
+          The Hopper API url base path
+        `,
+        required: true
       },
       {
         name: 'currentTheme',
@@ -236,6 +244,7 @@ export class CfarContractDialogPageComponent extends CommonGuidesComponent {
   public onOpenCfarContractDialog(): void {
     const dialogData = { 
       isFakeBackend: this.isFakeBackend,
+      basePath: this.basePath,
       currentLang: this.currentLang,
       partnerId: this.partnerId,
       hCSessionId: this.hCSessionId,

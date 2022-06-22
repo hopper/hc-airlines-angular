@@ -18,6 +18,7 @@ export class CfarContractChoicePageComponent extends CommonGuidesComponent {
   public override htmlCode: string = `
     <hopper-cfar-contract-choice
       [currentLang]="currentLang"
+      [basePath]="basePath"
       [partnerId]="partnerId"
       [hCSessionId]="hCSessionId"
       [originAirport]="originAirport"
@@ -65,6 +66,13 @@ export class CfarContractChoicePageComponent extends CommonGuidesComponent {
           <b>By default</b> : en
         `,
         required: false
+      },
+      {
+        name: 'basePath',
+        description: `
+          The Hopper API url base path
+        `,
+        required: true
       },
       {
         name: 'partnerId',

@@ -15,6 +15,7 @@ export abstract class CommonGuidesComponent implements OnInit, OnDestroy {
     
   public currentTheme!: string;
   public currentLang!: string;
+  public basePath!: string;
   public isFakeBackend!: boolean;
 
   protected _unsubcriber: Subject<any>;
@@ -24,7 +25,7 @@ export abstract class CommonGuidesComponent implements OnInit, OnDestroy {
 
   // Parameters
   public partnerId = "23459807-1a9a-4227-a7aa-226e3c5552d1";
-  public hCSessionId = "b407a457-155a-4b5e-9a47-303950fd8283";
+  public hCSessionId = "dca2a8c4-8443-4633-a8e5-5df051effe45";
   public originAirport = "LGA";
   public destinationAirport = "BOS";
   public departureDateTime = "2022-06-28T18:34:30";
@@ -55,8 +56,12 @@ export abstract class CommonGuidesComponent implements OnInit, OnDestroy {
     protected _snackBar: MatSnackBar
   ) {
     this._unsubcriber = new Subject<any>();
+    
     // Active fake data in components
-    this.isFakeBackend = true;
+    this.isFakeBackend = false;
+
+    // For local usage
+    this.basePath = 'http://localhost:7071/airline/v1.0/customer';
   }
   
   // -----------------------------------------------

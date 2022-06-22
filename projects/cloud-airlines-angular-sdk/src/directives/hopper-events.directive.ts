@@ -32,10 +32,10 @@ export class HopperEventsDirective {
             console.log("HopperEventObject :")
             console.log(this.hopperEventObject);
 
-            this._hopperEventsService
+           /* this._hopperEventsService
                 .pushEvents(this.hopperEventId)
                 .pipe(take(1))
-                .subscribe(result => console.log("Event pushé"));
+                .subscribe(result => console.log("Event pushé"));*/
         } catch (error) {
             console.error(error);
         }

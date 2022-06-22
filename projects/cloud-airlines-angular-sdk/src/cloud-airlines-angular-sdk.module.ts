@@ -13,7 +13,6 @@ import { EventButtonComponent } from './components/event-button/event-button.com
 
 import { MomentDateAdapter, MAT_MOMENT_DATE_FORMATS } from '@angular/material-moment-adapter';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
-import { environment } from './environments/environment';
 
 import { HopperEventsDirective } from './directives/hopper-events.directive';
 
@@ -26,7 +25,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatSelectModule } from '@angular/material/select';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
-import { ApiModule, BASE_PATH } from './apis/hopper-cloud-airline/v1';
+import { ApiModule } from './apis/hopper-cloud-airline/v1';
 
 import localeFr from '@angular/common/locales/fr';
 import localeFrExtra from '@angular/common/locales/extra/fr';
@@ -39,6 +38,7 @@ import localeZhExtra from '@angular/common/locales/extra/zh';
 
 import localeEs from '@angular/common/locales/es';
 import localeEsExtra from '@angular/common/locales/extra/es';
+import { HopperProxyService } from './services/hopper-proxy.service';
 
 // Supported Languages for Datepicker
 registerLocaleData(localeFr, 'fr', localeFrExtra);
@@ -103,7 +103,7 @@ registerLocaleData(localeZh, 'zh', localeZhExtra);
   providers: [
     { provide: DateAdapter, useClass: MomentDateAdapter, deps: [ MAT_DATE_LOCALE ] },
     { provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS },
-    { provide: BASE_PATH, useValue: environment.apiUrl }   
+    HopperProxyService
   ]
 })
 export class HopperCloudAirlinesAngularSdkModule { }
