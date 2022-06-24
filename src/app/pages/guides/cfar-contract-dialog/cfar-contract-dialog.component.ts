@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component } from "@angular/core";
+import { Component } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { Store } from "@ngrx/store";
@@ -21,7 +21,9 @@ import { Clipboard } from '@angular/cdk/clipboard';
 export class CfarContractDialogPageComponent extends CommonGuidesComponent {
 
   public override htmlCode: string = `
-    <button mat-flat-button color="primary" (click)="onOpenCfarContractDialog()">Open CFAR Contract dialog</button>
+    <button mat-flat-button color="primary" (click)="onOpenCfarContractDialog()">
+      Open CFAR Contract dialog
+    </button>
   `;
 
   public override tsCode: string = `
@@ -31,20 +33,12 @@ export class CfarContractDialogPageComponent extends CommonGuidesComponent {
         basePath: this.basePath,
         partnerId: this.partnerId,
         hCSessionId: this.hCSessionId,
-        originAirport: this.originAirport,
-        destinationAirport: this.destinationAirport,
-        departureDateTime: this.departureDateTime,
-        arrivalDateTime: this.arrivalDateTime,
-        flightNumber: this.flightNumber,
-        carrierCode: this.carrierCode,
-        fareClass: this.fareClass,
-        currency: this.currency,
-        totalPrice: this.totalPrice,
-        passengers: this.passengers,
-        ancillaryPrice: this.ancillaryPrice,
-        ancillaryType: this.ancillaryType,
-        bookingDateTime: this.bookingDateTime,
         paymentType: this.paymentType
+        // Choice 1 - create new offers
+        itinerary: this.itinerary,
+        bookingDateTime: this.bookingDateTime,
+        // Choice 2 - load existing offers
+        // cfarOffers: this.cfarOffers
       };
       const dialogConfig = DialogUtils.getDialogConfig(dialogData, this.currentTheme);
       const dialogRef = this._dialog.open(CfarContractDialogComponent, dialogConfig);
@@ -91,7 +85,7 @@ export class CfarContractDialogPageComponent extends CommonGuidesComponent {
       {
         name: 'basePath',
         description: `
-          The Hopper API url base path
+          The Hopper Cloud Airlines API url base path
         `,
         required: true
       },
@@ -118,99 +112,20 @@ export class CfarContractDialogPageComponent extends CommonGuidesComponent {
         required: true
       },
       {
-        name: 'originAirport',
+        name: 'itinerary',
         description: `
-          IATA airport code of origin (3 characters)
+          You can pass itinerary if you want to create new offers <br />
+          See <a target="_blank" href="https://airlines-api.staging.hopper.com/airline/v1.0/docs/index.html#operation/postCfar_offers">API documentation</a>
         `,
         required: true
       },
       {
-        name: 'destinationAirport',
+        name: 'cfarOffers',
         description: `
-          IATA airport code of destination (3 characters)
-        `,
-        required: true
-      },
-      {
-        name: 'departureDateTime',
-        description: `
-          The local date and time of departure in ISO Local Date Time format
-        `,
-        required: true
-      },
-      {
-        name: 'arrivalDateTime',
-        description: `
-          The local date and time of arrival in ISO Local Date Time format
-        `,
-        required: true
-      },
-      {
-        name: 'flightNumber',
-        description: `
-          The number of the flight. <br />
-          Format: [A-Z0-9]{2}[0-9]{1,4}
-        `,
-        required: true
-      },
-      {
-        name: 'carrierCode',
-        description: `
-          The IATA airline code of the validating carrier for this segment. <br />
-          Format: [A-Z0-9]{2}
-        `,
-        required: true
-      },
-      {
-        name: 'fareClass',
-        description: `
-          Fare class of the segment. <br />
-          Possible value (FareClass enum) : "basic_economy", "economy", "premium_economy", "business", "first"
-        `,
-        required: true
-      },
-      {
-        name: 'currency',
-        description: `
-          Currency of pricing fields
-        `,
-        required: true
-      },
-      {
-        name: 'totalPrice',
-        description: `
-          Total price of ancillaries of this type attached to fare. (>= 0)
-        `,
-        required: true
-      },
-      {
-        name: 'passengers',
-        description: `
-          List of passenger for a fare <br />
-          { count: number; type: string; }[] <br />
-          count : Number of passenger type (> 0)<br />
-          type (enum): "adult" "child" "seated_infant" "lap_infant" <br />
-          The type of passenger:
-          <ul>
-            <li>adult - 12+ years of age</li>
-            <li>child - 2-11 years of age</li>
-            <li>seated_infant - < 2 years of age, in their own seat</li>
-            <li>lap_infant - < 2 years of age, not in their own seat</li>
-          </ul>
-        `,
-        required: true
-      },
-      {
-        name: 'ancillaryPrice',
-        description: `
-          Total price of ancillaries of this type attached to fare
-        `,
-        required: true
-      },
-      {
-        name: 'ancillaryType',
-        description: `
-          'travel_insurance' or 'unclassified'
+          You can pass offers if you want to load existing offers <br />
+          See <a target="_blank" href="https://airlines-api.staging.hopper.com/airline/v1.0/docs/index.html#operation/postCfar_offers">
+            Response of the 'Create a CFAR Offer' api call for data structure
+          </a>
         `,
         required: true
       },
@@ -248,20 +163,10 @@ export class CfarContractDialogPageComponent extends CommonGuidesComponent {
       currentLang: this.currentLang,
       partnerId: this.partnerId,
       hCSessionId: this.hCSessionId,
-      originAirport: this.originAirport,
-      destinationAirport: this.destinationAirport,
-      departureDateTime: this.departureDateTime,
-      arrivalDateTime: this.arrivalDateTime,
-      flightNumber: this.flightNumber,
-      carrierCode: this.carrierCode,
-      fareClass: this.fareClass,
-      currency: this.currency,
-      totalPrice: this.totalPrice,
-      passengers: this.passengers,
-      ancillaryPrice: this.ancillaryPrice,
-      ancillaryType: this.ancillaryType,
+      itinerary: this.itinerary,
       bookingDateTime: this.bookingDateTime,
-      paymentType: this.paymentType
+      paymentType: this.paymentType,
+      extAttributes: this.extAttributes
     };
     const dialogConfig = DialogUtils.getDialogConfig(dialogData, this.currentTheme);
     const dialogRef = this._dialog.open(CfarContractDialogComponent, dialogConfig);

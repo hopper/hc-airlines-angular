@@ -13,6 +13,7 @@ import { MetaReducer, StoreModule } from '@ngrx/store';
 import { storeFreeze } from 'ngrx-store-freeze';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { reducers } from './shared/ngrx';
+import { StoreRouterConnectingModule } from '@ngrx/router-store';
 
 const metaReducers: MetaReducer<any>[] = !environment.production ? [storeFreeze] : [];
 @NgModule({
@@ -32,7 +33,8 @@ const metaReducers: MetaReducer<any>[] = !environment.production ? [storeFreeze]
     AppRoutingModule,
     HighlightModule,
     StoreModule.forRoot(reducers, { metaReducers }),
-    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production })
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
+    StoreRouterConnectingModule.forRoot()
   ],
   providers: [
     {

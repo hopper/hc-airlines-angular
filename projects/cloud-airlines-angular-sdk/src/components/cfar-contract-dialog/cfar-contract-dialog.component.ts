@@ -1,7 +1,7 @@
 import { Component, Inject, OnChanges, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { take } from 'rxjs/operators';
-import { CfarContract, CfarOffer, CreateCfarContractRequest, CreateCfarOfferRequest, FareClass, PassengerPricing, RequestType } from '../../apis/hopper-cloud-airline/v1';
+import { CfarContract, CfarItinerary, CfarOffer, CreateCfarContractRequest, CreateCfarOfferRequest, RequestType } from '../../apis/hopper-cloud-airline/v1';
 import { TranslateService } from '@ngx-translate/core';
 import { DateAdapter } from "@angular/material/core";
 import { AbstractComponent } from '../abstract.component';
@@ -15,7 +15,6 @@ import { HopperProxyService } from '../../services/hopper-proxy.service';
 })
 export class CfarContractDialogComponent extends AbstractComponent implements OnInit, OnChanges {
 
-  public rules!: string[];
   public cfarOffers!: CfarOffer[];
   public selectedCfarOffer!: CfarOffer;
   public isLoading!: boolean;
@@ -23,18 +22,7 @@ export class CfarContractDialogComponent extends AbstractComponent implements On
   // Mandatory data
   private _partnerId!: string;
   private _hCSessionId!: string;
-  private _originAirport!: string;
-  private _destinationAirport!: string;
-  private _departureDateTime!: string;
-  private _arrivalDateTime!: string;
-  private _flightNumber!: string;
-  private _carrierCode!: string;
-  private _fareClass!: FareClass;
-  private _currency!: string;
-  private _totalPrice!: string;
-  private _passengers!: PassengerPricing[];
-  private _ancillaryPrice!: string;
-  private _ancillaryType!: string;
+  private _itinerary!: CfarItinerary[];
   private _bookingDateTime!: Date;
   private _paymentType!: string;
 
@@ -53,28 +41,19 @@ export class CfarContractDialogComponent extends AbstractComponent implements On
     // Mandatory data
     this._partnerId = data.partnerId;
     this._hCSessionId = data.hCSessionId;
-    this._originAirport = data.originAirport;
-    this._destinationAirport = data.destinationAirport;
-    this._departureDateTime = data.departureDateTime;
-    this._arrivalDateTime = data.arrivalDateTime;
-    this._flightNumber = data.flightNumber;
-    this._carrierCode = data.carrierCode;
-    this._fareClass = data.fareClass;
-    this._currency = data.currency;
-    this._totalPrice = data.totalPrice;
-    this._passengers = data.passengers;
-    this._ancillaryPrice = data.ancillaryPrice;
-    this._ancillaryType = data.ancillaryType;
-    this._bookingDateTime = data.bookingDateTime;
     this._paymentType = data.paymentType;
 
     // Optional data
     this._pnrReference = data.pnrReference;
+    this._itinerary = data.itinerary;
+    this._bookingDateTime = data.bookingDateTime;
+    this.cfarOffers = data.cfarOffers;
 
     // Update parents @inputs manually (Dialog limitation)
     this.isFakeBackend = data.isFakeBackend;
     this.currentLang = data.currentLang;
     this.basePath = data.basePath;
+    this.extAttributes = data.extAttributes;
 
     this._translateService.use(this.currentLang);
   }
@@ -84,14 +63,9 @@ export class CfarContractDialogComponent extends AbstractComponent implements On
   // -----------------------------------------------
 
   ngOnInit(): void {
-    // FIXME : To Remove later
-    this.rules = [
-      'Add the flexibility to cancel your flight for any reason up to 3 hours before departure',
-      'Cancel and choose between an XX% refund of your flightase fare and taxes or XX% airline travel credit',
-      'Get instant resolution through Air Canada, no form or claims required!',
-    ];
-
-    if (this.isFakeBackend) {
+    if (this.cfarOffers && this.cfarOffers?.length > 0) {
+      this.selectedCfarOffer = this.cfarOffers[0];
+    } else if (this.isFakeBackend) {
       this.cfarOffers = this._buildFakePostCfarOffersResponse();
       this.selectedCfarOffer = this.cfarOffers[0];
     } else {
@@ -171,73 +145,21 @@ export class CfarContractDialogComponent extends AbstractComponent implements On
   private _buildCreateCfarOfferRequest(): CreateCfarOfferRequest {
     return {
       partnerId: this._partnerId,
-      itinerary: [
-        {
-          currency: this._currency,
-          passengerPricing: this._passengers,
-          slices: [
-            {
-              segments: [
-                {
-                  originAirport: this._originAirport,
-                  destinationAirport: this._destinationAirport,
-                  departureDateTime: this._departureDateTime,
-                  arrivalDateTime: this._arrivalDateTime,
-                  flightNumber: this._flightNumber,
-                  validatingCarrierCode: this._carrierCode,
-                  fareClass: this._fareClass
-                }
-              ]
-            }
-          ],
-          totalPrice: this._totalPrice,
-          ancillaries: [
-            {
-              totalPrice: this._ancillaryPrice,
-              type: this._ancillaryType
-            }
-          ]
-        }
-      ],
+      itinerary: this._itinerary,
       requestType: RequestType.Ancillary,
       bookingDateTime: this._bookingDateTime,
-      extAttributes: {}
+      extAttributes: this.extAttributes
     };
   }
 
   private _buildCreateCfarContractRequest(): CreateCfarContractRequest {
     return {
       offerIds: [this.selectedCfarOffer.id],
-      itinerary: {
-        currency: this._currency,
-        passengerPricing: this._passengers,
-        slices: [
-          {
-            segments: [
-              {
-                originAirport: this._originAirport,
-                destinationAirport: this._destinationAirport,
-                departureDateTime: this._departureDateTime,
-                arrivalDateTime: this._arrivalDateTime,
-                flightNumber: this._flightNumber,
-                validatingCarrierCode: this._carrierCode,
-                fareClass: this._fareClass
-              }
-            ]
-          }
-        ],
-        totalPrice: this._totalPrice,
-        ancillaries: [
-          {
-            totalPrice: this._ancillaryPrice,
-            type: this._ancillaryType
-          }
-        ]
-      },
+      itinerary: this.selectedCfarOffer.itinerary,
       paymentMethod: {
         type: this._paymentType
       },
-      extAttributes: {},
+      extAttributes: this.extAttributes,
       pnrReference: this._pnrReference
     };
   } 
@@ -288,7 +210,9 @@ export class CfarContractDialogComponent extends AbstractComponent implements On
           "totalPrice": "601.65"
         },
         "offerDescription": [
-          ""
+          "Add the flexibility to cancel your flight for any reason up to 3 hours before departure",
+          "Cancel and choose between a 80% refund of your flight base fare and taxes or 100% airline travel credit",
+          "Get instant resolution, no forms or claims required"
         ],
         "extAttributes": {
           "property1": "test1",

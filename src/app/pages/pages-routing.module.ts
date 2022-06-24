@@ -23,7 +23,7 @@ const routes: Routes = [
   {
     path: 'cfar-exercise-dialog',
     component: CfarExerciseDialogPageComponent,
-    data: { path: 'cfar-exericse-dialog' }
+    data: { path: 'cfar-exercise-dialog' }
   }
 ];
 

@@ -34,6 +34,17 @@
                 overflow: scroll;
                 background-color: map-get($bg-palette, app-bar);
                 @include mat.elevation(4);
+
+                .mat-list-base {
+                    padding: 0px;
+
+                    .mat-list-single-selected-option,
+                    .mat-list-single-selected-option:hover,
+                    .mat-list-single-selected-option:focus {
+                        background-color: map-get($accent-palette, default);
+                        color: map-get($accent-palette, "default-contrast")
+                    }
+                }  
             }
 
             .content {

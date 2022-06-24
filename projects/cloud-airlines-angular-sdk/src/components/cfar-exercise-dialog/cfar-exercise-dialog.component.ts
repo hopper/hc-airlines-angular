@@ -26,18 +26,19 @@ export class CfarExerciseDialogComponent extends AbstractComponent implements On
   private _hCSessionId!: string;
   private _pnrReference!: string;
   private _contractId!: string;
+  private _itinerary!: CfarItinerary;
   private _currency!: string;
-  private _originAirport!: string;
-  private _destinationAirport!: string;
-  private _departureDateTime!: string;
-  private _arrivalDateTime!: string;
-  private _flightNumber!: string;
-  private _carrierCode!: string;
-  private _fareClass!: FareClass;
-  private _totalPrice!: string;
-  private _passengers!: PassengerPricing[];
-  private _ancillaryPrice!: string;
-  private _ancillaryType!: string;
+  // private _originAirport!: string;
+  // private _destinationAirport!: string;
+  // private _departureDateTime!: string;
+  // private _arrivalDateTime!: string;
+  // private _flightNumber!: string;
+  // private _carrierCode!: string;
+  // private _fareClass!: FareClass;
+  // private _totalPrice!: string;
+  // private _passengers!: PassengerPricing[];
+  // private _ancillaryPrice!: string;
+  // private _ancillaryType!: string;
 
   // Optional data
   private _airlineRefundAllowance?: string;
@@ -55,18 +56,8 @@ export class CfarExerciseDialogComponent extends AbstractComponent implements On
     this._hCSessionId = data.hCSessionId;
     this._pnrReference = data.pnrReference;
     this._contractId = data.contractId;
+    this._itinerary = data.itinerary;
     this._currency = data.currency;
-    this._originAirport = data.originAirport;
-    this._destinationAirport = data.destinationAirport;
-    this._departureDateTime = data.departureDateTime;
-    this._arrivalDateTime = data.arrivalDateTime;
-    this._flightNumber = data.flightNumber;
-    this._carrierCode = data.carrierCode;
-    this._fareClass = data.fareClass;
-    this._totalPrice = data.totalPrice;
-    this._passengers = data.passengers;
-    this._ancillaryPrice = data.ancillaryPrice;
-    this._ancillaryType = data.ancillaryType;
 
     // Optional data
     this._currency = data.currency;
@@ -76,6 +67,7 @@ export class CfarExerciseDialogComponent extends AbstractComponent implements On
     this.isFakeBackend = data.isFakeBackend;
     this.currentLang = data.currentLang;
     this.basePath = data.basePath;
+    this.extAttributes = this.extAttributes;
 
     this._translateService.use(data.currentLang);
   }
@@ -173,37 +165,12 @@ export class CfarExerciseDialogComponent extends AbstractComponent implements On
     return {
       contractId: this._contractId,
       exerciseInitiatedDateTime: new Date(),
-      itinerary: {
-        currency: this._currency,
-        passengerPricing: this._passengers,
-        slices: [
-          {
-            segments: [
-              {
-                originAirport: this._originAirport,
-                destinationAirport: this._destinationAirport,
-                departureDateTime: this._departureDateTime,
-                arrivalDateTime: this._arrivalDateTime,
-                flightNumber: this._flightNumber,
-                validatingCarrierCode: this._carrierCode,
-                fareClass: this._fareClass
-              }
-            ]
-          }
-        ],
-        totalPrice: this._totalPrice,
-        ancillaries: [
-          {
-            totalPrice: this._ancillaryPrice,
-            type: this._ancillaryType
-          }
-        ]
-      },
+      itinerary: this._itinerary,
       pnrReference: this._pnrReference,
       airlineRefundAllowance: this._airlineRefundAllowance,
       airlineRefundMethod: this.selectedRefundMethod,
       currency: this._currency,
-      extAttributes: {}
+      extAttributes: this.extAttributes
     };
   }
 
@@ -255,7 +222,9 @@ export class CfarExerciseDialogComponent extends AbstractComponent implements On
             "totalPrice": "91.65"
           },
           "offerDescription": [
-            ""
+            "Add the flexibility to cancel your flight for any reason up to 3 hours before departure",
+            "Cancel and choose between a 80% refund of your flight base fare and taxes or 100% airline travel credit",
+            "Get instant resolution, no forms or claims required"
           ],
           "extAttributes": {
             "property1": "test1",
@@ -306,7 +275,9 @@ export class CfarExerciseDialogComponent extends AbstractComponent implements On
             "totalPrice": "91.65"
           },
           "offerDescription": [
-            ""
+            "Add the flexibility to cancel your flight for any reason up to 3 hours before departure",
+            "Cancel and choose between a 80% refund of your flight base fare and taxes or 100% airline travel credit",
+            "Get instant resolution, no forms or claims required"
           ],
           "extAttributes": {
             "property1": "test1",

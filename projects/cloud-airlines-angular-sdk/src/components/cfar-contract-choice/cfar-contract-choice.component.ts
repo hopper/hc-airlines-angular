@@ -1,11 +1,13 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { take } from 'rxjs/operators';
-import { CfarOffer, CreateCfarOfferRequest, FareClass, PassengerPricing, RequestType } from '../../apis/hopper-cloud-airline/v1';
+import { CfarContract, CfarItinerary, CfarOffer, CreateCfarOfferRequest, RequestType } from '../../apis/hopper-cloud-airline/v1';
 import { AbstractComponent } from '../abstract.component';
 import { TranslateService } from '@ngx-translate/core';
 import { DateAdapter } from "@angular/material/core";
 import { ApiTranslatorUtils } from '../../utils/api-translator.utils';
 import { HopperProxyService } from '../../services/hopper-proxy.service';
+import { CfarContractDialogComponent, DialogUtils } from '../../public-api';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'hopper-cfar-contract-choice',
@@ -14,32 +16,22 @@ import { HopperProxyService } from '../../services/hopper-proxy.service';
 })
 export class CfarContractChoiceComponent extends AbstractComponent implements OnInit {
 
-  public rules!: string[];
   public cfarOffers!: CfarOffer[];
   public isLoading!: boolean;
 
   @Input() partnerId!: string;
   @Input() hCSessionId!: string;
-  @Input() originAirport!: string;
-  @Input() destinationAirport!: string;
-  @Input() departureDateTime!: string;
-  @Input() arrivalDateTime!: string;
-  @Input() flightNumber!: string;
-  @Input() carrierCode!: string;
-  @Input() fareClass!: FareClass;
-  @Input() currency!: string;
-  @Input() totalPrice!: string;
-  @Input() passengers!: PassengerPricing[];
-  @Input() ancillaryPrice!: string;
-  @Input() ancillaryType!: string;
   @Input() bookingDateTime!: Date;
+  @Input() itinerary!: CfarItinerary[];
+  @Input() paymentType!: string;
 
   @Output() emitSubmit = new EventEmitter();
   
   constructor(
     private _adapter: DateAdapter<any>,
     private _translateService: TranslateService,
-    private _hopperProxyService: HopperProxyService
+    private _hopperProxyService: HopperProxyService,
+    private _dialog: MatDialog
   ) {
     super(_adapter, _translateService);
   }
@@ -49,12 +41,6 @@ export class CfarContractChoiceComponent extends AbstractComponent implements On
   // -----------------------------------------------
 
   ngOnInit(): void {
-    // FIXME : To remove later
-    this.rules = [
-      'Add the flexibility to cancel your flight for any reason up to 3 hours before departure',
-      'No forms or claims required, without talking to customer service',
-    ];
-
     if (this.isFakeBackend) {
       this.cfarOffers = this._buildFakePostCfarOffersResponse();
     } else {
@@ -86,7 +72,30 @@ export class CfarContractChoiceComponent extends AbstractComponent implements On
   // -----------------------------------------------
 
   public onSubmit(cfarOffer: CfarOffer): void {
-    this.emitSubmit.emit(cfarOffer);
+    const dialogData = { 
+      currentLang: this.currentLang,
+      basePath: this.basePath,
+      partnerId: this.partnerId,
+      hCSessionId: this.hCSessionId,
+      cfarOffers: this.cfarOffers,
+      paymentType: this.paymentType,
+      extAttributes: this.extAttributes
+    };
+    const dialogConfig = DialogUtils.getDialogConfig(dialogData);
+    const dialogRef = this._dialog.open(CfarContractDialogComponent, dialogConfig);
+
+    dialogRef.afterClosed()
+      .pipe(take(1))
+      .subscribe(
+        (result: CfarContract) => {
+          if (result) {
+            this.emitSubmit.emit(result);
+          } else {
+            console.log("Close dialog");
+          }
+        },
+        (error) => console.log(error)
+      );
   }
 
   // -----------------------------------------------
@@ -96,37 +105,10 @@ export class CfarContractChoiceComponent extends AbstractComponent implements On
   private _buildCreateCfarOfferRequest(): CreateCfarOfferRequest {
     return {
       partnerId: this.partnerId,
-      itinerary: [
-        {
-          currency: this.currency,
-          passengerPricing: this.passengers,
-          slices: [
-            {
-              segments: [
-                {
-                  originAirport: this.originAirport,
-                  destinationAirport: this.destinationAirport,
-                  departureDateTime: this.departureDateTime,
-                  arrivalDateTime: this.arrivalDateTime,
-                  flightNumber: this.flightNumber,
-                  validatingCarrierCode: this.carrierCode,
-                  fareClass: this.fareClass
-                }
-              ]
-            }
-          ],
-          totalPrice: this.totalPrice,
-          ancillaries: [
-            {
-              totalPrice: this.ancillaryPrice,
-              type: this.ancillaryType
-            }
-          ]
-        }
-      ],
+      itinerary: this.itinerary,
       requestType: RequestType.Ancillary,
       bookingDateTime: this.bookingDateTime,
-      extAttributes: {}
+      extAttributes: this.extAttributes
     };
   }
 
@@ -176,7 +158,9 @@ export class CfarContractChoiceComponent extends AbstractComponent implements On
           "totalPrice": "601.65"
         },
         "offerDescription": [
-          ""
+          "Add the flexibility to cancel your flight for any reason up to 3 hours before departure",
+          "Cancel and choose between a 80% refund of your flight base fare and taxes or 100% airline travel credit",
+          "Get instant resolution, no forms or claims required"
         ],
         "extAttributes": {
           "property1": "test1",

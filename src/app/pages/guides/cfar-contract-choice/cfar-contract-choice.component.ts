@@ -17,22 +17,12 @@ export class CfarContractChoicePageComponent extends CommonGuidesComponent {
 
   public override htmlCode: string = `
     <hopper-cfar-contract-choice
-      [currentLang]="currentLang"
       [basePath]="basePath"
+      [currentLang]="currentLang"
       [partnerId]="partnerId"
       [hCSessionId]="hCSessionId"
-      [originAirport]="originAirport"
-      [destinationAirport]="destinationAirport"
-      [departureDateTime]="departureDateTime"
-      [arrivalDateTime]="arrivalDateTime"
-      [flightNumber]="flightNumber"
-      [carrierCode]="carrierCode"
-      [fareClass]="fareClass"
-      [currency]="currency"
-      [totalPrice]="totalPrice"
-      [passengers]="passengers"
-      [ancillaryPrice]="ancillaryPrice"
-      [ancillaryType]="ancillaryType"
+      [itinerary]="itinerary"
+      [paymentType]="paymentType"
       [bookingDateTime]="bookingDateTime"
       (emitSubmit)="onEmitSubmitCfarContractChoice($event)"
     ></hopper-cfar-contract-choice>
@@ -70,7 +60,7 @@ export class CfarContractChoicePageComponent extends CommonGuidesComponent {
       {
         name: 'basePath',
         description: `
-          The Hopper API url base path
+          The Hopper Cloud Airlines API url base path
         `,
         required: true
       },
@@ -90,99 +80,9 @@ export class CfarContractChoicePageComponent extends CommonGuidesComponent {
         required: true
       },
       {
-        name: 'originAirport',
+        name: 'itinerary',
         description: `
-          IATA airport code of origin (3 characters)
-        `,
-        required: true
-      },
-      {
-        name: 'destinationAirport',
-        description: `
-          IATA airport code of destination (3 characters)
-        `,
-        required: true
-      },
-      {
-        name: 'departureDateTime',
-        description: `
-          The local date and time of departure in ISO Local Date Time format
-        `,
-        required: true
-      },
-      {
-        name: 'arrivalDateTime',
-        description: `
-          The local date and time of arrival in ISO Local Date Time format
-        `,
-        required: true
-      },
-      {
-        name: 'flightNumber',
-        description: `
-          The number of the flight. <br />
-          Format: [A-Z0-9]{2}[0-9]{1,4}
-        `,
-        required: true
-      },
-      {
-        name: 'carrierCode',
-        description: `
-          The IATA airline code of the validating carrier for this segment. <br />
-          Format: [A-Z0-9]{2}
-        `,
-        required: true
-      },
-      {
-        name: 'fareClass',
-        description: `
-          Fare class of the segment. <br />
-          Possible value (FareClass enum) : "basic_economy", "economy", "premium_economy", "business", "first"
-        `,
-        required: true
-      },
-      {
-        name: 'currency',
-        description: `
-          Currency of pricing fields
-        `,
-        required: true
-      },
-      {
-        name: 'totalPrice',
-        description: `
-          Total price of ancillaries of this type attached to fare. (>= 0)
-        `,
-        required: true
-      },
-      {
-        name: 'passengers',
-        description: `
-          List of passenger for a fare <br />
-          { count: number; type: string; }[] <br />
-          count : Number of passenger type (> 0)<br />
-          type (enum): "adult" "child" "seated_infant" "lap_infant" <br />
-          The type of passenger:
-          <ul>
-            <li>adult - 12+ years of age</li>
-            <li>child - 2-11 years of age</li>
-            <li>seated_infant - < 2 years of age, in their own seat</li>
-            <li>lap_infant - < 2 years of age, not in their own seat</li>
-          </ul>
-        `,
-        required: true
-      },
-      {
-        name: 'ancillaryPrice',
-        description: `
-          Total price of ancillaries of this type attached to fare
-        `,
-        required: true
-      },
-      {
-        name: 'ancillaryType',
-        description: `
-          'travel_insurance' or 'unclassified'
+          See <a target="_blank" href="https://airlines-api.staging.hopper.com/airline/v1.0/docs/index.html#operation/postCfar_offers">API documentation</a>
         `,
         required: true
       },

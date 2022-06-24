@@ -19,10 +19,13 @@
                 <div fxFlexOffset="112px" fxFlexOffset.lt-md="104px" fxFlexOffset.lt-sm="0px"
                     fxFlex fxLayout="row wrap" fxLayoutAlign="start center">
     
-                    <div fxFlex="100" class="py-16" *ngFor="let desc of offer?.offerDescription" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
-                        <mat-icon class="fat-icon" color="primary">check</mat-icon>
-                        <span>{{ desc }}</span>
-                    </div>
+                    <ng-container *ngFor="let desc of offer?.offerDescription; let i = index;">
+                        <!-- DIRTY FIX : Hide the second description -->
+                        <div fxFlex="100" class="py-16" *ngIf="i != 1" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
+                            <mat-icon class="fat-icon" color="primary">check</mat-icon>
+                            <span>{{ desc }}</span>
+                        </div>
+                    </ng-container>
             
                     <div fxFlex="100" fxLayoutAlign="end center">
                         <button mat-stroked-button color="primary" (click)="onSubmit(offer)">

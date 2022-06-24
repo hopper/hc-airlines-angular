@@ -7,6 +7,7 @@ import { AppState } from "src/app/shared/ngrx";
 import { getCurrentLang, getCurrentTheme } from "src/app/shared/ngrx/global/global.selectors";
 import { Clipboard } from '@angular/cdk/clipboard';
 import { MatSnackBar } from "@angular/material/snack-bar";
+import { MapString } from "projects/cloud-airlines-angular-sdk/src/apis/hopper-cloud-airline/v1";
 
 @Directive({
   selector: '[CommonGuidesComponent]'
@@ -25,7 +26,8 @@ export abstract class CommonGuidesComponent implements OnInit, OnDestroy {
 
   // Parameters
   public partnerId = "23459807-1a9a-4227-a7aa-226e3c5552d1";
-  public hCSessionId = "dca2a8c4-8443-4633-a8e5-5df051effe45";
+  public hCSessionId = "6c966d68-cd8e-4c04-9783-d81a1887b7c3";
+
   public originAirport = "LGA";
   public destinationAirport = "BOS";
   public departureDateTime = "2022-06-28T18:34:30";
@@ -49,6 +51,37 @@ export abstract class CommonGuidesComponent implements OnInit, OnDestroy {
   public paymentType = "offline_reconciliation";
   public pnrReference = "123456";
   public contractId = "1ece89da-263c-6689-bec4-f56934b83f44";
+  public extAttributes: MapString = {
+    property1: "value1",
+    property2: "value2"
+  };
+
+  public itinerary = [{
+    currency: this.currency,
+    passengerPricing: this.passengers,
+    slices: [
+      {
+        segments: [
+          {
+            originAirport: this.originAirport,
+            destinationAirport: this.destinationAirport,
+            departureDateTime: this.departureDateTime,
+            arrivalDateTime: this.arrivalDateTime,
+            flightNumber: this.flightNumber,
+            validatingCarrierCode: this.carrierCode,
+            fareClass: this.fareClass
+          }
+        ]
+      }
+    ],
+    totalPrice: this.totalPrice,
+    ancillaries: [
+      {
+        totalPrice: this.ancillaryPrice,
+        type: this.ancillaryType
+      }
+    ]
+  }];
 
   constructor(
     protected _store: Store<AppState>,
@@ -58,7 +91,7 @@ export abstract class CommonGuidesComponent implements OnInit, OnDestroy {
     this._unsubcriber = new Subject<any>();
     
     // Active fake data in components
-    this.isFakeBackend = false;
+    this.isFakeBackend = true;
 
     // For local usage
     this.basePath = 'http://localhost:7071/airline/v1.0/customer';
