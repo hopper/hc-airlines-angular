@@ -5,7 +5,7 @@ export interface I18n {
             DATE_FORMAT: string;
             DATE_FORMAT_SHORT: string;
         },
-        CFAR_CONTRACT_CHOICE: {
+        CFAR_OFFER_BANNER: {
             TITLE: string;
             PRICE: string;
             NO_OFFERS: string;

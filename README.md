@@ -16,14 +16,6 @@ If you want to build a specific project :
 
 `ng build PROJECTNAME`
 
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
 ## Publishing
 
 1. Update the `package.json version` of the project

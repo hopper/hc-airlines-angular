@@ -7,7 +7,7 @@ export const locale: I18n = {
             DATE_FORMAT: 'EEEE, MMMM d, y, h:mm:ss a z',
             DATE_FORMAT_SHORT: 'MM/dd/YYYY hh:mm'
         },
-        CFAR_CONTRACT_CHOICE: {
+        CFAR_OFFER_BANNER: {
             TITLE: "随时以任何理由取消您的航班。",
             PRICE: "添加 {{ price }}",
             NO_OFFERS: "没有可用的优惠",

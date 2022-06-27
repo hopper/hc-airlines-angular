@@ -19,6 +19,8 @@ import { CfarOfferBannerPageComponent } from './guides/cfar-offer-banner/cfar-of
 import { CfarExerciseDialogPageComponent } from './guides/cfar-exercise-dialog/cfar-exercise-dialog.component';
 import { GuidesPageComponent } from './guides/guides.component';
 import { SharedModule } from '../shared/shared.module';
+import { MatCardModule } from '@angular/material/card';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -29,6 +31,9 @@ import { SharedModule } from '../shared/shared.module';
     CfarExerciseDialogPageComponent
   ],
   imports: [
+    // Angular Module
+    CommonModule,
+
     // My library Module
     HopperCloudAirlinesAngularSdkModule,
 
@@ -40,6 +45,7 @@ import { SharedModule } from '../shared/shared.module';
     MatIconModule,
     MatMenuModule,
     MatSnackBarModule,
+    MatCardModule,
 
     // Misc Modules
     FlexLayoutModule,

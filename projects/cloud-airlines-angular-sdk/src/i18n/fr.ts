@@ -7,7 +7,7 @@ export const locale: I18n = {
             DATE_FORMAT: 'EEEE d MMMM y à h:mm:ss z',
             DATE_FORMAT_SHORT: 'dd/MM/YYYY hh:mm'
         },
-        CFAR_CONTRACT_CHOICE: {
+        CFAR_OFFER_BANNER: {
             TITLE: "Annulez votre vol à tout moment, pour quelque raison que ce soit.",
             PRICE: "Ajouter pour {{ price }}",
             NO_OFFERS: "Aucune offre disponible",
