@@ -1,7 +1,7 @@
 import { Component } from "@angular/core";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { Store } from "@ngrx/store";
-import { CfarOffer } from "projects/cloud-airlines-angular-sdk/src/apis/hopper-cloud-airline/v1";
+import { CfarContract } from "projects/cloud-airlines-angular-sdk/src/apis/hopper-cloud-airline/v1";
 import { Locales } from "projects/cloud-airlines-angular-sdk/src/i18n";
 import { InputModel, OutputModel } from "src/app/shared/models";
 import { AppState } from "src/app/shared/ngrx";
@@ -9,14 +9,14 @@ import { CommonGuidesComponent } from "../common-guides.component";
 import { Clipboard } from '@angular/cdk/clipboard';
 
 @Component({
-  selector: "app-cfar-contract-choice",
-  templateUrl: "./cfar-contract-choice.component.html",
-  styleUrls: ["./cfar-contract-choice.component.scss"],
+  selector: "app-cfar-offer-banner",
+  templateUrl: "./cfar-offer-banner.component.html",
+  styleUrls: ["./cfar-offer-banner.component.scss"],
 })
-export class CfarContractChoicePageComponent extends CommonGuidesComponent {
+export class CfarOfferBannerPageComponent extends CommonGuidesComponent {
 
   public override htmlCode: string = `
-    <hopper-cfar-contract-choice
+    <hopper-cfar-offer-banner
       [basePath]="basePath"
       [currentLang]="currentLang"
       [partnerId]="partnerId"
@@ -24,13 +24,18 @@ export class CfarContractChoicePageComponent extends CommonGuidesComponent {
       [itinerary]="itinerary"
       [paymentType]="paymentType"
       [bookingDateTime]="bookingDateTime"
-      (emitSubmit)="onEmitSubmitCfarContractChoice($event)"
-    ></hopper-cfar-contract-choice>
+      [extAttributes]="extAttributes"
+      (emitSubmit)="onEmitSubmit($event)"
+    ></hopper-cfar-offer-banner>
   `;
 
   public override tsCode: string = `
-    onEmitSubmitCfarContractChoice(cfarOffer: CfarOffer): void {
-      console.log(cfarOffer);
+    import { CfarContract } from '@hopper/cloud-airlines-angular-sdk/apis/hopper-cloud-airline/v1';
+
+    // ...
+
+    onEmitSubmit(cfarContract: CfarContract): void {
+      console.log(cfarContract);
     }
   `;
 
@@ -92,6 +97,22 @@ export class CfarContractChoicePageComponent extends CommonGuidesComponent {
           string date-time
         `,
         required: true
+      },
+      {
+        name: 'paymentType',
+        description: `
+          type: string <br />
+          'offline_reconciliation' or 'spreedly_token'
+        `,
+        required: true
+      },
+      {
+        name: 'extAttributes',
+        description: `
+          object (map_string) <br />
+          can be empty ({ })
+        `,
+        required: true
       }
     ];
   }
@@ -100,12 +121,15 @@ export class CfarContractChoicePageComponent extends CommonGuidesComponent {
     return [
       {
         name: 'emitSubmit',
-        description: 'Event triggered when the user clicks on the button'
+        description: `
+          Event triggered when the user gets a coverage of a selected offer <br />
+          Returns a CfarContract
+        `
       }
     ];
   }
 
-  onEmitSubmitCfarContractChoice(cfarOffer: CfarOffer): void {
-    console.log(cfarOffer);
+  onEmitSubmit(cfarContract: CfarContract): void {
+    console.log(cfarContract);
   }
 }

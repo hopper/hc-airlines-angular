@@ -1,5 +1,5 @@
 // How to use : https://tomastrajan.medium.com/the-complete-guide-to-angular-material-themes-4d165a9d24d1
-@mixin cfar-contract-choice-page-component-theme($theme) {
+@mixin cfar-offer-banner-page-component-theme($theme) {
 
     // Colors used for element backgrounds
     // Values : status-bar, app-bar, background, hover, card, dialog, disabled-button, raised-button,
@@ -23,9 +23,9 @@
 
     // ----------------------------------------------
 
-    app-cfar-contract-choice {
+    app-cfar-offer-banner {
 
-        .cfar-contract-choice-page-container {
+        .cfar-offer-banner-page-container {
 
             .tab-group {
                 @include mat.elevation(4);

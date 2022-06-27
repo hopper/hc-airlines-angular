@@ -33,9 +33,10 @@ export class CfarExerciseDialogPageComponent extends CommonGuidesComponent {
         pnrReference: this.pnrReference,
         contractId: this.contractId,
         currency: this.currency,
-        itinerary: this.itinerary
+        itinerary: this.itinerary,
+        extAttributes: this.extAttributes
       };
-      const dialogConfig = DialogUtils.getDialogConfig(dialogData);
+      const dialogConfig = DialogUtils.getDialogConfig(dialogData, this.currentTheme);
       const dialogRef = this._dialog.open(CfarExerciseDialogComponent, dialogConfig);
 
       dialogRef.afterClosed()
@@ -131,6 +132,14 @@ export class CfarExerciseDialogPageComponent extends CommonGuidesComponent {
         name: 'contractId',
         description: `
           A unique identifier for a CFAR contract
+        `,
+        required: true
+      },
+      {
+        name: 'extAttributes',
+        description: `
+          object (map_string) <br />
+          can be empty ({ })
         `,
         required: true
       }

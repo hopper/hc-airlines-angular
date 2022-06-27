@@ -21,7 +21,7 @@ export class LayoutComponent implements OnInit, OnDestroy {
   constructor(
     private _store: Store<AppState>
   ) {
-    this.components.push({ name: 'CFAR Contract Choice', link: 'cfar-contract-choice' });
+    this.components.push({ name: 'CFAR Offer Banner', link: 'cfar-offer-banner' });
     this.components.push({ name: 'CFAR Contract Dialog', link: 'cfar-contract-dialog' });
     this.components.push({ name: 'CFAR Exercise Dialog', link: 'cfar-exercise-dialog' });
   }

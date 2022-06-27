@@ -10,11 +10,11 @@ import { CfarContractDialogComponent, DialogUtils } from '../../public-api';
 import { MatDialog } from '@angular/material/dialog';
 
 @Component({
-  selector: 'hopper-cfar-contract-choice',
-  templateUrl: './cfar-contract-choice.component.html',
-  styleUrls: ['./cfar-contract-choice.component.scss']
+  selector: 'hopper-cfar-offer-banner',
+  templateUrl: './cfar-offer-banner.component.html',
+  styleUrls: ['./cfar-offer-banner.component.scss']
 })
-export class CfarContractChoiceComponent extends AbstractComponent implements OnInit {
+export class CfarOfferBannerComponent extends AbstractComponent implements OnInit {
 
   public cfarOffers!: CfarOffer[];
   public isLoading!: boolean;

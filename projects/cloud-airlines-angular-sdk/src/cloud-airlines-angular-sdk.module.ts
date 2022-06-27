@@ -6,7 +6,7 @@ import { CommonModule, registerLocaleData } from '@angular/common';
 
 import { TranslateModule } from '@ngx-translate/core';
 
-import { CfarContractChoiceComponent } from './components/cfar-contract-choice/cfar-contract-choice.component';
+import { CfarOfferBannerComponent } from './components/cfar-offer-banner/cfar-offer-banner.component';
 import { CfarContractDialogComponent } from './components/cfar-contract-dialog/cfar-contract-dialog.component';
 import { CfarExerciseDialogComponent } from './components/cfar-exercise-dialog/cfar-exercise-dialog.component';
 import { EventButtonComponent } from './components/event-button/event-button.component';
@@ -51,7 +51,7 @@ registerLocaleData(localeZh, 'zh', localeZhExtra);
   declarations: [
     // Component
     EventButtonComponent,
-    CfarContractChoiceComponent,
+    CfarOfferBannerComponent,
     CfarContractDialogComponent,
     CfarExerciseDialogComponent,
 
@@ -85,7 +85,7 @@ registerLocaleData(localeZh, 'zh', localeZhExtra);
   exports: [
     // Component
     EventButtonComponent,
-    CfarContractChoiceComponent,
+    CfarOfferBannerComponent,
     CfarContractDialogComponent,
     CfarExerciseDialogComponent,
 

@@ -15,7 +15,7 @@ import { NotFoundPageComponent } from './not-found/not-found.component';
 import { CfarContractDialogPageComponent } from './guides/cfar-contract-dialog/cfar-contract-dialog.component';
 import { PagesRoutingModule } from './pages-routing.module';
 import { HighlightModule } from 'ngx-highlightjs';
-import { CfarContractChoicePageComponent } from './guides/cfar-contract-choice/cfar-contract-choice.component';
+import { CfarOfferBannerPageComponent } from './guides/cfar-offer-banner/cfar-offer-banner.component';
 import { CfarExerciseDialogPageComponent } from './guides/cfar-exercise-dialog/cfar-exercise-dialog.component';
 import { GuidesPageComponent } from './guides/guides.component';
 import { SharedModule } from '../shared/shared.module';
@@ -25,7 +25,7 @@ import { SharedModule } from '../shared/shared.module';
     NotFoundPageComponent,
     GuidesPageComponent,
     CfarContractDialogPageComponent,
-    CfarContractChoicePageComponent,
+    CfarOfferBannerPageComponent,
     CfarExerciseDialogPageComponent
   ],
   imports: [

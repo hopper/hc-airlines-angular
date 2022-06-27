@@ -1,17 +1,13 @@
-<div class="cfar-contract-choice-page-container p-32" fxLayout="row wrap" fxLayoutAlign="start start">
+<div class="cfar-offer-banner-page-container p-32" fxLayout="row wrap" fxLayoutAlign="start start">
 
-    <p fxFlex="100">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-        industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled
-        it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic
-        typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset
-        sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker
-        including versions of Lorem Ipsum.</p>
+    <p fxFlex="100">This banner can be integrated in your booking funnel in order to display CFAR offers to the User. CFAR offers will be created dynamically, including a description in the page’s language and a starting price.
+        Following a click of the User on the ‘Add’ button, the CFAR Dialog will open.</p>
 
     <mat-tab-group fxFlex="100" backgroundColor="primary" class="tab-group mb-16">
 
         <mat-tab label="Overview">
             <div class="p-16">
-                <hopper-cfar-contract-choice
+                <hopper-cfar-offer-banner
                     [isFakeBackend]="isFakeBackend"
                     [basePath]="basePath"
                     [currentLang]="currentLang"
@@ -21,8 +17,8 @@
                     [itinerary]="itinerary"
                     [bookingDateTime]="bookingDateTime"
                     [extAttributes]="extAttributes"
-                    (emitSubmit)="onEmitSubmitCfarContractChoice($event)"
-                ></hopper-cfar-contract-choice>
+                    (emitSubmit)="onEmitSubmit($event)"
+                ></hopper-cfar-offer-banner>
             </div>
         </mat-tab>
 

@@ -2,7 +2,7 @@
 
 
 // How to use : https://tomastrajan.medium.com/the-complete-guide-to-angular-material-themes-4d165a9d24d1
-@mixin cfar-contract-choice-theme($theme) {
+@mixin cfar-offer-banner-theme($theme) {
 
     // Colors used for element backgrounds
     $bg-palette: map-get($theme, background);
@@ -24,7 +24,7 @@
 
     // ----------------------------------------------
 
-    hopper-cfar-contract-choice {
+    hopper-cfar-offer-banner {
         .mat-card {
             &:hover {
                 @include mat.elevation(4);

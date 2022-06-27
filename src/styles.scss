@@ -26,7 +26,7 @@ $light-primary-text: white;
 
 // Components
 @import "./app/pages/guides/guides.component.scss";
-@import "./app/pages/guides/cfar-contract-choice/cfar-contract-choice.component.scss";
+@import "./app/pages/guides/cfar-offer-banner/cfar-offer-banner.component.scss";
 @import "./app/pages/guides/cfar-contract-dialog/cfar-contract-dialog.component.scss";
 @import "./app/pages/guides/cfar-exercise-dialog/cfar-exercise-dialog.component.scss";
 
@@ -40,7 +40,7 @@ $light-primary-text: white;
 // Mixin for easier access
 @mixin hopper-components-theme($theme) {
   @include guides-page-component-theme($theme);
-  @include cfar-contract-choice-page-component-theme($theme);
+  @include cfar-offer-banner-page-component-theme($theme);
   @include cfar-contract-dialog-page-component-theme($theme);
   @include cfar-exercise-dialog-page-component-theme($theme);
 

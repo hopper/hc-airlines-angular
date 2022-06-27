@@ -33,7 +33,8 @@ export class CfarContractDialogPageComponent extends CommonGuidesComponent {
         basePath: this.basePath,
         partnerId: this.partnerId,
         hCSessionId: this.hCSessionId,
-        paymentType: this.paymentType
+        paymentType: this.paymentType,
+        extAttributes: this.extAttributes,
         // Choice 1 - create new offers
         itinerary: this.itinerary,
         bookingDateTime: this.bookingDateTime,
@@ -115,7 +116,9 @@ export class CfarContractDialogPageComponent extends CommonGuidesComponent {
         name: 'itinerary',
         description: `
           You can pass itinerary if you want to create new offers <br />
-          See <a target="_blank" href="https://airlines-api.staging.hopper.com/airline/v1.0/docs/index.html#operation/postCfar_offers">API documentation</a>
+          See <a target="_blank" href="https://airlines-api.staging.hopper.com/airline/v1.0/docs/index.html#operation/postCfar_offers">
+            API documentation
+          </a>
         `,
         required: true
       },
@@ -133,6 +136,22 @@ export class CfarContractDialogPageComponent extends CommonGuidesComponent {
         name: 'bookingDateTime',
         description: `
           string date-time
+        `,
+        required: true
+      },
+      {
+        name: 'paymentType',
+        description: `
+          type: string <br />
+          'offline_reconciliation' or 'spreedly_token'
+        `,
+        required: true
+      },
+      {
+        name: 'extAttributes',
+        description: `
+          object (map_string) <br />
+          can be empty ({ })
         `,
         required: true
       }
