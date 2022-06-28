@@ -9,11 +9,11 @@ import { ApiTranslatorUtils } from '../../utils/api-translator.utils';
 import { HopperProxyService } from '../../services/hopper-proxy.service';
 
 @Component({
-  selector: 'hopper-cfar-contract-dialog',
-  templateUrl: './cfar-contract-dialog.component.html',
-  styleUrls: ['./cfar-contract-dialog.component.scss']
+  selector: 'hopper-cfar-offer-dialog',
+  templateUrl: './cfar-offer-dialog.component.html',
+  styleUrls: ['./cfar-offer-dialog.component.scss']
 })
-export class CfarContractDialogComponent extends AbstractComponent implements OnInit, OnChanges {
+export class CfarOfferDialogComponent extends AbstractComponent implements OnInit, OnChanges {
 
   public cfarOffers!: CfarOffer[];
   public selectedCfarOffer!: CfarOffer;
@@ -32,7 +32,7 @@ export class CfarContractDialogComponent extends AbstractComponent implements On
   constructor(
     private _adapter: DateAdapter<any>,
     private _translateService: TranslateService,
-    private _dialogRef: MatDialogRef<CfarContractDialogComponent>,
+    private _dialogRef: MatDialogRef<CfarOfferDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private _hopperProxyService: HopperProxyService
   ) {

@@ -27,7 +27,7 @@ $light-primary-text: white;
 // Components
 @import "./app/pages/guides/guides.component.scss";
 @import "./app/pages/guides/cfar-offer-banner/cfar-offer-banner.component.scss";
-@import "./app/pages/guides/cfar-contract-dialog/cfar-contract-dialog.component.scss";
+@import "./app/pages/guides/cfar-offer-dialog/cfar-offer-dialog.component.scss";
 @import "./app/pages/guides/cfar-exercise-dialog/cfar-exercise-dialog.component.scss";
 
 @import "./app/pages/not-found/not-found.component.scss";
@@ -41,7 +41,7 @@ $light-primary-text: white;
 @mixin hopper-components-theme($theme) {
   @include guides-page-component-theme($theme);
   @include cfar-offer-banner-page-component-theme($theme);
-  @include cfar-contract-dialog-page-component-theme($theme);
+  @include cfar-offer-dialog-page-component-theme($theme);
   @include cfar-exercise-dialog-page-component-theme($theme);
 
   @include not-found-page-component-theme($theme);
@@ -268,6 +268,9 @@ $light-blue-theme: mat.define-light-theme((
 
 /* You can add global styles to this file, and also import other style files */
 
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { 
+  margin: 0;
+  // font-family: Roboto, "Helvetica Neue", sans-serif;
+}
 .pointer { cursor: pointer; }
 .main-container { height: 100vh; }

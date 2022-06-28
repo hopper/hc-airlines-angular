@@ -3,7 +3,7 @@ import { MatDialog } from "@angular/material/dialog";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { Store } from "@ngrx/store";
 import { CfarContract } from "projects/cloud-airlines-angular-sdk/src/apis/hopper-cloud-airline/v1";
-import { CfarContractDialogComponent } from "projects/cloud-airlines-angular-sdk/src/components/cfar-contract-dialog/cfar-contract-dialog.component";
+import { CfarOfferDialogComponent } from "projects/cloud-airlines-angular-sdk/src/components/cfar-offer-dialog/cfar-offer-dialog.component";
 import { Locales } from "projects/cloud-airlines-angular-sdk/src/i18n";
 import { DialogUtils } from "projects/cloud-airlines-angular-sdk/src/utils/dialog.utils";
 import { take } from "rxjs/operators";
@@ -14,20 +14,20 @@ import { Clipboard } from '@angular/cdk/clipboard';
 
 
 @Component({
-  selector: "app-cfar-contract-dialog",
-  templateUrl: "./cfar-contract-dialog.component.html",
-  styleUrls: ["./cfar-contract-dialog.component.scss"],
+  selector: "app-cfar-offer-dialog",
+  templateUrl: "./cfar-offer-dialog.component.html",
+  styleUrls: ["./cfar-offer-dialog.component.scss"],
 })
-export class CfarContractDialogPageComponent extends CommonGuidesComponent {
+export class CfarOfferDialogPageComponent extends CommonGuidesComponent {
 
   public override htmlCode: string = `
-    <button mat-flat-button color="primary" (click)="onOpenCfarContractDialog()">
-      Open CFAR Contract dialog
+    <button mat-flat-button color="primary" (click)="onOpenCfarOfferDialog()">
+      Open CFAR offer dialog
     </button>
   `;
 
   public override tsCode: string = `
-    public onOpenCfarContractDialog(): void {
+    public onOpenCfarOfferDialog(): void {
       const dialogData = { 
         currentLang: this.currentLang,
         basePath: this.basePath,
@@ -42,7 +42,7 @@ export class CfarContractDialogPageComponent extends CommonGuidesComponent {
         // cfarOffers: this.cfarOffers
       };
       const dialogConfig = DialogUtils.getDialogConfig(dialogData, this.currentTheme);
-      const dialogRef = this._dialog.open(CfarContractDialogComponent, dialogConfig);
+      const dialogRef = this._dialog.open(CfarOfferDialogComponent, dialogConfig);
 
       dialogRef.afterClosed()
         .pipe(take(1))
@@ -175,7 +175,7 @@ export class CfarContractDialogPageComponent extends CommonGuidesComponent {
     ];
   }
 
-  public onOpenCfarContractDialog(): void {
+  public onOpenCfarOfferDialog(): void {
     const dialogData = { 
       isFakeBackend: this.isFakeBackend,
       basePath: this.basePath,
@@ -188,14 +188,14 @@ export class CfarContractDialogPageComponent extends CommonGuidesComponent {
       extAttributes: this.extAttributes
     };
     const dialogConfig = DialogUtils.getDialogConfig(dialogData, this.currentTheme);
-    const dialogRef = this._dialog.open(CfarContractDialogComponent, dialogConfig);
+    const dialogRef = this._dialog.open(CfarOfferDialogComponent, dialogConfig);
 
     dialogRef.afterClosed()
       .pipe(take(1))
       .subscribe(
         (result: CfarContract) => {
           if (result) {
-            console.log("Submit cfar contract dialog :")
+            console.log("Submit cfar offer dialog :")
             console.log(result);
           } else {
             console.log("Close dialog")

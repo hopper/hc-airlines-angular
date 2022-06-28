@@ -3,7 +3,7 @@
 
 
 // How to use : https://tomastrajan.medium.com/the-complete-guide-to-angular-material-themes-4d165a9d24d1
-@mixin cfar-contract-dialog-theme($theme) {
+@mixin cfar-offer-dialog-theme($theme) {
 
     // Colors used for element backgrounds
     $bg-palette: map-get($theme, background);
@@ -25,20 +25,46 @@
 
     // ----------------------------------------------
 
-    hopper-cfar-contract-dialog {
+    hopper-cfar-offer-dialog {
         .mat-dialog-title {
-            background-color: map-get($accent-palette, 800);
-            color: map-get($accent-palette, "800-contrast");
+            background-color: map-get($accent-palette, 900);
+            color: map-get($accent-palette, "900-contrast");
             margin: 0px;
 
             .big-icon {
                 font-size: 40px;
                 height: 100%;
             }
+
+            .powered-by-container {
+                height: 0px;
+
+                .powered-by {
+                    @if($is-dark) {
+                        background: rgb(52,52,52);
+                        background: linear-gradient(0deg, rgba(52,52,52,0) 0%, rgba(52,52,52,1) 25%);
+                        color: white;
+                    } @else {
+                        background: rgb(255,255,255);
+                        background: linear-gradient(0deg, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 25%);
+                        color: black;
+                    }
+    
+                    
+                    border-radius: 16px;
+                    position: relative;
+                    font-size: 12px;
+                    top: 16px;
+                }
+            }
         }
 
         .mat-dialog-content {
-            background-color: map-get($bg-palette, background);
+            @if($is-dark) {
+                background-color: rgb(52,52,52);
+            } @else {
+                background-color: rgb(255,255,255);
+            }
 
             .fat-icon {
                 font-weight: 700;
@@ -67,7 +93,11 @@
         }
 
         .mat-dialog-actions {
-            background-color: map-get($bg-palette, background);
+            @if($is-dark) {
+                background-color: rgb(52,52,52);
+            } @else {
+                background-color: rgb(255,255,255);
+            }
 
             .mat-button-base+.mat-button-base,
             .mat-mdc-button-base+.mat-mdc-button-base {

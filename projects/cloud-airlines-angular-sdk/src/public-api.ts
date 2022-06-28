@@ -11,7 +11,7 @@ export * from './directives/hopper-events.directive';
 
 // COMPONENTS
 export * from './components/cfar-offer-banner/cfar-offer-banner.component';
-export * from './components/cfar-contract-dialog/cfar-contract-dialog.component';
+export * from './components/cfar-offer-dialog/cfar-offer-dialog.component';
 export * from './components/cfar-exercise-dialog/cfar-exercise-dialog.component';
 export * from './components/event-button/event-button.component';
 

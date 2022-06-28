@@ -13,7 +13,7 @@ export interface I18n {
                 SELECT: string;
             }
         },
-        CFAR_CONTRACT_DIALOG: {
+        CFAR_OFFER_DIALOG: {
             TITLE: string;
             POWERED_BY: string;
             VIEW_DETAILS: string;

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CfarOfferBannerPageComponent } from './guides/cfar-offer-banner/cfar-offer-banner.component';
-import { CfarContractDialogPageComponent } from './guides/cfar-contract-dialog/cfar-contract-dialog.component';
+import { CfarOfferDialogPageComponent } from './guides/cfar-offer-dialog/cfar-offer-dialog.component';
 import { CfarExerciseDialogPageComponent } from './guides/cfar-exercise-dialog/cfar-exercise-dialog.component';
 import { GuidesPageComponent } from './guides/guides.component';
 
@@ -11,9 +11,9 @@ const routes: Routes = [
     component: GuidesPageComponent
   },
   {
-    path: 'cfar-contract-dialog',
-    component: CfarContractDialogPageComponent,
-    data: { path: 'cfar-contract-dialog' }
+    path: 'cfar-offer-dialog',
+    component: CfarOfferDialogPageComponent,
+    data: { path: 'cfar-offer-dialog' }
   },
   {
     path: 'cfar-offer-banner',

@@ -12,7 +12,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { NotFoundPageComponent } from './not-found/not-found.component';
-import { CfarContractDialogPageComponent } from './guides/cfar-contract-dialog/cfar-contract-dialog.component';
+import { CfarOfferDialogPageComponent } from './guides/cfar-offer-dialog/cfar-offer-dialog.component';
 import { PagesRoutingModule } from './pages-routing.module';
 import { HighlightModule } from 'ngx-highlightjs';
 import { CfarOfferBannerPageComponent } from './guides/cfar-offer-banner/cfar-offer-banner.component';
@@ -26,7 +26,7 @@ import { CommonModule } from '@angular/common';
   declarations: [
     NotFoundPageComponent,
     GuidesPageComponent,
-    CfarContractDialogPageComponent,
+    CfarOfferDialogPageComponent,
     CfarOfferBannerPageComponent,
     CfarExerciseDialogPageComponent
   ],

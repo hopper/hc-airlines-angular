@@ -15,7 +15,7 @@ export const locale: I18n = {
                 SELECT: "Seleccione"
             }
         },
-        CFAR_CONTRACT_DIALOG: {
+        CFAR_OFFER_DIALOG: {
             TITLE: "Cancelar por cualquier motivo",
             POWERED_BY: "Impulsado por Hopper",
             VIEW_DETAILS: "Ver detalles",

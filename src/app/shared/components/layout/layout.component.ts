@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
-import { ActivatedRoute, Data } from "@angular/router";
+import { Data } from "@angular/router";
 import { select, Store } from "@ngrx/store";
 import { Subject } from "rxjs";
 import { takeUntil } from "rxjs/operators";
@@ -22,7 +22,7 @@ export class LayoutComponent implements OnInit, OnDestroy {
     private _store: Store<AppState>
   ) {
     this.components.push({ name: 'CFAR Offer Banner', link: 'cfar-offer-banner' });
-    this.components.push({ name: 'CFAR Contract Dialog', link: 'cfar-contract-dialog' });
+    this.components.push({ name: 'CFAR Offer Dialog', link: 'cfar-offer-dialog' });
     this.components.push({ name: 'CFAR Exercise Dialog', link: 'cfar-exercise-dialog' });
   }
 

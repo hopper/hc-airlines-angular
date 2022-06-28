@@ -6,7 +6,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { DateAdapter } from "@angular/material/core";
 import { ApiTranslatorUtils } from '../../utils/api-translator.utils';
 import { HopperProxyService } from '../../services/hopper-proxy.service';
-import { CfarContractDialogComponent, DialogUtils } from '../../public-api';
+import { CfarOfferDialogComponent, DialogUtils } from '../../public-api';
 import { MatDialog } from '@angular/material/dialog';
 
 @Component({
@@ -82,7 +82,7 @@ export class CfarOfferBannerComponent extends AbstractComponent implements OnIni
       extAttributes: this.extAttributes
     };
     const dialogConfig = DialogUtils.getDialogConfig(dialogData);
-    const dialogRef = this._dialog.open(CfarContractDialogComponent, dialogConfig);
+    const dialogRef = this._dialog.open(CfarOfferDialogComponent, dialogConfig);
 
     dialogRef.afterClosed()
       .pipe(take(1))

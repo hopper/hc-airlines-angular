@@ -22,8 +22,8 @@ export class GuidesPageComponent {
     });
 
     this.components.push({ 
-      name: 'CFAR Contract Dialog',
-      link: 'cfar-contract-dialog',
+      name: 'CFAR Offer Dialog',
+      link: 'cfar-offer-dialog',
       description: 'A dialog to choose different coverage options'
     });
 
