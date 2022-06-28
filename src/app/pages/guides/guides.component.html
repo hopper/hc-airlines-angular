@@ -9,7 +9,7 @@
 
         <mat-card class="m-16" *ngFor="let component of components" [routerLink]="component?.link">
             
-            <img mat-card-image src="/assets/miniatures/{{ component?.link }}.png" alt="{{ component?.name }} miniature">
+            <img mat-card-image src="assets/miniatures/{{ component?.link }}.png" alt="{{ component?.name }} miniature">
             
             <mat-card-header>
               <mat-card-title>{{ component?.name }}</mat-card-title>

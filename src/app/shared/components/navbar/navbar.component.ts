@@ -41,7 +41,7 @@ export class NavBarComponent implements OnInit, OnDestroy {
 
     // Add SVG icons for each languages
     this.languages.forEach(language => {
-      this._matIconRegistry.addSvgIcon("flag_" + language, this._domSanitizer.bypassSecurityTrustResourceUrl("../assets/flags/" + language + ".svg"));
+      this._matIconRegistry.addSvgIcon("flag_" + language, this._domSanitizer.bypassSecurityTrustResourceUrl("assets/flags/" + language + ".svg"));
     });
   }
 
