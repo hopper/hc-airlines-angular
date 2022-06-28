@@ -9,9 +9,11 @@ export const locale: I18n = {
         },
         CFAR_OFFER_BANNER: {
             TITLE: "随时以任何理由取消您的航班。",
-            PRICE: "添加 {{ price }}",
             NO_OFFERS: "没有可用的优惠",
-            LOADING: "正在加载优惠..."
+            LOADING: "正在加载优惠...",
+            BUTTON: {
+                SELECT: "选择"
+            }
         },
         CFAR_CONTRACT_DIALOG: {
             TITLE: "出于任何原因取消",

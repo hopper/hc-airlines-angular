@@ -27,7 +27,10 @@
 
         .mat-header-row {
             background-color: map-get($primary-palette, 500);
-            color: map-get($primary-palette, "500-contrast");
+            
+            .mat-header-cell {
+                color: map-get($primary-palette, "500-contrast");
+            }
         }
     }
 }

@@ -25,47 +25,19 @@
     // ----------------------------------------------
 
     hopper-cfar-offer-banner {
-        .mat-card {
-            &:hover {
-                @include mat.elevation(4);
-            }
+        mat-card {
+            background: map-get($primary-palette, 50) !important;
+            color: map-get($primary-palette, "50-contrast") !important;
     
-            .big-icon {
-                width: 32px;
-                height: 32px;
-                font-size: 32px;
-                border: 16px solid map-get($primary-palette, default);
-                background: map-get($primary-palette, default);
-                color: white;
-                border-radius: 32px;
-
-                @include media-breakpoint('lt-md') {
-                    width: 24px;
-                    height: 24px;
-                    font-size: 24px;
-                }
-        
-                @include media-breakpoint('lt-sm') {
-                    width: 16px;
-                    height: 16px;
-                    font-size: 16px;
-                }
-            }
-    
-            .fat-icon {
-                font-weight: 700;
+            .check-icon {
+                font-weight: bold;
+                color: green;
             }
     
             .offer-title {
                 font-weight: bold;
                 margin: 0px;
             }
-        }
-    
-        @if ($is-dark) {
-    
-        } @else {
-            
         }
     }
 }

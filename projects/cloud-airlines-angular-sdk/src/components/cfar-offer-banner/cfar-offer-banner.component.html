@@ -3,36 +3,32 @@
     <ng-container *ngIf="!isLoading">
         <mat-card class="m-16 pointer" fxFlex fxLayout="row wrap" *ngFor="let offer of cfarOffers">
     
-            <div fxFlex="100" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="16px">
-                <div fxFlex="96px" fxFlex.lt-md="88px" fxFlex.lt-sm="48px" class="p-16" ngClass.lt-sm="px-0">
-                    <mat-icon class="big-icon">cached</mat-icon>
+            <div fxFlex="100" fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="16px">
+    
+                <div fxFlex="calc(20% - 16px)" fxHide.lt-md fxLayout="row" fxLayoutAlign="center center" class="p-16" ngClass.lt-sm="px-0">
+                    <img src="assets/offer-banner-icon.svg">
                 </div>
+
+                <div fxFlex="60" fxFlex.lt-md="100" fxLayout="column" fxLayoutAlign="center start">
     
-                <div fxFlex="calc(100% - 112px)" fxFlex.lt-md="calc(100% - 104px)" fxFlex.lt-sm="calc(100% - 48px)" 
-                    fxLayout="row wrap" fxLayoutAlign="start center">
-                    <h2 class="offer-title">{{ 'CFAR_OFFER_BANNER.TITLE' | translate }}</h2>
-                </div>
-            </div>
-    
-            <div fxFlex="100">
-    
-                <div fxFlexOffset="112px" fxFlexOffset.lt-md="104px" fxFlexOffset.lt-sm="0px"
-                    fxFlex fxLayout="row wrap" fxLayoutAlign="start center">
-    
+                    <div fxLayout="row" fxLayoutAlign="start center">
+                        <h2 class="offer-title">{{ 'CFAR_OFFER_BANNER.TITLE' | translate }}</h2>
+                    </div>   
+
                     <ng-container *ngFor="let desc of offer?.offerDescription; let i = index;">
                         <!-- DIRTY FIX : Hide the second description -->
-                        <div fxFlex="100" class="py-16" *ngIf="i != 1" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
-                            <mat-icon class="fat-icon" color="primary">check</mat-icon>
+                        <div class="py-16" *ngIf="i != 1" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
+                            <mat-icon class="check-icon">check</mat-icon>
                             <span>{{ desc }}</span>
                         </div>
                     </ng-container>
             
-                    <div fxFlex="100" fxLayoutAlign="end center">
-                        <button mat-stroked-button color="primary" (click)="onSubmit(offer)">
-                            {{ 'CFAR_OFFER_BANNER.PRICE' | translate: { price : (offer?.premium | currency:offer?.currency:'symbol':undefined:currentLang) } }}
-                        </button>
-                    </div>
-        
+                </div>
+
+                <div fxFlex="calc(20% - 16px)" fxFlex.lt-md="100" fxLayout="row" fxLayoutAlign="center center" fxLayoutAlign.lt-md="end center">
+                    <button mat-raised-button (click)="onSubmit(offer)">
+                        {{ 'CFAR_OFFER_BANNER.BUTTON.SELECT' | translate }}
+                    </button>
                 </div>
     
             </div>

@@ -7,9 +7,11 @@ export interface I18n {
         },
         CFAR_OFFER_BANNER: {
             TITLE: string;
-            PRICE: string;
             NO_OFFERS: string;
             LOADING: string;
+            BUTTON: {
+                SELECT: string;
+            }
         },
         CFAR_CONTRACT_DIALOG: {
             TITLE: string;

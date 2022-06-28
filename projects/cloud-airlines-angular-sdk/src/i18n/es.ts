@@ -9,9 +9,11 @@ export const locale: I18n = {
         },
         CFAR_OFFER_BANNER: {
             TITLE: "Cancele su vuelo en cualquier momento, por cualquier motivo.",
-            PRICE: "Agregar por {{ price }}",
             NO_OFFERS: "No hay ofertas disponibles",
-            LOADING: "Cargando ofertas en curso..."
+            LOADING: "Cargando ofertas en curso...",
+            BUTTON: {
+                SELECT: "Seleccione"
+            }
         },
         CFAR_CONTRACT_DIALOG: {
             TITLE: "Cancelar por cualquier motivo",

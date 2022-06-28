@@ -35,7 +35,8 @@ export class NavBarComponent implements OnInit, OnDestroy {
 
     this.themes = [
       'theme-dark-hopper',
-      'theme-light-hopper'
+      'theme-light-hopper',
+      'theme-light-blue'
     ];
 
     // Add SVG icons for each languages
