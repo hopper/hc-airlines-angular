@@ -33,7 +33,6 @@ export class CfarOfferDialogPageComponent extends CommonGuidesComponent {
         basePath: this.basePath,
         partnerId: this.partnerId,
         hCSessionId: this.hCSessionId,
-        paymentType: this.paymentType,
         extAttributes: this.extAttributes,
         // Choice 1 - create new offers
         itinerary: this.itinerary,
@@ -140,14 +139,6 @@ export class CfarOfferDialogPageComponent extends CommonGuidesComponent {
         required: true
       },
       {
-        name: 'paymentType',
-        description: `
-          type: string <br />
-          'offline_reconciliation' or 'spreedly_token'
-        `,
-        required: true
-      },
-      {
         name: 'extAttributes',
         description: `
           object (map_string) <br />
@@ -184,7 +175,6 @@ export class CfarOfferDialogPageComponent extends CommonGuidesComponent {
       hCSessionId: this.hCSessionId,
       itinerary: this.itinerary,
       bookingDateTime: this.bookingDateTime,
-      paymentType: this.paymentType,
       extAttributes: this.extAttributes
     };
     const dialogConfig = DialogUtils.getDialogConfig(dialogData, this.currentTheme);

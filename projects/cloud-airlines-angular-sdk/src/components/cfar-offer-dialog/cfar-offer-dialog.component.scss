@@ -26,15 +26,18 @@
     // ----------------------------------------------
 
     hopper-cfar-offer-dialog {
+        .mat-button, 
+        .mat-flat-button, 
+        .mat-icon-button, 
+        .mat-raised-button,
+        .mat-stroked-button { 
+            border-radius: 0px; 
+        }
+        
         .mat-dialog-title {
             background-color: map-get($accent-palette, 900);
             color: map-get($accent-palette, "900-contrast");
             margin: 0px;
-
-            .big-icon {
-                font-size: 40px;
-                height: 100%;
-            }
 
             .powered-by-container {
                 height: 0px;
@@ -66,13 +69,15 @@
                 background-color: rgb(255,255,255);
             }
 
-            .fat-icon {
-                font-weight: 700;
+            .check-icon {
+                font-weight: bold;
+                color: green;
             }
 
             mat-card {
                 color: map-get($fg-palette, default);
-
+                border-radius: 0px;
+                
                 &:hover {
                     @include mat.elevation(4);
                 }

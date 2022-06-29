@@ -25,10 +25,19 @@
     // ----------------------------------------------
 
     hopper-cfar-offer-banner {
+        .mat-button, 
+        .mat-flat-button, 
+        .mat-icon-button, 
+        .mat-raised-button,
+        .mat-stroked-button { 
+            border-radius: 0px; 
+        }
+
         mat-card {
             background: map-get($primary-palette, 50) !important;
             color: map-get($primary-palette, "50-contrast") !important;
-    
+            border-radius: 0px;
+
             .check-icon {
                 font-weight: bold;
                 color: green;

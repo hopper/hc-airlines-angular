@@ -23,6 +23,8 @@ export interface I18n {
             },
             NO_OFFERS: string;
             LOADING: string;
+            TERMS_WARNING: string;
+            TERMS_LINK_TEXT: string;
         },
         CFAR_EXERCISE_DIALOG: {
             TITLE: string;

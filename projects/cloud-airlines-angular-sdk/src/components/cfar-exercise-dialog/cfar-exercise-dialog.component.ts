@@ -7,6 +7,8 @@ import { TranslateService } from '@ngx-translate/core';
 import { DateAdapter } from "@angular/material/core";
 import { ApiTranslatorUtils } from '../../utils/api-translator.utils';
 import { HopperProxyService } from '../../services/hopper-proxy.service';
+import { MatIconRegistry } from '@angular/material/icon';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'hopper-cfar-exercise-dialog',
@@ -44,6 +46,8 @@ export class CfarExerciseDialogComponent extends AbstractComponent implements On
   private _airlineRefundAllowance?: string;
 
   constructor(
+    private _matIconRegistry: MatIconRegistry,
+    private _domSanitizer: DomSanitizer,
     private _adapter: DateAdapter<any>,
     private _translateService: TranslateService,
     private _dialogRef: MatDialogRef<CfarExerciseDialogComponent>,
@@ -70,6 +74,9 @@ export class CfarExerciseDialogComponent extends AbstractComponent implements On
     this.extAttributes = this.extAttributes;
 
     this._translateService.use(data.currentLang);
+
+    // Create material icon for refundable ticket
+    this._matIconRegistry.addSvgIcon("refundable_ticket", this._domSanitizer.bypassSecurityTrustResourceUrl("assets/refundable-ticket.svg"));
   }
 
   // -----------------------------------------------

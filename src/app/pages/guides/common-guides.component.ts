@@ -48,7 +48,6 @@ export abstract class CommonGuidesComponent implements OnInit, OnDestroy {
   public ancillaryPrice = "30.55";
   public ancillaryType = "travel_insurance";
   public bookingDateTime = new Date();
-  public paymentType = "offline_reconciliation";
   public pnrReference = "123456";
   public contractId = "1ece89da-263c-6689-bec4-f56934b83f44";
   public extAttributes: MapString = {

@@ -19,7 +19,7 @@
             <div class="p-32" ngClass.lt-md="px-16" fxLayout="row wrap" fxLayoutAlign="start center">
         
                 <div fxFlex="100" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px" class="mb-16">
-                    <mat-icon color="primary">cached</mat-icon>
+                    <mat-icon svgIcon="refundable_ticket" color="primary"></mat-icon>
                     <span class="title">{{ 'CFAR_EXERCISE_DIALOG.SUBTITLE' | translate }}</span>
                 </div>
         
@@ -191,11 +191,12 @@
 
 <mat-dialog-actions>
 
-    <div class="p-32" *ngIf="!isLoading" ngClass.lt-md="px-16" fxFlex="100" fxLayout="row wrap" fxLayout.lt-sm="column" fxLayoutAlign="end center">
-        <button mat-button color="primary" ngClass.lt-sm="full-width" (click)="onClose()">
+    <div class="p-32" *ngIf="!isLoading" fxLayoutGap="16px"
+        ngClass.lt-md="px-16" fxFlex="100" fxLayout="row wrap" fxLayout.lt-sm="column" fxLayoutAlign="center center">
+        <button mat-raised-button ngClass.lt-sm="full-width" (click)="onClose()">
             {{ 'CFAR_EXERCISE_DIALOG.BUTTON.CANCEL' | translate }}
         </button>
-        <button mat-flat-button color="primary" ngClass.lt-sm="full-width" (click)="onSubmit()">
+        <button mat-raised-button color="primary" ngClass.lt-sm="full-width" (click)="onSubmit()">
             {{ 'CFAR_EXERCISE_DIALOG.BUTTON.SUBMIT' | translate }}
         </button>
     </div>

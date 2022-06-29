@@ -20,11 +20,13 @@ export const locale: I18n = {
             POWERED_BY: "Powered by Hopper",
             VIEW_DETAILS: "View details",
             BUTTON: {
-                CANCEL: "Decline Coverage",
-                SUBMIT: "Get {{ percentage }} coverage | {{ price }}"
+                CANCEL: "Continue Without Coverage",
+                SUBMIT: "Continue With {{ coverage }} Coverage"
             },
             NO_OFFERS: "No offer available",
-            LOADING: "Loading offers in progress..."
+            LOADING: "Loading offers in progress...",
+            TERMS_WARNING: "If you don't add this, your ticket is non-refundable.",
+            TERMS_LINK_TEXT: "Terms & Conditions"
         },
         CFAR_EXERCISE_DIALOG: {
             TITLE: "Cancel flight",
@@ -45,7 +47,7 @@ export const locale: I18n = {
             REFUND_METHOD: "Refund method",
             BUTTON: {
                 CANCEL: "Cancel",
-                SUBMIT: "Submit"
+                SUBMIT: "Yes, cancel flight"
             },
             NO_CONTRACT: "No contract available",
             LOADING: "Loading in progress..."

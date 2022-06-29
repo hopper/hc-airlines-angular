@@ -20,11 +20,13 @@ export const locale: I18n = {
             POWERED_BY: "由 Hopper 提供支持",
             VIEW_DETAILS: "查看详情",
             BUTTON: {
-                CANCEL: "拒绝覆盖",
-                SUBMIT: "获得 {{ percentage }} 覆盖率 | {{ price }}"
+                CANCEL: "继续无覆盖",
+                SUBMIT: "继续覆盖 {{ coverage }}"
             },
             NO_OFFERS: "没有可用的优惠",
-            LOADING: "正在加载优惠..."
+            LOADING: "正在加载优惠...",
+            TERMS_WARNING: "如果你不添加这个，你的票是不可退款的。",
+            TERMS_LINK_TEXT: "条款和条件"
         },
         CFAR_EXERCISE_DIALOG: {
             TITLE: "取消航班",
@@ -45,7 +47,7 @@ export const locale: I18n = {
             REFUND_METHOD: "退款方式",
             BUTTON: {
                 CANCEL: "取消",
-                SUBMIT: "提交"
+                SUBMIT: "是的，取消航班"
             },
             NO_CONTRACT: "没有可用的合同",
             LOADING: "正在加载..."

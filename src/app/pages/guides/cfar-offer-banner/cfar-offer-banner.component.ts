@@ -22,7 +22,6 @@ export class CfarOfferBannerPageComponent extends CommonGuidesComponent {
       [partnerId]="partnerId"
       [hCSessionId]="hCSessionId"
       [itinerary]="itinerary"
-      [paymentType]="paymentType"
       [bookingDateTime]="bookingDateTime"
       [extAttributes]="extAttributes"
       (emitSubmit)="onEmitSubmit($event)"
@@ -95,14 +94,6 @@ export class CfarOfferBannerPageComponent extends CommonGuidesComponent {
         name: 'bookingDateTime',
         description: `
           string date-time
-        `,
-        required: true
-      },
-      {
-        name: 'paymentType',
-        description: `
-          type: string <br />
-          'offline_reconciliation' or 'spreedly_token'
         `,
         required: true
       },

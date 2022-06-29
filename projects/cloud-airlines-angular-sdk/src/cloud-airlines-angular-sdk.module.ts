@@ -46,7 +46,6 @@ registerLocaleData(localeEn, 'en', localeEnExtra);
 registerLocaleData(localeEs, 'es', localeEsExtra);
 registerLocaleData(localeZh, 'zh', localeZhExtra);
 
-
 @NgModule({
   declarations: [
     // Component

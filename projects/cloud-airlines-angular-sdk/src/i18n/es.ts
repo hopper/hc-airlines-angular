@@ -20,11 +20,13 @@ export const locale: I18n = {
             POWERED_BY: "Impulsado por Hopper",
             VIEW_DETAILS: "Ver detalles",
             BUTTON: {
-                CANCEL: "Rechazar Cobertura",
-                SUBMIT: "Obtenga {{ percentage }} de cobertura | {{ price }}"
+                CANCEL: "Continuar sin cobertura",
+                SUBMIT: "Continuar con {{ coverage }} de cobertura"
             },
             NO_OFFERS: "No hay ofertas disponibles",
-            LOADING: "Cargando ofertas en curso..."
+            LOADING: "Cargando ofertas en curso...",
+            TERMS_WARNING: "Si no agrega esto, su boleto no es reembolsable",
+            TERMS_LINK_TEXT: "Términos y condiciones"
         },
         CFAR_EXERCISE_DIALOG: {
             TITLE: "Cancelar vuelo",
@@ -45,7 +47,7 @@ export const locale: I18n = {
             REFUND_METHOD: "Método de reembolso",
             BUTTON: {
                 CANCEL: "Cancelar",
-                SUBMIT: "Enviar"
+                SUBMIT: "Sí, cancelar vuelo"
             },
             NO_CONTRACT: "No hay contrato disponible",
             LOADING: "Cargando en curso..."

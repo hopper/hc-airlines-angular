@@ -25,6 +25,14 @@
     // ----------------------------------------------
 
     hopper-cfar-exercise-dialog {
+        .mat-button, 
+        .mat-flat-button, 
+        .mat-icon-button, 
+        .mat-raised-button,
+        .mat-stroked-button { 
+            border-radius: 0px; 
+        }
+
         .mat-dialog-title {
             background-color: map-get($accent-palette, 900);
             color: map-get($accent-palette, "900-contrast");
@@ -63,6 +71,8 @@
             }
 
             mat-card {
+                border-radius: 0px;
+                
                 &:hover {
                     @include mat.elevation(4);
                 }

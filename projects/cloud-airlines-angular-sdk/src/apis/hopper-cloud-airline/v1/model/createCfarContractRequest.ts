@@ -19,7 +19,7 @@ import { PaymentMethod } from './paymentMethod';
 export interface CreateCfarContractRequest { 
     offerIds: Array<string>;
     itinerary: CfarItinerary;
-    paymentMethod: PaymentMethod;
+    paymentMethod?: PaymentMethod;
     extAttributes: MapString;
     pnrReference?: string;
 }

@@ -24,7 +24,6 @@ export class CfarOfferDialogComponent extends AbstractComponent implements OnIni
   private _hCSessionId!: string;
   private _itinerary!: CfarItinerary[];
   private _bookingDateTime!: Date;
-  private _paymentType!: string;
 
   // Optional data
   private _pnrReference?: string;
@@ -41,7 +40,6 @@ export class CfarOfferDialogComponent extends AbstractComponent implements OnIni
     // Mandatory data
     this._partnerId = data.partnerId;
     this._hCSessionId = data.hCSessionId;
-    this._paymentType = data.paymentType;
 
     // Optional data
     this._pnrReference = data.pnrReference;
@@ -56,6 +54,7 @@ export class CfarOfferDialogComponent extends AbstractComponent implements OnIni
     this.extAttributes = data.extAttributes;
 
     this._translateService.use(this.currentLang);
+
   }
 
   // -----------------------------------------------
@@ -121,12 +120,6 @@ export class CfarOfferDialogComponent extends AbstractComponent implements OnIni
     this.selectedCfarOffer = cfarOffer;
   }
 
-  onViewDetails(offer: CfarOffer): void {
-    this.onSelectOffer(offer);
-
-    // TODO
-  }
-
   computePercentage(offer: CfarOffer): number {
     if (offer) {
       const coverage = Number.parseFloat(offer.coverage);
@@ -156,9 +149,6 @@ export class CfarOfferDialogComponent extends AbstractComponent implements OnIni
     return {
       offerIds: [this.selectedCfarOffer.id],
       itinerary: this.selectedCfarOffer.itinerary,
-      paymentMethod: {
-        type: this._paymentType
-      },
       extAttributes: this.extAttributes,
       pnrReference: this._pnrReference
     };

@@ -23,7 +23,6 @@ export class CfarOfferBannerComponent extends AbstractComponent implements OnIni
   @Input() hCSessionId!: string;
   @Input() bookingDateTime!: Date;
   @Input() itinerary!: CfarItinerary[];
-  @Input() paymentType!: string;
 
   @Output() emitSubmit = new EventEmitter();
   
@@ -78,7 +77,6 @@ export class CfarOfferBannerComponent extends AbstractComponent implements OnIni
       partnerId: this.partnerId,
       hCSessionId: this.hCSessionId,
       cfarOffers: this.cfarOffers,
-      paymentType: this.paymentType,
       extAttributes: this.extAttributes
     };
     const dialogConfig = DialogUtils.getDialogConfig(dialogData);
