@@ -8,7 +8,7 @@ export interface GlobalState {
 
 const initialState: GlobalState = {
     currentLang: 'en',
-    currentTheme: 'theme-dark-hopper'
+    currentTheme: 'theme-light-hopper'
 };
 
 const reducer = createReducer(
