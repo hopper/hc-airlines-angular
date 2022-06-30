@@ -85,6 +85,12 @@
                     font-weight: bold;
                 }
             }
+
+            .custom-icon {
+                * {
+                    fill: map-get($primary-palette, default);
+                }
+            }
         }
 
         .mat-dialog-actions {
