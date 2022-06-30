@@ -19,6 +19,7 @@ export class CfarOfferBannerPageComponent extends CommonGuidesComponent {
     <hopper-cfar-offer-banner
       [basePath]="basePath"
       [currentLang]="currentLang"
+      [currentTheme]="currentTheme"
       [partnerId]="partnerId"
       [hCSessionId]="hCSessionId"
       [itineraries]="itineraries"
@@ -58,6 +59,13 @@ export class CfarOfferBannerPageComponent extends CommonGuidesComponent {
           The language to apply to the component. <br />
           <b>Supported Languages</b> : ${Locales.map(x => ' ' + x.lang)} <br />
           <b>By default</b> : en
+        `,
+        required: false
+      },
+      {
+        name: 'currentTheme',
+        description: `
+          The active theme managed by Hopper (for the Offer Banner Dialog)
         `,
         required: false
       },
