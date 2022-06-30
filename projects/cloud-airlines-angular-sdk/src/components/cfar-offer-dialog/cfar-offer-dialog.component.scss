@@ -74,6 +74,21 @@
                 color: green;
             }
 
+            .error-message {
+                @if ($is-dark == false) {
+                    background: map-get($warn-palette, 50);
+                }
+
+                border: 1px solid map-get($warn-palette, default);
+                width: 100%;
+                text-align: center;
+                color: map-get($warn-palette, default);
+            }
+
+            a {
+                color: map-get($primary-palette, default);
+            }
+
             mat-card {
                 color: map-get($fg-palette, default);
                 border-radius: 0px;

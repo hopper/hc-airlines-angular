@@ -21,10 +21,10 @@ npm install @hopper/cloud-airlines-angular-sdk@latest
 
     @import "@hopper/cloud-airlines-angular-sdk/src/styles/theme.scss";
 
-    @include custom-components-theme($your-angular-material-theme);
+    @include hopper-cloud-airlines-angular-sdk-components-theme($your-angular-material-theme);
     ```
 
-2. If you use a theme provided by Hopper
+2. If you want to use a theme provided by Hopper
 
     - For dialog components :
 
@@ -48,9 +48,21 @@ npm install @hopper/cloud-airlines-angular-sdk@latest
         <!-- <HOPPER-COMPONENT>...</HOPPER-COMPONENT> -->
     </div>
     ```
-### Configure Assets
 
-In your angular.json file into your Angular project, you need to add following lines in the assets parameter :
+    More simply you can also add the hopper theme class in the class attribute of the Body tag
+
+    ```
+    <body class="HOPPER-THEME-CLASS">
+
+        <!-- Your code / Apps / ... -->
+
+        <!-- <HOPPER-COMPONENT>...</HOPPER-COMPONENT> -->
+    </body>
+    ```
+
+### Configure Assets for the SDK
+
+In your angular.json file into your Angular project, you need to add following lines in the `assets` parameter :
 
 ```
 {

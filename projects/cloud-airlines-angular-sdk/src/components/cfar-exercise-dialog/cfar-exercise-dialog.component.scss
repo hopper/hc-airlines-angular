@@ -91,6 +91,17 @@
                     fill: map-get($primary-palette, default);
                 }
             }
+
+            .error-message {
+                @if ($is-dark == false) {
+                    background: map-get($warn-palette, 50);
+                }
+                
+                border: 1px solid map-get($warn-palette, default);
+                width: 100%;
+                text-align: center;
+                color: map-get($warn-palette, default);
+            }
         }
 
         .mat-dialog-actions {

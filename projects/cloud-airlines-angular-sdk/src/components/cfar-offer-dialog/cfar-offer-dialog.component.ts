@@ -19,7 +19,7 @@ export class CfarOfferDialogComponent extends AbstractComponent implements OnIni
   public selectedCfarOffer!: CfarOffer;
   public isLoading!: boolean;
 
-  // Mandatory data
+  // Mandatory data 
   private _partnerId!: string;
   private _hCSessionId!: string;
   private _itineraries!: CfarItinerary[];
@@ -61,11 +61,11 @@ export class CfarOfferDialogComponent extends AbstractComponent implements OnIni
   // -----------------------------------------------
 
   ngOnInit(): void {
-    if (this.cfarOffers && this.cfarOffers?.length > 0) {
-      this.selectedCfarOffer = this.cfarOffers[0];
-    } else if (this.isFakeBackend) {
+    if (this.isFakeBackend) {
       this.cfarOffers = this._buildFakePostCfarOffersResponse();
-      this.selectedCfarOffer = this.cfarOffers[0];
+      this.selectedCfarOffer = this._getCheapestOffer(this.cfarOffers);
+    } else if (this.cfarOffers && this.cfarOffers?.length > 0) {
+      this.selectedCfarOffer = this._getCheapestOffer(this.cfarOffers);
     } else {
       this.isLoading = true;
   
@@ -83,8 +83,8 @@ export class CfarOfferDialogComponent extends AbstractComponent implements OnIni
             }
             
             this.cfarOffers = results;
-            // The first one by default
-            this.selectedCfarOffer = results[0];
+            // The cheapest by default
+            this.selectedCfarOffer = this._getCheapestOffer(this.cfarOffers);
             this.isLoading = false;
           },
           (error) => this.isLoading = false
@@ -156,108 +156,156 @@ export class CfarOfferDialogComponent extends AbstractComponent implements OnIni
   private _buildFakePostCfarOffersResponse(): CfarOffer[] {
     return [
       {
-        "id": "1ecf0aa8-8892-6ace-8c08-63e55c467dd8",
-        "premium": "180.00",
-        "coverage": "481.32",
-        "currency": "CAD",
-        "requestType": "fare",
-        "toUsdExchangeRate": "0.7658463176194433063117224266606420",
-        "contractExpiryDateTime": new Date("2022-07-09T22:34:30Z"),
-        "createdDateTime": new Date("2022-06-20T15:06:16.744Z"),
-        "itinerary": {
-          "passengerPricing": [
+        id: "1ecf859e-8785-625f-8eda-198d1ce0d6c4",
+        premium: "861.00",
+        coverage: "5736.78",
+        currency: "CAD",
+        requestType: "ancillary",
+        toUsdExchangeRate: "0.7744877537996369201410187302118379",
+        contractExpiryDateTime: new Date("2022-07-08T22:00:00Z"),
+        createdDateTime: new Date("2022-06-30T09:49:17.762Z"),
+        itinerary: {
+          passengerPricing: [
             {
-              "passengerCount": {
-                "count": 3,
-                "type": "adult"
+              passengerCount: {
+                  count: 3,
+                  type: "adult"
               },
-              "individualPrice": "0.0"
+              individualPrice: "null"
             }
           ],
           "currency": "CAD",
-          "slices": [
+          slices: [
             {
-              "segments": [
+              segments: [
                 {
-                  "originAirport": "LGA",
-                  "destinationAirport": "BOS",
-                  "departureDateTime": "2022-07-10T18:34:30",
-                  "arrivalDateTime": "2022-07-10T19:12:30",
-                  "flightNumber": "JB776",
-                  "validatingCarrierCode": "B6",
-                  "fareClass": "basic_economy"
+                  originAirport: "YYZ",
+                  destinationAirport: "YUL",
+                  departureDateTime: "2022-07-09T18:00",
+                  arrivalDateTime: "2022-07-09T19:14",
+                  flightNumber: "AC894",
+                  validatingCarrierCode: "AC",
+                  fareClass: "economy"
+                },
+                {
+                  originAirport: "YUL",
+                  destinationAirport: "NCE",
+                  departureDateTime: "2022-07-09T20:50",
+                  arrivalDateTime: "2022-07-10T10:25",
+                  flightNumber: "AC878",
+                  validatingCarrierCode: "AC",
+                  fareClass: "economy"
+                }
+              ]
+            },
+            {
+              segments: [
+                {
+                  originAirport: "NCE",
+                  destinationAirport: "YUL",
+                  departureDateTime: "2022-07-15T13:15",
+                  arrivalDateTime: "2022-07-15T15:55",
+                  flightNumber: "AC879",
+                  validatingCarrierCode: "AC",
+                  fareClass: "economy"
+                },
+                {
+                  originAirport: "YUL",
+                  destinationAirport: "YYZ",
+                  departureDateTime: "2022-07-15T17:30",
+                  arrivalDateTime: "2022-07-15T18:50",
+                  flightNumber: "AC895",
+                  validatingCarrierCode: "AC",
+                  fareClass: "economy"
                 }
               ]
             }
           ],
-          "ancillaries": [
-            {
-              "totalPrice": "200.55",
-              "type": "travel_insurance"
-            }
-          ],
-          "totalPrice": "601.65"
+          ancillaries: [],
+          totalPrice: "7170.96"
         },
-        "offerDescription": [
+        offerDescription: [
           "Add the flexibility to cancel your flight for any reason up to 3 hours before departure",
           "Cancel and choose between a 80% refund of your flight base fare and taxes or 100% airline travel credit",
           "Get instant resolution, no forms or claims required"
         ],
-        "extAttributes": {
-          "property1": "test1",
-          "property2": "test2"
-        }
+        extAttributes: {}
       },
       {
-        "id": "1ecf0aa8-88ca-6d3f-8c08-27bc3e4e8e42",
-        "premium": "84.00",
-        "coverage": "481.32",
-        "currency": "CAD",
-        "requestType": "fare",
-        "toUsdExchangeRate": "0.7658463176194433063117224266606420",
-        "contractExpiryDateTime": new Date("2022-07-09T22:34:30Z"),
-        "createdDateTime": new Date("2022-06-20T15:06:16.767Z"),
-        "itinerary": {
-          "passengerPricing": [
+        id: "1ecf859e-8785-625f-8eda-198d1ce0d6c5",
+        premium: "1076.00",
+        coverage: "7170.96",
+        currency: "CAD",
+        requestType: "ancillary",
+        toUsdExchangeRate: "0.7744877537996369201410187302118379",
+        contractExpiryDateTime: new Date("2022-07-08T22:00:00Z"),
+        createdDateTime: new Date("2022-06-30T09:49:17.762Z"),
+        itinerary: {
+          passengerPricing: [
             {
-              "passengerCount": {
-                "count": 3,
-                "type": "adult"
+              passengerCount: {
+                  count: 3,
+                  type: "adult"
               },
-              "individualPrice": "0.0"
+              individualPrice: "null"
             }
           ],
-          "currency": "CAD",
-          "slices": [
+          currency: "CAD",
+          slices: [
             {
-              "segments": [
+              segments: [
                 {
-                  "originAirport": "LGA",
-                  "destinationAirport": "BOS",
-                  "departureDateTime": "2022-07-10T18:34:30",
-                  "arrivalDateTime": "2022-07-10T19:12:30",
-                  "flightNumber": "JB777",
-                  "validatingCarrierCode": "B6",
-                  "fareClass": "basic_economy"
+                  originAirport: "YYZ",
+                  destinationAirport: "YUL",
+                  departureDateTime: "2022-07-09T18:00",
+                  arrivalDateTime: "2022-07-09T19:14",
+                  flightNumber: "AC894",
+                  validatingCarrierCode: "AC",
+                  fareClass: "economy"
+                },
+                {
+                  originAirport: "YUL",
+                  destinationAirport: "NCE",
+                  departureDateTime: "2022-07-09T20:50",
+                  arrivalDateTime: "2022-07-10T10:25",
+                  flightNumber: "AC878",
+                  validatingCarrierCode: "AC",
+                  fareClass: "economy"
+                }
+              ]
+            },
+            {
+              segments: [
+                {
+                  originAirport: "NCE",
+                  destinationAirport: "YUL",
+                  departureDateTime: "2022-07-15T13:15",
+                  arrivalDateTime: "2022-07-15T15:55",
+                  flightNumber: "AC879",
+                  validatingCarrierCode: "AC",
+                  fareClass: "economy"
+                },
+                {
+                  originAirport: "YUL",
+                  destinationAirport: "YYZ",
+                  departureDateTime: "2022-07-15T17:30",
+                  arrivalDateTime: "2022-07-15T18:50",
+                  flightNumber: "AC895",
+                  validatingCarrierCode: "AC",
+                  fareClass: "economy"
                 }
               ]
             }
           ],
-          "ancillaries": [
-            {
-              "totalPrice": "200.55",
-              "type": "travel_insurance"
-            }
-          ],
-          "totalPrice": "601.65"
+          ancillaries: [],
+          totalPrice: "7170.96"
         },
-        "offerDescription": [
-          ""
+        offerDescription: [
+          "Add the flexibility to cancel your flight for any reason up to 3 hours before departure",
+          "Cancel and choose between a 100% refund of your flight base fare and taxes or 100% airline travel credit",
+          "Get instant resolution, no forms or claims required"
         ],
-        "extAttributes": {
-          "property1": "test1",
-          "property2": "test2"
-        }
+        extAttributes: {}
       }
     ];
   }

@@ -3,7 +3,7 @@ import { Locales } from "../i18n";
 import { TranslateService } from '@ngx-translate/core';
 import { I18n } from "../i18n/i18n.interface";
 import { DateAdapter } from "@angular/material/core";
-import { MapString } from "../apis/hopper-cloud-airline/v1";
+import { CfarOffer, MapString } from "../apis/hopper-cloud-airline/v1";
 
 @Directive({
     selector: '[HopperAbstractComponent]'
@@ -43,5 +43,15 @@ export abstract class AbstractComponent implements OnChanges {
             // update current language
             this.translateService.use(changes.currentLang.currentValue);
         }
+    }
+
+    // -----------------------------------------------
+    // Protected Methods
+    // -----------------------------------------------
+
+    protected _getCheapestOffer(offers: CfarOffer[]): CfarOffer {
+        return offers.reduce((previous: CfarOffer, current: CfarOffer) => {
+            return +previous?.premium < +current?.premium ? previous : current;
+        });
     }
 }

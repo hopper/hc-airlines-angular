@@ -49,15 +49,15 @@
         </ng-container>
 
         <ng-container *ngIf="!cfarOffers || cfarOffers?.length == 0">
-            <div class="px-32" ngClass.lt-md="px-16" fxLayout="row wrap" fxLayoutAlign="center center">
-                <p>{{ 'CFAR_OFFER_DIALOG.NO_OFFERS' | translate }}</p>
+            <div class="p-32" ngClass.lt-md="p-16" fxLayout="row wrap" fxLayoutAlign="center center">
+                <span class="error-message p-16">{{ 'CFAR_OFFER_DIALOG.NO_OFFERS' | translate }}</span>
             </div>
         </ng-container>
 
     </ng-container>
 
     <ng-container *ngIf="isLoading">
-        <div class="p-32" ngClass.lt-md="px-16" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="16px">
+        <div class="p-32" ngClass.lt-md="p-16" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="16px">
             <mat-spinner></mat-spinner>
             <p>{{ 'CFAR_OFFER_DIALOG.LOADING' | translate }}</p>
         </div>
@@ -72,7 +72,7 @@
         <button mat-raised-button ngClass.lt-sm="full-width" (click)="onClose()">
             {{ 'CFAR_OFFER_DIALOG.BUTTON.CANCEL' | translate }}
         </button>
-        <button mat-raised-button color="primary" ngClass.lt-sm="full-width" (click)="onSubmit()">
+        <button mat-raised-button color="primary" *ngIf="selectedCfarOffer" ngClass.lt-sm="full-width" (click)="onSubmit()">
             {{ 'CFAR_OFFER_DIALOG.BUTTON.SUBMIT' | translate: { 
                 coverage: (computePercentage(selectedCfarOffer) | percent)
             } }}
