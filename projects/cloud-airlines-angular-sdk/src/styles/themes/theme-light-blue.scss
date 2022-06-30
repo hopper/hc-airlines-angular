@@ -1,5 +1,8 @@
 @use '~@angular/material' as mat;
 
+$dark-primary-text: rgba(black, 0.87);
+$light-primary-text: white;
+
 $light-blue-primary-palette: (
   50: #e0eaef,
   100: #b3cbd7,
