@@ -48,3 +48,14 @@ npm install @hopper/cloud-airlines-angular-sdk@latest
         <!-- <HOPPER-COMPONENT>...</HOPPER-COMPONENT> -->
     </div>
     ```
+### Configure Assets
+
+In your angular.json file into your Angular project, you need to add following lines in the assets parameter :
+
+```
+{
+    "glob": "**/*",
+    "input": "./node_modules/@hopper/cloud-airlines-angular-sdk/assets",
+    "output": "/assets/"
+}
+```
