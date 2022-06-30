@@ -35,7 +35,7 @@ export class CfarOfferDialogPageComponent extends CommonGuidesComponent {
         hCSessionId: this.hCSessionId,
         extAttributes: this.extAttributes,
         // Choice 1 - create new offers
-        itinerary: this.itinerary,
+        itineraries: this.itineraries,
         bookingDateTime: this.bookingDateTime,
         // Choice 2 - load existing offers
         // cfarOffers: this.cfarOffers
@@ -112,9 +112,9 @@ export class CfarOfferDialogPageComponent extends CommonGuidesComponent {
         required: true
       },
       {
-        name: 'itinerary',
+        name: 'itineraries',
         description: `
-          You can pass itinerary if you want to create new offers <br />
+          You can pass itineraries if you want to create new offers <br />
           See <a target="_blank" href="https://airlines-api.staging.hopper.com/airline/v1.0/docs/index.html#operation/postCfar_offers">
             API documentation
           </a>
@@ -173,11 +173,11 @@ export class CfarOfferDialogPageComponent extends CommonGuidesComponent {
       currentLang: this.currentLang,
       partnerId: this.partnerId,
       hCSessionId: this.hCSessionId,
-      itinerary: this.itinerary,
+      itineraries: this.itineraries,
       bookingDateTime: this.bookingDateTime,
       extAttributes: this.extAttributes
     };
-    const dialogConfig = DialogUtils.getDialogConfig(dialogData, this.currentTheme);
+    const dialogConfig = DialogUtils.getDialogConfig(dialogData);
     const dialogRef = this._dialog.open(CfarOfferDialogComponent, dialogConfig);
 
     dialogRef.afterClosed()

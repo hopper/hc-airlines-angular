@@ -1,0 +1,79 @@
+@use '~@angular/material' as mat;
+
+$light-blue-primary-palette: (
+  50: #e0eaef,
+  100: #b3cbd7,
+  200: #80a8bc,
+  300: #4d85a1,
+  400: #266a8c,
+  500: #005078,
+  600: #004970,
+  700: #004065,
+  800: #00375b,
+  900: #002748,
+  A100: #7cb7ff,
+  A200: #499aff,
+  A400: #167eff,
+  A700: #0070fc,
+  contrast: (
+    50: $dark-primary-text,
+    100: $dark-primary-text,
+    200: $dark-primary-text,
+    300: $light-primary-text,
+    400: $light-primary-text,
+    500: $light-primary-text,
+    600: $light-primary-text,
+    700: $light-primary-text,
+    800: $light-primary-text,
+    900: $light-primary-text,
+    A100: $dark-primary-text,
+    A200: $dark-primary-text,
+    A400: $light-primary-text,
+    A700: $light-primary-text,
+  )
+);
+
+$light-blue-accent-palette: (
+  50: #e9eaeb,
+  100: #c9cacc,
+  200: #a5a7aa,
+  300: #808488,
+  400: #65696f,
+  500: #4a4f55,
+  600: #43484e,
+  700: #3a3f44,
+  800: #32363b,
+  900: #22262a,
+  A100: #7ab1fb,
+  A200: #4894fa,
+  A400: #1076ff,
+  A700: #0069f6,
+  contrast: (
+    50: $dark-primary-text,
+    100: $dark-primary-text,
+    200: $dark-primary-text,
+    300: $dark-primary-text,
+    400: $light-primary-text,
+    500: $light-primary-text,
+    600: $light-primary-text,
+    700: $light-primary-text,
+    800: $light-primary-text,
+    900: $light-primary-text,
+    A100: $dark-primary-text,
+    A200: $dark-primary-text,
+    A400: $light-primary-text,
+    A700: $light-primary-text,
+  )
+);
+
+$light-blue-primary: mat.define-palette($light-blue-primary-palette, 500, 300, 700);
+$light-blue-accent: mat.define-palette($light-blue-accent-palette, 500, 300, 700);
+$light-blue-warn: mat.define-palette(mat.$red-palette);
+
+$light-blue-theme: mat.define-light-theme((
+  color: (
+    primary: $light-blue-primary,
+    accent: $light-blue-accent,
+    warn: $light-blue-warn,
+  )
+));

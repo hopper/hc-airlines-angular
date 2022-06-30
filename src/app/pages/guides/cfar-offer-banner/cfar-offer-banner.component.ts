@@ -21,7 +21,7 @@ export class CfarOfferBannerPageComponent extends CommonGuidesComponent {
       [currentLang]="currentLang"
       [partnerId]="partnerId"
       [hCSessionId]="hCSessionId"
-      [itinerary]="itinerary"
+      [itineraries]="itineraries"
       [bookingDateTime]="bookingDateTime"
       [extAttributes]="extAttributes"
       (emitSubmit)="onEmitSubmit($event)"
@@ -84,7 +84,7 @@ export class CfarOfferBannerPageComponent extends CommonGuidesComponent {
         required: true
       },
       {
-        name: 'itinerary',
+        name: 'itineraries',
         description: `
           See <a target="_blank" href="https://airlines-api.staging.hopper.com/airline/v1.0/docs/index.html#operation/postCfar_offers">API documentation</a>
         `,

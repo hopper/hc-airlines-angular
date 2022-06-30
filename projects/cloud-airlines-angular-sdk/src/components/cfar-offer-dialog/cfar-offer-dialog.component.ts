@@ -22,7 +22,7 @@ export class CfarOfferDialogComponent extends AbstractComponent implements OnIni
   // Mandatory data
   private _partnerId!: string;
   private _hCSessionId!: string;
-  private _itinerary!: CfarItinerary[];
+  private _itineraries!: CfarItinerary[];
   private _bookingDateTime!: Date;
 
   // Optional data
@@ -43,7 +43,7 @@ export class CfarOfferDialogComponent extends AbstractComponent implements OnIni
 
     // Optional data
     this._pnrReference = data.pnrReference;
-    this._itinerary = data.itinerary;
+    this._itineraries = data.itineraries;
     this._bookingDateTime = data.bookingDateTime;
     this.cfarOffers = data.cfarOffers;
 
@@ -54,7 +54,6 @@ export class CfarOfferDialogComponent extends AbstractComponent implements OnIni
     this.extAttributes = data.extAttributes;
 
     this._translateService.use(this.currentLang);
-
   }
 
   // -----------------------------------------------
@@ -138,7 +137,7 @@ export class CfarOfferDialogComponent extends AbstractComponent implements OnIni
   private _buildCreateCfarOfferRequest(): CreateCfarOfferRequest {
     return {
       partnerId: this._partnerId,
-      itinerary: this._itinerary,
+      itinerary: this._itineraries,
       requestType: RequestType.Ancillary,
       bookingDateTime: this._bookingDateTime,
       extAttributes: this.extAttributes

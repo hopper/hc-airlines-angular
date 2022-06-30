@@ -28,7 +28,7 @@ export class GuidesPageComponent {
     });
 
     this.components.push({ 
-      name: 'CFAR Exercise Dialog',
+      name: 'CFAR Exercise Dialog [WIP]',
       link: 'cfar-exercise-dialog',
       description: 'A dialog that allow user to be refund'
     });

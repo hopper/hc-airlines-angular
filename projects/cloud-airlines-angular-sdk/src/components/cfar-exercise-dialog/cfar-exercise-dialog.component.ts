@@ -30,17 +30,6 @@ export class CfarExerciseDialogComponent extends AbstractComponent implements On
   private _contractId!: string;
   private _itinerary!: CfarItinerary;
   private _currency!: string;
-  // private _originAirport!: string;
-  // private _destinationAirport!: string;
-  // private _departureDateTime!: string;
-  // private _arrivalDateTime!: string;
-  // private _flightNumber!: string;
-  // private _carrierCode!: string;
-  // private _fareClass!: FareClass;
-  // private _totalPrice!: string;
-  // private _passengers!: PassengerPricing[];
-  // private _ancillaryPrice!: string;
-  // private _ancillaryType!: string;
 
   // Optional data
   private _airlineRefundAllowance?: string;

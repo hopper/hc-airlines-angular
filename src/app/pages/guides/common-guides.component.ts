@@ -7,7 +7,7 @@ import { AppState } from "src/app/shared/ngrx";
 import { getCurrentLang, getCurrentTheme } from "src/app/shared/ngrx/global/global.selectors";
 import { Clipboard } from '@angular/cdk/clipboard';
 import { MatSnackBar } from "@angular/material/snack-bar";
-import { MapString } from "projects/cloud-airlines-angular-sdk/src/apis/hopper-cloud-airline/v1";
+import { CfarItinerary, MapString, PassengerPricing } from "projects/cloud-airlines-angular-sdk/src/apis/hopper-cloud-airline/v1";
 
 @Directive({
   selector: '[CommonGuidesComponent]'
@@ -26,18 +26,9 @@ export abstract class CommonGuidesComponent implements OnInit, OnDestroy {
 
   // Parameters
   public partnerId = "23459807-1a9a-4227-a7aa-226e3c5552d1";
-  public hCSessionId = "6c966d68-cd8e-4c04-9783-d81a1887b7c3";
-
-  public originAirport = "LGA";
-  public destinationAirport = "BOS";
-  public departureDateTime = "2022-06-28T18:34:30";
-  public arrivalDateTime = "2022-06-28T19:12:30";
-  public flightNumber = "JB776";
-  public carrierCode = "B6";
-  public fareClass: any = "basic_economy";
+  public hCSessionId = "2e5f9347-084d-4f4f-aa92-2278c933c5f0";
   public currency = "EUR";
-  public totalPrice = "91.65";
-  public passengers: any[] = [
+  public passengers: PassengerPricing[] = [
     {
       passengerCount: {
         count: 3,
@@ -45,8 +36,6 @@ export abstract class CommonGuidesComponent implements OnInit, OnDestroy {
       }
     }
   ];
-  public ancillaryPrice = "30.55";
-  public ancillaryType = "travel_insurance";
   public bookingDateTime = new Date();
   public pnrReference = "123456";
   public contractId = "1ece89da-263c-6689-bec4-f56934b83f44";
@@ -54,33 +43,58 @@ export abstract class CommonGuidesComponent implements OnInit, OnDestroy {
     property1: "value1",
     property2: "value2"
   };
-
-  public itinerary = [{
+  public itineraries: CfarItinerary[] = [{
     currency: this.currency,
     passengerPricing: this.passengers,
     slices: [
       {
         segments: [
           {
-            originAirport: this.originAirport,
-            destinationAirport: this.destinationAirport,
-            departureDateTime: this.departureDateTime,
-            arrivalDateTime: this.arrivalDateTime,
-            flightNumber: this.flightNumber,
-            validatingCarrierCode: this.carrierCode,
-            fareClass: this.fareClass
+            originAirport: "LGA",
+            destinationAirport: "BOS",
+            departureDateTime: "2022-07-25T18:34:30",
+            arrivalDateTime: "2022-07-25T19:12:30",
+            flightNumber: "JB776",
+            validatingCarrierCode: "B6",
+            fareClass: "basic_economy"
           }
         ]
       }
     ],
-    totalPrice: this.totalPrice,
+    totalPrice: "91.65",
     ancillaries: [
       {
-        totalPrice: this.ancillaryPrice,
-        type: this.ancillaryType
+        totalPrice: "30.55",
+        type: "travel_insurance"
       }
     ]
   }];
+  public itinerary: CfarItinerary = {
+    currency: this.currency,
+    passengerPricing: this.passengers,
+    slices: [
+      {
+        segments: [
+          {
+            originAirport: "LGA",
+            destinationAirport: "BOS",
+            departureDateTime: "2022-07-25T18:34:30",
+            arrivalDateTime: "2022-07-25T19:12:30",
+            flightNumber: "JB776",
+            validatingCarrierCode: "B6",
+            fareClass: "basic_economy"
+          }
+        ]
+      }
+    ],
+    totalPrice: "91.65",
+    ancillaries: [
+      {
+        totalPrice: "30.55",
+        type: "travel_insurance"
+      }
+    ]
+  };
 
   constructor(
     protected _store: Store<AppState>,

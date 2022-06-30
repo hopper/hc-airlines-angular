@@ -172,10 +172,10 @@ export class CfarExerciseDialogPageComponent extends CommonGuidesComponent {
       pnrReference: this.pnrReference,
       contractId: this.contractId,
       currency: this.currency,
-      itinerary: this.itinerary[0],
+      itinerary: this.itinerary,
       extAttributes: this.extAttributes
     };
-    const dialogConfig = DialogUtils.getDialogConfig(dialogData, this.currentTheme);
+    const dialogConfig = DialogUtils.getDialogConfig(dialogData);
     const dialogRef = this._dialog.open(CfarExerciseDialogComponent, dialogConfig);
 
     dialogRef.afterClosed()

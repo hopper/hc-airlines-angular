@@ -22,7 +22,7 @@ export class CfarOfferBannerComponent extends AbstractComponent implements OnIni
   @Input() partnerId!: string;
   @Input() hCSessionId!: string;
   @Input() bookingDateTime!: Date;
-  @Input() itinerary!: CfarItinerary[];
+  @Input() itineraries!: CfarItinerary[];
 
   @Output() emitSubmit = new EventEmitter();
   
@@ -103,7 +103,7 @@ export class CfarOfferBannerComponent extends AbstractComponent implements OnIni
   private _buildCreateCfarOfferRequest(): CreateCfarOfferRequest {
     return {
       partnerId: this.partnerId,
-      itinerary: this.itinerary,
+      itinerary: this.itineraries,
       requestType: RequestType.Ancillary,
       bookingDateTime: this.bookingDateTime,
       extAttributes: this.extAttributes
