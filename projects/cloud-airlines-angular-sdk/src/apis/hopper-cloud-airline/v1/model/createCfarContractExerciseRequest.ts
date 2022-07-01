@@ -21,10 +21,6 @@ export interface CreateCfarContractExerciseRequest {
      * A unique identifier for a CFAR contract
      */
     contractId: string;
-    /**
-     * A UTC [RFC3339](https://xml2rfc.tools.ietf.org/public/rfc/html/rfc3339.html#anchor14) datetime; the date and time at which a contract exercise was initiated
-     */
-    exerciseInitiatedDateTime: Date;
     itinerary: CfarItinerary;
     pnrReference: string;
     airlineRefundAllowance?: string;

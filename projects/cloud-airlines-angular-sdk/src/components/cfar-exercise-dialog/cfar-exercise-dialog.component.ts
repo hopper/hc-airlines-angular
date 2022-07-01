@@ -160,7 +160,6 @@ export class CfarExerciseDialogComponent extends AbstractComponent implements On
   private _buildCreateCfarContractExerciseRequest(): CreateCfarContractExerciseRequest {
     return {
       contractId: this._contractId,
-      exerciseInitiatedDateTime: new Date(),
       itinerary: this._itinerary,
       pnrReference: this._pnrReference,
       airlineRefundAllowance: this._airlineRefundAllowance,

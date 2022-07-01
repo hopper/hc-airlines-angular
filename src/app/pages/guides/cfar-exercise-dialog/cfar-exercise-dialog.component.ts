@@ -25,6 +25,19 @@ export class CfarExerciseDialogPageComponent extends CommonGuidesComponent {
   `;
 
   public override tsCode: string = `
+    import { DialogUtils } from "@hopper/cloud-airlines-angular-sdk/src/utils/dialog.utils";
+    import { CfarExerciseDialogComponent } from "@hopper/cloud-airlines-angular-sdk/src/components/cfar-exercise-dialog/cfar-exercise-dialog.component";
+    import { MatDialog } from "@angular/material/dialog";
+    import { take } from "rxjs/operators";
+    
+    // ...
+
+    constructor(
+      private _dialog: MatDialog
+    ) { }
+
+    // ...
+
     onOpenCfarExerciseDialog(): void {
       const dialogData = { 
         currentLang: this.currentLang,
@@ -86,13 +99,6 @@ export class CfarExerciseDialogPageComponent extends CommonGuidesComponent {
         required: false
       },
       {
-        name: 'partnerId',
-        description: `
-          The partner's unique identifier provided by Hopper
-        `,
-        required: false
-      },
-      {
         name: 'hCSessionId',
         description: `
           Example: 9fd3f2f9-e5aa-4128-ace9-3c4ee37b685f <br />
@@ -111,13 +117,6 @@ export class CfarExerciseDialogPageComponent extends CommonGuidesComponent {
         name: 'currency',
         description: `
           Currency of pricing fields
-        `,
-        required: true
-      },
-      {
-        name: 'bookingDateTime',
-        description: `
-          string date-time
         `,
         required: true
       },

@@ -21,13 +21,11 @@ export class CfarOfferBannerComponent extends AbstractComponent implements OnIni
 
   private _cfarOffers!: CfarOffer[];
 
-  @Input() partnerId!: string;
   @Input() hCSessionId!: string;
-  @Input() bookingDateTime!: Date;
   @Input() itineraries!: CfarItinerary[];
   @Input() currentTheme!: string;
 
-  @Output() emitSubmit = new EventEmitter();
+  @Output() offerAccepted = new EventEmitter();
   
   constructor(
     private _adapter: DateAdapter<any>,
@@ -79,7 +77,6 @@ export class CfarOfferBannerComponent extends AbstractComponent implements OnIni
     const dialogData = { 
       currentLang: this.currentLang,
       basePath: this.basePath,
-      partnerId: this.partnerId,
       hCSessionId: this.hCSessionId,
       cfarOffers: this._cfarOffers,
       extAttributes: this.extAttributes
@@ -92,7 +89,7 @@ export class CfarOfferBannerComponent extends AbstractComponent implements OnIni
       .subscribe(
         (result: CfarContract) => {
           if (result) {
-            this.emitSubmit.emit(result);
+            this.offerAccepted.emit(result);
           } else {
             console.log("Close dialog");
           }
@@ -107,10 +104,8 @@ export class CfarOfferBannerComponent extends AbstractComponent implements OnIni
 
   private _buildCreateCfarOfferRequest(): CreateCfarOfferRequest {
     return {
-      partnerId: this.partnerId,
       itinerary: this.itineraries,
       requestType: RequestType.Ancillary,
-      bookingDateTime: this.bookingDateTime,
       extAttributes: this.extAttributes
     };
   }

@@ -23,6 +23,6 @@ export interface CreateCfarOfferRequest {
     partnerId?: string;
     itinerary: Array<CfarItinerary>;
     requestType: RequestType;
-    bookingDateTime: Date;
+    bookingDateTime?: Date;
     extAttributes: MapString;
 }

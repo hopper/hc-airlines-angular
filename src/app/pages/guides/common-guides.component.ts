@@ -25,7 +25,6 @@ export abstract class CommonGuidesComponent implements OnInit, OnDestroy {
   public abstract htmlCode: string;
 
   // Parameters
-  public partnerId = "23459807-1a9a-4227-a7aa-226e3c5552d1";
   public hCSessionId = "2e5f9347-084d-4f4f-aa92-2278c933c5f0";
   public currency = "EUR";
   public passengers: PassengerPricing[] = [
@@ -36,7 +35,6 @@ export abstract class CommonGuidesComponent implements OnInit, OnDestroy {
       }
     }
   ];
-  public bookingDateTime = new Date();
   public pnrReference = "123456";
   public contractId = "1ece89da-263c-6689-bec4-f56934b83f44";
   public extAttributes: MapString = {

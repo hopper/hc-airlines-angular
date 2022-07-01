@@ -11,12 +11,10 @@
                     [isFakeBackend]="isFakeBackend"
                     [basePath]="basePath"
                     [currentLang]="currentLang"
-                    [partnerId]="partnerId"
                     [hCSessionId]="hCSessionId"
                     [itineraries]="itineraries"
-                    [bookingDateTime]="bookingDateTime"
                     [extAttributes]="extAttributes"
-                    (emitSubmit)="onEmitSubmit($event)"
+                    (offerAccepted)="onOfferAccepted($event)"
                 ></hopper-cfar-offer-banner>
             </div>
         </mat-tab>

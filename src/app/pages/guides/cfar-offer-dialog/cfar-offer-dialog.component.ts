@@ -27,18 +27,27 @@ export class CfarOfferDialogPageComponent extends CommonGuidesComponent {
   `;
 
   public override tsCode: string = `
+    import { DialogUtils } from "@hopper/cloud-airlines-angular-sdk/src/utils/dialog.utils";
+    import { CfarContract } from "@hopper/cloud-airlines-angular-sdk/src/apis/hopper-cloud-airline/v1";
+    import { CfarOfferDialogComponent } from "@hopper/cloud-airlines-angular-sdk/src/components/cfar-offer-dialog/cfar-offer-dialog.component";
+    import { MatDialog } from "@angular/material/dialog";
+    import { take } from "rxjs/operators";
+    
+    // ...
+
+    constructor(
+      private _dialog: MatDialog
+    ) { }
+
+    // ...
+
     public onOpenCfarOfferDialog(): void {
       const dialogData = { 
         currentLang: this.currentLang,
         basePath: this.basePath,
-        partnerId: this.partnerId,
         hCSessionId: this.hCSessionId,
         extAttributes: this.extAttributes,
-        // Choice 1 - create new offers
-        itineraries: this.itineraries,
-        bookingDateTime: this.bookingDateTime,
-        // Choice 2 - load existing offers
-        // cfarOffers: this.cfarOffers
+        itineraries: this.itineraries
       };
       const dialogConfig = DialogUtils.getDialogConfig(dialogData, this.currentTheme);
       const dialogRef = this._dialog.open(CfarOfferDialogComponent, dialogConfig);
@@ -97,13 +106,6 @@ export class CfarOfferDialogPageComponent extends CommonGuidesComponent {
         required: false
       },
       {
-        name: 'partnerId',
-        description: `
-          The partner's unique identifier provided by Hopper
-        `,
-        required: false
-      },
-      {
         name: 'hCSessionId',
         description: `
           Example: 9fd3f2f9-e5aa-4128-ace9-3c4ee37b685f <br />
@@ -114,14 +116,14 @@ export class CfarOfferDialogPageComponent extends CommonGuidesComponent {
       {
         name: 'itineraries',
         description: `
-          You can pass itineraries if you want to create new offers <br />
+          You need to pass itineraries in order to create new offers <br />
           See <a target="_blank" href="https://airlines-api.staging.hopper.com/airline/v1.0/docs/index.html#operation/postCfar_offers">
             API documentation
           </a>
         `,
         required: true
       },
-      {
+     /* {
         name: 'cfarOffers',
         description: `
           You can pass offers if you want to load existing offers <br />
@@ -130,14 +132,7 @@ export class CfarOfferDialogPageComponent extends CommonGuidesComponent {
           </a>
         `,
         required: true
-      },
-      {
-        name: 'bookingDateTime',
-        description: `
-          string date-time
-        `,
-        required: true
-      },
+      },*/
       {
         name: 'extAttributes',
         description: `
@@ -171,10 +166,8 @@ export class CfarOfferDialogPageComponent extends CommonGuidesComponent {
       isFakeBackend: this.isFakeBackend,
       basePath: this.basePath,
       currentLang: this.currentLang,
-      partnerId: this.partnerId,
       hCSessionId: this.hCSessionId,
       itineraries: this.itineraries,
-      bookingDateTime: this.bookingDateTime,
       extAttributes: this.extAttributes
     };
     const dialogConfig = DialogUtils.getDialogConfig(dialogData);

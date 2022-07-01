@@ -20,21 +20,19 @@ export class CfarOfferBannerPageComponent extends CommonGuidesComponent {
       [basePath]="basePath"
       [currentLang]="currentLang"
       [currentTheme]="currentTheme"
-      [partnerId]="partnerId"
       [hCSessionId]="hCSessionId"
       [itineraries]="itineraries"
-      [bookingDateTime]="bookingDateTime"
       [extAttributes]="extAttributes"
-      (emitSubmit)="onEmitSubmit($event)"
+      (offerAccepted)="onOfferAccepted($event)"
     ></hopper-cfar-offer-banner>
   `;
 
   public override tsCode: string = `
-    import { CfarContract } from '@hopper/cloud-airlines-angular-sdk/apis/hopper-cloud-airline/v1';
-
+    import { CfarContract } from "@hopper/cloud-airlines-angular-sdk/src/apis/hopper-cloud-airline/v1";
+    
     // ...
 
-    onEmitSubmit(cfarContract: CfarContract): void {
+    onOfferAccepted(cfarContract: CfarContract): void {
       console.log(cfarContract);
     }
   `;
@@ -77,13 +75,6 @@ export class CfarOfferBannerPageComponent extends CommonGuidesComponent {
         required: true
       },
       {
-        name: 'partnerId',
-        description: `
-          The partner's unique identifier provided by Hopper
-        `,
-        required: false
-      },
-      {
         name: 'hCSessionId',
         description: `
           Example: 9fd3f2f9-e5aa-4128-ace9-3c4ee37b685f <br />
@@ -95,13 +86,6 @@ export class CfarOfferBannerPageComponent extends CommonGuidesComponent {
         name: 'itineraries',
         description: `
           See <a target="_blank" href="https://airlines-api.staging.hopper.com/airline/v1.0/docs/index.html#operation/postCfar_offers">API documentation</a>
-        `,
-        required: true
-      },
-      {
-        name: 'bookingDateTime',
-        description: `
-          string date-time
         `,
         required: true
       },
@@ -119,16 +103,16 @@ export class CfarOfferBannerPageComponent extends CommonGuidesComponent {
   public override getOutputs(): OutputModel[] {
     return [
       {
-        name: 'emitSubmit',
+        name: 'offerAccepted',
         description: `
-          Event triggered when the user gets a coverage of a selected offer <br />
+          Event triggered when the user accepts a CFAR offer <br />
           Returns a CfarContract
         `
       }
     ];
   }
 
-  onEmitSubmit(cfarContract: CfarContract): void {
+  onOfferAccepted(cfarContract: CfarContract): void {
     console.log(cfarContract);
   }
 }

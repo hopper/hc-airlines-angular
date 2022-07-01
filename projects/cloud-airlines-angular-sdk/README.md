@@ -4,13 +4,32 @@ This project aims to provide a set of Angular components to subscribe to Hopper 
 
 ## Configuration
 
-### Install the package
+### 1. Install the package
 
 ```
 npm install @hopper/cloud-airlines-angular-sdk@latest
 ```
 
-### Configure Theming
+### 2. Import module
+
+Add this module to your Angular app
+
+```
+import { HopperCloudAirlinesAngularSdkModule } from '@hopper/cloud-airlines-angular-sdk';
+
+// ...
+
+@NgModule({
+  imports: [
+    // ...
+
+    HopperCloudAirlinesAngularSdkModule
+  ]
+})
+export class YourModule { }
+```
+
+### 3. Configure Theming
 
 1. If you have an Angular Material theme configured
 
