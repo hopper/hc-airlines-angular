@@ -2,6 +2,11 @@
 
 This project aims to provide a set of Angular components to subscribe to Hopper services such as "Cancel for any reason".
 
+## Changelog
+
+[Changelog](https://github.com/hopper/hc-airlines-angular/blob/main/projects/cloud-airlines-angular-sdk/CHANGELOG.md)
+
+
 ## Configuration
 
 ### 1. Install the package

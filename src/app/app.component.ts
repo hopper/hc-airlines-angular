@@ -5,7 +5,6 @@ import { takeUntil } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { AppState } from './shared/ngrx';
 import { getCurrentTheme } from './shared/ngrx/global/global.selectors';
-
 import * as globalActions from "./shared/ngrx/global/global.actions";
 
 @Component({
@@ -15,7 +14,6 @@ import * as globalActions from "./shared/ngrx/global/global.actions";
 export class AppComponent implements OnDestroy {
   
   public currentTheme!: string;
-
   private _unsubcriber: Subject<any> = new Subject<any>();
   
   constructor(

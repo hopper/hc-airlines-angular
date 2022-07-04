@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  defaultTheme: "theme-light-hopper"
+  defaultTheme: "theme-light-hopper",
+  version: 'v1.2.0'
 };
 
 /*

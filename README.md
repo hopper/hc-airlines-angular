@@ -2,6 +2,10 @@
 
 This repository contains all the Angular projects of the Hopper Cloud Airlines & Pss team
 
+## Changelog
+
+[Changelog](https://github.com/hopper/hc-airlines-angular/blob/main/CHANGELOG.md)
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.

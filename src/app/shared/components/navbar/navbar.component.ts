@@ -5,6 +5,7 @@ import { select, Store } from "@ngrx/store";
 import { Locales } from "projects/cloud-airlines-angular-sdk/src/i18n";
 import { Subject } from "rxjs";
 import { takeUntil } from "rxjs/operators";
+import { environment } from "src/environments/environment";
 
 import { AppState } from "../../ngrx";
 import * as globalActions from "../../ngrx/global/global.actions";
@@ -19,7 +20,7 @@ export class NavBarComponent implements OnInit, OnDestroy {
 
   public currentLang!: string;
   public currentTheme!: string;
-
+  public version!: string;
   public languages!: string[];
   public themes!: string[];
 
@@ -30,6 +31,9 @@ export class NavBarComponent implements OnInit, OnDestroy {
     private _domSanitizer: DomSanitizer,
     private _store: Store<AppState>,
   ) {
+    // Set the current version
+    this.version = environment.version;
+
     // The languages ​​available depend on the languages ​​supported by the API
     this.languages = Locales.map(x => x.lang);
 
