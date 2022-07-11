@@ -31,6 +31,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatRadioModule } from '@angular/material/radio';
+import { FormsModule } from '@angular/forms';
 
 import { ApiModule } from './apis/hopper-cloud-airline/v1';
 
@@ -71,6 +72,7 @@ registerLocaleData(localeZh, 'zh', localeZhExtra);
     CommonModule,
     HttpClientModule,
     ReactiveFormsModule,
+    FormsModule,
 
     // Flex Layout
     FlexLayoutModule,

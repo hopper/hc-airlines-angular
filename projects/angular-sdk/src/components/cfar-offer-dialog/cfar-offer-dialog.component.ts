@@ -93,11 +93,11 @@ export class CfarOfferDialogComponent extends AbstractComponent implements OnIni
   // Publics Methods
   // -----------------------------------------------
 
-  onClose(): void {
+  public onClose(): void {
     this._dialogRef.close();
   }
 
-  onSubmit(): void {
+  public onSubmit(): void {
     this.isLoading = true;
 
     // Create CFAR Contract
@@ -112,11 +112,11 @@ export class CfarOfferDialogComponent extends AbstractComponent implements OnIni
       );
   }
 
-  onSelectOffer(cfarOffer: CfarOffer): void {
+  public onSelectOffer(cfarOffer: CfarOffer): void {
     this.selectedCfarOffer = cfarOffer;
   }
 
-  computePercentage(offer: CfarOffer): number {
+  public computePercentage(offer: CfarOffer): number {
     if (offer) {
       const coverage = Number.parseFloat(offer.coverage);
       const totalPrice = Number.parseFloat(offer.itinerary.totalPrice);

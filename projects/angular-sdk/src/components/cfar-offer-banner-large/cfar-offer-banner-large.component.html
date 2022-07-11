@@ -18,7 +18,7 @@
     
                     <div fxFlex="80" fxFlex.lt-md="100" fxLayout="column" fxLayoutGap="16px" fxLayoutAlign="center start">
 
-                        <ng-container *ngFor="let desc of cheapestOffer?.offerDescription; let i = index;">
+                        <ng-container *ngFor="let desc of selectedCfarOffer?.offerDescription; let i = index;">
                             <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
                                 <mat-icon class="check-icon">check</mat-icon>
                                 <span>{{ desc }}</span>
@@ -31,19 +31,20 @@
     
                 <div fxFlexOffset="20" fxFlex="80" fxFlexOffset.lt-md="0" fxFlex.lt-md="100" fxLayout="row" class="mb-16" fxLayoutAlign="start center" fxLayoutGap="16px">
     
-                    <mat-radio-group fxFlex="100" fxLayout="row wrap" fxLayoutAlign="start center" color="primary">
+                    <mat-radio-group fxFlex="100" fxLayout="row wrap" fxLayoutAlign="start center" color="primary"
+                        [(ngModel)]="selectedChoice" (ngModelChange)="onChangeChoice()">
                         <div fxFlex="100" fxLayout="row" fxLayout.lt-sm="column" fxLayoutAlign="start center"
                             fxLayoutAlign.lt-md="center start" fxLayoutGap.lt-md="16px">
-                            <mat-radio-button fxFlex="45" fxFlex.lt-md="100" value="1" class="important-text bold">
-                                XX% Flight cost covered
-                            </mat-radio-button>
-    
-                            <mat-radio-button fxFlex="45" fxFlex.lt-md="100" value="2" class="important-text bold">
-                                YY% Flight cost covered
-                            </mat-radio-button>
+
+                            <ng-container *ngFor="let offer of cfarOffers; let i = index;">
+                                <mat-radio-button fxFlex="50" fxFlex.lt-md="100" value="{{ i }}" class="important-text bold">
+                                    {{ computePercentage(offer) | percent }} Flight cost covered
+                                </mat-radio-button>
+                            </ng-container>
+
                         </div>
                        
-                        <mat-radio-button class="default-choice mt-16 p-16" fxFlex="100" value="3" [checked]="true">
+                        <mat-radio-button class="default-choice mt-16 p-16" fxFlex="100" value="-1">
                             I do not want to purchase Cancel For Any Reason.
                         </mat-radio-button>
                     </mat-radio-group>
@@ -55,7 +56,7 @@
     
                     <span>Please choose or decline Cancel For Any Reason.</span>
     
-                    <button mat-raised-button color="primary" ngClass.lt-sm="full-width">
+                    <button mat-raised-button color="primary" (click)="onSubmit()" ngClass.lt-sm="full-width">
                         Continue
                     </button>
                 </div>
@@ -63,7 +64,7 @@
 
         </mat-card>
 
-        <ng-container *ngIf="!cheapestOffer">
+        <ng-container *ngIf="!cfarOffers">
             <p>{{ 'CFAR_OFFER_BANNER.NO_OFFERS' | translate }}</p>
         </ng-container>
 
