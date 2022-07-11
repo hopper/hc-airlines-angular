@@ -28,9 +28,9 @@ jobs:
           registry-url: https://registry.npmjs.org/
       - run: npm install
       - run: npm install -g @angular/cli@12.2.17
-      - run: ng build "cloud-airlines-angular-sdk"
+      - run: ng build "angular-sdk"
       - run: |
-          cd dist/cloud-airlines-angular-sdk
+          cd dist/angular-sdk
           npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{secrets.npm_token}}

@@ -7,7 +7,7 @@ import { AppState } from "src/app/shared/ngrx";
 import { getCurrentLang, getCurrentTheme } from "src/app/shared/ngrx/global/global.selectors";
 import { Clipboard } from '@angular/cdk/clipboard';
 import { MatSnackBar } from "@angular/material/snack-bar";
-import { CfarItinerary, MapString, PassengerPricing } from "projects/cloud-airlines-angular-sdk/src/apis/hopper-cloud-airline/v1";
+import { CfarItinerary, MapString, PassengerPricing } from "projects/angular-sdk/src/apis/hopper-cloud-airline/v1";
 
 @Directive({
   selector: '[CommonGuidesComponent]'

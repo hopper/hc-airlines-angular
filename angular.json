@@ -31,7 +31,7 @@
               "src/assets",
               {
                 "glob": "**/*",
-                "input": "./projects/cloud-airlines-angular-sdk/assets",
+                "input": "./projects/angular-sdk/assets",
                 "output": "/assets/"
               }
             ],
@@ -93,23 +93,23 @@
         }
       }
     },
-    "cloud-airlines-angular-sdk": {
+    "angular-sdk": {
       "projectType": "library",
-      "root": "projects/cloud-airlines-angular-sdk",
-      "sourceRoot": "projects/cloud-airlines-angular-sdk/src",
+      "root": "projects/angular-sdk",
+      "sourceRoot": "projects/angular-sdk/src",
       "prefix": "lib",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
-            "project": "projects/cloud-airlines-angular-sdk/ng-package.json"
+            "project": "projects/angular-sdk/ng-package.json"
           },
           "configurations": {
             "production": {
-              "tsConfig": "projects/cloud-airlines-angular-sdk/tsconfig.lib.prod.json"
+              "tsConfig": "projects/angular-sdk/tsconfig.lib.prod.json"
             },
             "development": {
-              "tsConfig": "projects/cloud-airlines-angular-sdk/tsconfig.lib.json"
+              "tsConfig": "projects/angular-sdk/tsconfig.lib.json"
             }
           },
           "defaultConfiguration": "production"

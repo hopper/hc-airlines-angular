@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from "@angular/core";
 import { MatIconRegistry } from "@angular/material/icon";
 import { DomSanitizer } from "@angular/platform-browser";
 import { select, Store } from "@ngrx/store";
-import { Locales } from "projects/cloud-airlines-angular-sdk/src/i18n";
+import { Locales } from "projects/angular-sdk/src/i18n";
 import { Subject } from "rxjs";
 import { takeUntil } from "rxjs/operators";
 import { environment } from "src/environments/environment";

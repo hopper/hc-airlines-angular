@@ -2,9 +2,9 @@ import { Component } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { Store } from "@ngrx/store";
-import { CfarExerciseDialogComponent } from "projects/cloud-airlines-angular-sdk/src/components/cfar-exercise-dialog/cfar-exercise-dialog.component";
-import { Locales } from "projects/cloud-airlines-angular-sdk/src/i18n";
-import { DialogUtils } from "projects/cloud-airlines-angular-sdk/src/utils/dialog.utils";
+import { CfarExerciseDialogComponent } from "projects/angular-sdk/src/components/cfar-exercise-dialog/cfar-exercise-dialog.component";
+import { Locales } from "projects/angular-sdk/src/i18n";
+import { DialogUtils } from "projects/angular-sdk/src/utils/dialog.utils";
 import { take } from "rxjs/operators";
 import { InputModel, OutputModel } from "src/app/shared/models";
 import { AppState } from "src/app/shared/ngrx";
@@ -25,8 +25,8 @@ export class CfarExerciseDialogPageComponent extends CommonGuidesComponent {
   `;
 
   public override tsCode: string = `
-    import { DialogUtils } from "@hopper/cloud-airlines-angular-sdk/src/utils/dialog.utils";
-    import { CfarExerciseDialogComponent } from "@hopper/cloud-airlines-angular-sdk/src/components/cfar-exercise-dialog/cfar-exercise-dialog.component";
+    import { DialogUtils } from "@hopper-cloud-airlines/angular-sdk/src/utils/dialog.utils";
+    import { CfarExerciseDialogComponent } from "@hopper-cloud-airlines/angular-sdk/src/components/cfar-exercise-dialog/cfar-exercise-dialog.component";
     import { MatDialog } from "@angular/material/dialog";
     import { take } from "rxjs/operators";
     

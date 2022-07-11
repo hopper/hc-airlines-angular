@@ -1,8 +1,8 @@
 import { Component } from "@angular/core";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { Store } from "@ngrx/store";
-import { CfarContract } from "projects/cloud-airlines-angular-sdk/src/apis/hopper-cloud-airline/v1";
-import { Locales } from "projects/cloud-airlines-angular-sdk/src/i18n";
+import { CfarContract } from "projects/angular-sdk/src/apis/hopper-cloud-airline/v1";
+import { Locales } from "projects/angular-sdk/src/i18n";
 import { InputModel, OutputModel } from "src/app/shared/models";
 import { AppState } from "src/app/shared/ngrx";
 import { CommonGuidesComponent } from "../common-guides.component";
@@ -28,7 +28,7 @@ export class CfarOfferBannerPageComponent extends CommonGuidesComponent {
   `;
 
   public override tsCode: string = `
-    import { CfarContract } from "@hopper/cloud-airlines-angular-sdk/src/apis/hopper-cloud-airline/v1";
+    import { CfarContract } from "@hopper-cloud-airlines/angular-sdk/src/apis/hopper-cloud-airline/v1";
     
     // ...
 

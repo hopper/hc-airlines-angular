@@ -1,6 +1,9 @@
-<a name="1.3.0"></a>
+<a name="2.0.0"></a>
 
-# 1.3.0 (2022-XX-XX)
+# 2.0.0 (2022-XX-XX)
+
+### Breaking changes
+- New url of the package: https://www.npmjs.com/package/@hopper-cloud-airlines/angular-sdk
 
 ### Minor changes
 - New component: CFAR Exercise Dialog 

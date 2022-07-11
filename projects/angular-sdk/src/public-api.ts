@@ -21,4 +21,4 @@ export * from './utils/dialog.utils';
 export * from './utils/api-translator.utils';
 
 // MODULES
-export * from './cloud-airlines-angular-sdk.module';
+export * from './angular-sdk.module';

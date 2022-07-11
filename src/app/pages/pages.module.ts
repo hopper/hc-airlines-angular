@@ -3,7 +3,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 
 // Custom LIB (from local access)
-import { HopperCloudAirlinesAngularSdkModule } from 'projects/cloud-airlines-angular-sdk/src/cloud-airlines-angular-sdk.module';
+import { HopperCloudAirlinesAngularSdkModule } from 'projects/angular-sdk/src/angular-sdk.module';
 
 import { MatIconModule } from '@angular/material/icon';
 import { FlexLayoutModule } from '@angular/flex-layout';

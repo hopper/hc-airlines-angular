@@ -1,10 +1,10 @@
-# cloud-airlines-angular-sdk
+# angular-sdk
 
 This project aims to provide a set of Angular components to subscribe to Hopper services such as "Cancel for any reason".
 
 ## Changelog
 
-[Changelog](https://github.com/hopper/hc-airlines-angular/blob/main/projects/cloud-airlines-angular-sdk/CHANGELOG.md)
+[Changelog](https://github.com/hopper/hc-airlines-angular/blob/main/projects/angular-sdk/CHANGELOG.md)
 
 
 ## Configuration
@@ -12,7 +12,7 @@ This project aims to provide a set of Angular components to subscribe to Hopper 
 ### 1. Install the package
 
 ```
-npm install @hopper/cloud-airlines-angular-sdk@latest
+npm install @hopper-cloud-airlines/angular-sdk@latest
 ```
 
 ### 2. Import module
@@ -20,7 +20,7 @@ npm install @hopper/cloud-airlines-angular-sdk@latest
 Add this module to your Angular app
 
 ```
-import { HopperCloudAirlinesAngularSdkModule } from '@hopper/cloud-airlines-angular-sdk';
+import { HopperCloudAirlinesAngularSdkModule } from '@hopper-cloud-airlines/angular-sdk';
 
 // ...
 
@@ -43,7 +43,7 @@ export class YourModule { }
     ```
     // Apply the theme to Hopper components 
 
-    @import "@hopper/cloud-airlines-angular-sdk/src/styles/theme.scss";
+    @import "@hopper-cloud-airlines/angular-sdk/src/styles/theme.scss";
 
     @include hopper-cloud-airlines-angular-sdk-components-theme($your-angular-material-theme);
     ```
@@ -55,7 +55,7 @@ export class YourModule { }
     Pass the theme name as a parameter in the dialog configuration
 
     ```
-    import { DialogUtils } from '@hopper/cloud-airlines-angular-sdk';
+    import { DialogUtils } from '@hopper-cloud-airlines/angular-sdk';
 
     // ...
 
@@ -91,7 +91,7 @@ In your angular.json file into your Angular project, you need to add following l
 ```
 {
     "glob": "**/*",
-    "input": "./node_modules/@hopper/cloud-airlines-angular-sdk/assets",
+    "input": "./node_modules/@hopper-cloud-airlines/angular-sdk/assets",
     "output": "/assets/"
 }
 ```

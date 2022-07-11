@@ -21,8 +21,8 @@ $light-primary-text: white;
 // COMPONENT THEMING
 // ------------------------------------------
 
-// cloud-airlines-angular-sdk Lib
-@import "../projects/cloud-airlines-angular-sdk/src/styles/theme.scss";
+// angular-sdk Lib
+@import "../projects/angular-sdk/src/styles/theme.scss";
 
 // Components
 @import "./app/pages/guides/guides.component.scss";

@@ -2,10 +2,10 @@ import { Component } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { Store } from "@ngrx/store";
-import { CfarContract } from "projects/cloud-airlines-angular-sdk/src/apis/hopper-cloud-airline/v1";
-import { CfarOfferDialogComponent } from "projects/cloud-airlines-angular-sdk/src/components/cfar-offer-dialog/cfar-offer-dialog.component";
-import { Locales } from "projects/cloud-airlines-angular-sdk/src/i18n";
-import { DialogUtils } from "projects/cloud-airlines-angular-sdk/src/utils/dialog.utils";
+import { CfarContract } from "projects/angular-sdk/src/apis/hopper-cloud-airline/v1";
+import { CfarOfferDialogComponent } from "projects/angular-sdk/src/components/cfar-offer-dialog/cfar-offer-dialog.component";
+import { Locales } from "projects/angular-sdk/src/i18n";
+import { DialogUtils } from "projects/angular-sdk/src/utils/dialog.utils";
 import { take } from "rxjs/operators";
 import { InputModel, OutputModel } from "src/app/shared/models";
 import { AppState } from "src/app/shared/ngrx";
@@ -27,9 +27,9 @@ export class CfarOfferDialogPageComponent extends CommonGuidesComponent {
   `;
 
   public override tsCode: string = `
-    import { DialogUtils } from "@hopper/cloud-airlines-angular-sdk/src/utils/dialog.utils";
-    import { CfarContract } from "@hopper/cloud-airlines-angular-sdk/src/apis/hopper-cloud-airline/v1";
-    import { CfarOfferDialogComponent } from "@hopper/cloud-airlines-angular-sdk/src/components/cfar-offer-dialog/cfar-offer-dialog.component";
+    import { DialogUtils } from "@hopper-cloud-airlines/angular-sdk/src/utils/dialog.utils";
+    import { CfarContract } from "@hopper-cloud-airlines/angular-sdk/src/apis/hopper-cloud-airline/v1";
+    import { CfarOfferDialogComponent } from "@hopper-cloud-airlines/angular-sdk/src/components/cfar-offer-dialog/cfar-offer-dialog.component";
     import { MatDialog } from "@angular/material/dialog";
     import { take } from "rxjs/operators";
     
