@@ -6,6 +6,9 @@
 - New component: CFAR Exercise Dialog 
 - New component: CFAR Offer Banner Large
 
+### Bug Fixes
+- Fix accessibility issue with the npm registry
+
 <a name="1.2.0"></a>
 
 # 1.2.0 (2022-07-04)
