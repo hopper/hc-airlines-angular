@@ -14,6 +14,7 @@ import { EventButtonComponent } from './components/event-button/event-button.com
 import { MomentDateAdapter, MAT_MOMENT_DATE_FORMATS } from '@angular/material-moment-adapter';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 
+import { HopperProxyService } from './services/hopper-proxy.service';
 import { HopperEventsDirective } from './directives/hopper-events.directive';
 
 import { MatDialogModule } from '@angular/material/dialog';
@@ -23,7 +24,13 @@ import { MatCardModule } from '@angular/material/card';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatSelectModule } from '@angular/material/select';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatStepperModule } from '@angular/material/stepper';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatRadioModule } from '@angular/material/radio';
 
 import { ApiModule } from './apis/hopper-cloud-airline/v1';
 
@@ -38,7 +45,8 @@ import localeZhExtra from '@angular/common/locales/extra/zh';
 
 import localeEs from '@angular/common/locales/es';
 import localeEsExtra from '@angular/common/locales/extra/es';
-import { HopperProxyService } from './services/hopper-proxy.service';
+import { CfarOfferBannerLargeComponent } from './components/cfar-offer-banner-large/cfar-offer-banner-large.component';
+
 
 // Supported Languages for Datepicker
 registerLocaleData(localeFr, 'fr', localeFrExtra);
@@ -51,6 +59,7 @@ registerLocaleData(localeZh, 'zh', localeZhExtra);
     // Component
     EventButtonComponent,
     CfarOfferBannerComponent,
+    CfarOfferBannerLargeComponent,
     CfarOfferDialogComponent,
     CfarExerciseDialogComponent,
 
@@ -61,6 +70,7 @@ registerLocaleData(localeZh, 'zh', localeZhExtra);
     // Angular Module
     CommonModule,
     HttpClientModule,
+    ReactiveFormsModule,
 
     // Flex Layout
     FlexLayoutModule,
@@ -74,6 +84,11 @@ registerLocaleData(localeZh, 'zh', localeZhExtra);
     MatDividerModule,
     MatSelectModule,
     MatProgressSpinnerModule,
+    MatStepperModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatDatepickerModule,
+    MatRadioModule,
 
     // APIs
     ApiModule,
@@ -85,6 +100,7 @@ registerLocaleData(localeZh, 'zh', localeZhExtra);
     // Component
     EventButtonComponent,
     CfarOfferBannerComponent,
+    CfarOfferBannerLargeComponent,
     CfarOfferDialogComponent,
     CfarExerciseDialogComponent,
 

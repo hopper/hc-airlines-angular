@@ -1,4 +1,5 @@
 import { Component } from "@angular/core";
+import { environment } from "src/environments/environment";
 
 @Component({
   selector: "app-guides-page",
@@ -27,11 +28,20 @@ export class GuidesPageComponent {
       description: 'A dialog to choose different coverage options'
     });
 
-    this.components.push({ 
-      name: 'CFAR Exercise Dialog [WIP]',
-      link: 'cfar-exercise-dialog',
-      description: 'A dialog that allow user to be refund'
-    });
+    // Working items
+    if (!environment.production) {
+      this.components.push({ 
+        name: 'CFAR Offer Banner Large [WIP]',
+        link: 'cfar-offer-banner-large',
+        description: 'A large banner to display offer to the user'
+      });
+
+      this.components.push({ 
+        name: 'CFAR Exercise Dialog [WIP]',
+        link: 'cfar-exercise-dialog',
+        description: 'A dialog that allow user to be refund'
+      });
+    }
   }
 
   // -------------------------------

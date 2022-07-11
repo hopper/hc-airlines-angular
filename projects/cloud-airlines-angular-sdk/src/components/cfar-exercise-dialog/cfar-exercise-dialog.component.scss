@@ -45,6 +45,11 @@
         }
 
         .mat-dialog-content {
+            @include media-breakpoint('lt-sm') {
+                // Full-height - mat-dialog-title height
+                max-height: calc(100% - 110px);
+            }
+
             @if($is-dark) {
                 background-color: rgb(52,52,52);
             } @else {
@@ -102,18 +107,22 @@
                 text-align: center;
                 color: map-get($warn-palette, default);
             }
-        }
 
-        .mat-dialog-actions {
-            @if($is-dark) {
-                background-color: rgb(52,52,52);
-            } @else {
-                background-color: rgb(255,255,255);
+            fieldset {
+                border: 2px solid map-get($primary-palette, default);
+                border-radius: 8px;
+
+                legend {
+                    border: 2px solid map-get($primary-palette, default);
+                    border-radius: 8px;
+                }
             }
 
-            .mat-button-base+.mat-button-base,
-            .mat-mdc-button-base+.mat-mdc-button-base {
-                margin: 0px;
+            .confirmation-icon {
+                background: map-get($primary-palette, default);
+                border-radius: 50%;
+                padding: 8px;
+                color: white;
             }
         }
     }      

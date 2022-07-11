@@ -27,6 +27,7 @@ $light-primary-text: white;
 // Components
 @import "./app/pages/guides/guides.component.scss";
 @import "./app/pages/guides/cfar-offer-banner/cfar-offer-banner.component.scss";
+@import "./app/pages/guides/cfar-offer-banner-large/cfar-offer-banner-large.component.scss";
 @import "./app/pages/guides/cfar-offer-dialog/cfar-offer-dialog.component.scss";
 @import "./app/pages/guides/cfar-exercise-dialog/cfar-exercise-dialog.component.scss";
 
@@ -41,6 +42,7 @@ $light-primary-text: white;
 @mixin documentation-components-theme($theme) {
   @include guides-page-component-theme($theme);
   @include cfar-offer-banner-page-component-theme($theme);
+  @include cfar-offer-banner-large-page-component-theme($theme);
   @include cfar-offer-dialog-page-component-theme($theme);
   @include cfar-exercise-dialog-page-component-theme($theme);
 

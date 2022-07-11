@@ -1,3 +1,11 @@
+<a name="1.3.0"></a>
+
+# 1.3.0 (2022-XX-XX)
+
+### Minor changes
+- New component: CFAR Exercise Dialog 
+- New component: CFAR Offer Banner Large
+
 <a name="1.2.0"></a>
 
 # 1.2.0 (2022-07-04)

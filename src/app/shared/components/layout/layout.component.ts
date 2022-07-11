@@ -3,6 +3,7 @@ import { Data } from "@angular/router";
 import { select, Store } from "@ngrx/store";
 import { Subject } from "rxjs";
 import { takeUntil } from "rxjs/operators";
+import { environment } from "src/environments/environment";
 import { AppState } from "../../ngrx";
 import { selectRouteData } from "../../ngrx/router/router.actions";
 
@@ -23,7 +24,12 @@ export class LayoutComponent implements OnInit, OnDestroy {
   ) {
     this.components.push({ name: 'CFAR Offer Banner', link: 'cfar-offer-banner' });
     this.components.push({ name: 'CFAR Offer Dialog', link: 'cfar-offer-dialog' });
-    this.components.push({ name: 'CFAR Exercise Dialog [WIP]', link: 'cfar-exercise-dialog' });
+    
+    // Working items
+    if (!environment.production) {
+      this.components.push({ name: 'CFAR Offer Banner Large [WIP]', link: 'cfar-offer-banner-large' });
+      this.components.push({ name: 'CFAR Exercise Dialog [WIP]', link: 'cfar-exercise-dialog' });
+    }
   }
 
   // -------------------------------

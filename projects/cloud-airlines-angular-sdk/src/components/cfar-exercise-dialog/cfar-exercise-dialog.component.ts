@@ -1,7 +1,7 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, Inject, OnInit, SimpleChange, ViewChild } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { take } from 'rxjs/operators';
-import { CfarContract, CfarOffer, CfarContractExercise, CreateCfarContractExerciseRequest, PassengerPricing, FareClass, CfarItinerary } from '../../apis/hopper-cloud-airline/v1';
+import { CfarContract, CfarOffer, CfarContractExercise, CreateCfarContractExerciseRequest, CfarItinerary } from '../../apis/hopper-cloud-airline/v1';
 import { AbstractComponent } from '../abstract.component';
 import { TranslateService } from '@ngx-translate/core';
 import { DateAdapter } from "@angular/material/core";
@@ -9,6 +9,9 @@ import { ApiTranslatorUtils } from '../../utils/api-translator.utils';
 import { HopperProxyService } from '../../services/hopper-proxy.service';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { StepperSelectionEvent } from '@angular/cdk/stepper';
+import { CountryCode } from '../../enums/country-code.enum';
 
 @Component({
   selector: 'hopper-cfar-exercise-dialog',
@@ -34,14 +37,21 @@ export class CfarExerciseDialogComponent extends AbstractComponent implements On
   // Optional data
   private _airlineRefundAllowance?: string;
 
+  // Forms
+  public step2Form!: FormGroup;
+
+  @ViewChild('dialogContentAnchor') public anchor!: ElementRef;
+
   constructor(
+    private _changeDetector: ChangeDetectorRef,
     private _matIconRegistry: MatIconRegistry,
     private _domSanitizer: DomSanitizer,
     private _adapter: DateAdapter<any>,
     private _translateService: TranslateService,
     private _dialogRef: MatDialogRef<CfarExerciseDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private _hopperProxyService: HopperProxyService
+    private _hopperProxyService: HopperProxyService,
+    private _formBuilder: FormBuilder
   ) {
     super(_adapter, _translateService);
 
@@ -62,8 +72,6 @@ export class CfarExerciseDialogComponent extends AbstractComponent implements On
     this.basePath = data.basePath;
     this.extAttributes = this.extAttributes;
 
-    this._translateService.use(data.currentLang);
-
     // Create material icon for refundable ticket
     this._matIconRegistry.addSvgIcon("refundable_ticket", this._domSanitizer.bypassSecurityTrustResourceUrl("assets/refundable-ticket.svg"));
   }
@@ -73,6 +81,12 @@ export class CfarExerciseDialogComponent extends AbstractComponent implements On
   // -----------------------------------------------
 
   ngOnInit(): void {
+    // Update languages/labels manually (dialog limitation)
+    this._updateLanguage(this.currentLang);
+
+    // Update countries labels manually (dialog limitation)
+    this._setCountriesLabels();
+
     if (this.isFakeBackend) {
       this.cfarContract = this._buildFakeCfarContractExercisesResponse();
     } else {
@@ -108,6 +122,8 @@ export class CfarExerciseDialogComponent extends AbstractComponent implements On
       { value: 'ftc', label: 'FTC' },
       { value: 'cash', label: 'CASH' }
     ];
+    
+    this._initForms();
   }
 
   // -----------------------------------------------
@@ -118,16 +134,13 @@ export class CfarExerciseDialogComponent extends AbstractComponent implements On
     this._dialogRef.close();
   }
 
-  onSubmit(): void {
-    // TODO
-  }
-
   onSelectRefundType(type: string): void {
     this.isHopperRefund = type == 'hopper';
   }
 
-  onSelectRefundMethod(method: { value: 'ftc' | 'cash', label: string }): void {
-    this.selectedRefundMethod = method.value;
+  onScrollToTop(event: StepperSelectionEvent): void {
+    // Scroll to top of the stepper when step changes (timer due to rendering delay)
+    setTimeout(() => this.anchor.nativeElement.scrollTo(0,0), 0);
   }
 
   getNbPassengers(itinerary: CfarItinerary): number {
@@ -151,6 +164,13 @@ export class CfarExerciseDialogComponent extends AbstractComponent implements On
     });
 
     return mapPassengers;
+  }
+
+  /**
+   * @description Trick to preserve the order of a map (with the keyvalue pipe)
+   */
+  asIsOrder(a: any, b: any): number {
+    return 1;
   }
 
   // -----------------------------------------------
@@ -310,6 +330,16 @@ export class CfarExerciseDialogComponent extends AbstractComponent implements On
         ancillaries: [],
         totalPrice: "7170.96"
       },
+      contractExercise: {
+        id: '123456',
+        contractId: '123456789',
+        exerciseInitiatedDateTime: new Date(),
+        hopperRefund: '5736.78',
+        hopperRefundMethod: 'cash',
+        extAttributes: {},
+        airlineRefundAllowance: '4736.78',
+        airlineRefundMethod: 'cash'
+      },
       coverage: "5736.78",
       premium: "1434.00",
       currency: "CAD",
@@ -318,5 +348,20 @@ export class CfarExerciseDialogComponent extends AbstractComponent implements On
       status: "created",
       extAttributes: {}
     };
+  }
+
+  private _initForms(): void {
+    this.step2Form = this._formBuilder.group({
+      firstName: new FormControl(null, [Validators.required]),
+      middleName: new FormControl(null),
+      lastName: new FormControl(null, [Validators.required]),
+      dateOfBirth: new FormControl({ value: new Date(), disabled: true }, [Validators.required]),
+      addressLine1: new FormControl(null, [Validators.required]),
+      addressLine2: new FormControl(null),
+      city: new FormControl(null, [Validators.required]),
+      country: new FormControl(null, [Validators.required]),
+      state: new FormControl(null, [Validators.required]),
+      zip: new FormControl(null, [Validators.required])
+    });
   }
 }

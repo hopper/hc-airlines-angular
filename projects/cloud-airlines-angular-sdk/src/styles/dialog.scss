@@ -9,7 +9,8 @@
         }
 
         @include media-breakpoint('lt-sm') {
-            max-width: 90% !important;
+            max-width: 100% !important;
+            height: 100%;
         }
     
         .mat-dialog-container {

@@ -21,6 +21,7 @@ import { GuidesPageComponent } from './guides/guides.component';
 import { SharedModule } from '../shared/shared.module';
 import { MatCardModule } from '@angular/material/card';
 import { CommonModule } from '@angular/common';
+import { CfarOfferBannerLargePageComponent } from './guides/cfar-offer-banner-large/cfar-offer-banner-large.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { CommonModule } from '@angular/common';
     GuidesPageComponent,
     CfarOfferDialogPageComponent,
     CfarOfferBannerPageComponent,
+    CfarOfferBannerLargePageComponent,
     CfarExerciseDialogPageComponent
   ],
   imports: [

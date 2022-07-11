@@ -1,53 +1,40 @@
-import { Component, Inject, OnChanges, OnInit } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { take } from 'rxjs/operators';
-import { CfarContract, CfarItinerary, CfarOffer, CreateCfarContractRequest, CreateCfarOfferRequest, RequestType } from '../../apis/hopper-cloud-airline/v1';
+import { CfarContract, CfarItinerary, CfarOffer, CreateCfarOfferRequest, RequestType } from '../../apis/hopper-cloud-airline/v1';
+import { AbstractComponent } from '../abstract.component';
 import { TranslateService } from '@ngx-translate/core';
 import { DateAdapter } from "@angular/material/core";
-import { AbstractComponent } from '../abstract.component';
 import { ApiTranslatorUtils } from '../../utils/api-translator.utils';
 import { HopperProxyService } from '../../services/hopper-proxy.service';
+import { CfarOfferDialogComponent, DialogUtils } from '../../public-api';
+import { MatDialog } from '@angular/material/dialog';
+import { MatRadioButton, MatRadioGroup } from '@angular/material/radio';
 
 @Component({
-  selector: 'hopper-cfar-offer-dialog',
-  templateUrl: './cfar-offer-dialog.component.html',
-  styleUrls: ['./cfar-offer-dialog.component.scss']
+  selector: 'hopper-cfar-offer-banner-large',
+  templateUrl: './cfar-offer-banner-large.component.html',
+  styleUrls: ['./cfar-offer-banner-large.component.scss']
 })
-export class CfarOfferDialogComponent extends AbstractComponent implements OnInit, OnChanges {
+export class CfarOfferBannerLargeComponent extends AbstractComponent implements OnInit {
 
-  public cfarOffers!: CfarOffer[];
-  public selectedCfarOffer!: CfarOffer;
+  public cheapestOffer!: CfarOffer;
   public isLoading!: boolean;
 
-  // Mandatory data 
-  private _hCSessionId!: string;
-  private _itineraries!: CfarItinerary[];
+  private _cfarOffers!: CfarOffer[];
 
-  // Optional data
-  private _pnrReference?: string;
+  @Input() hCSessionId!: string;
+  @Input() itineraries!: CfarItinerary[];
+  @Input() currentTheme!: string;
+
+  @Output() offerAccepted = new EventEmitter();
 
   constructor(
     private _adapter: DateAdapter<any>,
     private _translateService: TranslateService,
-    private _dialogRef: MatDialogRef<CfarOfferDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any,
-    private _hopperProxyService: HopperProxyService
+    private _hopperProxyService: HopperProxyService,
+    private _dialog: MatDialog
   ) {
     super(_adapter, _translateService);
-
-    // Mandatory data
-    this._hCSessionId = data.hCSessionId;
-
-    // Optional data
-    this._pnrReference = data.pnrReference;
-    this._itineraries = data.itineraries;
-    this.cfarOffers = data.cfarOffers;
-
-    // Update parents @inputs manually (Dialog limitation)
-    this.isFakeBackend = data.isFakeBackend;
-    this.currentLang = data.currentLang;
-    this.basePath = data.basePath;
-    this.extAttributes = data.extAttributes;
   }
 
   // -----------------------------------------------
@@ -55,33 +42,27 @@ export class CfarOfferDialogComponent extends AbstractComponent implements OnIni
   // -----------------------------------------------
 
   ngOnInit(): void {
-    // Update languages/labels manually (dialog limitation)
-    this._updateLanguage(this.currentLang);
-
     if (this.isFakeBackend) {
-      this.cfarOffers = this._buildFakePostCfarOffersResponse();
-      this.selectedCfarOffer = this._getCheapestOffer(this.cfarOffers);
-    } else if (this.cfarOffers && this.cfarOffers?.length > 0) {
-      this.selectedCfarOffer = this._getCheapestOffer(this.cfarOffers);
+      this._cfarOffers = this._buildFakePostCfarOffersResponse();
+      this.cheapestOffer = this._getCheapestOffer(this._cfarOffers);
     } else {
       this.isLoading = true;
-  
+
       this._hopperProxyService
-        .postCfarOffers(this.basePath, this._hCSessionId, ApiTranslatorUtils.modelToSnakeCase(this._buildCreateCfarOfferRequest()))
+        .postCfarOffers(this.basePath, this.hCSessionId, ApiTranslatorUtils.modelToSnakeCase(this._buildCreateCfarOfferRequest()))
         .pipe(take(1))
         .subscribe(
           (cfarOffers) => {
             let results: CfarOffer[] = [];
-  
+
             if (cfarOffers) {
               cfarOffers.forEach(cfarOffer => {
                 results.push(ApiTranslatorUtils.modelToCamelCase(cfarOffer) as CfarOffer);
               });
             }
             
-            this.cfarOffers = results;
-            // The cheapest by default
-            this.selectedCfarOffer = this._getCheapestOffer(this.cfarOffers);
+            this._cfarOffers = results;
+            this.cheapestOffer = this._getCheapestOffer(this._cfarOffers);
             this.isLoading = false;
           },
           (error) => this.isLoading = false
@@ -93,38 +74,29 @@ export class CfarOfferDialogComponent extends AbstractComponent implements OnIni
   // Publics Methods
   // -----------------------------------------------
 
-  onClose(): void {
-    this._dialogRef.close();
-  }
+  public onSubmit(cfarOffer: CfarOffer): void {
+    const dialogData = { 
+      currentLang: this.currentLang,
+      basePath: this.basePath,
+      hCSessionId: this.hCSessionId,
+      cfarOffers: this._cfarOffers,
+      extAttributes: this.extAttributes
+    };
+    const dialogConfig = DialogUtils.getDialogConfig(dialogData, this.currentTheme);
+    const dialogRef = this._dialog.open(CfarOfferDialogComponent, dialogConfig);
 
-  onSubmit(): void {
-    this.isLoading = true;
-
-    // Create CFAR Contract
-    this._hopperProxyService
-      .postCfarContracts(this.basePath, this._hCSessionId, ApiTranslatorUtils.modelToSnakeCase(this._buildCreateCfarContractRequest()))
+    dialogRef.afterClosed()
       .pipe(take(1))
       .subscribe(
-        (cfarContract: CfarContract) => {
-          this._dialogRef.close(ApiTranslatorUtils.modelToCamelCase(cfarContract) as CfarContract);
+        (result: CfarContract) => {
+          if (result) {
+            this.offerAccepted.emit(result);
+          } else {
+            console.log("Close dialog");
+          }
         },
-        (error) => this.isLoading = false
+        (error) => console.log(error)
       );
-  }
-
-  onSelectOffer(cfarOffer: CfarOffer): void {
-    this.selectedCfarOffer = cfarOffer;
-  }
-
-  computePercentage(offer: CfarOffer): number {
-    if (offer) {
-      const coverage = Number.parseFloat(offer.coverage);
-      const totalPrice = Number.parseFloat(offer.itinerary.totalPrice);
-  
-      return coverage / (totalPrice || 1.0);
-    }
-
-    return 0;
   }
 
   // -----------------------------------------------
@@ -133,22 +105,13 @@ export class CfarOfferDialogComponent extends AbstractComponent implements OnIni
 
   private _buildCreateCfarOfferRequest(): CreateCfarOfferRequest {
     return {
-      itinerary: this._itineraries,
+      itinerary: this.itineraries,
       requestType: RequestType.Ancillary,
       extAttributes: this.extAttributes
     };
   }
 
-  private _buildCreateCfarContractRequest(): CreateCfarContractRequest {
-    return {
-      offerIds: [this.selectedCfarOffer.id],
-      itinerary: this.selectedCfarOffer.itinerary,
-      extAttributes: this.extAttributes,
-      pnrReference: this._pnrReference
-    };
-  } 
-
-  private _buildFakePostCfarOffersResponse(): CfarOffer[] {
+  private _buildFakePostCfarOffersResponse(): CfarOffer[] {   
     return [
       {
         id: "1ecf859e-8785-625f-8eda-198d1ce0d6c4",

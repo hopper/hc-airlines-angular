@@ -1,3 +1,11 @@
+<a name="1.3.0"></a>
+
+# 1.3.0 (2022-XX-XX)
+
+### Minor changes
+- Add Apache licence
+- Hide Work In Progress components (in production)
+
 <a name="1.2.0"></a>
 
 # 1.2.0 (2022-07-04)
