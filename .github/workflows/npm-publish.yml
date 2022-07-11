@@ -31,6 +31,6 @@ jobs:
       - run: ng build "cloud-airlines-angular-sdk"
       - run: |
           cd dist/cloud-airlines-angular-sdk
-          npm publish
+          npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{secrets.npm_token}}
