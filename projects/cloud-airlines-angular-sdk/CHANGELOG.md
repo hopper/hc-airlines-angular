@@ -1,3 +1,10 @@
+<a name="1.2.1"></a>
+
+# 1.2.1 (2022-07-11)
+
+### Minor changes
+- Fix accessibility issue with the npm registry
+
 <a name="1.2.0"></a>
 
 # 1.2.0 (2022-07-04)
