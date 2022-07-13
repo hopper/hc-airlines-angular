@@ -22,7 +22,6 @@ export class CfarOfferBannerPageComponent extends CommonGuidesComponent {
       [currentTheme]="currentTheme"
       [hCSessionId]="hCSessionId"
       [itineraries]="itineraries"
-      [extAttributes]="extAttributes"
       (offerAccepted)="onOfferAccepted($event)"
     ></hopper-cfar-offer-banner>
   `;
@@ -86,14 +85,6 @@ export class CfarOfferBannerPageComponent extends CommonGuidesComponent {
         name: 'itineraries',
         description: `
           See <a target="_blank" href="https://airlines-api.staging.hopper.com/airline/v1.0/docs/index.html#operation/postCfar_offers">API documentation</a>
-        `,
-        required: true
-      },
-      {
-        name: 'extAttributes',
-        description: `
-          object (map_string) <br />
-          can be empty ({ })
         `,
         required: true
       }

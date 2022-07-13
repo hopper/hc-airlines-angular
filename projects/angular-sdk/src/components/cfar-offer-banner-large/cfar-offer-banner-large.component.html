@@ -56,7 +56,7 @@
     
                     <span>Please choose or decline Cancel For Any Reason.</span>
     
-                    <button mat-raised-button color="primary" (click)="onSubmit()" ngClass.lt-sm="full-width">
+                    <button mat-raised-button color="primary" (click)="onSubmit()" [disabled]="!selectedChoice" ngClass.lt-sm="full-width">
                         Continue
                     </button>
                 </div>

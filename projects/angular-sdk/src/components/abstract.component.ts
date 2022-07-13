@@ -3,7 +3,7 @@ import { Locales } from "../i18n";
 import { TranslateService } from '@ngx-translate/core';
 import { I18n } from "../i18n/i18n.interface";
 import { DateAdapter } from "@angular/material/core";
-import { CfarOffer, MapString } from "../apis/hopper-cloud-airline/v1";
+import { CfarOffer } from "../apis/hopper-cloud-airline/v1";
 import { CountryCode } from "../enums/country-code.enum";
 import { take } from "rxjs/operators";
 
@@ -15,7 +15,6 @@ export abstract class AbstractComponent implements OnChanges {
     @Input() currentLang!: string;
     @Input() basePath!: string;
     @Input() isFakeBackend!: boolean;
-    @Input() extAttributes!: MapString;
 
     public mapCountries: Map<string, string>;
 

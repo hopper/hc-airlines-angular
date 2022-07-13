@@ -11,13 +11,13 @@
 
 </div>
 
-<mat-dialog-content class="mat-typography" #dialogContentAnchor>
+<mat-dialog-content class="mat-typography" [ngClass]="{ 'sidebar-mode': isSidebar }" #dialogContentAnchor>
 
     <ng-container *ngIf="!isLoading">
 
         <ng-container *ngIf="cfarContract">
 
-            <mat-stepper orientation="vertical" linear (selectionChange)="onScrollToTop($event)">
+            <mat-stepper orientation="vertical" #stepper linear (selectionChange)="onScrollToTop($event)">
 
                 <!-- STEP 1 -->
                 <mat-step>
@@ -167,7 +167,7 @@
                     </div>
 
                     <div class="p-16" fxLayoutGap="16px" ngClass.lt-md="px-16" fxFlex="100" fxLayout="row wrap" fxLayoutAlign="center center">
-                        <button mat-raised-button color="primary" matStepperNext ngClass.lt-sm="full-width">
+                        <button mat-raised-button color="primary" (click)="onSubmitStep1()" ngClass.lt-sm="full-width">
                             Continue
                         </button>
                     </div>
@@ -175,7 +175,7 @@
                 <!-- / STEP 1 -->
 
                 <!-- STEP 2 [stepControl]="step2Form" -->
-                <mat-step >
+                <mat-step *ngIf="isHopperRefund">
                     <ng-template matStepLabel>General information</ng-template>
 
                     <div class="p-16" ngClass.lt-md="px-16" fxLayout="row wrap" fxLayoutAlign="start center">
@@ -276,7 +276,7 @@
                 <!-- / STEP 2 -->
 
                 <!-- STEP 3 -->
-                <mat-step>
+                <mat-step *ngIf="isHopperRefund">
                     <ng-template matStepLabel>Payment information [hyperwallet]</ng-template>
 
                     <div class="p-16" ngClass.lt-md="px-16" fxLayout="row wrap" fxLayoutAlign="start center">
@@ -297,7 +297,7 @@
                 <!-- / STEP 3 -->
 
                 <!-- STEP 4 -->
-                <mat-step>
+                <mat-step *ngIf="isHopperRefund">
                     <ng-template matStepLabel>Confirmation</ng-template>
 
                     <div class="p-16" ngClass.lt-md="px-16" fxLayout="row wrap" fxLayoutAlign="start center">

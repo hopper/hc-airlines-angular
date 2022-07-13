@@ -21,9 +21,8 @@ export class CfarOfferBannerLargeComponent extends AbstractComponent implements 
 
   @Input() hCSessionId!: string;
   @Input() itineraries!: CfarItinerary[];
-  @Input() pnrReference!: string;
 
-  @Output() offerAccepted = new EventEmitter();
+  @Output() chooseCoverage = new EventEmitter();
 
   constructor(
     private _adapter: DateAdapter<any>,
@@ -31,9 +30,6 @@ export class CfarOfferBannerLargeComponent extends AbstractComponent implements 
     private _hopperProxyService: HopperProxyService,
   ) {
     super(_adapter, _translateService);
-
-    // Decline CFAR option, by default
-    this.selectedChoice = -1;
   }
 
   // -----------------------------------------------
@@ -83,11 +79,13 @@ export class CfarOfferBannerLargeComponent extends AbstractComponent implements 
         .pipe(take(1))
         .subscribe(
           (cfarContract: CfarContract) => {
-            this.offerAccepted.emit(cfarContract);
+            this.chooseCoverage.emit(cfarContract);
             this.isLoading = false;
           },
           (error) => this.isLoading = false
         );
+    } else {
+      this.chooseCoverage.emit(null);
     }
   }
 
@@ -115,7 +113,7 @@ export class CfarOfferBannerLargeComponent extends AbstractComponent implements 
     return {
       itinerary: this.itineraries,
       requestType: RequestType.Ancillary,
-      extAttributes: this.extAttributes
+      extAttributes: {}
     };
   }
 
@@ -123,8 +121,7 @@ export class CfarOfferBannerLargeComponent extends AbstractComponent implements 
     return {
       offerIds: [this.selectedCfarOffer.id],
       itinerary: this.selectedCfarOffer.itinerary,
-      extAttributes: this.extAttributes,
-      pnrReference: this.pnrReference
+      extAttributes: {}
     };
   } 
 

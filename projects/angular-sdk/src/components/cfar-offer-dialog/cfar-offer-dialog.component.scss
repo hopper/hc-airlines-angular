@@ -63,11 +63,6 @@
         }
 
         .mat-dialog-content {
-            @include media-breakpoint('lt-sm') {
-                // Full-height - mat-dialog-title height - mat-dialog-actions height
-                max-height: calc(100% - 300px);
-            }
-
             @if($is-dark) {
                 background-color: rgb(52,52,52);
             } @else {

@@ -1,14 +1,19 @@
+<a name="2.1.0"></a>
+
+# 2.1.0 (2022-07-13)
+
+### Minor changes
+- New component: CFAR Offer Banner Large
+- Remove 'extAttributes' field from all components
+
 <a name="2.0.0"></a>
 
-# 2.0.0 (2022-XX-XX)
+# 2.0.0 (2022-07-11)
 
 ### Major changes
 - New url of the package: https://www.npmjs.com/package/@hopper-cloud-airlines/angular-sdk
 - The project was renamed to angular-sdk
-
-### Minor changes
-- New component: CFAR Exercise Dialog 
-- New component: CFAR Offer Banner Large
+- Downgrade Angular requirement to Angular 11
 
 ### Bug Fixes
 - Fix accessibility issue with the npm registry

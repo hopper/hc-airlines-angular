@@ -22,8 +22,7 @@ export class CfarOfferBannerLargePageComponent extends CommonGuidesComponent {
       [currentTheme]="currentTheme"
       [hCSessionId]="hCSessionId"
       [itineraries]="itineraries"
-      [extAttributes]="extAttributes"
-      (offerAccepted)="onOfferAccepted($event)"
+      (chooseCoverage)="onChooseCoverage($event)"
     ></hopper-cfar-offer-banner-large>
   `;
 
@@ -32,7 +31,7 @@ export class CfarOfferBannerLargePageComponent extends CommonGuidesComponent {
     
     // ...
 
-    onOfferAccepted(cfarContract: CfarContract): void {
+    onChooseCoverage(cfarContract: CfarContract): void {
       console.log(cfarContract);
     }
   `;
@@ -88,14 +87,6 @@ export class CfarOfferBannerLargePageComponent extends CommonGuidesComponent {
           See <a target="_blank" href="https://airlines-api.staging.hopper.com/airline/v1.0/docs/index.html#operation/postCfar_offers">API documentation</a>
         `,
         required: true
-      },
-      {
-        name: 'extAttributes',
-        description: `
-          object (map_string) <br />
-          can be empty ({ })
-        `,
-        required: true
       }
     ];
   }
@@ -103,16 +94,16 @@ export class CfarOfferBannerLargePageComponent extends CommonGuidesComponent {
   public override getOutputs(): OutputModel[] {
     return [
       {
-        name: 'offerAccepted',
+        name: 'choiceCoverage',
         description: `
-          Event triggered when the user accepts a CFAR offer <br />
-          Returns a CfarContract
+          Event triggered when the user chooses a coverage (or not)<br />
+          Returns a CfarContract or Nothing
         `
       }
     ];
   }
 
-  onOfferAccepted(cfarContract: CfarContract): void {
+  onChooseCoverage(cfarContract: CfarContract): void {
     console.log(cfarContract);
   }
 }

@@ -2,15 +2,15 @@ import { Component } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { Store } from "@ngrx/store";
-import { CfarContract } from "projects/angular-sdk/src/apis/hopper-cloud-airline/v1";
-import { CfarOfferDialogComponent } from "projects/angular-sdk/src/components/cfar-offer-dialog/cfar-offer-dialog.component";
-import { Locales } from "projects/angular-sdk/src/i18n";
-import { DialogUtils } from "projects/angular-sdk/src/utils/dialog.utils";
 import { take } from "rxjs/operators";
 import { InputModel, OutputModel } from "src/app/shared/models";
 import { AppState } from "src/app/shared/ngrx";
 import { CommonGuidesComponent } from "../common-guides.component";
 import { Clipboard } from '@angular/cdk/clipboard';
+import { Locales } from "projects/angular-sdk/src/i18n";
+import { DialogUtils } from "projects/angular-sdk/src/utils/dialog.utils";
+import { CfarOfferDialogComponent } from "projects/angular-sdk/src/components/cfar-offer-dialog/cfar-offer-dialog.component";
+import { CfarContract } from "projects/angular-sdk/src/apis/hopper-cloud-airline/v1";
 
 
 @Component({
@@ -46,7 +46,6 @@ export class CfarOfferDialogPageComponent extends CommonGuidesComponent {
         currentLang: this.currentLang,
         basePath: this.basePath,
         hCSessionId: this.hCSessionId,
-        extAttributes: this.extAttributes,
         itineraries: this.itineraries
       };
       const dialogConfig = DialogUtils.getDialogConfig(dialogData, this.currentTheme);
@@ -133,14 +132,6 @@ export class CfarOfferDialogPageComponent extends CommonGuidesComponent {
         `,
         required: true
       },*/
-      {
-        name: 'extAttributes',
-        description: `
-          object (map_string) <br />
-          can be empty ({ })
-        `,
-        required: true
-      }
     ];
   }
 
@@ -168,7 +159,6 @@ export class CfarOfferDialogPageComponent extends CommonGuidesComponent {
       currentLang: this.currentLang,
       hCSessionId: this.hCSessionId,
       itineraries: this.itineraries,
-      extAttributes: this.extAttributes
     };
     const dialogConfig = DialogUtils.getDialogConfig(dialogData);
     const dialogRef = this._dialog.open(CfarOfferDialogComponent, dialogConfig);

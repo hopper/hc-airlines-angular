@@ -34,6 +34,7 @@
         }
 
         .mat-dialog-title {
+            height: 100px;
             background-color: map-get($accent-palette, 900);
             color: map-get($accent-palette, "900-contrast");
             margin: 0px;
@@ -45,9 +46,9 @@
         }
 
         .mat-dialog-content {
-            @include media-breakpoint('lt-sm') {
+            &.sidebar-mode {
                 // Full-height - mat-dialog-title height
-                max-height: calc(100% - 110px);
+                max-height: calc(100% - 100px);
             }
 
             @if($is-dark) {

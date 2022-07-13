@@ -79,7 +79,7 @@ export class CfarOfferBannerComponent extends AbstractComponent implements OnIni
       basePath: this.basePath,
       hCSessionId: this.hCSessionId,
       cfarOffers: this._cfarOffers,
-      extAttributes: this.extAttributes
+      extAttributes: {}
     };
     const dialogConfig = DialogUtils.getDialogConfig(dialogData, this.currentTheme);
     const dialogRef = this._dialog.open(CfarOfferDialogComponent, dialogConfig);
@@ -106,7 +106,7 @@ export class CfarOfferBannerComponent extends AbstractComponent implements OnIni
     return {
       itinerary: this.itineraries,
       requestType: RequestType.Ancillary,
-      extAttributes: this.extAttributes
+      extAttributes: {}
     };
   }
 

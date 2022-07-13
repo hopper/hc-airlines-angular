@@ -19,8 +19,12 @@ import { Clipboard } from '@angular/cdk/clipboard';
 export class CfarExerciseDialogPageComponent extends CommonGuidesComponent {
 
   public override htmlCode: string = `
-    <button mat-flat-button color="primary" (click)="onOpenCfarExerciseDialog()">
+    <button mat-flat-button color="primary" (click)="onOpenCfarExerciseDialog(false)">
       Open CFAR Exercise dialog
+    </button>
+
+    <button mat-flat-button color="primary" (click)="onOpenCfarExerciseDialog(true)">
+      Open CFAR Exercise dialog as a sidebar
     </button>
   `;
 
@@ -38,24 +42,28 @@ export class CfarExerciseDialogPageComponent extends CommonGuidesComponent {
 
     // ...
 
-    onOpenCfarExerciseDialog(): void {
+    public onOpenCfarExerciseDialog(isSidebar: boolean): void {
       const dialogData = { 
-        currentLang: this.currentLang,
+        isFakeBackend: this.isFakeBackend,
         basePath: this.basePath,
+        currentLang: this.currentLang,
         hCSessionId: this.hCSessionId,
         pnrReference: this.pnrReference,
         contractId: this.contractId,
         currency: this.currency,
         itinerary: this.itinerary,
-        extAttributes: this.extAttributes
+        isSidebar: isSidebar,
+        extAttributes: {}
       };
-      const dialogConfig = DialogUtils.getDialogConfig(dialogData, this.currentTheme);
+      const dialogConfig = DialogUtils.getDialogConfig(dialogData);
       const dialogRef = this._dialog.open(CfarExerciseDialogComponent, dialogConfig);
-
+  
       dialogRef.afterClosed()
         .pipe(take(1))
         .subscribe(result => {
-          console.log(result);
+          if (result && result == "AIRLINE_REFUND") {
+            alert("Implements airline refund");
+          }
         });
     }
   `;
@@ -133,14 +141,6 @@ export class CfarExerciseDialogPageComponent extends CommonGuidesComponent {
           A unique identifier for a CFAR contract
         `,
         required: true
-      },
-      {
-        name: 'extAttributes',
-        description: `
-          object (map_string) <br />
-          can be empty ({ })
-        `,
-        required: true
       }
     ];
   }
@@ -150,7 +150,7 @@ export class CfarExerciseDialogPageComponent extends CommonGuidesComponent {
       {
         name: 'Event on submit button',
         description: `
-          To be defined
+          When the airline refund is selected and the 'continue' button is pressed, the dialog returns 'AIRLINE_REFUND'.
         `
       },
       {
@@ -162,7 +162,7 @@ export class CfarExerciseDialogPageComponent extends CommonGuidesComponent {
     ];
   }
 
-  public onOpenCfarExerciseDialog(): void {
+  public onOpenCfarExerciseDialog(isSidebar: boolean): void {
     const dialogData = { 
       isFakeBackend: this.isFakeBackend,
       basePath: this.basePath,
@@ -172,7 +172,8 @@ export class CfarExerciseDialogPageComponent extends CommonGuidesComponent {
       contractId: this.contractId,
       currency: this.currency,
       itinerary: this.itinerary,
-      extAttributes: this.extAttributes
+      isSidebar: isSidebar,
+      extAttributes: {}
     };
     const dialogConfig = DialogUtils.getDialogConfig(dialogData);
     const dialogRef = this._dialog.open(CfarExerciseDialogComponent, dialogConfig);
@@ -180,7 +181,9 @@ export class CfarExerciseDialogPageComponent extends CommonGuidesComponent {
     dialogRef.afterClosed()
       .pipe(take(1))
       .subscribe(result => {
-        console.log(result);
+        if (result && result == "AIRLINE_REFUND") {
+          alert("Implements airline refund");
+        }
       });
   }
 }

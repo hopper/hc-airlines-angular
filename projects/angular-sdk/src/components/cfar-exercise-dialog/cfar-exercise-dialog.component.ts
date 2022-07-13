@@ -11,7 +11,7 @@ import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { StepperSelectionEvent } from '@angular/cdk/stepper';
-import { CountryCode } from '../../enums/country-code.enum';
+import { MatStepper } from '@angular/material/stepper';
 
 @Component({
   selector: 'hopper-cfar-exercise-dialog',
@@ -20,12 +20,12 @@ import { CountryCode } from '../../enums/country-code.enum';
 })
 export class CfarExerciseDialogComponent extends AbstractComponent implements OnInit {
 
-  public selectedCfarOffer!: CfarOffer;
   public selectedRefundMethod?: 'ftc' | 'cash';
   public cfarContract!: CfarContract;
   public refundMethods!: { value: 'ftc' | 'cash', label: string }[];
   public isHopperRefund!: boolean;
   public isLoading!: boolean;
+  public isSidebar!: boolean;
 
   // Mandatory data
   private _hCSessionId!: string;
@@ -41,6 +41,7 @@ export class CfarExerciseDialogComponent extends AbstractComponent implements On
   public step2Form!: FormGroup;
 
   @ViewChild('dialogContentAnchor') public anchor!: ElementRef;
+  @ViewChild('stepper') public stepper!: MatStepper;
 
   constructor(
     private _changeDetector: ChangeDetectorRef,
@@ -65,12 +66,12 @@ export class CfarExerciseDialogComponent extends AbstractComponent implements On
     // Optional data
     this._currency = data.currency;
     this._airlineRefundAllowance = data.airlineRefundAllowance;
+    this.isSidebar = data.isSidebar;
 
     // Update parents @inputs manually (Dialog limitation)
     this.isFakeBackend = data.isFakeBackend;
     this.currentLang = data.currentLang;
     this.basePath = data.basePath;
-    this.extAttributes = this.extAttributes;
 
     // Create material icon for refundable ticket
     this._matIconRegistry.addSvgIcon("refundable_ticket", this._domSanitizer.bypassSecurityTrustResourceUrl("assets/refundable-ticket.svg"));
@@ -173,6 +174,16 @@ export class CfarExerciseDialogComponent extends AbstractComponent implements On
     return 1;
   }
 
+  onSubmitStep1(): void {
+    if (this.isHopperRefund) {
+      // Go to the next step
+      this.stepper.next();
+    } else {
+      // Send a notification to the client
+      this._dialogRef.close("AIRLINE_REFUND");
+    }
+  }
+
   // -----------------------------------------------
   // Privates Methods
   // -----------------------------------------------
@@ -185,7 +196,7 @@ export class CfarExerciseDialogComponent extends AbstractComponent implements On
       airlineRefundAllowance: this._airlineRefundAllowance,
       airlineRefundMethod: this.selectedRefundMethod,
       currency: this._currency,
-      extAttributes: this.extAttributes
+      extAttributes: {}
     };
   }
 

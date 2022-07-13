@@ -1,7 +1,7 @@
 <div class="cfar-offer-banner-page-container p-32" fxLayout="row wrap" fxLayoutAlign="start start">
 
     <p fxFlex="100">This banner can be integrated in your booking funnel in order to display CFAR offers to the User. CFAR offers will be created dynamically, including a description in the page’s language and a starting price.
-        Following a click of the User on the ‘Add’ button, the CFAR Dialog will open.</p>
+        Following a click of the User on the 'Select' button, the CFAR Dialog will open.</p>
 
     <mat-tab-group fxFlex="100" backgroundColor="primary" class="tab-group mb-16">
 
@@ -13,7 +13,6 @@
                     [currentLang]="currentLang"
                     [hCSessionId]="hCSessionId"
                     [itineraries]="itineraries"
-                    [extAttributes]="extAttributes"
                     (offerAccepted)="onOfferAccepted($event)"
                 ></hopper-cfar-offer-banner>
             </div>

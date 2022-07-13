@@ -37,10 +37,6 @@ export abstract class CommonGuidesComponent implements OnInit, OnDestroy {
   ];
   public pnrReference = "123456";
   public contractId = "1ece89da-263c-6689-bec4-f56934b83f44";
-  public extAttributes: MapString = {
-    property1: "value1",
-    property2: "value2"
-  };
   public itineraries: CfarItinerary[] = [{
     currency: this.currency,
     passengerPricing: this.passengers,
