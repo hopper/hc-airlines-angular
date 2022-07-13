@@ -116,7 +116,7 @@ MIT
 @angular/router
 MIT
 
-@hopper/cloud-airlines-angular-sdk
+@hopper-cloud-airlines/angular-sdk
 
 @ngrx/router-store
 MIT
