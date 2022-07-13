@@ -1,3 +1,12 @@
+<a name="2.1.1"></a>
+
+# 2.1.1 (2022-07-13)
+
+### Bug fixes
+- Fix licence issue
+- Remove 'currentTheme' required field from "CFAR offer banner large" component
+- Fix some descriptions mistakes
+
 <a name="2.1.0"></a>
 
 # 2.1.0 (2022-07-13)
@@ -15,7 +24,7 @@
 - The project was renamed to angular-sdk
 - Downgrade Angular requirement to Angular 11
 
-### Bug Fixes
+### Bug fixes
 - Fix accessibility issue with the npm registry
 
 <a name="1.2.0"></a>

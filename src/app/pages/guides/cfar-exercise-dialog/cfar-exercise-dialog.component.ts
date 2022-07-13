@@ -43,8 +43,7 @@ export class CfarExerciseDialogPageComponent extends CommonGuidesComponent {
     // ...
 
     public onOpenCfarExerciseDialog(isSidebar: boolean): void {
-      const dialogData = { 
-        isFakeBackend: this.isFakeBackend,
+      const dialogData = {
         basePath: this.basePath,
         currentLang: this.currentLang,
         hCSessionId: this.hCSessionId,
@@ -52,10 +51,9 @@ export class CfarExerciseDialogPageComponent extends CommonGuidesComponent {
         contractId: this.contractId,
         currency: this.currency,
         itinerary: this.itinerary,
-        isSidebar: isSidebar,
-        extAttributes: {}
+        isSidebar: isSidebar
       };
-      const dialogConfig = DialogUtils.getDialogConfig(dialogData);
+      const dialogConfig = DialogUtils.getDialogConfig(dialogData, this.currentTheme);
       const dialogRef = this._dialog.open(CfarExerciseDialogComponent, dialogConfig);
   
       dialogRef.afterClosed()
@@ -102,7 +100,8 @@ export class CfarExerciseDialogPageComponent extends CommonGuidesComponent {
       {
         name: 'currentTheme',
         description: `
-          The active theme managed by Hopper
+          The active theme managed by Hopper.
+          If you have an Angular material theme, this field can be removed
         `,
         required: false
       },
@@ -141,6 +140,14 @@ export class CfarExerciseDialogPageComponent extends CommonGuidesComponent {
           A unique identifier for a CFAR contract
         `,
         required: true
+      },
+      {
+        name: 'isSidebar',
+        description: `
+          true : the dialog will be displayed as a sidebar (on the right). <br />
+          false : it will be displayed as a dialog (centered on the page)
+        `,
+        required: false
       }
     ];
   }
@@ -172,8 +179,7 @@ export class CfarExerciseDialogPageComponent extends CommonGuidesComponent {
       contractId: this.contractId,
       currency: this.currency,
       itinerary: this.itinerary,
-      isSidebar: isSidebar,
-      extAttributes: {}
+      isSidebar: isSidebar
     };
     const dialogConfig = DialogUtils.getDialogConfig(dialogData);
     const dialogRef = this._dialog.open(CfarExerciseDialogComponent, dialogConfig);

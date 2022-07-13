@@ -19,7 +19,6 @@ export class CfarOfferBannerLargePageComponent extends CommonGuidesComponent {
     <hopper-cfar-offer-banner-large
       [basePath]="basePath"
       [currentLang]="currentLang"
-      [currentTheme]="currentTheme"
       [hCSessionId]="hCSessionId"
       [itineraries]="itineraries"
       (chooseCoverage)="onChooseCoverage($event)"
@@ -60,13 +59,6 @@ export class CfarOfferBannerLargePageComponent extends CommonGuidesComponent {
         required: false
       },
       {
-        name: 'currentTheme',
-        description: `
-          The active theme managed by Hopper (for the Offer Banner Dialog)
-        `,
-        required: false
-      },
-      {
         name: 'basePath',
         description: `
           The Hopper Cloud Airlines API url base path
@@ -94,7 +86,7 @@ export class CfarOfferBannerLargePageComponent extends CommonGuidesComponent {
   public override getOutputs(): OutputModel[] {
     return [
       {
-        name: 'choiceCoverage',
+        name: 'chooseCoverage',
         description: `
           Event triggered when the user chooses a coverage (or not)<br />
           Returns a CfarContract or Nothing

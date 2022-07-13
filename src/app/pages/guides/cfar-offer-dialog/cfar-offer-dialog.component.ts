@@ -100,7 +100,8 @@ export class CfarOfferDialogPageComponent extends CommonGuidesComponent {
       {
         name: 'currentTheme',
         description: `
-          The active theme managed by Hopper
+          The active theme managed by Hopper.
+          If you have an Angular material theme, this field can be removed
         `,
         required: false
       },
@@ -121,17 +122,7 @@ export class CfarOfferDialogPageComponent extends CommonGuidesComponent {
           </a>
         `,
         required: true
-      },
-     /* {
-        name: 'cfarOffers',
-        description: `
-          You can pass offers if you want to load existing offers <br />
-          See <a target="_blank" href="https://airlines-api.staging.hopper.com/airline/v1.0/docs/index.html#operation/postCfar_offers">
-            Response of the 'Create a CFAR Offer' api call for data structure
-          </a>
-        `,
-        required: true
-      },*/
+      }
     ];
   }
 
