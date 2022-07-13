@@ -9,21 +9,21 @@ import { CommonGuidesComponent } from "../common-guides.component";
 import { Clipboard } from '@angular/cdk/clipboard';
 
 @Component({
-  selector: "app-cfar-offer-banner",
-  templateUrl: "./cfar-offer-banner.component.html",
-  styleUrls: ["./cfar-offer-banner.component.scss"],
+  selector: "app-cfar-offer-banner-large",
+  templateUrl: "./cfar-offer-banner-large.component.html",
+  styleUrls: ["./cfar-offer-banner-large.component.scss"],
 })
-export class CfarOfferBannerPageComponent extends CommonGuidesComponent {
+export class CfarOfferBannerLargePageComponent extends CommonGuidesComponent {
 
   public override htmlCode: string = `
-    <hopper-cfar-offer-banner
+    <hopper-cfar-offer-banner-large
       [basePath]="basePath"
       [currentLang]="currentLang"
       [currentTheme]="currentTheme"
       [hCSessionId]="hCSessionId"
       [itineraries]="itineraries"
-      (offerAccepted)="onOfferAccepted($event)"
-    ></hopper-cfar-offer-banner>
+      (chooseCoverage)="onChooseCoverage($event)"
+    ></hopper-cfar-offer-banner-large>
   `;
 
   public override tsCode: string = `
@@ -31,7 +31,7 @@ export class CfarOfferBannerPageComponent extends CommonGuidesComponent {
     
     // ...
 
-    onOfferAccepted(cfarContract: CfarContract): void {
+    onChooseCoverage(cfarContract: CfarContract): void {
       console.log(cfarContract);
     }
   `;
@@ -94,16 +94,16 @@ export class CfarOfferBannerPageComponent extends CommonGuidesComponent {
   public override getOutputs(): OutputModel[] {
     return [
       {
-        name: 'offerAccepted',
+        name: 'choiceCoverage',
         description: `
-          Event triggered when the user accepts a CFAR offer <br />
-          Returns a CfarContract
+          Event triggered when the user chooses a coverage (or not)<br />
+          Returns a CfarContract or Nothing
         `
       }
     ];
   }
 
-  onOfferAccepted(cfarContract: CfarContract): void {
+  onChooseCoverage(cfarContract: CfarContract): void {
     console.log(cfarContract);
   }
 }

@@ -7,7 +7,7 @@ import { AppState } from "src/app/shared/ngrx";
 import { getCurrentLang, getCurrentTheme } from "src/app/shared/ngrx/global/global.selectors";
 import { Clipboard } from '@angular/cdk/clipboard';
 import { MatSnackBar } from "@angular/material/snack-bar";
-import { CfarItinerary, MapString, PassengerPricing } from "projects/cloud-airlines-angular-sdk/src/apis/hopper-cloud-airline/v1";
+import { CfarItinerary, MapString, PassengerPricing } from "projects/angular-sdk/src/apis/hopper-cloud-airline/v1";
 
 @Directive({
   selector: '[CommonGuidesComponent]'
@@ -37,10 +37,6 @@ export abstract class CommonGuidesComponent implements OnInit, OnDestroy {
   ];
   public pnrReference = "123456";
   public contractId = "1ece89da-263c-6689-bec4-f56934b83f44";
-  public extAttributes: MapString = {
-    property1: "value1",
-    property2: "value2"
-  };
   public itineraries: CfarItinerary[] = [{
     currency: this.currency,
     passengerPricing: this.passengers,

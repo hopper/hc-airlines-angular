@@ -1,0 +1,39 @@
+// How to use : https://tomastrajan.medium.com/the-complete-guide-to-angular-material-themes-4d165a9d24d1
+@mixin cfar-offer-banner-large-page-component-theme($theme) {
+
+    // Colors used for element backgrounds
+    // Values : status-bar, app-bar, background, hover, card, dialog, disabled-button, raised-button,
+    // focused-button, selected-button, disabled-button-toggle, unselected-chip, disabled-list-option, tooltip
+    $bg-palette: map-get($theme, background);
+
+    // Colors used for texts and icons
+    $fg-palette: map-get($theme, foreground);
+
+    // Main color most widely used across all screens and components
+    $primary-palette: map-get($theme, primary);
+
+    // Also known as the secondary color. Used for floating action buttons and interactive elements.
+    $accent-palette: map-get($theme, accent);
+
+    // Color to convey error state
+    $warn-palette: map-get($theme, warn);
+
+    // If it's dark theme or not
+    $is-dark: map-get($theme, is-dark);
+
+    // ----------------------------------------------
+
+    app-cfar-offer-banner-large {
+
+        .cfar-offer-banner-large-page-container {
+
+            .tab-group {
+                @include mat.elevation(4);
+    
+                mat-tab-body {
+                    background-color: map-get($bg-palette, card);
+                }
+            }
+        }
+    }
+}

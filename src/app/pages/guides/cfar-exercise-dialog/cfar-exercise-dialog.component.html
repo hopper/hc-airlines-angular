@@ -6,9 +6,14 @@
     <mat-tab-group fxFlex="100" backgroundColor="primary" class="tab-group mb-16">
 
         <mat-tab label="Overview">
-            <div class="p-16">
-                <button mat-flat-button color="primary" (click)="onOpenCfarExerciseDialog()">Open CFAR Exercise
-                    dialog</button>
+            <div class="p-16" fxLayoutGap="16px">
+                <button mat-flat-button color="primary" (click)="onOpenCfarExerciseDialog(false)">
+                    Open CFAR Exercise dialog
+                </button>
+
+                <button mat-flat-button color="primary" (click)="onOpenCfarExerciseDialog(true)">
+                    Open CFAR Exercise dialog as a sidebar
+                </button>
             </div>
         </mat-tab>
 

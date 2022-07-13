@@ -4,6 +4,7 @@ import { CfarOfferBannerPageComponent } from './guides/cfar-offer-banner/cfar-of
 import { CfarOfferDialogPageComponent } from './guides/cfar-offer-dialog/cfar-offer-dialog.component';
 import { CfarExerciseDialogPageComponent } from './guides/cfar-exercise-dialog/cfar-exercise-dialog.component';
 import { GuidesPageComponent } from './guides/guides.component';
+import { CfarOfferBannerLargePageComponent } from './guides/cfar-offer-banner-large/cfar-offer-banner-large.component';
 
 const routes: Routes = [
   {
@@ -19,6 +20,11 @@ const routes: Routes = [
     path: 'cfar-offer-banner',
     component: CfarOfferBannerPageComponent,
     data: { path: 'cfar-offer-banner' }
+  },
+  {
+    path: 'cfar-offer-banner-large',
+    component: CfarOfferBannerLargePageComponent,
+    data: { path: 'cfar-offer-banner-large' }
   },
   {
     path: 'cfar-exercise-dialog',

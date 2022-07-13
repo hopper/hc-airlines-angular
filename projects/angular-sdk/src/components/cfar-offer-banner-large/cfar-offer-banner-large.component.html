@@ -1,0 +1,78 @@
+<div class="px-32" ngClass.lt-md="px-16" fxLayout="row" fxLayoutAlign="center center">
+
+    <ng-container *ngIf="!isLoading">
+
+        <mat-card class="mat-elevation-z4 m-16 pointer" fxFlex fxLayout="row wrap">
+    
+            <div fxFlex="90" fxFlex.lt-md="100" fxLayout="row wrap">
+
+                <div fxFlex="100">
+                    <h2 class="offer-title px-16 m-0">{{ 'CFAR_OFFER_BANNER.TITLE' | translate }}</h2>
+                </div>
+
+                <div class="mb-32" fxFlex="100" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="16px">
+    
+                    <div fxFlex="calc(20% - 16px)" fxHide.lt-md fxLayout="row" fxLayoutAlign="center center" class="p-16" ngClass.lt-sm="px-0">
+                        <img class="responsive-image" src="assets/offer-banner-icon.svg">
+                    </div>
+    
+                    <div fxFlex="80" fxFlex.lt-md="100" fxLayout="column" fxLayoutGap="16px" fxLayoutAlign="center start">
+
+                        <ng-container *ngFor="let desc of selectedCfarOffer?.offerDescription; let i = index;">
+                            <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
+                                <mat-icon class="check-icon">check</mat-icon>
+                                <span>{{ desc }}</span>
+                            </div>
+                        </ng-container>
+                
+                    </div>
+        
+                </div>
+    
+                <div fxFlexOffset="20" fxFlex="80" fxFlexOffset.lt-md="0" fxFlex.lt-md="100" fxLayout="row" class="mb-16" fxLayoutAlign="start center" fxLayoutGap="16px">
+    
+                    <mat-radio-group fxFlex="100" fxLayout="row wrap" fxLayoutAlign="start center" color="primary"
+                        [(ngModel)]="selectedChoice" (ngModelChange)="onChangeChoice()">
+                        <div fxFlex="100" fxLayout="row" fxLayout.lt-sm="column" fxLayoutAlign="start center"
+                            fxLayoutAlign.lt-md="center start" fxLayoutGap.lt-md="16px">
+
+                            <ng-container *ngFor="let offer of cfarOffers; let i = index;">
+                                <mat-radio-button fxFlex="50" fxFlex.lt-md="100" value="{{ i }}" class="important-text bold">
+                                    {{ computePercentage(offer) | percent }} Flight cost covered
+                                </mat-radio-button>
+                            </ng-container>
+
+                        </div>
+                       
+                        <mat-radio-button class="default-choice mt-16 p-16" fxFlex="100" value="-1">
+                            I do not want to purchase Cancel For Any Reason.
+                        </mat-radio-button>
+                    </mat-radio-group>
+    
+                </div>
+    
+                <div fxFlexOffset="20" fxFlex="80" fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="16px"
+                    fxFlexOffset.lt-md="0" fxFlex.lt-md="100" fxLayout.lt-md="column">
+    
+                    <span>Please choose or decline Cancel For Any Reason.</span>
+    
+                    <button mat-raised-button color="primary" (click)="onSubmit()" [disabled]="!selectedChoice" ngClass.lt-sm="full-width">
+                        Continue
+                    </button>
+                </div>
+            </div>
+
+        </mat-card>
+
+        <ng-container *ngIf="!cfarOffers">
+            <p>{{ 'CFAR_OFFER_BANNER.NO_OFFERS' | translate }}</p>
+        </ng-container>
+
+    </ng-container>
+
+    <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="16px" *ngIf="isLoading">
+        <mat-spinner></mat-spinner>
+        <p>{{ 'CFAR_OFFER_BANNER.LOADING' | translate }}</p>
+    </div>
+
+</div>

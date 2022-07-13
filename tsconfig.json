@@ -7,9 +7,9 @@
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "paths": {
-      "cloud-airlines-angular-sdk": [
-        "dist/cloud-airlines-angular-sdk/cloud-airlines-angular-sdk",
-        "dist/cloud-airlines-angular-sdk"
+      "angular-sdk": [
+        "dist/angular-sdk/angular-sdk",
+        "dist/angular-sdk"
       ]
     },
     "noImplicitReturns": true,
