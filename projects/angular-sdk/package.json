@@ -18,6 +18,5 @@
   "repository": {
     "type": "git",
     "url": "git@github.com:hopper/hc-airlines-angular.git"
-  },
-  "private": false
+  }
 }
