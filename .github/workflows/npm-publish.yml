@@ -7,7 +7,7 @@ on:
   workflow_dispatch
 
 jobs:
-  publish-npm:
+  publish-to-npm:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
