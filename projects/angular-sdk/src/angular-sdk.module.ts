@@ -59,7 +59,7 @@ registerLocaleData(localeZh, 'zh', localeZhExtra);
 @NgModule({
   declarations: [
     // Component
-    EventButtonComponent,
+    //EventButtonComponent,
     CfarOfferBannerComponent,
     CfarOfferBannerLargeComponent,
     CfarOfferDialogComponent,
@@ -101,7 +101,7 @@ registerLocaleData(localeZh, 'zh', localeZhExtra);
   ],
   exports: [
     // Component
-    EventButtonComponent,
+    //EventButtonComponent,
     CfarOfferBannerComponent,
     CfarOfferBannerLargeComponent,
     CfarOfferDialogComponent,
