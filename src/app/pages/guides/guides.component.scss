@@ -29,7 +29,7 @@
                 color: map-get($accent-palette, "default-contrast");
 
                 &:hover {
-                    @include mat.elevation(6);
+                    @include mat-elevation(6);
                 }
 
                 &.active {

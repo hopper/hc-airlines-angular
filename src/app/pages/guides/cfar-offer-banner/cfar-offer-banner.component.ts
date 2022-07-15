@@ -15,7 +15,7 @@ import { Clipboard } from '@angular/cdk/clipboard';
 })
 export class CfarOfferBannerPageComponent extends CommonGuidesComponent {
 
-  public override htmlCode: string = `
+  public  htmlCode: string = `
     <hopper-cfar-offer-banner
       [basePath]="basePath"
       [currentLang]="currentLang"
@@ -26,7 +26,7 @@ export class CfarOfferBannerPageComponent extends CommonGuidesComponent {
     ></hopper-cfar-offer-banner>
   `;
 
-  public override tsCode: string = `
+  public  tsCode: string = `
     import { CfarContract } from "@hopper-cloud-airlines/angular-sdk/src/apis/hopper-cloud-airline/v1";
     
     // ...
@@ -48,7 +48,7 @@ export class CfarOfferBannerPageComponent extends CommonGuidesComponent {
   // Publics Methods
   // -----------------------------------------------
 
-  public override getInputs(): InputModel[] {
+  public  getInputs(): InputModel[] {
     return [
       {
         name: 'currentLang',
@@ -91,7 +91,7 @@ export class CfarOfferBannerPageComponent extends CommonGuidesComponent {
     ];
   }
 
-  public override getOutputs(): OutputModel[] {
+  public  getOutputs(): OutputModel[] {
     return [
       {
         name: 'offerAccepted',

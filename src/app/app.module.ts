@@ -40,12 +40,13 @@ const metaReducers: MetaReducer<any>[] = !environment.production ? [storeFreeze]
     {
       provide: HIGHLIGHT_OPTIONS,
       useValue: {
-        coreLibraryLoader: () => import('highlight.js/lib/core'),
+        fullLibraryLoader: () => import('highlight.js'),
+        /*coreLibraryLoader: () => import('highlight.js/lib/core'),
         languages: {
           typescript: () => import('highlight.js/lib/languages/typescript'),
           css: () => import('highlight.js/lib/languages/css'),
           xml: () => import('highlight.js/lib/languages/xml')
-        }
+        }*/
       }
     }
   ],

@@ -1,4 +1,4 @@
-@use '~@angular/material' as mat;
+@import '~@angular/material/theming';
 
 // Import component mixins here to enable theming for them
 @import "../components/cfar-offer-banner/cfar-offer-banner.component.scss";
@@ -24,7 +24,7 @@
 
 .theme-light-blue {
   // Apply the theme to all Angular Material Components
-  @include mat.all-component-themes($light-blue-theme);
+  @include angular-material-theme($light-blue-theme);
 
   // Apply the theme to the library components
   @include hopper-cloud-airlines-angular-sdk-components-theme($light-blue-theme);

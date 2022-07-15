@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component, ElementRef, Inject, OnInit, SimpleChange, ViewChild } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { take } from 'rxjs/operators';
-import { CfarContract, CfarOffer, CfarContractExercise, CreateCfarContractExerciseRequest, CfarItinerary } from '../../apis/hopper-cloud-airline/v1';
+import { CfarContract, CfarContractExercise, CreateCfarContractExerciseRequest, CfarItinerary } from '../../apis/hopper-cloud-airline/v1';
 import { AbstractComponent } from '../abstract.component';
 import { TranslateService } from '@ngx-translate/core';
 import { DateAdapter } from "@angular/material/core";

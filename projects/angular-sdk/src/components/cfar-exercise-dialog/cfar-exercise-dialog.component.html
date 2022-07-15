@@ -17,7 +17,7 @@
 
         <ng-container *ngIf="cfarContract">
 
-            <mat-stepper orientation="vertical" #stepper linear (selectionChange)="onScrollToTop($event)">
+            <mat-vertical-stepper orientation="vertical" #stepper linear (selectionChange)="onScrollToTop($event)">
 
                 <!-- STEP 1 -->
                 <mat-step>
@@ -400,7 +400,7 @@
                 </mat-step>
                 <!-- / STEP 4 -->
 
-            </mat-stepper>
+            </mat-vertical-stepper>
 
         </ng-container>
 

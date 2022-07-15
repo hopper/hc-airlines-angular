@@ -18,7 +18,7 @@ import { Clipboard } from '@angular/cdk/clipboard';
 })
 export class CfarExerciseDialogPageComponent extends CommonGuidesComponent {
 
-  public override htmlCode: string = `
+  public  htmlCode: string = `
     <button mat-flat-button color="primary" (click)="onOpenCfarExerciseDialog(false)">
       Open CFAR Exercise dialog
     </button>
@@ -28,7 +28,7 @@ export class CfarExerciseDialogPageComponent extends CommonGuidesComponent {
     </button>
   `;
 
-  public override tsCode: string = `
+  public  tsCode: string = `
     import { DialogUtils } from "@hopper-cloud-airlines/angular-sdk/src/utils/dialog.utils";
     import { CfarExerciseDialogComponent } from "@hopper-cloud-airlines/angular-sdk/src/components/cfar-exercise-dialog/cfar-exercise-dialog.component";
     import { MatDialog } from "@angular/material/dialog";
@@ -79,7 +79,7 @@ export class CfarExerciseDialogPageComponent extends CommonGuidesComponent {
   // Publics Methods
   // -----------------------------------------------
 
-  public override getInputs(): InputModel[] {
+  public  getInputs(): InputModel[] {
     return [
       {
         name: 'currentLang',
@@ -152,7 +152,7 @@ export class CfarExerciseDialogPageComponent extends CommonGuidesComponent {
     ];
   }
 
-  public override getOutputs(): OutputModel[] {
+  public  getOutputs(): OutputModel[] {
     return [
       {
         name: 'Event on submit button',

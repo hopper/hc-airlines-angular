@@ -20,13 +20,13 @@ import { CfarContract } from "projects/angular-sdk/src/apis/hopper-cloud-airline
 })
 export class CfarOfferDialogPageComponent extends CommonGuidesComponent {
 
-  public override htmlCode: string = `
+  public htmlCode: string = `
     <button mat-flat-button color="primary" (click)="onOpenCfarOfferDialog()">
       Open CFAR offer dialog
     </button>
   `;
 
-  public override tsCode: string = `
+  public tsCode: string = `
     import { DialogUtils } from "@hopper-cloud-airlines/angular-sdk/src/utils/dialog.utils";
     import { CfarContract } from "@hopper-cloud-airlines/angular-sdk/src/apis/hopper-cloud-airline/v1";
     import { CfarOfferDialogComponent } from "@hopper-cloud-airlines/angular-sdk/src/components/cfar-offer-dialog/cfar-offer-dialog.component";
@@ -79,7 +79,7 @@ export class CfarOfferDialogPageComponent extends CommonGuidesComponent {
   // Publics Methods
   // -----------------------------------------------
 
-  public override getInputs(): InputModel[] {
+  public getInputs(): InputModel[] {
     return [
       {
         name: 'currentLang',
@@ -126,7 +126,7 @@ export class CfarOfferDialogPageComponent extends CommonGuidesComponent {
     ];
   }
 
-  public override getOutputs(): OutputModel[] {
+  public getOutputs(): OutputModel[] {
     return [
       {
         name: 'Event on submit button',

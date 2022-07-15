@@ -1,4 +1,4 @@
-@use '~@angular/material' as mat;
+@import '~@angular/material/theming';
 
 $dark-primary-text: rgba(black, 0.87);
 $light-primary-text: white;
@@ -69,11 +69,11 @@ $light-blue-accent-palette: (
   )
 );
 
-$light-blue-primary: mat.define-palette($light-blue-primary-palette, 500, 300, 700);
-$light-blue-accent: mat.define-palette($light-blue-accent-palette, 500, 300, 700);
-$light-blue-warn: mat.define-palette(mat.$red-palette);
+$light-blue-primary: mat-palette($light-blue-primary-palette, 500, 300, 700);
+$light-blue-accent: mat-palette($light-blue-accent-palette, 500, 300, 700);
+$light-blue-warn: mat-palette($mat-red);
 
-$light-blue-theme: mat.define-light-theme((
+$light-blue-theme: mat-light-theme((
   color: (
     primary: $light-blue-primary,
     accent: $light-blue-accent,

@@ -94,7 +94,7 @@
                 border-radius: 0px;
                 
                 &:hover {
-                    @include mat.elevation(4);
+                    @include mat-elevation(4);
                 }
 
                 &.active {

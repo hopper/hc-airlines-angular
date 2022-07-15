@@ -6,8 +6,9 @@ import { TranslateService } from '@ngx-translate/core';
 import { DateAdapter } from "@angular/material/core";
 import { ApiTranslatorUtils } from '../../utils/api-translator.utils';
 import { HopperProxyService } from '../../services/hopper-proxy.service';
-import { CfarOfferDialogComponent, DialogUtils } from '../../public-api';
 import { MatDialog } from '@angular/material/dialog';
+import { CfarOfferDialogComponent } from '../cfar-offer-dialog/cfar-offer-dialog.component';
+import { DialogUtils } from '../../utils/dialog.utils';
 
 @Component({
   selector: 'hopper-cfar-offer-banner',

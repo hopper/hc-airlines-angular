@@ -1,12 +1,12 @@
 
 // Custom Theming for Angular Material
 // For more information: https://material.angular.io/guide/theming
-@use '~@angular/material' as mat;
+@import '~@angular/material/theming';
 
 // Include the common styles for Angular Material. We include this here so that you only
 // have to load a single css file for Angular Material in your app.
 // Be sure that you only ever include this mixin once!
-@include mat.core();
+@include mat-core();
 
 $dark-primary-text: rgba(black, 0.87);
 $light-primary-text: white;
@@ -124,11 +124,11 @@ $hopper-accent-palette: (
   )
 );
 
-$hopper-primary: mat.define-palette($hopper-primary-palette, 500, 300, 700);
-$hopper-accent: mat.define-palette($hopper-accent-palette, 500, 300, 700);
-$hopper-warn: mat.define-palette(mat.$red-palette);
+$hopper-primary: mat-palette($hopper-primary-palette, 500, 300, 700);
+$hopper-accent: mat-palette($hopper-accent-palette, 500, 300, 700);
+$hopper-warn: mat-palette($mat-red);
 
-$hopper-dark-theme: mat.define-dark-theme((
+$hopper-dark-theme: mat-dark-theme((
   color: (
     primary: $hopper-primary,
     accent: $hopper-accent,
@@ -136,7 +136,7 @@ $hopper-dark-theme: mat.define-dark-theme((
   )
 ));
 
-$hopper-light-theme: mat.define-light-theme((
+$hopper-light-theme: mat-light-theme((
   color: (
     primary: $hopper-primary,
     accent: $hopper-accent,
@@ -146,7 +146,7 @@ $hopper-light-theme: mat.define-light-theme((
 
 .theme-dark-hopper {
   // Apply the theme to all Angular Material Components
-  @include mat.all-component-themes($hopper-dark-theme);
+  @include angular-material-theme($hopper-dark-theme);
 
   // Apply the theme to the library components
   @include hopper-cloud-airlines-angular-sdk-components-theme($hopper-dark-theme);
@@ -157,7 +157,7 @@ $hopper-light-theme: mat.define-light-theme((
 
 .theme-light-hopper {
   // Apply the theme to all Angular Material Components
-  @include mat.all-component-themes($hopper-light-theme);
+  @include angular-material-theme($hopper-light-theme);
 
   // Apply the theme to the library components
   @include hopper-cloud-airlines-angular-sdk-components-theme($hopper-light-theme);
@@ -172,7 +172,7 @@ $hopper-light-theme: mat.define-light-theme((
 
 .theme-light-blue {
   // Apply the theme to all Angular Material Components
-  @include mat.all-component-themes($light-blue-theme);
+  @include angular-material-theme($light-blue-theme);
 
   // Apply the theme to the library components
   @include hopper-cloud-airlines-angular-sdk-components-theme($light-blue-theme);
