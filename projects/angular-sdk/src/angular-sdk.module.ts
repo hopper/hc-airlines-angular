@@ -33,7 +33,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatRadioModule } from '@angular/material/radio';
 import { FormsModule } from '@angular/forms';
 
-import { ApiModule } from './apis/hopper-cloud-airline/v1';
+import { ApiModule, APIS, CancelForAnyReasonCFARService } from './apis/hopper-cloud-airline/v1';
 
 import localeFr from '@angular/common/locales/fr';
 import localeFrExtra from '@angular/common/locales/extra/fr';

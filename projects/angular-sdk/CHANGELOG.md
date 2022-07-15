@@ -1,3 +1,10 @@
+<a name="2.1.2"></a>
+
+# 2.1.2 (2022-07-15)
+
+### Bug fixes
+- Fix Service Import issue
+
 <a name="2.1.1"></a>
 
 # 2.1.1 (2022-07-13)

@@ -3,9 +3,7 @@ import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { CancelForAnyReasonCFARService, CfarContract, CfarContractExercise, CfarOffer, CreateCfarContractExerciseRequest, CreateCfarContractRequest, CreateCfarOfferRequest } from "../apis/hopper-cloud-airline/v1";
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class HopperProxyService {
 
   constructor(
