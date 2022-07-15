@@ -1,9 +1,30 @@
-<a name="2.1.3"></a>
+<a name="2.1.6"></a>
 
-# 2.1.3 (2022-XX-XX)
+# 2.1.6 (2022-07-15)
 
 ### Bug fixes
-- Fix angular issue
+- Fix architecture issue
+
+<a name="2.1.5"></a>
+
+# 2.1.5 (2022-07-15)
+
+### Bug fixes
+- Fix architecture issue
+
+<a name="2.1.4"></a>
+
+# 2.1.4 (2022-07-15)
+
+### Bug fixes
+- Fix architecture issue
+
+<a name="2.1.3"></a>
+
+# 2.1.3 (2022-07-15)
+
+### Bug fixes
+- Fix architecture issue
 
 <a name="2.1.2"></a>
 

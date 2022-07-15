@@ -16,14 +16,6 @@ If you want to build a specific project :
 
 `ng build PROJECT_NAME`
 
-## Publication
-
-1. Update the `package.json version` of the project
-2. Run `ng build PROJECT_NAME`
-3. Move to `dist/PROJECT_NAME` folder
-4. Run `npm pack` in order to generate a tgz file
-5. Run `npm publish` to push the new version
-
 ## Update documentation
 
 1. Run `ng build --base-href "https://hopper.github.io/hc-airlines-angular/"`
