@@ -1,3 +1,10 @@
+<a name="2.1.3"></a>
+
+# 2.1.3 (2022-XX-XX)
+
+### Bug fixes
+- Fix angular issue
+
 <a name="2.1.2"></a>
 
 # 2.1.2 (2022-07-15)
