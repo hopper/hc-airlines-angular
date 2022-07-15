@@ -18,9 +18,8 @@ jobs:
       - run: npm install -g @angular/cli@12.2.17
       - run: npm install
       - run: ng build "angular-sdk"
-      - run: |
-          cd dist/angular-sdk
-          npm dist-tag rm @hopper-cloud-airlines/angular-sdk beta
-          npm publish --access public --tag beta
+      - run: cd dist/angular-sdk
+      - run: npm dist-tag rm @hopper-cloud-airlines/angular-sdk beta
+      - run: npm publish --access public --tag beta
         env:
           NODE_AUTH_TOKEN: ${{secrets.npm_token}}

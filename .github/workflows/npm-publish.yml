@@ -19,8 +19,7 @@ jobs:
       - run: npm install -g @angular/cli@12.2.17
       - run: npm install
       - run: ng build "angular-sdk"
-      - run: |
-          cd dist/angular-sdk
-          npm publish --access public
+      - run: cd dist/angular-sdk
+      - run: npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{secrets.npm_token}}
