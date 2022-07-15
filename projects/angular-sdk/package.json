@@ -1,16 +1,17 @@
 {
   "name": "@hopper-cloud-airlines/angular-sdk",
-  "version": "2.1.4",
+  "version": "2.1.5",
   "peerDependencies": {
-    "@angular/common": "^11.2.14",
-    "@angular/core": "^11.2.14",
-    "@angular/material": "^11.2.12",
-    "@angular/material-moment-adapter": "^11.2.12",
-    "@angular/platform-browser": "~11.2.14",
-    "@angular/platform-browser-dynamic": "~11.2.14",
-    "@angular/flex-layout": "^11.0.0-beta.33",
-    "@ngx-translate/core": "^13.0.0",
-    "rxjs": "~6.6.0"
+    "@angular/common": ">=11.2.14",
+    "@angular/cdk": ">=11.2.13",
+    "@angular/core": ">=11.2.14",
+    "@angular/material": ">=11.2.13",
+    "@angular/material-moment-adapter": ">=11.2.13",
+    "@angular/platform-browser": ">=11.2.14",
+    "@angular/platform-browser-dynamic": ">=1.2.14",
+    "@angular/flex-layout": ">=11.0.0-beta.33",
+    "@ngx-translate/core": ">=13.0.0",
+    "rxjs": ">=6.6.0"
   },
   "dependencies": {
     "tslib": "^2.3.0"

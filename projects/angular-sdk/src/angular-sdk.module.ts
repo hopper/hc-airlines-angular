@@ -9,13 +9,9 @@ import { TranslateModule } from '@ngx-translate/core';
 import { CfarOfferBannerComponent } from './components/cfar-offer-banner/cfar-offer-banner.component';
 import { CfarOfferDialogComponent } from './components/cfar-offer-dialog/cfar-offer-dialog.component';
 import { CfarExerciseDialogComponent } from './components/cfar-exercise-dialog/cfar-exercise-dialog.component';
-import { EventButtonComponent } from './components/event-button/event-button.component';
 
 import { MomentDateAdapter, MAT_MOMENT_DATE_FORMATS } from '@angular/material-moment-adapter';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
-
-import { HopperProxyService } from './services/hopper-proxy.service';
-import { HopperEventsDirective } from './directives/hopper-events.directive';
 
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
@@ -33,7 +29,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatRadioModule } from '@angular/material/radio';
 import { FormsModule } from '@angular/forms';
 
-import { ApiModule, APIS, CancelForAnyReasonCFARService } from './apis/hopper-cloud-airline/v1';
+import { ApiModule } from './apis/hopper-cloud-airline/v1';
 
 import localeFr from '@angular/common/locales/fr';
 import localeFrExtra from '@angular/common/locales/extra/fr';
@@ -47,8 +43,7 @@ import localeZhExtra from '@angular/common/locales/extra/zh';
 import localeEs from '@angular/common/locales/es';
 import localeEsExtra from '@angular/common/locales/extra/es';
 import { CfarOfferBannerLargeComponent } from './components/cfar-offer-banner-large/cfar-offer-banner-large.component';
-// import { HopperEventsService } from './public-api';
-
+import { HopperProxyService } from './services/hopper-proxy.service';
 
 // Supported Languages for Datepicker
 registerLocaleData(localeFr, 'fr', localeFrExtra);
@@ -59,14 +54,10 @@ registerLocaleData(localeZh, 'zh', localeZhExtra);
 @NgModule({
   declarations: [
     // Component
-    //EventButtonComponent,
     CfarOfferBannerComponent,
     CfarOfferBannerLargeComponent,
     CfarOfferDialogComponent,
-    CfarExerciseDialogComponent,
-
-    // Directive
-    HopperEventsDirective,
+    CfarExerciseDialogComponent
   ],
   imports: [
     // Angular Module
@@ -101,28 +92,20 @@ registerLocaleData(localeZh, 'zh', localeZhExtra);
   ],
   exports: [
     // Component
-    //EventButtonComponent,
     CfarOfferBannerComponent,
     CfarOfferBannerLargeComponent,
     CfarOfferDialogComponent,
     CfarExerciseDialogComponent,
-
-    // Directive
-    // HopperEventsDirective
   ],
   entryComponents: [
     // Component
     CfarOfferDialogComponent,
     CfarExerciseDialogComponent,
-
-    // Directive
-    // HopperEventsDirective
   ],
   providers: [
     { provide: DateAdapter, useClass: MomentDateAdapter, deps: [ MAT_DATE_LOCALE ] },
     { provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS },
-    // HopperProxyService,
-    // HopperEventsService
+    HopperProxyService
   ]
 })
 export class HopperCloudAirlinesAngularSdkModule { }
