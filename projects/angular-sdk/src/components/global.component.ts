@@ -8,9 +8,9 @@ import { CountryCode } from "../enums/country-code.enum";
 import { take } from "rxjs/operators";
 
 @Directive({
-    selector: '[HopperAbstractComponent]'
+    selector: '[HopperGlobalComponent]'
 })
-export abstract class AbstractComponent implements OnChanges {
+export class GlobalComponent implements OnChanges {
     
     @Input() currentLang!: string;
     @Input() basePath!: string;

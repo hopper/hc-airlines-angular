@@ -2,7 +2,7 @@ import { ChangeDetectorRef, Component, ElementRef, Inject, OnInit, SimpleChange,
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { take } from 'rxjs/operators';
 import { CfarContract, CfarContractExercise, CreateCfarContractExerciseRequest, CfarItinerary } from '../../apis/hopper-cloud-airline/v1';
-import { AbstractComponent } from '../abstract.component';
+import { GlobalComponent } from '../global.component';
 import { TranslateService } from '@ngx-translate/core';
 import { DateAdapter } from "@angular/material/core";
 import { ApiTranslatorUtils } from '../../utils/api-translator.utils';
@@ -18,7 +18,7 @@ import { MatStepper } from '@angular/material/stepper';
   templateUrl: './cfar-exercise-dialog.component.html',
   styleUrls: ['./cfar-exercise-dialog.component.scss']
 })
-export class CfarExerciseDialogComponent extends AbstractComponent implements OnInit {
+export class CfarExerciseDialogComponent extends GlobalComponent implements OnInit {
 
   public selectedRefundMethod?: 'ftc' | 'cash';
   public cfarContract!: CfarContract;

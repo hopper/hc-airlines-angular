@@ -44,6 +44,7 @@ import localeEs from '@angular/common/locales/es';
 import localeEsExtra from '@angular/common/locales/extra/es';
 import { CfarOfferBannerLargeComponent } from './components/cfar-offer-banner-large/cfar-offer-banner-large.component';
 import { HopperProxyService } from './services/hopper-proxy.service';
+import { GlobalComponent } from './components/global.component';
 
 // Supported Languages for Datepicker
 registerLocaleData(localeFr, 'fr', localeFrExtra);
@@ -54,6 +55,7 @@ registerLocaleData(localeZh, 'zh', localeZhExtra);
 @NgModule({
   declarations: [
     // Component
+    GlobalComponent,
     CfarOfferBannerComponent,
     CfarOfferBannerLargeComponent,
     CfarOfferDialogComponent,

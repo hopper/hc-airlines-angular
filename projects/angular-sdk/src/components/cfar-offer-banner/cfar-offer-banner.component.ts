@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { take } from 'rxjs/operators';
 import { CfarContract, CfarItinerary, CfarOffer, CreateCfarOfferRequest, RequestType } from '../../apis/hopper-cloud-airline/v1';
-import { AbstractComponent } from '../abstract.component';
+import { GlobalComponent } from '../global.component';
 import { TranslateService } from '@ngx-translate/core';
 import { DateAdapter } from "@angular/material/core";
 import { ApiTranslatorUtils } from '../../utils/api-translator.utils';
@@ -15,7 +15,7 @@ import { DialogUtils } from '../../utils/dialog.utils';
   templateUrl: './cfar-offer-banner.component.html',
   styleUrls: ['./cfar-offer-banner.component.scss']
 })
-export class CfarOfferBannerComponent extends AbstractComponent implements OnInit {
+export class CfarOfferBannerComponent extends GlobalComponent implements OnInit {
 
   public cheapestOffer!: CfarOffer;
   public isLoading!: boolean;
