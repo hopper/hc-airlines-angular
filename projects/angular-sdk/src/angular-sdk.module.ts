@@ -47,7 +47,7 @@ import localeZhExtra from '@angular/common/locales/extra/zh';
 import localeEs from '@angular/common/locales/es';
 import localeEsExtra from '@angular/common/locales/extra/es';
 import { CfarOfferBannerLargeComponent } from './components/cfar-offer-banner-large/cfar-offer-banner-large.component';
-import { HopperEventsService } from './public-api';
+// import { HopperEventsService } from './public-api';
 
 
 // Supported Languages for Datepicker
@@ -108,7 +108,7 @@ registerLocaleData(localeZh, 'zh', localeZhExtra);
     CfarExerciseDialogComponent,
 
     // Directive
-    HopperEventsDirective
+    // HopperEventsDirective
   ],
   entryComponents: [
     // Component
@@ -116,13 +116,13 @@ registerLocaleData(localeZh, 'zh', localeZhExtra);
     CfarExerciseDialogComponent,
 
     // Directive
-    HopperEventsDirective
+    // HopperEventsDirective
   ],
   providers: [
     { provide: DateAdapter, useClass: MomentDateAdapter, deps: [ MAT_DATE_LOCALE ] },
     { provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS },
-    HopperProxyService,
-    HopperEventsService
+    // HopperProxyService,
+    // HopperEventsService
   ]
 })
 export class HopperCloudAirlinesAngularSdkModule { }
