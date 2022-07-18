@@ -471,7 +471,7 @@
       var environment = {
         production: false,
         defaultTheme: "theme-light-hopper",
-        version: 'v2.1.6'
+        version: 'v2.1.7'
       };
       /*
        * For easier debugging in development mode, you can import the following file
@@ -767,7 +767,19 @@
             LOADING: "正在加载优惠...",
             BUTTON: {
               SELECT: "选择"
-            }
+            },
+            COVERAGE_PERCENTAGE: "承保飞行费用的 {{ coverage }}"
+          },
+          CFAR_OFFER_BANNER_LARGE: {
+            TITLE: "随时以任何理由取消您的航班。",
+            NO_OFFERS: "没有可用的优惠",
+            LOADING: "正在加载优惠...",
+            BUTTON: {
+              CONTINUE: "继续"
+            },
+            COVERAGE_PERCENTAGE: "承保飞行费用的 {{ coverage }}",
+            NO_COVERAGE_OPTION: "我不想出于任何原因购买取消。",
+            CHOOSE_COVERAGE: "请选择或拒绝出于任何原因取消。"
           },
           CFAR_OFFER_DIALOG: {
             TITLE: "出于任何原因取消",
@@ -1141,7 +1153,19 @@
             LOADING: "Cargando ofertas en curso...",
             BUTTON: {
               SELECT: "Seleccione"
-            }
+            },
+            COVERAGE_PERCENTAGE: "{{ coverage }} de los costos de vuelo cubiertos"
+          },
+          CFAR_OFFER_BANNER_LARGE: {
+            TITLE: "Cancele su vuelo en cualquier momento, por cualquier motivo.",
+            NO_OFFERS: "No hay ofertas disponibles",
+            LOADING: "Cargando ofertas en curso...",
+            BUTTON: {
+              CONTINUE: "Seguir"
+            },
+            COVERAGE_PERCENTAGE: "{{ coverage }} de los costos de vuelo cubiertos",
+            NO_COVERAGE_OPTION: "No quiero comprar Cancelar por cualquier motivo.",
+            CHOOSE_COVERAGE: "Elija o rechace Cancelar por cualquier motivo."
           },
           CFAR_OFFER_DIALOG: {
             TITLE: "Cancelar por cualquier motivo",
@@ -1981,8 +2005,20 @@
             NO_OFFERS: "No offer available",
             LOADING: "Loading offers in progress...",
             BUTTON: {
-              SELECT: 'Select'
-            }
+              SELECT: "Select"
+            },
+            COVERAGE_PERCENTAGE: "{{ coverage }} Flight cost covered"
+          },
+          CFAR_OFFER_BANNER_LARGE: {
+            TITLE: "Cancel your flight at any time, for any reason.",
+            NO_OFFERS: "No offer available",
+            LOADING: "Loading offers in progress...",
+            BUTTON: {
+              CONTINUE: "Continue"
+            },
+            COVERAGE_PERCENTAGE: "{{ coverage }} Flight cost covered",
+            NO_COVERAGE_OPTION: "I do not want to purchase Cancel For Any Reason.",
+            CHOOSE_COVERAGE: "Please choose or decline Cancel For Any Reason."
           },
           CFAR_OFFER_DIALOG: {
             TITLE: "Cancel For Any Reason",
@@ -2773,7 +2809,19 @@
             LOADING: "Chargement des offres en cours...",
             BUTTON: {
               SELECT: "Sélectionner"
-            }
+            },
+            COVERAGE_PERCENTAGE: "{{ coverage }} des frais de vol couverts"
+          },
+          CFAR_OFFER_BANNER_LARGE: {
+            TITLE: "Annulez votre vol à tout moment, pour quelque raison que ce soit.",
+            NO_OFFERS: "Aucune offre disponible",
+            LOADING: "Chargement des offres en cours...",
+            BUTTON: {
+              CONTINUE: "Continuer"
+            },
+            COVERAGE_PERCENTAGE: "{{ coverage }} des frais de vol couverts",
+            NO_COVERAGE_OPTION: "Je ne veux pas ajouter l'option 'Annuler pour une raison quelconque'.",
+            CHOOSE_COVERAGE: "Veuillez choisir ou refuser 'Annuler pour une raison quelconque'."
           },
           CFAR_OFFER_DIALOG: {
             TITLE: "Annuler pour une raison quelconque",
