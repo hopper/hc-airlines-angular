@@ -16,6 +16,7 @@ import { reducers } from './shared/ngrx';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 
 const metaReducers: MetaReducer<any>[] = !environment.production ? [storeFreeze] : [];
+
 @NgModule({
   declarations: [
     AppComponent
