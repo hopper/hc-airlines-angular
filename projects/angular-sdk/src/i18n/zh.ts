@@ -262,7 +262,19 @@ export const locale: I18n = {
             LOADING: "正在加载优惠...",
             BUTTON: {
                 SELECT: "选择"
-            }
+            },
+            COVERAGE_PERCENTAGE: "承保飞行费用的 {{ coverage }}",
+        },
+        CFAR_OFFER_BANNER_LARGE: {
+            TITLE: "随时以任何理由取消您的航班。",
+            NO_OFFERS: "没有可用的优惠",
+            LOADING: "正在加载优惠...",
+            BUTTON: {
+                CONTINUE: "继续"
+            },
+            COVERAGE_PERCENTAGE: "承保飞行费用的 {{ coverage }}",
+            NO_COVERAGE_OPTION: "我不想出于任何原因购买取消。",
+            CHOOSE_COVERAGE: "请选择或拒绝出于任何原因取消。"
         },
         CFAR_OFFER_DIALOG: {
             TITLE: "出于任何原因取消",

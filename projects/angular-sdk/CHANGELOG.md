@@ -1,3 +1,12 @@
+<a name="2.1.7"></a>
+
+# 2.1.7 (2022-07-18)
+
+### Bug fixes / Small changes
+- Fix labels issues on CFAR Offer Banner Large component
+- Fix labels issues on CFAR Offer Banner component
+- Add Author info
+
 <a name="2.1.6"></a>
 
 # 2.1.6 (2022-07-15)

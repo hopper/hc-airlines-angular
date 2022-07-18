@@ -262,7 +262,19 @@ export const locale: I18n = {
             LOADING: "Chargement des offres en cours...",
             BUTTON: {
                 SELECT: "Sélectionner"
-            }
+            },
+            COVERAGE_PERCENTAGE: "{{ coverage }} des frais de vol couverts",
+        },
+        CFAR_OFFER_BANNER_LARGE: {
+            TITLE: "Annulez votre vol à tout moment, pour quelque raison que ce soit.",
+            NO_OFFERS: "Aucune offre disponible",
+            LOADING: "Chargement des offres en cours...",
+            BUTTON: {
+                CONTINUE: "Continuer"
+            },
+            COVERAGE_PERCENTAGE: "{{ coverage }} des frais de vol couverts",
+            NO_COVERAGE_OPTION: "Je ne veux pas ajouter l'option 'Annuler pour une raison quelconque'.",
+            CHOOSE_COVERAGE: "Veuillez choisir ou refuser 'Annuler pour une raison quelconque'."
         },
         CFAR_OFFER_DIALOG: {
             TITLE: "Annuler pour une raison quelconque",

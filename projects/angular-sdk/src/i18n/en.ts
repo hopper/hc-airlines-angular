@@ -261,8 +261,20 @@ export const locale: I18n = {
             NO_OFFERS: "No offer available",
             LOADING: "Loading offers in progress...",
             BUTTON: {
-                SELECT: 'Select'
-            }
+                SELECT: "Select"
+            },
+            COVERAGE_PERCENTAGE: "{{ coverage }} Flight cost covered",
+        },
+        CFAR_OFFER_BANNER_LARGE: {
+            TITLE: "Cancel your flight at any time, for any reason.",
+            NO_OFFERS: "No offer available",
+            LOADING: "Loading offers in progress...",
+            BUTTON: {
+                CONTINUE: "Continue"
+            },
+            COVERAGE_PERCENTAGE: "{{ coverage }} Flight cost covered",
+            NO_COVERAGE_OPTION: "I do not want to purchase Cancel For Any Reason.",
+            CHOOSE_COVERAGE: "Please choose or decline Cancel For Any Reason."
         },
         CFAR_OFFER_DIALOG: {
             TITLE: "Cancel For Any Reason",

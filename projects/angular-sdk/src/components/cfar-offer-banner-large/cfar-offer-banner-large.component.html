@@ -7,7 +7,7 @@
             <div fxFlex="90" fxFlex.lt-md="100" fxLayout="row wrap">
 
                 <div fxFlex="100">
-                    <h2 class="offer-title px-16 m-0">{{ 'CFAR_OFFER_BANNER.TITLE' | translate }}</h2>
+                    <h2 class="offer-title px-16 m-0">{{ 'CFAR_OFFER_BANNER_LARGE.TITLE' | translate }}</h2>
                 </div>
 
                 <div class="mb-32" fxFlex="100" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="16px">
@@ -38,14 +38,18 @@
 
                             <ng-container *ngFor="let offer of cfarOffers; let i = index;">
                                 <mat-radio-button fxFlex="50" fxFlex.lt-md="100" value="{{ i }}" class="important-text bold">
-                                    {{ computePercentage(offer) | percent }} Flight cost covered
+                                    {{ 'CFAR_OFFER_BANNER_LARGE.COVERAGE_PERCENTAGE' | translate: 
+                                        {
+                                            coverage: (computePercentage(offer) | percent)
+                                        }
+                                    }}
                                 </mat-radio-button>
                             </ng-container>
 
                         </div>
                        
                         <mat-radio-button class="default-choice mt-16 p-16" fxFlex="100" value="-1">
-                            I do not want to purchase Cancel For Any Reason.
+                            {{ 'CFAR_OFFER_BANNER_LARGE.NO_COVERAGE_OPTION' | translate }}
                         </mat-radio-button>
                     </mat-radio-group>
     
@@ -54,10 +58,10 @@
                 <div fxFlexOffset="20" fxFlex="80" fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="16px"
                     fxFlexOffset.lt-md="0" fxFlex.lt-md="100" fxLayout.lt-md="column">
     
-                    <span>Please choose or decline Cancel For Any Reason.</span>
+                    <span>{{ 'CFAR_OFFER_BANNER_LARGE.CHOOSE_COVERAGE' | translate }}</span>
     
                     <button mat-raised-button color="primary" (click)="onSubmit()" [disabled]="!selectedChoice" ngClass.lt-sm="full-width">
-                        Continue
+                        {{ 'CFAR_OFFER_BANNER_LARGE.BUTTON.CONTINUE' | translate }}
                     </button>
                 </div>
             </div>
@@ -65,14 +69,14 @@
         </mat-card>
 
         <ng-container *ngIf="!cfarOffers">
-            <p>{{ 'CFAR_OFFER_BANNER.NO_OFFERS' | translate }}</p>
+            <p>{{ 'CFAR_OFFER_BANNER_LARGE.NO_OFFERS' | translate }}</p>
         </ng-container>
 
     </ng-container>
 
     <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="16px" *ngIf="isLoading">
         <mat-spinner></mat-spinner>
-        <p>{{ 'CFAR_OFFER_BANNER.LOADING' | translate }}</p>
+        <p>{{ 'CFAR_OFFER_BANNER_LARGE.LOADING' | translate }}</p>
     </div>
 
 </div>

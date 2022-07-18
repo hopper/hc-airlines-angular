@@ -1,5 +1,5 @@
 /*
- * Public API Surface of hopper-lib
+ * Public API Surface of the SDK
  */
 
 // SERVICES

@@ -34,8 +34,9 @@
                         <div fxFlex="100">
                             <p>
                                 {{ 'CFAR_EXERCISE_DIALOG.DEADLINE_SENTENCE_1' | translate }}
-                                <b>{{ cfarContract?.expiryDateTime | date: ('COMMON.DATE_FORMAT' |
-                                    translate):'':currentLang }}</b>
+                                <b>
+                                    {{ cfarContract?.expiryDateTime | date: ('COMMON.DATE_FORMAT' | translate):'':currentLang }}
+                                </b>
                             </p>
                             <p>{{ 'CFAR_EXERCISE_DIALOG.DEADLINE_SENTENCE_2' | translate }}</p>
                         </div>

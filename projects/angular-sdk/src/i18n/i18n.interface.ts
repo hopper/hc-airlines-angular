@@ -260,7 +260,19 @@ export interface I18n {
             LOADING: string;
             BUTTON: {
                 SELECT: string;
-            }
+            },
+            COVERAGE_PERCENTAGE: string;
+        },
+        CFAR_OFFER_BANNER_LARGE: {
+            TITLE: string;
+            NO_OFFERS: string;
+            LOADING: string;
+            BUTTON: {
+                CONTINUE: string;
+            },
+            COVERAGE_PERCENTAGE: string;
+            NO_COVERAGE_OPTION: string;
+            CHOOSE_COVERAGE: string;
         },
         CFAR_OFFER_DIALOG: {
             TITLE: string;
