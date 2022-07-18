@@ -18,5 +18,5 @@ If you want to build a specific project :
 
 ## Update documentation
 
-1. Run `ng build --base-href "https://hopper.github.io/hc-airlines-angular/"`
+1. Run `ng build --prod --base-href "https://hopper.github.io/hc-airlines-angular/"`
 2. Run `npx angular-cli-ghpages --dir=dist/hc-airlines-angular`
