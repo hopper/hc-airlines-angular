@@ -297,7 +297,8 @@ export interface I18n {
             FLIGHT: string;
             PASSENGER: string;
             PASSENGERS: string;
-            CHOOSE_REFUND_TYPE: string;
+            REFUND_DETAILS_TITLE: string;
+            REFUND_WARNING_MESSAGE: string;
             HOPPER_REFUND: string;
             AIRLINE_REFUND: string;
             METHOD: string;

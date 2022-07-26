@@ -10,7 +10,7 @@ import { Clipboard } from '@angular/cdk/clipboard';
 import { Locales } from "projects/angular-sdk/src/i18n";
 import { DialogUtils } from "projects/angular-sdk/src/utils/dialog.utils";
 import { CfarOfferDialogComponent } from "projects/angular-sdk/src/components/cfar-offer-dialog/cfar-offer-dialog.component";
-import { CfarContract } from "projects/angular-sdk/src/apis/hopper-cloud-airline/v1";
+import { CfarContractCustomer } from "projects/angular-sdk/src/apis/hopper-cloud-airline/v1";
 
 
 @Component({
@@ -28,7 +28,7 @@ export class CfarOfferDialogPageComponent extends CommonGuidesComponent {
 
   public tsCode: string = `
     import { DialogUtils } from "@hopper-cloud-airlines/angular-sdk/src/utils/dialog.utils";
-    import { CfarContract } from "@hopper-cloud-airlines/angular-sdk/src/apis/hopper-cloud-airline/v1";
+    import { CfarContractCustomer } from "@hopper-cloud-airlines/angular-sdk/src/apis/hopper-cloud-airline/v1";
     import { CfarOfferDialogComponent } from "@hopper-cloud-airlines/angular-sdk/src/components/cfar-offer-dialog/cfar-offer-dialog.component";
     import { MatDialog } from "@angular/material/dialog";
     import { take } from "rxjs/operators";
@@ -54,7 +54,7 @@ export class CfarOfferDialogPageComponent extends CommonGuidesComponent {
       dialogRef.afterClosed()
         .pipe(take(1))
         .subscribe(
-          (result: CfarContract) => {
+          (result: CfarContractCustomer) => {
             if (result) {
               console.log(result);
             } else {
@@ -131,7 +131,7 @@ export class CfarOfferDialogPageComponent extends CommonGuidesComponent {
       {
         name: 'Event on submit button',
         description: `
-          When the submit button is pressed, the dialog returns a CfarContract object
+          When the submit button is pressed, the dialog returns a CfarContractCustomer object
         `
       },
       {
@@ -157,7 +157,7 @@ export class CfarOfferDialogPageComponent extends CommonGuidesComponent {
     dialogRef.afterClosed()
       .pipe(take(1))
       .subscribe(
-        (result: CfarContract) => {
+        (result: CfarContractCustomer) => {
           if (result) {
             console.log("Submit cfar offer dialog :")
             console.log(result);

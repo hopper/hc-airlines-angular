@@ -113,10 +113,10 @@
                         <div fxFlex="100" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px"
                             class="mb-16">
                             <mat-icon color="primary">monetization_on</mat-icon>
-                            <span class="subtitle">{{ 'CFAR_EXERCISE_DIALOG.CHOOSE_REFUND_TYPE' | translate }}</span>
+                            <span class="subtitle">{{ 'CFAR_EXERCISE_DIALOG.REFUND_DETAILS_TITLE' | translate }}</span>
                         </div>
 
-                        <div fxFlex="100" fxLayout="row wrap" fxLayoutAlign="center center" fxLayout.lt-md="column">
+                        <!--<div fxFlex="100" fxLayout="row wrap" fxLayoutAlign="center center" fxLayout.lt-md="column">
 
                             <ng-container *ngIf="cfarContract?.contractExercise?.hopperRefundMethod">
 
@@ -160,6 +160,30 @@
 
                             </ng-container>
 
+                        </div>-->
+
+                        <div fxFlex="100" fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="8px" class="mb-16">
+                            <p *ngIf="isHopperRefund">
+                                {{ 'CFAR_EXERCISE_DIALOG.REFUND_DETAILS' | translate: {
+                                    amount: cfarContract?.contractExercise?.hopperRefund | currency:cfarContract?.contractExercise?.currency:'symbol':undefined:currentLang,
+                                    method: cfarContract?.contractExercise?.hopperRefundMethod
+                                } }}
+                            </p>
+        
+                            <p *ngIf="!isHopperRefund">
+                                {{ 'CFAR_EXERCISE_DIALOG.REFUND_DETAILS' | translate: {
+                                    amount: cfarContract?.contractExercise?.airlineRefundAllowance | currency:cfarContract?.contractExercise?.currency:'symbol':undefined:currentLang,
+                                    method: cfarContract?.contractExercise?.airlineRefundMethod
+                                } }}
+                            </p>
+                        </div>
+
+                        <div fxFlex="100" *ngIf="isHopperRefund">
+                            <p class="text-justify">
+                                {{ 'CFAR_EXERCISE_DIALOG.REFUND_WARNING_MESSAGE' | translate: {
+                                    amount: cfarContract?.contractExercise?.hopperRefund | currency:cfarContract?.contractExercise?.currency:'symbol':undefined:currentLang
+                                } }}
+                            </p>
                         </div>
 
                     </div>

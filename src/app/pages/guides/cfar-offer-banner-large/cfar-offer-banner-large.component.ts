@@ -1,7 +1,7 @@
 import { Component } from "@angular/core";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { Store } from "@ngrx/store";
-import { CfarContract } from "projects/angular-sdk/src/apis/hopper-cloud-airline/v1";
+import { CfarContractCustomer } from "projects/angular-sdk/src/apis/hopper-cloud-airline/v1";
 import { Locales } from "projects/angular-sdk/src/i18n";
 import { InputModel, OutputModel } from "src/app/shared/models";
 import { AppState } from "src/app/shared/ngrx";
@@ -26,11 +26,11 @@ export class CfarOfferBannerLargePageComponent extends CommonGuidesComponent {
   `;
 
   public  tsCode: string = `
-    import { CfarContract } from "@hopper-cloud-airlines/angular-sdk/src/apis/hopper-cloud-airline/v1";
+    import { CfarContractCustomer } from "@hopper-cloud-airlines/angular-sdk/src/apis/hopper-cloud-airline/v1";
     
     // ...
 
-    onChooseCoverage(cfarContract: CfarContract): void {
+    onChooseCoverage(cfarContract: CfarContractCustomer): void {
       console.log(cfarContract);
     }
   `;
@@ -96,13 +96,13 @@ export class CfarOfferBannerLargePageComponent extends CommonGuidesComponent {
         name: 'chooseCoverage',
         description: `
           Event triggered when the user chooses a coverage (or not)<br />
-          Returns a CfarContract or null
+          Returns a CfarContractCustomer or null
         `
       }
     ];
   }
 
-  onChooseCoverage(cfarContract: CfarContract): void {
+  onChooseCoverage(cfarContract: CfarContractCustomer): void {
     console.log(cfarContract);
   }
 }

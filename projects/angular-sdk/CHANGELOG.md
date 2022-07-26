@@ -11,6 +11,7 @@
 - New component : Exercise Dialog
 - Catch errors of http calls
 - Remove 'Continue' button of the CFAR offer banner large.
+- CFAR offer banner / CFAR offer banner large : offerAccepted event now returns a CfarContractCustomer object
 
 <a name="2.1.7"></a>
 

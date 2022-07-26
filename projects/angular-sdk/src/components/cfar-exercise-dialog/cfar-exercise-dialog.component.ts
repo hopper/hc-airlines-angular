@@ -88,6 +88,8 @@ export class CfarExerciseDialogComponent extends GlobalComponent implements OnIn
 
     if (this.isFakeBackend) {
       this.cfarContract = this._buildFakeCfarContractExercisesResponse();
+      // Force to true for the MVP
+      this.isHopperRefund = true;
     } else {
       this.isLoading = true;
 
