@@ -34,13 +34,14 @@ export class GuidesPageComponent {
       description: 'A dialog to choose different coverage options'
     });
 
+    this.components.push({ 
+      name: 'CFAR Exercise Dialog',
+      link: 'cfar-exercise-dialog',
+      description: 'A dialog that allow user to be refund'
+    });
+
     // Working items
     if (!environment.production) {
-      this.components.push({ 
-        name: 'CFAR Exercise Dialog [WIP]',
-        link: 'cfar-exercise-dialog',
-        description: 'A dialog that allow user to be refund'
-      });
     }
   }
 

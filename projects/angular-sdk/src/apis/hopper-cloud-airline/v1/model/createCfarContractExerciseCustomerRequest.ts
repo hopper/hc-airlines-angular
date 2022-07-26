@@ -9,17 +9,20 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
+import { AirlineRefundMethod } from './airlineRefundMethod';
 import { CfarItinerary } from './cfarItinerary';
-import { MapString } from './mapString';
-import { PaymentMethod } from './paymentMethod';
 
 /**
- * A create CFAR contract request
+ * A create CFAR contract exercise customer request
  */
-export interface CreateCfarContractRequest { 
-    offerIds: Array<string>;
+export interface CreateCfarContractExerciseCustomerRequest { 
+    /**
+     * A unique identifier for a CFAR contract
+     */
+    contractId: string;
     itinerary: CfarItinerary;
-    paymentMethod?: PaymentMethod;
-    extAttributes: MapString;
-    pnrReference?: string;
+    pnrReference: string;
+    airlineRefundAllowance?: string;
+    airlineRefundMethod?: AirlineRefundMethod;
+    currency?: string;
 }

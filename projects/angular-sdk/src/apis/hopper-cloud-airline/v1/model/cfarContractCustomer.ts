@@ -10,5 +10,6 @@
  * Do not edit the class manually.
  */
 
-export interface Unauthorized { 
+export interface CfarContractCustomer { 
+    id: string;
 }

@@ -9,7 +9,13 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
+import { CfarItinerary } from './cfarItinerary';
 
-export interface OfflineReconciliation { 
-    type: string;
+/**
+ * A create CFAR contract customer request
+ */
+export interface CreateCfarContractCustomerRequest { 
+    offerIds: Array<string>;
+    itinerary: CfarItinerary;
+    pnrReference?: string;
 }

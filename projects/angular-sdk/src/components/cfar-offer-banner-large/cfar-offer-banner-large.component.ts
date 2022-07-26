@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { take } from 'rxjs/operators';
-import { CfarContract, CfarItinerary, CfarOffer, CreateCfarContractRequest, CreateCfarOfferRequest, RequestType } from '../../apis/hopper-cloud-airline/v1';
+import { CfarContractCustomer, CfarItinerary, CfarOfferCustomer, CreateCfarContractCustomerRequest, CreateCfarOfferCustomerRequest, RequestType } from '../../apis/hopper-cloud-airline/v1';
 import { GlobalComponent } from '../global.component';
 import { TranslateService } from '@ngx-translate/core';
 import { DateAdapter } from "@angular/material/core";
@@ -14,13 +14,15 @@ import { HopperProxyService } from '../../services/hopper-proxy.service';
 })
 export class CfarOfferBannerLargeComponent extends GlobalComponent implements OnInit {
 
-  public cfarOffers!: CfarOffer[];
-  public selectedCfarOffer!: CfarOffer;
+  public cfarOffers!: CfarOfferCustomer[];
+  public selectedCfarOffer!: CfarOfferCustomer;
   public isLoading!: boolean;
   public selectedChoice!: number;
+  public currency!: string;
 
   @Input() hCSessionId!: string;
   @Input() itineraries!: CfarItinerary[];
+  @Input() hasNoCoverageOption: boolean = true;
 
   @Output() chooseCoverage = new EventEmitter();
 
@@ -48,11 +50,11 @@ export class CfarOfferBannerLargeComponent extends GlobalComponent implements On
         .pipe(take(1))
         .subscribe(
           (cfarOffers) => {
-            let results: CfarOffer[] = [];
+            let results: CfarOfferCustomer[] = [];
 
             if (cfarOffers) {
               cfarOffers.forEach(cfarOffer => {
-                results.push(ApiTranslatorUtils.modelToCamelCase(cfarOffer) as CfarOffer);
+                results.push(ApiTranslatorUtils.modelToCamelCase(cfarOffer) as CfarOfferCustomer);
               });
             }
             
@@ -60,7 +62,10 @@ export class CfarOfferBannerLargeComponent extends GlobalComponent implements On
             this.selectedCfarOffer = this._getCheapestOffer(this.cfarOffers);
             this.isLoading = false;
           },
-          (error) => this.isLoading = false
+          (error) => {
+            console.error(error);
+            this.isLoading = false;
+          }
         );
     }
   }
@@ -69,27 +74,7 @@ export class CfarOfferBannerLargeComponent extends GlobalComponent implements On
   // Publics Methods
   // -----------------------------------------------
 
-  public onSubmit(): void {
-    if (this.selectedChoice != -1) {
-      this.isLoading = true;
-
-      // Create CFAR Contract
-      this._hopperProxyService
-        .postCfarContracts(this.basePath, this.hCSessionId, ApiTranslatorUtils.modelToSnakeCase(this._buildCreateCfarContractRequest()))
-        .pipe(take(1))
-        .subscribe(
-          (cfarContract: CfarContract) => {
-            this.chooseCoverage.emit(cfarContract);
-            this.isLoading = false;
-          },
-          (error) => this.isLoading = false
-        );
-    } else {
-      this.chooseCoverage.emit(null);
-    }
-  }
-
-  public computePercentage(offer: CfarOffer): number {
+  public computePercentage(offer: CfarOfferCustomer): number {
     if (offer) {
       const coverage = Number.parseFloat(offer.coverage);
       const totalPrice = Number.parseFloat(offer.itinerary.totalPrice);
@@ -100,32 +85,66 @@ export class CfarOfferBannerLargeComponent extends GlobalComponent implements On
     return 0;
   }
 
-  public onChangeChoice(): void {
+  public onChooseCoverage(): void {
     // Update descriptions
     this.selectedCfarOffer = this.selectedChoice > -1 ? this.cfarOffers[this.selectedChoice] : this._getCheapestOffer(this.cfarOffers);
+  
+    if (this.selectedChoice != -1) {
+
+      if (this.isFakeBackend) {
+        this.chooseCoverage.emit(this._buildFakePostCfarContractsResponse());
+      } else {
+        this.isLoading = true;
+
+        // Create CFAR Contract
+        this._hopperProxyService
+          .postCfarContracts(this.basePath, this.hCSessionId, ApiTranslatorUtils.modelToSnakeCase(this._buildCreateCfarContractRequest()))
+          .pipe(take(1))
+          .subscribe(
+            (cfarContract: CfarContractCustomer) => {
+              this.chooseCoverage.emit(cfarContract);
+              this.isLoading = false;
+            },
+            (error) => {
+              console.error(error);
+              this.isLoading = false;
+            }
+          );
+      } 
+    } else {
+      this.chooseCoverage.emit(null);
+    }
+  }
+
+  public getPricePerTraveler(offer: CfarOfferCustomer): number {
+    var nbTravelers = 0;
+    
+    offer.itinerary.passengerPricing.forEach(pp => {
+      nbTravelers += pp.passengerCount.count
+    });
+
+    return +offer.coverage / (nbTravelers || 1);
   }
 
   // -----------------------------------------------
   // Privates Methods
   // -----------------------------------------------
 
-  private _buildCreateCfarOfferRequest(): CreateCfarOfferRequest {
+  private _buildCreateCfarOfferRequest(): CreateCfarOfferCustomerRequest {
     return {
       itinerary: this.itineraries,
-      requestType: RequestType.Ancillary,
-      extAttributes: {}
+      requestType: RequestType.Ancillary
     };
   }
 
-  private _buildCreateCfarContractRequest(): CreateCfarContractRequest {
+  private _buildCreateCfarContractRequest(): CreateCfarContractCustomerRequest {
     return {
       offerIds: [this.selectedCfarOffer.id],
-      itinerary: this.selectedCfarOffer.itinerary,
-      extAttributes: {}
+      itinerary: this.selectedCfarOffer.itinerary
     };
   } 
 
-  private _buildFakePostCfarOffersResponse(): CfarOffer[] {   
+  private _buildFakePostCfarOffersResponse(): CfarOfferCustomer[] {   
     return [
       {
         id: "1ecf859e-8785-625f-8eda-198d1ce0d6c4",
@@ -200,8 +219,7 @@ export class CfarOfferBannerLargeComponent extends GlobalComponent implements On
           "Add the flexibility to cancel your flight for any reason up to 3 hours before departure",
           "Cancel and choose between a 80% refund of your flight base fare and taxes or 100% airline travel credit",
           "Get instant resolution, no forms or claims required"
-        ],
-        extAttributes: {}
+        ]
       },
       {
         id: "1ecf859e-8785-625f-8eda-198d1ce0d6c5",
@@ -276,9 +294,14 @@ export class CfarOfferBannerLargeComponent extends GlobalComponent implements On
           "Add the flexibility to cancel your flight for any reason up to 3 hours before departure",
           "Cancel and choose between a 100% refund of your flight base fare and taxes or 100% airline travel credit",
           "Get instant resolution, no forms or claims required"
-        ],
-        extAttributes: {}
+        ]
       }
     ];
+  }
+
+  private _buildFakePostCfarContractsResponse(): CfarContractCustomer {
+    return {
+      id: "1ecf85ab-211f-68b7-9bb3-4b1a314f1a42"
+    };
   }
 }

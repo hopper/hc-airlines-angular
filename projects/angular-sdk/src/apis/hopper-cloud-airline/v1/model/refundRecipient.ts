@@ -10,5 +10,9 @@
  * Do not edit the class manually.
  */
 
-export interface Forbidden { 
+export interface RefundRecipient { 
+    /**
+     * The refund recipient's unique identifier
+     */
+    id: string;
 }

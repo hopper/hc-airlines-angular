@@ -1,3 +1,17 @@
+<a name="2.2.0"></a>
+
+# 2.2.0 (2022-XX-XX)
+
+### Bug fixes / Small changes
+- Adjust values of countryCode enum (Alpha-2)
+- CFAR offer banner large: new field (hasNoCoverageOption)
+- CFAR offer banner large: display price per traveler
+
+### Minor changes
+- New component : Exercise Dialog
+- Catch errors of http calls
+- Remove 'Continue' button of the CFAR offer banner large.
+
 <a name="2.1.7"></a>
 
 # 2.1.7 (2022-07-18)

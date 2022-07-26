@@ -32,37 +32,37 @@
                 <div fxFlexOffset="20" fxFlex="80" fxFlexOffset.lt-md="0" fxFlex.lt-md="100" fxLayout="row" class="mb-16" fxLayoutAlign="start center" fxLayoutGap="16px">
     
                     <mat-radio-group fxFlex="100" fxLayout="row wrap" fxLayoutAlign="start center" color="primary"
-                        [(ngModel)]="selectedChoice" (ngModelChange)="onChangeChoice()">
-                        <div fxFlex="100" fxLayout="row" fxLayout.lt-sm="column" fxLayoutAlign="start center"
-                            fxLayoutAlign.lt-md="center start" fxLayoutGap.lt-md="16px">
+                        [(ngModel)]="selectedChoice" (ngModelChange)="onChooseCoverage()">
+                        <div fxFlex="100" fxLayout="row" fxLayoutGap="16px" fxLayout.lt-md="column" fxLayoutAlign="start center"
+                            fxLayoutAlign.lt-md="center start">
 
-                            <ng-container *ngFor="let offer of cfarOffers; let i = index;">
-                                <mat-radio-button fxFlex="50" fxFlex.lt-md="100" value="{{ i }}" class="important-text bold">
+                            <div fxFlex fxLayout="row wrap" fxLayoutAlign="start start" *ngFor="let offer of cfarOffers; let i = index;">
+                                <mat-radio-button fxFlex="100" value="{{ i }}" class="important-text bold">
                                     {{ 'CFAR_OFFER_BANNER_LARGE.COVERAGE_PERCENTAGE' | translate: 
-                                        {
-                                            coverage: (computePercentage(offer) | percent)
-                                        }
+                                        { coverage: (computePercentage(offer) | percent) }
                                     }}
                                 </mat-radio-button>
-                            </ng-container>
+
+                                <div class="mt-8" fxFlex="100" fxLayoutAlign="start center" fxLayoutGap="8px"
+                                    innerHtml="{{ 'CFAR_OFFER_BANNER_LARGE.PRICE_PER_TRAVELER' | translate: 
+                                        { price: (getPricePerTraveler(offer) | currency:offer?.currency:'symbol':undefined:currentLang) }
+                                    }}"
+                                ></div>
+                            </div>
 
                         </div>
                        
-                        <mat-radio-button class="default-choice mt-16 p-16" fxFlex="100" value="-1">
+                        <mat-radio-button *ngIf="hasNoCoverageOption" class="default-choice mt-16 p-16" fxFlex="100" value="-1">
                             {{ 'CFAR_OFFER_BANNER_LARGE.NO_COVERAGE_OPTION' | translate }}
                         </mat-radio-button>
                     </mat-radio-group>
     
                 </div>
     
-                <div fxFlexOffset="20" fxFlex="80" fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="16px"
-                    fxFlexOffset.lt-md="0" fxFlex.lt-md="100" fxLayout.lt-md="column">
-    
-                    <span>{{ 'CFAR_OFFER_BANNER_LARGE.CHOOSE_COVERAGE' | translate }}</span>
-    
-                    <button mat-raised-button color="primary" (click)="onSubmit()" [disabled]="!selectedChoice" ngClass.lt-sm="full-width">
-                        {{ 'CFAR_OFFER_BANNER_LARGE.BUTTON.CONTINUE' | translate }}
-                    </button>
+                <div fxFlexOffset="20" fxFlex="80" fxLayout="row" fxLayoutAlign="start center"
+                    fxFlexOffset.lt-md="0" fxFlex.lt-md="100">
+                    <span *ngIf="hasNoCoverageOption">{{ 'CFAR_OFFER_BANNER_LARGE.CHOOSE_COVERAGE_OR_NOT' | translate }}</span>
+                    <span *ngIf="!hasNoCoverageOption">{{ 'CFAR_OFFER_BANNER_LARGE.CHOOSE_COVERAGE' | translate }}</span>
                 </div>
             </div>
 

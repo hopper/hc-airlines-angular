@@ -21,7 +21,7 @@
 
                 <!-- STEP 1 -->
                 <mat-step>
-                    <ng-template matStepLabel>Refund type</ng-template>
+                    <ng-template matStepLabel>{{ 'CFAR_EXERCISE_DIALOG.STEP.FIRST' | translate }}</ng-template>
 
                     <div class="p-16" ngClass.lt-md="px-16" fxLayout="row wrap" fxLayoutAlign="start center">
 
@@ -65,13 +65,11 @@
                                     <div class="ml-32">
                                         <p>
                                             <b>{{ 'CFAR_EXERCISE_DIALOG.DEPARTURE' | translate }}</b>
-                                            {{ segment?.departureDateTime | date: ('COMMON.DATE_FORMAT_SHORT' |
-                                            translate):'':currentLang }}
+                                            {{ segment?.departureDateTime | date: ('COMMON.DATE_FORMAT_SHORT' | translate):'':currentLang }}
                                         </p>
                                         <p>
                                             <b>{{ 'CFAR_EXERCISE_DIALOG.ARRIVAL' | translate }}</b>
-                                            {{ segment?.arrivalDateTime | date: ('COMMON.DATE_FORMAT_SHORT' |
-                                            translate):'':currentLang }}
+                                            {{ segment?.arrivalDateTime | date: ('COMMON.DATE_FORMAT_SHORT' | translate):'':currentLang }}
                                         </p>
                                         <p>
                                             <b>{{ 'CFAR_EXERCISE_DIALOG.FLIGHT' | translate }}</b>
@@ -90,12 +88,12 @@
                                 <mat-icon color="primary">person</mat-icon>
                                 <span class="subtitle" *ngIf="getNbPassengers(cfarContract.itinerary) <= 1">
                                     {{ 'CFAR_EXERCISE_DIALOG.PASSENGER' | translate: {
-                                    nbPassenger: getNbPassengers(cfarContract.itinerary)
+                                        nbPassenger: getNbPassengers(cfarContract.itinerary)
                                     } }}
                                 </span>
                                 <span class="subtitle" *ngIf="getNbPassengers(cfarContract.itinerary) > 1">
                                     {{ 'CFAR_EXERCISE_DIALOG.PASSENGERS' | translate: {
-                                    nbPassenger: getNbPassengers(cfarContract.itinerary)
+                                        nbPassenger: getNbPassengers(cfarContract.itinerary)
                                     } }}
                                 </span>
                             </div>
@@ -115,8 +113,7 @@
                         <div fxFlex="100" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px"
                             class="mb-16">
                             <mat-icon color="primary">monetization_on</mat-icon>
-                            <span class="subtitle">{{ 'CFAR_EXERCISE_DIALOG.CHOOSE_REFUND_TYPE' | translate
-                                }}</span>
+                            <span class="subtitle">{{ 'CFAR_EXERCISE_DIALOG.CHOOSE_REFUND_TYPE' | translate }}</span>
                         </div>
 
                         <div fxFlex="100" fxLayout="row wrap" fxLayoutAlign="center center" fxLayout.lt-md="column">
@@ -169,94 +166,94 @@
 
                     <div class="p-16" fxLayoutGap="16px" ngClass.lt-md="px-16" fxFlex="100" fxLayout="row wrap" fxLayoutAlign="center center">
                         <button mat-raised-button color="primary" (click)="onSubmitStep1()" ngClass.lt-sm="full-width">
-                            Continue
+                            {{ 'CFAR_EXERCISE_DIALOG.BUTTON.CONTINUE' | translate }}
                         </button>
                     </div>
                 </mat-step>
                 <!-- / STEP 1 -->
 
-                <!-- STEP 2 [stepControl]="step2Form" -->
-                <mat-step *ngIf="isHopperRefund">
-                    <ng-template matStepLabel>General information</ng-template>
+                <!-- STEP 2 -->
+                <mat-step [stepControl]="step2Form" *ngIf="isHopperRefund">
+                    <ng-template matStepLabel>{{ 'CFAR_EXERCISE_DIALOG.STEP.SECOND' | translate }}</ng-template>
 
                     <div class="p-16" ngClass.lt-md="px-16" fxLayout="row wrap" fxLayoutAlign="start center">
 
                         <form [formGroup]="step2Form" class="full-width" fxLayout="column" fxLayoutGap="16px" fxLayoutAlign="center center">             
                             <!-- PERSONAL INFORMATION -->
                             <fieldset class="p-16" fxFlex="100" fxLayout="row wrap" fxLayoutAlign="start center">
-                                <legend class="px-16 py-8">Personal Information</legend>
+                                <legend class="px-16 py-8">{{ 'CFAR_EXERCISE_DIALOG.FORM.PERSONAL_INFORMATION' | translate }}</legend>
                                 
                                 <mat-form-field fxFlex="100" appearance="outline">
-                                    <mat-label>First name</mat-label>
+                                    <mat-label>{{ 'CFAR_EXERCISE_DIALOG.FORM.FIRST_NAME' | translate }}</mat-label>
                                     <input matInput formControlName="firstName">
-                                    <mat-error *ngIf="step2Form.get('firstName')?.invalid">First name is required</mat-error>
+                                    <mat-error *ngIf="step2Form.get('firstName')?.invalid">{{ 'CFAR_EXERCISE_DIALOG.FORM.FIRST_NAME_ERROR' | translate }}</mat-error>
                                 </mat-form-field>
     
                                 <mat-form-field fxFlex="100" appearance="outline">
-                                    <mat-label>Middle name (optional)</mat-label>
+                                    <mat-label>{{ 'CFAR_EXERCISE_DIALOG.FORM.MIDDLE_NAME' | translate }}</mat-label>
                                     <input matInput formControlName="middleName">
                                 </mat-form-field>
     
                                 <mat-form-field fxFlex="100" appearance="outline">
-                                    <mat-label>Last name</mat-label>
+                                    <mat-label>{{ 'CFAR_EXERCISE_DIALOG.FORM.LAST_NAME' | translate }}</mat-label>
                                     <input matInput formControlName="lastName">
-                                    <mat-error *ngIf="step2Form.get('lastName')?.invalid">Last name is required</mat-error>
+                                    <mat-error *ngIf="step2Form.get('lastName')?.invalid">{{ 'CFAR_EXERCISE_DIALOG.FORM.LAST_NAME_ERROR' | translate }}</mat-error>
                                 </mat-form-field>
     
                                 <mat-form-field fxFlex="100" appearance="outline" (click)="picker.open()">
-                                    <mat-label>Date of birth</mat-label>
+                                    <mat-label>{{ 'CFAR_EXERCISE_DIALOG.FORM.DATE_OF_BIRTH' | translate }}</mat-label>
                                     <input matInput formControlName="dateOfBirth" [matDatepicker]="picker">
                                     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                                     <mat-datepicker [disabled]="false" #picker></mat-datepicker>
-                                    <mat-error *ngIf="step2Form.get('dateOfBirth')?.invalid">Date of birth is required</mat-error>
+                                    <mat-error *ngIf="step2Form.get('dateOfBirth')?.invalid">{{ 'CFAR_EXERCISE_DIALOG.FORM.DATE_OF_BIRTH_ERROR' | translate }}</mat-error>
                                 </mat-form-field>
                             </fieldset>
                             <!-- / PERSONAL INFORMATION -->
 
                             <!-- HOME ADDRESS -->
                             <fieldset class="p-16" fxFlex="100" fxLayout="row wrap" fxLayoutAlign="start center">
-                                <legend class="px-16 py-8">Home Address</legend>
+                                <legend class="px-16 py-8">{{ 'CFAR_EXERCISE_DIALOG.FORM.HOME_ADDRESS' | translate }}</legend>
 
                                 <mat-form-field fxFlex="100" appearance="outline">
-                                    <mat-label>Address line 1</mat-label>
+                                    <mat-label>{{ 'CFAR_EXERCISE_DIALOG.FORM.ADDRESS_LINE_1' | translate }}</mat-label>
                                     <input matInput formControlName="addressLine1">
-                                    <mat-error *ngIf="step2Form.get('addressLine1')?.invalid">Address line 1 is required</mat-error>
+                                    <mat-error *ngIf="step2Form.get('addressLine1')?.invalid">{{ 'CFAR_EXERCISE_DIALOG.ADDRESS_LINE_1_ERROR' | translate }}</mat-error>
                                 </mat-form-field>
     
                                 <mat-form-field fxFlex="100" appearance="outline">
-                                    <mat-label>Address line 2 (optional)</mat-label>
+                                    <mat-label>{{ 'CFAR_EXERCISE_DIALOG.FORM.ADDRESS_LINE_2' | translate }}</mat-label>
                                     <input matInput formControlName="addressLine2">
                                 </mat-form-field>
     
                                 <div fxFlex="100" fxLayoutGap="16px" fxLayout="row" fxLayout.lt-md="column">
                                     <mat-form-field fxFlex appearance="outline">
-                                        <mat-label>City</mat-label>
+                                        <mat-label>{{ 'CFAR_EXERCISE_DIALOG.FORM.CITY' | translate }}</mat-label>
                                         <input matInput formControlName="city">
-                                        <mat-error *ngIf="step2Form.get('city')?.invalid">City is required</mat-error>
+                                        <mat-error *ngIf="step2Form.get('city')?.invalid">{{ 'CFAR_EXERCISE_DIALOG.FORM.CITY_ERROR' | translate }}</mat-error>
                                     </mat-form-field>
         
                                     <mat-form-field fxFlex appearance="outline">
-                                        <mat-label>Country</mat-label>
+                                        <mat-label>{{ 'CFAR_EXERCISE_DIALOG.FORM.COUNTRY' | translate }}</mat-label>
                                         <mat-select formControlName="country">
                                             <mat-option *ngFor="let c of mapCountries | keyvalue: asIsOrder" [value]="c.key">
                                                 {{ c.value }}
                                             </mat-option>
                                         </mat-select>
-                                        <mat-error *ngIf="step2Form.get('country')?.invalid">Country is required</mat-error>
+                                        <mat-error *ngIf="step2Form.get('country')?.invalid">{{ 'CFAR_EXERCISE_DIALOG.FORM.COUNTRY_ERROR' | translate }}</mat-error>
                                     </mat-form-field>
                                 </div>
     
                                 <div fxFlex="100" fxLayoutGap="16px" fxLayout="row" fxLayout.lt-md="column">
                                     <mat-form-field fxFlex appearance="outline">
-                                        <mat-label>State/Province</mat-label>
+                                        <mat-label>{{ 'CFAR_EXERCISE_DIALOG.FORM.STATE' | translate }}</mat-label>
                                         <input matInput formControlName="state">
-                                        <mat-error *ngIf="step2Form.get('state')?.invalid">State/Province is required</mat-error>
+                                        <mat-error *ngIf="step2Form.get('state')?.invalid">{{ 'CFAR_EXERCISE_DIALOG.FORM.STATE_ERROR' | translate }}</mat-error>
                                     </mat-form-field>
         
                                     <mat-form-field fxFlex appearance="outline">
-                                        <mat-label>Zip/Postal Code</mat-label>
+                                        <mat-label>{{ 'CFAR_EXERCISE_DIALOG.FORM.ZIP' | translate }}</mat-label>
                                         <input matInput formControlName="zip">
-                                        <mat-error *ngIf="step2Form.get('zip')?.invalid">Zip/Postal Code is required</mat-error>
+                                        <mat-error *ngIf="step2Form.get('zip')?.invalid">{{ 'CFAR_EXERCISE_DIALOG.FORM.ZIP_ERROR' | translate }}</mat-error>
                                     </mat-form-field>
                                 </div>
                             </fieldset>
@@ -267,45 +264,50 @@
 
                     <div class="p-16" fxLayoutGap="16px" ngClass.lt-md="px-16" fxFlex="100" fxLayout="row" fxLayout.lt-sm="column" fxLayoutAlign="center center">
                         <button mat-raised-button ngClass.lt-sm="full-width" matStepperPrevious>
-                            Back
+                            {{ 'CFAR_EXERCISE_DIALOG.BUTTON.BACK' | translate }}
                         </button>
-                        <button mat-raised-button color="primary" matStepperNext ngClass.lt-sm="full-width" [disabled]="step2Form.invalid">
-                            Continue
+                        <button mat-raised-button color="primary" (click)="onSubmitStep2()" ngClass.lt-sm="full-width" [disabled]="step2Form.invalid">
+                            {{ 'CFAR_EXERCISE_DIALOG.BUTTON.CONTINUE' | translate }}
                         </button>
                     </div>
                 </mat-step>
                 <!-- / STEP 2 -->
 
                 <!-- STEP 3 -->
-                <mat-step *ngIf="isHopperRefund">
-                    <ng-template matStepLabel>Payment information [hyperwallet]</ng-template>
+                <mat-step [completed]="isValidHyperwalletSubmit" *ngIf="isHopperRefund">
+                    <ng-template matStepLabel>{{ 'CFAR_EXERCISE_DIALOG.STEP.THIRD' | translate }}</ng-template>
 
                     <div class="p-16" ngClass.lt-md="px-16" fxLayout="row wrap" fxLayoutAlign="start center">
-                        <div fxFlex="100">
-                            TODO
+                        
+                        <div fxFlex="100" *ngIf="isLoadingHyperwallet" class="p-32" ngClass.lt-md="px-16" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="16px">
+                            <mat-spinner></mat-spinner>
+                            <p>{{ 'CFAR_EXERCISE_DIALOG.LOADING_HYPERWALLET' | translate }}</p>
                         </div>
-                    </div>
 
-                    <div class="p-16" fxLayoutGap="16px" ngClass.lt-md="px-16" fxFlex="100" fxLayout="row" fxLayout.lt-sm="column" fxLayoutAlign="center center">
-                        <button mat-raised-button ngClass.lt-sm="full-width" matStepperPrevious>
-                            Back
-                        </button>
-                        <button mat-raised-button color="primary" matStepperNext ngClass.lt-sm="full-width">
-                            Continue
-                        </button>
+                        <div *ngIf="isErrorHyperwallet" fxFlex="100" class="p-32" ngClass.lt-md="p-16" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="16px">
+                            <span class="error-message p-16">{{ 'CFAR_EXERCISE_DIALOG.LOADING_HYPERWALLET_ERROR' | translate }}</span>
+                        </div>
+
+                        <div fxFlex="100">
+                            <div id="TransferMethodUI"><!-- INJECTED CONTENT --></div>
+                        </div>
                     </div>
                 </mat-step>
                 <!-- / STEP 3 -->
 
                 <!-- STEP 4 -->
                 <mat-step *ngIf="isHopperRefund">
-                    <ng-template matStepLabel>Confirmation</ng-template>
+                    <ng-template matStepLabel>{{ 'CFAR_EXERCISE_DIALOG.STEP.FOURTH' | translate }}</ng-template>
 
                     <div class="p-16" ngClass.lt-md="px-16" fxLayout="row wrap" fxLayoutAlign="start center">
                         <div fxFlex="100" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="16px">
                             <mat-icon class="confirmation-icon">checked</mat-icon>
-                            <p class="title">Your flight has been canceled and your refund is being processed.</p>
-                            <p>A confirmation email will be sent shortly to XXX@XXX.XXX with details on how to use your airlines credits</p>
+                            <p class="title">{{ 'CFAR_EXERCISE_DIALOG.CONFIRMATION_MESSAGE_1' | translate }}</p>
+                            <p>
+                                {{ 'CFAR_EXERCISE_DIALOG.CONFIRMATION_MESSAGE_2' | translate: {
+                                    userEmail: userEmail
+                                } }}
+                            </p>
                         </div>
                     </div>
 
@@ -331,13 +333,11 @@
                                     <div class="ml-32">
                                         <p>
                                             <b>{{ 'CFAR_EXERCISE_DIALOG.DEPARTURE' | translate }}</b>
-                                            {{ segment?.departureDateTime | date: ('COMMON.DATE_FORMAT_SHORT' |
-                                            translate):'':currentLang }}
+                                            {{ segment?.departureDateTime | date: ('COMMON.DATE_FORMAT_SHORT' | translate):'':currentLang }}
                                         </p>
                                         <p>
                                             <b>{{ 'CFAR_EXERCISE_DIALOG.ARRIVAL' | translate }}</b>
-                                            {{ segment?.arrivalDateTime | date: ('COMMON.DATE_FORMAT_SHORT' |
-                                            translate):'':currentLang }}
+                                            {{ segment?.arrivalDateTime | date: ('COMMON.DATE_FORMAT_SHORT' | translate):'':currentLang }}
                                         </p>
                                         <p>
                                             <b>{{ 'CFAR_EXERCISE_DIALOG.FLIGHT' | translate }}</b>
@@ -356,12 +356,12 @@
                                 <mat-icon color="primary">person</mat-icon>
                                 <span class="subtitle" *ngIf="getNbPassengers(cfarContract.itinerary) <= 1">
                                     {{ 'CFAR_EXERCISE_DIALOG.PASSENGER' | translate: {
-                                    nbPassenger: getNbPassengers(cfarContract.itinerary)
+                                        nbPassenger: getNbPassengers(cfarContract.itinerary)
                                     } }}
                                 </span>
                                 <span class="subtitle" *ngIf="getNbPassengers(cfarContract.itinerary) > 1">
                                     {{ 'CFAR_EXERCISE_DIALOG.PASSENGERS' | translate: {
-                                    nbPassenger: getNbPassengers(cfarContract.itinerary)
+                                        nbPassenger: getNbPassengers(cfarContract.itinerary)
                                     } }}
                                 </span>
                             </div>
@@ -383,19 +383,23 @@
 
                     <div fxFlex="100" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px" class="mb-16">
                         <p *ngIf="isHopperRefund">
-                            {{ cfarContract?.contractExercise?.hopperRefund | currency:cfarContract?.contractExercise?.currency:'symbol':undefined:currentLang }}
-                            in cash
+                            {{ 'CFAR_EXERCISE_DIALOG.REFUND_DETAILS' | translate: {
+                                amount: cfarContract?.contractExercise?.hopperRefund | currency:cfarContract?.contractExercise?.currency:'symbol':undefined:currentLang,
+                                method: cfarContract?.contractExercise?.hopperRefundMethod
+                            } }}
                         </p>
     
                         <p *ngIf="!isHopperRefund">
-                            {{ cfarContract?.contractExercise?.airlineRefundAllowance | currency:cfarContract?.contractExercise?.currency:'symbol':undefined:currentLang }}
-                            in cash
+                            {{ 'CFAR_EXERCISE_DIALOG.REFUND_DETAILS' | translate: {
+                                amount: cfarContract?.contractExercise?.airlineRefundAllowance | currency:cfarContract?.contractExercise?.currency:'symbol':undefined:currentLang,
+                                method: cfarContract?.contractExercise?.airlineRefundMethod
+                            } }}
                         </p>
                     </div>
 
                     <div class="p-16" fxLayoutGap="16px" ngClass.lt-md="px-16" fxFlex="100" fxLayout="row" fxLayoutAlign="center center">
                         <button mat-raised-button ngClass.lt-sm="full-width" (click)="onClose()">
-                            Close
+                            {{ 'CFAR_EXERCISE_DIALOG.BUTTON.CLOSE' | translate }}
                         </button>
                     </div>
                 </mat-step>

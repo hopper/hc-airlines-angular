@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { HttpClientModule } from '@angular/common/http';
-import { CommonModule, registerLocaleData } from '@angular/common';
+import { CommonModule, DatePipe, registerLocaleData } from '@angular/common';
 
 import { TranslateModule } from '@ngx-translate/core';
 
@@ -107,7 +107,8 @@ registerLocaleData(localeZh, 'zh', localeZhExtra);
   providers: [
     { provide: DateAdapter, useClass: MomentDateAdapter, deps: [ MAT_DATE_LOCALE ] },
     { provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS },
-    HopperProxyService
+    HopperProxyService,
+    DatePipe
   ]
 })
 export class HopperCloudAirlinesAngularSdkModule { }

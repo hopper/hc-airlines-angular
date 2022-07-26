@@ -3,7 +3,7 @@ import { Locales } from "../i18n";
 import { TranslateService } from '@ngx-translate/core';
 import { I18n } from "../i18n/i18n.interface";
 import { DateAdapter } from "@angular/material/core";
-import { CfarOffer } from "../apis/hopper-cloud-airline/v1";
+import { CfarOfferCustomer } from "../apis/hopper-cloud-airline/v1";
 import { CountryCode } from "../enums/country-code.enum";
 import { take } from "rxjs/operators";
 
@@ -58,8 +58,8 @@ export class GlobalComponent implements OnChanges {
     // Protected Methods
     // -----------------------------------------------
 
-    protected _getCheapestOffer(offers: CfarOffer[]): CfarOffer {
-        return offers.reduce((previous: CfarOffer, current: CfarOffer) => {
+    protected _getCheapestOffer(offers: CfarOfferCustomer[]): CfarOfferCustomer {
+        return offers.reduce((previous: CfarOfferCustomer, current: CfarOfferCustomer) => {
             return +previous?.premium < +current?.premium ? previous : current;
         });
     }

@@ -89,6 +89,8 @@ export abstract class CommonGuidesComponent implements OnInit, OnDestroy {
       }
     ]
   };
+  public hyperwalletUrl = "https://sandbox.hyperwallet.com/rest/widgets/transfer-methods/";
+  public hasNoCoverageOption = false;
 
   constructor(
     protected _store: Store<AppState>,
@@ -101,7 +103,7 @@ export abstract class CommonGuidesComponent implements OnInit, OnDestroy {
     this.isFakeBackend = true;
 
     // For local usage
-    this.basePath = 'http://localhost:7071/airline/v1.0/customer';
+    this.basePath = 'http://localhost:7071/airline/v1.0';
   }
   
   // -----------------------------------------------

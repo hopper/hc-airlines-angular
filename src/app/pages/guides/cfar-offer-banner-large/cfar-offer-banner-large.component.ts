@@ -79,6 +79,13 @@ export class CfarOfferBannerLargePageComponent extends CommonGuidesComponent {
           See <a target="_blank" href="https://airlines-api.staging.hopper.com/airline/v1.0/docs/index.html#operation/postCfar_offers">API documentation</a>
         `,
         required: true
+      },
+      {
+        name: 'hasNoCoverageOption',
+        description: `
+          True by default. If it's false, the 'decline coverage' option is hidden.
+        `,
+        required: false
       }
     ];
   }
@@ -89,7 +96,7 @@ export class CfarOfferBannerLargePageComponent extends CommonGuidesComponent {
         name: 'chooseCoverage',
         description: `
           Event triggered when the user chooses a coverage (or not)<br />
-          Returns a CfarContract or Nothing
+          Returns a CfarContract or null
         `
       }
     ];

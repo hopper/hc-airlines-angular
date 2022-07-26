@@ -47,10 +47,8 @@ export class CfarExerciseDialogPageComponent extends CommonGuidesComponent {
         basePath: this.basePath,
         currentLang: this.currentLang,
         hCSessionId: this.hCSessionId,
-        pnrReference: this.pnrReference,
         contractId: this.contractId,
-        currency: this.currency,
-        itinerary: this.itinerary,
+        hyperwalletUrl: this.hyperwalletUrl,
         isSidebar: isSidebar
       };
       const dialogConfig = DialogUtils.getDialogConfig(dialogData, this.currentTheme);
@@ -114,30 +112,16 @@ export class CfarExerciseDialogPageComponent extends CommonGuidesComponent {
         required: true
       },
       {
-        name: 'itinerary',
-        description: `
-          See <a target="_blank" href="https://airlines-api.staging.hopper.com/airline/v1.0/docs/index.html#operation/postCfar_contract_exercises">API documentation</a>
-        `,
-        required: true
-      },
-      {
-        name: 'currency',
-        description: `
-          Currency of pricing fields
-        `,
-        required: true
-      },
-      {
-        name: 'pnrReference',
-        description: `
-          string
-        `,
-        required: true
-      },
-      {
         name: 'contractId',
         description: `
           A unique identifier for a CFAR contract
+        `,
+        required: true
+      },
+      {
+        name: 'hyperwalletUrl',
+        description: `
+          Url for hyperwallet integration
         `,
         required: true
       },
@@ -175,10 +159,8 @@ export class CfarExerciseDialogPageComponent extends CommonGuidesComponent {
       basePath: this.basePath,
       currentLang: this.currentLang,
       hCSessionId: this.hCSessionId,
-      pnrReference: this.pnrReference,
       contractId: this.contractId,
-      currency: this.currency,
-      itinerary: this.itinerary,
+      hyperwalletUrl: this.hyperwalletUrl,
       isSidebar: isSidebar
     };
     const dialogConfig = DialogUtils.getDialogConfig(dialogData);

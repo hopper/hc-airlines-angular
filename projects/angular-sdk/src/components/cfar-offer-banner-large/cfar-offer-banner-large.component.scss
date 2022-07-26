@@ -60,6 +60,11 @@
             .important-text {
                 font-size: 1rem;
             }
+
+            .price-per-traveler {
+                font-weight: bold;
+                color: map-get($primary-palette, default);
+            }
         }
     }
 }

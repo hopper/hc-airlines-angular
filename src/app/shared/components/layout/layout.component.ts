@@ -25,10 +25,10 @@ export class LayoutComponent implements OnInit, OnDestroy {
     this.components.push({ name: 'CFAR Offer Banner', link: 'cfar-offer-banner' });
     this.components.push({ name: 'CFAR Offer Banner Large', link: 'cfar-offer-banner-large' });
     this.components.push({ name: 'CFAR Offer Dialog', link: 'cfar-offer-dialog' });
+    this.components.push({ name: 'CFAR Exercise Dialog', link: 'cfar-exercise-dialog' });
     
     // Working items
     if (!environment.production) {
-      this.components.push({ name: 'CFAR Exercise Dialog [WIP]', link: 'cfar-exercise-dialog' });
     }
   }
 
