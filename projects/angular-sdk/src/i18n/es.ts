@@ -5,7 +5,7 @@ export const locale: I18n = {
     data: {
         COMMON: {
             DATE_FORMAT: 'EEEE, MMMM d, y, h:mm:ss a z',
-            DATE_FORMAT_SHORT: 'MM/dd/YYYY hh:mm',
+            DATE_FORMAT_SHORT: 'MM/dd/YYYY hh:mm a',
             COUNTRY: {
                 AF: "Afganistán",
                 AX: "Islas Åland",

@@ -302,8 +302,8 @@ export class CfarExerciseDialogComponent extends GlobalComponent implements OnIn
       offers: [
         {
           id: "1ecf85a8-1c43-6fad-9bb3-0dca2ca4e73a",
-          premium: "1434.00",
-          coverage: "5736.78",
+          premium: "14.00",
+          coverage: "57.78",
           currency: "CAD",
           requestType: "ancillary",
           toUsdExchangeRate: "0.7743486179425866960712648520064921",
@@ -435,23 +435,23 @@ export class CfarExerciseDialogComponent extends GlobalComponent implements OnIn
           }
         ],
         ancillaries: [],
-        totalPrice: "7170.96"
+        totalPrice: "71.96"
       },
       contractExercise: {
         id: '123456',
         contractId: '123456789',
         exerciseInitiatedDateTime: new Date(),
-        hopperRefund: '5736.78',
+        hopperRefund: '57.78',
         hopperRefundMethod: 'cash',
         extAttributes: {},
-        airlineRefundAllowance: '4736.78',
+        airlineRefundAllowance: '47.78',
         airlineRefundMethod: 'cash'
       },
-      coverage: "5736.78",
-      premium: "1434.00",
+      coverage: "57.78",
+      premium: "14.00",
       currency: "CAD",
       createdDateTime: new Date("2022-06-30T09:54:55.989Z"),
-      expiryDateTime: new Date("2022-07-08T22:00:00Z"),
+      expiryDateTime: new Date("2022-07-08T18:00Z"),
       status: "created",
       extAttributes: {}
     };

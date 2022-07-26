@@ -101,7 +101,7 @@ export class CfarOfferDialogPageComponent extends CommonGuidesComponent {
         name: 'currentTheme',
         description: `
           The active theme managed by Hopper.
-          If you have an Angular material theme, this field can be removed
+          If you have an Angular material theme, this field can be ignored
         `,
         required: false
       },

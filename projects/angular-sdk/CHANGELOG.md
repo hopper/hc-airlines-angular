@@ -6,6 +6,9 @@
 - Adjust values of countryCode enum (Alpha-2)
 - CFAR offer banner large: new field (hasNoCoverageOption)
 - CFAR offer banner large: display price per traveler
+- CFAR offer banner and banner large: Display the descriptions (next to the check icon) in the current language
+- CFAR offer banner large: improve performance
+- Fix date format
 
 ### Minor changes
 - New component : Exercise Dialog
