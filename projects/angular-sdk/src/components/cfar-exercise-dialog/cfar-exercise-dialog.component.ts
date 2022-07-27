@@ -459,16 +459,16 @@ export class CfarExerciseDialogComponent extends GlobalComponent implements OnIn
 
   private _initForms(): void {
     this.step2Form = this._formBuilder.group({
-      firstName: new FormControl('TEST', [Validators.required]),
-      middleName: new FormControl('TEST'),
-      lastName: new FormControl('TEST', [Validators.required]),
-      dateOfBirth: new FormControl({ value: new Date(1992,1,1), disabled: true }, [Validators.required]),
-      addressLine1: new FormControl('TEST', [Validators.required]),
-      addressLine2: new FormControl('TEST'),
-      city: new FormControl('TEST', [Validators.required]),
-      country: new FormControl('FR', [Validators.required]),
-      state: new FormControl('TEST', [Validators.required]),
-      zip: new FormControl('00000', [Validators.required])
+      firstName: new FormControl(null, [Validators.required]),
+      middleName: new FormControl(null),
+      lastName: new FormControl(null, [Validators.required]),
+      dateOfBirth: new FormControl({ value: new Date(), disabled: true }, [Validators.required]),
+      addressLine1: new FormControl(null, [Validators.required]),
+      addressLine2: new FormControl(null),
+      city: new FormControl(null, [Validators.required]),
+      country: new FormControl(null, [Validators.required]),
+      state: new FormControl(null, [Validators.required]),
+      zip: new FormControl(null, [Validators.required])
     });
   }
 
