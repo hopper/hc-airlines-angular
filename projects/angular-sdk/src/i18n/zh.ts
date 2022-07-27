@@ -271,8 +271,6 @@ export const locale: I18n = {
             LOADING: "正在加载优惠...",
             COVERAGE_PERCENTAGE: "承保飞行费用的 {{ coverage }}",
             NO_COVERAGE_OPTION: "我不想出于任何原因购买取消。",
-            CHOOSE_COVERAGE: "请选择封面。",
-            CHOOSE_COVERAGE_OR_NOT: "请选择或拒绝出于任何原因取消。",
             PRICE_PER_TRAVELER: "<span>每位乘客</span><span class='price-per-traveler'>{{ price }}</span>"
         },
         CFAR_OFFER_DIALOG: {

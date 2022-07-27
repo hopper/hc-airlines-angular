@@ -271,8 +271,6 @@ export const locale: I18n = {
             LOADING: "Chargement des offres en cours...",
             COVERAGE_PERCENTAGE: "{{ coverage }} des frais de vol couverts",
             NO_COVERAGE_OPTION: "Je ne veux pas ajouter l'option 'Annuler pour une raison quelconque'.",
-            CHOOSE_COVERAGE: "Veuillez choisir une couverture.",
-            CHOOSE_COVERAGE_OR_NOT: "Veuillez choisir ou refuser 'Annuler pour une raison quelconque'.",
             PRICE_PER_TRAVELER: "<span class='price-per-traveler'>{{ price }}</span><span>par passager</span>"
         },
         CFAR_OFFER_DIALOG: {

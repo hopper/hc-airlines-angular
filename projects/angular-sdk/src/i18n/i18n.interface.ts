@@ -269,8 +269,6 @@ export interface I18n {
             LOADING: string;
             COVERAGE_PERCENTAGE: string;
             NO_COVERAGE_OPTION: string;
-            CHOOSE_COVERAGE: string;
-            CHOOSE_COVERAGE_OR_NOT: string;
             PRICE_PER_TRAVELER: string;
         },
         CFAR_OFFER_DIALOG: {

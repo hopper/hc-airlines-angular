@@ -65,6 +65,10 @@
                 font-weight: bold;
                 color: map-get($primary-palette, default);
             }
+
+            .vertical-separator {
+                border-right: 2px solid map-get($accent-palette, 300);
+            }
         }
     }
 }

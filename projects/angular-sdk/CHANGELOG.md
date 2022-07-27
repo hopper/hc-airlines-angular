@@ -2,19 +2,29 @@
 
 # 2.2.0 (2022-XX-XX)
 
-### Bug fixes / Small changes
-- Adjust values of countryCode enum (Alpha-2)
-- CFAR offer banner large: new field (hasNoCoverageOption)
-- CFAR offer banner large: display price per traveler
-- CFAR offer banner and banner large: Display the descriptions (next to the check icon) in the current language
-- CFAR offer banner large: improve performance
-- Fix date format
+### Bug fixes
+- General:
+    - Fix date format
+    - Adjust values of countryCode enum (Alpha-2)
+- CFAR offer banner large:
+    - Remove unused block 'choose or decline coverage'
+    - Improve performance
+    - Fix the descriptions (next to the check icon) to be displayed in the current language
+
 
 ### Minor changes
-- New component : Exercise Dialog
+- New component: Exercise Dialog
 - Catch errors of http calls
-- Remove 'Continue' button of the CFAR offer banner large.
-- CFAR offer banner / CFAR offer banner large : offerAccepted event now returns a CfarContractCustomer object
+- CFAR offer banner: 
+    - OfferAccepted event now returns a CfarContractCustomer object
+    - Display the descriptions (next to the check icon) in the current language
+- CFAR offer banner large: 
+    - OfferAccepted event now returns a CfarContractCustomer object
+    - Remove 'Continue' button
+    - Add separator between coverages choices
+    - Display price per traveler
+    - New parameter (hasNoCoverageOption)
+
 
 <a name="2.1.7"></a>
 

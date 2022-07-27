@@ -36,7 +36,7 @@
                         <div fxFlex="100" fxLayout="row" fxLayoutGap="16px" fxLayout.lt-md="column" fxLayoutAlign="start center"
                             fxLayoutAlign.lt-md="center start">
 
-                            <div fxFlex fxLayout="row wrap" fxLayoutAlign="start start" *ngFor="let offer of cfarOffers; let i = index;">
+                            <div fxFlex [ngClass]="{'vertical-separator': (i % 2) == 0}" fxLayout="row wrap" fxLayoutAlign="start start" *ngFor="let offer of cfarOffers; let i = index;">
                                 <mat-radio-button fxFlex="100" value="{{ i }}" class="important-text bold">
                                     {{ 'CFAR_OFFER_BANNER_LARGE.COVERAGE_PERCENTAGE' | translate: 
                                         { coverage: (computePercentage(offer) | percent) }
@@ -57,12 +57,6 @@
                         </mat-radio-button>
                     </mat-radio-group>
     
-                </div>
-    
-                <div fxFlexOffset="20" fxFlex="80" fxLayout="row" fxLayoutAlign="start center"
-                    fxFlexOffset.lt-md="0" fxFlex.lt-md="100">
-                    <span *ngIf="hasNoCoverageOption">{{ 'CFAR_OFFER_BANNER_LARGE.CHOOSE_COVERAGE_OR_NOT' | translate }}</span>
-                    <span *ngIf="!hasNoCoverageOption">{{ 'CFAR_OFFER_BANNER_LARGE.CHOOSE_COVERAGE' | translate }}</span>
                 </div>
             </div>
 

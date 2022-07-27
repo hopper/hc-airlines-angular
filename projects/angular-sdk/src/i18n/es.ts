@@ -271,8 +271,6 @@ export const locale: I18n = {
             LOADING: "Cargando ofertas en curso...",
             COVERAGE_PERCENTAGE: "{{ coverage }} de los costos de vuelo cubiertos",
             NO_COVERAGE_OPTION: "No quiero comprar Cancelar por cualquier motivo.",
-            CHOOSE_COVERAGE: "Por favor, elija una cubierta.",
-            CHOOSE_COVERAGE_OR_NOT: "Elija o rechace Cancelar por cualquier motivo.",
             PRICE_PER_TRAVELER: "<span class='price-per-traveler'>{{ price }}</span><span>por pasajero</span>"
         },
         CFAR_OFFER_DIALOG: {
