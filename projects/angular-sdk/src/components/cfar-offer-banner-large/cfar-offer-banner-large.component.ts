@@ -88,6 +88,9 @@ export class CfarOfferBannerLargeComponent extends GlobalComponent implements On
   }
 
   public onChooseCoverage(): void {
+    // After the first choice, we force the display of the 'decline' option
+    this.hasNoCoverageOption = true;
+    
     // Update descriptions
     this.selectedCfarOffer = this.selectedChoice > -1 ? this.cfarOffers[this.selectedChoice] : this._getCheapestOffer(this.cfarOffers);
   
