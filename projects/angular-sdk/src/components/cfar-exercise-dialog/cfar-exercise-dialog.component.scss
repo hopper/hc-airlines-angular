@@ -63,6 +63,10 @@
                 font-weight: bold;
             }
 
+            .text-justify {
+                text-align: justify;
+            }
+
             .subtitle {
                 font-size: 16px;
                 font-weight: bold;
@@ -124,6 +128,66 @@
                 border-radius: 50%;
                 padding: 8px;
                 color: white;
+            }
+
+            // Hyperwallet
+            .hw-form-transfer-methods {
+                .hw-group {
+                    padding: 16px;
+                    margin: 16px 0px;
+
+                    legend {
+                        padding: 8px 16px;
+                    }
+
+                    .hw-form-group {
+                        display: flex;
+                        flex-flow: row wrap;
+                        margin-bottom: 16px;
+                    }
+
+                    .hw-label,
+                    .hw-number,
+                    .hw-input,
+                    .hw-select {
+                        width: 100%;
+                        height: 2rem;
+                        margin-bottom: 8px;
+                    }
+
+                    .hw-error-message {
+                        color: map-get($warn-palette, default);
+                    }
+                }
+
+                .hw-global-errors {
+                    background: rgba(255, 0, 0, 0.25);
+                    padding: 16px;
+                    color: map-get($warn-palette, default);
+                    border: 1px solid map-get($warn-palette, default);
+                    margin: 16px;
+
+                    .hw-global-errors-list {
+                        list-style: none;
+                        padding-inline-start: 0px;
+                    }
+                }
+
+                .hw-button {
+                    width: 50%;
+                    margin: 0px 25%;
+                    background-color: map-get($primary-palette, default);
+                    color: map-get($primary-palette, "default-contrast");
+                    font-family: Roboto, "Helvetica Neue", sans-serif;
+                    font-size: 14px;
+                    font-weight: 500;
+                    box-shadow: 0px 3px 1px -2px rgb(0 0 0 / 20%), 0px 2px 2px 0px rgb(0 0 0 / 14%), 0px 1px 5px 0px rgb(0 0 0 / 12%);
+                    cursor: pointer;
+                    border: none;
+                    min-width: 64px;
+                    line-height: 36px;
+                    padding: 0 16px;
+                }
             }
         }
     }      

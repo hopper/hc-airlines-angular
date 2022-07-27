@@ -10,10 +10,9 @@
  * Do not edit the class manually.
  */
 
-export interface SpreedlyToken { 
+export interface RefundAuthorization { 
     /**
-     * A tokenized payment method stored in Spreedly
+     * The unique authorization token for the user
      */
     token: string;
-    type: string;
 }

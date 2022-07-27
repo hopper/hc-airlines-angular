@@ -1,7 +1,7 @@
 import { Component } from "@angular/core";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { Store } from "@ngrx/store";
-import { CfarContract } from "projects/angular-sdk/src/apis/hopper-cloud-airline/v1";
+import { CfarContract, CfarContractCustomer } from "projects/angular-sdk/src/apis/hopper-cloud-airline/v1";
 import { Locales } from "projects/angular-sdk/src/i18n";
 import { InputModel, OutputModel } from "src/app/shared/models";
 import { AppState } from "src/app/shared/ngrx";
@@ -27,11 +27,11 @@ export class CfarOfferBannerPageComponent extends CommonGuidesComponent {
   `;
 
   public  tsCode: string = `
-    import { CfarContract } from "@hopper-cloud-airlines/angular-sdk/src/apis/hopper-cloud-airline/v1";
+    import { CfarContractCustomer } from "@hopper-cloud-airlines/angular-sdk/src/apis/hopper-cloud-airline/v1";
     
     // ...
 
-    onOfferAccepted(cfarContract: CfarContract): void {
+    onOfferAccepted(cfarContract: CfarContractCustomer): void {
       console.log(cfarContract);
     }
   `;
@@ -97,13 +97,13 @@ export class CfarOfferBannerPageComponent extends CommonGuidesComponent {
         name: 'offerAccepted',
         description: `
           Event triggered when the user accepts a CFAR offer <br />
-          Returns a CfarContract
+          Returns a CfarContractCustomer
         `
       }
     ];
   }
 
-  onOfferAccepted(cfarContract: CfarContract): void {
+  onOfferAccepted(cfarContract: CfarContractCustomer): void {
     console.log(cfarContract);
   }
 }

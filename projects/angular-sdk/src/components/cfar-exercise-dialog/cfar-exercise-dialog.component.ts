@@ -1,7 +1,7 @@
-import { ChangeDetectorRef, Component, ElementRef, Inject, OnInit, SimpleChange, ViewChild } from '@angular/core';
+import { Component, ElementRef, HostListener, Inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { take } from 'rxjs/operators';
-import { CfarContract, CfarContractExercise, CreateCfarContractExerciseRequest, CfarItinerary } from '../../apis/hopper-cloud-airline/v1';
+import { CfarContract, CfarItinerary, CreateRefundAuthorizationRequest, CreateRefundRecipientRequest, CreateRefundRequest, RefundAuthorization, RefundRecipient } from '../../apis/hopper-cloud-airline/v1';
 import { GlobalComponent } from '../global.component';
 import { TranslateService } from '@ngx-translate/core';
 import { DateAdapter } from "@angular/material/core";
@@ -12,6 +12,8 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { StepperSelectionEvent } from '@angular/cdk/stepper';
 import { MatStepper } from '@angular/material/stepper';
+import { HttpClient } from '@angular/common/http';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'hopper-cfar-exercise-dialog',
@@ -25,17 +27,16 @@ export class CfarExerciseDialogComponent extends GlobalComponent implements OnIn
   public refundMethods!: { value: 'ftc' | 'cash', label: string }[];
   public isHopperRefund!: boolean;
   public isLoading!: boolean;
+  public isLoadingHyperwallet!: boolean;
   public isSidebar!: boolean;
+  public isValidHyperwalletSubmit!: boolean;
+  public isErrorHyperwallet!: boolean;
+  public userEmail!: string;
 
   // Mandatory data
   private _hCSessionId!: string;
-  private _pnrReference!: string;
   private _contractId!: string;
-  private _itinerary!: CfarItinerary;
-  private _currency!: string;
-
-  // Optional data
-  private _airlineRefundAllowance?: string;
+  private _hyperwalletUrl!: string;
 
   // Forms
   public step2Form!: FormGroup;
@@ -44,7 +45,6 @@ export class CfarExerciseDialogComponent extends GlobalComponent implements OnIn
   @ViewChild('stepper') public stepper!: MatStepper;
 
   constructor(
-    private _changeDetector: ChangeDetectorRef,
     private _matIconRegistry: MatIconRegistry,
     private _domSanitizer: DomSanitizer,
     private _adapter: DateAdapter<any>,
@@ -52,20 +52,18 @@ export class CfarExerciseDialogComponent extends GlobalComponent implements OnIn
     private _dialogRef: MatDialogRef<CfarExerciseDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private _hopperProxyService: HopperProxyService,
-    private _formBuilder: FormBuilder
+    private _formBuilder: FormBuilder,
+    private _http: HttpClient,
+    private _datePipe: DatePipe
   ) {
     super(_adapter, _translateService);
 
     // Mandatory data
     this._hCSessionId = data.hCSessionId;
-    this._pnrReference = data.pnrReference;
     this._contractId = data.contractId;
-    this._itinerary = data.itinerary;
-    this._currency = data.currency;
+    this._hyperwalletUrl = data.hyperwalletUrl;
 
     // Optional data
-    this._currency = data.currency;
-    this._airlineRefundAllowance = data.airlineRefundAllowance;
     this.isSidebar = data.isSidebar;
 
     // Update parents @inputs manually (Dialog limitation)
@@ -90,32 +88,28 @@ export class CfarExerciseDialogComponent extends GlobalComponent implements OnIn
 
     if (this.isFakeBackend) {
       this.cfarContract = this._buildFakeCfarContractExercisesResponse();
+      // Force to true for the MVP
+      this.isHopperRefund = true;
     } else {
       this.isLoading = true;
 
-      // Create Contract Exercise
+      // Get the contract with the exercise
       this._hopperProxyService
-        .postCfarContractExercises(
-          this.basePath, this._hCSessionId, 
-          ApiTranslatorUtils.modelToSnakeCase(this._buildCreateCfarContractExerciseRequest())
-        )
+        .getCfarContractsId(this.basePath, this._contractId, this._hCSessionId)
         .pipe(take(1))
         .subscribe(
-          (cfarContractExercise: CfarContractExercise) => {
-            // Get the contract with the exercise
-            this._hopperProxyService
-              .getCfarContractsId(this.basePath, this._contractId, this._hCSessionId)
-              .pipe(take(1))
-              .subscribe((cfarContract: CfarContract) => {
-                const result = ApiTranslatorUtils.modelToCamelCase(cfarContract) as CfarContract;
-  
-                this.cfarContract = result;
-  
-                // Hopper offer by default
-                this.isHopperRefund = true;
-              });
+          (cfarContract: CfarContract) => {
+            const result = ApiTranslatorUtils.modelToCamelCase(cfarContract) as CfarContract;
+
+            this.cfarContract = result;
+
+            // Hopper offer by default
+            this.isHopperRefund = true;
           },
-          (error) => this.isLoading = false
+          (error: any) => {
+            console.error(error);
+            this.isLoading = false;
+          }
         );
     }
 
@@ -167,9 +161,6 @@ export class CfarExerciseDialogComponent extends GlobalComponent implements OnIn
     return mapPassengers;
   }
 
-  /**
-   * @description Trick to preserve the order of a map (with the keyvalue pipe)
-   */
   asIsOrder(a: any, b: any): number {
     return 1;
   }
@@ -184,21 +175,126 @@ export class CfarExerciseDialogComponent extends GlobalComponent implements OnIn
     }
   }
 
+  onSubmitStep2(): void {
+    // Go to the next step
+    this.stepper.next();
+
+    this.isErrorHyperwallet = false;
+    this.isLoadingHyperwallet = true;
+
+    if (this.isFakeBackend) {
+      this.isValidHyperwalletSubmit = true;
+
+      setTimeout(() => {
+        this.isLoadingHyperwallet = true;
+        this.userEmail = "sample@hopper.com";
+        this.stepper.next();
+      }, 2000);
+    } else {
+      this._hopperProxyService
+        .postRefundRecipients(this.basePath, this._hCSessionId, ApiTranslatorUtils.modelToSnakeCase(this._buildCreateRefundRecipientRequest()))
+        .pipe(take(1))
+        .subscribe(
+          (refundRecipient: RefundRecipient) => {
+            const userId = refundRecipient.id;
+            const url = this._hyperwalletUrl + userId + "/" + this.currentLang + ".min.js";
+            const mainScript = document.createElement('script');
+  
+            mainScript.type = 'text/javascript';
+            mainScript.async = true;
+            mainScript.src = url;
+            mainScript.onerror = (error) => {
+              console.error('Error loading Hyperwallet script', error);
+              this.isLoadingHyperwallet = false;
+              this.isErrorHyperwallet = true;
+            }
+            mainScript.onload = () => {
+              const request: CreateRefundAuthorizationRequest = {
+                userId: userId
+              };
+          
+              this._hopperProxyService
+                .postRefundAuthorizations(this.basePath, this._hCSessionId, ApiTranslatorUtils.modelToSnakeCase(request))
+                .pipe(take(1))
+                .subscribe(
+                  (authorization: RefundAuthorization) => {
+                    const script = document.createElement('script');
+                      
+                    script.type = 'text/javascript';
+                    script.async = false;
+                    script.innerHTML =  `
+                      window.HWWidgets.initialize((onSuccess, onFailure) => {
+                        onSuccess("${authorization.token}");
+                      });
+            
+                      window.HWWidgets.transferMethods.configure({
+                        template: 'plain',
+                        el: document.getElementById("TransferMethodUI"),
+                        transferMethodConfiguration: {
+                          profileType: 'INDIVIDUAL'
+                        },
+                        onComplete: function(trmObject, completionResult) {
+                          if (trmObject) {
+                            window.dispatchEvent(new CustomEvent('hopper-hyperwallet', {
+                              'detail': {
+                                trmObject: trmObject,
+                                completionResult: completionResult
+                              }}
+                            ));
+                          }
+                        }
+                      }).display();
+                    `;
+            
+                    document.body.appendChild(script);
+                    this.isLoadingHyperwallet = false;
+                  },
+                  (error: any) => {
+                    this.isLoadingHyperwallet = false;
+                    this.isErrorHyperwallet = true;
+                    console.error(error);
+                  }
+                );
+            };
+  
+            document.head.appendChild(mainScript);
+          },
+          (error: any) => {
+            console.error(error);
+            this.isLoadingHyperwallet = false;
+            this.isErrorHyperwallet = true;
+          }
+        );
+    }
+  }
+
+  @HostListener('window:hopper-hyperwallet', ['$event']) 
+  public checkHyperwalletCallback(event: CustomEvent): void {
+    this.isValidHyperwalletSubmit = true;
+
+    const request: CreateRefundRequest = {
+      transferMethodId: event.detail.trmObject.token
+    };
+
+    this._hopperProxyService
+      .postRefunds(this.basePath, this._hCSessionId, ApiTranslatorUtils.modelToSnakeCase(request))
+      .pipe(take(1))
+      .subscribe(
+        () => {
+          this.isLoadingHyperwallet = false;
+          this.userEmail = event.detail.trmObject.email;
+          this.stepper.next();
+        },
+        (error) => {
+          console.error(error);
+          this.isLoadingHyperwallet = false;
+        }
+      );
+  }
+
   // -----------------------------------------------
   // Privates Methods
   // -----------------------------------------------
-
-  private _buildCreateCfarContractExerciseRequest(): CreateCfarContractExerciseRequest {
-    return {
-      contractId: this._contractId,
-      itinerary: this._itinerary,
-      pnrReference: this._pnrReference,
-      airlineRefundAllowance: this._airlineRefundAllowance,
-      airlineRefundMethod: this.selectedRefundMethod,
-      currency: this._currency,
-      extAttributes: {}
-    };
-  }
 
   private _buildFakeCfarContractExercisesResponse(): CfarContract {
     return {
@@ -206,8 +302,8 @@ export class CfarExerciseDialogComponent extends GlobalComponent implements OnIn
       offers: [
         {
           id: "1ecf85a8-1c43-6fad-9bb3-0dca2ca4e73a",
-          premium: "1434.00",
-          coverage: "5736.78",
+          premium: "14.00",
+          coverage: "57.78",
           currency: "CAD",
           requestType: "ancillary",
           toUsdExchangeRate: "0.7743486179425866960712648520064921",
@@ -339,23 +435,23 @@ export class CfarExerciseDialogComponent extends GlobalComponent implements OnIn
           }
         ],
         ancillaries: [],
-        totalPrice: "7170.96"
+        totalPrice: "71.96"
       },
       contractExercise: {
         id: '123456',
         contractId: '123456789',
         exerciseInitiatedDateTime: new Date(),
-        hopperRefund: '5736.78',
+        hopperRefund: '57.78',
         hopperRefundMethod: 'cash',
         extAttributes: {},
-        airlineRefundAllowance: '4736.78',
+        airlineRefundAllowance: '47.78',
         airlineRefundMethod: 'cash'
       },
-      coverage: "5736.78",
-      premium: "1434.00",
+      coverage: "57.78",
+      premium: "14.00",
       currency: "CAD",
       createdDateTime: new Date("2022-06-30T09:54:55.989Z"),
-      expiryDateTime: new Date("2022-07-08T22:00:00Z"),
+      expiryDateTime: new Date("2022-07-08T18:00Z"),
       status: "created",
       extAttributes: {}
     };
@@ -374,5 +470,18 @@ export class CfarExerciseDialogComponent extends GlobalComponent implements OnIn
       state: new FormControl(null, [Validators.required]),
       zip: new FormControl(null, [Validators.required])
     });
+  }
+
+  private _buildCreateRefundRecipientRequest(): CreateRefundRecipientRequest {
+    return {
+      firstName: this.step2Form.get('firstName')?.value,
+      lastName: this.step2Form.get('lastName')?.value,
+      dateOfBirth: this._datePipe.transform(this.step2Form.get('dateOfBirth')?.value, 'yyyy-MM-dd') || '',
+      address: this.step2Form.get('addressLine1')?.value + ', ' + this.step2Form.get('addressLine2')?.value,
+      city: this.step2Form.get('city')?.value,
+      stateProvince: this.step2Form.get('state')?.value,
+      country: this.step2Form.get('country')?.value,
+      postalCode: this.step2Form.get('zip')?.value
+    };
   }
 }

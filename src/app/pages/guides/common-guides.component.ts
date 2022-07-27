@@ -7,7 +7,7 @@ import { AppState } from "src/app/shared/ngrx";
 import { getCurrentLang, getCurrentTheme } from "src/app/shared/ngrx/global/global.selectors";
 import { Clipboard } from '@angular/cdk/clipboard';
 import { MatSnackBar } from "@angular/material/snack-bar";
-import { CfarItinerary, MapString, PassengerPricing } from "projects/angular-sdk/src/apis/hopper-cloud-airline/v1";
+import { CfarItinerary, PassengerPricing } from "projects/angular-sdk/src/apis/hopper-cloud-airline/v1";
 
 @Directive({
   selector: '[CommonGuidesComponent]'
@@ -16,7 +16,7 @@ export abstract class CommonGuidesComponent implements OnInit, OnDestroy {
     
   public currentTheme!: string;
   public currentLang!: string;
-  public basePath!: string;
+  public basePath: string = 'http://localhost:7071/airline/v1.0';
   public isFakeBackend!: boolean;
 
   protected _unsubcriber: Subject<any>;
@@ -25,7 +25,7 @@ export abstract class CommonGuidesComponent implements OnInit, OnDestroy {
   public abstract htmlCode: string;
 
   // Parameters
-  public hCSessionId = "84310cea-566a-479a-bd27-385eab32d10c";
+  public hCSessionId = "25416b3f-222e-45f3-9205-d12d876792c0";
   public currency = "EUR";
   public passengers: PassengerPricing[] = [
     {
@@ -89,6 +89,8 @@ export abstract class CommonGuidesComponent implements OnInit, OnDestroy {
       }
     ]
   };
+  public hyperwalletUrl: string = "https://sandbox.hyperwallet.com/rest/widgets/transfer-methods/";
+  public hasNoCoverageOption = false;
 
   constructor(
     protected _store: Store<AppState>,
@@ -99,9 +101,6 @@ export abstract class CommonGuidesComponent implements OnInit, OnDestroy {
     
     // Active fake data in components
     this.isFakeBackend = true;
-
-    // For local usage
-    this.basePath = 'http://localhost:7071/airline/v1.0/customer';
   }
   
   // -----------------------------------------------

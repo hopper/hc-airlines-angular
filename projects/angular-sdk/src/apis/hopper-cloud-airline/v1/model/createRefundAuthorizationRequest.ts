@@ -9,13 +9,13 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { CfarContractStatus } from './cfarContractStatus';
 
 /**
- * Update CFAR contract request
+ * A Refund Authorization Request
  */
-export interface UpdateCfarContractRequest { 
-    pnrReference: string;
-    emailAddress: string;
-    status: CfarContractStatus;
+export interface CreateRefundAuthorizationRequest { 
+    /**
+     * The user who will be refunded. This ID is the response from Create User
+     */
+    userId: string;
 }

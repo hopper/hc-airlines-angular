@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { take } from 'rxjs/operators';
-import { CfarContract, CfarItinerary, CfarOffer, CreateCfarOfferRequest, RequestType } from '../../apis/hopper-cloud-airline/v1';
+import { CfarContractCustomer, CfarItinerary, CfarOfferCustomer, CreateCfarOfferCustomerRequest, RequestType } from '../../apis/hopper-cloud-airline/v1';
 import { GlobalComponent } from '../global.component';
 import { TranslateService } from '@ngx-translate/core';
 import { DateAdapter } from "@angular/material/core";
@@ -17,10 +17,10 @@ import { DialogUtils } from '../../utils/dialog.utils';
 })
 export class CfarOfferBannerComponent extends GlobalComponent implements OnInit {
 
-  public cheapestOffer!: CfarOffer;
+  public cheapestOffer!: CfarOfferCustomer;
   public isLoading!: boolean;
 
-  private _cfarOffers!: CfarOffer[];
+  private _cfarOffers!: CfarOfferCustomer[];
 
   @Input() hCSessionId!: string;
   @Input() itineraries!: CfarItinerary[];
@@ -49,15 +49,15 @@ export class CfarOfferBannerComponent extends GlobalComponent implements OnInit 
       this.isLoading = true;
 
       this._hopperProxyService
-        .postCfarOffers(this.basePath, this.hCSessionId, ApiTranslatorUtils.modelToSnakeCase(this._buildCreateCfarOfferRequest()))
+        .postCfarOffers(this.basePath, this.hCSessionId, this.currentLang, ApiTranslatorUtils.modelToSnakeCase(this._buildCreateCfarOfferRequest()))
         .pipe(take(1))
         .subscribe(
           (cfarOffers) => {
-            let results: CfarOffer[] = [];
+            let results: CfarOfferCustomer[] = [];
 
             if (cfarOffers) {
               cfarOffers.forEach(cfarOffer => {
-                results.push(ApiTranslatorUtils.modelToCamelCase(cfarOffer) as CfarOffer);
+                results.push(ApiTranslatorUtils.modelToCamelCase(cfarOffer) as CfarOfferCustomer);
               });
             }
             
@@ -65,7 +65,10 @@ export class CfarOfferBannerComponent extends GlobalComponent implements OnInit 
             this.cheapestOffer = this._getCheapestOffer(this._cfarOffers);
             this.isLoading = false;
           },
-          (error) => this.isLoading = false
+          (error: any) => {
+            console.error(error);
+            this.isLoading = false;
+          }
         );
     }
   }
@@ -74,13 +77,12 @@ export class CfarOfferBannerComponent extends GlobalComponent implements OnInit 
   // Publics Methods
   // -----------------------------------------------
 
-  public onSubmit(cfarOffer: CfarOffer): void {
+  public onSubmit(cfarOffer: CfarOfferCustomer): void {
     const dialogData = { 
       currentLang: this.currentLang,
       basePath: this.basePath,
       hCSessionId: this.hCSessionId,
-      cfarOffers: this._cfarOffers,
-      extAttributes: {}
+      cfarOffers: this._cfarOffers
     };
     const dialogConfig = DialogUtils.getDialogConfig(dialogData, this.currentTheme);
     const dialogRef = this._dialog.open(CfarOfferDialogComponent, dialogConfig);
@@ -88,14 +90,14 @@ export class CfarOfferBannerComponent extends GlobalComponent implements OnInit 
     dialogRef.afterClosed()
       .pipe(take(1))
       .subscribe(
-        (result: CfarContract) => {
+        (result: CfarContractCustomer) => {
           if (result) {
             this.offerAccepted.emit(result);
           } else {
             console.log("Close dialog");
           }
         },
-        (error) => console.log(error)
+        (error) => console.error(error)
       );
   }
 
@@ -103,20 +105,19 @@ export class CfarOfferBannerComponent extends GlobalComponent implements OnInit 
   // Privates Methods
   // -----------------------------------------------
 
-  private _buildCreateCfarOfferRequest(): CreateCfarOfferRequest {
+  private _buildCreateCfarOfferRequest(): CreateCfarOfferCustomerRequest {
     return {
       itinerary: this.itineraries,
-      requestType: RequestType.Ancillary,
-      extAttributes: {}
+      requestType: RequestType.Ancillary
     };
   }
 
-  private _buildFakePostCfarOffersResponse(): CfarOffer[] {   
+  private _buildFakePostCfarOffersResponse(): CfarOfferCustomer[] {   
     return [
       {
         id: "1ecf859e-8785-625f-8eda-198d1ce0d6c4",
-        premium: "861.00",
-        coverage: "5736.78",
+        premium: "8.00",
+        coverage: "57.78",
         currency: "CAD",
         requestType: "ancillary",
         toUsdExchangeRate: "0.7744877537996369201410187302118379",
@@ -180,19 +181,18 @@ export class CfarOfferBannerComponent extends GlobalComponent implements OnInit 
             }
           ],
           ancillaries: [],
-          totalPrice: "7170.96"
+          totalPrice: "71.96"
         },
         offerDescription: [
           "Add the flexibility to cancel your flight for any reason up to 3 hours before departure",
           "Cancel and choose between a 80% refund of your flight base fare and taxes or 100% airline travel credit",
           "Get instant resolution, no forms or claims required"
-        ],
-        extAttributes: {}
+        ]
       },
       {
         id: "1ecf859e-8785-625f-8eda-198d1ce0d6c5",
-        premium: "1076.00",
-        coverage: "7170.96",
+        premium: "10.00",
+        coverage: "71.96",
         currency: "CAD",
         requestType: "ancillary",
         toUsdExchangeRate: "0.7744877537996369201410187302118379",
@@ -256,14 +256,13 @@ export class CfarOfferBannerComponent extends GlobalComponent implements OnInit 
             }
           ],
           ancillaries: [],
-          totalPrice: "7170.96"
+          totalPrice: "71.96"
         },
         offerDescription: [
           "Add the flexibility to cancel your flight for any reason up to 3 hours before departure",
           "Cancel and choose between a 100% refund of your flight base fare and taxes or 100% airline travel credit",
           "Get instant resolution, no forms or claims required"
-        ],
-        extAttributes: {}
+        ]
       }
     ];
   }
