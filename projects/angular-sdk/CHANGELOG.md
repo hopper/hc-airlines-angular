@@ -7,6 +7,8 @@
     - Fixed a label issue when the address line 1 was empty
     - Fixed the display of the loader
     - Force the display of the 'decline option' after a first selection
+- CFAR Offer Banner Large:
+    - Fix a display issue in mobile view
 
 <a name="2.2.0"></a>
 
