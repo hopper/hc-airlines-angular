@@ -15,8 +15,3 @@ Run `ng build` to build the project. The build artifacts will be stored in the `
 If you want to build a specific project :
 
 `ng build PROJECT_NAME`
-
-## Update documentation
-
-1. Run `ng build --prod --base-href "https://hopper.github.io/hc-airlines-angular/"`
-2. Run `npx angular-cli-ghpages --dir=dist/hc-airlines-angular`
