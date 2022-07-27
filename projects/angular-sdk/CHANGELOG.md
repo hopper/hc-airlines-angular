@@ -2,10 +2,11 @@
 
 # 2.2.1 (XXXX)
 
-### Bug fixes
+### Bug fixes / Small changes
 - CFAR Exercise Dialog:
     - Fixed a label issue when the address line 1 was empty
     - Fixed the display of the loader
+    - Force the display of the 'decline option' after a first selection
 
 <a name="2.2.0"></a>
 
