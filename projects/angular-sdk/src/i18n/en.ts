@@ -257,7 +257,8 @@ export const locale: I18n = {
             },
             BUTTON: {
                 CLOSE: 'Close'
-            }
+            },
+            TERMS_LINK_TEXT: "Terms & conditions apply"
         },
         CFAR_OFFER_BANNER: {
             TITLE: "Cancel your flight at any time, for any reason.",
@@ -285,8 +286,7 @@ export const locale: I18n = {
             },
             NO_OFFERS: "No offer available",
             LOADING: "Loading offers in progress...",
-            TERMS_WARNING: "If you don't add this, your ticket is non-refundable.",
-            TERMS_LINK_TEXT: "Terms & Conditions"
+            TERMS_WARNING: "If you don't add this, your ticket is non-refundable."
         },
         CFAR_EXERCISE_DIALOG: {
             TITLE: "Cancel flight",

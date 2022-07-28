@@ -257,7 +257,8 @@ export const locale: I18n = {
             },
             BUTTON: {
                 CLOSE: 'Fermer'
-            }
+            },
+            TERMS_LINK_TEXT: "Conditions d'utilisation"
         },
         CFAR_OFFER_BANNER: {
             TITLE: "Annulez votre vol à tout moment, pour quelque raison que ce soit.",
@@ -285,8 +286,7 @@ export const locale: I18n = {
             },
             NO_OFFERS: "Aucune offre disponible",
             LOADING: "Chargement des offres en cours...",
-            TERMS_WARNING: "Si vous ne l'ajoutez pas, votre billet ne sera pas remboursable.",
-            TERMS_LINK_TEXT: "Conditions d'utilisation"
+            TERMS_WARNING: "Si vous ne l'ajoutez pas, votre billet ne sera pas remboursable."
         },
         CFAR_EXERCISE_DIALOG: {
             TITLE: "Annuler le vol",

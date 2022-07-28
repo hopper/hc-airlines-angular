@@ -78,6 +78,10 @@
                     border: none;
                 }
             }
+
+            a {
+                color: map-get($primary-palette, default);
+            }
         }
     }
 }

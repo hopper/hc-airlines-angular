@@ -257,7 +257,8 @@ export const locale: I18n = {
             },
             BUTTON: {
                 CLOSE: 'Cerrar'
-            }
+            },
+            TERMS_LINK_TEXT: "Términos y condiciones"
         },
         CFAR_OFFER_BANNER: {
             TITLE: "Cancele su vuelo en cualquier momento, por cualquier motivo.",
@@ -285,8 +286,7 @@ export const locale: I18n = {
             },
             NO_OFFERS: "No hay ofertas disponibles",
             LOADING: "Cargando ofertas en curso...",
-            TERMS_WARNING: "Si no agrega esto, su boleto no es reembolsable",
-            TERMS_LINK_TEXT: "Términos y condiciones"
+            TERMS_WARNING: "Si no agrega esto, su boleto no es reembolsable"
         },
         CFAR_EXERCISE_DIALOG: {
             TITLE: "Cancelar vuelo",

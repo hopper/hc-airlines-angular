@@ -257,7 +257,8 @@ export const locale: I18n = {
             },
             BUTTON: {
                 CLOSE: '关'
-            }
+            },
+            TERMS_LINK_TEXT: "条款和条件"
         },
         CFAR_OFFER_BANNER: {
             TITLE: "随时以任何理由取消您的航班。",
@@ -285,8 +286,7 @@ export const locale: I18n = {
             },
             NO_OFFERS: "没有可用的优惠",
             LOADING: "正在加载优惠...",
-            TERMS_WARNING: "如果你不添加这个,你的票是不可退款的。",
-            TERMS_LINK_TEXT: "条款和条件"
+            TERMS_WARNING: "如果你不添加这个,你的票是不可退款的。"
         },
         CFAR_EXERCISE_DIALOG: {
             TITLE: "取消航班",
