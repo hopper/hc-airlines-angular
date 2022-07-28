@@ -1,3 +1,10 @@
+<a name="2.4.0"></a>
+
+# 2.4.O (XXXX-XX-XX)
+
+# Minor changes
+- WCAG compliance
+
 <a name="2.3.0"></a>
 
 # 2.3.O (2022-07-28)
