@@ -1,7 +1,7 @@
 import { Component } from "@angular/core";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { Store } from "@ngrx/store";
-import { CfarContractCustomer } from "projects/angular-sdk/src/apis/hopper-cloud-airline/v1";
+import { CfarContractCustomer, CfarOfferCustomer } from "projects/angular-sdk/src/apis/hopper-cloud-airline/v1";
 import { Locales } from "projects/angular-sdk/src/i18n";
 import { InputModel, OutputModel } from "src/app/shared/models";
 import { AppState } from "src/app/shared/ngrx";
@@ -22,16 +22,21 @@ export class CfarOfferBannerLargePageComponent extends CommonGuidesComponent {
       [hCSessionId]="hCSessionId"
       [itineraries]="itineraries"
       (chooseCoverage)="onChooseCoverage($event)"
+      (offersLoaded)="onOffersLoaded($event)"
     ></hopper-cfar-offer-banner-large>
   `;
 
   public  tsCode: string = `
-    import { CfarContractCustomer } from "@hopper-cloud-airlines/angular-sdk/src/apis/hopper-cloud-airline/v1";
+    import { CfarContractCustomer, CfarOfferCustomer } from "@hopper-cloud-airlines/angular-sdk/src/apis/hopper-cloud-airline/v1";
     
     // ...
 
     onChooseCoverage(cfarContract: CfarContractCustomer): void {
       console.log(cfarContract);
+    }
+
+    onOffersLoaded(cfarOffers: CfarOfferCustomer[]): void {
+      console.log(cfarOffers);
     }
   `;
 
@@ -86,7 +91,7 @@ export class CfarOfferBannerLargePageComponent extends CommonGuidesComponent {
           True by default. If it's false, the 'decline coverage' option is hidden.
         `,
         required: false
-      }
+      },
     ];
   }
 
@@ -98,11 +103,22 @@ export class CfarOfferBannerLargePageComponent extends CommonGuidesComponent {
           Event triggered when the user chooses a coverage (or not)<br />
           Returns a CfarContractCustomer or null
         `
+      },
+      {
+        name: 'offersLoaded',
+        description: `
+          Event triggered when the offers are loaded <br />
+          Returns a CfarOfferCustomer array
+        `
       }
     ];
   }
 
   onChooseCoverage(cfarContract: CfarContractCustomer): void {
     console.log(cfarContract);
+  }
+
+  onOffersLoaded(cfarOffers: CfarOfferCustomer[]): void {
+    console.log(cfarOffers);
   }
 }

@@ -1,7 +1,7 @@
 import { Component } from "@angular/core";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { Store } from "@ngrx/store";
-import { CfarContract, CfarContractCustomer } from "projects/angular-sdk/src/apis/hopper-cloud-airline/v1";
+import { CfarContract, CfarContractCustomer, CfarOfferCustomer } from "projects/angular-sdk/src/apis/hopper-cloud-airline/v1";
 import { Locales } from "projects/angular-sdk/src/i18n";
 import { InputModel, OutputModel } from "src/app/shared/models";
 import { AppState } from "src/app/shared/ngrx";
@@ -23,16 +23,21 @@ export class CfarOfferBannerPageComponent extends CommonGuidesComponent {
       [hCSessionId]="hCSessionId"
       [itineraries]="itineraries"
       (offerAccepted)="onOfferAccepted($event)"
+      (offersLoaded)="onOffersLoaded($event)"
     ></hopper-cfar-offer-banner>
   `;
 
   public  tsCode: string = `
-    import { CfarContractCustomer } from "@hopper-cloud-airlines/angular-sdk/src/apis/hopper-cloud-airline/v1";
+    import { CfarContractCustomer, CfarOfferCustomer } from "@hopper-cloud-airlines/angular-sdk/src/apis/hopper-cloud-airline/v1";
     
     // ...
 
     onOfferAccepted(cfarContract: CfarContractCustomer): void {
       console.log(cfarContract);
+    }
+
+    onOffersLoaded(cfarOffers: CfarOfferCustomer[]): void {
+      console.log(cfarOffers);
     }
   `;
 
@@ -99,11 +104,22 @@ export class CfarOfferBannerPageComponent extends CommonGuidesComponent {
           Event triggered when the user accepts a CFAR offer <br />
           Returns a CfarContractCustomer
         `
+      },
+      {
+        name: 'offersLoaded',
+        description: `
+          Event triggered when the offers are loaded <br />
+          Returns a CfarOfferCustomer array
+        `
       }
     ];
   }
 
   onOfferAccepted(cfarContract: CfarContractCustomer): void {
     console.log(cfarContract);
+  }
+
+  onOffersLoaded(cfarOffers: CfarOfferCustomer[]): void {
+    console.log(cfarOffers);
   }
 }

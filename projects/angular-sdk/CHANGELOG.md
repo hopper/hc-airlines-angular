@@ -1,6 +1,6 @@
 <a name="2.2.1"></a>
 
-# 2.2.1 (XXXX)
+# 2.3.O (XXXX)
 
 ### Bug fixes / Small changes
 - CFAR Exercise Dialog:
@@ -9,6 +9,12 @@
     - Force the display of the 'decline option' after a first selection
 - CFAR Offer Banner Large:
     - Fix a display issue in mobile view
+
+### Minor changes
+- CFAR Offer banner and CFAR Offer banner large:
+    - Add new event: offersLoaded
+- CFAR Offer dialog:
+    - Add new parameter: cfarOffers
 
 <a name="2.2.0"></a>
 

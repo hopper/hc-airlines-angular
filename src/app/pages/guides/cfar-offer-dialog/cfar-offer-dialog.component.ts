@@ -46,7 +46,10 @@ export class CfarOfferDialogPageComponent extends CommonGuidesComponent {
         currentLang: this.currentLang,
         basePath: this.basePath,
         hCSessionId: this.hCSessionId,
+        // Choice 1 : The component will create offers based of the itineraries
         itineraries: this.itineraries
+        // Choice 2 : The component will load directly the offers
+        cfarOffers: this.cfarOffers
       };
       const dialogConfig = DialogUtils.getDialogConfig(dialogData, this.currentTheme);
       const dialogRef = this._dialog.open(CfarOfferDialogComponent, dialogConfig);
@@ -116,10 +119,22 @@ export class CfarOfferDialogPageComponent extends CommonGuidesComponent {
       {
         name: 'itineraries',
         description: `
-          You need to pass itineraries in order to create new offers <br />
-          See <a target="_blank" href="https://airlines-api.staging.hopper.com/airline/v1.0/docs/index.html#operation/postCfar_offers">
+          Itineraries are required in order to create new offers <br />
+          See <a target="_blank" href="https://airlines-api.staging.hopper.com/airline/v1.0/docs/index.html#operation/postCustomerCfar_offers">
             API documentation
-          </a>
+          </a> <br />
+          You need to pass itineraries OR cfarOffers.
+        `,
+        required: true
+      },
+      {
+        name: 'cfarOffers',
+        description: `
+          CfarOffers are loaded directly into the component (without creating new offers) <br />
+          See <a target="_blank" href="https://airlines-api.staging.hopper.com/airline/v1.0/docs/index.html#operation/postCustomerCfar_offers">
+            API documentation
+          </a> <br />
+          You need to pass itineraries OR cfarOffers.
         `,
         required: true
       }

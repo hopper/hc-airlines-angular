@@ -25,6 +25,7 @@ export class CfarOfferBannerLargeComponent extends GlobalComponent implements On
   @Input() hasNoCoverageOption: boolean = true;
 
   @Output() chooseCoverage = new EventEmitter();
+  @Output() offersLoaded = new EventEmitter();
 
   private contractsByChoiceIndex = new Map<number, CfarContractCustomer>();
 
@@ -44,6 +45,7 @@ export class CfarOfferBannerLargeComponent extends GlobalComponent implements On
     if (this.isFakeBackend) {
       this.cfarOffers = this._buildFakePostCfarOffersResponse();
       this.selectedCfarOffer = this._getCheapestOffer(this.cfarOffers);
+      this.offersLoaded.emit(this.cfarOffers);
     } else {
       this.isLoading = true;
 
@@ -62,6 +64,8 @@ export class CfarOfferBannerLargeComponent extends GlobalComponent implements On
             
             this.cfarOffers = results;
             this.selectedCfarOffer = this._getCheapestOffer(this.cfarOffers);
+            this.offersLoaded.emit(this.cfarOffers);
+            
             this.isLoading = false;
           },
           (error) => {
