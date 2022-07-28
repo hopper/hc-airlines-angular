@@ -440,6 +440,11 @@
         <ng-container *ngIf="!cfarContract">
             <div class="p-32" ngClass.lt-md="p-16" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="16px">
                 <span class="error-message p-16">{{ 'CFAR_EXERCISE_DIALOG.NO_CONTRACT' | translate }}</span>
+
+                <button mat-raised-button ngClass.lt-sm="full-width" (click)="onClose()"
+                    attr.aria-label="{{ 'COMMON.BUTTON.CLOSE' | translate }}">
+                    {{ 'COMMON.BUTTON.CLOSE' | translate }}
+                </button>
             </div>
         </ng-container>
 

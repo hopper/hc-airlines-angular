@@ -97,8 +97,6 @@ export class CfarOfferBannerComponent extends GlobalComponent implements OnInit 
         (result: CfarContractCustomer) => {
           if (result) {
             this.offerAccepted.emit(result);
-          } else {
-            console.log("Close dialog");
           }
         },
         (error) => console.error(error)

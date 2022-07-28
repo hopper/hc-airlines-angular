@@ -3,6 +3,7 @@
 ::ng-deep {
     .hopper-dialog-container {
         max-width: 640px !important;
+        min-width: 300px !important;
 
         @include media-breakpoint('lt-md') {
             max-width: 80% !important;
