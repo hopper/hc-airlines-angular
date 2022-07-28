@@ -4,7 +4,7 @@
         <h2 class="m-0">{{ 'CFAR_EXERCISE_DIALOG.TITLE' | translate }}</h2>
     </div>
     <div fxFlex="calc(20% - 16px)" fxLayoutAlign="end start">
-        <button mat-mini-fab matTooltip="Close" (click)="onClose()">
+        <button mat-mini-fab matTooltip="Close" attr.aria-label="{{ 'COMMON.BUTTON.CLOSE' | translate }}" (click)="onClose()">
             <mat-icon>clear</mat-icon>
         </button>
     </div>
@@ -189,7 +189,8 @@
                     </div>
 
                     <div class="p-16" fxLayoutGap="16px" ngClass.lt-md="px-16" fxFlex="100" fxLayout="row wrap" fxLayoutAlign="center center">
-                        <button mat-raised-button color="primary" (click)="onSubmitStep1()" ngClass.lt-sm="full-width">
+                        <button mat-raised-button color="primary" (click)="onSubmitStep1()" ngClass.lt-sm="full-width"
+                            attr.aria-label="{{ 'CFAR_EXERCISE_DIALOG.BUTTON.CONTINUE' | translate }}">
                             {{ 'CFAR_EXERCISE_DIALOG.BUTTON.CONTINUE' | translate }}
                         </button>
                     </div>
@@ -287,10 +288,12 @@
                     </div>
 
                     <div class="p-16" fxLayoutGap="16px" ngClass.lt-md="px-16" fxFlex="100" fxLayout="row" fxLayout.lt-sm="column" fxLayoutAlign="center center">
-                        <button mat-raised-button ngClass.lt-sm="full-width" matStepperPrevious>
+                        <button mat-raised-button ngClass.lt-sm="full-width" matStepperPrevious
+                            attr.aria-label="{{ 'CFAR_EXERCISE_DIALOG.BUTTON.BACK' | translate }}">
                             {{ 'CFAR_EXERCISE_DIALOG.BUTTON.BACK' | translate }}
                         </button>
-                        <button mat-raised-button color="primary" (click)="onSubmitStep2()" ngClass.lt-sm="full-width" [disabled]="step2Form.invalid">
+                        <button mat-raised-button color="primary" (click)="onSubmitStep2()" ngClass.lt-sm="full-width" 
+                            [disabled]="step2Form.invalid" attr.aria-label="{{ 'CFAR_EXERCISE_DIALOG.BUTTON.CONTINUE' | translate }}">
                             {{ 'CFAR_EXERCISE_DIALOG.BUTTON.CONTINUE' | translate }}
                         </button>
                     </div>
@@ -408,22 +411,23 @@
                     <div fxFlex="100" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px" class="mb-16">
                         <p *ngIf="isHopperRefund">
                             {{ 'CFAR_EXERCISE_DIALOG.REFUND_DETAILS' | translate: {
-                                amount: cfarContract?.contractExercise?.hopperRefund | currency:cfarContract?.contractExercise?.currency:'symbol':undefined:currentLang,
-                                method: cfarContract?.contractExercise?.hopperRefundMethod
+                                amount: cfarContract.contractExercise?.hopperRefund | currency:cfarContract.contractExercise?.currency:'symbol':undefined:currentLang,
+                                method: cfarContract.contractExercise?.hopperRefundMethod
                             } }}
                         </p>
     
                         <p *ngIf="!isHopperRefund">
                             {{ 'CFAR_EXERCISE_DIALOG.REFUND_DETAILS' | translate: {
-                                amount: cfarContract?.contractExercise?.airlineRefundAllowance | currency:cfarContract?.contractExercise?.currency:'symbol':undefined:currentLang,
-                                method: cfarContract?.contractExercise?.airlineRefundMethod
+                                amount: cfarContract.contractExercise?.airlineRefundAllowance | currency:cfarContract.contractExercise?.currency:'symbol':undefined:currentLang,
+                                method: cfarContract.contractExercise?.airlineRefundMethod
                             } }}
                         </p>
                     </div>
 
                     <div class="p-16" fxLayoutGap="16px" ngClass.lt-md="px-16" fxFlex="100" fxLayout="row" fxLayoutAlign="center center">
-                        <button mat-raised-button ngClass.lt-sm="full-width" (click)="onClose()">
-                            {{ 'CFAR_EXERCISE_DIALOG.BUTTON.CLOSE' | translate }}
+                        <button mat-raised-button ngClass.lt-sm="full-width" (click)="onClose()"
+                            attr.aria-label="{{ 'COMMON.BUTTON.CLOSE' | translate }}">
+                            {{ 'COMMON.BUTTON.CLOSE' | translate }}
                         </button>
                     </div>
                 </mat-step>

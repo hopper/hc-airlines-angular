@@ -254,6 +254,9 @@ export const locale: I18n = {
                 YE: "也门",
                 ZM: "赞比亚",
                 ZW: "津巴布韦"
+            },
+            BUTTON: {
+                CLOSE: '关'
             }
         },
         CFAR_OFFER_BANNER: {
@@ -308,8 +311,7 @@ export const locale: I18n = {
                 CANCEL: "取消",
                 SUBMIT: "是的,取消航班",
                 BACK: "背部",
-                CONTINUE: "继续",
-                CLOSE: "关"
+                CONTINUE: "继续"
             },
             NO_CONTRACT: "没有可用的合同",
             LOADING: "正在加载...",

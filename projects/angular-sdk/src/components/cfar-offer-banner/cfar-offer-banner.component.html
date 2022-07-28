@@ -27,7 +27,8 @@
                 </div>
 
                 <div fxFlex="calc(20% - 16px)" fxFlex.lt-md="100" fxLayout="row" fxLayoutAlign="center center" fxLayoutAlign.lt-md="end center">
-                    <button mat-raised-button (click)="onSubmit(cheapestOffer)">
+                    <button mat-raised-button (click)="onSubmit(cheapestOffer)" 
+                        attr.aria-label="{{ 'CFAR_OFFER_BANNER.BUTTON.SELECT' | translate }}">
                         {{ 'CFAR_OFFER_BANNER.BUTTON.SELECT' | translate }}
                     </button>
                 </div>

@@ -254,6 +254,9 @@ export const locale: I18n = {
                 YE: "Yemen",
                 ZM: "Zambia",
                 ZW: "Zimbabwe"
+            },
+            BUTTON: {
+                CLOSE: 'Close'
             }
         },
         CFAR_OFFER_BANNER: {
@@ -308,8 +311,7 @@ export const locale: I18n = {
                 CANCEL: "Cancel",
                 SUBMIT: "Yes, cancel flight",
                 BACK: "Back",
-                CONTINUE: "Continue",
-                CLOSE: "Close"
+                CONTINUE: "Continue"
             },
             NO_CONTRACT: "No contract available",
             LOADING: "Loading in progress...",

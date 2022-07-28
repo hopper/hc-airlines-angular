@@ -5,7 +5,7 @@
     </div>
 
     <div fxFlex="calc(20% - 16px)" fxLayoutAlign="end start">
-        <button mat-mini-fab matTooltip="Close" (click)="onClose()">
+        <button mat-mini-fab (click)="onClose()" attr.aria-label="{{ 'COMMON.BUTTON.CLOSE' | translate }}">
             <mat-icon>clear</mat-icon>
         </button>
     </div>
@@ -75,10 +75,12 @@
 
     <div class="p-32" *ngIf="!isLoading" ngClass.lt-md="px-16" 
         fxFlex="100" fxLayout="row wrap" fxLayoutGap="16px" fxLayout.lt-sm="column" fxLayoutAlign="center center">
-        <button mat-raised-button ngClass.lt-sm="full-width" (click)="onClose()">
+        <button mat-raised-button ngClass.lt-sm="full-width" (click)="onClose()"
+            attr.aria-label="{{ 'CFAR_OFFER_DIALOG.BUTTON.CANCEL' | translate }}">
             {{ 'CFAR_OFFER_DIALOG.BUTTON.CANCEL' | translate }}
         </button>
-        <button mat-raised-button color="primary" *ngIf="selectedCfarOffer" ngClass.lt-sm="full-width" (click)="onSubmit()">
+        <button mat-raised-button color="primary" *ngIf="selectedCfarOffer" ngClass.lt-sm="full-width" (click)="onSubmit()"
+            attr.aria-label="{{ 'CFAR_OFFER_DIALOG.BUTTON.SUBMIT' | translate }}">
             {{ 'CFAR_OFFER_DIALOG.BUTTON.SUBMIT' | translate: { 
                 coverage: (computePercentage(selectedCfarOffer) | percent)
             } }}

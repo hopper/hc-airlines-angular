@@ -252,6 +252,9 @@ export interface I18n {
                 YE: string;
                 ZM: string;
                 ZW: string;
+            },
+            BUTTON: {
+                CLOSE: string;
             }
         },
         CFAR_OFFER_BANNER: {
@@ -307,7 +310,6 @@ export interface I18n {
                 SUBMIT: string;
                 BACK: string;
                 CONTINUE: string;
-                CLOSE: string;
             },
             NO_CONTRACT: string;
             LOADING: string;

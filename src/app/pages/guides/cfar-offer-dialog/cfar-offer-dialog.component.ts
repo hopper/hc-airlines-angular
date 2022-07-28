@@ -21,7 +21,7 @@ import { CfarContractCustomer } from "projects/angular-sdk/src/apis/hopper-cloud
 export class CfarOfferDialogPageComponent extends CommonGuidesComponent {
 
   public htmlCode: string = `
-    <button mat-flat-button color="primary" (click)="onOpenCfarOfferDialog()">
+    <button mat-flat-button color="primary" aria-label="Open CFAR offer dialog" (click)="onOpenCfarOfferDialog()">
       Open CFAR offer dialog
     </button>
   `;
