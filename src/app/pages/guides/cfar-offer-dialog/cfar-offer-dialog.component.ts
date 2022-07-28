@@ -120,7 +120,7 @@ export class CfarOfferDialogPageComponent extends CommonGuidesComponent {
         name: 'itineraries',
         description: `
           Itineraries are required in order to create new offers <br />
-          See <a target="_blank" href="https://airlines-api.staging.hopper.com/airline/v1.0/docs/index.html#operation/postCustomerCfar_offers">
+          See <a target="_blank" aria-describedby="api documentation" href="https://airlines-api.staging.hopper.com/airline/v1.0/docs/index.html#operation/postCustomerCfar_offers">
             API documentation
           </a> <br />
           You need to pass itineraries OR cfarOffers.
@@ -131,7 +131,7 @@ export class CfarOfferDialogPageComponent extends CommonGuidesComponent {
         name: 'cfarOffers',
         description: `
           CfarOffers are loaded directly into the component (without creating new offers) <br />
-          See <a target="_blank" href="https://airlines-api.staging.hopper.com/airline/v1.0/docs/index.html#operation/postCustomerCfar_offers">
+          See <a target="_blank" aria-describedby="api documentation" href="https://airlines-api.staging.hopper.com/airline/v1.0/docs/index.html#operation/postCustomerCfar_offers">
             API documentation
           </a> <br />
           You need to pass itineraries OR cfarOffers.

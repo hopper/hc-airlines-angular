@@ -36,6 +36,10 @@
                     border: 2px solid map-get($primary-palette, default);
                 }
             }
+
+            a {
+                color: map-get($primary-palette, default);
+            }
         }
     }
 }

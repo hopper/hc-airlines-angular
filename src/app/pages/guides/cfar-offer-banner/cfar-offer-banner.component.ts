@@ -89,7 +89,7 @@ export class CfarOfferBannerPageComponent extends CommonGuidesComponent {
       {
         name: 'itineraries',
         description: `
-          See <a target="_blank" href="https://airlines-api.staging.hopper.com/airline/v1.0/docs/index.html#operation/postCfar_offers">API documentation</a>
+          See <a target="_blank" aria-describedby="api documentation" href="https://airlines-api.staging.hopper.com/airline/v1.0/docs/index.html#operation/postCfar_offers">API documentation</a>
         `,
         required: true
       }
