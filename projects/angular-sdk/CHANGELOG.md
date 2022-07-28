@@ -4,6 +4,7 @@
 
 # Minor changes
 - WCAG compliance
+- Add "Powered By Hopper" logo on CFAR Offer Banner Large and CFAR Offer Dialog components
 
 <a name="2.3.0"></a>
 

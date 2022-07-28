@@ -278,7 +278,6 @@ export const locale: I18n = {
         },
         CFAR_OFFER_DIALOG: {
             TITLE: "Annuler pour une raison quelconque",
-            POWERED_BY: "Propulsé par Hopper",
             VIEW_DETAILS: "Voir détails",
             BUTTON: {
                 CANCEL: "Continuer sans couverture",

@@ -37,6 +37,11 @@
             border: 1px solid map-get($primary-palette, "A200") !important;
             border-radius: 0px;
 
+            .powered-by-image {
+                margin-top: 1rem;
+                height: 2rem;
+            }
+
             .check-icon {
                 font-weight: bold;
                 color: green;

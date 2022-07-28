@@ -276,7 +276,6 @@ export interface I18n {
         },
         CFAR_OFFER_DIALOG: {
             TITLE: string;
-            POWERED_BY: string;
             VIEW_DETAILS: string;
             BUTTON: {
                 CANCEL: string;

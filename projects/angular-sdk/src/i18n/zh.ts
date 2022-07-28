@@ -278,7 +278,6 @@ export const locale: I18n = {
         },
         CFAR_OFFER_DIALOG: {
             TITLE: "出于任何原因取消",
-            POWERED_BY: "由 Hopper 提供支持",
             VIEW_DETAILS: "查看详情",
             BUTTON: {
                 CANCEL: "继续无覆盖",
