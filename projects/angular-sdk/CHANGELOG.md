@@ -1,6 +1,6 @@
 <a name="2.2.1"></a>
 
-# 2.3.O (XXXX)
+# 2.3.O (2022-07-28)
 
 ### Bug fixes / Small changes
 - CFAR Exercise Dialog:
@@ -18,7 +18,7 @@
 
 <a name="2.2.0"></a>
 
-# 2.2.0 (2022-07-29)
+# 2.2.0 (2022-07-27)
 
 ### Bug fixes
 - General:
