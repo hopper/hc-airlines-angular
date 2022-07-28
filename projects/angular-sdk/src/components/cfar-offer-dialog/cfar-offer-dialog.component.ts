@@ -19,7 +19,6 @@ export class CfarOfferDialogComponent extends GlobalComponent implements OnInit,
   public selectedCfarOffer!: CfarOfferCustomer;
   public isLoading!: boolean;
 
-  // Mandatory data 
   private _hCSessionId!: string;
   private _itineraries!: CfarItinerary[];
 

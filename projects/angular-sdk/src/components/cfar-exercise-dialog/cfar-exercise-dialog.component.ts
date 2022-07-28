@@ -95,7 +95,7 @@ export class CfarExerciseDialogComponent extends GlobalComponent implements OnIn
 
       // Get the contract with the exercise
       this._hopperProxyService
-        .getCfarContractsId(this.basePath, this._contractId, this._hCSessionId)
+        .getCfarContractsId(this.basePath, this._hCSessionId, this._contractId)
         .pipe(take(1))
         .subscribe(
           (cfarContract: CfarContract) => {
@@ -103,6 +103,8 @@ export class CfarExerciseDialogComponent extends GlobalComponent implements OnIn
 
             this.cfarContract = result;
 
+            this.isLoading = false;
+            
             // Hopper offer by default
             this.isHopperRefund = true;
           },

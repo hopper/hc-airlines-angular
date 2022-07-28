@@ -68,6 +68,10 @@
 
             .vertical-separator {
                 border-right: 2px solid map-get($accent-palette, 300);
+
+                @include media-breakpoint('lt-md') {
+                    border: none;
+                }
             }
         }
     }

@@ -25,7 +25,7 @@ export abstract class CommonGuidesComponent implements OnInit, OnDestroy {
   public abstract htmlCode: string;
 
   // Parameters
-  public hCSessionId = "25416b3f-222e-45f3-9205-d12d876792c0";
+  public hCSessionId = "74f96587-1bcf-4794-bbb9-0df7dfcc252a";
   public currency = "EUR";
   public passengers: PassengerPricing[] = [
     {
@@ -36,7 +36,7 @@ export abstract class CommonGuidesComponent implements OnInit, OnDestroy {
     }
   ];
   public pnrReference = "123456";
-  public contractId = "1ece89da-263c-6689-bec4-f56934b83f44";
+  public contractId = "1ed0dab3-8a1a-66bb-8888-1d6e9ed4e21c";
   public itineraries: CfarItinerary[] = [{
     currency: this.currency,
     passengerPricing: this.passengers,

@@ -1,15 +1,33 @@
+<a name="2.2.1"></a>
+
+# 2.3.O (2022-07-28)
+
+### Bug fixes / Small changes
+- CFAR Exercise Dialog:
+    - Fixed a label issue when the address line 1 was empty
+    - Fixed the display of the loader
+    - Force the display of the 'decline option' after a first selection
+- CFAR Offer Banner Large:
+    - Fix a display issue in mobile view
+
+### Minor changes
+- CFAR Offer banner and CFAR Offer banner large:
+    - Add new event: offersLoaded
+- CFAR Offer dialog:
+    - Add new parameter: cfarOffers
+
 <a name="2.2.0"></a>
 
-# 2.2.0 (2022-07-29)
+# 2.2.0 (2022-07-27)
 
 ### Bug fixes
 - General:
-    - Fix date format
+    - Fixed date format
     - Adjust values of countryCode enum (Alpha-2)
 - CFAR offer banner large:
     - Remove unused block 'choose or decline coverage'
     - Improve performance
-    - Fix the descriptions (next to the check icon) to be displayed in the current language
+    - Fixed the descriptions (next to the check icon) to be displayed in the current language
 
 
 ### Minor changes
@@ -31,8 +49,8 @@
 # 2.1.7 (2022-07-18)
 
 ### Bug fixes / Small changes
-- Fix labels issues on CFAR Offer Banner Large component
-- Fix labels issues on CFAR Offer Banner component
+- Fixed labels issues on CFAR Offer Banner Large component
+- Fixed labels issues on CFAR Offer Banner component
 - Add Author info
 
 <a name="2.1.6"></a>
@@ -40,44 +58,44 @@
 # 2.1.6 (2022-07-15)
 
 ### Bug fixes
-- Fix architecture issue
+- Fixed architecture issue
 
 <a name="2.1.5"></a>
 
 # 2.1.5 (2022-07-15)
 
 ### Bug fixes
-- Fix architecture issue
+- Fixed architecture issue
 
 <a name="2.1.4"></a>
 
 # 2.1.4 (2022-07-15)
 
 ### Bug fixes
-- Fix architecture issue
+- Fixed architecture issue
 
 <a name="2.1.3"></a>
 
 # 2.1.3 (2022-07-15)
 
 ### Bug fixes
-- Fix architecture issue
+- Fixed architecture issue
 
 <a name="2.1.2"></a>
 
 # 2.1.2 (2022-07-15)
 
 ### Bug fixes
-- Fix Service Import issue
+- Fixed Service Import issue
 
 <a name="2.1.1"></a>
 
 # 2.1.1 (2022-07-13)
 
 ### Bug fixes
-- Fix licence issue
+- Fixed licence issue
 - Remove 'currentTheme' required field from "CFAR offer banner large" component
-- Fix some descriptions mistakes
+- Fixed some descriptions mistakes
 
 <a name="2.1.0"></a>
 
@@ -97,7 +115,7 @@
 - Downgrade Angular requirement to Angular 11
 
 ### Bug fixes
-- Fix accessibility issue with the npm registry
+- Fixed accessibility issue with the npm registry
 
 <a name="1.2.0"></a>
 

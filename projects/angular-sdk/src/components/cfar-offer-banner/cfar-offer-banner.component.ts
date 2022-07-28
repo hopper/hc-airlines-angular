@@ -27,6 +27,7 @@ export class CfarOfferBannerComponent extends GlobalComponent implements OnInit 
   @Input() currentTheme!: string;
 
   @Output() offerAccepted = new EventEmitter();
+  @Output() offersLoaded = new EventEmitter();
   
   constructor(
     private _adapter: DateAdapter<any>,
@@ -45,6 +46,7 @@ export class CfarOfferBannerComponent extends GlobalComponent implements OnInit 
     if (this.isFakeBackend) {
       this._cfarOffers = this._buildFakePostCfarOffersResponse();
       this.cheapestOffer = this._getCheapestOffer(this._cfarOffers);
+      this.offersLoaded.emit(this._cfarOffers);
     } else {
       this.isLoading = true;
 
@@ -63,6 +65,8 @@ export class CfarOfferBannerComponent extends GlobalComponent implements OnInit 
             
             this._cfarOffers = results;
             this.cheapestOffer = this._getCheapestOffer(this._cfarOffers);
+            this.offersLoaded.emit(this._cfarOffers);
+            
             this.isLoading = false;
           },
           (error: any) => {
