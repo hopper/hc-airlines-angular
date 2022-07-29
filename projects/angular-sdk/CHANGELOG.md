@@ -8,6 +8,7 @@
 - CFAR Offer Banner Large: 
     - Add "Powered By Hopper" logo
     - Add Terms and conditions link
+    - Improve offer descriptions
 
 <a name="2.3.0"></a>
 

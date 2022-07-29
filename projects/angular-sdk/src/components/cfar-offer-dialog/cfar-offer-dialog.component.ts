@@ -217,8 +217,8 @@ export class CfarOfferDialogComponent extends GlobalComponent implements OnInit,
           totalPrice: "71.96"
         },
         offerDescription: [
-          "Add the flexibility to cancel your flight for any reason up to 3 hours before departure",
-          "Cancel and choose between a 80% refund of your flight base fare and taxes or 100% airline travel credit",
+          "Add the flexibility to cancel your flight for any reason up to 24 hours before departure",
+          "Cancel and choose between a refund of your flight base fare and taxes, excluding additional services (paid seats, paid bags...)",
           "Get instant resolution, no forms or claims required"
         ]
       },
@@ -292,8 +292,8 @@ export class CfarOfferDialogComponent extends GlobalComponent implements OnInit,
           totalPrice: "71.96"
         },
         offerDescription: [
-          "Add the flexibility to cancel your flight for any reason up to 3 hours before departure",
-          "Cancel and choose between a 100% refund of your flight base fare and taxes or 100% airline travel credit",
+          "Add the flexibility to cancel your flight for any reason up to 24 hours before departure",
+          "Cancel and choose between a refund of your flight base fare and taxes, excluding additional services (paid seats, paid bags...)",
           "Get instant resolution, no forms or claims required"
         ]
       }
