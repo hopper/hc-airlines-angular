@@ -37,6 +37,11 @@
             border: 1px solid map-get($primary-palette, "A200") !important;
             border-radius: 0px;
 
+            .powered-by-image {
+                margin-top: 1rem;
+                height: 2rem;
+            }
+
             .check-icon {
                 font-weight: bold;
                 color: green;
@@ -66,12 +71,17 @@
                 color: map-get($primary-palette, default);
             }
 
-            .vertical-separator {
-                border-right: 2px solid map-get($accent-palette, 300);
+            .offer-choice {
+                border-left: 2px solid map-get($accent-palette, 300);
+                padding-left: 16px;
 
                 @include media-breakpoint('lt-md') {
                     border: none;
                 }
+            }
+
+            a {
+                color: map-get($primary-palette, default);
             }
         }
     }

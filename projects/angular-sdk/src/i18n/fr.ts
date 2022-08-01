@@ -254,7 +254,11 @@ export const locale: I18n = {
                 YE: "Yémen",
                 ZM: "Zambie",
                 ZW: "Zimbabwe"
-            }
+            },
+            BUTTON: {
+                CLOSE: 'Fermer'
+            },
+            TERMS_LINK_TEXT: "Conditions d'utilisation"
         },
         CFAR_OFFER_BANNER: {
             TITLE: "Annulez votre vol à tout moment, pour quelque raison que ce soit.",
@@ -275,7 +279,6 @@ export const locale: I18n = {
         },
         CFAR_OFFER_DIALOG: {
             TITLE: "Annuler pour une raison quelconque",
-            POWERED_BY: "Propulsé par Hopper",
             VIEW_DETAILS: "Voir détails",
             BUTTON: {
                 CANCEL: "Continuer sans couverture",
@@ -283,8 +286,7 @@ export const locale: I18n = {
             },
             NO_OFFERS: "Aucune offre disponible",
             LOADING: "Chargement des offres en cours...",
-            TERMS_WARNING: "Si vous ne l'ajoutez pas, votre billet ne sera pas remboursable.",
-            TERMS_LINK_TEXT: "Conditions d'utilisation"
+            TERMS_WARNING: "Si vous ne l'ajoutez pas, votre billet ne sera pas remboursable."
         },
         CFAR_EXERCISE_DIALOG: {
             TITLE: "Annuler le vol",
@@ -308,8 +310,7 @@ export const locale: I18n = {
                 CANCEL: "Annuler",
                 SUBMIT: "Oui, annuler le vol",
                 BACK: "Retour",
-                CONTINUE: "Continuer",
-                CLOSE: "Fermer"
+                CONTINUE: "Continuer"
             },
             NO_CONTRACT: "Aucun contrat disponible",
             LOADING: "Chargement en cours...",

@@ -17,8 +17,7 @@
                     </div>
 
                     <ng-container *ngFor="let desc of cheapestOffer?.offerDescription; let i = index;">
-                        <!-- DIRTY FIX : Hide the second description -->
-                        <div class="py-16" *ngIf="i != 1" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
+                        <div class="py-16" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
                             <mat-icon class="check-icon">check</mat-icon>
                             <span>{{ desc }}</span>
                         </div>
@@ -27,7 +26,8 @@
                 </div>
 
                 <div fxFlex="calc(20% - 16px)" fxFlex.lt-md="100" fxLayout="row" fxLayoutAlign="center center" fxLayoutAlign.lt-md="end center">
-                    <button mat-raised-button (click)="onSubmit(cheapestOffer)">
+                    <button mat-raised-button (click)="onSubmit(cheapestOffer)" 
+                        attr.aria-label="{{ 'CFAR_OFFER_BANNER.BUTTON.SELECT' | translate }}">
                         {{ 'CFAR_OFFER_BANNER.BUTTON.SELECT' | translate }}
                     </button>
                 </div>

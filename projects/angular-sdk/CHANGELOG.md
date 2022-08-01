@@ -1,3 +1,15 @@
+<a name="2.4.0"></a>
+
+# 2.4.O (2022-08-01)
+
+# Minor changes
+- General:
+    - WCAG compliance
+- CFAR Offer Banner Large: 
+    - Add "Powered By Hopper" logo
+    - Add Terms and conditions link
+    - Improve offer descriptions
+
 <a name="2.3.0"></a>
 
 # 2.3.O (2022-07-28)

@@ -42,22 +42,9 @@
             .powered-by-container {
                 height: 0px;
 
-                .powered-by {
-                    @if($is-dark) {
-                        background: rgb(52,52,52);
-                        background: linear-gradient(0deg, rgba(52,52,52,0) 0%, rgba(52,52,52,1) 25%);
-                        color: white;
-                    } @else {
-                        background: rgb(255,255,255);
-                        background: linear-gradient(0deg, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 25%);
-                        color: black;
-                    }
-    
-                    
-                    border-radius: 16px;
-                    position: relative;
-                    font-size: 12px;
-                    top: 16px;
+                .powered-by-image {
+                    margin-top: 1rem;
+                    height: 2rem;
                 }
             }
         }

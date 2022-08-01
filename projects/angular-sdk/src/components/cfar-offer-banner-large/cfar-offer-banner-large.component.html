@@ -4,9 +4,9 @@
 
         <mat-card *ngIf="cfarOffers" class="mat-elevation-z4 m-16 pointer" fxFlex fxLayout="row wrap">
     
-            <div fxFlex="90" fxFlex.lt-md="100" fxLayout="row wrap">
+            <div fxFlex="100" fxLayout="row wrap">
 
-                <div fxFlex="100">
+                <div fxFlex="100" fxLayout="row" fxLayoutAlign="start center">
                     <h2 class="offer-title px-16 m-0">{{ 'CFAR_OFFER_BANNER_LARGE.TITLE' | translate }}</h2>
                 </div>
 
@@ -24,6 +24,12 @@
                                 <span>{{ desc }}</span>
                             </div>
                         </ng-container>
+
+                        <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
+                            <a href="#" attr.aria-describedby="{{ 'COMMON.TERMS_LINK_TEXT' | translate }}" target="_blank">
+                                {{ 'COMMON.TERMS_LINK_TEXT' | translate }}
+                            </a>
+                        </div>
                 
                     </div>
         
@@ -36,7 +42,7 @@
                         <div fxFlex="100" fxLayout="row" fxLayoutGap="16px" fxLayout.lt-md="column" fxLayoutAlign="start center"
                             fxLayoutAlign.lt-md="center start">
 
-                            <div fxFlex [ngClass]="{'vertical-separator': (i % 2) == 0}" fxLayout="row wrap" fxLayoutAlign="start start" *ngFor="let offer of cfarOffers; let i = index;">
+                            <div fxFlex class="offer-choice" fxLayout="row wrap" fxLayoutAlign="start start" *ngFor="let offer of cfarOffers; let i = index;">
                                 <mat-radio-button fxFlex="100" value="{{ i }}" class="important-text bold">
                                     {{ 'CFAR_OFFER_BANNER_LARGE.COVERAGE_PERCENTAGE' | translate: 
                                         { coverage: (computePercentage(offer) | percent) }
@@ -58,6 +64,11 @@
                     </mat-radio-group>
     
                 </div>
+
+                <div fxFlex="100" fxLayout="row" fxLayoutAlign="end center">
+                    <img class="powered-by-image" src="assets/powered-by-hopper.svg" />
+                </div>
+                
             </div>
 
         </mat-card>

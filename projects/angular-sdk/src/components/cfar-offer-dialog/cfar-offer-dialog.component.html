@@ -5,13 +5,13 @@
     </div>
 
     <div fxFlex="calc(20% - 16px)" fxLayoutAlign="end start">
-        <button mat-mini-fab matTooltip="Close" (click)="onClose()">
+        <button mat-mini-fab (click)="onClose()" attr.aria-label="{{ 'COMMON.BUTTON.CLOSE' | translate }}">
             <mat-icon>clear</mat-icon>
         </button>
     </div>
 
     <div fxFlex="100" class="powered-by-container">
-        <span class="powered-by px-16 py-8">{{ 'CFAR_OFFER_DIALOG.POWERED_BY' | translate }}</span>
+        <img class="powered-by-image" src="assets/powered-by-hopper.svg" />
     </div>
 
 </div>
@@ -30,7 +30,10 @@
 
                 <div fxFlex="100" class="py-8" fxLayout="row" fxLayout.lt-sm="column" fxLayoutAlign="start center" fxLayoutGap="8px">
                     <span>{{ 'CFAR_OFFER_DIALOG.TERMS_WARNING' | translate }}</span>
-                    <a href="#" target="_blank">{{ 'CFAR_OFFER_DIALOG.TERMS_LINK_TEXT' | translate }}</a>
+                    <a href="#" attr.aria-describedby="{{ 'COMMON.TERMS_LINK_TEXT' | translate }}" 
+                        target="_blank">
+                        {{ 'COMMON.TERMS_LINK_TEXT' | translate }}
+                    </a>
                 </div>
             
             </div>
@@ -75,10 +78,12 @@
 
     <div class="p-32" *ngIf="!isLoading" ngClass.lt-md="px-16" 
         fxFlex="100" fxLayout="row wrap" fxLayoutGap="16px" fxLayout.lt-sm="column" fxLayoutAlign="center center">
-        <button mat-raised-button ngClass.lt-sm="full-width" (click)="onClose()">
+        <button mat-raised-button ngClass.lt-sm="full-width" (click)="onClose()"
+            attr.aria-label="{{ 'CFAR_OFFER_DIALOG.BUTTON.CANCEL' | translate }}">
             {{ 'CFAR_OFFER_DIALOG.BUTTON.CANCEL' | translate }}
         </button>
-        <button mat-raised-button color="primary" *ngIf="selectedCfarOffer" ngClass.lt-sm="full-width" (click)="onSubmit()">
+        <button mat-raised-button color="primary" *ngIf="selectedCfarOffer" ngClass.lt-sm="full-width" (click)="onSubmit()"
+            attr.aria-label="{{ 'CFAR_OFFER_DIALOG.BUTTON.SUBMIT' | translate }}">
             {{ 'CFAR_OFFER_DIALOG.BUTTON.SUBMIT' | translate: { 
                 coverage: (computePercentage(selectedCfarOffer) | percent)
             } }}

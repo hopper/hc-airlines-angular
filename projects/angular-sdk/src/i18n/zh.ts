@@ -254,7 +254,11 @@ export const locale: I18n = {
                 YE: "也门",
                 ZM: "赞比亚",
                 ZW: "津巴布韦"
-            }
+            },
+            BUTTON: {
+                CLOSE: '关'
+            },
+            TERMS_LINK_TEXT: "条款和条件"
         },
         CFAR_OFFER_BANNER: {
             TITLE: "随时以任何理由取消您的航班。",
@@ -275,7 +279,6 @@ export const locale: I18n = {
         },
         CFAR_OFFER_DIALOG: {
             TITLE: "出于任何原因取消",
-            POWERED_BY: "由 Hopper 提供支持",
             VIEW_DETAILS: "查看详情",
             BUTTON: {
                 CANCEL: "继续无覆盖",
@@ -283,8 +286,7 @@ export const locale: I18n = {
             },
             NO_OFFERS: "没有可用的优惠",
             LOADING: "正在加载优惠...",
-            TERMS_WARNING: "如果你不添加这个,你的票是不可退款的。",
-            TERMS_LINK_TEXT: "条款和条件"
+            TERMS_WARNING: "如果你不添加这个,你的票是不可退款的。"
         },
         CFAR_EXERCISE_DIALOG: {
             TITLE: "取消航班",
@@ -308,8 +310,7 @@ export const locale: I18n = {
                 CANCEL: "取消",
                 SUBMIT: "是的,取消航班",
                 BACK: "背部",
-                CONTINUE: "继续",
-                CLOSE: "关"
+                CONTINUE: "继续"
             },
             NO_CONTRACT: "没有可用的合同",
             LOADING: "正在加载...",

@@ -372,8 +372,8 @@ export class CfarExerciseDialogComponent extends GlobalComponent implements OnIn
             totalPrice: "7170.96"
           },
           offerDescription: [
-            "Add the flexibility to cancel your flight for any reason up to 3 hours before departure",
-            "Cancel and choose between a 80% refund of your flight base fare and taxes or 100% airline travel credit",
+            "Add the flexibility to cancel your flight for any reason up to 24 hours before departure",
+            "Cancel and get a refund of your flight base fare and taxes, excluding additional services (paid seats, paid bags...)",
             "Get instant resolution, no forms or claims required"
           ],
           extAttributes: {}

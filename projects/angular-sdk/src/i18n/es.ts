@@ -254,7 +254,11 @@ export const locale: I18n = {
                 YE: "Yemen",
                 ZM: "Zambia",
                 ZW: "Zimbabue"
-            }
+            },
+            BUTTON: {
+                CLOSE: 'Cerrar'
+            },
+            TERMS_LINK_TEXT: "Términos y condiciones"
         },
         CFAR_OFFER_BANNER: {
             TITLE: "Cancele su vuelo en cualquier momento, por cualquier motivo.",
@@ -275,7 +279,6 @@ export const locale: I18n = {
         },
         CFAR_OFFER_DIALOG: {
             TITLE: "Cancelar por cualquier motivo",
-            POWERED_BY: "Impulsado por Hopper",
             VIEW_DETAILS: "Ver detalles",
             BUTTON: {
                 CANCEL: "Continuar sin cobertura",
@@ -283,8 +286,7 @@ export const locale: I18n = {
             },
             NO_OFFERS: "No hay ofertas disponibles",
             LOADING: "Cargando ofertas en curso...",
-            TERMS_WARNING: "Si no agrega esto, su boleto no es reembolsable",
-            TERMS_LINK_TEXT: "Términos y condiciones"
+            TERMS_WARNING: "Si no agrega esto, su boleto no es reembolsable"
         },
         CFAR_EXERCISE_DIALOG: {
             TITLE: "Cancelar vuelo",
@@ -308,8 +310,7 @@ export const locale: I18n = {
                 CANCEL: "Cancelar",
                 SUBMIT: "Sí, cancelar vuelo",
                 BACK: "Volver",
-                CONTINUE: "Seguir",
-                CLOSE: "Cerrar"
+                CONTINUE: "Seguir"
             },
             NO_CONTRACT: "No hay contrato disponible",
             LOADING: "Cargando en curso...",

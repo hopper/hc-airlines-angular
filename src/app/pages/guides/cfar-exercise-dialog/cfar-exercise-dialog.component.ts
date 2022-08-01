@@ -19,11 +19,11 @@ import { Clipboard } from '@angular/cdk/clipboard';
 export class CfarExerciseDialogPageComponent extends CommonGuidesComponent {
 
   public  htmlCode: string = `
-    <button mat-flat-button color="primary" (click)="onOpenCfarExerciseDialog(false)">
+    <button mat-flat-button color="primary" aria-label="Open CFAR Exercise dialog" (click)="onOpenCfarExerciseDialog(false)">
       Open CFAR Exercise dialog
     </button>
 
-    <button mat-flat-button color="primary" (click)="onOpenCfarExerciseDialog(true)">
+    <button mat-flat-button color="primary" aria-label="Open CFAR Exercise dialog as a siderbar" (click)="onOpenCfarExerciseDialog(true)">
       Open CFAR Exercise dialog as a sidebar
     </button>
   `;
