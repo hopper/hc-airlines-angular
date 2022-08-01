@@ -1,6 +1,6 @@
 <a name="2.4.0"></a>
 
-# 2.4.O (XXXX-XX-XX)
+# 2.4.O (2022-08-01)
 
 # Minor changes
 - General:
