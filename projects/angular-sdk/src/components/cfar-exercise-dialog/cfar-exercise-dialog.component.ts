@@ -127,20 +127,20 @@ export class CfarExerciseDialogComponent extends GlobalComponent implements OnIn
   // Publics Methods
   // -----------------------------------------------
 
-  onClose(): void {
+  public onClose(): void {
     this._dialogRef.close();
   }
 
-  onSelectRefundType(type: string): void {
+  public onSelectRefundType(type: string): void {
     this.isHopperRefund = type == 'hopper';
   }
 
-  onScrollToTop(event: StepperSelectionEvent): void {
+  public onScrollToTop(event: StepperSelectionEvent): void {
     // Scroll to top of the stepper when step changes (timer due to rendering delay)
     setTimeout(() => this.anchor.nativeElement.scrollTo(0,0), 0);
   }
 
-  getNbPassengers(itinerary: CfarItinerary): number {
+  public getNbPassengers(itinerary: CfarItinerary): number {
     let nbPassengers = 0;
 
     if (itinerary && itinerary?.passengerPricing) {
@@ -150,7 +150,7 @@ export class CfarExerciseDialogComponent extends GlobalComponent implements OnIn
     return nbPassengers;
   }
 
-  getMapPassengers(itinerary: CfarItinerary): Map<string, number> {
+  public getMapPassengers(itinerary: CfarItinerary): Map<string, number> {
     const mapPassengers = new Map<string, number>();
 
     itinerary.passengerPricing.forEach(pp => {
@@ -163,11 +163,11 @@ export class CfarExerciseDialogComponent extends GlobalComponent implements OnIn
     return mapPassengers;
   }
 
-  asIsOrder(a: any, b: any): number {
+  public asIsOrder(a: any, b: any): number {
     return 1;
   }
 
-  onSubmitStep1(): void {
+  public onSubmitStep1(): void {
     if (this.isHopperRefund) {
       // Go to the next step
       this.stepper.next();
@@ -177,7 +177,7 @@ export class CfarExerciseDialogComponent extends GlobalComponent implements OnIn
     }
   }
 
-  onSubmitStep2(): void {
+  public onSubmitStep2(): void {
     // Go to the next step
     this.stepper.next();
 
@@ -293,7 +293,7 @@ export class CfarExerciseDialogComponent extends GlobalComponent implements OnIn
         }
       );
   }
-
+  
   // -----------------------------------------------
   // Privates Methods
   // -----------------------------------------------

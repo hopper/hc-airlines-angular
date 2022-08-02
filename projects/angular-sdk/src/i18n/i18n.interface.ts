@@ -2,8 +2,11 @@ export interface I18n {
     lang: string;
     data: {
         COMMON: {
-            DATE_FORMAT: string;
-            DATE_FORMAT_SHORT: string;
+            DATE_FORMAT: {
+                HOUR: string;
+                DATE: string;
+                HOUR_AND_DATE: string;
+            },
             COUNTRY: {
                 AF: string;
                 AX: string;

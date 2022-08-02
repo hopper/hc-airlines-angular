@@ -4,8 +4,11 @@ export const locale: I18n = {
     lang: 'en',
     data: {
         COMMON: {
-            DATE_FORMAT: 'EEEE, MMMM d, y, h:mm:ss a z',
-            DATE_FORMAT_SHORT: 'MM/dd/YYYY hh:mm a',
+            DATE_FORMAT: {
+                HOUR: 'hh:mm a',
+                DATE: 'ddMMM',
+                HOUR_AND_DATE: 'EEEE, MMMM d, y, h:mm:ss a z'
+            },
             COUNTRY: {
                 AF: "Afghanistan",
                 AX: "Åland Islands",
@@ -319,7 +322,7 @@ export const locale: I18n = {
             STEP: {
                 FIRST: "Refund type",
                 SECOND: "General information",
-                THIRD: "Payment information [hyperwallet]",
+                THIRD: "Payment information",
                 FOURTH: "Confirmation"
             },
             FORM: {

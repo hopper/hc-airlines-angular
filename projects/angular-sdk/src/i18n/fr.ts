@@ -4,8 +4,11 @@ export const locale: I18n = {
     lang: 'fr',
     data: {
         COMMON: {
-            DATE_FORMAT: 'EEEE d MMMM y à HH:mm:ss z',
-            DATE_FORMAT_SHORT: 'dd/MM/YYYY HH:mm',
+            DATE_FORMAT: {
+                HOUR: 'hh:mm a',
+                DATE: 'ddMMM',
+                HOUR_AND_DATE: 'EEEE, MMMM d, y à h:mm:ss a z'
+            },
             COUNTRY: {
                 AF: "Afghanistan",
                 AX: "Îles Åland",

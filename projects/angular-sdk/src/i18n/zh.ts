@@ -4,8 +4,11 @@ export const locale: I18n = {
     lang: 'zh',
     data: {
         COMMON: {
-            DATE_FORMAT: 'EEEE, MMMM d, y, h:mm:ss a z',
-            DATE_FORMAT_SHORT: 'MM/dd/YYYY hh:mm a',
+            DATE_FORMAT: {
+                HOUR: 'hh:mm a',
+                DATE: 'ddMMM',
+                HOUR_AND_DATE: 'EEEE, MMMM d, y, h:mm:ss a z'
+            },
             COUNTRY: {
                 AF: "阿富汗",
                 AX: "奥兰群岛",
@@ -319,7 +322,7 @@ export const locale: I18n = {
             STEP: {
                 FIRST: "退款类型",
                 SECOND: "一般信息",
-                THIRD: "支付信息 [Hyperwallet]",
+                THIRD: "支付信息",
                 FOURTH: "确认"
             },
             FORM: {
