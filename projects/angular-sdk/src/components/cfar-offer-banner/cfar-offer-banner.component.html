@@ -36,10 +36,6 @@
             
         </mat-card>
 
-        <ng-container *ngIf="!cheapestOffer">
-            <p>{{ 'CFAR_OFFER_BANNER.NO_OFFERS' | translate }}</p>
-        </ng-container>
-
     </ng-container>
 
     <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="16px" *ngIf="isLoading">

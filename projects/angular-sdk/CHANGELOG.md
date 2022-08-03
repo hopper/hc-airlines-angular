@@ -10,6 +10,13 @@
 ### Minor changes
 - CFAR Exercise dialog:
     - Improved itinerary display
+- CFAR Offer Banner:
+    - Added an event when loading offers fails.
+    - The component content's is now hidden when offers fail to load.
+- CFAR Offer Banner Large:
+    - Added an event when loading offers fails.
+    - The component content's is now hidden when offers fail to load.
+    - Added a new input: hasWarningCoverageMessage
 
 <a name="2.4.0"></a>
 

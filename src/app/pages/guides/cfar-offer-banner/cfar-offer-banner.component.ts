@@ -108,8 +108,8 @@ export class CfarOfferBannerPageComponent extends CommonGuidesComponent {
       {
         name: 'offersLoaded',
         description: `
-          Event triggered when the offers are loaded <br />
-          Returns a CfarOfferCustomer array
+          Event triggered when the offers are loaded (or not)<br />
+          Returns a CfarOfferCustomer array or null
         `
       }
     ];

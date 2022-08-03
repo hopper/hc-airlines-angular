@@ -21,6 +21,8 @@ export class CfarOfferBannerLargePageComponent extends CommonGuidesComponent {
       [currentLang]="currentLang"
       [hCSessionId]="hCSessionId"
       [itineraries]="itineraries"
+      [hasNoCoverageOption]="hasNoCoverageOption"
+      [hasWarningCoverageMessage]="hasWarningCoverageMessage"
       (chooseCoverage)="onChooseCoverage($event)"
       (offersLoaded)="onOffersLoaded($event)"
     ></hopper-cfar-offer-banner-large>
@@ -92,6 +94,13 @@ export class CfarOfferBannerLargePageComponent extends CommonGuidesComponent {
         `,
         required: false
       },
+      {
+        name: 'hasWarningCoverageMessage',
+        description: `
+          False by default. If it's true, a warning message is displayed when no choice has been selected.
+        `,
+        required: false
+      }
     ];
   }
 
@@ -107,8 +116,8 @@ export class CfarOfferBannerLargePageComponent extends CommonGuidesComponent {
       {
         name: 'offersLoaded',
         description: `
-          Event triggered when the offers are loaded <br />
-          Returns a CfarOfferCustomer array
+          Event triggered when the offers are loaded (or not)<br />
+          Returns a CfarOfferCustomer array or null
         `
       }
     ];

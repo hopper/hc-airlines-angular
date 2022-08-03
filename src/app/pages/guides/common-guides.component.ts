@@ -91,6 +91,7 @@ export abstract class CommonGuidesComponent implements OnInit, OnDestroy {
   };
   public hyperwalletUrl: string = "https://sandbox.hyperwallet.com/rest/widgets/transfer-methods/";
   public hasNoCoverageOption = false;
+  public hasWarningCoverageMessage = true;
 
   constructor(
     protected _store: Store<AppState>,

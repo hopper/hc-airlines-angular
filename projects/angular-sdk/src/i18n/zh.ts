@@ -265,7 +265,6 @@ export const locale: I18n = {
         },
         CFAR_OFFER_BANNER: {
             TITLE: "随时以任何理由取消您的航班。",
-            NO_OFFERS: "没有可用的优惠",
             LOADING: "正在加载优惠...",
             BUTTON: {
                 SELECT: "选择"
@@ -274,11 +273,11 @@ export const locale: I18n = {
         },
         CFAR_OFFER_BANNER_LARGE: {
             TITLE: "随时以任何理由取消您的航班。",
-            NO_OFFERS: "没有可用的优惠",
             LOADING: "正在加载优惠...",
             COVERAGE_PERCENTAGE: "承保飞行费用的 {{ coverage }}",
             NO_COVERAGE_OPTION: "我不想出于任何原因购买取消。",
-            PRICE_PER_TRAVELER: "<span>每位乘客</span><span class='price-per-traveler'>{{ price }}</span>"
+            PRICE_PER_TRAVELER: "<span>每位乘客</span><span class='price-per-traveler'>{{ price }}</span>",
+            WARNING_MESSAGE: "请选择或拒绝出于任何原因取消。"
         },
         CFAR_OFFER_DIALOG: {
             TITLE: "出于任何原因取消",

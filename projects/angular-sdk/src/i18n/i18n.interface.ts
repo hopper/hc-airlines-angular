@@ -263,7 +263,6 @@ export interface I18n {
         },
         CFAR_OFFER_BANNER: {
             TITLE: string;
-            NO_OFFERS: string;
             LOADING: string;
             BUTTON: {
                 SELECT: string;
@@ -272,11 +271,11 @@ export interface I18n {
         },
         CFAR_OFFER_BANNER_LARGE: {
             TITLE: string;
-            NO_OFFERS: string;
             LOADING: string;
             COVERAGE_PERCENTAGE: string;
             NO_COVERAGE_OPTION: string;
             PRICE_PER_TRAVELER: string;
+            WARNING_MESSAGE: string;
         },
         CFAR_OFFER_DIALOG: {
             TITLE: string;

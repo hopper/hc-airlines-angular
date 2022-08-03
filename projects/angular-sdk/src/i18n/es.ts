@@ -265,7 +265,6 @@ export const locale: I18n = {
         },
         CFAR_OFFER_BANNER: {
             TITLE: "Cancele su vuelo en cualquier momento, por cualquier motivo.",
-            NO_OFFERS: "No hay ofertas disponibles",
             LOADING: "Cargando ofertas en curso...",
             BUTTON: {
                 SELECT: "Seleccione"
@@ -274,11 +273,11 @@ export const locale: I18n = {
         },
         CFAR_OFFER_BANNER_LARGE: {
             TITLE: "Cancele su vuelo en cualquier momento, por cualquier motivo.",
-            NO_OFFERS: "No hay ofertas disponibles",
             LOADING: "Cargando ofertas en curso...",
             COVERAGE_PERCENTAGE: "{{ coverage }} de los costos de vuelo cubiertos",
             NO_COVERAGE_OPTION: "No quiero comprar Cancelar por cualquier motivo.",
-            PRICE_PER_TRAVELER: "<span class='price-per-traveler'>{{ price }}</span><span>por pasajero</span>"
+            PRICE_PER_TRAVELER: "<span class='price-per-traveler'>{{ price }}</span><span>por pasajero</span>",
+            WARNING_MESSAGE: "Elija o rechace Cancelar por cualquier motivo."
         },
         CFAR_OFFER_DIALOG: {
             TITLE: "Cancelar por cualquier motivo",

@@ -23,6 +23,7 @@ export class CfarOfferBannerLargeComponent extends GlobalComponent implements On
   @Input() hCSessionId!: string;
   @Input() itineraries!: CfarItinerary[];
   @Input() hasNoCoverageOption: boolean = true;
+  @Input() hasWarningCoverageMessage: boolean = false;
 
   @Output() chooseCoverage = new EventEmitter();
   @Output() offersLoaded = new EventEmitter();
@@ -70,6 +71,7 @@ export class CfarOfferBannerLargeComponent extends GlobalComponent implements On
           },
           (error) => {
             console.error(error);
+            this.offersLoaded.emit();
             this.isLoading = false;
           }
         );

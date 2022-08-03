@@ -35,8 +35,12 @@
         
                 </div>
     
-                <div fxFlexOffset="20" fxFlex="80" fxFlexOffset.lt-md="0" fxFlex.lt-md="100" fxLayout="row" class="mb-16" fxLayoutAlign="start center" fxLayoutGap="16px">
+                <div fxFlexOffset="20" fxFlex="80" fxFlexOffset.lt-md="0" fxFlex.lt-md="100" fxLayout="row wrap" class="mb-16" fxLayoutAlign="start center" fxLayoutGap="16px">
     
+                    <div *ngIf="hasWarningCoverageMessage && !selectedChoice" class="p-16" fxFlex="100" fxLayout="row wrap" fxLayoutAlign="center center">
+                        <p class="p-16 warning-message">{{ 'CFAR_OFFER_BANNER_LARGE.WARNING_MESSAGE' | translate }}</p>
+                    </div>
+
                     <mat-radio-group fxFlex="100" fxLayout="row wrap" fxLayoutAlign="start center" color="primary"
                         [(ngModel)]="selectedChoice" (ngModelChange)="onChooseCoverage()">
                         <div fxFlex="100" fxLayout="row" fxLayoutGap="16px" fxLayout.lt-md="column" fxLayoutAlign="start center"
@@ -72,10 +76,6 @@
             </div>
 
         </mat-card>
-
-        <ng-container *ngIf="!cfarOffers">
-            <p>{{ 'CFAR_OFFER_BANNER_LARGE.NO_OFFERS' | translate }}</p>
-        </ng-container>
 
     </ng-container>
 
