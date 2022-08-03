@@ -348,6 +348,12 @@ export interface I18n {
             CONFIRMATION_MESSAGE_1: string;
             CONFIRMATION_MESSAGE_2: string;
             REFUND_DETAILS: string;
+            PASSENGER_TYPE: {
+                ADULT: string;
+                CHILD: string;
+                SEATED_INFANT: string;
+                LAP_INFANT: string;
+            }
         }
     }
 }

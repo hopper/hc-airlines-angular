@@ -77,10 +77,6 @@
                 font-weight: bold;
             }
 
-            .passenger-type {
-                text-transform: capitalize;
-            }
-
             .flight-icon {
                 transform: rotate(90deg);
                 font-size: 32px;
@@ -95,7 +91,7 @@
             }
 
             .itinerary-container {
-                border-right: 1px solid map-get($accent-palette, 300);
+                border-right: 1px solid map-get($fg-palette, divider);
             }
 
             mat-card {

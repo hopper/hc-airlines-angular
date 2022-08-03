@@ -320,7 +320,7 @@ export const locale: I18n = {
             LOADING_HYPERWALLET: "Loading Hyperwallet in progress...",
             LOADING_HYPERWALLET_ERROR: "An error occured while loading Hyperwallet",
             STEP: {
-                FIRST: "Refund type",
+                FIRST: "Booking summary",
                 SECOND: "General information",
                 THIRD: "Payment information",
                 FOURTH: "Confirmation"
@@ -349,7 +349,13 @@ export const locale: I18n = {
             },
             CONFIRMATION_MESSAGE_1: "Your flight has been canceled and your refund is being processed.",
             CONFIRMATION_MESSAGE_2: "A confirmation email will be sent shortly to {{ userEmail }} with details on how to use your airlines credits",
-            REFUND_DETAILS: "{{ amount }} in {{ method }}"
+            REFUND_DETAILS: "{{ amount }} in {{ method }}",
+            PASSENGER_TYPE: {
+                ADULT: "Adult",
+                CHILD: "Child",
+                SEATED_INFANT: "Seated infant",
+                LAP_INFANT: "Lap infant"
+            }
         }
     }
 }

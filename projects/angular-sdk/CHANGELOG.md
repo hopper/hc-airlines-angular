@@ -5,6 +5,7 @@
 ### Bug fixes / Small changes
 - CFAR Exercise dialog:
     - Fixed a display issue in mobile view
+    - Translation of passengers types
 
 ### Minor changes
 - CFAR Exercise dialog:

@@ -135,7 +135,7 @@
 
                             <div class="ml-32">
                                 <p *ngFor="let passenger of getMapPassengers(cfarContract.itinerary) | keyvalue">
-                                    <b class="passenger-type">{{ passenger?.key }}</b> : {{ passenger?.value }}
+                                    <b>{{ ('CFAR_EXERCISE_DIALOG.PASSENGER_TYPE.' + passenger?.key?.toUpperCase()) | translate }}</b> : {{ passenger?.value }}
                                 </p>
                             </div>
                         </div>

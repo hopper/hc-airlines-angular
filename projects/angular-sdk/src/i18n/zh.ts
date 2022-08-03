@@ -320,7 +320,7 @@ export const locale: I18n = {
             LOADING_HYPERWALLET: "正在加载 Hyperwallet...",
             LOADING_HYPERWALLET_ERROR: "加载 Hyperwallet 时出错",
             STEP: {
-                FIRST: "退款类型",
+                FIRST: "预订摘要",
                 SECOND: "一般信息",
                 THIRD: "支付信息",
                 FOURTH: "确认"
@@ -349,7 +349,13 @@ export const locale: I18n = {
             },
             CONFIRMATION_MESSAGE_1: "您的航班已取消，正在处理您的退款。",
             CONFIRMATION_MESSAGE_2: "稍后将向 {{ userEmail }} 发送一封确认电子邮件，其中包含有关如何使用您的航空公司积分的详细信息",
-            REFUND_DETAILS: "{{ amount }} 在 {{ method }}"
+            REFUND_DETAILS: "{{ amount }} 在 {{ method }}",
+            PASSENGER_TYPE: {
+                ADULT: "成人",
+                CHILD: "孩子",
+                SEATED_INFANT: "坐着的婴儿",
+                LAP_INFANT: "膝上婴儿"
+            }
         }
     }
 }
