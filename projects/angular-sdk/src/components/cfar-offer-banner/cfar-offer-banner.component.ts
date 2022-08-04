@@ -71,6 +71,7 @@ export class CfarOfferBannerComponent extends GlobalComponent implements OnInit 
           },
           (error: any) => {
             console.error(error);
+            this.offersLoaded.emit();
             this.isLoading = false;
           }
         );
@@ -99,7 +100,9 @@ export class CfarOfferBannerComponent extends GlobalComponent implements OnInit 
             this.offerAccepted.emit(result);
           }
         },
-        (error) => console.error(error)
+        (error) => {
+          console.error(error);
+        }
       );
   }
 

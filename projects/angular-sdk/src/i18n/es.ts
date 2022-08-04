@@ -4,8 +4,11 @@ export const locale: I18n = {
     lang: 'es',
     data: {
         COMMON: {
-            DATE_FORMAT: 'EEEE, MMMM d, y, h:mm:ss a z',
-            DATE_FORMAT_SHORT: 'MM/dd/YYYY hh:mm a',
+            DATE_FORMAT: {
+                HOUR: 'hh:mm a',
+                DATE: 'ddMMM',
+                HOUR_AND_DATE: 'EEEE, MMMM d, y, h:mm:ss a z'
+            },
             COUNTRY: {
                 AF: "Afganistán",
                 AX: "Islas Åland",
@@ -262,7 +265,6 @@ export const locale: I18n = {
         },
         CFAR_OFFER_BANNER: {
             TITLE: "Cancele su vuelo en cualquier momento, por cualquier motivo.",
-            NO_OFFERS: "No hay ofertas disponibles",
             LOADING: "Cargando ofertas en curso...",
             BUTTON: {
                 SELECT: "Seleccione"
@@ -271,11 +273,11 @@ export const locale: I18n = {
         },
         CFAR_OFFER_BANNER_LARGE: {
             TITLE: "Cancele su vuelo en cualquier momento, por cualquier motivo.",
-            NO_OFFERS: "No hay ofertas disponibles",
             LOADING: "Cargando ofertas en curso...",
             COVERAGE_PERCENTAGE: "{{ coverage }} de los costos de vuelo cubiertos",
             NO_COVERAGE_OPTION: "No quiero comprar Cancelar por cualquier motivo.",
-            PRICE_PER_TRAVELER: "<span class='price-per-traveler'>{{ price }}</span><span>por pasajero</span>"
+            PRICE_PER_TRAVELER: "<span class='price-per-traveler'>{{ price }}</span><span>por pasajero</span>",
+            WARNING_MESSAGE: "Elija o rechace Cancelar por cualquier motivo."
         },
         CFAR_OFFER_DIALOG: {
             TITLE: "Cancelar por cualquier motivo",
@@ -317,9 +319,9 @@ export const locale: I18n = {
             LOADING_HYPERWALLET: "Cargando Hyperwallet en curso...",
             LOADING_HYPERWALLET_ERROR: "Ocurrió un error al cargar Hyperwallet",
             STEP: {
-                FIRST: "Tipo de reembolso",
+                FIRST: "Resumen de la reserva",
                 SECOND: "Información general",
-                THIRD: "Información de pago [hyperwallet]",
+                THIRD: "Información de pago",
                 FOURTH: "Confirmación"
             },
             FORM: {
@@ -346,7 +348,13 @@ export const locale: I18n = {
             },
             CONFIRMATION_MESSAGE_1: "Tu vuelo ha sido cancelado y tu reembolso está siendo procesado.",
             CONFIRMATION_MESSAGE_2: "En breve se enviará un correo electrónico de confirmación a {{ userEmail }} con detalles sobre cómo usar los créditos de las aerolíneas",
-            REFUND_DETAILS: "{{ amount }} en {{ method }}"
+            REFUND_DETAILS: "{{ amount }} en {{ method }}",
+            PASSENGER_TYPE: {
+                ADULT: "Adulto",
+                CHILD: "Niño",
+                SEATED_INFANT: "Bebé sentado",
+                LAP_INFANT: "Infante de regazo"
+            }
         }
     }
 }

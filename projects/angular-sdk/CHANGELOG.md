@@ -1,14 +1,34 @@
+<a name="2.5.0"></a>
+
+# 2.5.O (2022-08-04)
+
+### Bug fixes / Small changes
+- CFAR Exercise dialog:
+    - Fixed a display issue in mobile view
+    - Translation of passengers types
+
+### Minor changes
+- CFAR Exercise dialog:
+    - Improved itinerary display
+- CFAR Offer Banner:
+    - Added an event when loading offers fails.
+    - The component content's is now hidden when offers fail to load.
+- CFAR Offer Banner Large:
+    - Added an event when loading offers fails.
+    - The component content's is now hidden when offers fail to load.
+    - Added a new input: hasWarningCoverageMessage
+
 <a name="2.4.0"></a>
 
 # 2.4.O (2022-08-01)
 
-# Minor changes
+### Minor changes
 - General:
     - WCAG compliance
 - CFAR Offer Banner Large: 
-    - Add "Powered By Hopper" logo
-    - Add Terms and conditions link
-    - Improve offer descriptions
+    - Added "Powered By Hopper" logo
+    - Added Terms and conditions link
+    - Improved offer descriptions
 
 <a name="2.3.0"></a>
 
@@ -18,15 +38,15 @@
 - CFAR Exercise Dialog:
     - Fixed a label issue when the address line 1 was empty
     - Fixed the display of the loader
-    - Force the display of the 'decline option' after a first selection
+    - Forced the display of the 'decline option' after a first selection
 - CFAR Offer Banner Large:
-    - Fix a display issue in mobile view
+    - Fixed a display issue in mobile view
 
 ### Minor changes
 - CFAR Offer banner and CFAR Offer banner large:
-    - Add new event: offersLoaded
+    - Added new event: offersLoaded
 - CFAR Offer dialog:
-    - Add new parameter: cfarOffers
+    - Added new parameter: cfarOffers
 
 <a name="2.2.0"></a>
 
@@ -35,10 +55,10 @@
 ### Bug fixes
 - General:
     - Fixed date format
-    - Adjust values of countryCode enum (Alpha-2)
+    - Adjusted values of countryCode enum (Alpha-2)
 - CFAR offer banner large:
-    - Remove unused block 'choose or decline coverage'
-    - Improve performance
+    - Removed unused block 'choose or decline coverage'
+    - Improved performance
     - Fixed the descriptions (next to the check icon) to be displayed in the current language
 
 

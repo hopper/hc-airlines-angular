@@ -35,7 +35,7 @@
                             <p>
                                 {{ 'CFAR_EXERCISE_DIALOG.DEADLINE_SENTENCE_1' | translate }}
                                 <b>
-                                    {{ cfarContract.expiryDateTime | date: ('COMMON.DATE_FORMAT' | translate):'':currentLang }}
+                                    {{ cfarContract.expiryDateTime | date: ('COMMON.DATE_FORMAT.HOUR_AND_DATE' | translate):'':currentLang }}
                                 </b>
                             </p>
                             <p>{{ 'CFAR_EXERCISE_DIALOG.DEADLINE_SENTENCE_2' | translate }}</p>
@@ -45,13 +45,47 @@
 
                     <mat-divider></mat-divider>
 
-                    <div class="p-16" ngClass.lt-md="px-16" fxLayout="row" fxLayoutAlign="start start">
-                        <div fxFlex fxLayout="column" fxLayoutAlign="center start">
+                    <div class="p-16" ngClass.lt-md="px-16" fxLayout="row" fxLayoutAlign="start start"
+                        fxLayoutGap="16px"
+                    >
+                        <div fxFlex class="itinerary-container" fxLayout="column" fxLayoutAlign="center start" fxLayoutGap="32px">
 
                             <ng-container *ngFor="let slice of cfarContract?.itinerary?.slices">
 
-                                <ng-container *ngFor="let segment of slice?.segments">
+                                <div fxLayout="row wrap" fxLayoutAlign="start center" 
+                                    *ngFor="let segment of slice?.segments">
 
+                                    <div fxFlex="100" class="mb-8">
+                                        <div fxFlex fxLayoutAlign="center center">
+                                            {{ segment?.departureDateTime | date: ('COMMON.DATE_FORMAT.HOUR' | translate):'':currentLang }}
+                                        </div>
+                                        <div fxFlex fxLayoutAlign="center center"><!-- Let empty --></div>
+                                        <div fxFlex fxLayoutAlign="center center">
+                                            {{ segment?.arrivalDateTime | date: ('COMMON.DATE_FORMAT.HOUR' | translate):'':currentLang }}
+                                        </div>
+                                    </div>
+
+                                    <div fxFlex="100" class="mb-8">
+                                        <div fxFlex class="origin-destination" fxLayoutAlign="center center">{{ segment?.originAirport }}</div>
+                                        <div fxFlex fxLayoutAlign="center center" fxLayoutGap="8px">
+                                            <div class="decorative-stroke"></div>
+                                            <mat-icon color="primary" class="flight-icon">flight</mat-icon>
+                                            <div class="decorative-stroke"></div>
+                                        </div>
+                                        <div fxFlex class="origin-destination" fxLayoutAlign="center center">{{ segment?.destinationAirport }}</div>
+                                    </div>
+
+                                    <div fxFlex="100">
+                                        <div fxFlex fxLayoutAlign="center center">
+                                            {{ segment?.departureDateTime | date: ('COMMON.DATE_FORMAT.DATE' | translate):'':currentLang }}
+                                        </div>
+                                        <div fxFlex fxLayoutAlign="center center">{{ segment?.flightNumber }}</div>
+                                        <div fxFlex fxLayoutAlign="center center">
+                                            {{ segment?.arrivalDateTime | date: ('COMMON.DATE_FORMAT.DATE' | translate):'':currentLang }}
+                                        </div>
+                                    </div>
+
+                                    <!--
                                     <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px"
                                         class="mb-16">
                                         <mat-icon color="primary" class="rotate-90">flight</mat-icon>
@@ -76,8 +110,9 @@
                                             {{ segment?.flightNumber }}
                                         </p>
                                     </div>
+                                    -->
 
-                                </ng-container>
+                                </div>
 
                             </ng-container>
 
@@ -100,7 +135,7 @@
 
                             <div class="ml-32">
                                 <p *ngFor="let passenger of getMapPassengers(cfarContract.itinerary) | keyvalue">
-                                    <b class="passenger-type">{{ passenger?.key }}</b> : {{ passenger?.value }}
+                                    <b>{{ ('CFAR_EXERCISE_DIALOG.PASSENGER_TYPE.' + passenger?.key?.toUpperCase()) | translate }}</b> : {{ passenger?.value }}
                                 </p>
                             </div>
                         </div>
@@ -165,15 +200,15 @@
                         <div fxFlex="100" fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="8px" class="mb-16">
                             <p *ngIf="isHopperRefund">
                                 {{ 'CFAR_EXERCISE_DIALOG.REFUND_DETAILS' | translate: {
-                                    amount: cfarContract?.contractExercise?.hopperRefund | currency:cfarContract?.contractExercise?.currency:'symbol':undefined:currentLang,
-                                    method: cfarContract?.contractExercise?.hopperRefundMethod
+                                    amount: cfarContract.contractExercise?.hopperRefund | currency:cfarContract.contractExercise?.currency:'symbol':undefined:currentLang,
+                                    method: cfarContract.contractExercise?.hopperRefundMethod
                                 } }}
                             </p>
         
                             <p *ngIf="!isHopperRefund">
                                 {{ 'CFAR_EXERCISE_DIALOG.REFUND_DETAILS' | translate: {
-                                    amount: cfarContract?.contractExercise?.airlineRefundAllowance | currency:cfarContract?.contractExercise?.currency:'symbol':undefined:currentLang,
-                                    method: cfarContract?.contractExercise?.airlineRefundMethod
+                                    amount: cfarContract.contractExercise?.airlineRefundAllowance | currency:cfarContract.contractExercise?.currency:'symbol':undefined:currentLang,
+                                    method: cfarContract.contractExercise?.airlineRefundMethod
                                 } }}
                             </p>
                         </div>
@@ -181,7 +216,7 @@
                         <div fxFlex="100" *ngIf="isHopperRefund">
                             <p class="text-justify">
                                 {{ 'CFAR_EXERCISE_DIALOG.REFUND_WARNING_MESSAGE' | translate: {
-                                    amount: cfarContract?.contractExercise?.hopperRefund | currency:cfarContract?.contractExercise?.currency:'symbol':undefined:currentLang
+                                    amount: cfarContract.contractExercise?.hopperRefund | currency:cfarContract.contractExercise?.currency:'symbol':undefined:currentLang
                                 } }}
                             </p>
                         </div>

@@ -46,6 +46,11 @@
         }
 
         .mat-dialog-content {
+            @include media-breakpoint('lt-sm') {
+                // Full-height - mat-dialog-title height
+                max-height: calc(100% - 100px);
+            }
+
             &.sidebar-mode {
                 // Full-height - mat-dialog-title height
                 max-height: calc(100% - 100px);
@@ -72,12 +77,21 @@
                 font-weight: bold;
             }
 
-            .passenger-type {
-                text-transform: capitalize;
+            .flight-icon {
+                transform: rotate(90deg);
+                font-size: 32px;
+                width: 32px;
+                height: 32px;
             }
 
-            .rotate-90 {
-                transform: rotate(90deg);
+            .decorative-stroke {
+                height: 2px;
+                background-color: map-get($primary-palette, default);
+                width: 100%;
+            }
+
+            .itinerary-container {
+                border-right: 1px solid map-get($fg-palette, divider);
             }
 
             mat-card {
@@ -128,6 +142,11 @@
                 border-radius: 50%;
                 padding: 8px;
                 color: white;
+            }
+
+            .origin-destination {
+                font-weight: bold;
+                font-size: 1.6rem;
             }
 
             // Hyperwallet

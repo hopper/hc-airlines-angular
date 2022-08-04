@@ -4,8 +4,11 @@ export const locale: I18n = {
     lang: 'zh',
     data: {
         COMMON: {
-            DATE_FORMAT: 'EEEE, MMMM d, y, h:mm:ss a z',
-            DATE_FORMAT_SHORT: 'MM/dd/YYYY hh:mm a',
+            DATE_FORMAT: {
+                HOUR: 'hh:mm a',
+                DATE: 'ddMMM',
+                HOUR_AND_DATE: 'EEEE, MMMM d, y, h:mm:ss a z'
+            },
             COUNTRY: {
                 AF: "阿富汗",
                 AX: "奥兰群岛",
@@ -262,7 +265,6 @@ export const locale: I18n = {
         },
         CFAR_OFFER_BANNER: {
             TITLE: "随时以任何理由取消您的航班。",
-            NO_OFFERS: "没有可用的优惠",
             LOADING: "正在加载优惠...",
             BUTTON: {
                 SELECT: "选择"
@@ -271,11 +273,11 @@ export const locale: I18n = {
         },
         CFAR_OFFER_BANNER_LARGE: {
             TITLE: "随时以任何理由取消您的航班。",
-            NO_OFFERS: "没有可用的优惠",
             LOADING: "正在加载优惠...",
             COVERAGE_PERCENTAGE: "承保飞行费用的 {{ coverage }}",
             NO_COVERAGE_OPTION: "我不想出于任何原因购买取消。",
-            PRICE_PER_TRAVELER: "<span>每位乘客</span><span class='price-per-traveler'>{{ price }}</span>"
+            PRICE_PER_TRAVELER: "<span>每位乘客</span><span class='price-per-traveler'>{{ price }}</span>",
+            WARNING_MESSAGE: "请选择或拒绝出于任何原因取消。"
         },
         CFAR_OFFER_DIALOG: {
             TITLE: "出于任何原因取消",
@@ -317,9 +319,9 @@ export const locale: I18n = {
             LOADING_HYPERWALLET: "正在加载 Hyperwallet...",
             LOADING_HYPERWALLET_ERROR: "加载 Hyperwallet 时出错",
             STEP: {
-                FIRST: "退款类型",
+                FIRST: "预订摘要",
                 SECOND: "一般信息",
-                THIRD: "支付信息 [Hyperwallet]",
+                THIRD: "支付信息",
                 FOURTH: "确认"
             },
             FORM: {
@@ -346,7 +348,13 @@ export const locale: I18n = {
             },
             CONFIRMATION_MESSAGE_1: "您的航班已取消，正在处理您的退款。",
             CONFIRMATION_MESSAGE_2: "稍后将向 {{ userEmail }} 发送一封确认电子邮件，其中包含有关如何使用您的航空公司积分的详细信息",
-            REFUND_DETAILS: "{{ amount }} 在 {{ method }}"
+            REFUND_DETAILS: "{{ amount }} 在 {{ method }}",
+            PASSENGER_TYPE: {
+                ADULT: "成人",
+                CHILD: "孩子",
+                SEATED_INFANT: "坐着的婴儿",
+                LAP_INFANT: "膝上婴儿"
+            }
         }
     }
 }

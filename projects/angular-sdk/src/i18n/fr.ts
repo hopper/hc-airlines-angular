@@ -4,8 +4,11 @@ export const locale: I18n = {
     lang: 'fr',
     data: {
         COMMON: {
-            DATE_FORMAT: 'EEEE d MMMM y à HH:mm:ss z',
-            DATE_FORMAT_SHORT: 'dd/MM/YYYY HH:mm',
+            DATE_FORMAT: {
+                HOUR: 'hh:mm a',
+                DATE: 'ddMMM',
+                HOUR_AND_DATE: 'EEEE, MMMM d, y à h:mm:ss a z'
+            },
             COUNTRY: {
                 AF: "Afghanistan",
                 AX: "Îles Åland",
@@ -262,7 +265,6 @@ export const locale: I18n = {
         },
         CFAR_OFFER_BANNER: {
             TITLE: "Annulez votre vol à tout moment, pour quelque raison que ce soit.",
-            NO_OFFERS: "Aucune offre disponible",
             LOADING: "Chargement des offres en cours...",
             BUTTON: {
                 SELECT: "Sélectionner"
@@ -271,11 +273,11 @@ export const locale: I18n = {
         },
         CFAR_OFFER_BANNER_LARGE: {
             TITLE: "Annulez votre vol à tout moment, pour quelque raison que ce soit.",
-            NO_OFFERS: "Aucune offre disponible",
             LOADING: "Chargement des offres en cours...",
             COVERAGE_PERCENTAGE: "{{ coverage }} des frais de vol couverts",
             NO_COVERAGE_OPTION: "Je ne veux pas ajouter l'option 'Annuler pour une raison quelconque'.",
-            PRICE_PER_TRAVELER: "<span class='price-per-traveler'>{{ price }}</span><span>par passager</span>"
+            PRICE_PER_TRAVELER: "<span class='price-per-traveler'>{{ price }}</span><span>par passager</span>",
+            WARNING_MESSAGE: "Veuillez choisir ou refuser l'annulation pour quelque raison que ce soit."
         },
         CFAR_OFFER_DIALOG: {
             TITLE: "Annuler pour une raison quelconque",
@@ -317,7 +319,7 @@ export const locale: I18n = {
             LOADING_HYPERWALLET: "Chargement d'Hyperwallet en cours...",
             LOADING_HYPERWALLET_ERROR: "Une erreur est survenue lors du chargement d'Hyperwallet",
             STEP: {
-                FIRST: "Type de remboursement",
+                FIRST: "Récapitulatif de la réservation",
                 SECOND: "Informations générales",
                 THIRD: "Information du paiement",
                 FOURTH: "Confirmation"
@@ -346,7 +348,13 @@ export const locale: I18n = {
             },
             CONFIRMATION_MESSAGE_1: "Votre vol a été remboursé and votre remboursement est en train d'être traité.",
             CONFIRMATION_MESSAGE_2: "Un mail de confirmation va être envoyé à l'adresse {{ userEmail }} avec les détails sur la manière d'utiliser votre crédit",
-            REFUND_DETAILS: "{{ amount }} en {{ method }}"
+            REFUND_DETAILS: "{{ amount }} en {{ method }}",
+            PASSENGER_TYPE: {
+                ADULT: "Adulte",
+                CHILD: "Enfant",
+                SEATED_INFANT: "Bébé assis",
+                LAP_INFANT: "Bébé sur les genoux"
+            }
         }
     }
 }
