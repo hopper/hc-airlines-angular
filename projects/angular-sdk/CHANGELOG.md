@@ -1,6 +1,6 @@
 <a name="2.5.0"></a>
 
-# 2.5.O (2022-XX-XXXX)
+# 2.5.O (2022-08-04)
 
 ### Bug fixes / Small changes
 - CFAR Exercise dialog:
