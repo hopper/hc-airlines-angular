@@ -25,7 +25,7 @@ export abstract class CommonGuidesComponent implements OnInit, OnDestroy {
   public abstract htmlCode: string;
 
   // Parameters
-  public hCSessionId = "74f96587-1bcf-4794-bbb9-0df7dfcc252a";
+  public hCSessionId = "d4c74b72-cff9-4b14-9243-33550fce4a54";
   public currency = "EUR";
   public passengers: PassengerPricing[] = [
     {
@@ -37,32 +37,34 @@ export abstract class CommonGuidesComponent implements OnInit, OnDestroy {
   ];
   public pnrReference = "123456";
   public contractId = "1ed0dab3-8a1a-66bb-8888-1d6e9ed4e21c";
-  public itineraries: CfarItinerary[] = [{
-    currency: this.currency,
-    passengerPricing: this.passengers,
-    slices: [
-      {
-        segments: [
-          {
-            originAirport: "LGA",
-            destinationAirport: "BOS",
-            departureDateTime: "2022-07-30T18:34:30",
-            arrivalDateTime: "2022-07-30T19:12:30",
-            flightNumber: "JB776",
-            validatingCarrierCode: "B6",
-            fareClass: "basic_economy"
-          }
-        ]
-      }
-    ],
-    totalPrice: "91.65",
-    ancillaries: [
-      {
-        totalPrice: "30.55",
-        type: "travel_insurance"
-      }
-    ]
-  }];
+  public itineraries: CfarItinerary[] = [
+    {
+      currency: this.currency,
+      passengerPricing: this.passengers,
+      slices: [
+        {
+          segments: [
+            {
+              originAirport: "LGA",
+              destinationAirport: "BOS",
+              departureDateTime: "2022-08-30T18:34:30",
+              arrivalDateTime: "2022-08-30T19:12:30",
+              flightNumber: "JB776",
+              validatingCarrierCode: "B6",
+              fareClass: "basic_economy"
+            }
+          ]
+        }
+      ],
+      totalPrice: "91.65",
+      ancillaries: [
+        {
+          totalPrice: "30.55",
+          type: "travel_insurance"
+        }
+      ]
+    }
+  ];
   public itinerary: CfarItinerary = {
     currency: this.currency,
     passengerPricing: this.passengers,
@@ -72,8 +74,8 @@ export abstract class CommonGuidesComponent implements OnInit, OnDestroy {
           {
             originAirport: "LGA",
             destinationAirport: "BOS",
-            departureDateTime: "2022-07-30T18:34:30",
-            arrivalDateTime: "2022-07-30T19:12:30",
+            departureDateTime: "2022-08-30T18:34:30",
+            arrivalDateTime: "2022-08-30T19:12:30",
             flightNumber: "JB776",
             validatingCarrierCode: "B6",
             fareClass: "basic_economy"
