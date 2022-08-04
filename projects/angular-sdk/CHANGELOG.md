@@ -3,7 +3,8 @@
 # 2.5.O (2022-XX-XX)
 
 ### Bug fixes / Small changes
-- TODO
+- Exercise Dialog:
+    - Fixed Terms and conditions label case
 
 ### Minor changes
 - TODO
