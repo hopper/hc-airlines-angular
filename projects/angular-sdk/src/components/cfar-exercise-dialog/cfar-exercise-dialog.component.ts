@@ -14,6 +14,8 @@ import { StepperSelectionEvent } from '@angular/cdk/stepper';
 import { MatStepper } from '@angular/material/stepper';
 import { HttpClient } from '@angular/common/http';
 import { DatePipe } from '@angular/common';
+import { ExerciseActionStep } from '../../enums/exercise-action-step.enum';
+import { SendCfarContractExerciceVerificationCodeResponse } from '../../apis/hopper-cloud-airline/v1';
 
 @Component({
   selector: 'hopper-cfar-exercise-dialog',
@@ -32,13 +34,16 @@ export class CfarExerciseDialogComponent extends GlobalComponent implements OnIn
   public isValidHyperwalletSubmit!: boolean;
   public isErrorHyperwallet!: boolean;
   public userEmail!: string;
+  public cfarContractUserEmail!: string;
 
   // Mandatory data
   private _hCSessionId!: string;
   private _contractId!: string;
   private _hyperwalletUrl!: string;
+  private _navigationStep!: ExerciseActionStep;
 
   // Forms
+  public checkVerificationCodeForm!: FormGroup;
   public step2Form!: FormGroup;
 
   @ViewChild('dialogContentAnchor') public anchor!: ElementRef;
@@ -86,34 +91,11 @@ export class CfarExerciseDialogComponent extends GlobalComponent implements OnIn
     // Update countries labels manually (dialog limitation)
     this._setCountriesLabels();
 
-    if (this.isFakeBackend) {
-      this.cfarContract = this._buildFakeCfarContractExercisesResponse();
-      // Force to true for the MVP
-      this.isHopperRefund = true;
-    } else {
-      this.isLoading = true;
+    // Init Navigation Context
+    this._initNavigationContext();
 
-      // Get the contract with the exercise
-      this._hopperProxyService
-        .getCfarContractsId(this.basePath, this._hCSessionId, this._contractId)
-        .pipe(take(1))
-        .subscribe(
-          (cfarContract: CfarContract) => {
-            const result = ApiTranslatorUtils.modelToCamelCase(cfarContract) as CfarContract;
-
-            this.cfarContract = result;
-
-            this.isLoading = false;
-            
-            // Hopper offer by default
-            this.isHopperRefund = true;
-          },
-          (error: any) => {
-            console.error(error);
-            this.isLoading = false;
-          }
-        );
-    }
+    // Load the contract and the associated exercise
+    //this._loadContractExercise();
 
     this.refundMethods = [
       { value: 'ftc', label: 'FTC' },
@@ -293,10 +275,105 @@ export class CfarExerciseDialogComponent extends GlobalComponent implements OnIn
         }
       );
   }
+
+
+
+  // -----------------------------------------------
+  // Navigation
+  // -----------------------------------------------
+
+  public isSendVerificationCodeStep(): Boolean {
+    return this._navigationStep === ExerciseActionStep.SEND_VERIFICATION_STEP;
+  }
+
+  public isCheckVerificationCodeStep(): Boolean {
+    return this._navigationStep === ExerciseActionStep.CHECK_VERIFICATION_STEP;
+  }
+
+  public isProcessCfarExerciseStep(): Boolean {
+    return this._navigationStep === ExerciseActionStep.PROCESS_CFAR_EXERCISE_STEP;
+  }
+
+  public onSendVerificationCode(): void {
+    console.log("SEND");
+    if (this.isFakeBackend) {
+      this.setStep(ExerciseActionStep.CHECK_VERIFICATION_STEP);
+      //this.cfarContract = this._loadContractExercise();
+    } else {
+      this.isLoading = true;
+
+      // Get the contract with the exercise
+      this._hopperProxyService
+        .postSendCfarExerciseVerificationCode(this.basePath, this._hCSessionId, this._contractId, ApiTranslatorUtils.modelToSnakeCase({}))
+        .pipe(take(1))
+        .subscribe(
+          (sendVerificationResult: SendCfarContractExerciceVerificationCodeResponse) => {
+            const result = ApiTranslatorUtils.modelToCamelCase(sendVerificationResult) as SendCfarContractExerciceVerificationCodeResponse;
+
+            this._contractId = result.contractId;
+            this.cfarContractUserEmail = result.anonymizedEmailAddress;
+            this.setStep(ExerciseActionStep.CHECK_VERIFICATION_STEP);
+
+            this.isLoading = false;
+          },
+          (error: any) => {
+            console.error(error);
+            this.isLoading = false;
+          }
+        );
+    }
+  }
+
+  public isCheckVerificationCodeFormValid(): boolean {
+    return this.checkVerificationCodeForm.valid;
+  }
+
+  public onCheckVerificationCode(): void {
+    console.log("ee");
+  }
+
+  private _initNavigationContext(): void {
+    this._navigationStep = ExerciseActionStep.SEND_VERIFICATION_STEP;
+  }
+
+  private setStep(currentStep: ExerciseActionStep): void {
+    this._navigationStep = currentStep;
+  }
   
   // -----------------------------------------------
   // Privates Methods
   // -----------------------------------------------
+
+  private _loadContractExercise(): void {
+    if (this.isFakeBackend) {
+      this.cfarContract = this._buildFakeCfarContractExercisesResponse();
+      // Force to true for the MVP
+      this.isHopperRefund = true;
+    } else {
+      this.isLoading = true;
+
+      // Get the contract with the exercise
+      this._hopperProxyService
+        .getCfarContractsId(this.basePath, this._hCSessionId, this._contractId)
+        .pipe(take(1))
+        .subscribe(
+          (cfarContract: CfarContract) => {
+            const result = ApiTranslatorUtils.modelToCamelCase(cfarContract) as CfarContract;
+
+            this.cfarContract = result;
+
+            this.isLoading = false;
+            
+            // Hopper offer by default
+            this.isHopperRefund = true;
+          },
+          (error: any) => {
+            console.error(error);
+            this.isLoading = false;
+          }
+        );
+    }
+  }
 
   private _buildFakeCfarContractExercisesResponse(): CfarContract {
     return {
@@ -459,7 +536,11 @@ export class CfarExerciseDialogComponent extends GlobalComponent implements OnIn
     };
   }
 
-  private _initForms(): void {
+  private _initForms(): void {    
+    this.checkVerificationCodeForm = this._formBuilder.group({
+      verificationCode: [null, [Validators.pattern('[0-9]{6}'), Validators.required]]
+    });
+
     this.step2Form = this._formBuilder.group({
       firstName: new FormControl(null, [Validators.required]),
       middleName: new FormControl(null),

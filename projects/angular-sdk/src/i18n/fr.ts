@@ -308,11 +308,18 @@ export const locale: I18n = {
             METHOD: "Méthode :",
             AMOUNT: "Montant :",
             REFUND_METHOD: "Mode de remboursement",
+            CHECK_VERIFICATION_TITLE: "Vérification de votre identité",
+            CHECK_VERIFICATION_TEXT: "Afin de vérifier votre identité, nous allons vous envoyer un e-mail contenant un code de vérification",
+            SEND_VERIFICATION_TITLE: "Vérification de votre identité",
+            SEND_VERIFICATION_TEXT: "Un e-mail contenant un code de vérification vient d'être envoyé à {{email}}. Veuillez saisie ce code ci dessous",
+            RESEND_VERIFICATION_CODE: "Renvoyer un code",
             BUTTON: {
                 CANCEL: "Annuler",
                 SUBMIT: "Oui, annuler le vol",
                 BACK: "Retour",
-                CONTINUE: "Continuer"
+                CONTINUE: "Continuer",
+                SEND_VERIFICATION_CODE: "Envoyer",
+                CHECK_VERIFICATION_CODE: "Vérifier"
             },
             NO_CONTRACT: "Aucun contrat disponible",
             LOADING: "Chargement en cours...",
@@ -325,6 +332,8 @@ export const locale: I18n = {
                 FOURTH: "Confirmation"
             },
             FORM: {
+                VERIFICATION_CODE: "Code de vérification",
+                VERIFICATION_CODE_ERROR: "Le code de vérification est requis",
                 PERSONAL_INFORMATION: "Informations personnelles",
                 FIRST_NAME: "Prénom",
                 FIRST_NAME_ERROR: "Le prénom est requis",

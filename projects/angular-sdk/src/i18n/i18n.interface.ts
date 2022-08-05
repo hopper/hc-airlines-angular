@@ -306,11 +306,18 @@ export interface I18n {
             METHOD: string;
             AMOUNT: string;
             REFUND_METHOD: string;
+            CHECK_VERIFICATION_TITLE: string;
+            CHECK_VERIFICATION_TEXT: string;
+            SEND_VERIFICATION_TITLE: string;
+            SEND_VERIFICATION_TEXT: string;
+            RESEND_VERIFICATION_CODE: string;
             BUTTON: {
                 CANCEL: string;
                 SUBMIT: string;
                 BACK: string;
                 CONTINUE: string;
+                SEND_VERIFICATION_CODE: string;
+                CHECK_VERIFICATION_CODE: string;
             },
             NO_CONTRACT: string;
             LOADING: string;
@@ -323,6 +330,8 @@ export interface I18n {
                 FOURTH: string;
             },
             FORM: {
+                VERIFICATION_CODE: string;
+                VERIFICATION_CODE_ERROR: string;
                 PERSONAL_INFORMATION: string;
                 FIRST_NAME: string;
                 FIRST_NAME_ERROR: string;
