@@ -261,7 +261,7 @@ export const locale: I18n = {
             BUTTON: {
                 CLOSE: 'Cerrar'
             },
-            TERMS_LINK_TEXT: "Términos y condiciones"
+            TERMS_LINK_TEXT: "Términos y Condiciones"
         },
         CFAR_OFFER_BANNER: {
             TITLE: "Cancele su vuelo en cualquier momento, por cualquier motivo.",

@@ -1,3 +1,14 @@
+<a name="2.6.0"></a>
+
+# 2.5.O (2022-XX-XX)
+
+### Bug fixes / Small changes
+- Exercise Dialog:
+    - Fixed Terms and conditions label case
+
+### Minor changes
+- TODO
+
 <a name="2.5.0"></a>
 
 # 2.5.O (2022-08-04)
