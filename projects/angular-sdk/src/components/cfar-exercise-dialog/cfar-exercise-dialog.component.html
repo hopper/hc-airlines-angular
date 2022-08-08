@@ -50,11 +50,15 @@
                 <mat-error>{{this.errorMessage}}</mat-error>
             </div>
 
-            <div fxLayoutAlign="center center">
+            <div fxLayoutAlign="center center" fxLayout="column">
                 <button mat-raised-button color="primary" ngClass.lt-sm="full-width" ngClass.gt-sm="mid-width" [disabled]="!isCheckVerificationCodeFormValid()" 
                     (click)="onCheckVerificationCode()" attr.aria-label="{{ 'CFAR_EXERCISE_DIALOG.BUTTON.CONTINUE' | translate }}">
                     {{ 'CFAR_EXERCISE_DIALOG.BUTTON.CONTINUE' | translate }}
                 </button>
+
+                <div fxFlex="100" class="mt-8 resent-code-label" (click)="onSendVerificationCode()">
+                    {{ 'CFAR_EXERCISE_DIALOG.RESEND_VERIFICATION_CODE' | translate }}
+                </div>
             </div>
         </div>                
         <!-- / STEP CHECK VERIFICATION CODE -->

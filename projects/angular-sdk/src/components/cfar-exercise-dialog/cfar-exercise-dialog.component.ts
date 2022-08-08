@@ -319,7 +319,8 @@ export class CfarExerciseDialogComponent extends GlobalComponent implements OnIn
             this.isLoading = false;
           },
           (error: any) => {
-            console.error(error);
+            const airlinesError = ApiHttpUtils.manageErrorResponse(error);
+            console.log(airlinesError.toString());
             this.isLoading = false;
           }
         );
