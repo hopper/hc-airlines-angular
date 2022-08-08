@@ -36,8 +36,8 @@
                 email: cfarContractUserEmail
             } }}</span>
 
-            <form [formGroup]="checkVerificationCodeForm" class="mb-32">
-                <div fxFlex="100" appearance="outline" fxLayoutGap="16px">
+            <form [formGroup]="checkVerificationCodeForm" class="mb-4">
+                <div fxFlex="100" appearance="outline" fxLayoutGap="8px">
                     <mat-form-field fxFlex="100" appearance="outline">                        
                         <mat-label>{{ 'CFAR_EXERCISE_DIALOG.FORM.VERIFICATION_CODE' | translate }}</mat-label>
                         <input matInput formControlName="verificationCode">
@@ -45,6 +45,10 @@
                     </mat-form-field>
                 </div>
             </form>
+
+            <div fxFlex="100" class="mb-24" *ngIf="displayErrorMessageBlock()">
+                <mat-error>{{this.errorMessage}}</mat-error>
+            </div>
 
             <div fxLayoutAlign="center center">
                 <button mat-raised-button color="primary" ngClass.lt-sm="full-width" ngClass.gt-sm="mid-width" [disabled]="!isCheckVerificationCodeFormValid()" 
@@ -527,9 +531,13 @@
     </ng-container>
 
     <ng-container *ngIf="isLoading">
-        <div class="p-32" ngClass.lt-md="px-16" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="16px">
-            <mat-spinner></mat-spinner>
-            <p>{{ 'CFAR_EXERCISE_DIALOG.LOADING' | translate }}</p>
+        <div fxFlex="100" class="p-16" fxLayout="column">
+            <div class="p-16" ngClass.lt-md="px-16" fxLayoutAlign="center center" fxLayoutGap="16px">
+                <mat-spinner></mat-spinner>
+            </div>
+            <div class="p-8" ngClass.lt-md="px-8" fxLayoutAlign="center center" fxLayoutGap="16px">
+                <p>{{ 'CFAR_EXERCISE_DIALOG.LOADING' | translate }}</p>
+            </div>
         </div>
     </ng-container>
 

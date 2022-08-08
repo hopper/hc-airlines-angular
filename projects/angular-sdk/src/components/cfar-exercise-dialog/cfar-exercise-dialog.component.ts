@@ -1,7 +1,7 @@
 import { Component, ElementRef, HostListener, Inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { take } from 'rxjs/operators';
-import { CfarContract, CfarItinerary, CreateRefundAuthorizationRequest, CreateRefundRecipientRequest, CreateRefundRequest, RefundAuthorization, RefundRecipient } from '../../apis/hopper-cloud-airline/v1';
+import { CfarContract, CfarItinerary, CheckCfarContractExerciceVerificationCodeResponse, CheckCfarContractExerciseVerificationCodeRequest, CreateRefundAuthorizationRequest, CreateRefundRecipientRequest, CreateRefundRequest, RefundAuthorization, RefundRecipient } from '../../apis/hopper-cloud-airline/v1';
 import { GlobalComponent } from '../global.component';
 import { TranslateService } from '@ngx-translate/core';
 import { DateAdapter } from "@angular/material/core";
@@ -16,6 +16,7 @@ import { HttpClient } from '@angular/common/http';
 import { DatePipe } from '@angular/common';
 import { ExerciseActionStep } from '../../enums/exercise-action-step.enum';
 import { SendCfarContractExerciceVerificationCodeResponse } from '../../apis/hopper-cloud-airline/v1';
+import { ApiHttpUtils, StringUtils } from '../../public-api';
 
 @Component({
   selector: 'hopper-cfar-exercise-dialog',
@@ -35,6 +36,7 @@ export class CfarExerciseDialogComponent extends GlobalComponent implements OnIn
   public isErrorHyperwallet!: boolean;
   public userEmail!: string;
   public cfarContractUserEmail!: string;
+  public errorMessage!: string;
 
   // Mandatory data
   private _hCSessionId!: string;
@@ -295,20 +297,20 @@ export class CfarExerciseDialogComponent extends GlobalComponent implements OnIn
   }
 
   public onSendVerificationCode(): void {
-    console.log("SEND");
+    this._purgeErrorMessageContext();
     if (this.isFakeBackend) {
       this.setStep(ExerciseActionStep.CHECK_VERIFICATION_STEP);
+      // TODO complete fake backend mode
       //this.cfarContract = this._loadContractExercise();
     } else {
       this.isLoading = true;
 
-      // Get the contract with the exercise
       this._hopperProxyService
         .postSendCfarExerciseVerificationCode(this.basePath, this._hCSessionId, this._contractId, ApiTranslatorUtils.modelToSnakeCase({}))
         .pipe(take(1))
         .subscribe(
-          (sendVerificationResult: SendCfarContractExerciceVerificationCodeResponse) => {
-            const result = ApiTranslatorUtils.modelToCamelCase(sendVerificationResult) as SendCfarContractExerciceVerificationCodeResponse;
+          (sendVerificationCodeResult: SendCfarContractExerciceVerificationCodeResponse) => {
+            const result = ApiTranslatorUtils.modelToCamelCase(sendVerificationCodeResult) as SendCfarContractExerciceVerificationCodeResponse;
 
             this._contractId = result.contractId;
             this.cfarContractUserEmail = result.anonymizedEmailAddress;
@@ -329,7 +331,41 @@ export class CfarExerciseDialogComponent extends GlobalComponent implements OnIn
   }
 
   public onCheckVerificationCode(): void {
-    console.log("ee");
+    this._purgeErrorMessageContext();
+    if (this.isFakeBackend) {
+      this.setStep(ExerciseActionStep.PROCESS_CFAR_EXERCISE_STEP);
+      // TODO complete fake backend mode
+      //this.cfarContract = this._loadContractExercise();
+    } else {
+      this.isLoading = true;
+
+      this._hopperProxyService
+        .postCheckCfarExerciseVerificationCode(this.basePath, this._hCSessionId, this._contractId, ApiTranslatorUtils.modelToSnakeCase(this._buildCheckExerciseVerificationCodeRequest()))
+        .pipe(take(1))
+        .subscribe(
+          (checkVerificationCodeResult: CheckCfarContractExerciceVerificationCodeResponse) => {
+            const result = ApiTranslatorUtils.modelToCamelCase(checkVerificationCodeResult) as CheckCfarContractExerciceVerificationCodeResponse;
+
+            if (result.compliant) {                    
+              this._contractId = result.contractId;
+
+              // Load the contract and the associated exercise
+              this.setStep(ExerciseActionStep.PROCESS_CFAR_EXERCISE_STEP);
+              this._loadContractExercise();
+            } else {
+              this.errorMessage = 'Incorrect code';
+              console.log(result)
+              this.isLoading = false;
+            }     
+          },
+          (error: any) => {
+            const airlinesError = ApiHttpUtils.manageErrorResponse(error);
+            console.log(airlinesError.toString());
+            this.errorMessage = airlinesError.message;  // Nota : We must use the code and retrieve the corresponding label with i18n
+            this.isLoading = false;
+          }
+        );
+    }
   }
 
   private _initNavigationContext(): void {
@@ -345,6 +381,7 @@ export class CfarExerciseDialogComponent extends GlobalComponent implements OnIn
   // -----------------------------------------------
 
   private _loadContractExercise(): void {
+    this._purgeErrorMessageContext();
     if (this.isFakeBackend) {
       this.cfarContract = this._buildFakeCfarContractExercisesResponse();
       // Force to true for the MVP
@@ -536,7 +573,17 @@ export class CfarExerciseDialogComponent extends GlobalComponent implements OnIn
     };
   }
 
-  private _initForms(): void {    
+  private _purgeErrorMessageContext() {
+    this.errorMessage = '';
+  }
+
+  public displayErrorMessageBlock(): boolean {
+    return StringUtils.isNotEmpty(this.errorMessage);
+  }
+
+  private _initForms(): void {
+    this._purgeErrorMessageContext();
+    
     this.checkVerificationCodeForm = this._formBuilder.group({
       verificationCode: [null, [Validators.pattern('[0-9]{6}'), Validators.required]]
     });
@@ -565,6 +612,12 @@ export class CfarExerciseDialogComponent extends GlobalComponent implements OnIn
       stateProvince: this.step2Form.get('state')?.value,
       country: this.step2Form.get('country')?.value,
       postalCode: this.step2Form.get('zip')?.value
+    };
+  }
+
+  private _buildCheckExerciseVerificationCodeRequest(): CheckCfarContractExerciseVerificationCodeRequest {
+    return {
+      verificationCode: this.checkVerificationCodeForm.get('verificationCode')?.value
     };
   }
 }
