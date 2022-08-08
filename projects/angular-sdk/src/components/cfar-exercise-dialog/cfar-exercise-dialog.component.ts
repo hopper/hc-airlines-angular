@@ -44,6 +44,11 @@ export class CfarExerciseDialogComponent extends GlobalComponent implements OnIn
   private _hyperwalletUrl!: string;
   private _navigationStep!: ExerciseActionStep;
 
+  // Fake values
+  private fakeContractId: string = "1ecf85ab-211f-68b7-9bb3-4b1a314f1a42";
+  private fakeContractExerciseId: string = "1ecf85ab-211f-68b7-9bb3-f1d35b1c2045";
+  private fakeVerificationCode: string = "123456";
+
   // Forms
   public checkVerificationCodeForm!: FormGroup;
   public step2Form!: FormGroup;
@@ -300,8 +305,6 @@ export class CfarExerciseDialogComponent extends GlobalComponent implements OnIn
     this._purgeErrorMessageContext();
     if (this.isFakeBackend) {
       this.setStep(ExerciseActionStep.CHECK_VERIFICATION_STEP);
-      // TODO complete fake backend mode
-      //this.cfarContract = this._loadContractExercise();
     } else {
       this.isLoading = true;
 
@@ -334,9 +337,12 @@ export class CfarExerciseDialogComponent extends GlobalComponent implements OnIn
   public onCheckVerificationCode(): void {
     this._purgeErrorMessageContext();
     if (this.isFakeBackend) {
-      this.setStep(ExerciseActionStep.PROCESS_CFAR_EXERCISE_STEP);
-      // TODO complete fake backend mode
-      //this.cfarContract = this._loadContractExercise();
+      const request = this._buildCheckExerciseVerificationCodeRequest();
+      if (request.verificationCode === this.fakeVerificationCode) {
+        this._loadContractExercise();
+      } else {
+        this.errorMessage = 'Incorrect code';              
+      }
     } else {
       this.isLoading = true;
 
@@ -351,7 +357,6 @@ export class CfarExerciseDialogComponent extends GlobalComponent implements OnIn
               this._contractId = result.contractId;
 
               // Load the contract and the associated exercise
-              this.setStep(ExerciseActionStep.PROCESS_CFAR_EXERCISE_STEP);
               this._loadContractExercise();
             } else {
               this.errorMessage = 'Incorrect code';
@@ -383,6 +388,8 @@ export class CfarExerciseDialogComponent extends GlobalComponent implements OnIn
 
   private _loadContractExercise(): void {
     this._purgeErrorMessageContext();
+    this.setStep(ExerciseActionStep.PROCESS_CFAR_EXERCISE_STEP);
+
     if (this.isFakeBackend) {
       this.cfarContract = this._buildFakeCfarContractExercisesResponse();
       // Force to true for the MVP
@@ -415,7 +422,7 @@ export class CfarExerciseDialogComponent extends GlobalComponent implements OnIn
 
   private _buildFakeCfarContractExercisesResponse(): CfarContract {
     return {
-      id: "1ecf85ab-211f-68b7-9bb3-4b1a314f1a42",
+      id: this.fakeContractId,
       offers: [
         {
           id: "1ecf85a8-1c43-6fad-9bb3-0dca2ca4e73a",
@@ -555,7 +562,7 @@ export class CfarExerciseDialogComponent extends GlobalComponent implements OnIn
         totalPrice: "71.96"
       },
       contractExercise: {
-        id: '123456',
+        id: this.fakeContractExerciseId,
         contractId: '123456789',
         exerciseInitiatedDateTime: new Date(),
         hopperRefund: '57.78',
@@ -572,6 +579,23 @@ export class CfarExerciseDialogComponent extends GlobalComponent implements OnIn
       status: "created",
       extAttributes: {}
     };
+  }
+
+  private _buildFakeSendCfarExerciseVerificationCodeResponse(): SendCfarContractExerciceVerificationCodeResponse {
+    return {
+      contractId: this.fakeContractId,
+      exerciseId: this.fakeContractExerciseId,
+      anonymizedEmailAddress: 'te****@fr****',
+      succeeded: true 
+    }
+  }
+
+  private _buildFakeCheckCfarExerciseVerificationCodeResponse(): CheckCfarContractExerciceVerificationCodeResponse {
+    return {
+      contractId: this.fakeContractId,
+      exerciseId: this.fakeContractExerciseId,
+      compliant: true 
+    }
   }
 
   private _purgeErrorMessageContext() {
