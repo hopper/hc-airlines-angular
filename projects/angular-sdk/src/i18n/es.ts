@@ -333,7 +333,7 @@ export const locale: I18n = {
             },
             FORM: {
                 VERIFICATION_CODE: "Código de verificación",
-                VERIFICATION_CODE_ERROR: "Es obligatorio indicar el código de verificación",
+                VERIFICATION_CODE_ERROR: "Es obligatorio indicar el código de verificación de seis dígitos",
                 PERSONAL_INFORMATION: "Informacion personal",
                 FIRST_NAME: "El primer nombre",
                 FIRST_NAME_ERROR: "Se requiere el primer nombre",

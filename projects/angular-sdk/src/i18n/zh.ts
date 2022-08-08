@@ -333,7 +333,7 @@ export const locale: I18n = {
             },
             FORM: {
                 VERIFICATION_CODE: "验证代码",
-                VERIFICATION_CODE_ERROR: "验证代码是强制性的",
+                VERIFICATION_CODE_ERROR: "必须输入六位数验证码",
                 PERSONAL_INFORMATION: "个人信息",
                 FIRST_NAME: "名",
                 FIRST_NAME_ERROR: "名字是必填项",
