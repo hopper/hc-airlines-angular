@@ -11,14 +11,63 @@
 
 </div>
 
-<mat-dialog-content class="mat-typography" [ngClass]="{ 'sidebar-mode': isSidebar }" #dialogContentAnchor>
+<mat-dialog-content class="mat-typography" fxLayout="row wrap" fxLayout="start center" [ngClass]="{ 'sidebar-mode': isSidebar }" #dialogContentAnchor>
 
     <ng-container *ngIf="!isLoading">
 
-        <ng-container *ngIf="cfarContract">
+        <!-- STEP SEND VERIFICATION CODE -->
+        <div fxFlex="100" class="p-16" fxLayout="column" *ngIf="isSendVerificationCodeStep()">
+            <h2 class="mb-32">{{ 'CFAR_EXERCISE_DIALOG.CHECK_VERIFICATION_TITLE' | translate }}</h2>
+            <span class="text-justify mb-32">{{ 'CFAR_EXERCISE_DIALOG.CHECK_VERIFICATION_TEXT' | translate }}</span>
+            
+            <div fxLayoutAlign="center center">
+                <button mat-raised-button color="primary" ngClass.lt-sm="full-width" ngClass.gt-sm="mid-width" (click)="onSendVerificationCode()"
+                    attr.aria-label="{{ 'CFAR_EXERCISE_DIALOG.BUTTON.SEND_VERIFICATION_CODE' | translate }}">
+                    {{ 'CFAR_EXERCISE_DIALOG.BUTTON.SEND_VERIFICATION_CODE' | translate }}
+                </button>
+            </div>
+        </div>                
+        <!-- / STEP SEND VERIFICATION CODE -->
+        
+        <!-- STEP CHECK VERIFICATION CODE -->
+        <div fxFlex="100" class="p-16" fxLayout="column" *ngIf="isCheckVerificationCodeStep()">
+            <h2 class="mb-32">{{ 'CFAR_EXERCISE_DIALOG.SEND_VERIFICATION_TITLE' | translate }}</h2>
+            <span class="text-justify mb-32">{{ 'CFAR_EXERCISE_DIALOG.SEND_VERIFICATION_TEXT' | translate: {
+                email: cfarContractUserEmail
+            } }}</span>
 
+            <form [formGroup]="checkVerificationCodeForm" class="mb-4">
+                <div fxFlex="100" appearance="outline" fxLayoutGap="8px">
+                    <mat-form-field fxFlex="100" appearance="outline">                        
+                        <mat-label>{{ 'CFAR_EXERCISE_DIALOG.FORM.VERIFICATION_CODE' | translate }}</mat-label>
+                        <input matInput formControlName="verificationCode">
+                        <mat-error *ngIf="checkVerificationCodeForm.get('verificationCode')?.invalid">{{ 'CFAR_EXERCISE_DIALOG.FORM.VERIFICATION_CODE_ERROR' | translate }}</mat-error>
+                    </mat-form-field>
+                </div>
+            </form>
+
+            <div fxFlex="100" class="mb-24" *ngIf="displayErrorMessageBlock()">
+                <mat-error>{{this.errorMessage}}</mat-error>
+            </div>
+
+            <div fxLayoutAlign="center center" fxLayout="column">
+                <button mat-raised-button color="primary" ngClass.lt-sm="full-width" ngClass.gt-sm="mid-width" [disabled]="!isCheckVerificationCodeFormValid()" 
+                    (click)="onCheckVerificationCode()" attr.aria-label="{{ 'CFAR_EXERCISE_DIALOG.BUTTON.CONTINUE' | translate }}">
+                    {{ 'CFAR_EXERCISE_DIALOG.BUTTON.CONTINUE' | translate }}
+                </button>
+
+                <div fxFlex="100" class="mt-8 resent-code-label" (click)="onSendVerificationCode()">
+                    {{ 'CFAR_EXERCISE_DIALOG.RESEND_VERIFICATION_CODE' | translate }}
+                </div>
+            </div>
+        </div>                
+        <!-- / STEP CHECK VERIFICATION CODE -->
+
+        <!-- EXERCISE STEPPER -->
+        <ng-container *ngIf="cfarContract && isProcessCfarExerciseStep()">
+                
             <mat-vertical-stepper orientation="vertical" #stepper linear (selectionChange)="onScrollToTop($event)">
-
+                
                 <!-- STEP 1 -->
                 <mat-step>
                     <ng-template matStepLabel>{{ 'CFAR_EXERCISE_DIALOG.STEP.FIRST' | translate }}</ng-template>
@@ -467,12 +516,12 @@
                     </div>
                 </mat-step>
                 <!-- / STEP 4 -->
-
             </mat-vertical-stepper>
-
+            <!-- / EXERCISE STEPPER -->
+            
         </ng-container>
 
-        <ng-container *ngIf="!cfarContract">
+        <ng-container *ngIf="!cfarContract && isProcessCfarExerciseStep()">
             <div class="p-32" ngClass.lt-md="p-16" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="16px">
                 <span class="error-message p-16">{{ 'CFAR_EXERCISE_DIALOG.NO_CONTRACT' | translate }}</span>
 
@@ -486,9 +535,13 @@
     </ng-container>
 
     <ng-container *ngIf="isLoading">
-        <div class="p-32" ngClass.lt-md="px-16" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="16px">
-            <mat-spinner></mat-spinner>
-            <p>{{ 'CFAR_EXERCISE_DIALOG.LOADING' | translate }}</p>
+        <div fxFlex="100" class="p-16" fxLayout="column">
+            <div class="p-16" ngClass.lt-md="px-16" fxLayoutAlign="center center" fxLayoutGap="16px">
+                <mat-spinner></mat-spinner>
+            </div>
+            <div class="p-8" ngClass.lt-md="px-8" fxLayoutAlign="center center" fxLayoutGap="16px">
+                <p>{{ 'CFAR_EXERCISE_DIALOG.LOADING' | translate }}</p>
+            </div>
         </div>
     </ng-container>
 

@@ -261,7 +261,7 @@ export const locale: I18n = {
             BUTTON: {
                 CLOSE: 'Close'
             },
-            TERMS_LINK_TEXT: "Terms & conditions apply"
+            TERMS_LINK_TEXT: "Terms & Conditions apply"
         },
         CFAR_OFFER_BANNER: {
             TITLE: "Cancel your flight at any time, for any reason.",
@@ -308,11 +308,18 @@ export const locale: I18n = {
             METHOD: "Method:",
             AMOUNT: "Airline:",
             REFUND_METHOD: "Refund method",
+            CHECK_VERIFICATION_TITLE: "Identity verification",
+            CHECK_VERIFICATION_TEXT: "In order to verify your identity, we will send a code to your email address",
+            SEND_VERIFICATION_TITLE: "Identity verification",
+            SEND_VERIFICATION_TEXT: "We just sent an email with a verification code to {{email}}. Please enter that code below",
+            RESEND_VERIFICATION_CODE: "Resend a code",
             BUTTON: {
                 CANCEL: "Cancel",
                 SUBMIT: "Yes, cancel flight",
                 BACK: "Back",
-                CONTINUE: "Continue"
+                CONTINUE: "Continue",
+                SEND_VERIFICATION_CODE: "Send",
+                CHECK_VERIFICATION_CODE: "Check"
             },
             NO_CONTRACT: "No contract available",
             LOADING: "Loading in progress...",
@@ -325,6 +332,8 @@ export const locale: I18n = {
                 FOURTH: "Confirmation"
             },
             FORM: {
+                VERIFICATION_CODE: "Verification code",
+                VERIFICATION_CODE_ERROR: "A verification code is required and must contain 6 numbers.",
                 PERSONAL_INFORMATION: "Personal Information",
                 FIRST_NAME: "First name",
                 FIRST_NAME_ERROR: "First name is required",
