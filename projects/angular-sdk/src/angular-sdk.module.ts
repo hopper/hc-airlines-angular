@@ -45,6 +45,7 @@ import localeEsExtra from '@angular/common/locales/extra/es';
 import { CfarOfferBannerLargeComponent } from './components/cfar-offer-banner-large/cfar-offer-banner-large.component';
 import { HopperProxyService } from './services/hopper-proxy.service';
 import { GlobalComponent } from './components/global.component';
+// import { HopperEventsDirective } from './public-api';
 
 // Supported Languages for Datepicker
 registerLocaleData(localeFr, 'fr', localeFrExtra);
@@ -59,7 +60,10 @@ registerLocaleData(localeZh, 'zh', localeZhExtra);
     CfarOfferBannerComponent,
     CfarOfferBannerLargeComponent,
     CfarOfferDialogComponent,
-    CfarExerciseDialogComponent
+    CfarExerciseDialogComponent,
+
+    // Directives
+    // HopperEventsDirective
   ],
   imports: [
     // Angular Module
@@ -98,6 +102,9 @@ registerLocaleData(localeZh, 'zh', localeZhExtra);
     CfarOfferBannerLargeComponent,
     CfarOfferDialogComponent,
     CfarExerciseDialogComponent,
+
+    // Directives
+    // HopperEventsDirective
   ],
   entryComponents: [
     // Component

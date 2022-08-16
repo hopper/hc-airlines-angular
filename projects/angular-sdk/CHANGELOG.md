@@ -1,3 +1,12 @@
+<a name="2.6.0"></a>
+
+# 2.6.O (2022-08-09)
+
+### Bug fixes / Small changes
+- Exercise Dialog:
+    - Send and validate a one time password before processing an exercise
+    - Fixed Terms and conditions label case
+
 <a name="2.5.0"></a>
 
 # 2.5.O (2022-08-04)

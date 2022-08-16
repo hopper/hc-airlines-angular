@@ -116,6 +116,11 @@
                 }
             }
 
+            .resent-code-label {
+                font-size: 11px;
+                cursor: pointer;
+            }
+
             .error-message {
                 @if ($is-dark == false) {
                     background: map-get($warn-palette, 50);
