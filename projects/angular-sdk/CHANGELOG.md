@@ -1,11 +1,26 @@
+<a name="2.7.0"></a>
+
+# 2.7.O (2022-XX-XX)
+
+### Bug fixes / Small changes
+- Fixed an issue with ngx-highlight module
+- Exercise Dialog:
+    - Fixed an issue with the verification email during the verification step
+
+### Minor changes
+- TODO
+
 <a name="2.6.0"></a>
 
 # 2.6.O (2022-08-09)
 
 ### Bug fixes / Small changes
 - Exercise Dialog:
-    - Send and validate a one time password before processing an exercise
     - Fixed Terms and conditions label case
+
+### Minor changes
+- Exercise Dialog:
+    - Send and validate a one time password before processing an exercise
 
 <a name="2.5.0"></a>
 
