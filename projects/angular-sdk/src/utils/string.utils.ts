@@ -23,5 +23,4 @@ export class StringUtils {
     public static isEmpty(value: string| undefined): boolean {
         return !StringUtils.isNotEmpty(value);
     }
-
 }

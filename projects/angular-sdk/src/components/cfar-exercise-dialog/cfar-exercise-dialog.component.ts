@@ -16,7 +16,7 @@ import { HttpClient } from '@angular/common/http';
 import { DatePipe } from '@angular/common';
 import { ExerciseActionStep } from '../../enums/exercise-action-step.enum';
 import { SendCfarContractExerciceVerificationCodeResponse } from '../../apis/hopper-cloud-airline/v1';
-import { ApiHttpUtils, StringUtils } from '../../public-api';
+import { StringUtils } from '../../utils/string.utils';
 
 @Component({
   selector: 'hopper-cfar-exercise-dialog',
@@ -323,7 +323,7 @@ export class CfarExerciseDialogComponent extends GlobalComponent implements OnIn
             this.isLoading = false;
           },
           (error: any) => {
-            const airlinesError = ApiHttpUtils.manageErrorResponse(error);
+            const airlinesError = this._getHcAirlinesErrorResponse(error);
             console.error(airlinesError.toString());
             this.isLoading = false;
           }
@@ -364,9 +364,11 @@ export class CfarExerciseDialogComponent extends GlobalComponent implements OnIn
             }     
           },
           (error: any) => {
-            const airlinesError = ApiHttpUtils.manageErrorResponse(error);
+            const airlinesError = this._getHcAirlinesErrorResponse(error);
             console.error(airlinesError.toString());
-            this.errorMessage = airlinesError.message;  // Nota : We must use the code and retrieve the corresponding label with i18n
+            
+            // Nota : We must use the code and retrieve the corresponding label with i18n
+            this.errorMessage = airlinesError.message;
             this.isLoading = false;
           }
         );

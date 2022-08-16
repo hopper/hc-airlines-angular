@@ -5,6 +5,7 @@
 ### Bug fixes / Small changes
 - Fixed an issue with ngx-highlight module
 - Exercise Dialog:
+    - Fixed circular dependencies
     - Fixed an issue with the verification email during the verification step
 
 ### Minor changes
