@@ -16,9 +16,11 @@
         <mat-tab label="TS">
             <div fxLayout="row" fxLayout="start start">
                 
-                <pre fxFlex="80"><code [highlight]="tsCode"></code></pre>
+                <textarea fxFlex="90" highlight-js [lang]="'typescript'">
+                    {{ tsCode }}
+                </textarea>
 
-                <div fxFlex="20" fxLayout="row" fxLayoutAlign="end start" class="p-16">
+                <div fxFlex="10" fxLayout="row" fxLayoutAlign="end start" class="p-16">
                     <button mat-icon-button aria-label="Copy example source" (click)="onCopySourceCode(tsCode)">
                         <mat-icon>content_copy</mat-icon>
                     </button>
@@ -30,9 +32,11 @@
         <mat-tab label="HTML">
             <div fxLayout="row" fxLayout="start start">
                 
-                <pre fxFlex="80"><code [highlight]="htmlCode"></code></pre>
+                <textarea fxFlex="90" highlight-js [lang]="'html'">
+                    {{ htmlCode }}
+                </textarea>
 
-                <div fxFlex="20" fxLayout="row" fxLayoutAlign="end start" class="p-16">
+                <div fxFlex="10" fxLayout="row" fxLayoutAlign="end start" class="p-16">
                     <button mat-icon-button aria-label="Copy example source" (click)="onCopySourceCode(htmlCode)">
                         <mat-icon>content_copy</mat-icon>
                     </button>
