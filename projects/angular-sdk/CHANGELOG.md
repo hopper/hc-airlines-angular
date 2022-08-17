@@ -1,5 +1,12 @@
 <a name="2.7.0"></a>
 
+# 2.7.0 (2022-XX-XX)
+
+### Minor changes
+- TODO
+
+<a name="2.6.1"></a>
+
 # 2.6.1 (2022-08-17)
 
 ### Bug fixes / Small changes
