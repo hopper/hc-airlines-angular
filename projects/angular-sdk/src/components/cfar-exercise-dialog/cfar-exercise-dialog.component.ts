@@ -16,7 +16,7 @@ import { HttpClient } from '@angular/common/http';
 import { DatePipe } from '@angular/common';
 import { ExerciseActionStep } from '../../enums/exercise-action-step.enum';
 import { SendCfarContractExerciceVerificationCodeResponse } from '../../apis/hopper-cloud-airline/v1';
-import { ApiHttpUtils, StringUtils } from '../../public-api';
+import { StringUtils } from '../../utils/string.utils';
 
 @Component({
   selector: 'hopper-cfar-exercise-dialog',
@@ -100,9 +100,6 @@ export class CfarExerciseDialogComponent extends GlobalComponent implements OnIn
 
     // Init Navigation Context
     this._initNavigationContext();
-
-    // Load the contract and the associated exercise
-    //this._loadContractExercise();
 
     this.refundMethods = [
       { value: 'ftc', label: 'FTC' },
@@ -283,8 +280,6 @@ export class CfarExerciseDialogComponent extends GlobalComponent implements OnIn
       );
   }
 
-
-
   // -----------------------------------------------
   // Navigation
   // -----------------------------------------------
@@ -301,10 +296,16 @@ export class CfarExerciseDialogComponent extends GlobalComponent implements OnIn
     return this._navigationStep === ExerciseActionStep.PROCESS_CFAR_EXERCISE_STEP;
   }
 
+  public isCheckVerificationCodeFormValid(): boolean {
+    return this.checkVerificationCodeForm.valid;
+  }
+
   public onSendVerificationCode(): void {
     this._purgeErrorMessageContext();
+
     if (this.isFakeBackend) {
-      this.setStep(ExerciseActionStep.CHECK_VERIFICATION_STEP);
+      this.cfarContractUserEmail = "sample@hopper.com";
+      this._setStep(ExerciseActionStep.CHECK_VERIFICATION_STEP);
     } else {
       this.isLoading = true;
 
@@ -317,27 +318,25 @@ export class CfarExerciseDialogComponent extends GlobalComponent implements OnIn
 
             this._contractId = result.contractId;
             this.cfarContractUserEmail = result.anonymizedEmailAddress;
-            this.setStep(ExerciseActionStep.CHECK_VERIFICATION_STEP);
+            this._setStep(ExerciseActionStep.CHECK_VERIFICATION_STEP);
 
             this.isLoading = false;
           },
           (error: any) => {
-            const airlinesError = ApiHttpUtils.manageErrorResponse(error);
-            console.log(airlinesError.toString());
+            const airlinesError = this._getHcAirlinesErrorResponse(error);
+            console.error(airlinesError.toString());
             this.isLoading = false;
           }
         );
     }
   }
 
-  public isCheckVerificationCodeFormValid(): boolean {
-    return this.checkVerificationCodeForm.valid;
-  }
-
   public onCheckVerificationCode(): void {
     this._purgeErrorMessageContext();
+
     if (this.isFakeBackend) {
       const request = this._buildCheckExerciseVerificationCodeRequest();
+
       if (request.verificationCode === this.fakeVerificationCode) {
         this._loadContractExercise();
       } else {
@@ -360,35 +359,33 @@ export class CfarExerciseDialogComponent extends GlobalComponent implements OnIn
               this._loadContractExercise();
             } else {
               this.errorMessage = 'Incorrect code';
-              console.log(result)
+              console.error(result)
               this.isLoading = false;
             }     
           },
           (error: any) => {
-            const airlinesError = ApiHttpUtils.manageErrorResponse(error);
-            console.log(airlinesError.toString());
-            this.errorMessage = airlinesError.message;  // Nota : We must use the code and retrieve the corresponding label with i18n
+            const airlinesError = this._getHcAirlinesErrorResponse(error);
+            console.error(airlinesError.toString());
+            
+            // Nota : We must use the code and retrieve the corresponding label with i18n
+            this.errorMessage = airlinesError.message;
             this.isLoading = false;
           }
         );
     }
   }
 
-  private _initNavigationContext(): void {
-    this._navigationStep = ExerciseActionStep.SEND_VERIFICATION_STEP;
+  public displayErrorMessageBlock(): boolean {
+    return StringUtils.isNotEmpty(this.errorMessage);
   }
 
-  private setStep(currentStep: ExerciseActionStep): void {
-    this._navigationStep = currentStep;
-  }
-  
   // -----------------------------------------------
   // Privates Methods
   // -----------------------------------------------
 
   private _loadContractExercise(): void {
     this._purgeErrorMessageContext();
-    this.setStep(ExerciseActionStep.PROCESS_CFAR_EXERCISE_STEP);
+    this._setStep(ExerciseActionStep.PROCESS_CFAR_EXERCISE_STEP);
 
     if (this.isFakeBackend) {
       this.cfarContract = this._buildFakeCfarContractExercisesResponse();
@@ -581,7 +578,15 @@ export class CfarExerciseDialogComponent extends GlobalComponent implements OnIn
     };
   }
 
-  private _buildFakeSendCfarExerciseVerificationCodeResponse(): SendCfarContractExerciceVerificationCodeResponse {
+  private _initNavigationContext(): void {
+    this._navigationStep = ExerciseActionStep.SEND_VERIFICATION_STEP;
+  }
+
+  private _setStep(currentStep: ExerciseActionStep): void {
+    this._navigationStep = currentStep;
+  }
+
+  /*private _buildFakeSendCfarExerciseVerificationCodeResponse(): SendCfarContractExerciceVerificationCodeResponse {
     return {
       contractId: this.fakeContractId,
       exerciseId: this.fakeContractExerciseId,
@@ -596,14 +601,10 @@ export class CfarExerciseDialogComponent extends GlobalComponent implements OnIn
       exerciseId: this.fakeContractExerciseId,
       compliant: true 
     }
-  }
+  }*/
 
   private _purgeErrorMessageContext() {
     this.errorMessage = '';
-  }
-
-  public displayErrorMessageBlock(): boolean {
-    return StringUtils.isNotEmpty(this.errorMessage);
   }
 
   private _initForms(): void {

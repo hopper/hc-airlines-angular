@@ -1,23 +1,25 @@
 import { Error } from '../apis/hopper-cloud-airline/v1';
-import { ApiHttpUtils } from '../public-api';
 
 export class HcAirlinesError implements Error {
+
   status?: string;
   message: string;
   code?: string;
   
+  private static readonly DEFAULT_HC_AIRLINES_ERROR_CODE = "HC_AIRLINES_ERROR";
+
   constructor(message: string, code?: string, status?: string) {
     this.status = status;
     this.message = message;
     this.code = code;
   }
   
-  static buildDefault() {
+  public static buildDefault(): HcAirlinesError {
     return new HcAirlinesError("An error occured");
   }
 
   public extractCode(): string {
-    return this.code ?? ApiHttpUtils.DEFAULT_HC_AIRLINES_ERROR_CODE;
+    return this.code ?? HcAirlinesError.DEFAULT_HC_AIRLINES_ERROR_CODE;
   }
 
   public toString(): string {

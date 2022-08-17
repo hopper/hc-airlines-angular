@@ -6,12 +6,18 @@ import { DateAdapter } from "@angular/material/core";
 import { CfarOfferCustomer } from "../apis/hopper-cloud-airline/v1";
 import { CountryCode } from "../enums/country-code.enum";
 import { take } from "rxjs/operators";
+import { HttpErrorResponse } from "@angular/common/http";
+import { ArrayUtils } from "../utils/array-utils";
+import { HcAirlinesError } from "../models/hc-airlines-error";
+import { Error } from '../apis/hopper-cloud-airline/v1';
 
 @Directive({
     selector: '[HopperGlobalComponent]'
 })
 export class GlobalComponent implements OnChanges {
     
+    protected static readonly HTTP_ERROR_UNPROCESSABLE_ENTITY_CODE = 422;
+
     @Input() currentLang!: string;
     @Input() basePath!: string;
     @Input() isFakeBackend!: boolean;
@@ -84,5 +90,22 @@ export class GlobalComponent implements OnChanges {
         
         // Sort the map by label (alphabetical order)
         this.mapCountries = new Map([...this.mapCountries.entries()].sort((a, b) => a[1].localeCompare(b[1])));
+    }
+
+    protected _getHcAirlinesErrorResponse(apiError: HttpErrorResponse): HcAirlinesError {
+        if (apiError.status == GlobalComponent.HTTP_ERROR_UNPROCESSABLE_ENTITY_CODE) {
+            const apiErrors = apiError.error.errors;
+            
+            if (ArrayUtils.isNotEmpty(apiErrors)) {
+                const mainApiError = apiErrors[0] as Error;
+                return new HcAirlinesError(mainApiError.message, mainApiError.code);
+            } else {
+                console.error(apiError);
+            }
+        } else {
+            console.error(apiError);
+        }
+
+        return HcAirlinesError.buildDefault();
     }
 }
