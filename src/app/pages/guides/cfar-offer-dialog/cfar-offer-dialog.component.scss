@@ -32,6 +32,11 @@
     
                 mat-tab-body {
                     background-color: map-get($bg-palette, card);
+
+                    .hljs {
+                        max-width: 90%;
+                        padding: 0px;
+                    }
                 }
             }
         }

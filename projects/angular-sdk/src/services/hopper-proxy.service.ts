@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
-import { CfarContract, CfarContractCustomer, CfarOffer, CfarOfferCustomer, CreateCfarContractCustomerRequest, CreateCfarOfferCustomerRequest, CreateRefundAuthorizationRequest, CreateRefundRecipientRequest, CreateRefundRequest, CustomerService, RefundAuthorization, RefundRecipient } from "../apis/hopper-cloud-airline/v1";
+import { CfarContract, CfarContractCustomer, CfarOffer, CfarOfferCustomer, CheckCfarContractExerciceVerificationCodeResponse, CheckCfarContractExerciseVerificationCodeRequest, CreateCfarContractCustomerRequest, CreateCfarOfferCustomerRequest, CreateRefundAuthorizationRequest, CreateRefundRecipientRequest, CreateRefundRequest, CustomerService, RefundAuthorization, RefundRecipient, SendCfarContractExerciceVerificationCodeResponse, SendCfarContractExerciseVerificationCodeRequest } from "../apis/hopper-cloud-airline/v1";
 
 @Injectable({
   providedIn: "root"
@@ -57,6 +57,20 @@ export class HopperProxyService {
     this._overrideConfiguration(basePath);
     
     return this._customerService.postCustomerRefunds(request, hCSessionId);
+  }
+
+  postSendCfarExerciseVerificationCode(basePath: string, hCSessionId: string, contractId: string, request: SendCfarContractExerciseVerificationCodeRequest): Observable<SendCfarContractExerciceVerificationCodeResponse> {
+    // Init services
+    this._overrideConfiguration(basePath);
+    
+    return this._customerService.postCustomerIdSendExerciseVerificationCode(request, contractId, hCSessionId);
+  }
+
+  postCheckCfarExerciseVerificationCode(basePath: string, hCSessionId: string, contractId: string, request: CheckCfarContractExerciseVerificationCodeRequest): Observable<CheckCfarContractExerciceVerificationCodeResponse> {
+    // Init services
+    this._overrideConfiguration(basePath);
+    
+    return this._customerService.postCustomerIdCheckExerciseVerificationCode(request, contractId, hCSessionId);
   }
 
   // ----------------------------------------------------------

@@ -3,10 +3,16 @@
 ::ng-deep {
     .hopper-dialog-container {
         max-width: 640px !important;
-        min-width: 300px !important;
+        min-width: 500px !important;
+
+        @include media-breakpoint('gt-md') {
+            min-height: 600px !important;    
+        }
 
         @include media-breakpoint('lt-md') {
             max-width: 80% !important;
+            min-width: 300px !important;
+            height: 80%;    
         }
 
         @include media-breakpoint('lt-sm') {

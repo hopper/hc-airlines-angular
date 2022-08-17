@@ -21,6 +21,8 @@ import { BadRequest } from '../model/badRequest';
 import { CfarContract } from '../model/cfarContract';
 import { CfarContractCustomer } from '../model/cfarContractCustomer';
 import { CfarOfferCustomer } from '../model/cfarOfferCustomer';
+import { CheckCfarContractExerciceVerificationCodeResponse } from '../model/checkCfarContractExerciceVerificationCodeResponse';
+import { CheckCfarContractExerciseVerificationCodeRequest } from '../model/checkCfarContractExerciseVerificationCodeRequest';
 import { CreateCfarContractCustomerRequest } from '../model/createCfarContractCustomerRequest';
 import { CreateCfarContractExerciseCustomerRequest } from '../model/createCfarContractExerciseCustomerRequest';
 import { CreateCfarOfferCustomerRequest } from '../model/createCfarOfferCustomerRequest';
@@ -29,6 +31,9 @@ import { CreateRefundRecipientRequest } from '../model/createRefundRecipientRequ
 import { CreateRefundRequest } from '../model/createRefundRequest';
 import { RefundAuthorization } from '../model/refundAuthorization';
 import { RefundRecipient } from '../model/refundRecipient';
+import { SendCfarContractExerciceVerificationCodeResponse } from '../model/sendCfarContractExerciceVerificationCodeResponse';
+import { SendCfarContractExerciseVerificationCodeRequest } from '../model/sendCfarContractExerciseVerificationCodeRequest';
+import { SendRefund } from '../model/sendRefund';
 import { UnprocessableEntity } from '../model/unprocessableEntity';
 
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
@@ -276,6 +281,120 @@ export class CustomerService {
     }
 
     /**
+     * Check a verification code associated with a CFAR exercise
+     * Check a verification code to a user required to process a CFAR exercise
+     * @param body 
+     * @param id A unique identifier for a CFAR contract
+     * @param hCSessionID The ID of the current airline session, see [Sessions](#tag/Sessions)
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public postCustomerIdCheckExerciseVerificationCode(body: CheckCfarContractExerciseVerificationCodeRequest, id: string, hCSessionID?: string, observe?: 'body', reportProgress?: boolean): Observable<CheckCfarContractExerciceVerificationCodeResponse>;
+    public postCustomerIdCheckExerciseVerificationCode(body: CheckCfarContractExerciseVerificationCodeRequest, id: string, hCSessionID?: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<CheckCfarContractExerciceVerificationCodeResponse>>;
+    public postCustomerIdCheckExerciseVerificationCode(body: CheckCfarContractExerciseVerificationCodeRequest, id: string, hCSessionID?: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<CheckCfarContractExerciceVerificationCodeResponse>>;
+    public postCustomerIdCheckExerciseVerificationCode(body: CheckCfarContractExerciseVerificationCodeRequest, id: string, hCSessionID?: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (body === null || body === undefined) {
+            throw new Error('Required parameter body was null or undefined when calling postCustomerIdCheckExerciseVerificationCode.');
+        }
+
+        if (id === null || id === undefined) {
+            throw new Error('Required parameter id was null or undefined when calling postCustomerIdCheckExerciseVerificationCode.');
+        }
+
+
+        let headers = this.defaultHeaders;
+        if (hCSessionID !== undefined && hCSessionID !== null) {
+            headers = headers.set('HC-Session-ID', String(hCSessionID));
+        }
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/json'
+        ];
+        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
+        if (httpContentTypeSelected != undefined) {
+            headers = headers.set('Content-Type', httpContentTypeSelected);
+        }
+
+        return this.httpClient.request<CheckCfarContractExerciceVerificationCodeResponse>('post',`${this.basePath}/customer/${encodeURIComponent(String(id))}/check_exercise_verification_code`,
+            {
+                body: body,
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * Send a verification code associated with a CFAR exercise
+     * Send a verification code to a user required to process a CFAR exercise
+     * @param body 
+     * @param id A unique identifier for a CFAR contract
+     * @param hCSessionID The ID of the current airline session, see [Sessions](#tag/Sessions)
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public postCustomerIdSendExerciseVerificationCode(body: SendCfarContractExerciseVerificationCodeRequest, id: string, hCSessionID?: string, observe?: 'body', reportProgress?: boolean): Observable<SendCfarContractExerciceVerificationCodeResponse>;
+    public postCustomerIdSendExerciseVerificationCode(body: SendCfarContractExerciseVerificationCodeRequest, id: string, hCSessionID?: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<SendCfarContractExerciceVerificationCodeResponse>>;
+    public postCustomerIdSendExerciseVerificationCode(body: SendCfarContractExerciseVerificationCodeRequest, id: string, hCSessionID?: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<SendCfarContractExerciceVerificationCodeResponse>>;
+    public postCustomerIdSendExerciseVerificationCode(body: SendCfarContractExerciseVerificationCodeRequest, id: string, hCSessionID?: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (body === null || body === undefined) {
+            throw new Error('Required parameter body was null or undefined when calling postCustomerIdSendExerciseVerificationCode.');
+        }
+
+        if (id === null || id === undefined) {
+            throw new Error('Required parameter id was null or undefined when calling postCustomerIdSendExerciseVerificationCode.');
+        }
+
+
+        let headers = this.defaultHeaders;
+        if (hCSessionID !== undefined && hCSessionID !== null) {
+            headers = headers.set('HC-Session-ID', String(hCSessionID));
+        }
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/json'
+        ];
+        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
+        if (httpContentTypeSelected != undefined) {
+            headers = headers.set('Content-Type', httpContentTypeSelected);
+        }
+
+        return this.httpClient.request<SendCfarContractExerciceVerificationCodeResponse>('post',`${this.basePath}/customer/${encodeURIComponent(String(id))}/send_exercise_verification_code`,
+            {
+                body: body,
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
      * Create a Refund Authorization Token
      * Create a Refund Authorization Token
      * @param body 
@@ -387,9 +506,9 @@ export class CustomerService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public postCustomerRefunds(body: CreateRefundRequest, hCSessionID?: string, observe?: 'body', reportProgress?: boolean): Observable<any>;
-    public postCustomerRefunds(body: CreateRefundRequest, hCSessionID?: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
-    public postCustomerRefunds(body: CreateRefundRequest, hCSessionID?: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
+    public postCustomerRefunds(body: CreateRefundRequest, hCSessionID?: string, observe?: 'body', reportProgress?: boolean): Observable<SendRefund>;
+    public postCustomerRefunds(body: CreateRefundRequest, hCSessionID?: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<SendRefund>>;
+    public postCustomerRefunds(body: CreateRefundRequest, hCSessionID?: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<SendRefund>>;
     public postCustomerRefunds(body: CreateRefundRequest, hCSessionID?: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (body === null || body === undefined) {
@@ -420,7 +539,7 @@ export class CustomerService {
             headers = headers.set('Content-Type', httpContentTypeSelected);
         }
 
-        return this.httpClient.request<any>('post',`${this.basePath}/customer/refunds`,
+        return this.httpClient.request<SendRefund>('post',`${this.basePath}/customer/refunds`,
             {
                 body: body,
                 withCredentials: this.configuration.withCredentials,

@@ -14,7 +14,6 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { NotFoundPageComponent } from './not-found/not-found.component';
 import { CfarOfferDialogPageComponent } from './guides/cfar-offer-dialog/cfar-offer-dialog.component';
 import { PagesRoutingModule } from './pages-routing.module';
-import { HighlightModule } from 'ngx-highlightjs';
 import { CfarOfferBannerPageComponent } from './guides/cfar-offer-banner/cfar-offer-banner.component';
 import { CfarExerciseDialogPageComponent } from './guides/cfar-exercise-dialog/cfar-exercise-dialog.component';
 import { GuidesPageComponent } from './guides/guides.component';
@@ -22,6 +21,7 @@ import { SharedModule } from '../shared/shared.module';
 import { MatCardModule } from '@angular/material/card';
 import { CommonModule } from '@angular/common';
 import { CfarOfferBannerLargePageComponent } from './guides/cfar-offer-banner-large/cfar-offer-banner-large.component';
+import { HighlightJsModule } from 'ngx-highlight-js';
 
 @NgModule({
   declarations: [
@@ -51,8 +51,8 @@ import { CfarOfferBannerLargePageComponent } from './guides/cfar-offer-banner-la
 
     // Misc Modules
     FlexLayoutModule,
-    HighlightModule,
-    
+    HighlightJsModule,
+
     // Custom Modules
     PagesRoutingModule,
     SharedModule

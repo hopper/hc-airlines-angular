@@ -1,7 +1,7 @@
 import { Component, ElementRef, HostListener, Inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { take } from 'rxjs/operators';
-import { CfarContract, CfarItinerary, CreateRefundAuthorizationRequest, CreateRefundRecipientRequest, CreateRefundRequest, RefundAuthorization, RefundRecipient } from '../../apis/hopper-cloud-airline/v1';
+import { CfarContract, CfarItinerary, CheckCfarContractExerciceVerificationCodeResponse, CheckCfarContractExerciseVerificationCodeRequest, CreateRefundAuthorizationRequest, CreateRefundRecipientRequest, CreateRefundRequest, RefundAuthorization, RefundRecipient } from '../../apis/hopper-cloud-airline/v1';
 import { GlobalComponent } from '../global.component';
 import { TranslateService } from '@ngx-translate/core';
 import { DateAdapter } from "@angular/material/core";
@@ -14,6 +14,9 @@ import { StepperSelectionEvent } from '@angular/cdk/stepper';
 import { MatStepper } from '@angular/material/stepper';
 import { HttpClient } from '@angular/common/http';
 import { DatePipe } from '@angular/common';
+import { ExerciseActionStep } from '../../enums/exercise-action-step.enum';
+import { SendCfarContractExerciceVerificationCodeResponse } from '../../apis/hopper-cloud-airline/v1';
+import { StringUtils } from '../../utils/string.utils';
 
 @Component({
   selector: 'hopper-cfar-exercise-dialog',
@@ -32,13 +35,22 @@ export class CfarExerciseDialogComponent extends GlobalComponent implements OnIn
   public isValidHyperwalletSubmit!: boolean;
   public isErrorHyperwallet!: boolean;
   public userEmail!: string;
+  public cfarContractUserEmail!: string;
+  public errorMessage!: string;
 
   // Mandatory data
   private _hCSessionId!: string;
   private _contractId!: string;
   private _hyperwalletUrl!: string;
+  private _navigationStep!: ExerciseActionStep;
+
+  // Fake values
+  private fakeContractId: string = "1ecf85ab-211f-68b7-9bb3-4b1a314f1a42";
+  private fakeContractExerciseId: string = "1ecf85ab-211f-68b7-9bb3-f1d35b1c2045";
+  private fakeVerificationCode: string = "123456";
 
   // Forms
+  public checkVerificationCodeForm!: FormGroup;
   public step2Form!: FormGroup;
 
   @ViewChild('dialogContentAnchor') public anchor!: ElementRef;
@@ -86,34 +98,8 @@ export class CfarExerciseDialogComponent extends GlobalComponent implements OnIn
     // Update countries labels manually (dialog limitation)
     this._setCountriesLabels();
 
-    if (this.isFakeBackend) {
-      this.cfarContract = this._buildFakeCfarContractExercisesResponse();
-      // Force to true for the MVP
-      this.isHopperRefund = true;
-    } else {
-      this.isLoading = true;
-
-      // Get the contract with the exercise
-      this._hopperProxyService
-        .getCfarContractsId(this.basePath, this._hCSessionId, this._contractId)
-        .pipe(take(1))
-        .subscribe(
-          (cfarContract: CfarContract) => {
-            const result = ApiTranslatorUtils.modelToCamelCase(cfarContract) as CfarContract;
-
-            this.cfarContract = result;
-
-            this.isLoading = false;
-            
-            // Hopper offer by default
-            this.isHopperRefund = true;
-          },
-          (error: any) => {
-            console.error(error);
-            this.isLoading = false;
-          }
-        );
-    }
+    // Init Navigation Context
+    this._initNavigationContext();
 
     this.refundMethods = [
       { value: 'ftc', label: 'FTC' },
@@ -293,14 +279,147 @@ export class CfarExerciseDialogComponent extends GlobalComponent implements OnIn
         }
       );
   }
-  
+
+  // -----------------------------------------------
+  // Navigation
+  // -----------------------------------------------
+
+  public isSendVerificationCodeStep(): Boolean {
+    return this._navigationStep === ExerciseActionStep.SEND_VERIFICATION_STEP;
+  }
+
+  public isCheckVerificationCodeStep(): Boolean {
+    return this._navigationStep === ExerciseActionStep.CHECK_VERIFICATION_STEP;
+  }
+
+  public isProcessCfarExerciseStep(): Boolean {
+    return this._navigationStep === ExerciseActionStep.PROCESS_CFAR_EXERCISE_STEP;
+  }
+
+  public isCheckVerificationCodeFormValid(): boolean {
+    return this.checkVerificationCodeForm.valid;
+  }
+
+  public onSendVerificationCode(): void {
+    this._purgeErrorMessageContext();
+
+    if (this.isFakeBackend) {
+      this.cfarContractUserEmail = "sample@hopper.com";
+      this._setStep(ExerciseActionStep.CHECK_VERIFICATION_STEP);
+    } else {
+      this.isLoading = true;
+
+      this._hopperProxyService
+        .postSendCfarExerciseVerificationCode(this.basePath, this._hCSessionId, this._contractId, ApiTranslatorUtils.modelToSnakeCase({}))
+        .pipe(take(1))
+        .subscribe(
+          (sendVerificationCodeResult: SendCfarContractExerciceVerificationCodeResponse) => {
+            const result = ApiTranslatorUtils.modelToCamelCase(sendVerificationCodeResult) as SendCfarContractExerciceVerificationCodeResponse;
+
+            this._contractId = result.contractId;
+            this.cfarContractUserEmail = result.anonymizedEmailAddress;
+            this._setStep(ExerciseActionStep.CHECK_VERIFICATION_STEP);
+
+            this.isLoading = false;
+          },
+          (error: any) => {
+            const airlinesError = this._getHcAirlinesErrorResponse(error);
+            console.error(airlinesError.toString());
+            this.isLoading = false;
+          }
+        );
+    }
+  }
+
+  public onCheckVerificationCode(): void {
+    this._purgeErrorMessageContext();
+
+    if (this.isFakeBackend) {
+      const request = this._buildCheckExerciseVerificationCodeRequest();
+
+      if (request.verificationCode === this.fakeVerificationCode) {
+        this._loadContractExercise();
+      } else {
+        this.errorMessage = 'Incorrect code';              
+      }
+    } else {
+      this.isLoading = true;
+
+      this._hopperProxyService
+        .postCheckCfarExerciseVerificationCode(this.basePath, this._hCSessionId, this._contractId, ApiTranslatorUtils.modelToSnakeCase(this._buildCheckExerciseVerificationCodeRequest()))
+        .pipe(take(1))
+        .subscribe(
+          (checkVerificationCodeResult: CheckCfarContractExerciceVerificationCodeResponse) => {
+            const result = ApiTranslatorUtils.modelToCamelCase(checkVerificationCodeResult) as CheckCfarContractExerciceVerificationCodeResponse;
+
+            if (result.compliant) {                    
+              this._contractId = result.contractId;
+
+              // Load the contract and the associated exercise
+              this._loadContractExercise();
+            } else {
+              this.errorMessage = 'Incorrect code';
+              console.error(result)
+              this.isLoading = false;
+            }     
+          },
+          (error: any) => {
+            const airlinesError = this._getHcAirlinesErrorResponse(error);
+            console.error(airlinesError.toString());
+            
+            // Nota : We must use the code and retrieve the corresponding label with i18n
+            this.errorMessage = airlinesError.message;
+            this.isLoading = false;
+          }
+        );
+    }
+  }
+
+  public displayErrorMessageBlock(): boolean {
+    return StringUtils.isNotEmpty(this.errorMessage);
+  }
+
   // -----------------------------------------------
   // Privates Methods
   // -----------------------------------------------
 
+  private _loadContractExercise(): void {
+    this._purgeErrorMessageContext();
+    this._setStep(ExerciseActionStep.PROCESS_CFAR_EXERCISE_STEP);
+
+    if (this.isFakeBackend) {
+      this.cfarContract = this._buildFakeCfarContractExercisesResponse();
+      // Force to true for the MVP
+      this.isHopperRefund = true;
+    } else {
+      this.isLoading = true;
+
+      // Get the contract with the exercise
+      this._hopperProxyService
+        .getCfarContractsId(this.basePath, this._hCSessionId, this._contractId)
+        .pipe(take(1))
+        .subscribe(
+          (cfarContract: CfarContract) => {
+            const result = ApiTranslatorUtils.modelToCamelCase(cfarContract) as CfarContract;
+
+            this.cfarContract = result;
+
+            this.isLoading = false;
+            
+            // Hopper offer by default
+            this.isHopperRefund = true;
+          },
+          (error: any) => {
+            console.error(error);
+            this.isLoading = false;
+          }
+        );
+    }
+  }
+
   private _buildFakeCfarContractExercisesResponse(): CfarContract {
     return {
-      id: "1ecf85ab-211f-68b7-9bb3-4b1a314f1a42",
+      id: this.fakeContractId,
       offers: [
         {
           id: "1ecf85a8-1c43-6fad-9bb3-0dca2ca4e73a",
@@ -440,7 +559,7 @@ export class CfarExerciseDialogComponent extends GlobalComponent implements OnIn
         totalPrice: "71.96"
       },
       contractExercise: {
-        id: '123456',
+        id: this.fakeContractExerciseId,
         contractId: '123456789',
         exerciseInitiatedDateTime: new Date(),
         hopperRefund: '57.78',
@@ -459,7 +578,42 @@ export class CfarExerciseDialogComponent extends GlobalComponent implements OnIn
     };
   }
 
+  private _initNavigationContext(): void {
+    this._navigationStep = ExerciseActionStep.SEND_VERIFICATION_STEP;
+  }
+
+  private _setStep(currentStep: ExerciseActionStep): void {
+    this._navigationStep = currentStep;
+  }
+
+  /*private _buildFakeSendCfarExerciseVerificationCodeResponse(): SendCfarContractExerciceVerificationCodeResponse {
+    return {
+      contractId: this.fakeContractId,
+      exerciseId: this.fakeContractExerciseId,
+      anonymizedEmailAddress: 'te****@fr****',
+      succeeded: true 
+    }
+  }
+
+  private _buildFakeCheckCfarExerciseVerificationCodeResponse(): CheckCfarContractExerciceVerificationCodeResponse {
+    return {
+      contractId: this.fakeContractId,
+      exerciseId: this.fakeContractExerciseId,
+      compliant: true 
+    }
+  }*/
+
+  private _purgeErrorMessageContext() {
+    this.errorMessage = '';
+  }
+
   private _initForms(): void {
+    this._purgeErrorMessageContext();
+    
+    this.checkVerificationCodeForm = this._formBuilder.group({
+      verificationCode: [null, [Validators.pattern('[0-9]{6}'), Validators.required]]
+    });
+
     this.step2Form = this._formBuilder.group({
       firstName: new FormControl(null, [Validators.required]),
       middleName: new FormControl(null),
@@ -484,6 +638,12 @@ export class CfarExerciseDialogComponent extends GlobalComponent implements OnIn
       stateProvince: this.step2Form.get('state')?.value,
       country: this.step2Form.get('country')?.value,
       postalCode: this.step2Form.get('zip')?.value
+    };
+  }
+
+  private _buildCheckExerciseVerificationCodeRequest(): CheckCfarContractExerciseVerificationCodeRequest {
+    return {
+      verificationCode: this.checkVerificationCodeForm.get('verificationCode')?.value
     };
   }
 }
