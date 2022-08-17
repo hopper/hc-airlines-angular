@@ -5,7 +5,7 @@
 @import "../components/cfar-offer-banner-large/cfar-offer-banner-large.component.scss";
 @import "../components/cfar-offer-dialog/cfar-offer-dialog.component.scss";
 @import "../components/cfar-exercise-dialog/cfar-exercise-dialog.component.scss";
-@import "../components/event-button/event-button.component.scss";
+// @import "../components/event-button/event-button.component.scss";
 
 // Define a mixin for easier access
 @mixin hopper-cloud-airlines-angular-sdk-components-theme($theme) {
@@ -13,7 +13,7 @@
   @include cfar-offer-banner-large-theme($theme);
   @include cfar-offer-dialog-theme($theme);
   @include cfar-exercise-dialog-theme($theme);
-  @include event-button-theme($theme);
+  // @include event-button-theme($theme);
 }
 
 // ------------------------------------------

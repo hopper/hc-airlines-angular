@@ -45,6 +45,7 @@ export class CfarExerciseDialogPageComponent extends CommonGuidesComponent {
     public onOpenCfarExerciseDialog(isSidebar: boolean): void {
       const dialogData = {
         basePath: this.basePath,
+        imageBasePath: this.imageBasePath,
         currentLang: this.currentLang,
         hCSessionId: this.hCSessionId,
         contractId: this.contractId,
@@ -94,6 +95,13 @@ export class CfarExerciseDialogPageComponent extends CommonGuidesComponent {
           The Hopper Cloud Airlines API url base path
         `,
         required: true
+      },
+      {
+        name: 'imageBasePath',
+        description: `
+          The basePath for images (empty by default)
+        `,
+        required: false
       },
       {
         name: 'currentTheme',
@@ -157,6 +165,7 @@ export class CfarExerciseDialogPageComponent extends CommonGuidesComponent {
     const dialogData = { 
       isFakeBackend: this.isFakeBackend,
       basePath: this.basePath,
+      imageBasePath: this.imageBasePath,
       currentLang: this.currentLang,
       hCSessionId: this.hCSessionId,
       contractId: this.contractId,

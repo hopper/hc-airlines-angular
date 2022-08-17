@@ -2,8 +2,12 @@
 
 # 2.7.0 (2022-XX-XX)
 
+### Bug fixes / Small changes
+- Fixed a css issue related to the source code examples 
+
 ### Minor changes
-- TODO
+- New Cfar Status: Refunding
+- New optional parameter: imageBasePath
 
 <a name="2.6.1"></a>
 
