@@ -1,6 +1,6 @@
 <a name="2.7.0"></a>
 
-# 2.7.0 (2022-XX-XX)
+# 2.7.0 (2022-08-19)
 
 ### Bug fixes / Small changes
 - Fixed a css issue related to the source code examples 
