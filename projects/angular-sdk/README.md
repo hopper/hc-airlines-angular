@@ -43,6 +43,7 @@ export class YourModule { }
     ```
     // Apply the theme to Hopper components 
     @import "@hopper-cloud-airlines/angular-sdk/src/styles/theme.scss";
+    
     @include hopper-cloud-airlines-angular-sdk-components-theme($your-angular-material-theme);
     ```
 

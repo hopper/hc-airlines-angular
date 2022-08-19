@@ -1,5 +1,17 @@
 <a name="2.7.0"></a>
 
+# 2.7.0 (2022-08-19)
+
+### Bug fixes / Small changes
+- Fixed a css issue related to the source code examples 
+
+### Minor changes
+- New optional parameter: imageBasePath
+- Cfar Exercise Dialog:
+    - The component is not a dialog anymore
+
+<a name="2.6.1"></a>
+
 # 2.6.1 (2022-08-17)
 
 ### Bug fixes / Small changes

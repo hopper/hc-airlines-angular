@@ -20,7 +20,8 @@ export class GlobalComponent implements OnChanges {
 
     @Input() currentLang!: string;
     @Input() basePath!: string;
-    @Input() isFakeBackend!: boolean;
+    @Input() imageBasePath?: string;
+    @Input() isFakeBackend?: boolean;
 
     public mapCountries: Map<string, string>;
 

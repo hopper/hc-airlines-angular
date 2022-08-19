@@ -45,6 +45,7 @@ export class CfarOfferDialogPageComponent extends CommonGuidesComponent {
       const dialogData = { 
         currentLang: this.currentLang,
         basePath: this.basePath,
+        imageBasePath: this.imageBasePath,
         hCSessionId: this.hCSessionId,
         // Choice 1 : The component will create offers based of the itineraries
         itineraries: this.itineraries
@@ -99,6 +100,13 @@ export class CfarOfferDialogPageComponent extends CommonGuidesComponent {
           The Hopper Cloud Airlines API url base path
         `,
         required: true
+      },
+      {
+        name: 'imageBasePath',
+        description: `
+          The basePath for images (empty by default)
+        `,
+        required: false
       },
       {
         name: 'currentTheme',
@@ -162,6 +170,7 @@ export class CfarOfferDialogPageComponent extends CommonGuidesComponent {
     const dialogData = { 
       isFakeBackend: this.isFakeBackend,
       basePath: this.basePath,
+      imageBasePath: this.imageBasePath,
       currentLang: this.currentLang,
       hCSessionId: this.hCSessionId,
       itineraries: this.itineraries,

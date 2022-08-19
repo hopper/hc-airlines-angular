@@ -17,6 +17,7 @@ export abstract class CommonGuidesComponent implements OnInit, OnDestroy {
   public currentTheme!: string;
   public currentLang!: string;
   public basePath: string = 'http://localhost:7071/airline/v1.0';
+  public imageBasePath: string = ''; // 'http://localhost:4200/';
   public isFakeBackend!: boolean;
 
   protected _unsubcriber: Subject<any>;

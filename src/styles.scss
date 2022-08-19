@@ -12,12 +12,6 @@ $dark-primary-text: rgba(black, 0.87);
 $light-primary-text: white;
 
 // ------------------------------------------
-// HIGHLIGHT JS
-// ------------------------------------------
-
-@import '~highlight.js/styles/github.css';
-
-// ------------------------------------------
 // COMPONENT THEMING
 // ------------------------------------------
 
@@ -25,11 +19,13 @@ $light-primary-text: white;
 @import "../projects/angular-sdk/src/styles/theme.scss";
 
 // Components
+@import "./app/app.component.scss";
+
 @import "./app/pages/guides/guides.component.scss";
 @import "./app/pages/guides/cfar-offer-banner/cfar-offer-banner.component.scss";
 @import "./app/pages/guides/cfar-offer-banner-large/cfar-offer-banner-large.component.scss";
 @import "./app/pages/guides/cfar-offer-dialog/cfar-offer-dialog.component.scss";
-@import "./app/pages/guides/cfar-exercise-dialog/cfar-exercise-dialog.component.scss";
+@import "./app/pages/guides/cfar-exercise-flow/cfar-exercise-flow.component.scss";
 
 @import "./app/pages/not-found/not-found.component.scss";
 
@@ -40,11 +36,13 @@ $light-primary-text: white;
 
 // Mixin for easier access
 @mixin documentation-components-theme($theme) {
+  @include app-component-theme($theme);
+
   @include guides-page-component-theme($theme);
   @include cfar-offer-banner-page-component-theme($theme);
   @include cfar-offer-banner-large-page-component-theme($theme);
   @include cfar-offer-dialog-page-component-theme($theme);
-  @include cfar-exercise-dialog-page-component-theme($theme);
+  @include cfar-exercise-flow-page-component-theme($theme);
 
   @include not-found-page-component-theme($theme);
 
@@ -192,4 +190,3 @@ body {
   // font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 .pointer { cursor: pointer; }
-.main-container { height: 100vh; }

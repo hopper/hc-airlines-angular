@@ -2,9 +2,9 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CfarOfferBannerPageComponent } from './guides/cfar-offer-banner/cfar-offer-banner.component';
 import { CfarOfferDialogPageComponent } from './guides/cfar-offer-dialog/cfar-offer-dialog.component';
-import { CfarExerciseDialogPageComponent } from './guides/cfar-exercise-dialog/cfar-exercise-dialog.component';
 import { GuidesPageComponent } from './guides/guides.component';
 import { CfarOfferBannerLargePageComponent } from './guides/cfar-offer-banner-large/cfar-offer-banner-large.component';
+import { CfarExerciseFlowPageComponent } from './guides/cfar-exercise-flow/cfar-exercise-flow.component';
 
 const routes: Routes = [
   {
@@ -27,9 +27,9 @@ const routes: Routes = [
     data: { path: 'cfar-offer-banner-large' }
   },
   {
-    path: 'cfar-exercise-dialog',
-    component: CfarExerciseDialogPageComponent,
-    data: { path: 'cfar-exercise-dialog' }
+    path: 'cfar-exercise-flow',
+    component: CfarExerciseFlowPageComponent,
+    data: { path: 'cfar-exercise-flow' }
   }
 ];
 

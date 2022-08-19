@@ -1,5 +1,5 @@
 // How to use : https://tomastrajan.medium.com/the-complete-guide-to-angular-material-themes-4d165a9d24d1
-@mixin cfar-exercise-dialog-page-component-theme($theme) {
+@mixin cfar-exercise-flow-page-component-theme($theme) {
 
     // Colors used for element backgrounds
     // Values : status-bar, app-bar, background, hover, card, dialog, disabled-button, raised-button,
@@ -23,9 +23,9 @@
 
     // ----------------------------------------------
 
-    app-cfar-exercise-dialog {
+    app-cfar-exercise-flow {
 
-        .cfar-exercise-dialog-page-container {
+        .cfar-exercise-flow-page-container {
 
             .tab-group {
                 @include mat-elevation(4);
@@ -34,8 +34,9 @@
                     background-color: map-get($bg-palette, card);
 
                     .hljs {
-                        max-width: 90%;
+                        width: calc(90% - 32px);
                         padding: 0px;
+                        margin: 16px;
                     }
                 }
             }

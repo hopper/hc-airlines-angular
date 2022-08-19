@@ -8,7 +8,7 @@ import { TranslateModule } from '@ngx-translate/core';
 
 import { CfarOfferBannerComponent } from './components/cfar-offer-banner/cfar-offer-banner.component';
 import { CfarOfferDialogComponent } from './components/cfar-offer-dialog/cfar-offer-dialog.component';
-import { CfarExerciseDialogComponent } from './components/cfar-exercise-dialog/cfar-exercise-dialog.component';
+import { CfarExerciseFlowComponent } from './components/cfar-exercise-flow/cfar-exercise-flow.component';
 
 import { MomentDateAdapter, MAT_MOMENT_DATE_FORMATS } from '@angular/material-moment-adapter';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
@@ -60,7 +60,7 @@ registerLocaleData(localeZh, 'zh', localeZhExtra);
     CfarOfferBannerComponent,
     CfarOfferBannerLargeComponent,
     CfarOfferDialogComponent,
-    CfarExerciseDialogComponent,
+    CfarExerciseFlowComponent,
 
     // Directives
     // HopperEventsDirective
@@ -101,15 +101,14 @@ registerLocaleData(localeZh, 'zh', localeZhExtra);
     CfarOfferBannerComponent,
     CfarOfferBannerLargeComponent,
     CfarOfferDialogComponent,
-    CfarExerciseDialogComponent,
+    CfarExerciseFlowComponent,
 
     // Directives
     // HopperEventsDirective
   ],
   entryComponents: [
     // Component
-    CfarOfferDialogComponent,
-    CfarExerciseDialogComponent,
+    CfarOfferDialogComponent
   ],
   providers: [
     { provide: DateAdapter, useClass: MomentDateAdapter, deps: [ MAT_DATE_LOCALE ] },

@@ -34,8 +34,9 @@
                     background-color: map-get($bg-palette, card);
 
                     .hljs {
-                        max-width: 90%;
+                        width: calc(90% - 32px);
                         padding: 0px;
+                        margin: 16px;
                     }
                 }
             }

@@ -18,6 +18,7 @@ export class CfarOfferBannerLargePageComponent extends CommonGuidesComponent {
   public  htmlCode: string = `
     <hopper-cfar-offer-banner-large
       [basePath]="basePath"
+      [imageBasePath]="imageBasePath"
       [currentLang]="currentLang"
       [hCSessionId]="hCSessionId"
       [itineraries]="itineraries"
@@ -71,6 +72,13 @@ export class CfarOfferBannerLargePageComponent extends CommonGuidesComponent {
           The Hopper Cloud Airlines API url base path
         `,
         required: true
+      },
+      {
+        name: 'imageBasePath',
+        description: `
+          The basePath for images (empty by default)
+        `,
+        required: false
       },
       {
         name: 'hCSessionId',
