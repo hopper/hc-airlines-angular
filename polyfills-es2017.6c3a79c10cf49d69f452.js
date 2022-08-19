@@ -7,7 +7,7 @@
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/bburger/Git/TMP/hc-airlines-angular/src/polyfills.ts */"hN/g");
+module.exports = __webpack_require__(/*! /Users/bburger/Git/hc-airlines-angular/src/polyfills.ts */"hN/g");
 
 
 /***/ }),

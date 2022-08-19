@@ -499,7 +499,7 @@
     /***/
     function _(module, exports, __webpack_require__) {
       __webpack_require__(
-      /*! /Users/bburger/Git/TMP/hc-airlines-angular/node_modules/@angular-devkit/build-angular/src/webpack/es5-polyfills.js */
+      /*! /Users/bburger/Git/hc-airlines-angular/node_modules/@angular-devkit/build-angular/src/webpack/es5-polyfills.js */
       "voQr");
 
       __webpack_require__(
@@ -507,7 +507,7 @@
       "R0gw");
 
       module.exports = __webpack_require__(
-      /*! /Users/bburger/Git/TMP/hc-airlines-angular/src/polyfills.ts */
+      /*! /Users/bburger/Git/hc-airlines-angular/src/polyfills.ts */
       "hN/g");
       /***/
     },
