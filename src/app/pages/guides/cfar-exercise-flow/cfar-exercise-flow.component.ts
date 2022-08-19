@@ -1,7 +1,6 @@
 import { Component } from "@angular/core";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { Store } from "@ngrx/store";
-import { CfarContractCustomer, CfarOfferCustomer } from "projects/angular-sdk/src/apis/hopper-cloud-airline/v1";
 import { Locales } from "projects/angular-sdk/src/i18n";
 import { InputModel, OutputModel } from "src/app/shared/models";
 import { AppState } from "src/app/shared/ngrx";
@@ -9,43 +8,34 @@ import { CommonGuidesComponent } from "../common-guides.component";
 import { Clipboard } from '@angular/cdk/clipboard';
 
 @Component({
-  selector: "app-cfar-offer-banner",
-  templateUrl: "./cfar-offer-banner.component.html",
-  styleUrls: ["./cfar-offer-banner.component.scss"],
+  selector: "app-cfar-exercise-flow",
+  templateUrl: "./cfar-exercise-flow.component.html",
+  styleUrls: ["./cfar-exercise-flow.component.scss"],
 })
-export class CfarOfferBannerPageComponent extends CommonGuidesComponent {
+export class CfarExerciseFlowPageComponent extends CommonGuidesComponent {
 
   public  htmlCode: string = `
-    <hopper-cfar-offer-banner
+    <hopper-cfar-exercise-flow
       [basePath]="basePath"
       [imageBasePath]="imageBasePath"
       [currentLang]="currentLang"
-      [currentTheme]="currentTheme"
       [hCSessionId]="hCSessionId"
-      [itineraries]="itineraries"
-      (offerAccepted)="onOfferAccepted($event)"
-      (offersLoaded)="onOffersLoaded($event)"
-    ></hopper-cfar-offer-banner>
+      [contractId]="contractId"
+      [hyperwalletUrl]="hyperwalletUrl"
+      (airlineRefundSelected)="onAirlineRefundSelected($event)"
+    ></hopper-cfar-exercise-flow>
   `;
 
   public  tsCode: string = `
-    import { CfarContractCustomer, CfarOfferCustomer } from "@hopper-cloud-airlines/angular-sdk/src/apis/hopper-cloud-airline/v1";
-    
-    // ...
-
-    onOfferAccepted(cfarContract: CfarContractCustomer): void {
-      console.log(cfarContract);
-    }
-
-    onOffersLoaded(cfarOffers: CfarOfferCustomer[]): void {
-      console.log(cfarOffers);
+    public onAirlineRefundSelected(data: string): void {
+      console.log(data);
     }
   `;
 
   constructor(
     protected _store: Store<AppState>,
     protected _clipboard: Clipboard,
-    protected _snackBar: MatSnackBar
+    protected _snackBar: MatSnackBar,
   ) {
     super(_store, _clipboard, _snackBar);
   }
@@ -66,13 +56,6 @@ export class CfarOfferBannerPageComponent extends CommonGuidesComponent {
         required: false
       },
       {
-        name: 'currentTheme',
-        description: `
-          The active theme managed by Hopper (for the Offer Banner Dialog)
-        `,
-        required: false
-      },
-      {
         name: 'basePath',
         description: `
           The Hopper Cloud Airlines API url base path
@@ -87,6 +70,14 @@ export class CfarOfferBannerPageComponent extends CommonGuidesComponent {
         required: false
       },
       {
+        name: 'currentTheme',
+        description: `
+          The active theme managed by Hopper.
+          If you have an Angular material theme, this field can be ignored
+        `,
+        required: false
+      },
+      {
         name: 'hCSessionId',
         description: `
           Example: 9fd3f2f9-e5aa-4128-ace9-3c4ee37b685f <br />
@@ -95,9 +86,16 @@ export class CfarOfferBannerPageComponent extends CommonGuidesComponent {
         required: true
       },
       {
-        name: 'itineraries',
+        name: 'contractId',
         description: `
-          See <a target="_blank" aria-describedby="api documentation" href="https://airlines-api.staging.hopper.com/airline/v1.0/docs/index.html#operation/postCfar_offers">API documentation</a>
+          A unique identifier for a CFAR contract
+        `,
+        required: true
+      },
+      {
+        name: 'hyperwalletUrl',
+        description: `
+          Url for hyperwallet integration
         `,
         required: true
       }
@@ -107,27 +105,16 @@ export class CfarOfferBannerPageComponent extends CommonGuidesComponent {
   public  getOutputs(): OutputModel[] {
     return [
       {
-        name: 'offerAccepted',
+        name: 'airlineRefundSelected',
         description: `
-          Event triggered when the user accepts a CFAR offer <br />
-          Returns a CfarContractCustomer
-        `
-      },
-      {
-        name: 'offersLoaded',
-        description: `
-          Event triggered when the offers are loaded (or not)<br />
-          Returns a CfarOfferCustomer array or null
+          Event triggered when the user select the airline refund method<br />
+          Returns a string (AIRLINE_REFUND)
         `
       }
     ];
   }
 
-  onOfferAccepted(cfarContract: CfarContractCustomer): void {
-    console.log(cfarContract);
-  }
-
-  onOffersLoaded(cfarOffers: CfarOfferCustomer[]): void {
-    console.log(cfarOffers);
+  public onAirlineRefundSelected(data: string): void {
+    console.log(data);
   }
 }

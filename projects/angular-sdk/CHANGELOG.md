@@ -6,8 +6,9 @@
 - Fixed a css issue related to the source code examples 
 
 ### Minor changes
-- New Cfar Status: Refunding
 - New optional parameter: imageBasePath
+- Cfar Exercise Dialog:
+    - The component is not a dialog anymore
 
 <a name="2.6.1"></a>
 

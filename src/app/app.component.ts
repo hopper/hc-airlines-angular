@@ -1,4 +1,4 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -11,7 +11,7 @@ import * as globalActions from "./shared/ngrx/global/global.actions";
   selector: 'app-root',
   templateUrl: './app.component.html'
 })
-export class AppComponent implements OnDestroy {
+export class AppComponent implements OnInit, OnDestroy {
   
   public currentTheme!: string;
   private _unsubcriber: Subject<any> = new Subject<any>();

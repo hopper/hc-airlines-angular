@@ -1,8 +1,7 @@
 @import '../../styles/helper.scss';
-@import '../../styles/dialog.scss';
 
 // How to use : https://tomastrajan.medium.com/the-complete-guide-to-angular-material-themes-4d165a9d24d1
-@mixin cfar-exercise-dialog-theme($theme) {
+@mixin cfar-exercise-flow-theme($theme) {
 
     // Colors used for element backgrounds
     $bg-palette: map-get($theme, background);
@@ -24,7 +23,7 @@
 
     // ----------------------------------------------
 
-    hopper-cfar-exercise-dialog {
+    hopper-cfar-exercise-flow {
         .mat-button, 
         .mat-flat-button, 
         .mat-icon-button, 
@@ -33,25 +32,15 @@
             border-radius: 0px; 
         }
 
-        .mat-dialog-title {
+        .header {
             height: 100px;
-            background-color: map-get($accent-palette, 900);
-            color: map-get($accent-palette, "900-contrast");
             margin: 0px;
-        
-            .big-icon {
-                font-size: 4rem;
-                height: 100%;
-            }
+            text-align: center;
+            border-bottom: 1px solid map-get($fg-palette, divider);
         }
 
-        .mat-dialog-content {
+        .content {
             @include media-breakpoint('lt-sm') {
-                // Full-height - mat-dialog-title height
-                max-height: calc(100% - 100px);
-            }
-
-            &.sidebar-mode {
                 // Full-height - mat-dialog-title height
                 max-height: calc(100% - 100px);
             }

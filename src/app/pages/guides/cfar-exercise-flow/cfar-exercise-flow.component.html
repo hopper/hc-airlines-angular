@@ -1,4 +1,4 @@
-<div class="cfar-exercise-dialog-page-container p-32" fxLayout="row wrap" fxLayoutAlign="start start">
+<div class="cfar-exercise-flow-page-container p-32" fxLayout="row wrap" fxLayoutAlign="start start">
 
     <p fxFlex="100">This page is displayed to the User following the successful retrieval of a CFAR contract for a booking eligible to the refund.
         The User gets a display of the booking’s itinerary that can be cancelled and is prompted to choose the refund type.<br />
@@ -7,16 +7,17 @@
     <mat-tab-group fxFlex="100" backgroundColor="primary" class="tab-group mb-16">
 
         <mat-tab label="Overview">
-            <div class="p-16" fxLayoutGap="16px">
-                <button mat-flat-button color="primary" (click)="onOpenCfarExerciseDialog(false)"
-                    aria-label="Open CFAR Exercise dialog">
-                    Open CFAR Exercise dialog
-                </button>
-
-                <button mat-flat-button color="primary" (click)="onOpenCfarExerciseDialog(true)"
-                    aria-label="Open CFAR Exercise dialog as a sidebar">
-                    Open CFAR Exercise dialog as a sidebar
-                </button>
+            <div class="p-16">
+                <hopper-cfar-exercise-flow
+                    [isFakeBackend]="isFakeBackend"
+                    [basePath]="basePath"
+                    [imageBasePath]="imageBasePath"
+                    [currentLang]="currentLang"
+                    [hCSessionId]="hCSessionId"
+                    [contractId]="contractId"
+                    [hyperwalletUrl]="hyperwalletUrl"
+                    (airlineRefundSelected)="onAirlineRefundSelected($event)"
+                ></hopper-cfar-exercise-flow>
             </div>
         </mat-tab>
 

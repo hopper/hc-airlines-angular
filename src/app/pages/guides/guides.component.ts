@@ -35,9 +35,9 @@ export class GuidesPageComponent {
     });
 
     this.components.push({ 
-      name: 'CFAR Exercise Dialog',
-      link: 'cfar-exercise-dialog',
-      description: 'A dialog that allow user to be refund'
+      name: 'CFAR Exercise Flow',
+      link: 'cfar-exercise-flow',
+      description: 'A flow that allow user to be refund'
     });
 
     // Working items

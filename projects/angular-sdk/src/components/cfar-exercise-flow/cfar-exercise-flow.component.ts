@@ -1,4 +1,4 @@
-import { Component, ElementRef, HostListener, Inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, HostListener, Inject, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { take } from 'rxjs/operators';
 import { CfarContract, CfarItinerary, CheckCfarContractExerciceVerificationCodeResponse, CheckCfarContractExerciseVerificationCodeRequest, CreateRefundAuthorizationRequest, CreateRefundRecipientRequest, CreateRefundRequest, RefundAuthorization, RefundRecipient } from '../../apis/hopper-cloud-airline/v1';
@@ -19,11 +19,11 @@ import { SendCfarContractExerciceVerificationCodeResponse } from '../../apis/hop
 import { StringUtils } from '../../utils/string.utils';
 
 @Component({
-  selector: 'hopper-cfar-exercise-dialog',
-  templateUrl: './cfar-exercise-dialog.component.html',
-  styleUrls: ['./cfar-exercise-dialog.component.scss']
+  selector: 'hopper-cfar-exercise-flow',
+  templateUrl: './cfar-exercise-flow.component.html',
+  styleUrls: ['./cfar-exercise-flow.component.scss']
 })
-export class CfarExerciseDialogComponent extends GlobalComponent implements OnInit {
+export class CfarExerciseFlowComponent extends GlobalComponent implements OnInit {
 
   public selectedRefundMethod?: 'ftc' | 'cash';
   public cfarContract!: CfarContract;
@@ -39,21 +39,24 @@ export class CfarExerciseDialogComponent extends GlobalComponent implements OnIn
   public errorMessage!: string;
 
   // Mandatory data
-  private _hCSessionId!: string;
-  private _contractId!: string;
-  private _hyperwalletUrl!: string;
   private _navigationStep!: ExerciseActionStep;
 
+  @Input() hCSessionId!: string;
+  @Input() contractId!: string;
+  @Input() hyperwalletUrl!: string;
+
+  @Output() airlineRefundSelected = new EventEmitter();
+
   // Fake values
-  private fakeContractId: string = "1ecf85ab-211f-68b7-9bb3-4b1a314f1a42";
-  private fakeContractExerciseId: string = "1ecf85ab-211f-68b7-9bb3-f1d35b1c2045";
-  private fakeVerificationCode: string = "123456";
+  private _fakeContractId: string = "1ecf85ab-211f-68b7-9bb3-4b1a314f1a42";
+  private _fakeContractExerciseId: string = "1ecf85ab-211f-68b7-9bb3-f1d35b1c2045";
+  private _minLengthVerificationCode: number = 6;
 
   // Forms
   public checkVerificationCodeForm!: FormGroup;
   public step2Form!: FormGroup;
 
-  @ViewChild('dialogContentAnchor') public anchor!: ElementRef;
+  @ViewChild('stepperContentAnchor') public anchor!: ElementRef;
   @ViewChild('stepper') public stepper!: MatStepper;
 
   constructor(
@@ -61,27 +64,12 @@ export class CfarExerciseDialogComponent extends GlobalComponent implements OnIn
     private _domSanitizer: DomSanitizer,
     private _adapter: DateAdapter<any>,
     private _translateService: TranslateService,
-    private _dialogRef: MatDialogRef<CfarExerciseDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any,
     private _hopperProxyService: HopperProxyService,
     private _formBuilder: FormBuilder,
     private _http: HttpClient,
     private _datePipe: DatePipe
   ) {
     super(_adapter, _translateService);
-
-    // Mandatory data
-    this._hCSessionId = data.hCSessionId;
-    this._contractId = data.contractId;
-    this._hyperwalletUrl = data.hyperwalletUrl;
-
-    // Optional data
-    this.isSidebar = data.isSidebar;
-
-    // Update parents @inputs manually (Dialog limitation)
-    this.isFakeBackend = data.isFakeBackend;
-    this.currentLang = data.currentLang;
-    this.basePath = data.basePath;
 
     // Create material icon for refundable ticket
     this._matIconRegistry.addSvgIcon("refundable_ticket", this._domSanitizer.bypassSecurityTrustResourceUrl("assets/refundable-ticket.svg"));
@@ -93,10 +81,10 @@ export class CfarExerciseDialogComponent extends GlobalComponent implements OnIn
 
   ngOnInit(): void {
     // Update languages/labels manually (dialog limitation)
-    this._updateLanguage(this.currentLang);
+    //this._updateLanguage(this.currentLang);
 
     // Update countries labels manually (dialog limitation)
-    this._setCountriesLabels();
+    //this._setCountriesLabels();
 
     // Init Navigation Context
     this._initNavigationContext();
@@ -112,10 +100,6 @@ export class CfarExerciseDialogComponent extends GlobalComponent implements OnIn
   // -----------------------------------------------
   // Publics Methods
   // -----------------------------------------------
-
-  public onClose(): void {
-    this._dialogRef.close();
-  }
 
   public onSelectRefundType(type: string): void {
     this.isHopperRefund = type == 'hopper';
@@ -159,7 +143,7 @@ export class CfarExerciseDialogComponent extends GlobalComponent implements OnIn
       this.stepper.next();
     } else {
       // Send a notification to the client
-      this._dialogRef.close("AIRLINE_REFUND");
+      this.airlineRefundSelected.emit("AIRLINE_REFUND");
     }
   }
 
@@ -180,12 +164,12 @@ export class CfarExerciseDialogComponent extends GlobalComponent implements OnIn
       }, 2000);
     } else {
       this._hopperProxyService
-        .postRefundRecipients(this.basePath, this._hCSessionId, ApiTranslatorUtils.modelToSnakeCase(this._buildCreateRefundRecipientRequest()))
+        .postRefundRecipients(this.basePath, this.hCSessionId, ApiTranslatorUtils.modelToSnakeCase(this._buildCreateRefundRecipientRequest()))
         .pipe(take(1))
         .subscribe(
           (refundRecipient: RefundRecipient) => {
             const userId = refundRecipient.id;
-            const url = this._hyperwalletUrl + userId + "/" + this.currentLang + ".min.js";
+            const url = this.hyperwalletUrl + userId + "/" + this.currentLang + ".min.js";
             const mainScript = document.createElement('script');
   
             mainScript.type = 'text/javascript';
@@ -202,7 +186,7 @@ export class CfarExerciseDialogComponent extends GlobalComponent implements OnIn
               };
           
               this._hopperProxyService
-                .postRefundAuthorizations(this.basePath, this._hCSessionId, ApiTranslatorUtils.modelToSnakeCase(request))
+                .postRefundAuthorizations(this.basePath, this.hCSessionId, ApiTranslatorUtils.modelToSnakeCase(request))
                 .pipe(take(1))
                 .subscribe(
                   (authorization: RefundAuthorization) => {
@@ -265,7 +249,7 @@ export class CfarExerciseDialogComponent extends GlobalComponent implements OnIn
     };
 
     this._hopperProxyService
-      .postRefunds(this.basePath, this._hCSessionId, ApiTranslatorUtils.modelToSnakeCase(request))
+      .postRefunds(this.basePath, this.hCSessionId, ApiTranslatorUtils.modelToSnakeCase(request))
       .pipe(take(1))
       .subscribe(
         () => {
@@ -310,13 +294,13 @@ export class CfarExerciseDialogComponent extends GlobalComponent implements OnIn
       this.isLoading = true;
 
       this._hopperProxyService
-        .postSendCfarExerciseVerificationCode(this.basePath, this._hCSessionId, this._contractId, ApiTranslatorUtils.modelToSnakeCase({}))
+        .postSendCfarExerciseVerificationCode(this.basePath, this.hCSessionId, this.contractId, ApiTranslatorUtils.modelToSnakeCase({}))
         .pipe(take(1))
         .subscribe(
           (sendVerificationCodeResult: SendCfarContractExerciceVerificationCodeResponse) => {
             const result = ApiTranslatorUtils.modelToCamelCase(sendVerificationCodeResult) as SendCfarContractExerciceVerificationCodeResponse;
 
-            this._contractId = result.contractId;
+            this.contractId = result.contractId;
             this.cfarContractUserEmail = result.anonymizedEmailAddress;
             this._setStep(ExerciseActionStep.CHECK_VERIFICATION_STEP);
 
@@ -337,7 +321,7 @@ export class CfarExerciseDialogComponent extends GlobalComponent implements OnIn
     if (this.isFakeBackend) {
       const request = this._buildCheckExerciseVerificationCodeRequest();
 
-      if (request.verificationCode === this.fakeVerificationCode) {
+      if (request.verificationCode && request.verificationCode?.length >= this._minLengthVerificationCode) {
         this._loadContractExercise();
       } else {
         this.errorMessage = 'Incorrect code';              
@@ -346,14 +330,14 @@ export class CfarExerciseDialogComponent extends GlobalComponent implements OnIn
       this.isLoading = true;
 
       this._hopperProxyService
-        .postCheckCfarExerciseVerificationCode(this.basePath, this._hCSessionId, this._contractId, ApiTranslatorUtils.modelToSnakeCase(this._buildCheckExerciseVerificationCodeRequest()))
+        .postCheckCfarExerciseVerificationCode(this.basePath, this.hCSessionId, this.contractId, ApiTranslatorUtils.modelToSnakeCase(this._buildCheckExerciseVerificationCodeRequest()))
         .pipe(take(1))
         .subscribe(
           (checkVerificationCodeResult: CheckCfarContractExerciceVerificationCodeResponse) => {
             const result = ApiTranslatorUtils.modelToCamelCase(checkVerificationCodeResult) as CheckCfarContractExerciceVerificationCodeResponse;
 
             if (result.compliant) {                    
-              this._contractId = result.contractId;
+              this.contractId = result.contractId;
 
               // Load the contract and the associated exercise
               this._loadContractExercise();
@@ -396,7 +380,7 @@ export class CfarExerciseDialogComponent extends GlobalComponent implements OnIn
 
       // Get the contract with the exercise
       this._hopperProxyService
-        .getCfarContractsId(this.basePath, this._hCSessionId, this._contractId)
+        .getCfarContractsId(this.basePath, this.hCSessionId, this.contractId)
         .pipe(take(1))
         .subscribe(
           (cfarContract: CfarContract) => {
@@ -419,7 +403,7 @@ export class CfarExerciseDialogComponent extends GlobalComponent implements OnIn
 
   private _buildFakeCfarContractExercisesResponse(): CfarContract {
     return {
-      id: this.fakeContractId,
+      id: this._fakeContractId,
       offers: [
         {
           id: "1ecf85a8-1c43-6fad-9bb3-0dca2ca4e73a",
@@ -559,7 +543,7 @@ export class CfarExerciseDialogComponent extends GlobalComponent implements OnIn
         totalPrice: "71.96"
       },
       contractExercise: {
-        id: this.fakeContractExerciseId,
+        id: this._fakeContractExerciseId,
         contractId: '123456789',
         exerciseInitiatedDateTime: new Date(),
         hopperRefund: '57.78',
