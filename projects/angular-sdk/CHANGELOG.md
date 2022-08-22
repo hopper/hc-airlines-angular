@@ -3,7 +3,7 @@
 # 2.8.0 (2022-XX-XX)
 
 ### Bug fixes / Small changes
-- TODO
+- Fixed import issue
 
 ### Minor changes
 - Update the API
