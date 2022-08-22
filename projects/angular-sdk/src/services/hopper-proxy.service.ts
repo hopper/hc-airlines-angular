@@ -52,11 +52,11 @@ export class HopperProxyService {
     return this._customerService.postCustomerRefundRecipients(request, hCSessionId);
   }
 
-  postRefunds(basePath: string, hCSessionId: string, request: CreateRefundRequest): Observable<any> {
+  postInitiateRefund(basePath: string, hCSessionId: string, request: CreateRefundRequest): Observable<any> {
     // Init services
     this._overrideConfiguration(basePath);
     
-    return this._customerService.postCustomerRefunds(request, hCSessionId);
+    return this._customerService.postCustomerInitiaterefund(request, hCSessionId);
   }
 
   postSendCfarExerciseVerificationCode(basePath: string, hCSessionId: string, contractId: string, request: SendCfarContractExerciseVerificationCodeRequest): Observable<SendCfarContractExerciceVerificationCodeResponse> {

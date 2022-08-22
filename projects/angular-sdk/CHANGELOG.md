@@ -1,3 +1,13 @@
+<a name="2.8.0"></a>
+
+# 2.8.0 (2022-XX-XX)
+
+### Bug fixes / Small changes
+- TODO
+
+### Minor changes
+- Update the API
+
 <a name="2.7.0"></a>
 
 # 2.7.0 (2022-08-19)

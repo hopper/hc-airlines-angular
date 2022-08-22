@@ -249,7 +249,7 @@ export class CfarExerciseFlowComponent extends GlobalComponent implements OnInit
     };
 
     this._hopperProxyService
-      .postRefunds(this.basePath, this.hCSessionId, ApiTranslatorUtils.modelToSnakeCase(request))
+      .postInitiateRefund(this.basePath, this.hCSessionId, ApiTranslatorUtils.modelToSnakeCase(request))
       .pipe(take(1))
       .subscribe(
         () => {

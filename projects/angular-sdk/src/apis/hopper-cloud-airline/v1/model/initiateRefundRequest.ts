@@ -10,6 +10,12 @@
  * Do not edit the class manually.
  */
 
-export interface SendRefund { 
-    token: string;
+/**
+ * A create CFAR refund request
+ */
+export interface InitiateRefundRequest { 
+    /**
+     * trm-286646a1-69f0-4926-a849-8fe8ad79756e
+     */
+    transferMethodId: string;
 }
