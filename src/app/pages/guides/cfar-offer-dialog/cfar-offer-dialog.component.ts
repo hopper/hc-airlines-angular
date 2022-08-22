@@ -27,9 +27,8 @@ export class CfarOfferDialogPageComponent extends CommonGuidesComponent {
   `;
 
   public tsCode: string = `
-    import { DialogUtils } from "@hopper-cloud-airlines/angular-sdk/src/utils/dialog.utils";
-    import { CfarContractCustomer } from "@hopper-cloud-airlines/angular-sdk/src/apis/hopper-cloud-airline/v1";
-    import { CfarOfferDialogComponent } from "@hopper-cloud-airlines/angular-sdk/src/components/cfar-offer-dialog/cfar-offer-dialog.component";
+    import { CfarContractCustomer } from "@hopper-cloud-airlines/angular-sdk/apis/hopper-cloud-airline/v1";
+    import { CfarOfferDialogComponent, DialogUtils } from "@hopper-cloud-airlines/angular-sdk";
     import { MatDialog } from "@angular/material/dialog";
     import { take } from "rxjs/operators";
     
