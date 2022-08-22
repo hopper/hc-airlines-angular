@@ -1,7 +1,6 @@
-import { Component, ElementRef, EventEmitter, HostListener, Inject, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Component, ElementRef, EventEmitter, HostListener, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { take } from 'rxjs/operators';
-import { CfarContract, CfarItinerary, CheckCfarContractExerciceVerificationCodeResponse, CheckCfarContractExerciseVerificationCodeRequest, CreateRefundAuthorizationRequest, CreateRefundRecipientRequest, CreateRefundRequest, RefundAuthorization, RefundRecipient } from '../../apis/hopper-cloud-airline/v1';
+import { CfarContract, CfarItinerary, CheckCfarContractExerciceVerificationCodeResponse, CheckCfarContractExerciseVerificationCodeRequest, CreateRefundAuthorizationRequest, CreateRefundRecipientRequest, InitiateRefundRequest, RefundAuthorization, RefundRecipient } from '../../apis/hopper-cloud-airline/v1';
 import { GlobalComponent } from '../global.component';
 import { TranslateService } from '@ngx-translate/core';
 import { DateAdapter } from "@angular/material/core";
@@ -244,7 +243,7 @@ export class CfarExerciseFlowComponent extends GlobalComponent implements OnInit
   public checkHyperwalletCallback(event: CustomEvent): void {
     this.isValidHyperwalletSubmit = true;
 
-    const request: CreateRefundRequest = {
+    const request: InitiateRefundRequest = {
       transferMethodId: event.detail.trmObject.token
     };
 
