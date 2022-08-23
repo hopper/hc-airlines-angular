@@ -81,6 +81,11 @@
 
             .itinerary-container {
                 border-right: 1px solid map-get($fg-palette, divider);
+                
+                @include media-breakpoint('lt-sm') {
+                    border-right: none;
+                    border-bottom: 1px solid map-get($fg-palette, divider);
+                }
             }
 
             mat-card {
