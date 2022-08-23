@@ -10,13 +10,12 @@
  * Do not edit the class manually.
  */
 
-export type CfarContractStatus = 'created' | 'confirmed' | 'canceled' | 'exercised' | 'expired' | 'refunding';
+export type CfarContractStatus = 'created' | 'confirmed' | 'canceled' | 'exercised' | 'expired';
 
 export const CfarContractStatus = {
     Created: 'created' as CfarContractStatus,
     Confirmed: 'confirmed' as CfarContractStatus,
     Canceled: 'canceled' as CfarContractStatus,
     Exercised: 'exercised' as CfarContractStatus,
-    Expired: 'expired' as CfarContractStatus,
-    Refunding: 'refunding' as CfarContractStatus
+    Expired: 'expired' as CfarContractStatus
 };

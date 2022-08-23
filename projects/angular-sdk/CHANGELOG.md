@@ -1,3 +1,14 @@
+<a name="2.8.0"></a>
+
+# 2.8.0 (2022-08-23)
+
+### Bug fixes / Small changes
+- Fixed import issue
+- Fixed css issue
+
+### Minor changes
+- Update the API
+
 <a name="2.7.0"></a>
 
 # 2.7.0 (2022-08-19)

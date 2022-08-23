@@ -30,7 +30,7 @@ export class CfarOfferBannerLargePageComponent extends CommonGuidesComponent {
   `;
 
   public  tsCode: string = `
-    import { CfarContractCustomer, CfarOfferCustomer } from "@hopper-cloud-airlines/angular-sdk/src/apis/hopper-cloud-airline/v1";
+    import { CfarContractCustomer, CfarOfferCustomer } from "@hopper-cloud-airlines/angular-sdk/apis/hopper-cloud-airline/v1";
     
     // ...
 
