@@ -1,3 +1,13 @@
+<a name="2.8.1"></a>
+
+# 2.8.1 (2022-08-24)
+
+### Bug fixes / Small changes
+- Fixed loading error of some svg icons
+- Exercise flow:
+    - Fixed display issue on mobile
+    - Fixed display issue on 'resend code' button
+
 <a name="2.8.0"></a>
 
 # 2.8.0 (2022-08-23)

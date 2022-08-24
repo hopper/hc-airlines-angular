@@ -71,7 +71,12 @@ export class CfarExerciseFlowComponent extends GlobalComponent implements OnInit
     super(_adapter, _translateService);
 
     // Create material icon for refundable ticket
-    this._matIconRegistry.addSvgIcon("refundable_ticket", this._domSanitizer.bypassSecurityTrustResourceUrl("assets/refundable-ticket.svg"));
+    this._matIconRegistry.addSvgIcon(
+      "refundable_ticket",
+      this._domSanitizer.bypassSecurityTrustResourceUrl(
+        (this.imageBasePath || '') + "assets/refundable-ticket.svg"
+      )
+    );
   }
 
   // -----------------------------------------------

@@ -312,14 +312,14 @@ export const locale: I18n = {
             CHECK_VERIFICATION_TEXT: "In order to verify your identity, we will send a code to your email address",
             SEND_VERIFICATION_TITLE: "Identity verification",
             SEND_VERIFICATION_TEXT: "We just sent an email with a verification code to {{email}}. Please enter that code below",
-            RESEND_VERIFICATION_CODE: "Resend a code",
             BUTTON: {
                 CANCEL: "Cancel",
                 SUBMIT: "Yes, cancel flight",
                 BACK: "Back",
                 CONTINUE: "Continue",
                 SEND_VERIFICATION_CODE: "Send",
-                CHECK_VERIFICATION_CODE: "Check"
+                CHECK_VERIFICATION_CODE: "Check",
+                RESEND_VERIFICATION_CODE: "Resend a code"
             },
             NO_CONTRACT: "No contract available",
             LOADING: "Loading in progress...",

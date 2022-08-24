@@ -45,15 +45,16 @@
                         <mat-error>{{ this.errorMessage }}</mat-error>
                     </div>
         
-                    <div fxLayoutAlign="center center" fxLayout="column">
+                    <div fxLayoutAlign="center center" fxLayout="column" fxLayoutGap="16px">
                         <button mat-raised-button color="primary" ngClass.lt-sm="full-width" ngClass.gt-sm="mid-width" [disabled]="!isCheckVerificationCodeFormValid()" 
                             (click)="onCheckVerificationCode()" attr.aria-label="{{ 'CFAR_EXERCISE_DIALOG.BUTTON.CONTINUE' | translate }}">
                             {{ 'CFAR_EXERCISE_DIALOG.BUTTON.CONTINUE' | translate }}
                         </button>
         
-                        <div fxFlex="100" class="mt-8 resent-code-label" (click)="onSendVerificationCode()">
-                            {{ 'CFAR_EXERCISE_DIALOG.RESEND_VERIFICATION_CODE' | translate }}
-                        </div>
+                        <button mat-button color="primary" ngClass.lt-sm="full-width" ngClass.gt-sm="mid-width" 
+                            attr.aria-label="{{ 'CFAR_EXERCISE_DIALOG.BUTTON.RESEND_VERIFICATION_CODE' | translate }}" (click)="onSendVerificationCode()">
+                            {{ 'CFAR_EXERCISE_DIALOG.BUTTON.RESEND_VERIFICATION_CODE' | translate }}
+                        </button>
                     </div>
                 </div>                
                 <!-- / STEP CHECK VERIFICATION CODE -->
@@ -67,7 +68,7 @@
                         <mat-step>
                             <ng-template matStepLabel>{{ 'CFAR_EXERCISE_DIALOG.STEP.FIRST' | translate }}</ng-template>
         
-                            <div class="p-16" ngClass.lt-md="px-16" fxLayout="row wrap" fxLayoutAlign="start center">
+                            <div class="p-16" fxLayout="row wrap" fxLayoutAlign="start center">
         
                                 <div fxFlex="100" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px"
                                     class="mb-16">
@@ -89,10 +90,10 @@
         
                             <mat-divider></mat-divider>
         
-                            <div class="p-16" ngClass.lt-md="px-16" fxLayout="row" fxLayout.lt-sm="column" fxLayoutAlign="start start"
+                            <div ngClass.gt-sm="p-16" ngClass.lt-md="py-16" fxLayout="row" fxLayout.lt-sm="column" fxLayoutAlign="start start"
                                 fxLayoutGap="16px"
                             >
-                                <div fxFlex class="itinerary-container" fxLayout="column" fxLayoutAlign="center start" fxLayoutGap="32px">
+                                <div fxFlex class="itinerary-container pr-16" fxLayout="column" fxLayoutAlign="center start" fxLayoutGap="32px">
         
                                     <ng-container *ngFor="let slice of cfarContract?.itinerary?.slices">
         
@@ -419,10 +420,10 @@
         
                             <mat-divider></mat-divider>
         
-                            <div class="p-16" ngClass.lt-md="px-16" fxLayout="row" fxLayout.lt-sm="column" fxLayoutAlign="start start"
+                            <div ngClass.gt-sm="p-16" ngClass.lt-md="py-16" fxLayout="row" fxLayout.lt-sm="column" fxLayoutAlign="start start"
                                 fxLayoutGap="16px"
                             >
-                                <div fxFlex class="itinerary-container" fxLayout="column" fxLayoutAlign="center start" fxLayoutGap="32px">
+                                <div fxFlex class="itinerary-container pr-16" fxLayout="column" fxLayoutAlign="center start" fxLayoutGap="32px">
         
                                     <ng-container *ngFor="let slice of cfarContract?.itinerary?.slices">
         

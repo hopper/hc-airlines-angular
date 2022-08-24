@@ -310,7 +310,6 @@ export interface I18n {
             CHECK_VERIFICATION_TEXT: string;
             SEND_VERIFICATION_TITLE: string;
             SEND_VERIFICATION_TEXT: string;
-            RESEND_VERIFICATION_CODE: string;
             BUTTON: {
                 CANCEL: string;
                 SUBMIT: string;
@@ -318,6 +317,7 @@ export interface I18n {
                 CONTINUE: string;
                 SEND_VERIFICATION_CODE: string;
                 CHECK_VERIFICATION_CODE: string;
+                RESEND_VERIFICATION_CODE: string;
             },
             NO_CONTRACT: string;
             LOADING: string;

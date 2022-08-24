@@ -312,14 +312,14 @@ export const locale: I18n = {
             CHECK_VERIFICATION_TEXT: "为了验证您的身份, 我们将向您的电子邮件地址发送代码",
             SEND_VERIFICATION_TITLE: "身份验证",
             SEND_VERIFICATION_TEXT: "我们刚刚向 {{email}} 发送了一封带有验证代码的电子邮件。请在下面输入代码",
-            RESEND_VERIFICATION_CODE: "重新发送代码",
             BUTTON: {
                 CANCEL: "取消",
                 SUBMIT: "是的,取消航班",
                 BACK: "背部",
                 CONTINUE: "继续",
                 SEND_VERIFICATION_CODE: "发送验证码",
-                CHECK_VERIFICATION_CODE: "验证验证代码"
+                CHECK_VERIFICATION_CODE: "验证验证代码",
+                RESEND_VERIFICATION_CODE: "重新发送代码"
             },
             NO_CONTRACT: "没有可用的合同",
             LOADING: "正在加载...",

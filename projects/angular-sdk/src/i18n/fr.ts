@@ -312,14 +312,14 @@ export const locale: I18n = {
             CHECK_VERIFICATION_TEXT: "Afin de vérifier votre identité, nous allons vous envoyer un e-mail contenant un code de vérification",
             SEND_VERIFICATION_TITLE: "Vérification de votre identité",
             SEND_VERIFICATION_TEXT: "Un e-mail contenant un code de vérification vient d'être envoyé à {{email}}. Veuillez saisie ce code ci dessous",
-            RESEND_VERIFICATION_CODE: "Renvoyer un code",
             BUTTON: {
                 CANCEL: "Annuler",
                 SUBMIT: "Oui, annuler le vol",
                 BACK: "Retour",
                 CONTINUE: "Continuer",
                 SEND_VERIFICATION_CODE: "Envoyer",
-                CHECK_VERIFICATION_CODE: "Vérifier"
+                CHECK_VERIFICATION_CODE: "Vérifier",
+                RESEND_VERIFICATION_CODE: "Renvoyer un code"
             },
             NO_CONTRACT: "Aucun contrat disponible",
             LOADING: "Chargement en cours...",
