@@ -4,6 +4,9 @@
 
 ### Bug fixes / Small changes
 - Fixed loading error of some svg icons
+- Exercise flow:
+    - Fixed display issue on mobile
+    - Fixed display issue on 'resend code' button
 
 <a name="2.8.0"></a>
 
