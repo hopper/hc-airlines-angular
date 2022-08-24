@@ -1,3 +1,10 @@
+<a name="2.8.1"></a>
+
+# 2.8.1 (2022-08-24)
+
+### Bug fixes / Small changes
+- Fixed loading error of some svg icons
+
 <a name="2.8.0"></a>
 
 # 2.8.0 (2022-08-23)
