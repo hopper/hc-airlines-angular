@@ -33,6 +33,16 @@
             border-radius: 0px; 
         }
 
+        .warning-message {
+            @if ($is-dark == false) {
+                background: map-get($warn-palette, 50);
+            }
+            
+            border: 1px solid map-get($warn-palette, default);
+            padding: 0px 16px;
+            color: black;
+        }
+        
         mat-card {
             border: 1px solid map-get($primary-palette, "A200") !important;
             border-radius: 0px;
@@ -82,17 +92,6 @@
 
             a {
                 color: map-get($primary-palette, default);
-            }
-
-            .warning-message {
-                @if ($is-dark == false) {
-                    background: map-get($warn-palette, 50);
-                }
-                
-                border: 1px solid map-get($warn-palette, default);
-                width: 100%;
-                text-align: center;
-                color: map-get($warn-palette, default);
             }
         }
     }

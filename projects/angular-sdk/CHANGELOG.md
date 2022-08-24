@@ -1,3 +1,11 @@
+<a name="2.8.2"></a>
+
+# 2.8.2 (2022-XX-XX)
+
+### Bug fixes / Small changes
+- Offer Banner Large: 
+    - Fixed the display of warning message
+
 <a name="2.8.1"></a>
 
 # 2.8.1 (2022-08-24)
