@@ -10,6 +10,7 @@
     - Fixed the display of price per traveler
 - General:
     - Fixed XSS vulnerability
+    - Changed some labels
 
 <a name="2.8.1"></a>
 

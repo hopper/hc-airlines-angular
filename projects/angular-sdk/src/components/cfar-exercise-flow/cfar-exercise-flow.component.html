@@ -97,7 +97,11 @@
                                                 {{ cfarContract.expiryDateTime | date: ('COMMON.DATE_FORMAT.HOUR_AND_DATE' | translate):'':currentLang }}
                                             </b>
                                         </p>
-                                        <p>{{ 'CFAR_EXERCISE_FLOW.DEADLINE_SENTENCE_2' | translate }}</p>
+                                        <p *ngIf="isHopperRefund">
+                                            {{ 'CFAR_EXERCISE_FLOW.DEADLINE_SENTENCE_2' | translate: {
+                                                amount: cfarContract.contractExercise?.hopperRefund | currency:cfarContract.contractExercise?.currency:'symbol':undefined:currentLang
+                                            } }}
+                                        </p>
                                     </div>
             
                                 </div>
@@ -406,7 +410,11 @@
                                     </div>
             
                                     <div *ngIf="isErrorHyperwallet" fxFlex="100" class="p-32" ngClass.lt-md="p-16" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="16px">
-                                        <span class="error-message p-16">{{ 'CFAR_EXERCISE_FLOW.LOADING_HYPERWALLET_ERROR' | translate }}</span>
+                                        <span class="error-message p-16" innerHtml="
+                                            {{ 'CFAR_EXERCISE_FLOW.LOADING_HYPERWALLET_ERROR' | translate: {
+                                                link: '#'
+                                            } }}">
+                                        </span>
                                     </div>
             
                                     <div fxFlex="100">
