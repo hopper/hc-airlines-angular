@@ -44,13 +44,16 @@
                     [ngClass]="{ 'active': offer == selectedCfarOffer }">
                     <div fxFlex="100" (click)="onSelectOffer(offer)">
                         <h3 class="offer-title">
-                            {{ 'CFAR_OFFER_BANNER.COVERAGE_PERCENTAGE' | translate: 
+                            {{ 'COMMON.COVERAGE_PERCENTAGE' | translate: 
                                 {
                                     coverage: (computePercentage(offer) | percent)
                                 }
                             }}
                         </h3>
-                        <span class="price">{{ offer?.premium | currency:offer?.currency:'symbol' }}</span>
+                        <div class="price" innerHtml="{{ 'COMMON.PRICE_PER_TRAVELER' | translate: 
+                            { price: (getPricePerTraveler(offer) | currency:offer?.currency:'symbol':undefined:currentLang) }
+                        }}"
+                        ></div>
                     </div>
                 </mat-card>
 

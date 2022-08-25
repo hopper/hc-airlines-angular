@@ -261,22 +261,21 @@ export const locale: I18n = {
             BUTTON: {
                 CLOSE: '关'
             },
-            TERMS_LINK_TEXT: "条款和条件"
+            TERMS_LINK_TEXT: "条款和条件",
+            COVERAGE_PERCENTAGE: "承保飞行费用的 {{ coverage }}",
+            PRICE_PER_TRAVELER: "<span>每位乘客</span><span class='price-per-traveler'>{{ price }}</span>"
         },
         CFAR_OFFER_BANNER: {
             TITLE: "随时以任何理由取消您的航班。",
             LOADING: "正在加载优惠...",
             BUTTON: {
                 SELECT: "选择"
-            },
-            COVERAGE_PERCENTAGE: "承保飞行费用的 {{ coverage }}",
+            }
         },
         CFAR_OFFER_BANNER_LARGE: {
             TITLE: "随时以任何理由取消您的航班。",
             LOADING: "正在加载优惠...",
-            COVERAGE_PERCENTAGE: "承保飞行费用的 {{ coverage }}",
             NO_COVERAGE_OPTION: "我不想出于任何原因购买取消。",
-            PRICE_PER_TRAVELER: "<span>每位乘客</span><span class='price-per-traveler'>{{ price }}</span>",
             WARNING_MESSAGE: "请选择或拒绝出于任何原因取消。"
         },
         CFAR_OFFER_DIALOG: {
@@ -290,7 +289,7 @@ export const locale: I18n = {
             LOADING: "正在加载优惠...",
             TERMS_WARNING: "如果你不添加这个,你的票是不可退款的。"
         },
-        CFAR_EXERCISE_DIALOG: {
+        CFAR_EXERCISE_FLOW: {
             TITLE: "取消航班",
             SUBTITLE: "出于任何原因取消",
             DEADLINE_SENTENCE_1: "免费取消您的预订,直到 ",
@@ -363,7 +362,8 @@ export const locale: I18n = {
                 CHILD: "孩子",
                 SEATED_INFANT: "坐着的婴儿",
                 LAP_INFANT: "膝上婴儿"
-            }
+            },
+            CONTRACT_ALREADY_REFUNDED: "您的取消请求已被考虑在内，您的退款正在进行中。如果您需要帮助，可以通过<a href='{{ link }}' target='_blank'>此表格联系我们的客户支持团队。</a>"
         }
     }
 }

@@ -1,8 +1,13 @@
-<div class="px-32" ngClass.lt-md="px-16" fxLayout="row" fxLayoutAlign="center center">
+<div class="px-32" ngClass.lt-md="px-16" fxLayout="row wrap" fxLayoutAlign="center center">
 
     <ng-container *ngIf="!isLoading">
 
-        <mat-card *ngIf="cfarOffers" class="mat-elevation-z4 m-16 pointer" fxFlex fxLayout="row wrap">
+        <div fxFlex="100" *ngIf="hasWarningCoverageMessage && !selectedChoice" class="warning-message m-16" fxLayout="row" fxLayoutAlign="start center">
+            <mat-icon>error</mat-icon>
+            <span class="p-16">{{ 'CFAR_OFFER_BANNER_LARGE.WARNING_MESSAGE' | translate }}</span>
+        </div>
+
+        <mat-card fxFlex="100" *ngIf="cfarOffers" class="mat-elevation-z4 m-16 pointer" fxLayout="row wrap">
     
             <div fxFlex="100" fxLayout="row wrap">
 
@@ -37,10 +42,6 @@
     
                 <div fxFlexOffset="20" fxFlex="80" fxFlexOffset.lt-md="0" fxFlex.lt-md="100" fxLayout="row wrap" class="mb-16" fxLayoutAlign="start center" fxLayoutGap="16px">
     
-                    <div *ngIf="hasWarningCoverageMessage && !selectedChoice" class="p-16" fxFlex="100" fxLayout="row wrap" fxLayoutAlign="center center">
-                        <p class="p-16 warning-message">{{ 'CFAR_OFFER_BANNER_LARGE.WARNING_MESSAGE' | translate }}</p>
-                    </div>
-
                     <mat-radio-group fxFlex="100" fxLayout="row wrap" fxLayoutAlign="start center" color="primary"
                         [(ngModel)]="selectedChoice" (ngModelChange)="onChooseCoverage()">
                         <div fxFlex="100" fxLayout="row" fxLayoutGap="16px" fxLayout.lt-md="column" fxLayoutAlign="start center"
@@ -48,13 +49,13 @@
 
                             <div fxFlex class="offer-choice" fxLayout="row wrap" fxLayoutAlign="start start" *ngFor="let offer of cfarOffers; let i = index;">
                                 <mat-radio-button fxFlex="100" value="{{ i }}" class="important-text bold">
-                                    {{ 'CFAR_OFFER_BANNER_LARGE.COVERAGE_PERCENTAGE' | translate: 
+                                    {{ 'COMMON.COVERAGE_PERCENTAGE' | translate: 
                                         { coverage: (computePercentage(offer) | percent) }
                                     }}
                                 </mat-radio-button>
 
                                 <div class="mt-8" fxFlex="100" fxLayoutAlign="start center" fxLayoutGap="8px"
-                                    innerHtml="{{ 'CFAR_OFFER_BANNER_LARGE.PRICE_PER_TRAVELER' | translate: 
+                                    innerHtml="{{ 'COMMON.PRICE_PER_TRAVELER' | translate: 
                                         { price: (getPricePerTraveler(offer) | currency:offer?.currency:'symbol':undefined:currentLang) }
                                     }}"
                                 ></div>
@@ -79,7 +80,7 @@
 
     </ng-container>
 
-    <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="16px" *ngIf="isLoading">
+    <div fxFlex="100" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="16px" *ngIf="isLoading">
         <mat-spinner></mat-spinner>
         <p>{{ 'CFAR_OFFER_BANNER_LARGE.LOADING' | translate }}</p>
     </div>

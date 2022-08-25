@@ -261,40 +261,39 @@ export const locale: I18n = {
             BUTTON: {
                 CLOSE: 'Fermer'
             },
-            TERMS_LINK_TEXT: "Conditions d'utilisation"
+            TERMS_LINK_TEXT: "Voir les conditions générales",
+            COVERAGE_PERCENTAGE: "{{ coverage }} du montant des billets remboursés",
+            PRICE_PER_TRAVELER: "<span class='price-per-traveler'>{{ price }}</span><span>par passager</span>"
         },
         CFAR_OFFER_BANNER: {
-            TITLE: "Annulez votre vol à tout moment, pour quelque raison que ce soit.",
+            TITLE: "Annulez votre vol à tout moment, quelle que soit la raison.",
             LOADING: "Chargement des offres en cours...",
             BUTTON: {
                 SELECT: "Sélectionner"
-            },
-            COVERAGE_PERCENTAGE: "{{ coverage }} des frais de vol couverts",
+            }
         },
         CFAR_OFFER_BANNER_LARGE: {
-            TITLE: "Annulez votre vol à tout moment, pour quelque raison que ce soit.",
+            TITLE: "Annulez votre vol à tout moment, quelle que soit la raison.",
             LOADING: "Chargement des offres en cours...",
-            COVERAGE_PERCENTAGE: "{{ coverage }} des frais de vol couverts",
-            NO_COVERAGE_OPTION: "Je ne veux pas ajouter l'option 'Annuler pour une raison quelconque'.",
-            PRICE_PER_TRAVELER: "<span class='price-per-traveler'>{{ price }}</span><span>par passager</span>",
-            WARNING_MESSAGE: "Veuillez choisir ou refuser l'annulation pour quelque raison que ce soit."
+            NO_COVERAGE_OPTION: "Je ne veux pas ajouter l'option d'Annulation sans motif.",
+            WARNING_MESSAGE: "Veuillez choisir ou refuser l'option d'Annulation sans motif."
         },
         CFAR_OFFER_DIALOG: {
-            TITLE: "Annuler pour une raison quelconque",
+            TITLE: "Annulation sans motif",
             VIEW_DETAILS: "Voir détails",
             BUTTON: {
-                CANCEL: "Continuer sans couverture",
+                CANCEL: "Continuer sans l'option",
                 SUBMIT: "Continuer avec {{ coverage }} de couverture"
             },
             NO_OFFERS: "Aucune offre disponible",
             LOADING: "Chargement des offres en cours...",
-            TERMS_WARNING: "Si vous ne l'ajoutez pas, votre billet ne sera pas remboursable."
+            TERMS_WARNING: "Si vous n'ajoutez pas cette option, votre billet ne sera pas remboursable."
         },
-        CFAR_EXERCISE_DIALOG: {
+        CFAR_EXERCISE_FLOW: {
             TITLE: "Annuler le vol",
-            SUBTITLE: "Annuler pour une raison quelconque",
-            DEADLINE_SENTENCE_1: "Annulez votre réservation sans frais jusqu'au ",
-            DEADLINE_SENTENCE_2: "Vous recevrez un e-mail de confirmation et le statut du voyage sera mis à jour.",
+            SUBTITLE: "Annulation sans motif",
+            DEADLINE_SENTENCE_1: "Vous avez souscrit à l'option d'annulation sans motif avec votre réservation. Vous pouvez ainsi annuler votre réservation sans frais jusqu'au ",
+            DEADLINE_SENTENCE_2: "N'oubliez pas que l'annulation est seulement possible pour l'ensemble de votre voyage et tous les passagers de votre réservation. Conformément au montant couvert, vous serez remboursé d'un total de {{ amount }}.",
             TO: " vers ",
             DEPARTURE: "Départ :",
             ARRIVAL: "Arrivée :",
@@ -302,14 +301,14 @@ export const locale: I18n = {
             PASSENGER: "{{ nbPassenger }} passager",
             PASSENGERS: "{{ nbPassenger }} passagers",
             REFUND_DETAILS_TITLE: "Détails du remboursement",
-            REFUND_WARNING_MESSAGE: "Vous avez souscrit à l'option 'CFAR' avec votre réservation, qui vous permet d'annuler et d'être remboursé de {{ amount }}. Si vous souhaitez annuler votre réservation pour l'ensemble du voyage et tous les passagers, vous pouvez lancer le processus de remboursement ci-dessous",
+            REFUND_WARNING_MESSAGE: "Si vous êtes certain de vouloir annuler votre réservation et obtenir votre remboursement, merci de continuer.",
             HOPPER_REFUND: "Remboursement Hopper",
             AIRLINE_REFUND: "Remboursement de la compagnie aérienne",
             METHOD: "Méthode :",
             AMOUNT: "Montant :",
             REFUND_METHOD: "Mode de remboursement",
             CHECK_VERIFICATION_TITLE: "Vérification de votre identité",
-            CHECK_VERIFICATION_TEXT: "Afin de vérifier votre identité, nous allons vous envoyer un e-mail contenant un code de vérification",
+            CHECK_VERIFICATION_TEXT: "Afin de vérifier votre identité, nous allons vous envoyer un courriel contenant un code de vérification. L'adresse utilisée est celle que vous avez indiquée lors de la réservation.",
             SEND_VERIFICATION_TITLE: "Vérification de votre identité",
             SEND_VERIFICATION_TEXT: "Un e-mail contenant un code de vérification vient d'être envoyé à {{email}}. Veuillez saisie ce code ci dessous",
             BUTTON: {
@@ -323,8 +322,8 @@ export const locale: I18n = {
             },
             NO_CONTRACT: "Aucun contrat disponible",
             LOADING: "Chargement en cours...",
-            LOADING_HYPERWALLET: "Chargement d'Hyperwallet en cours...",
-            LOADING_HYPERWALLET_ERROR: "Une erreur est survenue lors du chargement d'Hyperwallet",
+            LOADING_HYPERWALLET: "Chargement en cours...",
+            LOADING_HYPERWALLET_ERROR: "Une erreur est survenue. Vous pouvez contacter notre service clients via <a href='{{ link }}' target='_blank'>ce formulaire.</a>",
             STEP: {
                 FIRST: "Récapitulatif de la réservation",
                 SECOND: "Informations générales",
@@ -355,15 +354,16 @@ export const locale: I18n = {
                 ZIP: "Code postal",
                 ZIP_ERROR: "Le code postal est requis"
             },
-            CONFIRMATION_MESSAGE_1: "Votre vol a été remboursé and votre remboursement est en train d'être traité.",
-            CONFIRMATION_MESSAGE_2: "Un mail de confirmation va être envoyé à l'adresse {{ userEmail }} avec les détails sur la manière d'utiliser votre crédit",
+            CONFIRMATION_MESSAGE_1: "Votre vol a été annulé et votre remboursement est en train d'être traité.",
+            CONFIRMATION_MESSAGE_2: "Vous allez recevoir un courriel de confirmation à votre adresse {{ userEmail }} ",
             REFUND_DETAILS: "{{ amount }} en {{ method }}",
             PASSENGER_TYPE: {
                 ADULT: "Adulte",
                 CHILD: "Enfant",
                 SEATED_INFANT: "Bébé assis",
                 LAP_INFANT: "Bébé sur les genoux"
-            }
+            },
+            CONTRACT_ALREADY_REFUNDED: "Votre demande d'annulation a déjà été prise en compte et votre remboursement est en cours. Si vous avez besoin d'aide, vous pouvez contacter notre service clients via <a href='{{ link }}' target='_blank'>ce formulaire.</a>"
         }
     }
 }

@@ -96,6 +96,11 @@
                     font-style: bold;
                     color: map-get($fg-palette, "secondary-text")
                 }
+
+                .price-per-traveler {
+                    font-weight: bold;
+                    margin-right: 8px;
+                }
             }
         }
 

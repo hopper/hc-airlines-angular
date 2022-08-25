@@ -261,23 +261,22 @@ export const locale: I18n = {
             BUTTON: {
                 CLOSE: 'Close'
             },
-            TERMS_LINK_TEXT: "Terms & Conditions apply"
+            TERMS_LINK_TEXT: "Terms & Conditions apply",
+            COVERAGE_PERCENTAGE: "{{ coverage }} flight cost covered",
+            PRICE_PER_TRAVELER: "<span class='price-per-traveler'>{{ price }}</span><span>per traveler</span>"
         },
         CFAR_OFFER_BANNER: {
             TITLE: "Cancel your flight at any time, for any reason.",
             LOADING: "Loading offers in progress...",
             BUTTON: {
                 SELECT: "Select"
-            },
-            COVERAGE_PERCENTAGE: "{{ coverage }} Flight cost covered",
+            }
         },
         CFAR_OFFER_BANNER_LARGE: {
             TITLE: "Cancel your flight at any time, for any reason.",
             LOADING: "Loading offers in progress...",
-            COVERAGE_PERCENTAGE: "{{ coverage }} Flight cost covered",
             NO_COVERAGE_OPTION: "I do not want to purchase Cancel For Any Reason.",
-            PRICE_PER_TRAVELER: "<span class='price-per-traveler'>{{ price }}</span><span>per traveler</span>",
-            WARNING_MESSAGE: "Please choose or decline Cancel For Any Reason."
+            WARNING_MESSAGE: "Please choose or decline Cancel For Any Reason to continue"
         },
         CFAR_OFFER_DIALOG: {
             TITLE: "Cancel For Any Reason",
@@ -290,11 +289,11 @@ export const locale: I18n = {
             LOADING: "Loading offers in progress...",
             TERMS_WARNING: "If you don't add this, your ticket is non-refundable."
         },
-        CFAR_EXERCISE_DIALOG: {
-            TITLE: "Cancel flight",
+        CFAR_EXERCISE_FLOW: {
+            TITLE: "Cancel your flight with Hopper",
             SUBTITLE: "Cancel For Any Reason",
-            DEADLINE_SENTENCE_1: "Cancel your booking free of charge until ",
-            DEADLINE_SENTENCE_2: "You'll receive a confirmation email and the trip status will be updated.",
+            DEADLINE_SENTENCE_1: "You have purchased a Cancel For Any Reason policy with your booking which enables you to cancel your booking free of charge until ",
+            DEADLINE_SENTENCE_2: "Don't forget that the cancellation is only possible for the entire trip and all the passengers in the booking. Based on your coverage amount, you will be refunded of a total of {{ amount }}.",
             TO: " to ",
             DEPARTURE: "Departure:",
             ARRIVAL: "Arrival:",
@@ -302,14 +301,14 @@ export const locale: I18n = {
             PASSENGER: "{{ nbPassenger }} passenger",
             PASSENGERS: "{{ nbPassenger }} passengers",
             REFUND_DETAILS_TITLE: "Refund details",
-            REFUND_WARNING_MESSAGE: "You have purchased a Cancel For Any Reason policy with your booking, which enables you to cancel and get refunded of {{ amount }}. If you want to cancel your booking for the entire trip and all the passengers, you can start the refund process below",
+            REFUND_WARNING_MESSAGE: "If you are sure you want to proceed to the cancellation and get your refund, please continue.",
             HOPPER_REFUND: "Hopper refund",
             AIRLINE_REFUND: "Airline refund",
             METHOD: "Method:",
             AMOUNT: "Airline:",
             REFUND_METHOD: "Refund method",
             CHECK_VERIFICATION_TITLE: "Identity verification",
-            CHECK_VERIFICATION_TEXT: "In order to verify your identity, we will send a code to your email address",
+            CHECK_VERIFICATION_TEXT: "In order to verify your identity, we will send a code to your email address (the one used when booking your flight).",
             SEND_VERIFICATION_TITLE: "Identity verification",
             SEND_VERIFICATION_TEXT: "We just sent an email with a verification code to {{email}}. Please enter that code below",
             BUTTON: {
@@ -323,8 +322,8 @@ export const locale: I18n = {
             },
             NO_CONTRACT: "No contract available",
             LOADING: "Loading in progress...",
-            LOADING_HYPERWALLET: "Loading Hyperwallet in progress...",
-            LOADING_HYPERWALLET_ERROR: "An error occured while loading Hyperwallet",
+            LOADING_HYPERWALLET: "Loading in progress...",
+            LOADING_HYPERWALLET_ERROR: "An error occured, please contact our customer support via <a href='{{ link }}' target='_blank'>this form.</a>",
             STEP: {
                 FIRST: "Booking summary",
                 SECOND: "General information",
@@ -356,14 +355,15 @@ export const locale: I18n = {
                 ZIP_ERROR: "Zip/Postal Code is required"
             },
             CONFIRMATION_MESSAGE_1: "Your flight has been canceled and your refund is being processed.",
-            CONFIRMATION_MESSAGE_2: "A confirmation email will be sent shortly to {{ userEmail }} with details on how to use your airlines credits",
+            CONFIRMATION_MESSAGE_2: "A confirmation email will be sent shortly to {{ userEmail }}",
             REFUND_DETAILS: "{{ amount }} in {{ method }}",
             PASSENGER_TYPE: {
                 ADULT: "Adult",
                 CHILD: "Child",
                 SEATED_INFANT: "Seated infant",
                 LAP_INFANT: "Lap infant"
-            }
+            },
+            CONTRACT_ALREADY_REFUNDED: "Your cancellation request has already been taken into account and your refund is in progress. If you need help, you may contact our customer support team via <a href='{{ link }}' target='_blank'>this form.</a>"
         }
     }
 }

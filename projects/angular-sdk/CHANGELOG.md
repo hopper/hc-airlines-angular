@@ -1,3 +1,17 @@
+<a name="2.8.2"></a>
+
+# 2.8.2 (2022-XX-XX)
+
+### Bug fixes / Small changes
+- CFAR Offer Banner Large: 
+    - Fixed the display of warning message
+    - Added a message when the booking has already been refunded
+- CFAR Offer Dialog:
+    - Fixed the display of price per traveler
+- General:
+    - Fixed XSS vulnerability
+    - Changed some labels
+
 <a name="2.8.1"></a>
 
 # 2.8.1 (2022-08-24)
