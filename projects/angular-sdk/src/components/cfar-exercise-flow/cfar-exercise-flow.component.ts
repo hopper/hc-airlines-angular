@@ -1,6 +1,6 @@
 import { Component, ElementRef, EventEmitter, HostListener, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { take } from 'rxjs/operators';
-import { CfarContract, CfarItinerary, CheckCfarContractExerciceVerificationCodeResponse, CheckCfarContractExerciseVerificationCodeRequest, CreateRefundAuthorizationRequest, CreateRefundRecipientRequest, InitiateRefundRequest, RefundAuthorization, RefundRecipient } from '../../apis/hopper-cloud-airline/v1';
+import { CfarContract, CfarContractStatus, CfarItinerary, CheckCfarContractExerciceVerificationCodeResponse, CheckCfarContractExerciseVerificationCodeRequest, CreateRefundAuthorizationRequest, CreateRefundRecipientRequest, InitiateRefundRequest, RefundAuthorization, RefundRecipient } from '../../apis/hopper-cloud-airline/v1';
 import { GlobalComponent } from '../global.component';
 import { TranslateService } from '@ngx-translate/core';
 import { DateAdapter } from "@angular/material/core";
@@ -288,6 +288,10 @@ export class CfarExerciseFlowComponent extends GlobalComponent implements OnInit
     return this.checkVerificationCodeForm.valid;
   }
 
+  public isCfarContractExercised(): boolean {
+    return this.cfarContract ? this.cfarContract.status === CfarContractStatus.Exercised : false;
+  }
+
   public onSendVerificationCode(): void {
     this._purgeErrorMessageContext();
 
@@ -561,7 +565,7 @@ export class CfarExerciseFlowComponent extends GlobalComponent implements OnInit
       currency: "CAD",
       createdDateTime: new Date("2022-06-30T09:54:55.989Z"),
       expiryDateTime: new Date("2022-07-08T18:00Z"),
-      status: "created",
+      status: CfarContractStatus.Confirmed,
       extAttributes: {}
     };
   }
@@ -573,23 +577,6 @@ export class CfarExerciseFlowComponent extends GlobalComponent implements OnInit
   private _setStep(currentStep: ExerciseActionStep): void {
     this._navigationStep = currentStep;
   }
-
-  /*private _buildFakeSendCfarExerciseVerificationCodeResponse(): SendCfarContractExerciceVerificationCodeResponse {
-    return {
-      contractId: this.fakeContractId,
-      exerciseId: this.fakeContractExerciseId,
-      anonymizedEmailAddress: 'te****@fr****',
-      succeeded: true 
-    }
-  }
-
-  private _buildFakeCheckCfarExerciseVerificationCodeResponse(): CheckCfarContractExerciceVerificationCodeResponse {
-    return {
-      contractId: this.fakeContractId,
-      exerciseId: this.fakeContractExerciseId,
-      compliant: true 
-    }
-  }*/
 
   private _purgeErrorMessageContext() {
     this.errorMessage = '';

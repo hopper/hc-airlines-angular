@@ -127,6 +127,11 @@
                 color: map-get($warn-palette, default);
             }
 
+            .information-message {
+                width: 100%;
+                text-align: center;
+            }
+
             fieldset {
                 border: 2px solid map-get($primary-palette, default);
                 border-radius: 8px;

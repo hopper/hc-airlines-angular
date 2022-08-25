@@ -261,23 +261,22 @@ export const locale: I18n = {
             BUTTON: {
                 CLOSE: 'Close'
             },
-            TERMS_LINK_TEXT: "Terms & Conditions apply"
+            TERMS_LINK_TEXT: "Terms & Conditions apply",
+            COVERAGE_PERCENTAGE: "{{ coverage }} Flight cost covered",
+            PRICE_PER_TRAVELER: "<span class='price-per-traveler'>{{ price }}</span><span>per traveler</span>"
         },
         CFAR_OFFER_BANNER: {
             TITLE: "Cancel your flight at any time, for any reason.",
             LOADING: "Loading offers in progress...",
             BUTTON: {
                 SELECT: "Select"
-            },
-            COVERAGE_PERCENTAGE: "{{ coverage }} Flight cost covered",
+            }
         },
         CFAR_OFFER_BANNER_LARGE: {
             TITLE: "Cancel your flight at any time, for any reason.",
             LOADING: "Loading offers in progress...",
-            COVERAGE_PERCENTAGE: "{{ coverage }} Flight cost covered",
             NO_COVERAGE_OPTION: "I do not want to purchase Cancel For Any Reason.",
-            PRICE_PER_TRAVELER: "<span class='price-per-traveler'>{{ price }}</span><span>per traveler</span>",
-            WARNING_MESSAGE: "Please choose a coverage, or decline Cancel For Any Reason to continue."
+            WARNING_MESSAGE: "Please choose or decline Cancel For Any Reason to continue"
         },
         CFAR_OFFER_DIALOG: {
             TITLE: "Cancel For Any Reason",
@@ -290,7 +289,7 @@ export const locale: I18n = {
             LOADING: "Loading offers in progress...",
             TERMS_WARNING: "If you don't add this, your ticket is non-refundable."
         },
-        CFAR_EXERCISE_DIALOG: {
+        CFAR_EXERCISE_FLOW: {
             TITLE: "Cancel flight",
             SUBTITLE: "Cancel For Any Reason",
             DEADLINE_SENTENCE_1: "Cancel your booking free of charge until ",
@@ -363,7 +362,8 @@ export const locale: I18n = {
                 CHILD: "Child",
                 SEATED_INFANT: "Seated infant",
                 LAP_INFANT: "Lap infant"
-            }
+            },
+            CONTRACT_ALREADY_REFUNDED: "Your cancellation request has already been taken into account and your refund is in progress. If you need help, you may contact our customer support team via <a href='{{ link }}' target='_blank'>this form.</a>"
         }
     }
 }

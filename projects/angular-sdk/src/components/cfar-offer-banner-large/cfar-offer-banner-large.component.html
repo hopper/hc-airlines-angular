@@ -49,13 +49,13 @@
 
                             <div fxFlex class="offer-choice" fxLayout="row wrap" fxLayoutAlign="start start" *ngFor="let offer of cfarOffers; let i = index;">
                                 <mat-radio-button fxFlex="100" value="{{ i }}" class="important-text bold">
-                                    {{ 'CFAR_OFFER_BANNER_LARGE.COVERAGE_PERCENTAGE' | translate: 
+                                    {{ 'COMMON.COVERAGE_PERCENTAGE' | translate: 
                                         { coverage: (computePercentage(offer) | percent) }
                                     }}
                                 </mat-radio-button>
 
                                 <div class="mt-8" fxFlex="100" fxLayoutAlign="start center" fxLayoutGap="8px"
-                                    innerHtml="{{ 'CFAR_OFFER_BANNER_LARGE.PRICE_PER_TRAVELER' | translate: 
+                                    innerHtml="{{ 'COMMON.PRICE_PER_TRAVELER' | translate: 
                                         { price: (getPricePerTraveler(offer) | currency:offer?.currency:'symbol':undefined:currentLang) }
                                     }}"
                                 ></div>

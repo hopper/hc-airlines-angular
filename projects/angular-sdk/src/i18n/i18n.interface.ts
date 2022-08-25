@@ -260,26 +260,26 @@ export interface I18n {
                 CLOSE: string;
             },
             TERMS_LINK_TEXT: string;
+            COVERAGE_PERCENTAGE: string;
+            PRICE_PER_TRAVELER: string;
         },
         CFAR_OFFER_BANNER: {
             TITLE: string;
             LOADING: string;
             BUTTON: {
                 SELECT: string;
-            },
-            COVERAGE_PERCENTAGE: string;
+            }
         },
         CFAR_OFFER_BANNER_LARGE: {
             TITLE: string;
             LOADING: string;
-            COVERAGE_PERCENTAGE: string;
             NO_COVERAGE_OPTION: string;
-            PRICE_PER_TRAVELER: string;
             WARNING_MESSAGE: string;
         },
         CFAR_OFFER_DIALOG: {
             TITLE: string;
             VIEW_DETAILS: string;
+            
             BUTTON: {
                 CANCEL: string;
                 SUBMIT: string;
@@ -288,7 +288,7 @@ export interface I18n {
             LOADING: string;
             TERMS_WARNING: string;
         },
-        CFAR_EXERCISE_DIALOG: {
+        CFAR_EXERCISE_FLOW: {
             TITLE: string;
             SUBTITLE: string;
             DEADLINE_SENTENCE_1: string;
@@ -361,7 +361,8 @@ export interface I18n {
                 CHILD: string;
                 SEATED_INFANT: string;
                 LAP_INFANT: string;
-            }
+            },
+            CONTRACT_ALREADY_REFUNDED: string;
         }
     }
 }

@@ -127,6 +127,16 @@ export class CfarOfferDialogComponent extends GlobalComponent implements OnInit,
     return 0;
   }
 
+  public getPricePerTraveler(offer: CfarOfferCustomer): number {
+    var nbTravelers = 0;
+    
+    offer.itinerary.passengerPricing.forEach(pp => {
+      nbTravelers += pp.passengerCount.count
+    });
+
+    return +offer.coverage / (nbTravelers || 1);
+  }
+
   // -----------------------------------------------
   // Privates Methods
   // -----------------------------------------------

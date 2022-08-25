@@ -261,22 +261,21 @@ export const locale: I18n = {
             BUTTON: {
                 CLOSE: 'Fermer'
             },
-            TERMS_LINK_TEXT: "Conditions d'utilisation"
+            TERMS_LINK_TEXT: "Conditions d'utilisation",
+            COVERAGE_PERCENTAGE: "{{ coverage }} des frais de vol couverts",
+            PRICE_PER_TRAVELER: "<span class='price-per-traveler'>{{ price }}</span><span>par passager</span>"
         },
         CFAR_OFFER_BANNER: {
             TITLE: "Annulez votre vol à tout moment, pour quelque raison que ce soit.",
             LOADING: "Chargement des offres en cours...",
             BUTTON: {
                 SELECT: "Sélectionner"
-            },
-            COVERAGE_PERCENTAGE: "{{ coverage }} des frais de vol couverts",
+            }
         },
         CFAR_OFFER_BANNER_LARGE: {
             TITLE: "Annulez votre vol à tout moment, pour quelque raison que ce soit.",
             LOADING: "Chargement des offres en cours...",
-            COVERAGE_PERCENTAGE: "{{ coverage }} des frais de vol couverts",
             NO_COVERAGE_OPTION: "Je ne veux pas ajouter l'option 'Annuler pour une raison quelconque'.",
-            PRICE_PER_TRAVELER: "<span class='price-per-traveler'>{{ price }}</span><span>par passager</span>",
             WARNING_MESSAGE: "Veuillez choisir ou refuser l'annulation pour quelque raison que ce soit."
         },
         CFAR_OFFER_DIALOG: {
@@ -290,7 +289,7 @@ export const locale: I18n = {
             LOADING: "Chargement des offres en cours...",
             TERMS_WARNING: "Si vous ne l'ajoutez pas, votre billet ne sera pas remboursable."
         },
-        CFAR_EXERCISE_DIALOG: {
+        CFAR_EXERCISE_FLOW: {
             TITLE: "Annuler le vol",
             SUBTITLE: "Annuler pour une raison quelconque",
             DEADLINE_SENTENCE_1: "Annulez votre réservation sans frais jusqu'au ",
@@ -363,7 +362,8 @@ export const locale: I18n = {
                 CHILD: "Enfant",
                 SEATED_INFANT: "Bébé assis",
                 LAP_INFANT: "Bébé sur les genoux"
-            }
+            },
+            CONTRACT_ALREADY_REFUNDED: "Votre demande d'annulation a déjà été prise en compte et votre remboursement est en cours. Si vous avez besoin d'aide, vous pouvez contacter notre équipe d'assistance client via <a href='{{ link }}' target='_blank'>ce formulaire.</a>"
         }
     }
 }
