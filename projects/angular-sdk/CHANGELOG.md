@@ -1,6 +1,6 @@
 <a name="2.8.2"></a>
 
-# 2.8.2 (2022-XX-XX)
+# 2.8.2 (2022-08-25)
 
 ### Bug fixes / Small changes
 - CFAR Offer Banner Large: 
