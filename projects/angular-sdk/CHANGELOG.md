@@ -5,6 +5,8 @@
 ### Bug fixes / Small changes
 - Offer Banner Large: 
     - Fixed the display of warning message
+- General:
+    - Fixed XSS vulnerability
 
 <a name="2.8.1"></a>
 
