@@ -33,7 +33,7 @@
         }
 
         .header {
-            height: 100px;
+            height: 48px;
             margin: 0px;
             text-align: center;
             border-bottom: 1px solid map-get($fg-palette, divider);
@@ -41,8 +41,8 @@
 
         .content {
             @include media-breakpoint('lt-sm') {
-                // Full-height - mat-dialog-title height
-                max-height: calc(100% - 100px);
+                // Full-height - header height
+                max-height: calc(100% - 48px);
             }
 
             @if($is-dark) {

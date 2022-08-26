@@ -1,3 +1,10 @@
+<a name="2.8.3"></a>
+
+# 2.8.3 (2022-XX-XX)
+
+### Bug fixes / Small changes
+- Improved rendering in mobile view
+
 <a name="2.8.2"></a>
 
 # 2.8.2 (2022-08-25)
