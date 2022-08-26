@@ -4,6 +4,7 @@
 
 ### Bug fixes / Small changes
 - Improved rendering in mobile view
+- The CFAR eligibility deadline is now in bold in the descriptions of the offers
 
 <a name="2.8.2"></a>
 

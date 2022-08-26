@@ -26,7 +26,7 @@
                         <ng-container *ngFor="let desc of selectedCfarOffer?.offerDescription; let i = index;">
                             <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
                                 <mat-icon class="check-icon">check</mat-icon>
-                                <span>{{ desc }}</span>
+                                <span innerHtml="{{ desc }}"></span>
                             </div>
                         </ng-container>
 
