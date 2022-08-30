@@ -1,6 +1,6 @@
 <a name="2.9.0"></a>
 
-# 2.9.0 (2022-XX-XX)
+# 2.9.0 (2022-08-30)
 
 ### Bug fixes / Small changes
 - Improved rendering in mobile view
