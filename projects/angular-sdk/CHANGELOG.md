@@ -1,3 +1,16 @@
+<a name="2.9.0"></a>
+
+# 2.9.0 (2022-08-30)
+
+### Bug fixes / Small changes
+- Improved rendering in mobile view
+- The CFAR eligibility deadline is now in bold in the descriptions of the offers
+
+### Minor changes
+- Exercise flow: 
+    - Improved wording
+    - New output: 'flowCompleted', after the completion of the flow
+
 <a name="2.8.2"></a>
 
 # 2.8.2 (2022-08-25)

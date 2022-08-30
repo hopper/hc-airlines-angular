@@ -1,12 +1,13 @@
 <mat-toolbar class="mat-elevation-z4" color="primary" fxLayout="row" fxLayoutAlign="space-between center">
     <div fxLayout="row" fxLayoutAlign="start center">
-        <span routerLink="/" class="pointer">Hopper Cloud Airlines - Angular SDK - {{ version }}</span>
+        <span fxHide.lt-md routerLink="/" class="pointer">Hopper Cloud Airlines - Angular SDK - {{ version }}</span>
+        <span fxHide.gt-sm routerLink="/" class="pointer">{{ version }}</span>
     </div>
 
     <div fxLayout="row" fxLayoutAlign="end center">
         <button mat-button [matMenuTriggerFor]="themeMenu" aria-label="Open Menu">
             <mat-icon class="mr-8">palette</mat-icon>
-            <span>{{ currentTheme }}</span>
+            <span fxHide.lt-md>{{ currentTheme }}</span>
         </button>
 
         <mat-menu #themeMenu="matMenu">

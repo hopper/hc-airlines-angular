@@ -23,12 +23,17 @@ export class CfarExerciseFlowPageComponent extends CommonGuidesComponent {
       [contractId]="contractId"
       [hyperwalletUrl]="hyperwalletUrl"
       (airlineRefundSelected)="onAirlineRefundSelected($event)"
+      (flowCompleted)="onFlowCompleted()"
     ></hopper-cfar-exercise-flow>
   `;
 
   public  tsCode: string = `
     public onAirlineRefundSelected(data: string): void {
       console.log(data);
+    }
+
+    public onFlowCompleted(): void {
+      // Do something
     }
   `;
 
@@ -110,11 +115,21 @@ export class CfarExerciseFlowPageComponent extends CommonGuidesComponent {
           Event triggered when the user select the airline refund method<br />
           Returns a string (AIRLINE_REFUND)
         `
+      },
+      {
+        name: 'flowCompleted',
+        description: `
+          Event triggered when the flow is completed
+        `
       }
     ];
   }
 
   public onAirlineRefundSelected(data: string): void {
     console.log(data);
+  }
+
+  public onFlowCompleted(): void {
+    // Do something
   }
 }

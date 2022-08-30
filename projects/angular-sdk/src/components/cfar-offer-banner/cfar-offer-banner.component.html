@@ -19,7 +19,7 @@
                     <ng-container *ngFor="let desc of cheapestOffer?.offerDescription; let i = index;">
                         <div class="py-16" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
                             <mat-icon class="check-icon">check</mat-icon>
-                            <span>{{ desc }}</span>
+                            <span innerHtml="{{ desc }}"></span>
                         </div>
                     </ng-container>
             

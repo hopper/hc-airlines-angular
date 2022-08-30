@@ -189,7 +189,7 @@ export class CfarOfferBannerComponent extends GlobalComponent implements OnInit 
           totalPrice: "71.96"
         },
         offerDescription: [
-          "Add the flexibility to cancel your flight for any reason up to 24 hours before departure",
+          "Add the flexibility to cancel your flight for any reason up to <b>24 hours</b> before departure",
           "Cancel and get a refund of your flight base fare and taxes, excluding additional services (paid seats, paid bags...)",
           "Get instant resolution, no forms or claims required"
         ]
@@ -264,7 +264,7 @@ export class CfarOfferBannerComponent extends GlobalComponent implements OnInit 
           totalPrice: "71.96"
         },
         offerDescription: [
-          "Add the flexibility to cancel your flight for any reason up to 24 hours before departure",
+          "Add the flexibility to cancel your flight for any reason up to <b>24 hours</b> before departure",
           "Cancel and get a refund of your flight base fare and taxes, excluding additional services (paid seats, paid bags...)",
           "Get instant resolution, no forms or claims required"
         ]
