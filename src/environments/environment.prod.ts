@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
   defaultTheme: "theme-light-blue",
-  version: 'v2.8.3'
+  version: 'v2.9.0'
 };

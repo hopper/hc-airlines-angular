@@ -354,8 +354,8 @@ export const locale: I18n = {
                 ZIP: "Code postal",
                 ZIP_ERROR: "Le code postal est requis"
             },
-            CONFIRMATION_MESSAGE_1: "Votre vol a été annulé et votre remboursement est en train d'être traité.",
-            CONFIRMATION_MESSAGE_2: "Vous allez recevoir un courriel de confirmation à votre adresse {{ userEmail }} ",
+            CONFIRMATION_MESSAGE_1: "Ne fermez pas cette page, votre demande de remboursement est en cours de traitement",
+            CONFIRMATION_MESSAGE_2: "Une fois votre demande traitée, vous recevrez un courriel de confirmation à votre adresse {{ userEmail }}",
             REFUND_DETAILS: "{{ amount }} en {{ method }}",
             PASSENGER_TYPE: {
                 ADULT: "Adulte",

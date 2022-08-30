@@ -45,6 +45,7 @@ export class CfarExerciseFlowComponent extends GlobalComponent implements OnInit
   @Input() hyperwalletUrl!: string;
 
   @Output() airlineRefundSelected = new EventEmitter();
+  @Output() flowCompleted = new EventEmitter();
 
   // Fake values
   private _fakeContractId: string = "1ecf85ab-211f-68b7-9bb3-4b1a314f1a42";
@@ -260,6 +261,9 @@ export class CfarExerciseFlowComponent extends GlobalComponent implements OnInit
           this.isLoadingHyperwallet = false;
           this.userEmail = event.detail.trmObject.email;
           this.stepper.next();
+
+          // The flow is completed
+          this.flowCompleted.emit();
         },
         (error) => {
           console.error(error);

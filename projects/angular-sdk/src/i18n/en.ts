@@ -354,8 +354,8 @@ export const locale: I18n = {
                 ZIP: "Zip/Postal Code",
                 ZIP_ERROR: "Zip/Postal Code is required"
             },
-            CONFIRMATION_MESSAGE_1: "Your flight has been canceled and your refund is being processed.",
-            CONFIRMATION_MESSAGE_2: "A confirmation email will be sent shortly to {{ userEmail }}",
+            CONFIRMATION_MESSAGE_1: "Don't close this page, your refund request is being processed",
+            CONFIRMATION_MESSAGE_2: "Once processed, you will receive a confirmation on your email address {{ userEmail }}",
             REFUND_DETAILS: "{{ amount }} in {{ method }}",
             PASSENGER_TYPE: {
                 ADULT: "Adult",
