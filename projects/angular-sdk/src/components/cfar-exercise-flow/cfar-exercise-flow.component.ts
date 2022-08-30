@@ -166,6 +166,9 @@ export class CfarExerciseFlowComponent extends GlobalComponent implements OnInit
         this.isLoadingHyperwallet = true;
         this.userEmail = "sample@hopper.com";
         this.stepper.next();
+
+        // The flow is completed
+        this.flowCompleted.emit();
       }, 2000);
     } else {
       this._hopperProxyService
