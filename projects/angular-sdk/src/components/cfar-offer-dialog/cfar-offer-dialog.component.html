@@ -60,11 +60,14 @@
             </div>
         </ng-container>
 
-        <ng-container *ngIf="!cfarOffers || cfarOffers?.length == 0">
-            <div class="p-32" ngClass.lt-md="p-16" fxLayout="row wrap" fxLayoutAlign="center center">
-                <span class="error-message p-16">{{ 'CFAR_OFFER_DIALOG.NO_OFFERS' | translate }}</span>
+        <!-- ERROR MESSAGE -->
+        <ng-container *ngIf="errorCode">
+            <div fxFlex="100" class="error-message m-16" fxLayout="row" fxLayoutAlign="start center">
+                <mat-icon>error</mat-icon>
+                <span class="p-16">{{ ('COMMON.ERROR_CODE.' + errorCode) | translate }}</span>
             </div>
         </ng-container>
+        <!-- / ERROR MESSAGE -->
 
     </ng-container>
 

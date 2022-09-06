@@ -15,7 +15,7 @@ import { HttpClient } from '@angular/common/http';
 import { DatePipe } from '@angular/common';
 import { ExerciseActionStep } from '../../enums/exercise-action-step.enum';
 import { SendCfarContractExerciceVerificationCodeResponse } from '../../apis/hopper-cloud-airline/v1';
-import { StringUtils } from '../../utils/string.utils';
+import { ErrorCode } from '../../enums/error-code.enum';
 
 @Component({
   selector: 'hopper-cfar-exercise-flow',
@@ -35,10 +35,10 @@ export class CfarExerciseFlowComponent extends GlobalComponent implements OnInit
   public isErrorHyperwallet!: boolean;
   public userEmail!: string;
   public cfarContractUserEmail!: string;
-  public errorMessage!: string;
+  public errorCode?: string;
 
-  // Mandatory data
   private _navigationStep!: ExerciseActionStep;
+  private _errorTimer: number = 1000;
 
   @Input() hCSessionId!: string;
   @Input() contractId!: string;
@@ -56,7 +56,7 @@ export class CfarExerciseFlowComponent extends GlobalComponent implements OnInit
   public checkVerificationCodeForm!: FormGroup;
   public step2Form!: FormGroup;
 
-  @ViewChild('stepperContentAnchor') public anchor!: ElementRef;
+  @ViewChild('scrollAnchor') public anchor!: ElementRef;
   @ViewChild('stepper') public stepper!: MatStepper;
 
   constructor(
@@ -85,12 +85,6 @@ export class CfarExerciseFlowComponent extends GlobalComponent implements OnInit
   // -----------------------------------------------
 
   ngOnInit(): void {
-    // Update languages/labels manually (dialog limitation)
-    //this._updateLanguage(this.currentLang);
-
-    // Update countries labels manually (dialog limitation)
-    //this._setCountriesLabels();
-
     // Init Navigation Context
     this._initNavigationContext();
 
@@ -110,9 +104,9 @@ export class CfarExerciseFlowComponent extends GlobalComponent implements OnInit
     this.isHopperRefund = type == 'hopper';
   }
 
-  public onScrollToTop(event: StepperSelectionEvent): void {
-    // Scroll to top of the stepper when step changes (timer due to rendering delay)
-    setTimeout(() => this.anchor.nativeElement.scrollTo(0,0), 0);
+  public onScrollToTop(timer?: number): void {
+    // Scroll to top of component (timer due to rendering delay)
+    setTimeout(() => this.anchor.nativeElement.scrollTo(0,0), timer || 0);
   }
 
   public getNbPassengers(itinerary: CfarItinerary): number {
@@ -153,6 +147,8 @@ export class CfarExerciseFlowComponent extends GlobalComponent implements OnInit
   }
 
   public onSubmitStep2(): void {
+    this._purgeErrorContext();
+
     // Go to the next step
     this.stepper.next();
 
@@ -230,9 +226,14 @@ export class CfarExerciseFlowComponent extends GlobalComponent implements OnInit
                     this.isLoadingHyperwallet = false;
                   },
                   (error: any) => {
+                    const builtError = this._getHcAirlinesErrorResponse(error);
+                    this.errorCode = builtError.code;
+                    
                     this.isLoadingHyperwallet = false;
                     this.isErrorHyperwallet = true;
-                    console.error(error);
+
+                    // Scroll on the error message
+                    this.onScrollToTop(this._errorTimer);
                   }
                 );
             };
@@ -240,9 +241,14 @@ export class CfarExerciseFlowComponent extends GlobalComponent implements OnInit
             document.head.appendChild(mainScript);
           },
           (error: any) => {
-            console.error(error);
+            const builtError = this._getHcAirlinesErrorResponse(error);
+            this.errorCode = builtError.code;
+
             this.isLoadingHyperwallet = false;
             this.isErrorHyperwallet = true;
+
+            // Scroll on the error message
+            this.onScrollToTop(this._errorTimer);
           }
         );
     }
@@ -250,6 +256,8 @@ export class CfarExerciseFlowComponent extends GlobalComponent implements OnInit
 
   @HostListener('window:hopper-hyperwallet', ['$event']) 
   public checkHyperwalletCallback(event: CustomEvent): void {
+    this._purgeErrorContext();
+
     this.isValidHyperwalletSubmit = true;
 
     const request: InitiateRefundRequest = {
@@ -269,8 +277,13 @@ export class CfarExerciseFlowComponent extends GlobalComponent implements OnInit
           this.flowCompleted.emit();
         },
         (error) => {
-          console.error(error);
+          const builtError = this._getHcAirlinesErrorResponse(error);
+          this.errorCode = builtError.code;
+          
           this.isLoadingHyperwallet = false;
+
+          // Scroll on the error message
+          this.onScrollToTop(this._errorTimer);
         }
       );
   }
@@ -300,7 +313,7 @@ export class CfarExerciseFlowComponent extends GlobalComponent implements OnInit
   }
 
   public onSendVerificationCode(): void {
-    this._purgeErrorMessageContext();
+    this._purgeErrorContext();
 
     if (this.isFakeBackend) {
       this.cfarContractUserEmail = "sample@hopper.com";
@@ -322,16 +335,20 @@ export class CfarExerciseFlowComponent extends GlobalComponent implements OnInit
             this.isLoading = false;
           },
           (error: any) => {
-            const airlinesError = this._getHcAirlinesErrorResponse(error);
-            console.error(airlinesError.toString());
+            const builtError = this._getHcAirlinesErrorResponse(error);
+            this.errorCode = builtError.code;
+
             this.isLoading = false;
+
+            // Scroll on the error message
+            this.onScrollToTop(this._errorTimer);
           }
         );
     }
   }
 
   public onCheckVerificationCode(): void {
-    this._purgeErrorMessageContext();
+    this._purgeErrorContext();
 
     if (this.isFakeBackend) {
       const request = this._buildCheckExerciseVerificationCodeRequest();
@@ -339,7 +356,8 @@ export class CfarExerciseFlowComponent extends GlobalComponent implements OnInit
       if (request.verificationCode && request.verificationCode?.length >= this._minLengthVerificationCode) {
         this._loadContractExercise();
       } else {
-        this.errorMessage = 'Incorrect code';              
+        // Invalid verification code
+        this.errorCode = ErrorCode.EX019;              
       }
     } else {
       this.isLoading = true;
@@ -357,25 +375,22 @@ export class CfarExerciseFlowComponent extends GlobalComponent implements OnInit
               // Load the contract and the associated exercise
               this._loadContractExercise();
             } else {
-              this.errorMessage = 'Incorrect code';
-              console.error(result)
+              // Invalid verification code
+              this.errorCode = ErrorCode.EX019;
               this.isLoading = false;
             }     
           },
           (error: any) => {
-            const airlinesError = this._getHcAirlinesErrorResponse(error);
-            console.error(airlinesError.toString());
-            
-            // Nota : We must use the code and retrieve the corresponding label with i18n
-            this.errorMessage = airlinesError.message;
+            const builtError = this._getHcAirlinesErrorResponse(error);
+            this.errorCode = builtError.code;
+
             this.isLoading = false;
+
+            // Scroll on the error message
+            this.onScrollToTop(this._errorTimer);
           }
         );
     }
-  }
-
-  public displayErrorMessageBlock(): boolean {
-    return StringUtils.isNotEmpty(this.errorMessage);
   }
 
   // -----------------------------------------------
@@ -383,7 +398,7 @@ export class CfarExerciseFlowComponent extends GlobalComponent implements OnInit
   // -----------------------------------------------
 
   private _loadContractExercise(): void {
-    this._purgeErrorMessageContext();
+    this._purgeErrorContext();
     this._setStep(ExerciseActionStep.PROCESS_CFAR_EXERCISE_STEP);
 
     if (this.isFakeBackend) {
@@ -409,8 +424,13 @@ export class CfarExerciseFlowComponent extends GlobalComponent implements OnInit
             this.isHopperRefund = true;
           },
           (error: any) => {
-            console.error(error);
+            const builtError = this._getHcAirlinesErrorResponse(error);
+            this.errorCode = builtError.code;
+
             this.isLoading = false;
+
+            // Scroll on the error message
+            this.onScrollToTop(this._errorTimer);
           }
         );
     }
@@ -585,12 +605,12 @@ export class CfarExerciseFlowComponent extends GlobalComponent implements OnInit
     this._navigationStep = currentStep;
   }
 
-  private _purgeErrorMessageContext() {
-    this.errorMessage = '';
+  private _purgeErrorContext() {
+    this.errorCode = undefined;
   }
 
   private _initForms(): void {
-    this._purgeErrorMessageContext();
+    this._purgeErrorContext();
     
     this.checkVerificationCodeForm = this._formBuilder.group({
       verificationCode: [null, [Validators.pattern('[0-9]{6}'), Validators.required]]

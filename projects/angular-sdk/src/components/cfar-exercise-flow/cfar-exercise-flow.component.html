@@ -6,9 +6,18 @@
             <h2>{{ 'CFAR_EXERCISE_FLOW.TITLE' | translate }}</h2>
         </div>
 
-        <div fxFlex="100" class="content" fxLayout="row wrap" #stepperContentAnchor>
+        <div fxFlex="100" class="content" fxLayout="row wrap" #scrollAnchor>
 
             <ng-container *ngIf="!isLoading">
+
+                <!-- ERROR MESSAGE -->
+                <ng-container *ngIf="errorCode">
+                    <div fxFlex="100" class="error-message m-16" fxLayout="row" fxLayoutAlign="start center">
+                        <mat-icon>error</mat-icon>
+                        <span class="p-16">{{ ('COMMON.ERROR_CODE.' + errorCode) | translate }}</span>
+                    </div>
+                </ng-container>
+                <!-- / ERROR MESSAGE -->
 
                 <!-- STEP SEND VERIFICATION CODE -->
                 <div fxFlex="100" class="p-16" fxLayout="column" *ngIf="isSendVerificationCodeStep()">
@@ -41,10 +50,6 @@
                         </div>
                     </form>
         
-                    <div fxFlex="100" class="mb-24" *ngIf="displayErrorMessageBlock()">
-                        <mat-error>{{ this.errorMessage }}</mat-error>
-                    </div>
-        
                     <div fxLayoutAlign="center center" fxLayout="column" fxLayoutGap="16px">
                         <button mat-raised-button color="primary" ngClass.lt-sm="full-width" ngClass.gt-sm="mid-width" [disabled]="!isCheckVerificationCodeFormValid()" 
                             (click)="onCheckVerificationCode()" attr.aria-label="{{ 'CFAR_EXERCISE_FLOW.BUTTON.CONTINUE' | translate }}">
@@ -76,7 +81,7 @@
                     
                     <ng-container *ngIf="!isCfarContractExercised()">
                         
-                        <mat-vertical-stepper orientation="vertical" #stepper linear (selectionChange)="onScrollToTop($event)">
+                        <mat-vertical-stepper orientation="vertical" #stepper linear (selectionChange)="onScrollToTop()">
                             
                             <!-- STEP 1 -->
                             <mat-step>
@@ -569,14 +574,6 @@
 
                 </ng-container>
                 <!-- / EXERCISE STEPPER -->
-        
-                <!-- ERROR MESSAGE - NO CONTRACT -->
-                <ng-container *ngIf="!cfarContract && isProcessCfarExerciseStep()">
-                    <div class="p-32" ngClass.lt-md="p-16" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="16px">
-                        <span class="error-message p-16">{{ 'CFAR_EXERCISE_FLOW.NO_CONTRACT' | translate }}</span>
-                    </div>
-                </ng-container>
-                <!-- / ERROR MESSAGE - NO CONTRACT -->
         
             </ng-container>
         

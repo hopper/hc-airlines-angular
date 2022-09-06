@@ -17,6 +17,7 @@ export abstract class CommonGuidesComponent implements OnInit, OnDestroy {
   public currentTheme!: string;
   public currentLang!: string;
   public basePath: string = 'http://localhost:7071/airline/v1.0';
+  // public basePath: string = 'http://unit.hc-airlines.svc.cluster.local:7070/airline/v1.0';
   public imageBasePath: string = ''; // 'http://localhost:4200/';
   public isFakeBackend!: boolean;
 
@@ -26,7 +27,7 @@ export abstract class CommonGuidesComponent implements OnInit, OnDestroy {
   public abstract htmlCode: string;
 
   // Parameters
-  public hCSessionId = "d4c74b72-cff9-4b14-9243-33550fce4a54";
+  public hCSessionId = "d6821241-3806-413b-b494-f3037cb40c27";
   public currency = "EUR";
   public passengers: PassengerPricing[] = [
     {
@@ -37,7 +38,7 @@ export abstract class CommonGuidesComponent implements OnInit, OnDestroy {
     }
   ];
   public pnrReference = "123456";
-  public contractId = "1ed0dab3-8a1a-66bb-8888-1d6e9ed4e21c";
+  public contractId = "1ed2dec1-23be-63cc-abc3-a5007022de79";
   public itineraries: CfarItinerary[] = [
     {
       currency: this.currency,

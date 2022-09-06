@@ -2,7 +2,7 @@
 
     <ng-container *ngIf="!isLoading">
 
-        <div fxFlex="100" *ngIf="hasWarningCoverageMessage && !selectedChoice" class="warning-message m-16" fxLayout="row" fxLayoutAlign="start center">
+        <div fxFlex="100" *ngIf="cfarOffers && hasWarningCoverageMessage && !selectedChoice" class="warning-message m-16" fxLayout="row" fxLayoutAlign="start center">
             <mat-icon>error</mat-icon>
             <span class="p-16">{{ 'CFAR_OFFER_BANNER_LARGE.WARNING_MESSAGE' | translate }}</span>
         </div>

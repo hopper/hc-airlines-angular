@@ -1,3 +1,15 @@
+<a name="2.10.0"></a>
+
+# 2.10.0 (2022-XX-XX)
+
+### Bug fixes / Small changes
+- TODO
+
+### Minor changes
+- Offer Banner Large:
+    - Improved the display of the error message when there are no offers
+
+
 <a name="2.9.0"></a>
 
 # 2.9.0 (2022-08-30)
