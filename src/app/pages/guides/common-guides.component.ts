@@ -16,8 +16,9 @@ export abstract class CommonGuidesComponent implements OnInit, OnDestroy {
     
   public currentTheme!: string;
   public currentLang!: string;
-  public basePath: string = 'http://localhost:7071/airline/v1.0';
+  // public basePath: string = 'http://localhost:7071/airline/v1.0';
   // public basePath: string = 'http://unit.hc-airlines.svc.cluster.local:7070/airline/v1.0';
+  public basePath: string = 'https://airlines-api.staging.hopper.com/airline/v1.0';
   public imageBasePath: string = ''; // 'http://localhost:4200/';
   public isFakeBackend!: boolean;
 
@@ -27,7 +28,7 @@ export abstract class CommonGuidesComponent implements OnInit, OnDestroy {
   public abstract htmlCode: string;
 
   // Parameters
-  public hCSessionId = "d6821241-3806-413b-b494-f3037cb40c27";
+  public hCSessionId = "9b139dbf-117c-4b3f-bf1f-568c898e1906";
   public currency = "EUR";
   public passengers: PassengerPricing[] = [
     {
@@ -38,7 +39,7 @@ export abstract class CommonGuidesComponent implements OnInit, OnDestroy {
     }
   ];
   public pnrReference = "123456";
-  public contractId = "1ed2dec1-23be-63cc-abc3-a5007022de79";
+  public contractId = "1ed2df96-ee3c-61e6-a57a-a7e77771ba29";
   public itineraries: CfarItinerary[] = [
     {
       currency: this.currency,
@@ -105,7 +106,7 @@ export abstract class CommonGuidesComponent implements OnInit, OnDestroy {
     this._unsubcriber = new Subject<any>();
     
     // Active fake data in components
-    this.isFakeBackend = true;
+    this.isFakeBackend = false;
   }
   
   // -----------------------------------------------

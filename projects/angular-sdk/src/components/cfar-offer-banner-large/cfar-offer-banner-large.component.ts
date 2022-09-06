@@ -321,7 +321,8 @@ export class CfarOfferBannerLargeComponent extends GlobalComponent implements On
 
   private _buildFakePostCfarContractsResponse(): CfarContractCustomer {
     return {
-      id: "1ecf85ab-211f-68b7-9bb3-4b1a314f1a42"
+      id: "1ecf85ab-211f-68b7-9bb3-4b1a314f1a42",
+      premium: "10.00"
     };
   }
 }
