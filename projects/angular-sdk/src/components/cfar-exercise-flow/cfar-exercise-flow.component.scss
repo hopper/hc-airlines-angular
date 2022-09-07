@@ -122,9 +122,8 @@
                 }
                 
                 border: 1px solid map-get($warn-palette, default);
-                width: 100%;
-                text-align: center;
-                color: map-get($warn-palette, default);
+                padding: 0px 16px;
+                color: black;
             }
 
             .information-message {

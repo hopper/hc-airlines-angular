@@ -262,6 +262,47 @@ export interface I18n {
             TERMS_LINK_TEXT: string;
             COVERAGE_PERCENTAGE: string;
             PRICE_PER_TRAVELER: string;
+            ERROR_CODE: {
+                DEFAULT: string;
+                EX014: string;
+                EX015: string;
+                EX016: string;
+                EX017: string;
+                EX018: string;
+                EX019: string;
+                EX020: string;
+                EX021: string;
+                EX022: string;
+                EX023: string;
+                EX024: string;
+                EX029: string;
+                EX030: string;
+                OF001: string;
+                OF002: string;
+                OF003: string;
+                OF004: string;
+                OF007: string;
+                OF008: string;
+                OF009: string;
+                OF010: string;
+                OF011: string;
+                SE001: string;
+                SE002: string;
+                SE003: string;
+                SE004: string;
+                CO001: string;
+                CO002: string;
+                CO003: string;
+                CO004: string;
+                CO005: string;
+                CO006: string;
+                CO007: string;
+                CO008: string;
+                CO009: string;
+                CO010: string;
+                CO011: string;
+                CO022: string;
+            }
         },
         CFAR_OFFER_BANNER: {
             TITLE: string;

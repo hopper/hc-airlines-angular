@@ -12,4 +12,5 @@
 
 export interface CfarContractCustomer { 
     id: string;
+    premium: string;
 }

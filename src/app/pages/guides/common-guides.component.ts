@@ -17,6 +17,8 @@ export abstract class CommonGuidesComponent implements OnInit, OnDestroy {
   public currentTheme!: string;
   public currentLang!: string;
   public basePath: string = 'http://localhost:7071/airline/v1.0';
+  // public basePath: string = 'http://unit.hc-airlines.svc.cluster.local:7070/airline/v1.0';
+  // public basePath: string = 'https://airlines-api.staging.hopper.com/airline/v1.0';
   public imageBasePath: string = ''; // 'http://localhost:4200/';
   public isFakeBackend!: boolean;
 
@@ -26,7 +28,7 @@ export abstract class CommonGuidesComponent implements OnInit, OnDestroy {
   public abstract htmlCode: string;
 
   // Parameters
-  public hCSessionId = "d4c74b72-cff9-4b14-9243-33550fce4a54";
+  public hCSessionId = "8b8c00b3-34c4-4538-abee-b75adc3301ec";
   public currency = "EUR";
   public passengers: PassengerPricing[] = [
     {
@@ -37,7 +39,7 @@ export abstract class CommonGuidesComponent implements OnInit, OnDestroy {
     }
   ];
   public pnrReference = "123456";
-  public contractId = "1ed0dab3-8a1a-66bb-8888-1d6e9ed4e21c";
+  public contractId = "1ed2df96-ee3c-61e6-a57a-a7e77771ba29";
   public itineraries: CfarItinerary[] = [
     {
       currency: this.currency,
@@ -48,8 +50,8 @@ export abstract class CommonGuidesComponent implements OnInit, OnDestroy {
             {
               originAirport: "LGA",
               destinationAirport: "BOS",
-              departureDateTime: "2022-08-30T18:34:30",
-              arrivalDateTime: "2022-08-30T19:12:30",
+              departureDateTime: "2022-09-30T18:34:30",
+              arrivalDateTime: "2022-09-30T19:12:30",
               flightNumber: "JB776",
               validatingCarrierCode: "B6",
               fareClass: "basic_economy"
@@ -75,8 +77,8 @@ export abstract class CommonGuidesComponent implements OnInit, OnDestroy {
           {
             originAirport: "LGA",
             destinationAirport: "BOS",
-            departureDateTime: "2022-08-30T18:34:30",
-            arrivalDateTime: "2022-08-30T19:12:30",
+            departureDateTime: "2022-09-30T18:34:30",
+            arrivalDateTime: "2022-09-30T19:12:30",
             flightNumber: "JB776",
             validatingCarrierCode: "B6",
             fareClass: "basic_economy"

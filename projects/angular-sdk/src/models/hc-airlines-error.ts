@@ -1,4 +1,5 @@
 import { Error } from '../apis/hopper-cloud-airline/v1';
+import { ErrorCode } from '../enums/error-code.enum';
 
 export class HcAirlinesError implements Error {
 
@@ -15,7 +16,7 @@ export class HcAirlinesError implements Error {
   }
   
   public static buildDefault(): HcAirlinesError {
-    return new HcAirlinesError("An error occured");
+    return new HcAirlinesError("An error occured", ErrorCode.DEFAULT);
   }
 
   public extractCode(): string {

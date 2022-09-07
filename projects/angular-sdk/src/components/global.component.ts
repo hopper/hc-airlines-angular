@@ -10,6 +10,7 @@ import { HttpErrorResponse } from "@angular/common/http";
 import { ArrayUtils } from "../utils/array-utils";
 import { HcAirlinesError } from "../models/hc-airlines-error";
 import { Error } from '../apis/hopper-cloud-airline/v1';
+import { ErrorCode } from "../enums/error-code.enum";
 
 @Directive({
     selector: '[HopperGlobalComponent]'
@@ -94,19 +95,14 @@ export class GlobalComponent implements OnChanges {
     }
 
     protected _getHcAirlinesErrorResponse(apiError: HttpErrorResponse): HcAirlinesError {
-        if (apiError.status == GlobalComponent.HTTP_ERROR_UNPROCESSABLE_ENTITY_CODE) {
-            const apiErrors = apiError.error.errors;
+        const apiErrors = apiError.error.errors;
             
-            if (ArrayUtils.isNotEmpty(apiErrors)) {
-                const mainApiError = apiErrors[0] as Error;
-                return new HcAirlinesError(mainApiError.message, mainApiError.code);
-            } else {
-                console.error(apiError);
-            }
+        if (ArrayUtils.isNotEmpty(apiErrors)) {
+            const mainApiError = apiErrors[0] as Error;
+            return new HcAirlinesError(mainApiError.message, mainApiError.code || ErrorCode.DEFAULT);
         } else {
             console.error(apiError);
+            return HcAirlinesError.buildDefault();
         }
-
-        return HcAirlinesError.buildDefault();
     }
 }
