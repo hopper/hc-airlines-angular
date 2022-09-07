@@ -16,9 +16,9 @@ export abstract class CommonGuidesComponent implements OnInit, OnDestroy {
     
   public currentTheme!: string;
   public currentLang!: string;
-  // public basePath: string = 'http://localhost:7071/airline/v1.0';
+  public basePath: string = 'http://localhost:7071/airline/v1.0';
   // public basePath: string = 'http://unit.hc-airlines.svc.cluster.local:7070/airline/v1.0';
-  public basePath: string = 'https://airlines-api.staging.hopper.com/airline/v1.0';
+  // public basePath: string = 'https://airlines-api.staging.hopper.com/airline/v1.0';
   public imageBasePath: string = ''; // 'http://localhost:4200/';
   public isFakeBackend!: boolean;
 
@@ -28,7 +28,7 @@ export abstract class CommonGuidesComponent implements OnInit, OnDestroy {
   public abstract htmlCode: string;
 
   // Parameters
-  public hCSessionId = "9b139dbf-117c-4b3f-bf1f-568c898e1906";
+  public hCSessionId = "8b8c00b3-34c4-4538-abee-b75adc3301ec";
   public currency = "EUR";
   public passengers: PassengerPricing[] = [
     {
@@ -50,8 +50,8 @@ export abstract class CommonGuidesComponent implements OnInit, OnDestroy {
             {
               originAirport: "LGA",
               destinationAirport: "BOS",
-              departureDateTime: "2022-08-30T18:34:30",
-              arrivalDateTime: "2022-08-30T19:12:30",
+              departureDateTime: "2022-09-30T18:34:30",
+              arrivalDateTime: "2022-09-30T19:12:30",
               flightNumber: "JB776",
               validatingCarrierCode: "B6",
               fareClass: "basic_economy"
@@ -77,8 +77,8 @@ export abstract class CommonGuidesComponent implements OnInit, OnDestroy {
           {
             originAirport: "LGA",
             destinationAirport: "BOS",
-            departureDateTime: "2022-08-30T18:34:30",
-            arrivalDateTime: "2022-08-30T19:12:30",
+            departureDateTime: "2022-09-30T18:34:30",
+            arrivalDateTime: "2022-09-30T19:12:30",
             flightNumber: "JB776",
             validatingCarrierCode: "B6",
             fareClass: "basic_economy"
@@ -106,7 +106,7 @@ export abstract class CommonGuidesComponent implements OnInit, OnDestroy {
     this._unsubcriber = new Subject<any>();
     
     // Active fake data in components
-    this.isFakeBackend = false;
+    this.isFakeBackend = true;
   }
   
   // -----------------------------------------------
