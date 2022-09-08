@@ -28,7 +28,7 @@
         .cfar-offer-banner-large-page-container {
 
             .tab-group {
-                @include mat-elevation(4);
+                @include mat.elevation(4);
     
                 mat-tab-body {
                     background-color: map-get($bg-palette, card);
