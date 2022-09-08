@@ -6,6 +6,12 @@ This project aims to provide a set of Angular components to subscribe to Hopper 
 
 [Changelog](https://github.com/hopper/hc-airlines-angular/blob/main/projects/angular-sdk/CHANGELOG.md)
 
+## Angular compatibility
+
+|  Package version 	|   Angular Version	|
+|---	            |---	            |
+|   3.0.0	        |   Angular 12	    |
+|   2.10.0	        |   Angular 11	    |
 
 ## Configuration
 

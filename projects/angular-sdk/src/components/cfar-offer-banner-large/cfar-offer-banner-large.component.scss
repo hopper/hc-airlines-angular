@@ -34,10 +34,7 @@
         }
 
         .warning-message {
-            @if ($is-dark == false) {
-                background: map-get($warn-palette, 50);
-            }
-            
+            background: map-get($warn-palette, 50);
             border: 1px solid map-get($warn-palette, default);
             padding: 0px 16px;
             color: black;

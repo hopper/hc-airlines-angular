@@ -33,7 +33,7 @@
             .aside {
                 overflow: scroll;
                 background-color: map-get($bg-palette, app-bar);
-                @include mat-elevation(4);
+                @include mat.elevation(4);
 
                 .mat-list-base {
                     padding: 0px;
