@@ -49,7 +49,7 @@ export class YourModule { }
 
     ```
     // Apply the theme to Hopper components 
-    @import "@hopper-cloud-airlines/angular-sdk/src/styles/theme.scss";
+    @import "node_modules/@hopper-cloud-airlines/angular-sdk/src/styles/theme.scss";
     
     @include hopper-cloud-airlines-angular-sdk-components-theme($your-angular-material-theme);
     ```
@@ -60,7 +60,7 @@ export class YourModule { }
 
     ```
     // Load the themes provided by Hopper
-    @import "@hopper-cloud-airlines/angular-sdk/src/styles/theme.scss";
+    @import "node_modules/@hopper-cloud-airlines/angular-sdk/src/styles/theme.scss";
     ```
 
     - For dialog components :
