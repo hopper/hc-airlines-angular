@@ -54,67 +54,57 @@ registerLocaleData(localeEs, 'es', localeEsExtra);
 registerLocaleData(localeZh, 'zh', localeZhExtra);
 
 @NgModule({
-  declarations: [
-    // Component
-    GlobalComponent,
-    CfarOfferBannerComponent,
-    CfarOfferBannerLargeComponent,
-    CfarOfferDialogComponent,
-    CfarExerciseFlowComponent,
-
-    // Directives
-    // HopperEventsDirective
-  ],
-  imports: [
-    // Angular Module
-    CommonModule,
-    HttpClientModule,
-    ReactiveFormsModule,
-    FormsModule,
-
-    // Flex Layout
-    FlexLayoutModule,
-
-    // Angular Material
-    MatButtonModule,
-    MatDialogModule,
-    MatIconModule,
-    MatCardModule,
-    MatSlideToggleModule,
-    MatDividerModule,
-    MatSelectModule,
-    MatProgressSpinnerModule,
-    MatStepperModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatDatepickerModule,
-    MatRadioModule,
-
-    // APIs
-    ApiModule,
-
-    // I18n
-    TranslateModule.forRoot()
-  ],
-  exports: [
-    // Component
-    CfarOfferBannerComponent,
-    CfarOfferBannerLargeComponent,
-    CfarOfferDialogComponent,
-    CfarExerciseFlowComponent,
-
-    // Directives
-    // HopperEventsDirective
-  ],
-  entryComponents: [
-    // Component
-    CfarOfferDialogComponent
-  ],
-  providers: [
-    { provide: DateAdapter, useClass: MomentDateAdapter, deps: [ MAT_DATE_LOCALE ] },
-    { provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS },
-    HopperProxyService,
-    DatePipe
-  ]
+    declarations: [
+        // Component
+        GlobalComponent,
+        CfarOfferBannerComponent,
+        CfarOfferBannerLargeComponent,
+        CfarOfferDialogComponent,
+        CfarExerciseFlowComponent,
+        // Directives
+        // HopperEventsDirective
+    ],
+    imports: [
+        // Angular Module
+        CommonModule,
+        HttpClientModule,
+        ReactiveFormsModule,
+        FormsModule,
+        // Flex Layout
+        FlexLayoutModule,
+        // Angular Material
+        MatButtonModule,
+        MatDialogModule,
+        MatIconModule,
+        MatCardModule,
+        MatSlideToggleModule,
+        MatDividerModule,
+        MatSelectModule,
+        MatProgressSpinnerModule,
+        MatStepperModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatDatepickerModule,
+        MatRadioModule,
+        // APIs
+        ApiModule,
+        // I18n
+        TranslateModule.forRoot()
+    ],
+    exports: [
+        // Component
+        CfarOfferBannerComponent,
+        CfarOfferBannerLargeComponent,
+        CfarOfferDialogComponent,
+        CfarExerciseFlowComponent,
+        // Directives
+        // HopperEventsDirective
+    ],
+    providers: [
+        { provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] },
+        { provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS },
+        HopperProxyService,
+        DatePipe
+    ]
 })
 export class HopperCloudAirlinesAngularSdkModule { }
