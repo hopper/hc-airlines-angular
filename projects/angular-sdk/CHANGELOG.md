@@ -1,6 +1,13 @@
+<a name="4.0.0"></a>
+
+# 4.0.0 (2022-09-09)
+
+### Major changes
+- Added support for Angular 13
+
 <a name="3.0.0"></a>
 
-# 3.0.0 (2022-XX-XX)
+# 3.0.0 (2022-09-08)
 
 ### Major changes
 - Added support for Angular 12

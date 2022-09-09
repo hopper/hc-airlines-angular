@@ -39,7 +39,7 @@ export class GlobalComponent implements OnChanges {
         this.translateService.addLangs(Locales.map(i18n => i18n.lang));
 
         // Set default language
-        this.translateService.use(this.translateService.getBrowserLang());
+        this.translateService.use(this.translateService.getBrowserLang() || 'en');
 
         // Set default language for datepickers
         this.adapter.setLocale(this.translateService.getBrowserLang());

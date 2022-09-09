@@ -1,22 +1,22 @@
 {
   "name": "@hopper-cloud-airlines/angular-sdk",
-  "version": "3.0.0",
+  "version": "4.0.0",
   "license": "Apache-2.0",
   "author": {
     "name": "Hopper Cloud Airlines Team",
     "url": "https://cloud.hopper.com/"
   },
   "peerDependencies": {
-    "@angular/common": ">=12.2.16",
-    "@angular/cdk": ">=12.2.13",
-    "@angular/core": ">=12.2.16",
-    "@angular/material": ">=12.2.13",
-    "@angular/material-moment-adapter": ">=12.2.13",
-    "@angular/platform-browser": ">=12.2.16",
-    "@angular/platform-browser-dynamic": ">=12.2.16",
-    "@angular/flex-layout": ">=12.0.0-beta.35",
-    "@ngx-translate/core": ">=13.0.0",
-    "rxjs": ">=7.0.1"
+    "@angular/common": ">=13.3.11",
+    "@angular/cdk": ">=13.3.9",
+    "@angular/core": ">=13.3.11",
+    "@angular/material": ">=13.3.9",
+    "@angular/material-moment-adapter": ">=13.3.9",
+    "@angular/platform-browser": ">=13.3.11",
+    "@angular/platform-browser-dynamic": ">=13.3.11",
+    "@angular/flex-layout": ">=13.0.0-beta.38",
+    "@ngx-translate/core": ">=14.0.0",
+    "rxjs": ">=7.5.6"
   },
   "dependencies": {
     "tslib": "^2.3.0"
