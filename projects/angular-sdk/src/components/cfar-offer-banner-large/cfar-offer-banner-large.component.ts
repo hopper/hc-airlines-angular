@@ -53,8 +53,8 @@ export class CfarOfferBannerLargeComponent extends GlobalComponent implements On
       this._hopperProxyService
         .postCfarOffers(this.basePath, this.hCSessionId, this.currentLang, ApiTranslatorUtils.modelToSnakeCase(this._buildCreateCfarOfferRequest()))
         .pipe(take(1))
-        .subscribe(
-          (cfarOffers) => {
+        .subscribe({
+          next: (cfarOffers) => {
             let results: CfarOfferCustomer[] = [];
 
             if (cfarOffers) {
@@ -69,12 +69,12 @@ export class CfarOfferBannerLargeComponent extends GlobalComponent implements On
             
             this.isLoading = false;
           },
-          (error) => {
+          error: (error) => {
             console.error(error);
             this.offersLoaded.emit();
             this.isLoading = false;
           }
-        );
+        });
     }
   }
 
@@ -116,19 +116,19 @@ export class CfarOfferBannerLargeComponent extends GlobalComponent implements On
           this._hopperProxyService
             .postCfarContracts(this.basePath, this.hCSessionId, ApiTranslatorUtils.modelToSnakeCase(this._buildCreateCfarContractRequest()))
             .pipe(take(1))
-            .subscribe(
-              (cfarContract: CfarContractCustomer) => {
+            .subscribe({
+              next: (cfarContract: CfarContractCustomer) => {
                 // Cache the result into a map (for API performance)
                 this.contractsByChoiceIndex.set(this.selectedChoice, cfarContract);
   
                 this.chooseCoverage.emit(cfarContract);
                 this.isLoading = false;
               },
-              (error) => {
+              error: (error) => {
                 console.error(error);
                 this.isLoading = false;
               }
-            );
+            });
         } 
       }
     } else {

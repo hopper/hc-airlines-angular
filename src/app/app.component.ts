@@ -19,6 +19,9 @@ export class AppComponent implements OnInit, OnDestroy {
   constructor(
     private _store: Store<AppState>
   ) {
+
+    // Set Default theme
+    this._store.dispatch(globalActions.setCurrentTheme({ currentTheme: environment.defaultTheme }));
   }
 
   // -------------------------------
@@ -38,9 +41,6 @@ export class AppComponent implements OnInit, OnDestroy {
       this.currentTheme = currentTheme;
       document.body.classList.add(this.currentTheme);
     });
-
-    // Set Default theme
-    this._store.dispatch(globalActions.setCurrentTheme({ currentTheme: environment.defaultTheme }));
   }
 
   ngOnDestroy(): void {

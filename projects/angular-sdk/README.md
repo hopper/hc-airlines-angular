@@ -10,7 +10,7 @@ This project aims to provide a set of Angular components to subscribe to Hopper 
 
 |  Package version 	|   Angular Version	|
 |---	            |---	            |
-|   4.0.0	        |   Angular 13	    |
+|   4.0.0 and above |   Angular 13	    |
 |   3.0.0	        |   Angular 12	    |
 |   2.10.0	        |   Angular 11	    |
 

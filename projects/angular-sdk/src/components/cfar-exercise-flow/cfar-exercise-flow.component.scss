@@ -52,7 +52,7 @@
             }
 
             .title {
-                color: map-get($primary-palette, default);
+                color: map-get($accent-palette, default);
                 font-size: 20px;
                 font-weight: bold;
             }
@@ -75,7 +75,7 @@
 
             .decorative-stroke {
                 height: 2px;
-                background-color: map-get($primary-palette, default);
+                background-color: map-get($accent-palette, default);
                 width: 100%;
             }
 
@@ -97,7 +97,7 @@
                 }
 
                 &.active {
-                    border: 2px solid map-get($primary-palette, default);
+                    border: 2px solid map-get($accent-palette, default);
                 }
 
                 .offer-title {
@@ -107,7 +107,7 @@
 
             .custom-icon {
                 * {
-                    fill: map-get($primary-palette, default);
+                    fill: map-get($accent-palette, default);
                 }
             }
 
@@ -129,17 +129,17 @@
             }
 
             fieldset {
-                border: 2px solid map-get($primary-palette, default);
+                border: 2px solid map-get($accent-palette, default);
                 border-radius: 8px;
 
                 legend {
-                    border: 2px solid map-get($primary-palette, default);
+                    border: 2px solid map-get($accent-palette, default);
                     border-radius: 8px;
                 }
             }
 
             .confirmation-icon {
-                background: map-get($primary-palette, default);
+                background: map-get($accent-palette, default);
                 border-radius: 50%;
                 padding: 8px;
                 color: white;

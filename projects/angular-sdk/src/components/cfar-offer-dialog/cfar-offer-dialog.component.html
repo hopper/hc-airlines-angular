@@ -5,7 +5,7 @@
     </div>
 
     <div fxFlex="calc(20% - 16px)" fxLayoutAlign="end start">
-        <button mat-mini-fab (click)="onClose()" attr.aria-label="{{ 'COMMON.BUTTON.CLOSE' | translate }}">
+        <button mat-mini-fab color="primary" (click)="onClose()" attr.aria-label="{{ 'COMMON.BUTTON.CLOSE' | translate }}">
             <mat-icon>clear</mat-icon>
         </button>
     </div>
@@ -25,7 +25,7 @@
         
                 <div fxFlex="100" class="py-8" *ngFor="let desc of selectedCfarOffer?.offerDescription" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
                     <mat-icon class="check-icon">check</mat-icon>
-                    <span>{{ desc }}</span>
+                    <span innerHtml="{{ desc }}"></span>
                 </div>
 
                 <div fxFlex="100" class="py-8" fxLayout="row" fxLayout.lt-sm="column" fxLayoutAlign="start center" fxLayoutGap="8px">
@@ -88,7 +88,7 @@
             attr.aria-label="{{ 'CFAR_OFFER_DIALOG.BUTTON.CANCEL' | translate }}">
             {{ 'CFAR_OFFER_DIALOG.BUTTON.CANCEL' | translate }}
         </button>
-        <button mat-raised-button color="primary" *ngIf="selectedCfarOffer" ngClass.lt-sm="full-width" (click)="onSubmit()"
+        <button mat-raised-button color="accent" *ngIf="selectedCfarOffer" ngClass.lt-sm="full-width" (click)="onSubmit()"
             attr.aria-label="{{ 'CFAR_OFFER_DIALOG.BUTTON.SUBMIT' | translate }}">
             {{ 'CFAR_OFFER_DIALOG.BUTTON.SUBMIT' | translate: { 
                 coverage: (computePercentage(selectedCfarOffer) | percent)

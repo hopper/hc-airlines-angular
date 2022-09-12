@@ -25,7 +25,7 @@
                     <span class="text-justify mb-32">{{ 'CFAR_EXERCISE_FLOW.CHECK_VERIFICATION_TEXT' | translate }}</span>
                     
                     <div fxLayoutAlign="center center">
-                        <button mat-raised-button color="primary" ngClass.lt-sm="full-width" ngClass.gt-sm="mid-width" (click)="onSendVerificationCode()"
+                        <button mat-raised-button color="accent" ngClass.lt-sm="full-width" ngClass.gt-sm="mid-width" (click)="onSendVerificationCode()"
                             attr.aria-label="{{ 'CFAR_EXERCISE_FLOW.BUTTON.SEND_VERIFICATION_CODE' | translate }}">
                             {{ 'CFAR_EXERCISE_FLOW.BUTTON.SEND_VERIFICATION_CODE' | translate }}
                         </button>
@@ -51,12 +51,12 @@
                     </form>
         
                     <div fxLayoutAlign="center center" fxLayout="column" fxLayoutGap="16px">
-                        <button mat-raised-button color="primary" ngClass.lt-sm="full-width" ngClass.gt-sm="mid-width" [disabled]="!isCheckVerificationCodeFormValid()" 
+                        <button mat-raised-button color="accent" ngClass.lt-sm="full-width" ngClass.gt-sm="mid-width" [disabled]="!isCheckVerificationCodeFormValid()" 
                             (click)="onCheckVerificationCode()" attr.aria-label="{{ 'CFAR_EXERCISE_FLOW.BUTTON.CONTINUE' | translate }}">
                             {{ 'CFAR_EXERCISE_FLOW.BUTTON.CONTINUE' | translate }}
                         </button>
         
-                        <button mat-button color="primary" ngClass.lt-sm="full-width" ngClass.gt-sm="mid-width" 
+                        <button mat-button color="accent" ngClass.lt-sm="full-width" ngClass.gt-sm="mid-width" 
                             attr.aria-label="{{ 'CFAR_EXERCISE_FLOW.BUTTON.RESEND_VERIFICATION_CODE' | translate }}" (click)="onSendVerificationCode()">
                             {{ 'CFAR_EXERCISE_FLOW.BUTTON.RESEND_VERIFICATION_CODE' | translate }}
                         </button>
@@ -137,7 +137,7 @@
                                                     <div fxFlex class="origin-destination" fxLayoutAlign="center center">{{ segment?.originAirport }}</div>
                                                     <div fxFlex fxLayoutAlign="center center" fxLayoutGap="8px">
                                                         <div class="decorative-stroke"></div>
-                                                        <mat-icon color="primary" class="flight-icon">flight</mat-icon>
+                                                        <mat-icon color="accent" class="flight-icon">flight</mat-icon>
                                                         <div class="decorative-stroke"></div>
                                                     </div>
                                                     <div fxFlex class="origin-destination" fxLayoutAlign="center center">{{ segment?.destinationAirport }}</div>
@@ -156,7 +156,7 @@
                                                 <!--
                                                 <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px"
                                                     class="mb-16">
-                                                    <mat-icon color="primary" class="rotate-90">flight</mat-icon>
+                                                    <mat-icon color="accent" class="rotate-90">flight</mat-icon>
                                                     <span class="subtitle">
                                                         {{ segment?.originAirport }}
                                                         {{ 'CFAR_EXERCISE_FLOW.TO' | translate }}
@@ -188,7 +188,7 @@
             
                                     <div fxFlex fxLayout="column" fxLayoutAlign="center start">
                                         <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px" class="mb-16">
-                                            <mat-icon color="primary">person</mat-icon>
+                                            <mat-icon color="accent">person</mat-icon>
                                             <span class="subtitle" *ngIf="getNbPassengers(cfarContract.itinerary) <= 1">
                                                 {{ 'CFAR_EXERCISE_FLOW.PASSENGER' | translate: {
                                                     nbPassenger: getNbPassengers(cfarContract.itinerary)
@@ -215,7 +215,7 @@
             
                                     <div fxFlex="100" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px"
                                         class="mb-16">
-                                        <mat-icon color="primary">monetization_on</mat-icon>
+                                        <mat-icon color="accent">monetization_on</mat-icon>
                                         <span class="subtitle">{{ 'CFAR_EXERCISE_FLOW.REFUND_DETAILS_TITLE' | translate }}</span>
                                     </div>
             
@@ -292,7 +292,7 @@
                                 </div>
             
                                 <div class="p-16" fxLayoutGap="16px" ngClass.lt-md="px-16" fxFlex="100" fxLayout="row wrap" fxLayoutAlign="center center">
-                                    <button mat-raised-button color="primary" (click)="onSubmitStep1()" ngClass.lt-sm="full-width"
+                                    <button mat-raised-button color="accent" (click)="onSubmitStep1()" ngClass.lt-sm="full-width"
                                         attr.aria-label="{{ 'CFAR_EXERCISE_FLOW.BUTTON.CONTINUE' | translate }}">
                                         {{ 'CFAR_EXERCISE_FLOW.BUTTON.CONTINUE' | translate }}
                                     </button>
@@ -395,7 +395,7 @@
                                         attr.aria-label="{{ 'CFAR_EXERCISE_FLOW.BUTTON.BACK' | translate }}">
                                         {{ 'CFAR_EXERCISE_FLOW.BUTTON.BACK' | translate }}
                                     </button>
-                                    <button mat-raised-button color="primary" (click)="onSubmitStep2()" ngClass.lt-sm="full-width" 
+                                    <button mat-raised-button color="accent" (click)="onSubmitStep2()" ngClass.lt-sm="full-width" 
                                         [disabled]="step2Form.invalid" attr.aria-label="{{ 'CFAR_EXERCISE_FLOW.BUTTON.CONTINUE' | translate }}">
                                         {{ 'CFAR_EXERCISE_FLOW.BUTTON.CONTINUE' | translate }}
                                     </button>
@@ -471,7 +471,7 @@
                                                     <div fxFlex class="origin-destination" fxLayoutAlign="center center">{{ segment?.originAirport }}</div>
                                                     <div fxFlex fxLayoutAlign="center center" fxLayoutGap="8px">
                                                         <div class="decorative-stroke"></div>
-                                                        <mat-icon color="primary" class="flight-icon">flight</mat-icon>
+                                                        <mat-icon color="accent" class="flight-icon">flight</mat-icon>
                                                         <div class="decorative-stroke"></div>
                                                     </div>
                                                     <div fxFlex class="origin-destination" fxLayoutAlign="center center">{{ segment?.destinationAirport }}</div>
@@ -490,7 +490,7 @@
                                                 <!--
                                                 <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px"
                                                     class="mb-16">
-                                                    <mat-icon color="primary" class="rotate-90">flight</mat-icon>
+                                                    <mat-icon color="accent" class="rotate-90">flight</mat-icon>
                                                     <span class="subtitle">
                                                         {{ segment?.originAirport }}
                                                         {{ 'CFAR_EXERCISE_FLOW.TO' | translate }}
@@ -522,7 +522,7 @@
             
                                     <div fxFlex fxLayout="column" fxLayoutAlign="center start">
                                         <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px" class="mb-16">
-                                            <mat-icon color="primary">person</mat-icon>
+                                            <mat-icon color="accent">person</mat-icon>
                                             <span class="subtitle" *ngIf="getNbPassengers(cfarContract.itinerary) <= 1">
                                                 {{ 'CFAR_EXERCISE_FLOW.PASSENGER' | translate: {
                                                     nbPassenger: getNbPassengers(cfarContract.itinerary)
@@ -546,7 +546,7 @@
                                 <mat-divider></mat-divider>
             
                                 <div fxFlex="100" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px" class="my-16">
-                                    <mat-icon color="primary">monetization_on</mat-icon>
+                                    <mat-icon color="accent">monetization_on</mat-icon>
                                     <span class="subtitle">{{ 'CFAR_EXERCISE_FLOW.REFUND_METHOD' | translate }}</span>
                                 </div>
             

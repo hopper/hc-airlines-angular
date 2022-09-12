@@ -1,3 +1,15 @@
+<a name="4.1.0"></a>
+
+# 4.1.0 (2022-09-12)
+
+Offer Banner:
+- Fixed an issue with the offers descriptions
+
+General:
+- Improved the theming managment
+- Added a new theme: theme-light-yellow
+- Fixed deprecated subscriptions (required by the next release of RxJS)
+
 <a name="4.0.0"></a>
 
 # 4.0.0 (2022-09-09)

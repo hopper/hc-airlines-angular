@@ -56,16 +56,16 @@ export class CfarOfferDialogPageComponent extends CommonGuidesComponent {
 
       dialogRef.afterClosed()
         .pipe(take(1))
-        .subscribe(
-          (result: CfarContractCustomer) => {
+        .subscribe({
+          next: (result: CfarContractCustomer) => {
             if (result) {
               console.log(result);
             } else {
               console.log("Close dialog")
             }
           },
-          (error) => console.log(error)
-        );
+          error: (error) => console.log(error)
+        });
     }
   `;
 
@@ -179,8 +179,8 @@ export class CfarOfferDialogPageComponent extends CommonGuidesComponent {
 
     dialogRef.afterClosed()
       .pipe(take(1))
-      .subscribe(
-        (result: CfarContractCustomer) => {
+      .subscribe({
+        next: (result: CfarContractCustomer) => {
           if (result) {
             console.log("Submit cfar offer dialog :")
             console.log(result);
@@ -188,7 +188,7 @@ export class CfarOfferDialogPageComponent extends CommonGuidesComponent {
             console.log("Close dialog")
           }
         },
-        (error) => console.log(error)
-      );
+        error: (error) => console.log(error)
+      });
   }
 }

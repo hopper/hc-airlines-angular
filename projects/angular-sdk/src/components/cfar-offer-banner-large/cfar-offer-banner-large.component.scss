@@ -41,7 +41,7 @@
         }
         
         mat-card {
-            border: 1px solid map-get($primary-palette, "A200") !important;
+            border: 1px solid map-get($accent-palette, "A200") !important;
             border-radius: 0px;
 
             .powered-by-image {
@@ -55,7 +55,7 @@
             }
     
             .offer-title {
-                border-left: 2px solid map-get($accent-palette, 300);
+                border-left: 2px solid map-get($primary-palette, 300);
                 font-weight: bold;
             }
 
@@ -75,11 +75,11 @@
 
             .price-per-traveler {
                 font-weight: bold;
-                color: map-get($primary-palette, default);
+                color: map-get($accent-palette, default);
             }
 
             .offer-choice {
-                border-left: 2px solid map-get($accent-palette, 300);
+                border-left: 2px solid map-get($primary-palette, 300);
                 padding-left: 16px;
 
                 @include media-breakpoint('lt-md') {
@@ -88,7 +88,7 @@
             }
 
             a {
-                color: map-get($primary-palette, default);
+                color: map-get($accent-palette, default);
             }
         }
     }

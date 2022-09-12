@@ -179,6 +179,17 @@ $hopper-light-theme: mat.define-light-theme((
   @include documentation-components-theme($light-blue-theme);
 }
 
+.theme-light-yellow {
+  // Apply the theme to all Angular Material Components
+  @include mat.all-component-themes($light-yellow-theme);
+
+  // Apply the theme to the library components
+  @include hopper-cloud-airlines-angular-sdk-components-theme($light-yellow-theme);
+
+  // Apply the theme to the documentation components
+  @include documentation-components-theme($light-yellow-theme);
+}
+
 // ------------------------------------------
 // GLOBAL STYLE
 // ------------------------------------------

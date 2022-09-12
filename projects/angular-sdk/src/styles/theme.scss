@@ -29,3 +29,17 @@
   // Apply the theme to the library components
   @include hopper-cloud-airlines-angular-sdk-components-theme($light-blue-theme);
 }
+
+// ------------------------------------------
+// LIGHT YELLOW THEME
+// ------------------------------------------
+
+@import "./themes/theme-light-yellow.scss";
+
+.theme-light-yellow {
+  // Apply the theme to all Angular Material Components
+  @include mat.all-component-themes($light-yellow-theme);
+
+  // Apply the theme to the library components
+  @include hopper-cloud-airlines-angular-sdk-components-theme($light-yellow-theme);
+}

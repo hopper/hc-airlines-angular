@@ -53,8 +53,8 @@ export class CfarOfferBannerComponent extends GlobalComponent implements OnInit 
       this._hopperProxyService
         .postCfarOffers(this.basePath, this.hCSessionId, this.currentLang, ApiTranslatorUtils.modelToSnakeCase(this._buildCreateCfarOfferRequest()))
         .pipe(take(1))
-        .subscribe(
-          (cfarOffers) => {
+        .subscribe({
+          next: (cfarOffers) => {
             let results: CfarOfferCustomer[] = [];
 
             if (cfarOffers) {
@@ -69,12 +69,12 @@ export class CfarOfferBannerComponent extends GlobalComponent implements OnInit 
             
             this.isLoading = false;
           },
-          (error: any) => {
+          error: (error: any) => {
             console.error(error);
             this.offersLoaded.emit();
             this.isLoading = false;
           }
-        );
+        });
     }
   }
 
@@ -94,16 +94,16 @@ export class CfarOfferBannerComponent extends GlobalComponent implements OnInit 
 
     dialogRef.afterClosed()
       .pipe(take(1))
-      .subscribe(
-        (result: CfarContractCustomer) => {
+      .subscribe({
+        next: (result: CfarContractCustomer) => {
           if (result) {
             this.offerAccepted.emit(result);
           }
         },
-        (error) => {
+        error: (error) => {
           console.error(error);
         }
-      );
+      });
   }
 
   // -----------------------------------------------

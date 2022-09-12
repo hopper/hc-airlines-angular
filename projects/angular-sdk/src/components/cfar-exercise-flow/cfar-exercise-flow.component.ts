@@ -170,8 +170,8 @@ export class CfarExerciseFlowComponent extends GlobalComponent implements OnInit
       this._hopperProxyService
         .postRefundRecipients(this.basePath, this.hCSessionId, ApiTranslatorUtils.modelToSnakeCase(this._buildCreateRefundRecipientRequest()))
         .pipe(take(1))
-        .subscribe(
-          (refundRecipient: RefundRecipient) => {
+        .subscribe({
+          next: (refundRecipient: RefundRecipient) => {
             const userId = refundRecipient.id;
             const url = this.hyperwalletUrl + userId + "/" + this.currentLang + ".min.js";
             const mainScript = document.createElement('script');
@@ -192,8 +192,8 @@ export class CfarExerciseFlowComponent extends GlobalComponent implements OnInit
               this._hopperProxyService
                 .postRefundAuthorizations(this.basePath, this.hCSessionId, ApiTranslatorUtils.modelToSnakeCase(request))
                 .pipe(take(1))
-                .subscribe(
-                  (authorization: RefundAuthorization) => {
+                .subscribe({
+                  next: (authorization: RefundAuthorization) => {
                     const script = document.createElement('script');
                       
                     script.type = 'text/javascript';
@@ -225,7 +225,7 @@ export class CfarExerciseFlowComponent extends GlobalComponent implements OnInit
                     document.body.appendChild(script);
                     this.isLoadingHyperwallet = false;
                   },
-                  (error: any) => {
+                  error: (error: any) => {
                     const builtError = this._getHcAirlinesErrorResponse(error);
                     this.errorCode = builtError.code;
                     
@@ -235,22 +235,22 @@ export class CfarExerciseFlowComponent extends GlobalComponent implements OnInit
                     // Scroll on the error message
                     this.onScrollToTop(this._errorTimer);
                   }
-                );
+              });
             };
   
             document.head.appendChild(mainScript);
           },
-          (error: any) => {
+          error: (error: any) => {
             const builtError = this._getHcAirlinesErrorResponse(error);
             this.errorCode = builtError.code;
-
+  
             this.isLoadingHyperwallet = false;
             this.isErrorHyperwallet = true;
-
+  
             // Scroll on the error message
             this.onScrollToTop(this._errorTimer);
           }
-        );
+        });
     }
   }
 
@@ -267,8 +267,8 @@ export class CfarExerciseFlowComponent extends GlobalComponent implements OnInit
     this._hopperProxyService
       .postInitiateRefund(this.basePath, this.hCSessionId, ApiTranslatorUtils.modelToSnakeCase(request))
       .pipe(take(1))
-      .subscribe(
-        () => {
+      .subscribe({
+        next: () => {
           this.isLoadingHyperwallet = false;
           this.userEmail = event.detail.trmObject.email;
           this.stepper.next();
@@ -276,7 +276,7 @@ export class CfarExerciseFlowComponent extends GlobalComponent implements OnInit
           // The flow is completed
           this.flowCompleted.emit();
         },
-        (error) => {
+        error: (error) => {
           const builtError = this._getHcAirlinesErrorResponse(error);
           this.errorCode = builtError.code;
           
@@ -285,7 +285,7 @@ export class CfarExerciseFlowComponent extends GlobalComponent implements OnInit
           // Scroll on the error message
           this.onScrollToTop(this._errorTimer);
         }
-      );
+      });
   }
 
   // -----------------------------------------------
@@ -324,8 +324,8 @@ export class CfarExerciseFlowComponent extends GlobalComponent implements OnInit
       this._hopperProxyService
         .postSendCfarExerciseVerificationCode(this.basePath, this.hCSessionId, this.contractId, ApiTranslatorUtils.modelToSnakeCase({}))
         .pipe(take(1))
-        .subscribe(
-          (sendVerificationCodeResult: SendCfarContractExerciceVerificationCodeResponse) => {
+        .subscribe({
+          next: (sendVerificationCodeResult: SendCfarContractExerciceVerificationCodeResponse) => {
             const result = ApiTranslatorUtils.modelToCamelCase(sendVerificationCodeResult) as SendCfarContractExerciceVerificationCodeResponse;
 
             this.contractId = result.contractId;
@@ -334,7 +334,7 @@ export class CfarExerciseFlowComponent extends GlobalComponent implements OnInit
 
             this.isLoading = false;
           },
-          (error: any) => {
+          error: (error: any) => {
             const builtError = this._getHcAirlinesErrorResponse(error);
             this.errorCode = builtError.code;
 
@@ -343,7 +343,7 @@ export class CfarExerciseFlowComponent extends GlobalComponent implements OnInit
             // Scroll on the error message
             this.onScrollToTop(this._errorTimer);
           }
-        );
+        });
     }
   }
 
@@ -365,8 +365,8 @@ export class CfarExerciseFlowComponent extends GlobalComponent implements OnInit
       this._hopperProxyService
         .postCheckCfarExerciseVerificationCode(this.basePath, this.hCSessionId, this.contractId, ApiTranslatorUtils.modelToSnakeCase(this._buildCheckExerciseVerificationCodeRequest()))
         .pipe(take(1))
-        .subscribe(
-          (checkVerificationCodeResult: CheckCfarContractExerciceVerificationCodeResponse) => {
+        .subscribe({
+          next: (checkVerificationCodeResult: CheckCfarContractExerciceVerificationCodeResponse) => {
             const result = ApiTranslatorUtils.modelToCamelCase(checkVerificationCodeResult) as CheckCfarContractExerciceVerificationCodeResponse;
 
             if (result.compliant) {                    
@@ -380,7 +380,7 @@ export class CfarExerciseFlowComponent extends GlobalComponent implements OnInit
               this.isLoading = false;
             }     
           },
-          (error: any) => {
+          error: (error: any) => {
             const builtError = this._getHcAirlinesErrorResponse(error);
             this.errorCode = builtError.code;
 
@@ -389,7 +389,7 @@ export class CfarExerciseFlowComponent extends GlobalComponent implements OnInit
             // Scroll on the error message
             this.onScrollToTop(this._errorTimer);
           }
-        );
+        });
     }
   }
 
@@ -412,8 +412,8 @@ export class CfarExerciseFlowComponent extends GlobalComponent implements OnInit
       this._hopperProxyService
         .getCfarContractsId(this.basePath, this.hCSessionId, this.contractId)
         .pipe(take(1))
-        .subscribe(
-          (cfarContract: CfarContract) => {
+        .subscribe({
+          next: (cfarContract: CfarContract) => {
             const result = ApiTranslatorUtils.modelToCamelCase(cfarContract) as CfarContract;
 
             this.cfarContract = result;
@@ -423,7 +423,7 @@ export class CfarExerciseFlowComponent extends GlobalComponent implements OnInit
             // Hopper offer by default
             this.isHopperRefund = true;
           },
-          (error: any) => {
+          error: (error: any) => {
             const builtError = this._getHcAirlinesErrorResponse(error);
             this.errorCode = builtError.code;
 
@@ -432,7 +432,7 @@ export class CfarExerciseFlowComponent extends GlobalComponent implements OnInit
             // Scroll on the error message
             this.onScrollToTop(this._errorTimer);
           }
-        );
+        });
     }
   }
 

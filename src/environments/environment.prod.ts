@@ -1,5 +1,7 @@
+import { Theme } from "src/app/shared/enums/theme.enum";
+
 export const environment = {
   production: true,
-  defaultTheme: "theme-light-blue",
-  version: 'v4.0.0'
+  defaultTheme: Theme.THEME_LIGHT_BLUE,
+  version: 'v4.1.0'
 };

@@ -2,10 +2,12 @@
 // `ng build` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
+import { Theme } from "src/app/shared/enums/theme.enum";
+
 export const environment = {
   production: false,
-  defaultTheme: "theme-light-hopper",
-  version: 'v4.0.0'
+  defaultTheme: Theme.THEME_LIGHT_HOPPER,
+  version: 'v4.1.0'
 };
 
 /*

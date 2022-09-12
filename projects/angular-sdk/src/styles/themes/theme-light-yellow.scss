@@ -1,0 +1,82 @@
+@use '@angular/material' as mat;
+
+$dark-primary-text: rgba(black, 0.87);
+$light-primary-text: white;
+
+$light-yellow-primary-palette: (
+  50: #fefdeb,
+  100: #fefacc,
+  200: #fdf7aa,
+  300: #fcf488,
+  400: #fbf16f,
+  500: #faef55,
+  600: #f9ed4e,
+  700: #f9eb44,
+  800: #f8e83b,
+  900: #f6e42a,
+  A100: #ffffff,
+  A200: #ffffff,
+  A400: #fffacf,
+  A700: #fff8b5,
+  contrast: (
+    50: $dark-primary-text,
+    100: $dark-primary-text,
+    200: $dark-primary-text,
+    300: $dark-primary-text,
+    400: $dark-primary-text,
+    500: $dark-primary-text,
+    600: $dark-primary-text,
+    700: $dark-primary-text,
+    800: $dark-primary-text,
+    900: $dark-primary-text,
+    A100: $dark-primary-text,
+    A200: $dark-primary-text,
+    A400: $dark-primary-text,
+    A700: $dark-primary-text,
+  )
+);
+
+$light-yellow-accent-palette: (
+  50: #e1eefc,
+  100: #b4d5f8,
+  200: #82b9f3,
+  300: #4f9cee,
+  400: #2a87ea,
+  500: #0472e6,
+  600: #036ae3,
+  700: #035fdf,
+  800: #0255db,
+  900: #0142d5,
+  A100: #fcfdff,
+  A200: #c9d6ff,
+  A400: #96b0ff,
+  A700: #7d9cff,
+  contrast: (
+    50: $dark-primary-text,
+    100: $dark-primary-text,
+    200: $dark-primary-text,
+    300: $dark-primary-text,
+    400: $light-primary-text,
+    500: $light-primary-text,
+    600: $light-primary-text,
+    700: $light-primary-text,
+    800: $light-primary-text,
+    900: $light-primary-text,
+    A100: $dark-primary-text,
+    A200: $dark-primary-text,
+    A400: $dark-primary-text,
+    A700: $dark-primary-text,
+  )
+);
+
+$light-yellow-primary: mat.define-palette($light-yellow-primary-palette, 500, 300, 700);
+$light-yellow-accent: mat.define-palette($light-yellow-accent-palette, 500, 300, 700);
+$light-yellow-warn: mat.define-palette(mat.$red-palette);
+
+$light-yellow-theme: mat.define-light-theme((
+  color: (
+    primary: $light-yellow-primary,
+    accent: $light-yellow-accent,
+    warn: $light-yellow-warn,
+  )
+));

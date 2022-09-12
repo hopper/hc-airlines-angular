@@ -6,10 +6,11 @@ import { Locales } from "projects/angular-sdk/src/i18n";
 import { Subject } from "rxjs";
 import { takeUntil } from "rxjs/operators";
 import { environment } from "src/environments/environment";
+import { Theme } from "../../enums/theme.enum";
 
 import { AppState } from "../../ngrx";
 import * as globalActions from "../../ngrx/global/global.actions";
-import { getCurrentLang, getCurrentTheme } from "../../ngrx/global/global.selectors";
+import { getCurrentLang, getCurrentTheme, getCurrentPartnerId } from "../../ngrx/global/global.selectors";
 
 @Component({
   selector: "app-navbar",
@@ -20,6 +21,7 @@ export class NavBarComponent implements OnInit, OnDestroy {
 
   public currentLang!: string;
   public currentTheme!: string;
+  public currentPartnerId!: number;
   public version!: string;
   public languages!: string[];
   public themes!: string[];
@@ -37,11 +39,7 @@ export class NavBarComponent implements OnInit, OnDestroy {
     // The languages ​​available depend on the languages ​​supported by the API
     this.languages = Locales.map(x => x.lang);
 
-    this.themes = [
-      'theme-dark-hopper',
-      'theme-light-hopper',
-      'theme-light-blue'
-    ];
+    this.themes = Object.values(Theme);
 
     // Add SVG icons for each languages
     this.languages.forEach(language => {
@@ -65,6 +63,12 @@ export class NavBarComponent implements OnInit, OnDestroy {
       select(getCurrentLang),
       takeUntil(this._unsubcriber)
     ).subscribe((currentLanguage: string) => this.currentLang = currentLanguage);
+
+    // Update the currentTheme when the partnerId has changed
+    this._store.pipe(
+      select(getCurrentPartnerId),
+      takeUntil(this._unsubcriber)
+    ).subscribe((partnerId: number) => this._loadPartnerData(partnerId));
   }
 
   ngOnDestroy(): void {
@@ -73,7 +77,7 @@ export class NavBarComponent implements OnInit, OnDestroy {
   }
   
   // -------------------------------
-  // - METHODS
+  // - PUBLICS METHODS
   // -------------------------------
 
   onSetTheme(newTheme: string): void {
@@ -82,5 +86,24 @@ export class NavBarComponent implements OnInit, OnDestroy {
 
   onSetLanguage(newLanguage: string): void {
     this._store.dispatch(globalActions.setCurrentLang({ currentLang: newLanguage }));
+  }
+
+  // -------------------------------
+  // - PRIVATES METHODS
+  // -------------------------------
+
+  /**
+   * FIXME : Load config by partner ?
+   * @param partnerId 
+   */
+  private _loadPartnerData(partnerId: number): void {
+    this.currentPartnerId = partnerId;
+    if (partnerId == 0) {
+      this.onSetTheme(Theme.THEME_LIGHT_BLUE);
+    } else if (partnerId == 1) {
+      this.onSetTheme(Theme.THEME_LIGHT_YELLOW);
+    } else {
+      this.onSetTheme(Theme.THEME_LIGHT_HOPPER);
+    }
   }
 }
