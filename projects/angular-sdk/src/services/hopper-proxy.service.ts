@@ -9,8 +9,8 @@ import { CfarContract, CfarContractCustomer, CfarOfferCustomer, CheckCfarContrac
 export class HopperProxyService {
 
   constructor(
-    private _httpClient: HttpClient,
-    private _customerService: CustomerService
+    protected _httpClient: HttpClient,
+    protected _customerService: CustomerService
   ) {}
 
   // ----------------------------------------------------------
@@ -74,10 +74,10 @@ export class HopperProxyService {
   }
 
   // ----------------------------------------------------------
-  // PRIVATES METHODS
+  // PROTECTED METHODS
   // ----------------------------------------------------------
 
-  private _overrideConfiguration(basePath: string): void {
+  protected _overrideConfiguration(basePath: string): void {
     this._customerService = new CustomerService(this._httpClient, basePath, {
       selectHeaderAccept: (accepts: ['application/json']) => 'application/json',
       selectHeaderContentType: (contentsTypes: ['application/json']) => 'application/json',
