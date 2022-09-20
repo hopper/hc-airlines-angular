@@ -23,6 +23,8 @@
             "allowedCommonJsDependencies": [
               "lodash"
             ],
+            "buildOptimizer": true,
+            "optimization": true,
             "outputPath": "dist/hc-airlines-angular",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -63,7 +65,9 @@
                   "with": "src/environments/environment.prod.ts"
                 }
               ],
-              "outputHashing": "all"
+              "outputHashing": "all",
+              "buildOptimizer": true,
+              "optimization": true
             },
             "development": {
               "buildOptimizer": false,
