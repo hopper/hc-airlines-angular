@@ -48,7 +48,7 @@ export class HopperEventsService extends HopperProxyService {
     return this._customerService.postCustomerEvents(event, hCSessionId);
   }
   
-  postCreateForcedChoiceWarning(basePath: string, hCSessionId: string): Observable<any> {
+  postCreateCfarForcedChoiceWarning(basePath: string, hCSessionId: string): Observable<any> {
     // Init services
     this._overrideConfiguration(basePath);
 

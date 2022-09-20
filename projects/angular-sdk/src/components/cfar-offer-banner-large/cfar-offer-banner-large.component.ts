@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { take } from 'rxjs/operators';
-import { CfarContractCustomer, CfarItinerary, CfarOfferCustomer, CreateCfarContractCustomerRequest, CreateCfarOfferCustomerRequest, RequestType } from '../../apis/hopper-cloud-airline/v1';
+import { CfarContractCustomer, CfarItinerary, CfarOfferCustomer, CreateCfarContractCustomerRequest, CreateCfarOfferCustomerRequest, RequestType, UiSource } from '../../apis/hopper-cloud-airline/v1';
 import { GlobalComponent } from '../global.component';
 import { TranslateService } from '@ngx-translate/core';
 import { DateAdapter } from "@angular/material/core";
@@ -29,6 +29,7 @@ export class CfarOfferBannerLargeComponent extends GlobalComponent implements On
   @Output() offersLoaded = new EventEmitter();
 
   private contractsByChoiceIndex = new Map<number, CfarContractCustomer>();
+  private uiSource!: UiSource;
 
   constructor(
     private _adapter: DateAdapter<any>,
@@ -49,6 +50,8 @@ export class CfarOfferBannerLargeComponent extends GlobalComponent implements On
       this.offersLoaded.emit(this.cfarOffers);
     } else {
       this.isLoading = true;
+
+      this._initUiSource();
 
       this._hopperProxyService
         .postCfarOffers(this.basePath, this.hCSessionId, this.currentLang, ApiTranslatorUtils.modelToSnakeCase(this._buildCreateCfarOfferRequest()))
@@ -150,6 +153,16 @@ export class CfarOfferBannerLargeComponent extends GlobalComponent implements On
   // Privates Methods
   // -----------------------------------------------
 
+  /**
+   * Actually, The UI Source is fixed using the parameters of the component.
+   * FIXME In the future, use a dedicated parameter, passed by the airline. 
+   * WARN /!\ Call this method only when initializing the component (i.e. ngOnInit).
+   * @returns 
+   */
+  private _initUiSource() {
+    this.uiSource = this.hasNoCoverageOption ? UiSource.BannerVariantA : UiSource.BannerVariantB;
+  }
+
   private _buildCreateCfarOfferRequest(): CreateCfarOfferCustomerRequest {
     return {
       itinerary: this.itineraries,
@@ -160,7 +173,8 @@ export class CfarOfferBannerLargeComponent extends GlobalComponent implements On
   private _buildCreateCfarContractRequest(): CreateCfarContractCustomerRequest {
     return {
       offerIds: [this.selectedCfarOffer.id],
-      itinerary: this.selectedCfarOffer.itinerary
+      itinerary: this.selectedCfarOffer.itinerary,
+      uiSource: this.uiSource
     };
   } 
 

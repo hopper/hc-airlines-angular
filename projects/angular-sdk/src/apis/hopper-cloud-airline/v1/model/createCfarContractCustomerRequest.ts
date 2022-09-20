@@ -10,6 +10,7 @@
  * Do not edit the class manually.
  */
 import { CfarItinerary } from './cfarItinerary';
+import { UiSource } from './uiSource';
 
 /**
  * A create CFAR contract customer request
@@ -18,4 +19,5 @@ export interface CreateCfarContractCustomerRequest {
     offerIds: Array<string>;
     itinerary: CfarItinerary;
     pnrReference?: string;
+    uiSource?: UiSource;
 }
