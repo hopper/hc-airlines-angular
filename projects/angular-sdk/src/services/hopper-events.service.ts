@@ -4,9 +4,7 @@ import { Observable } from "rxjs";
 import { Event, CustomerService, CfarOffersBannerDisplay, UiVariant, CfarOffersTakeoverDisplay, CfarForcedChoiceWarning, CfarViewInfo, UiSource, CfarDenyPurchase } from "../apis/hopper-cloud-airline/v1";
 import { HopperProxyService } from "./hopper-proxy.service";
 
-@Injectable({
-  providedIn: "root"
-})
+@Injectable()
 export class HopperEventsService extends HopperProxyService {
 
   constructor(

@@ -4,9 +4,7 @@ import { Observable } from "rxjs";
 import { CfarContract, CfarContractCustomer, CfarOfferCustomer, CheckCfarContractExerciceVerificationCodeResponse, CheckCfarContractExerciseVerificationCodeRequest, CreateCfarContractCustomerRequest, CreateCfarOfferCustomerRequest, CreateRefundAuthorizationRequest, CreateRefundRecipientRequest, CustomerService, InitiateRefundRequest, RefundAuthorization, RefundRecipient, SendCfarContractExerciceVerificationCodeResponse, SendCfarContractExerciseVerificationCodeRequest } from "../apis/hopper-cloud-airline/v1";
 import { HopperProxyService } from "./hopper-proxy.service";
 
-@Injectable({
-  providedIn: "root"
-})
+@Injectable()
 export class HopperCfarService extends HopperProxyService {
 
   constructor(

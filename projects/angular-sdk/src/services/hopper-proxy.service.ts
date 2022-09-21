@@ -2,9 +2,6 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { CustomerService } from "../apis/hopper-cloud-airline/v1";
 
-@Injectable({
-  providedIn: "root"
-})
 export class HopperProxyService {
 
   constructor(
