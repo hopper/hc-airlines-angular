@@ -82,8 +82,8 @@ export class CfarOfferBannerLargeComponent extends GlobalComponent implements On
           this.offersLoaded.emit(this.cfarOffers);          
           this.isLoading = false;
 
-          // Build corresponding event
-          this.createEventAfterInit();
+          // Build corresponding eventsÒ
+          this.createEventsAfterInit();
         },
         error: (error) => {
           console.error(error);
@@ -93,10 +93,30 @@ export class CfarOfferBannerLargeComponent extends GlobalComponent implements On
       });
   }
 
-  protected createEventAfterInit(): void {
+  protected createEventsAfterInit(): void {
     this.isLoading = true;
     this._hopperEventService
       .postCreateCfarOffersBannerDisplay(this.basePath, this.hCSessionId, this.uiVariant)
+      .pipe(take(1))
+      .subscribe({
+        next: () => {
+          if (this.hasWarningCoverageMessage) {
+            this.createWarningMessageEventAfterInit();
+          } else {
+            this.isLoading = false;
+          }
+        },
+        error: (error) => {
+          console.error(error);
+          this.isLoading = false;
+        }
+      });
+  }
+  
+  protected createWarningMessageEventAfterInit(): void {
+    this.isLoading = true;
+    this._hopperEventService
+      .postCreateCfarForcedChoiceWarning(this.basePath, this.hCSessionId)
       .pipe(take(1))
       .subscribe({
         next: () => {
