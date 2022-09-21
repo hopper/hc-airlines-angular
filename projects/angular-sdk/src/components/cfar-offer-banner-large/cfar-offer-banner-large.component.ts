@@ -169,7 +169,6 @@ export class CfarOfferBannerLargeComponent extends GlobalComponent implements On
   }
 
   protected createEventsAfterInit(): void {
-    this.isLoading = true;
     this._hopperEventService
       .postCreateCfarOffersBannerDisplay(this.basePath, this.hCSessionId, this.uiVariant)
       .pipe(take(1))
@@ -177,61 +176,46 @@ export class CfarOfferBannerLargeComponent extends GlobalComponent implements On
         next: () => {
           if (this.hasWarningCoverageMessage) {
             this.createWarningMessageEvent();
-          } else {
-            this.isLoading = false;
           }
         },
         error: (error) => {
           console.error(error);
-          this.isLoading = false;
         }
       });
   }
   
   protected createWarningMessageEvent(): void {
-    this.isLoading = true;
     this._hopperEventService
       .postCreateCfarForcedChoiceWarning(this.basePath, this.hCSessionId)
       .pipe(take(1))
       .subscribe({
-        next: () => {
-          this.isLoading = false;
-        },
+        next: () => {},
         error: (error) => {
           console.error(error);
-          this.isLoading = false;
         }
       });
   }
   
   protected createTermsAndConditionsEvent(): void {
-    this.isLoading = true;
     this._hopperEventService
       .postCreateCfarViewInfo(this.basePath, this.hCSessionId, this.uiSource)
       .pipe(take(1))
       .subscribe({
-        next: () => {
-          this.isLoading = false;
-        },
+        next: () => {},
         error: (error) => {
           console.error(error);
-          this.isLoading = false;
         }
       });
   }
   
   protected createDenyPurchaseEvent(): void {
-    this.isLoading = true;
     this._hopperEventService
       .postCreateCfarDenyPurchase(this.basePath, this.hCSessionId, this.uiSource)
       .pipe(take(1))
       .subscribe({
-        next: () => {
-          this.isLoading = false;
-        },
+        next: () => {},
         error: (error) => {
           console.error(error);
-          this.isLoading = false;
         }
       });
   }

@@ -66,59 +66,6 @@ export class CfarOfferDialogComponent extends GlobalComponent implements OnInit,
   }
 
   // -----------------------------------------------
-  //  Protected Methods
-  // -----------------------------------------------
-
-  protected initCfarOffers(): void {
-    this.isLoading = true;
-    
-    this._hopperCfarService
-    .postCfarOffers(this.basePath, this._hCSessionId, this.currentLang, ApiTranslatorUtils.modelToSnakeCase(this._buildCreateCfarOfferRequest()))
-    .pipe(take(1))
-    .subscribe({
-      next: (cfarOffers) => {
-        let results: CfarOfferCustomer[] = [];
-
-        if (cfarOffers) {
-          cfarOffers.forEach(cfarOffer => {
-            results.push(ApiTranslatorUtils.modelToCamelCase(cfarOffer) as CfarOfferCustomer);
-          });
-        }
-        
-        this.cfarOffers = results;
-        // The cheapest by default
-        this.selectedCfarOffer = this._getCheapestOffer(this.cfarOffers);
-        this.isLoading = false;
-
-        // Build corresponding events
-        this.createEventsAfterInit();
-      },
-      error: (error) => {
-        const builtError = this._getHcAirlinesErrorResponse(error);
-        this.errorCode = builtError.code;
-
-        this.isLoading = false;
-      }
-    });
-  }
-
-  protected createEventsAfterInit(): void {
-    this.isLoading = true;
-    this._hopperEventService
-      .postCreateCfarOffersTakeoverDisplay(this.basePath, this._hCSessionId)
-      .pipe(take(1))
-      .subscribe({
-        next: () => {
-          this.isLoading = false;
-        },
-        error: (error) => {
-          console.error(error);
-          this.isLoading = false;
-        }
-      });
-  }
-
-  // -----------------------------------------------
   // Publics Methods
   // -----------------------------------------------
 
@@ -181,35 +128,72 @@ export class CfarOfferDialogComponent extends GlobalComponent implements OnInit,
   // -----------------------------------------------
   // Protected Methods
   // -----------------------------------------------
+
+  protected initCfarOffers(): void {
+    this.isLoading = true;
+    
+    this._hopperCfarService
+    .postCfarOffers(this.basePath, this._hCSessionId, this.currentLang, ApiTranslatorUtils.modelToSnakeCase(this._buildCreateCfarOfferRequest()))
+    .pipe(take(1))
+    .subscribe({
+      next: (cfarOffers) => {
+        let results: CfarOfferCustomer[] = [];
+
+        if (cfarOffers) {
+          cfarOffers.forEach(cfarOffer => {
+            results.push(ApiTranslatorUtils.modelToCamelCase(cfarOffer) as CfarOfferCustomer);
+          });
+        }
+        
+        this.cfarOffers = results;
+        // The cheapest by default
+        this.selectedCfarOffer = this._getCheapestOffer(this.cfarOffers);
+        this.isLoading = false;
+
+        // Build corresponding events
+        this.createEventsAfterInit();
+      },
+      error: (error) => {
+        const builtError = this._getHcAirlinesErrorResponse(error);
+        this.errorCode = builtError.code;
+
+        this.isLoading = false;
+      }
+    });
+  }
+
+  protected createEventsAfterInit(): void {
+    this._hopperEventService
+      .postCreateCfarOffersTakeoverDisplay(this.basePath, this._hCSessionId)
+      .pipe(take(1))
+      .subscribe({
+        next: () => {},
+        error: (error) => {
+          console.error(error);
+        }
+      });
+  }
   
   protected createTermsAndConditionsEvent(): void {
-    this.isLoading = true;
     this._hopperEventService
       .postCreateCfarViewInfo(this.basePath, this._hCSessionId, UiSource.Takeover)
       .pipe(take(1))
       .subscribe({
-        next: () => {
-          this.isLoading = false;
-        },
+        next: () => {},
         error: (error) => {
           console.error(error);
-          this.isLoading = false;
         }
       });
   }
   
   protected createDenyPurchaseEvent(): void {
-    this.isLoading = true;
     this._hopperEventService
       .postCreateCfarDenyPurchase(this.basePath, this._hCSessionId, UiSource.Takeover)
       .pipe(take(1))
       .subscribe({
-        next: () => {
-          this.isLoading = false;
-        },
+        next: () => {},
         error: (error) => {
           console.error(error);
-          this.isLoading = false;
         }
       });
   }
