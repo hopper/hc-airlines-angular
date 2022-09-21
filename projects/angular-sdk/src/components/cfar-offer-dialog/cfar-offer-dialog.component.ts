@@ -96,6 +96,9 @@ export class CfarOfferDialogComponent extends GlobalComponent implements OnInit,
   // -----------------------------------------------
 
   public onClose(): void {
+    //Create an event
+    this.createDenyPurchaseEvent();
+    // Close the window
     this._dialogRef.close();
   }
 
@@ -156,6 +159,22 @@ export class CfarOfferDialogComponent extends GlobalComponent implements OnInit,
     this.isLoading = true;
     this._hopperEventService
       .postCreateCfarViewInfo(this.basePath, this._hCSessionId, UiSource.Takeover)
+      .pipe(take(1))
+      .subscribe({
+        next: () => {
+          this.isLoading = false;
+        },
+        error: (error) => {
+          console.error(error);
+          this.isLoading = false;
+        }
+      });
+  }
+  
+  protected createDenyPurchaseEvent(): void {
+    this.isLoading = true;
+    this._hopperEventService
+      .postCreateCfarDenyPurchase(this.basePath, this._hCSessionId, UiSource.Takeover)
       .pipe(take(1))
       .subscribe({
         next: () => {

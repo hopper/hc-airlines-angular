@@ -111,8 +111,11 @@ export class CfarOfferBannerLargeComponent extends GlobalComponent implements On
             });
         } 
       }
-    } else {
+    } else {  // The user decline the offer
       this.chooseCoverage.emit(null);
+      
+      // Create an event
+      this.createDenyPurchaseEvent();
     }
   }
 
@@ -154,7 +157,7 @@ export class CfarOfferBannerLargeComponent extends GlobalComponent implements On
           this.offersLoaded.emit(this.cfarOffers);          
           this.isLoading = false;
 
-          // Build corresponding eventsÒ
+          // Build corresponding events
           this.createEventsAfterInit();
         },
         error: (error) => {
@@ -216,6 +219,22 @@ export class CfarOfferBannerLargeComponent extends GlobalComponent implements On
         }
       });
   }
+  
+  protected createDenyPurchaseEvent(): void {
+    this.isLoading = true;
+    this._hopperEventService
+      .postCreateCfarDenyPurchase(this.basePath, this.hCSessionId, this.uiSource)
+      .pipe(take(1))
+      .subscribe({
+        next: () => {
+          this.isLoading = false;
+        },
+        error: (error) => {
+          console.error(error);
+          this.isLoading = false;
+        }
+      });
+  }
 
   // -----------------------------------------------
   // Privates Methods
@@ -224,7 +243,7 @@ export class CfarOfferBannerLargeComponent extends GlobalComponent implements On
   /**
    * Actually, The UI elements are fixed using the input parameters of the component.
    * FIXME In the future, use a dedicated parameter, passed by the airline. 
-   * WARN /!\ Call this method only when initializing the component (i.e. ngOnInit).
+   * WARN /!\ Call this method only when initializing the component (i.e. ngOnInit), since the flag used can be updated later.
    * @returns 
    */
   private _initUiElements() {
