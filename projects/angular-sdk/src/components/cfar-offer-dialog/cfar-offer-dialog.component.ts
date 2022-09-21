@@ -7,6 +7,7 @@ import { DateAdapter } from "@angular/material/core";
 import { GlobalComponent } from '../global.component';
 import { ApiTranslatorUtils } from '../../utils/api-translator.utils';
 import { HopperCfarService } from '../../services/hopper-cfar.service';
+import { HopperEventsService } from '../../services/hopper-events.service';
 
 @Component({
   selector: 'hopper-cfar-offer-dialog',
@@ -28,7 +29,8 @@ export class CfarOfferDialogComponent extends GlobalComponent implements OnInit,
     private _translateService: TranslateService,
     private _dialogRef: MatDialogRef<CfarOfferDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private _hopperCfarService: HopperCfarService
+    private _hopperCfarService: HopperCfarService,
+    private _hopperEventService: HopperEventsService
   ) {
     super(_adapter, _translateService);
 
@@ -121,6 +123,10 @@ export class CfarOfferDialogComponent extends GlobalComponent implements OnInit,
     this.selectedCfarOffer = cfarOffer;
   }
 
+  public onOpenTermsAndConditions(): void {
+    this.createTermsAndConditionsEvent();
+  }
+
   public computePercentage(offer: CfarOfferCustomer): number {
     if (offer) {
       const coverage = Number.parseFloat(offer.coverage);
@@ -140,6 +146,26 @@ export class CfarOfferDialogComponent extends GlobalComponent implements OnInit,
     });
 
     return +offer.coverage / (nbTravelers || 1);
+  }
+
+  // -----------------------------------------------
+  // Protected Methods
+  // -----------------------------------------------
+  
+  protected createTermsAndConditionsEvent(): void {
+    this.isLoading = true;
+    this._hopperEventService
+      .postCreateCfarViewInfo(this.basePath, this._hCSessionId, UiSource.Takeover)
+      .pipe(take(1))
+      .subscribe({
+        next: () => {
+          this.isLoading = false;
+        },
+        error: (error) => {
+          console.error(error);
+          this.isLoading = false;
+        }
+      });
   }
 
   // -----------------------------------------------

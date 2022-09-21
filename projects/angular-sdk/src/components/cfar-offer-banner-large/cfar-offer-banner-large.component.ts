@@ -59,77 +59,6 @@ export class CfarOfferBannerLargeComponent extends GlobalComponent implements On
   }
 
   // -----------------------------------------------
-  //  Initialization Methods
-  // -----------------------------------------------
-
-  protected initCfarOffers(): void {
-    this.isLoading = true;
-    this._hopperCfarService
-      .postCfarOffers(this.basePath, this.hCSessionId, this.currentLang, ApiTranslatorUtils.modelToSnakeCase(this._buildCreateCfarOfferRequest()))
-      .pipe(take(1))
-      .subscribe({
-        next: (cfarOffers) => {
-          let results: CfarOfferCustomer[] = [];
-
-          if (cfarOffers) {
-            cfarOffers.forEach(cfarOffer => {
-              results.push(ApiTranslatorUtils.modelToCamelCase(cfarOffer) as CfarOfferCustomer);
-            });
-          }
-          
-          this.cfarOffers = results;
-          this.selectedCfarOffer = this._getCheapestOffer(this.cfarOffers);
-          this.offersLoaded.emit(this.cfarOffers);          
-          this.isLoading = false;
-
-          // Build corresponding eventsÒ
-          this.createEventsAfterInit();
-        },
-        error: (error) => {
-          console.error(error);
-          this.offersLoaded.emit();
-          this.isLoading = false;
-        }
-      });
-  }
-
-  protected createEventsAfterInit(): void {
-    this.isLoading = true;
-    this._hopperEventService
-      .postCreateCfarOffersBannerDisplay(this.basePath, this.hCSessionId, this.uiVariant)
-      .pipe(take(1))
-      .subscribe({
-        next: () => {
-          if (this.hasWarningCoverageMessage) {
-            this.createWarningMessageEventAfterInit();
-          } else {
-            this.isLoading = false;
-          }
-        },
-        error: (error) => {
-          console.error(error);
-          this.isLoading = false;
-        }
-      });
-  }
-  
-  protected createWarningMessageEventAfterInit(): void {
-    this.isLoading = true;
-    this._hopperEventService
-      .postCreateCfarForcedChoiceWarning(this.basePath, this.hCSessionId)
-      .pipe(take(1))
-      .subscribe({
-        next: () => {
-          this.isLoading = false;
-        },
-        error: (error) => {
-          console.error(error);
-          this.isLoading = false;
-        }
-      });
-  }
-
-  // -----------------------------------------------
   // Publics Methods
   // -----------------------------------------------
 
@@ -187,6 +116,10 @@ export class CfarOfferBannerLargeComponent extends GlobalComponent implements On
     }
   }
 
+  public onOpenTermsAndConditions(): void {
+    this.createTermsAndConditionsEvent();
+  }
+
   public getPricePerTraveler(offer: CfarOfferCustomer): number {
     var nbTravelers = 0;
     
@@ -195,6 +128,93 @@ export class CfarOfferBannerLargeComponent extends GlobalComponent implements On
     });
 
     return +offer.coverage / (nbTravelers || 1);
+  }
+
+  // -----------------------------------------------
+  //  Protected Methods
+  // -----------------------------------------------
+
+  protected initCfarOffers(): void {
+    this.isLoading = true;
+    this._hopperCfarService
+      .postCfarOffers(this.basePath, this.hCSessionId, this.currentLang, ApiTranslatorUtils.modelToSnakeCase(this._buildCreateCfarOfferRequest()))
+      .pipe(take(1))
+      .subscribe({
+        next: (cfarOffers) => {
+          let results: CfarOfferCustomer[] = [];
+
+          if (cfarOffers) {
+            cfarOffers.forEach(cfarOffer => {
+              results.push(ApiTranslatorUtils.modelToCamelCase(cfarOffer) as CfarOfferCustomer);
+            });
+          }
+          
+          this.cfarOffers = results;
+          this.selectedCfarOffer = this._getCheapestOffer(this.cfarOffers);
+          this.offersLoaded.emit(this.cfarOffers);          
+          this.isLoading = false;
+
+          // Build corresponding eventsÒ
+          this.createEventsAfterInit();
+        },
+        error: (error) => {
+          console.error(error);
+          this.offersLoaded.emit();
+          this.isLoading = false;
+        }
+      });
+  }
+
+  protected createEventsAfterInit(): void {
+    this.isLoading = true;
+    this._hopperEventService
+      .postCreateCfarOffersBannerDisplay(this.basePath, this.hCSessionId, this.uiVariant)
+      .pipe(take(1))
+      .subscribe({
+        next: () => {
+          if (this.hasWarningCoverageMessage) {
+            this.createWarningMessageEvent();
+          } else {
+            this.isLoading = false;
+          }
+        },
+        error: (error) => {
+          console.error(error);
+          this.isLoading = false;
+        }
+      });
+  }
+  
+  protected createWarningMessageEvent(): void {
+    this.isLoading = true;
+    this._hopperEventService
+      .postCreateCfarForcedChoiceWarning(this.basePath, this.hCSessionId)
+      .pipe(take(1))
+      .subscribe({
+        next: () => {
+          this.isLoading = false;
+        },
+        error: (error) => {
+          console.error(error);
+          this.isLoading = false;
+        }
+      });
+  }
+  
+  protected createTermsAndConditionsEvent(): void {
+    this.isLoading = true;
+    this._hopperEventService
+      .postCreateCfarViewInfo(this.basePath, this.hCSessionId, this.uiSource)
+      .pipe(take(1))
+      .subscribe({
+        next: () => {
+          this.isLoading = false;
+        },
+        error: (error) => {
+          console.error(error);
+          this.isLoading = false;
+        }
+      });
   }
 
   // -----------------------------------------------
