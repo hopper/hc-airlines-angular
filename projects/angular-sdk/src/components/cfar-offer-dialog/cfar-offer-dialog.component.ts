@@ -6,7 +6,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { DateAdapter } from "@angular/material/core";
 import { GlobalComponent } from '../global.component';
 import { ApiTranslatorUtils } from '../../utils/api-translator.utils';
-import { HopperProxyService } from '../../services/hopper-proxy.service';
+import { HopperCfarService } from '../../services/hopper-cfar.service';
 
 @Component({
   selector: 'hopper-cfar-offer-dialog',
@@ -28,7 +28,7 @@ export class CfarOfferDialogComponent extends GlobalComponent implements OnInit,
     private _translateService: TranslateService,
     private _dialogRef: MatDialogRef<CfarOfferDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private _hopperProxyService: HopperProxyService
+    private _hopperCfarService: HopperCfarService
   ) {
     super(_adapter, _translateService);
 
@@ -61,7 +61,7 @@ export class CfarOfferDialogComponent extends GlobalComponent implements OnInit,
     } else {
       this.isLoading = true;
   
-      this._hopperProxyService
+      this._hopperCfarService
         .postCfarOffers(this.basePath, this._hCSessionId, this.currentLang, ApiTranslatorUtils.modelToSnakeCase(this._buildCreateCfarOfferRequest()))
         .pipe(take(1))
         .subscribe({
@@ -101,7 +101,7 @@ export class CfarOfferDialogComponent extends GlobalComponent implements OnInit,
     this.isLoading = true;
 
     // Create CFAR Contract
-    this._hopperProxyService
+    this._hopperCfarService
       .postCfarContracts(this.basePath, this._hCSessionId, ApiTranslatorUtils.modelToSnakeCase(this._buildCreateCfarContractRequest()))
       .pipe(take(1))
       .subscribe({

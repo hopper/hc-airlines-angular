@@ -5,7 +5,6 @@ import { GlobalComponent } from '../global.component';
 import { TranslateService } from '@ngx-translate/core';
 import { DateAdapter } from "@angular/material/core";
 import { ApiTranslatorUtils } from '../../utils/api-translator.utils';
-import { HopperProxyService } from '../../services/hopper-proxy.service';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
@@ -16,6 +15,7 @@ import { DatePipe } from '@angular/common';
 import { ExerciseActionStep } from '../../enums/exercise-action-step.enum';
 import { SendCfarContractExerciceVerificationCodeResponse } from '../../apis/hopper-cloud-airline/v1';
 import { ErrorCode } from '../../enums/error-code.enum';
+import { HopperCfarService } from '../../services/hopper-cfar.service';
 
 @Component({
   selector: 'hopper-cfar-exercise-flow',
@@ -64,7 +64,7 @@ export class CfarExerciseFlowComponent extends GlobalComponent implements OnInit
     private _domSanitizer: DomSanitizer,
     private _adapter: DateAdapter<any>,
     private _translateService: TranslateService,
-    private _hopperProxyService: HopperProxyService,
+    private _hopperCfarService: HopperCfarService,
     private _formBuilder: FormBuilder,
     private _http: HttpClient,
     private _datePipe: DatePipe
@@ -167,7 +167,7 @@ export class CfarExerciseFlowComponent extends GlobalComponent implements OnInit
         this.flowCompleted.emit();
       }, 2000);
     } else {
-      this._hopperProxyService
+      this._hopperCfarService
         .postRefundRecipients(this.basePath, this.hCSessionId, ApiTranslatorUtils.modelToSnakeCase(this._buildCreateRefundRecipientRequest()))
         .pipe(take(1))
         .subscribe({
@@ -189,7 +189,7 @@ export class CfarExerciseFlowComponent extends GlobalComponent implements OnInit
                 userId: userId
               };
           
-              this._hopperProxyService
+              this._hopperCfarService
                 .postRefundAuthorizations(this.basePath, this.hCSessionId, ApiTranslatorUtils.modelToSnakeCase(request))
                 .pipe(take(1))
                 .subscribe({
@@ -264,7 +264,7 @@ export class CfarExerciseFlowComponent extends GlobalComponent implements OnInit
       transferMethodId: event.detail.trmObject.token
     };
 
-    this._hopperProxyService
+    this._hopperCfarService
       .postInitiateRefund(this.basePath, this.hCSessionId, ApiTranslatorUtils.modelToSnakeCase(request))
       .pipe(take(1))
       .subscribe({
@@ -321,7 +321,7 @@ export class CfarExerciseFlowComponent extends GlobalComponent implements OnInit
     } else {
       this.isLoading = true;
 
-      this._hopperProxyService
+      this._hopperCfarService
         .postSendCfarExerciseVerificationCode(this.basePath, this.hCSessionId, this.contractId, ApiTranslatorUtils.modelToSnakeCase({}))
         .pipe(take(1))
         .subscribe({
@@ -362,7 +362,7 @@ export class CfarExerciseFlowComponent extends GlobalComponent implements OnInit
     } else {
       this.isLoading = true;
 
-      this._hopperProxyService
+      this._hopperCfarService
         .postCheckCfarExerciseVerificationCode(this.basePath, this.hCSessionId, this.contractId, ApiTranslatorUtils.modelToSnakeCase(this._buildCheckExerciseVerificationCodeRequest()))
         .pipe(take(1))
         .subscribe({
@@ -409,7 +409,7 @@ export class CfarExerciseFlowComponent extends GlobalComponent implements OnInit
       this.isLoading = true;
 
       // Get the contract with the exercise
-      this._hopperProxyService
+      this._hopperCfarService
         .getCfarContractsId(this.basePath, this.hCSessionId, this.contractId)
         .pipe(take(1))
         .subscribe({

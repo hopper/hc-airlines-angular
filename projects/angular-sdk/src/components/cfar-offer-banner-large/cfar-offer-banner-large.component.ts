@@ -5,7 +5,7 @@ import { GlobalComponent } from '../global.component';
 import { TranslateService } from '@ngx-translate/core';
 import { DateAdapter } from "@angular/material/core";
 import { ApiTranslatorUtils } from '../../utils/api-translator.utils';
-import { HopperProxyService } from '../../services/hopper-proxy.service';
+import { HopperCfarService } from '../../services/hopper-cfar.service';
 
 @Component({
   selector: 'hopper-cfar-offer-banner-large',
@@ -34,7 +34,7 @@ export class CfarOfferBannerLargeComponent extends GlobalComponent implements On
   constructor(
     private _adapter: DateAdapter<any>,
     private _translateService: TranslateService,
-    private _hopperProxyService: HopperProxyService,
+    private _hopperCfarService: HopperCfarService,
   ) {
     super(_adapter, _translateService);
   }
@@ -53,7 +53,7 @@ export class CfarOfferBannerLargeComponent extends GlobalComponent implements On
 
       this._initUiSource();
 
-      this._hopperProxyService
+      this._hopperCfarService
         .postCfarOffers(this.basePath, this.hCSessionId, this.currentLang, ApiTranslatorUtils.modelToSnakeCase(this._buildCreateCfarOfferRequest()))
         .pipe(take(1))
         .subscribe({
@@ -116,7 +116,7 @@ export class CfarOfferBannerLargeComponent extends GlobalComponent implements On
           this.isLoading = true;
 
           // Create CFAR Contract
-          this._hopperProxyService
+          this._hopperCfarService
             .postCfarContracts(this.basePath, this.hCSessionId, ApiTranslatorUtils.modelToSnakeCase(this._buildCreateCfarContractRequest()))
             .pipe(take(1))
             .subscribe({
