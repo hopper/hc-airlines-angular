@@ -1,7 +1,7 @@
 import { Component, Inject, OnChanges, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { take } from 'rxjs/operators';
-import { CfarContractCustomer, CfarItinerary, CfarOfferCustomer, CreateCfarContractCustomerRequest, CreateCfarOfferCustomerRequest, RequestType, UiSource } from '../../apis/hopper-cloud-airline/v1';
+import { CfarContractCustomer, CfarItinerary, CfarOfferCustomer, CreateCfarContractCustomerRequest, CreateCfarOfferCustomerRequest, RequestType, UiSource, UiVariant } from '../../apis/hopper-cloud-airline/v1';
 import { TranslateService } from '@ngx-translate/core';
 import { DateAdapter } from "@angular/material/core";
 import { GlobalComponent } from '../global.component';
@@ -61,34 +61,61 @@ export class CfarOfferDialogComponent extends GlobalComponent implements OnInit,
     } else if (this.cfarOffers && this.cfarOffers?.length > 0) {
       this.selectedCfarOffer = this._getCheapestOffer(this.cfarOffers);
     } else {
-      this.isLoading = true;
-  
-      this._hopperCfarService
-        .postCfarOffers(this.basePath, this._hCSessionId, this.currentLang, ApiTranslatorUtils.modelToSnakeCase(this._buildCreateCfarOfferRequest()))
-        .pipe(take(1))
-        .subscribe({
-          next: (cfarOffers) => {
-            let results: CfarOfferCustomer[] = [];
-  
-            if (cfarOffers) {
-              cfarOffers.forEach(cfarOffer => {
-                results.push(ApiTranslatorUtils.modelToCamelCase(cfarOffer) as CfarOfferCustomer);
-              });
-            }
-            
-            this.cfarOffers = results;
-            // The cheapest by default
-            this.selectedCfarOffer = this._getCheapestOffer(this.cfarOffers);
-            this.isLoading = false;
-          },
-          error: (error) => {
-            const builtError = this._getHcAirlinesErrorResponse(error);
-            this.errorCode = builtError.code;
-
-            this.isLoading = false;
-          }
-        });
+      this.initCfarOffers();      
     }
+  }
+
+  // -----------------------------------------------
+  //  Protected Methods
+  // -----------------------------------------------
+
+  protected initCfarOffers(): void {
+    this.isLoading = true;
+    
+    this._hopperCfarService
+    .postCfarOffers(this.basePath, this._hCSessionId, this.currentLang, ApiTranslatorUtils.modelToSnakeCase(this._buildCreateCfarOfferRequest()))
+    .pipe(take(1))
+    .subscribe({
+      next: (cfarOffers) => {
+        let results: CfarOfferCustomer[] = [];
+
+        if (cfarOffers) {
+          cfarOffers.forEach(cfarOffer => {
+            results.push(ApiTranslatorUtils.modelToCamelCase(cfarOffer) as CfarOfferCustomer);
+          });
+        }
+        
+        this.cfarOffers = results;
+        // The cheapest by default
+        this.selectedCfarOffer = this._getCheapestOffer(this.cfarOffers);
+        this.isLoading = false;
+
+        // Build corresponding events
+        this.createEventsAfterInit();
+      },
+      error: (error) => {
+        const builtError = this._getHcAirlinesErrorResponse(error);
+        this.errorCode = builtError.code;
+
+        this.isLoading = false;
+      }
+    });
+  }
+
+  protected createEventsAfterInit(): void {
+    this.isLoading = true;
+    this._hopperEventService
+      .postCreateCfarOffersTakeoverDisplay(this.basePath, this._hCSessionId)
+      .pipe(take(1))
+      .subscribe({
+        next: () => {
+          this.isLoading = false;
+        },
+        error: (error) => {
+          console.error(error);
+          this.isLoading = false;
+        }
+      });
   }
 
   // -----------------------------------------------

@@ -34,14 +34,13 @@ export class HopperEventsService extends HopperProxyService {
     return this._customerService.postCustomerEvents(event, hCSessionId);
   }
   
-  postCreateCfarOffersTakeoverDisplay(basePath: string, hCSessionId: string, uiVariant: UiVariant): Observable<any> {
+  postCreateCfarOffersTakeoverDisplay(basePath: string, hCSessionId: string): Observable<any> {
     // Init services
     this._overrideConfiguration(basePath);
 
     // Build the event
     let event: CfarOffersTakeoverDisplay = {
       occurredDateTime: new Date(),
-      uiVariant: uiVariant,
       type: "cfar_offers_takeover_display"
     }
     
