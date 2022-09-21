@@ -1,5 +1,14 @@
 <a name="4.1.0"></a>
 
+# 4.1.1 (2022-09-20)
+Offer Banner Large:
+- Fixed a display issue with the PoweredBy Logo
+
+General:
+- Reduced the CSS weight (faster loading)
+
+<a name="4.1.0"></a>
+
 # 4.1.0 (2022-09-12)
 
 Offer Banner:
