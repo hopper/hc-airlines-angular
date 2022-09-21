@@ -1,11 +1,12 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { take } from 'rxjs/operators';
-import { CfarContractCustomer, CfarItinerary, CfarOfferCustomer, CreateCfarContractCustomerRequest, CreateCfarOfferCustomerRequest, RequestType, UiSource } from '../../apis/hopper-cloud-airline/v1';
+import { CfarContractCustomer, CfarItinerary, CfarOfferCustomer, CreateCfarContractCustomerRequest, CreateCfarOfferCustomerRequest, RequestType, UiSource, UiVariant } from '../../apis/hopper-cloud-airline/v1';
 import { GlobalComponent } from '../global.component';
 import { TranslateService } from '@ngx-translate/core';
 import { DateAdapter } from "@angular/material/core";
 import { ApiTranslatorUtils } from '../../utils/api-translator.utils';
 import { HopperCfarService } from '../../services/hopper-cfar.service';
+import { HopperEventsService } from '../../services/hopper-events.service';
 
 @Component({
   selector: 'hopper-cfar-offer-banner-large',
@@ -30,11 +31,13 @@ export class CfarOfferBannerLargeComponent extends GlobalComponent implements On
 
   private contractsByChoiceIndex = new Map<number, CfarContractCustomer>();
   private uiSource!: UiSource;
+  private uiVariant!: UiVariant;
 
   constructor(
     private _adapter: DateAdapter<any>,
     private _translateService: TranslateService,
     private _hopperCfarService: HopperCfarService,
+    private _hopperEventService: HopperEventsService,
   ) {
     super(_adapter, _translateService);
   }
@@ -49,36 +52,61 @@ export class CfarOfferBannerLargeComponent extends GlobalComponent implements On
       this.selectedCfarOffer = this._getCheapestOffer(this.cfarOffers);
       this.offersLoaded.emit(this.cfarOffers);
     } else {
-      this.isLoading = true;
+      this._initUiElements();
 
-      this._initUiSource();
-
-      this._hopperCfarService
-        .postCfarOffers(this.basePath, this.hCSessionId, this.currentLang, ApiTranslatorUtils.modelToSnakeCase(this._buildCreateCfarOfferRequest()))
-        .pipe(take(1))
-        .subscribe({
-          next: (cfarOffers) => {
-            let results: CfarOfferCustomer[] = [];
-
-            if (cfarOffers) {
-              cfarOffers.forEach(cfarOffer => {
-                results.push(ApiTranslatorUtils.modelToCamelCase(cfarOffer) as CfarOfferCustomer);
-              });
-            }
-            
-            this.cfarOffers = results;
-            this.selectedCfarOffer = this._getCheapestOffer(this.cfarOffers);
-            this.offersLoaded.emit(this.cfarOffers);
-            
-            this.isLoading = false;
-          },
-          error: (error) => {
-            console.error(error);
-            this.offersLoaded.emit();
-            this.isLoading = false;
-          }
-        });
+      this.initCfarOffers();
     }
+  }
+
+  // -----------------------------------------------
+  //  Initialization Methods
+  // -----------------------------------------------
+
+  protected initCfarOffers(): void {
+    this.isLoading = true;
+    this._hopperCfarService
+      .postCfarOffers(this.basePath, this.hCSessionId, this.currentLang, ApiTranslatorUtils.modelToSnakeCase(this._buildCreateCfarOfferRequest()))
+      .pipe(take(1))
+      .subscribe({
+        next: (cfarOffers) => {
+          let results: CfarOfferCustomer[] = [];
+
+          if (cfarOffers) {
+            cfarOffers.forEach(cfarOffer => {
+              results.push(ApiTranslatorUtils.modelToCamelCase(cfarOffer) as CfarOfferCustomer);
+            });
+          }
+          
+          this.cfarOffers = results;
+          this.selectedCfarOffer = this._getCheapestOffer(this.cfarOffers);
+          this.offersLoaded.emit(this.cfarOffers);          
+          this.isLoading = false;
+
+          // Build corresponding event
+          this.createEventAfterInit();
+        },
+        error: (error) => {
+          console.error(error);
+          this.offersLoaded.emit();
+          this.isLoading = false;
+        }
+      });
+  }
+
+  protected createEventAfterInit(): void {
+    this.isLoading = true;
+    this._hopperEventService
+      .postCreateCfarOffersBannerDisplay(this.basePath, this.hCSessionId, this.uiVariant)
+      .pipe(take(1))
+      .subscribe({
+        next: () => {
+          this.isLoading = false;
+        },
+        error: (error) => {
+          console.error(error);
+          this.isLoading = false;
+        }
+      });
   }
 
   // -----------------------------------------------
@@ -154,12 +182,13 @@ export class CfarOfferBannerLargeComponent extends GlobalComponent implements On
   // -----------------------------------------------
 
   /**
-   * Actually, The UI Source is fixed using the parameters of the component.
+   * Actually, The UI elements are fixed using the input parameters of the component.
    * FIXME In the future, use a dedicated parameter, passed by the airline. 
    * WARN /!\ Call this method only when initializing the component (i.e. ngOnInit).
    * @returns 
    */
-  private _initUiSource() {
+  private _initUiElements() {
+    this.uiVariant = this.hasNoCoverageOption ? UiVariant.A : UiVariant.B;
     this.uiSource = this.hasNoCoverageOption ? UiSource.BannerVariantA : UiSource.BannerVariantB;
   }
 
