@@ -169,6 +169,9 @@ export class CfarOfferBannerLargeComponent extends GlobalComponent implements On
   }
 
   protected createEventsAfterInit(): void {
+    if (this.isFakeBackend) {
+      return;
+    }    
     this._hopperEventService
       .postCreateCfarOffersBannerDisplay(this.basePath, this.hCSessionId, this.uiVariant)
       .pipe(take(1))
@@ -185,6 +188,9 @@ export class CfarOfferBannerLargeComponent extends GlobalComponent implements On
   }
   
   protected createWarningMessageEvent(): void {
+    if (this.isFakeBackend) {
+      return;
+    }
     this._hopperEventService
       .postCreateCfarForcedChoiceWarning(this.basePath, this.hCSessionId)
       .pipe(take(1))
@@ -197,6 +203,9 @@ export class CfarOfferBannerLargeComponent extends GlobalComponent implements On
   }
   
   protected createTermsAndConditionsEvent(): void {
+    if (this.isFakeBackend) {
+      return;
+    }
     this._hopperEventService
       .postCreateCfarViewInfo(this.basePath, this.hCSessionId, this.uiSource)
       .pipe(take(1))
@@ -209,6 +218,9 @@ export class CfarOfferBannerLargeComponent extends GlobalComponent implements On
   }
   
   protected createDenyPurchaseEvent(): void {
+    if (this.isFakeBackend) {
+      return;
+    }
     this._hopperEventService
       .postCreateCfarDenyPurchase(this.basePath, this.hCSessionId, this.uiSource)
       .pipe(take(1))

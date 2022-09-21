@@ -163,6 +163,9 @@ export class CfarOfferDialogComponent extends GlobalComponent implements OnInit,
   }
 
   protected createEventsAfterInit(): void {
+    if (this.isFakeBackend) {
+      return;
+    }
     this._hopperEventService
       .postCreateCfarOffersTakeoverDisplay(this.basePath, this._hCSessionId)
       .pipe(take(1))
@@ -175,6 +178,9 @@ export class CfarOfferDialogComponent extends GlobalComponent implements OnInit,
   }
   
   protected createTermsAndConditionsEvent(): void {
+    if (this.isFakeBackend) {
+      return;
+    }
     this._hopperEventService
       .postCreateCfarViewInfo(this.basePath, this._hCSessionId, UiSource.Takeover)
       .pipe(take(1))
@@ -187,6 +193,9 @@ export class CfarOfferDialogComponent extends GlobalComponent implements OnInit,
   }
   
   protected createDenyPurchaseEvent(): void {
+    if (this.isFakeBackend) {
+      return;
+    }
     this._hopperEventService
       .postCreateCfarDenyPurchase(this.basePath, this._hCSessionId, UiSource.Takeover)
       .pipe(take(1))
