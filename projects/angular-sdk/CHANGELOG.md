@@ -1,4 +1,10 @@
-<a name="4.1.0"></a>
+<a name="4.2.0"></a>
+
+# 4.2.0 (2022-09-22)
+General:
+- Analytics events management
+
+<a name="4.1.1"></a>
 
 # 4.1.1 (2022-09-20)
 Offer Banner Large:
