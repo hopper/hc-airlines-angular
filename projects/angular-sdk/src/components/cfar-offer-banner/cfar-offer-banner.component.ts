@@ -5,7 +5,7 @@ import { GlobalComponent } from '../global.component';
 import { TranslateService } from '@ngx-translate/core';
 import { DateAdapter } from "@angular/material/core";
 import { ApiTranslatorUtils } from '../../utils/api-translator.utils';
-import { HopperProxyService } from '../../services/hopper-proxy.service';
+import { HopperCfarService } from '../../services/hopper-cfar.service';
 import { MatDialog } from '@angular/material/dialog';
 import { CfarOfferDialogComponent } from '../cfar-offer-dialog/cfar-offer-dialog.component';
 import { DialogUtils } from '../../utils/dialog.utils';
@@ -32,7 +32,7 @@ export class CfarOfferBannerComponent extends GlobalComponent implements OnInit 
   constructor(
     private _adapter: DateAdapter<any>,
     private _translateService: TranslateService,
-    private _hopperProxyService: HopperProxyService,
+    private _hopperCfarService: HopperCfarService,
     private _dialog: MatDialog
   ) {
     super(_adapter, _translateService);
@@ -50,7 +50,7 @@ export class CfarOfferBannerComponent extends GlobalComponent implements OnInit 
     } else {
       this.isLoading = true;
 
-      this._hopperProxyService
+      this._hopperCfarService
         .postCfarOffers(this.basePath, this.hCSessionId, this.currentLang, ApiTranslatorUtils.modelToSnakeCase(this._buildCreateCfarOfferRequest()))
         .pipe(take(1))
         .subscribe({

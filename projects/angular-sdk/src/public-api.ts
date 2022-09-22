@@ -4,6 +4,7 @@
 
 // SERVICES (only specific elements)
 // export * from './services/hopper-events.service';
+// export * from './services/hopper-cfar.service';
 // export * from './services/hopper-proxy.service';
 
 // DIRECTIVES (only specific elements)

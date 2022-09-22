@@ -1,12 +1,13 @@
 import { Component, Inject, OnChanges, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { take } from 'rxjs/operators';
-import { CfarContractCustomer, CfarItinerary, CfarOfferCustomer, CreateCfarContractCustomerRequest, CreateCfarOfferCustomerRequest, RequestType } from '../../apis/hopper-cloud-airline/v1';
+import { CfarContractCustomer, CfarItinerary, CfarOfferCustomer, CreateCfarContractCustomerRequest, CreateCfarOfferCustomerRequest, RequestType, UiSource, UiVariant } from '../../apis/hopper-cloud-airline/v1';
 import { TranslateService } from '@ngx-translate/core';
 import { DateAdapter } from "@angular/material/core";
 import { GlobalComponent } from '../global.component';
 import { ApiTranslatorUtils } from '../../utils/api-translator.utils';
-import { HopperProxyService } from '../../services/hopper-proxy.service';
+import { HopperCfarService } from '../../services/hopper-cfar.service';
+import { HopperEventsService } from '../../services/hopper-events.service';
 
 @Component({
   selector: 'hopper-cfar-offer-dialog',
@@ -28,7 +29,8 @@ export class CfarOfferDialogComponent extends GlobalComponent implements OnInit,
     private _translateService: TranslateService,
     private _dialogRef: MatDialogRef<CfarOfferDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private _hopperProxyService: HopperProxyService
+    private _hopperCfarService: HopperCfarService,
+    private _hopperEventService: HopperEventsService
   ) {
     super(_adapter, _translateService);
 
@@ -59,33 +61,7 @@ export class CfarOfferDialogComponent extends GlobalComponent implements OnInit,
     } else if (this.cfarOffers && this.cfarOffers?.length > 0) {
       this.selectedCfarOffer = this._getCheapestOffer(this.cfarOffers);
     } else {
-      this.isLoading = true;
-  
-      this._hopperProxyService
-        .postCfarOffers(this.basePath, this._hCSessionId, this.currentLang, ApiTranslatorUtils.modelToSnakeCase(this._buildCreateCfarOfferRequest()))
-        .pipe(take(1))
-        .subscribe({
-          next: (cfarOffers) => {
-            let results: CfarOfferCustomer[] = [];
-  
-            if (cfarOffers) {
-              cfarOffers.forEach(cfarOffer => {
-                results.push(ApiTranslatorUtils.modelToCamelCase(cfarOffer) as CfarOfferCustomer);
-              });
-            }
-            
-            this.cfarOffers = results;
-            // The cheapest by default
-            this.selectedCfarOffer = this._getCheapestOffer(this.cfarOffers);
-            this.isLoading = false;
-          },
-          error: (error) => {
-            const builtError = this._getHcAirlinesErrorResponse(error);
-            this.errorCode = builtError.code;
-
-            this.isLoading = false;
-          }
-        });
+      this.initCfarOffers();      
     }
   }
 
@@ -94,6 +70,9 @@ export class CfarOfferDialogComponent extends GlobalComponent implements OnInit,
   // -----------------------------------------------
 
   public onClose(): void {
+    //Create an event
+    this.createDenyPurchaseEvent();
+    // Close the window
     this._dialogRef.close();
   }
 
@@ -101,7 +80,7 @@ export class CfarOfferDialogComponent extends GlobalComponent implements OnInit,
     this.isLoading = true;
 
     // Create CFAR Contract
-    this._hopperProxyService
+    this._hopperCfarService
       .postCfarContracts(this.basePath, this._hCSessionId, ApiTranslatorUtils.modelToSnakeCase(this._buildCreateCfarContractRequest()))
       .pipe(take(1))
       .subscribe({
@@ -119,6 +98,10 @@ export class CfarOfferDialogComponent extends GlobalComponent implements OnInit,
 
   public onSelectOffer(cfarOffer: CfarOfferCustomer): void {
     this.selectedCfarOffer = cfarOffer;
+  }
+
+  public onOpenTermsAndConditions(): void {
+    this.createTermsAndConditionsEvent();
   }
 
   public computePercentage(offer: CfarOfferCustomer): number {
@@ -143,6 +126,88 @@ export class CfarOfferDialogComponent extends GlobalComponent implements OnInit,
   }
 
   // -----------------------------------------------
+  // Protected Methods
+  // -----------------------------------------------
+
+  protected initCfarOffers(): void {
+    this.isLoading = true;
+    
+    this._hopperCfarService
+    .postCfarOffers(this.basePath, this._hCSessionId, this.currentLang, ApiTranslatorUtils.modelToSnakeCase(this._buildCreateCfarOfferRequest()))
+    .pipe(take(1))
+    .subscribe({
+      next: (cfarOffers) => {
+        let results: CfarOfferCustomer[] = [];
+
+        if (cfarOffers) {
+          cfarOffers.forEach(cfarOffer => {
+            results.push(ApiTranslatorUtils.modelToCamelCase(cfarOffer) as CfarOfferCustomer);
+          });
+        }
+        
+        this.cfarOffers = results;
+        // The cheapest by default
+        this.selectedCfarOffer = this._getCheapestOffer(this.cfarOffers);
+        this.isLoading = false;
+
+        // Build corresponding events
+        this.createEventsAfterInit();
+      },
+      error: (error) => {
+        const builtError = this._getHcAirlinesErrorResponse(error);
+        this.errorCode = builtError.code;
+
+        this.isLoading = false;
+      }
+    });
+  }
+
+  protected createEventsAfterInit(): void {
+    if (this.isFakeBackend) {
+      return;
+    }
+    this._hopperEventService
+      .postCreateCfarOffersTakeoverDisplay(this.basePath, this._hCSessionId)
+      .pipe(take(1))
+      .subscribe({
+        next: () => {},
+        error: (error) => {
+          console.error(error);
+        }
+      });
+  }
+  
+  protected createTermsAndConditionsEvent(): void {
+    if (this.isFakeBackend) {
+      return;
+    }
+    this._hopperEventService
+      .postCreateCfarViewInfo(this.basePath, this._hCSessionId, UiSource.Takeover)
+      .pipe(take(1))
+      .subscribe({
+        next: () => {},
+        error: (error) => {
+          console.error(error);
+        }
+      });
+  }
+  
+  protected createDenyPurchaseEvent(): void {
+    if (this.isFakeBackend) {
+      return;
+    }
+    this._hopperEventService
+      .postCreateCfarDenyPurchase(this.basePath, this._hCSessionId, UiSource.Takeover)
+      .pipe(take(1))
+      .subscribe({
+        next: () => {},
+        error: (error) => {
+          console.error(error);
+        }
+      });
+  }
+
+  // -----------------------------------------------
   // Privates Methods
   // -----------------------------------------------
 
@@ -156,7 +221,8 @@ export class CfarOfferDialogComponent extends GlobalComponent implements OnInit,
   private _buildCreateCfarContractRequest(): CreateCfarContractCustomerRequest {
     return {
       offerIds: [this.selectedCfarOffer.id],
-      itinerary: this.selectedCfarOffer.itinerary
+      itinerary: this.selectedCfarOffer.itinerary,
+      uiSource: UiSource.Takeover
     };
   } 
 

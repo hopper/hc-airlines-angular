@@ -9,15 +9,11 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { CfarItinerary } from './cfarItinerary';
-import { UiSource } from './uiSource';
 
-/**
- * A create CFAR contract customer request
- */
-export interface CreateCfarContractCustomerRequest { 
-    offerIds: Array<string>;
-    itinerary: CfarItinerary;
-    pnrReference?: string;
-    uiSource?: UiSource;
-}
+export type UiVariant = 'variant_a' | 'variant_b' | 'variant_c';
+
+export const UiVariant = {
+    A: 'variant_a' as UiVariant,
+    B: 'variant_b' as UiVariant,
+    C: 'variant_c' as UiVariant
+};
