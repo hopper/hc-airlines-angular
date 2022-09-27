@@ -162,12 +162,16 @@ export class CfarOfferDialogComponent extends GlobalComponent implements OnInit,
     });
   }
 
+  protected toCfarOffersIds(): Array<string> {
+    return this.cfarOffers.map(cfarOffer => cfarOffer.id)
+  }
+
   protected createEventsAfterInit(): void {
     if (this.isFakeBackend) {
       return;
     }
     this._hopperEventService
-      .postCreateCfarOffersTakeoverDisplay(this.basePath, this._hCSessionId)
+      .postCreateCfarOffersTakeoverDisplay(this.basePath, this._hCSessionId, this.toCfarOffersIds())
       .pipe(take(1))
       .subscribe({
         next: () => {},
@@ -182,7 +186,7 @@ export class CfarOfferDialogComponent extends GlobalComponent implements OnInit,
       return;
     }
     this._hopperEventService
-      .postCreateCfarViewInfo(this.basePath, this._hCSessionId, UiSource.Takeover)
+      .postCreateCfarViewInfo(this.basePath, this._hCSessionId, this.toCfarOffersIds(), UiSource.Takeover)
       .pipe(take(1))
       .subscribe({
         next: () => {},
@@ -197,7 +201,7 @@ export class CfarOfferDialogComponent extends GlobalComponent implements OnInit,
       return;
     }
     this._hopperEventService
-      .postCreateCfarDenyPurchase(this.basePath, this._hCSessionId, UiSource.Takeover)
+      .postCreateCfarDenyPurchase(this.basePath, this._hCSessionId, this.toCfarOffersIds(), UiSource.Takeover)
       .pipe(take(1))
       .subscribe({
         next: () => {},

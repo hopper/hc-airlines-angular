@@ -168,12 +168,16 @@ export class CfarOfferBannerLargeComponent extends GlobalComponent implements On
       });
   }
 
+  protected toCfarOffersIds(): Array<string> {
+    return this.cfarOffers.map(cfarOffer => cfarOffer.id)
+  }
+
   protected createEventsAfterInit(): void {
     if (this.isFakeBackend) {
       return;
     }    
     this._hopperEventService
-      .postCreateCfarOffersBannerDisplay(this.basePath, this.hCSessionId, this.uiVariant)
+      .postCreateCfarOffersBannerDisplay(this.basePath, this.hCSessionId, this.toCfarOffersIds(), this.uiVariant)
       .pipe(take(1))
       .subscribe({
         next: () => {
@@ -192,7 +196,7 @@ export class CfarOfferBannerLargeComponent extends GlobalComponent implements On
       return;
     }
     this._hopperEventService
-      .postCreateCfarForcedChoiceWarning(this.basePath, this.hCSessionId)
+      .postCreateCfarForcedChoiceWarning(this.basePath, this.hCSessionId, this.toCfarOffersIds())
       .pipe(take(1))
       .subscribe({
         next: () => {},
@@ -207,7 +211,7 @@ export class CfarOfferBannerLargeComponent extends GlobalComponent implements On
       return;
     }
     this._hopperEventService
-      .postCreateCfarViewInfo(this.basePath, this.hCSessionId, this.uiSource)
+      .postCreateCfarViewInfo(this.basePath, this.hCSessionId, this.toCfarOffersIds(), this.uiSource)
       .pipe(take(1))
       .subscribe({
         next: () => {},
@@ -222,7 +226,7 @@ export class CfarOfferBannerLargeComponent extends GlobalComponent implements On
       return;
     }
     this._hopperEventService
-      .postCreateCfarDenyPurchase(this.basePath, this.hCSessionId, this.uiSource)
+      .postCreateCfarDenyPurchase(this.basePath, this.hCSessionId, this.toCfarOffersIds(), this.uiSource)
       .pipe(take(1))
       .subscribe({
         next: () => {},
