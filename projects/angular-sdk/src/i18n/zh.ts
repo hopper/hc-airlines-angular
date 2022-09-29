@@ -279,6 +279,8 @@ export const locale: I18n = {
                 EX024: "The contract exercise was not found.",
                 EX029: "The contract exercise was not found.",
                 EX030: "The contract exercise was not found.",
+                EX032: "The verification code to proceed an exercise has nos been sent..",
+                EX033: "Missing parameters to complete the exercise.",
                 OF001: "No eligible offers",
                 OF002: "The offer could not be saved.",
                 OF003: "The offer could not be saved.",
@@ -292,6 +294,11 @@ export const locale: I18n = {
                 SE002: "The session was not found.",
                 SE003: "The session was not found.",
                 SE004: "The session was not found.",
+                SE009: "The session was not found.",
+                SE010: "The session has expired.",
+                SE011: "The session was not found.",
+                SE012: "The session was not found.",
+                SE013: "The session does not have the correct flow type.",
                 CO001: "The contract was not found.",
                 CO002: "The contract was not found.",
                 CO003: "The contract was not found.",
@@ -303,7 +310,11 @@ export const locale: I18n = {
                 CO009: "The contract itinerary passenger counts do not match the itinerary passenger counts of the offer.",
                 CO010: "The contract itinerary price is not valid for the offer.",
                 CO011: "The contract itinerary slices do not match the itinerary slices of the offer.",
-                CO022: "The contract could not be save."
+                CO012: "The contract status is incorrect.",
+                CO022: "The contract could not be saved.",
+                CO030: "The contract could not be created.",
+                EM001: "The email could not be sent.",
+                EM002: "The email could not be sent."
             }
         },
         CFAR_OFFER_BANNER: {
