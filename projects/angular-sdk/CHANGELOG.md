@@ -1,3 +1,10 @@
+<a name="4.2.1"></a>
+
+# 4.2.1 (2022-09-29)
+General:
+- Use an exercise ID instead of a contract ID at claims portal opening
+- Complete the callbackUrl with a redirection token 
+
 <a name="4.2.0"></a>
 
 # 4.2.0 (2022-09-22)
