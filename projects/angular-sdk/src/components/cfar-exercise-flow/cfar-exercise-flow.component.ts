@@ -1,6 +1,6 @@
 import { Component, ElementRef, EventEmitter, HostListener, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { take } from 'rxjs/operators';
-import { CfarContract, CfarStatus, CfarItinerary, CheckCfarContractExerciceVerificationCodeResponse, CheckCfarContractExerciseVerificationCodeRequest, CreateRefundAuthorizationRequest, CreateRefundRecipientRequest, InitiateRefundRequest, RefundAuthorization, RefundRecipient, AirlineRefundMethod, GetCfarExerciseCustomerResponse } from '../../apis/hopper-cloud-airline/v1';
+import { CfarContract, CfarStatus, CfarItinerary, CheckCfarContractExerciceVerificationCodeResponse, CheckCfarContractExerciseVerificationCodeRequest, CreateRefundAuthorizationRequest, CreateRefundRecipientRequest, InitiateRefundRequest, RefundAuthorization, RefundRecipient, AirlineRefundMethod, GetCfarExerciseCustomerResponse, InitiateRefundResponse } from '../../apis/hopper-cloud-airline/v1';
 import { GlobalComponent } from '../global.component';
 import { TranslateService } from '@ngx-translate/core';
 import { DateAdapter } from "@angular/material/core";
@@ -51,6 +51,7 @@ export class CfarExerciseFlowComponent extends GlobalComponent implements OnInit
   // Fake values
   private _fakeContractId: string = "1ecf85ab-211f-68b7-9bb3-4b1a314f1a42";
   private _fakeContractExerciseId: string = "1ecf85ab-211f-68b7-9bb3-f1d35b1c2045";
+  private _fakeVerificationTokenId: string = "1ed2d2bb-8885-67a4-968f-81c642e12735";
   private _minLengthVerificationCode: number = 6;
 
   // Forms
@@ -165,7 +166,7 @@ export class CfarExerciseFlowComponent extends GlobalComponent implements OnInit
         this.stepper.next();
 
         // The flow is completed
-        this.flowCompleted.emit();
+        this.flowCompleted.emit(this._fakeVerificationTokenId);
       }, 2000);
     } else {
       this._hopperCfarService
@@ -269,13 +270,16 @@ export class CfarExerciseFlowComponent extends GlobalComponent implements OnInit
       .postInitiateRefund(this.basePath, this.hCSessionId, ApiTranslatorUtils.modelToSnakeCase(request))
       .pipe(take(1))
       .subscribe({
-        next: () => {
+        next: (initiateRefundResponse: InitiateRefundResponse) => {
+          const result = ApiTranslatorUtils.modelToCamelCase(initiateRefundResponse) as InitiateRefundResponse;
+          const redirectionToken = result.redirectionToken;
+
           this.isLoadingHyperwallet = false;
           this.userEmail = event.detail.trmObject.email;
           this.stepper.next();
 
           // The flow is completed
-          this.flowCompleted.emit();
+          this.flowCompleted.emit(redirectionToken);
         },
         error: (error) => {
           const builtError = this._getHcAirlinesErrorResponse(error);

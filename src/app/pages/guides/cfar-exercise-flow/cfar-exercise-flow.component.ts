@@ -23,7 +23,7 @@ export class CfarExerciseFlowPageComponent extends CommonGuidesComponent {
       [exerciseId]="exerciseId"
       [hyperwalletUrl]="hyperwalletUrl"
       (airlineRefundSelected)="onAirlineRefundSelected($event)"
-      (flowCompleted)="onFlowCompleted()"
+      (flowCompleted)="onFlowCompleted($event)"
     ></hopper-cfar-exercise-flow>
   `;
 
@@ -32,8 +32,8 @@ export class CfarExerciseFlowPageComponent extends CommonGuidesComponent {
       console.log(data);
     }
 
-    public onFlowCompleted(): void {
-      // Do something
+    public onFlowCompleted(data: string): void {
+      console.log(data);
     }
   `;
 
@@ -129,7 +129,7 @@ export class CfarExerciseFlowPageComponent extends CommonGuidesComponent {
     console.log(data);
   }
 
-  public onFlowCompleted(): void {
-    // Do something
+  public onFlowCompleted(data: string): void {
+    console.log(data);
   }
 }
