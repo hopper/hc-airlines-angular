@@ -1,3 +1,9 @@
+<a name="4.2.2"></a>
+
+# 4.2.2 (2022-09-29)
+General:
+- Update the list of error labels
+
 <a name="4.2.1"></a>
 
 # 4.2.1 (2022-09-29)
