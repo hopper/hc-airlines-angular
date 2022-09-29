@@ -10,10 +10,6 @@
  * Do not edit the class manually.
  */
 
-export interface CheckCfarContractExerciceVerificationCodeResponse { 
-    compliant: boolean;
-    /**
-     * Unique identifier for a CFAR exercise
-     */
-    exerciseId: string;
+export interface InitiateRefundResponse { 
+    redirectionToken: string;
 }

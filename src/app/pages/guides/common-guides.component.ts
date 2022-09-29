@@ -94,6 +94,7 @@ export abstract class CommonGuidesComponent implements OnInit, OnDestroy {
       }
     ]
   };
+  public exerciseId = "1ed2df96-ee3c-61e6-a57a-a7e77771ba29";
   public hyperwalletUrl: string = "https://sandbox.hyperwallet.com/rest/widgets/transfer-methods/";
   public hasNoCoverageOption = false;
   public hasWarningCoverageMessage = true;

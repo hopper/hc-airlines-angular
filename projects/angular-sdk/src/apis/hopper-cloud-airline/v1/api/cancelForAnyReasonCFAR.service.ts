@@ -23,6 +23,7 @@ import { CheckCfarContractExerciseVerificationCodeRequest } from '../model/check
 import { CreateRefundAuthorizationRequest } from '../model/createRefundAuthorizationRequest';
 import { CreateRefundRecipientRequest } from '../model/createRefundRecipientRequest';
 import { InitiateRefundRequest } from '../model/initiateRefundRequest';
+import { InitiateRefundResponse } from '../model/initiateRefundResponse';
 import { RefundAuthorization } from '../model/refundAuthorization';
 import { RefundRecipient } from '../model/refundRecipient';
 import { SendCfarContractExerciceVerificationCodeResponse } from '../model/sendCfarContractExerciceVerificationCodeResponse';
@@ -187,13 +188,13 @@ export class CancelForAnyReasonCFARService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public postCustomerInitiaterefund(body: InitiateRefundRequest, hCSessionID?: string, observe?: 'body', reportProgress?: boolean): Observable<any>;
-    public postCustomerInitiaterefund(body: InitiateRefundRequest, hCSessionID?: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
-    public postCustomerInitiaterefund(body: InitiateRefundRequest, hCSessionID?: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
-    public postCustomerInitiaterefund(body: InitiateRefundRequest, hCSessionID?: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public postCustomerInitiateRefund(body: InitiateRefundRequest, hCSessionID?: string, observe?: 'body', reportProgress?: boolean): Observable<InitiateRefundResponse>;
+    public postCustomerInitiateRefund(body: InitiateRefundRequest, hCSessionID?: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<InitiateRefundResponse>>;
+    public postCustomerInitiateRefund(body: InitiateRefundRequest, hCSessionID?: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<InitiateRefundResponse>>;
+    public postCustomerInitiateRefund(body: InitiateRefundRequest, hCSessionID?: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (body === null || body === undefined) {
-            throw new Error('Required parameter body was null or undefined when calling postCustomerInitiaterefund.');
+            throw new Error('Required parameter body was null or undefined when calling postCustomerInitiateRefund.');
         }
 
 
@@ -220,7 +221,7 @@ export class CancelForAnyReasonCFARService {
             headers = headers.set('Content-Type', httpContentTypeSelected);
         }
 
-        return this.httpClient.request<any>('post',`${this.basePath}/customer/initiateRefund`,
+        return this.httpClient.request<InitiateRefundResponse>('post',`${this.basePath}/customer/initiate_refund`,
             {
                 body: body,
                 withCredentials: this.configuration.withCredentials,

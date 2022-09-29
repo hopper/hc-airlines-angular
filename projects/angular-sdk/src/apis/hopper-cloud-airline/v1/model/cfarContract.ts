@@ -9,10 +9,9 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { CfarContractExercise } from './cfarContractExercise';
-import { CfarContractStatus } from './cfarContractStatus';
 import { CfarItinerary } from './cfarItinerary';
 import { CfarOffer } from './cfarOffer';
+import { CfarStatus } from './cfarStatus';
 import { MapString } from './mapString';
 
 /**
@@ -42,10 +41,9 @@ export interface CfarContract {
      */
     createdDateTime: Date;
     expiryDateTime: Date;
-    status: CfarContractStatus;
+    status: CfarStatus;
     confirmedDateTime?: Date;
     canceledDateTime?: Date;
-    contractExercise?: CfarContractExercise;
     pnrReference?: string;
     extAttributes: MapString;
 }
