@@ -11,18 +11,27 @@
  */
 import { AirlineRefundMethod } from './airlineRefundMethod';
 import { CfarItinerary } from './cfarItinerary';
+import { CfarStatus } from './cfarStatus';
 
 /**
- * A create CFAR contract exercise customer request
+ * A CFAR Exercise
  */
-export interface CreateCfarContractExerciseCustomerRequest { 
+export interface GetCfarExerciseCustomerResponse { 
     /**
-     * A unique identifier for a CFAR contract
+     * Unique identifier for a CFAR exercise
+     */
+    id: string;
+    /**
+     * Unique identifier for a contract
      */
     contractId: string;
+    /**
+     * The partner's share of the amount refunded to the customer to complete the CFAR contract exercise
+     */
+    hopperRefund: string;
+    hopperRefundMethod: AirlineRefundMethod;
+    hopperRefundCurrency: string;
+    status: CfarStatus;
+    contractExpiryDateTime: Date;
     itinerary: CfarItinerary;
-    pnrReference: string;
-    airlineRefundAllowance?: string;
-    airlineRefundMethod?: AirlineRefundMethod;
-    currency?: string;
 }

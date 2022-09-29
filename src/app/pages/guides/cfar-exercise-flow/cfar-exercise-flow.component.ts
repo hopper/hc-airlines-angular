@@ -20,7 +20,7 @@ export class CfarExerciseFlowPageComponent extends CommonGuidesComponent {
       [imageBasePath]="imageBasePath"
       [currentLang]="currentLang"
       [hCSessionId]="hCSessionId"
-      [contractId]="contractId"
+      [exerciseId]="exerciseId"
       [hyperwalletUrl]="hyperwalletUrl"
       (airlineRefundSelected)="onAirlineRefundSelected($event)"
       (flowCompleted)="onFlowCompleted()"
@@ -91,9 +91,9 @@ export class CfarExerciseFlowPageComponent extends CommonGuidesComponent {
         required: true
       },
       {
-        name: 'contractId',
+        name: 'exerciseId',
         description: `
-          A unique identifier for a CFAR contract
+          A unique identifier for a CFAR exercise
         `,
         required: true
       },

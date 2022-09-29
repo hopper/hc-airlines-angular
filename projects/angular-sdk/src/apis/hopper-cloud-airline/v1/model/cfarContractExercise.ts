@@ -45,4 +45,5 @@ export interface CfarContractExercise {
     airlineRefundAllowance?: string;
     airlineRefundMethod?: AirlineRefundMethod;
     currency?: string;
+    redirectionToken: string;
 }

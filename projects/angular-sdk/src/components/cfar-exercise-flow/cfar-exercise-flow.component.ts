@@ -1,6 +1,6 @@
 import { Component, ElementRef, EventEmitter, HostListener, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { take } from 'rxjs/operators';
-import { CfarContract, CfarContractStatus, CfarItinerary, CheckCfarContractExerciceVerificationCodeResponse, CheckCfarContractExerciseVerificationCodeRequest, CreateRefundAuthorizationRequest, CreateRefundRecipientRequest, InitiateRefundRequest, RefundAuthorization, RefundRecipient } from '../../apis/hopper-cloud-airline/v1';
+import { CfarContract, CfarStatus, CfarItinerary, CheckCfarContractExerciceVerificationCodeResponse, CheckCfarContractExerciseVerificationCodeRequest, CreateRefundAuthorizationRequest, CreateRefundRecipientRequest, InitiateRefundRequest, RefundAuthorization, RefundRecipient, AirlineRefundMethod, GetCfarExerciseCustomerResponse } from '../../apis/hopper-cloud-airline/v1';
 import { GlobalComponent } from '../global.component';
 import { TranslateService } from '@ngx-translate/core';
 import { DateAdapter } from "@angular/material/core";
@@ -25,7 +25,8 @@ import { HopperCfarService } from '../../services/hopper-cfar.service';
 export class CfarExerciseFlowComponent extends GlobalComponent implements OnInit {
 
   public selectedRefundMethod?: 'ftc' | 'cash';
-  public cfarContract!: CfarContract;
+  //public cfarContract!: CfarContract;
+  public cfarExercise!: GetCfarExerciseCustomerResponse;
   public refundMethods!: { value: 'ftc' | 'cash', label: string }[];
   public isHopperRefund!: boolean;
   public isLoading!: boolean;
@@ -41,7 +42,7 @@ export class CfarExerciseFlowComponent extends GlobalComponent implements OnInit
   private _errorTimer: number = 1000;
 
   @Input() hCSessionId!: string;
-  @Input() contractId!: string;
+  @Input() exerciseId!: string;
   @Input() hyperwalletUrl!: string;
 
   @Output() airlineRefundSelected = new EventEmitter();
@@ -309,7 +310,7 @@ export class CfarExerciseFlowComponent extends GlobalComponent implements OnInit
   }
 
   public isCfarContractExercised(): boolean {
-    return this.cfarContract ? this.cfarContract.status === CfarContractStatus.Exercised : false;
+    return this.cfarExercise ? this.cfarExercise.status === CfarStatus.Confirmed : false;
   }
 
   public onSendVerificationCode(): void {
@@ -322,13 +323,13 @@ export class CfarExerciseFlowComponent extends GlobalComponent implements OnInit
       this.isLoading = true;
 
       this._hopperCfarService
-        .postSendCfarExerciseVerificationCode(this.basePath, this.hCSessionId, this.contractId, ApiTranslatorUtils.modelToSnakeCase({}))
+        .postSendCfarExerciseVerificationCode(this.basePath, this.hCSessionId, this.exerciseId, ApiTranslatorUtils.modelToSnakeCase({}))
         .pipe(take(1))
         .subscribe({
           next: (sendVerificationCodeResult: SendCfarContractExerciceVerificationCodeResponse) => {
             const result = ApiTranslatorUtils.modelToCamelCase(sendVerificationCodeResult) as SendCfarContractExerciceVerificationCodeResponse;
 
-            this.contractId = result.contractId;
+            this.exerciseId = result.exerciseId;
             this.cfarContractUserEmail = result.anonymizedEmailAddress;
             this._setStep(ExerciseActionStep.CHECK_VERIFICATION_STEP);
 
@@ -363,14 +364,14 @@ export class CfarExerciseFlowComponent extends GlobalComponent implements OnInit
       this.isLoading = true;
 
       this._hopperCfarService
-        .postCheckCfarExerciseVerificationCode(this.basePath, this.hCSessionId, this.contractId, ApiTranslatorUtils.modelToSnakeCase(this._buildCheckExerciseVerificationCodeRequest()))
+        .postCheckCfarExerciseVerificationCode(this.basePath, this.hCSessionId, this.exerciseId, ApiTranslatorUtils.modelToSnakeCase(this._buildCheckExerciseVerificationCodeRequest()))
         .pipe(take(1))
         .subscribe({
           next: (checkVerificationCodeResult: CheckCfarContractExerciceVerificationCodeResponse) => {
             const result = ApiTranslatorUtils.modelToCamelCase(checkVerificationCodeResult) as CheckCfarContractExerciceVerificationCodeResponse;
 
             if (result.compliant) {                    
-              this.contractId = result.contractId;
+              this.exerciseId = result.exerciseId;
 
               // Load the contract and the associated exercise
               this._loadContractExercise();
@@ -402,7 +403,8 @@ export class CfarExerciseFlowComponent extends GlobalComponent implements OnInit
     this._setStep(ExerciseActionStep.PROCESS_CFAR_EXERCISE_STEP);
 
     if (this.isFakeBackend) {
-      this.cfarContract = this._buildFakeCfarContractExercisesResponse();
+      this.cfarExercise = this._buildFakeCfarExercisesResponse();
+
       // Force to true for the MVP
       this.isHopperRefund = true;
     } else {
@@ -410,13 +412,13 @@ export class CfarExerciseFlowComponent extends GlobalComponent implements OnInit
 
       // Get the contract with the exercise
       this._hopperCfarService
-        .getCfarContractsId(this.basePath, this.hCSessionId, this.contractId)
+        .getCfarExerciseById(this.basePath, this.hCSessionId, this.exerciseId)
         .pipe(take(1))
         .subscribe({
-          next: (cfarContract: CfarContract) => {
-            const result = ApiTranslatorUtils.modelToCamelCase(cfarContract) as CfarContract;
+          next: (cfarExercise: GetCfarExerciseCustomerResponse) => {
+            const result = ApiTranslatorUtils.modelToCamelCase(cfarExercise) as GetCfarExerciseCustomerResponse;
 
-            this.cfarContract = result;
+            this.cfarExercise = result;
 
             this.isLoading = false;
             
@@ -436,87 +438,10 @@ export class CfarExerciseFlowComponent extends GlobalComponent implements OnInit
     }
   }
 
-  private _buildFakeCfarContractExercisesResponse(): CfarContract {
+  private _buildFakeCfarExercisesResponse(): GetCfarExerciseCustomerResponse {
     return {
-      id: this._fakeContractId,
-      offers: [
-        {
-          id: "1ecf85a8-1c43-6fad-9bb3-0dca2ca4e73a",
-          premium: "14.00",
-          coverage: "57.78",
-          currency: "CAD",
-          requestType: "ancillary",
-          toUsdExchangeRate: "0.7743486179425866960712648520064921",
-          contractExpiryDateTime: new Date("2022-07-08T22:00:00Z"),
-          createdDateTime: new Date("2022-06-30T09:53:34.950Z"),
-          itinerary: {
-            passengerPricing: [
-              {
-                passengerCount: {
-                  count: 3,
-                  type: "adult"
-                },
-                individualPrice: "null"
-              }
-            ],
-            currency: "CAD",
-            slices: [
-              {
-                segments: [
-                  {
-                    originAirport: "YYZ",
-                    destinationAirport: "YUL",
-                    departureDateTime: "2022-07-09T18:00",
-                    arrivalDateTime: "2022-07-09T19:14",
-                    flightNumber: "AC894",
-                    validatingCarrierCode: "AC",
-                    fareClass: "economy"
-                  },
-                  {
-                    originAirport: "YUL",
-                    destinationAirport: "NCE",
-                    departureDateTime: "2022-07-09T20:50",
-                    arrivalDateTime: "2022-07-10T10:25",
-                    flightNumber: "AC878",
-                    validatingCarrierCode: "AC",
-                    fareClass: "economy"
-                  }
-                ]
-              },
-              {
-                segments: [
-                  {
-                    originAirport: "NCE",
-                    destinationAirport: "YUL",
-                    departureDateTime: "2022-07-15T13:15",
-                    arrivalDateTime: "2022-07-15T15:55",
-                    flightNumber: "AC879",
-                    validatingCarrierCode: "AC",
-                    fareClass: "economy"
-                  },
-                  {
-                    originAirport: "YUL",
-                    destinationAirport: "YYZ",
-                    departureDateTime: "2022-07-15T17:30",
-                    arrivalDateTime: "2022-07-15T18:50",
-                    flightNumber: "AC895",
-                    validatingCarrierCode: "AC",
-                    fareClass: "economy"
-                  }
-                ]
-              }
-            ],
-            ancillaries: [],
-            totalPrice: "7170.96"
-          },
-          offerDescription: [
-            "Add the flexibility to cancel your flight for any reason up to 24 hours before departure",
-            "Cancel and get a refund of your flight base fare and taxes, excluding additional services (paid seats, paid bags...)",
-            "Get instant resolution, no forms or claims required"
-          ],
-          extAttributes: {}
-        }
-      ],
+      id: this._fakeContractExerciseId,
+      contractId: this._fakeContractId,
       itinerary: {
         passengerPricing: [
           {
@@ -577,23 +502,11 @@ export class CfarExerciseFlowComponent extends GlobalComponent implements OnInit
         ancillaries: [],
         totalPrice: "71.96"
       },
-      contractExercise: {
-        id: this._fakeContractExerciseId,
-        contractId: '123456789',
-        exerciseInitiatedDateTime: new Date(),
-        hopperRefund: '57.78',
-        hopperRefundMethod: 'cash',
-        extAttributes: {},
-        airlineRefundAllowance: '47.78',
-        airlineRefundMethod: 'cash'
-      },
-      coverage: "57.78",
-      premium: "14.00",
-      currency: "CAD",
-      createdDateTime: new Date("2022-06-30T09:54:55.989Z"),
-      expiryDateTime: new Date("2022-07-08T18:00Z"),
-      status: CfarContractStatus.Confirmed,
-      extAttributes: {}
+      hopperRefund: "57.78",
+      hopperRefundMethod: AirlineRefundMethod.Ftc,
+      hopperRefundCurrency: "CAD",
+      contractExpiryDateTime: new Date("2022-07-08T18:00Z"),
+      status: CfarStatus.Confirmed
     };
   }
 

@@ -10,10 +10,12 @@
  * Do not edit the class manually.
  */
 
-export interface CheckCfarContractExerciceVerificationCodeResponse { 
-    compliant: boolean;
-    /**
-     * Unique identifier for a CFAR exercise
-     */
-    exerciseId: string;
-}
+/**
+ * The flow type for which the session is opened.
+ */
+export type FlowType = 'purchase' | 'exercise';
+
+export const FlowType = {
+    Purchase: 'purchase' as FlowType,
+    Exercise: 'exercise' as FlowType
+};

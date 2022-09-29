@@ -12,10 +12,6 @@
 
 export interface SendCfarContractExerciceVerificationCodeResponse { 
     /**
-     * Unique identifier for a contract
-     */
-    contractId: string;
-    /**
      * Unique identifier for a CFAR exercise
      */
     exerciseId: string;
