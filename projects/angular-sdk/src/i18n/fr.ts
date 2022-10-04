@@ -279,6 +279,8 @@ export const locale: I18n = {
                 EX024: "Le contrat d'exercice n'a pas été trouvé.",
                 EX029: "Le contrat d'exercice n'a pas été trouvé.",
                 EX030: "Le contrat d'exercice n'a pas été trouvé.",
+                EX032: "Le code de vérification pour procéder à un exercice n'a pas été envoyé.",
+                EX033: "Certains paramètres requis pour la création d'un exercice n'ont pas été définis.",
                 OF001: "Aucune offre éligible",
                 OF002: "L'offre n'a pas pu être enregistrée.",
                 OF003: "L'offre n'a pas pu être enregistrée.",
@@ -292,6 +294,11 @@ export const locale: I18n = {
                 SE002: "La session n'a pas été trouvée.",
                 SE003: "La session n'a pas été trouvée.",
                 SE004: "La session n'a pas été trouvée.",
+                SE009: "La session n'a pas été trouvée.",
+                SE010: "La session a expirée.",
+                SE011: "La session n'a pas été trouvée.",
+                SE012: "La session n'a pas été trouvée.",
+                SE013: "La session active n'est pas compatible avec les actions courantes.",
                 CO001: "Le contrat n'a pas été trouvé.",
                 CO002: "Le contrat n'a pas été trouvé.",
                 CO003: "Le contrat n'a pas été trouvé.",
@@ -303,7 +310,11 @@ export const locale: I18n = {
                 CO009: "Le nombre de passagers de l'itinéraire du contrat ne correspond pas au nombre de passagers de l'itinéraire de l'offre.",
                 CO010: "Le prix de l'itinéraire contractuel n'est pas valable pour l'offre.",
                 CO011: "Les tranches d'itinéraire du contrat ne correspondent pas aux tranches d'itinéraire de l'offre.",
-                CO022: "Le contrat n'a pas pu être sauvegardé."
+                CO012: "Le statut du contrat est incorrect.",
+                CO022: "Le contrat n'a pas pu être sauvegardé.",
+                CO030: "Le contract n'a pas pu être créé.",
+                EM001: "Envoi des emails impossible.",
+                EM002: "Envoi des emails impossible.",
             }
         },
         CFAR_OFFER_BANNER: {

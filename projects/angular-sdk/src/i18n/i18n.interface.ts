@@ -277,6 +277,8 @@ export interface I18n {
                 EX024: string;
                 EX029: string;
                 EX030: string;
+                EX032: string;
+                EX033: string;
                 OF001: string;
                 OF002: string;
                 OF003: string;
@@ -290,6 +292,11 @@ export interface I18n {
                 SE002: string;
                 SE003: string;
                 SE004: string;
+                SE009: string;
+                SE010: string;
+                SE011: string;
+                SE012: string;
+                SE013: string;
                 CO001: string;
                 CO002: string;
                 CO003: string;
@@ -301,7 +308,11 @@ export interface I18n {
                 CO009: string;
                 CO010: string;
                 CO011: string;
+                CO012: string;
                 CO022: string;
+                CO030: string;
+                EM001: string;
+                EM002: string;
             }
         },
         CFAR_OFFER_BANNER: {

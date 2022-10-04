@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
-import { CfarContract, CfarContractCustomer, CfarOfferCustomer, CheckCfarContractExerciceVerificationCodeResponse, CheckCfarContractExerciseVerificationCodeRequest, CreateCfarContractCustomerRequest, CreateCfarOfferCustomerRequest, CreateRefundAuthorizationRequest, CreateRefundRecipientRequest, CustomerService, InitiateRefundRequest, RefundAuthorization, RefundRecipient, SendCfarContractExerciceVerificationCodeResponse, SendCfarContractExerciseVerificationCodeRequest } from "../apis/hopper-cloud-airline/v1";
+import { CfarContractCustomer, CfarOfferCustomer, CheckCfarContractExerciceVerificationCodeResponse, CheckCfarContractExerciseVerificationCodeRequest, CreateCfarContractCustomerRequest, CreateCfarOfferCustomerRequest, CreateRefundAuthorizationRequest, CreateRefundRecipientRequest, CustomerService, GetCfarExerciseCustomerResponse, InitiateRefundRequest, InitiateRefundResponse, RefundAuthorization, RefundRecipient, SendCfarContractExerciceVerificationCodeResponse, SendCfarContractExerciseVerificationCodeRequest } from "../apis/hopper-cloud-airline/v1";
 import { HopperProxyService } from "./hopper-proxy.service";
 
 @Injectable()
@@ -28,11 +28,11 @@ export class HopperCfarService extends HopperProxyService {
     return this._customerService.postCustomerCfarContracts(request, hCSessionId);
   }
 
-  getCfarContractsId(basePath: string, hCSessionId: string, id: string): Observable<CfarContract> {
+  getCfarExerciseById(basePath: string, hCSessionId: string, id: string): Observable<GetCfarExerciseCustomerResponse> {
     // Init services
     this._overrideConfiguration(basePath);
 
-    return this._customerService.getCustomerCfarContractsId(id, hCSessionId);
+    return this._customerService.getCustomerCfarExercisesId(id, hCSessionId);
   }
 
   postRefundAuthorizations(basePath: string, hCSessionId: string, request: CreateRefundAuthorizationRequest): Observable<RefundAuthorization> {
@@ -49,11 +49,11 @@ export class HopperCfarService extends HopperProxyService {
     return this._customerService.postCustomerRefundRecipients(request, hCSessionId);
   }
 
-  postInitiateRefund(basePath: string, hCSessionId: string, request: InitiateRefundRequest): Observable<any> {
+  postInitiateRefund(basePath: string, hCSessionId: string, request: InitiateRefundRequest): Observable<InitiateRefundResponse> {
     // Init services
     this._overrideConfiguration(basePath);
     
-    return this._customerService.postCustomerInitiaterefund(request, hCSessionId);
+    return this._customerService.postCustomerInitiateRefund(request, hCSessionId);
   }
 
   postSendCfarExerciseVerificationCode(basePath: string, hCSessionId: string, contractId: string, request: SendCfarContractExerciseVerificationCodeRequest): Observable<SendCfarContractExerciceVerificationCodeResponse> {

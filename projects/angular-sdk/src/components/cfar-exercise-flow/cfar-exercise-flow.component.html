@@ -65,7 +65,7 @@
                 <!-- / STEP CHECK VERIFICATION CODE -->
         
                 <!-- EXERCISE STEPPER -->
-                <ng-container *ngIf="cfarContract && isProcessCfarExerciseStep()">
+                <ng-container *ngIf="cfarExercise && isProcessCfarExerciseStep()">
                     
                     <!-- IF THE CONTRACT HAS BEEN REFUNDED -->
                     <ng-container *ngIf="isCfarContractExercised()">
@@ -99,12 +99,12 @@
                                         <p>
                                             {{ 'CFAR_EXERCISE_FLOW.DEADLINE_SENTENCE_1' | translate }}
                                             <b>
-                                                {{ cfarContract.expiryDateTime | date: ('COMMON.DATE_FORMAT.HOUR_AND_DATE' | translate):'':currentLang }}
+                                                {{ cfarExercise.contractExpiryDateTime| date: ('COMMON.DATE_FORMAT.HOUR_AND_DATE' | translate):'':currentLang }}
                                             </b>
                                         </p>
                                         <p *ngIf="isHopperRefund">
                                             {{ 'CFAR_EXERCISE_FLOW.DEADLINE_SENTENCE_2' | translate: {
-                                                amount: cfarContract.contractExercise?.hopperRefund | currency:cfarContract.contractExercise?.currency:'symbol':undefined:currentLang
+                                                amount: cfarExercise.hopperRefund | currency:cfarExercise.hopperRefundCurrency:'symbol':undefined:currentLang
                                             } }}
                                         </p>
                                     </div>
@@ -118,7 +118,7 @@
                                 >
                                     <div fxFlex class="itinerary-container pr-16" fxLayout="column" fxLayoutAlign="center start" fxLayoutGap="32px">
             
-                                        <ng-container *ngFor="let slice of cfarContract?.itinerary?.slices">
+                                        <ng-container *ngFor="let slice of cfarExercise?.itinerary?.slices">
             
                                             <div fxLayout="row wrap" fxLayoutAlign="start center" 
                                                 *ngFor="let segment of slice?.segments">
@@ -189,20 +189,20 @@
                                     <div fxFlex fxLayout="column" fxLayoutAlign="center start">
                                         <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px" class="mb-16">
                                             <mat-icon color="accent">person</mat-icon>
-                                            <span class="subtitle" *ngIf="getNbPassengers(cfarContract.itinerary) <= 1">
+                                            <span class="subtitle" *ngIf="getNbPassengers(cfarExercise.itinerary) <= 1">
                                                 {{ 'CFAR_EXERCISE_FLOW.PASSENGER' | translate: {
-                                                    nbPassenger: getNbPassengers(cfarContract.itinerary)
+                                                    nbPassenger: getNbPassengers(cfarExercise.itinerary)
                                                 } }}
                                             </span>
-                                            <span class="subtitle" *ngIf="getNbPassengers(cfarContract.itinerary) > 1">
+                                            <span class="subtitle" *ngIf="getNbPassengers(cfarExercise.itinerary) > 1">
                                                 {{ 'CFAR_EXERCISE_FLOW.PASSENGERS' | translate: {
-                                                    nbPassenger: getNbPassengers(cfarContract.itinerary)
+                                                    nbPassenger: getNbPassengers(cfarExercise.itinerary)
                                                 } }}
                                             </span>
                                         </div>
             
                                         <div class="ml-32">
-                                            <p *ngFor="let passenger of getMapPassengers(cfarContract.itinerary) | keyvalue">
+                                            <p *ngFor="let passenger of getMapPassengers(cfarExercise.itinerary) | keyvalue">
                                                 <b>{{ ('CFAR_EXERCISE_FLOW.PASSENGER_TYPE.' + passenger?.key?.toUpperCase()) | translate }}</b> : {{ passenger?.value }}
                                             </p>
                                         </div>
@@ -219,72 +219,28 @@
                                         <span class="subtitle">{{ 'CFAR_EXERCISE_FLOW.REFUND_DETAILS_TITLE' | translate }}</span>
                                     </div>
             
-                                    <!--<div fxFlex="100" fxLayout="row wrap" fxLayoutAlign="center center" fxLayout.lt-md="column">
-            
-                                        <ng-container *ngIf="cfarContract?.contractExercise?.hopperRefundMethod">
-            
-                                            <mat-card class="m-16 pointer" fxFlex fxLayout="row wrap"
-                                                [ngClass]="{ 'active': isHopperRefund }"
-                                                [ngClass.lt-md]="{ 'active': isHopperRefund, 'full-width': true }"
-                                                (click)="onSelectRefundType('hopper')">
-                                                <div fxFlex="100">
-                                                    <h3 class="offer-title">{{ 'CFAR_EXERCISE_FLOW.HOPPER_REFUND' | translate }}</h3>
-                                                    <p>
-                                                        {{ 'CFAR_EXERCISE_FLOW.METHOD' | translate }}
-                                                        {{ cfarContract?.contractExercise?.hopperRefundMethod }}
-                                                    </p>
-                                                    <p>
-                                                        {{ 'CFAR_EXERCISE_FLOW.AMOUNT' | translate }}
-                                                        {{ cfarContract?.contractExercise?.hopperRefund | currency:cfarContract?.contractExercise?.currency:'symbol':undefined:currentLang }}
-                                                    </p>
-                                                </div>
-                                            </mat-card>
-            
-                                        </ng-container>
-            
-                                        <ng-container *ngIf="cfarContract?.contractExercise?.airlineRefundMethod">
-            
-                                            <mat-card class="m-16 pointer" fxFlex fxLayout="row wrap"
-                                                [ngClass]="{ 'active': !isHopperRefund }"
-                                                [ngClass.lt-md]="{ 'active': !isHopperRefund, 'full-width': true }"
-                                                (click)="onSelectRefundType('airline')">
-                                                <div fxFlex="100">
-                                                    <h3 class="offer-title">{{ 'CFAR_EXERCISE_FLOW.AIRLINE_REFUND' | translate }}</h3>
-                                                    <p>
-                                                        {{ 'CFAR_EXERCISE_FLOW.METHOD' | translate }}
-                                                        {{ cfarContract?.contractExercise?.airlineRefundMethod }}
-                                                    </p>
-                                                    <p>
-                                                        {{ 'CFAR_EXERCISE_FLOW.AMOUNT' | translate }}
-                                                        {{ cfarContract?.contractExercise?.airlineRefundAllowance | currency:cfarContract?.contractExercise?.currency:'symbol':undefined:currentLang }}
-                                                    </p>
-                                                </div>
-                                            </mat-card>
-            
-                                        </ng-container>
-            
-                                    </div>-->
-            
                                     <div fxFlex="100" fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="8px" class="mb-16">
                                         <p *ngIf="isHopperRefund">
                                             {{ 'CFAR_EXERCISE_FLOW.REFUND_DETAILS' | translate: {
-                                                amount: cfarContract.contractExercise?.hopperRefund | currency:cfarContract.contractExercise?.currency:'symbol':undefined:currentLang,
-                                                method: cfarContract.contractExercise?.hopperRefundMethod
+                                                amount: cfarExercise.hopperRefund | currency:cfarExercise.hopperRefundCurrency:'symbol':undefined:currentLang,
+                                                method: cfarExercise.hopperRefundMethod
                                             } }}
                                         </p>
                     
+                                        <!--
                                         <p *ngIf="!isHopperRefund">
                                             {{ 'CFAR_EXERCISE_FLOW.REFUND_DETAILS' | translate: {
-                                                amount: cfarContract.contractExercise?.airlineRefundAllowance | currency:cfarContract.contractExercise?.currency:'symbol':undefined:currentLang,
-                                                method: cfarContract.contractExercise?.airlineRefundMethod
+                                                amount: cfarExercise.airlineRefundAllowance | currency:cfarExercise.hopperRefundCurrency:'symbol':undefined:currentLang,
+                                                method: cfarExercise.airlineRefundMethod
                                             } }}
                                         </p>
+                                        -->
                                     </div>
             
                                     <div fxFlex="100" *ngIf="isHopperRefund">
                                         <p class="text-justify">
                                             {{ 'CFAR_EXERCISE_FLOW.REFUND_WARNING_MESSAGE' | translate: {
-                                                amount: cfarContract.contractExercise?.hopperRefund | currency:cfarContract.contractExercise?.currency:'symbol':undefined:currentLang
+                                                amount: cfarExercise.hopperRefund | currency:cfarExercise.hopperRefundCurrency:'symbol':undefined:currentLang
                                             } }}
                                         </p>
                                     </div>
@@ -452,7 +408,7 @@
                                 >
                                     <div fxFlex class="itinerary-container pr-16" fxLayout="column" fxLayoutAlign="center start" fxLayoutGap="32px">
             
-                                        <ng-container *ngFor="let slice of cfarContract?.itinerary?.slices">
+                                        <ng-container *ngFor="let slice of cfarExercise?.itinerary?.slices">
             
                                             <div fxLayout="row wrap" fxLayoutAlign="start center" 
                                                 *ngFor="let segment of slice?.segments">
@@ -523,20 +479,20 @@
                                     <div fxFlex fxLayout="column" fxLayoutAlign="center start">
                                         <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px" class="mb-16">
                                             <mat-icon color="accent">person</mat-icon>
-                                            <span class="subtitle" *ngIf="getNbPassengers(cfarContract.itinerary) <= 1">
+                                            <span class="subtitle" *ngIf="getNbPassengers(cfarExercise.itinerary) <= 1">
                                                 {{ 'CFAR_EXERCISE_FLOW.PASSENGER' | translate: {
-                                                    nbPassenger: getNbPassengers(cfarContract.itinerary)
+                                                    nbPassenger: getNbPassengers(cfarExercise.itinerary)
                                                 } }}
                                             </span>
-                                            <span class="subtitle" *ngIf="getNbPassengers(cfarContract.itinerary) > 1">
+                                            <span class="subtitle" *ngIf="getNbPassengers(cfarExercise.itinerary) > 1">
                                                 {{ 'CFAR_EXERCISE_FLOW.PASSENGERS' | translate: {
-                                                    nbPassenger: getNbPassengers(cfarContract.itinerary)
+                                                    nbPassenger: getNbPassengers(cfarExercise.itinerary)
                                                 } }}
                                             </span>
                                         </div>
             
                                         <div class="ml-32">
-                                            <p *ngFor="let passenger of getMapPassengers(cfarContract.itinerary) | keyvalue">
+                                            <p *ngFor="let passenger of getMapPassengers(cfarExercise.itinerary) | keyvalue">
                                                 <b>{{ ('CFAR_EXERCISE_FLOW.PASSENGER_TYPE.' + passenger?.key?.toUpperCase()) | translate }}</b> : {{ passenger?.value }}
                                             </p>
                                         </div>
@@ -553,17 +509,19 @@
                                 <div fxFlex="100" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px" class="mb-16">
                                     <p *ngIf="isHopperRefund">
                                         {{ 'CFAR_EXERCISE_FLOW.REFUND_DETAILS' | translate: {
-                                            amount: cfarContract.contractExercise?.hopperRefund | currency:cfarContract.contractExercise?.currency:'symbol':undefined:currentLang,
-                                            method: cfarContract.contractExercise?.hopperRefundMethod
+                                            amount: cfarExercise.hopperRefund | currency:cfarExercise.hopperRefundCurrency:'symbol':undefined:currentLang,
+                                            method: cfarExercise.hopperRefundMethod
                                         } }}
                                     </p>
                 
+                                    <!--
                                     <p *ngIf="!isHopperRefund">
                                         {{ 'CFAR_EXERCISE_FLOW.REFUND_DETAILS' | translate: {
-                                            amount: cfarContract.contractExercise?.airlineRefundAllowance | currency:cfarContract.contractExercise?.currency:'symbol':undefined:currentLang,
-                                            method: cfarContract.contractExercise?.airlineRefundMethod
+                                            amount: cfarExercise.airlineRefundAllowance | currency:cfarExercise.hopperRefundCurrency:'symbol':undefined:currentLang,
+                                            method: cfarExercise.airlineRefundMethod
                                         } }}
                                     </p>
+                                    -->
                                 </div>
                             </mat-step>
                             <!-- / STEP 4 -->

@@ -10,10 +10,9 @@
  * Do not edit the class manually.
  */
 
-export interface CheckCfarContractExerciceVerificationCodeResponse { 
-    compliant: boolean;
-    /**
-     * Unique identifier for a CFAR exercise
-     */
-    exerciseId: string;
-}
+export type CfarStatus = 'created' | 'confirmed';
+
+export const CfarStatus = {
+    Created: 'created' as CfarStatus,
+    Confirmed: 'confirmed' as CfarStatus
+};
