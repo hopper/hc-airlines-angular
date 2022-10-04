@@ -1,3 +1,9 @@
+<a name="4.2.3"></a>
+
+# 4.2.3 (2022-XX-XX)
+Offer Banner Large:
+- New parameter: uiVariant
+
 <a name="4.2.2"></a>
 
 # 4.2.2 (2022-09-29)

@@ -24,6 +24,7 @@ export class CfarOfferBannerLargePageComponent extends CommonGuidesComponent {
       [itineraries]="itineraries"
       [hasNoCoverageOption]="hasNoCoverageOption"
       [hasWarningCoverageMessage]="hasWarningCoverageMessage"
+      [uiVariant]="uiVariant"
       (chooseCoverage)="onChooseCoverage($event)"
       (offersLoaded)="onOffersLoaded($event)"
     ></hopper-cfar-offer-banner-large>
@@ -108,6 +109,14 @@ export class CfarOfferBannerLargePageComponent extends CommonGuidesComponent {
           False by default. If it's true, a warning message is displayed when no choice has been selected.
         `,
         required: false
+      },
+      {
+        name: 'uiVariant',
+        description: `
+          Used to do AB testing with differents displays of the component. <br />
+          Possibles values: 'variant_a', 'variant_b' or 'variant_c'
+        `,
+        required: true
       }
     ];
   }

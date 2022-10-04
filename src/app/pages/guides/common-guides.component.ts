@@ -7,7 +7,7 @@ import { AppState } from "src/app/shared/ngrx";
 import { getCurrentLang, getCurrentTheme } from "src/app/shared/ngrx/global/global.selectors";
 import { Clipboard } from '@angular/cdk/clipboard';
 import { MatSnackBar } from "@angular/material/snack-bar";
-import { CfarItinerary, PassengerPricing } from "projects/angular-sdk/src/apis/hopper-cloud-airline/v1";
+import { CfarItinerary, PassengerPricing, UiVariant } from "projects/angular-sdk/src/apis/hopper-cloud-airline/v1";
 
 @Directive({
   selector: '[CommonGuidesComponent]'
@@ -98,6 +98,7 @@ export abstract class CommonGuidesComponent implements OnInit, OnDestroy {
   public hyperwalletUrl: string = "https://sandbox.hyperwallet.com/rest/widgets/transfer-methods/";
   public hasNoCoverageOption = false;
   public hasWarningCoverageMessage = true;
+  public uiVariant = UiVariant.A;
 
   constructor(
     protected _store: Store<AppState>,
