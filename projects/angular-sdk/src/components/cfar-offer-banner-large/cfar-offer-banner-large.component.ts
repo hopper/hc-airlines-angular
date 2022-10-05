@@ -52,7 +52,7 @@ export class CfarOfferBannerLargeComponent extends GlobalComponent implements On
       this.selectedCfarOffer = this._getCheapestOffer(this.cfarOffers);
       this.offersLoaded.emit(this.cfarOffers);
     } else {
-      this._initUiElements();
+      this._initUiParameters();
 
       this.initCfarOffers();
     }
@@ -241,14 +241,19 @@ export class CfarOfferBannerLargeComponent extends GlobalComponent implements On
   // -----------------------------------------------
 
   /**
-   * Actually, The UI elements are fixed using the input parameters of the component.
-   * FIXME In the future, use a dedicated parameter, passed by the airline. 
-   * WARN /!\ Call this method only when initializing the component (i.e. ngOnInit), since the flag used can be updated later.
+   * Init UI parameters
    * @returns 
    */
-  private _initUiElements() {
-    // this.uiVariant = this.hasNoCoverageOption ? UiVariant.A : UiVariant.B;
-    this.uiSource = this.hasNoCoverageOption ? UiSource.BannerVariantA : UiSource.BannerVariantB;
+  private _initUiParameters() {
+    if (this.uiVariant === UiVariant.A) {
+      this.uiSource = UiSource.BannerVariantA;
+    } else if (this.uiVariant === UiVariant.B) {
+      this.uiSource = UiSource.BannerVariantB;
+    } else if (this.uiVariant === UiVariant.C) {
+      this.uiSource = UiSource.BannerVariantC;
+    } else {
+      this.uiSource = UiSource.BannerVariantA;
+    }
   }
 
   private _buildCreateCfarOfferRequest(): CreateCfarOfferCustomerRequest {
