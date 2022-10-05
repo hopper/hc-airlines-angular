@@ -1,3 +1,10 @@
+<a name="4.2.4"></a>
+
+# 4.2.4 (2022-XX-XX)
+General:
+- Price per traveler is now based of the premium amount (iso the coverage amount)
+- Manage additional parameters for analytics events
+
 <a name="4.2.3"></a>
 
 # 4.2.3 (2022-10-04)

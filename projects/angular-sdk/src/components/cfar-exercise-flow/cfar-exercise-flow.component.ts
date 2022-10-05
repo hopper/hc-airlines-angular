@@ -510,7 +510,7 @@ export class CfarExerciseFlowComponent extends GlobalComponent implements OnInit
       hopperRefundMethod: AirlineRefundMethod.Ftc,
       hopperRefundCurrency: "CAD",
       contractExpiryDateTime: new Date("2022-07-08T18:00Z"),
-      status: CfarStatus.Confirmed
+      status: CfarStatus.Created
     };
   }
 
