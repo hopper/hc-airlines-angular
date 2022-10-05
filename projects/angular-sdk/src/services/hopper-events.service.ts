@@ -18,13 +18,14 @@ export class HopperEventsService extends HopperProxyService {
   // CFAR events
   // ----------------------------------------------------------
 
-  postCreateCfarOffersBannerDisplay(basePath: string, hCSessionId: string, uiVariant: UiVariant): Observable<any> {
+  postCreateCfarOffersBannerDisplay(basePath: string, hCSessionId: string, cfarOffersIds: Array<string>, uiVariant: UiVariant): Observable<any> {
     // Init services
     this._overrideConfiguration(basePath);
 
     // Build the event
     let event: CfarOffersBannerDisplay = {
       occurredDateTime: new Date(),
+      cfarOffersIds: cfarOffersIds,
       uiVariant: uiVariant,
       type: "cfar_offers_banner_display"
     }
@@ -32,39 +33,42 @@ export class HopperEventsService extends HopperProxyService {
     return this._customerService.postCustomerEvents(event, hCSessionId);
   }
   
-  postCreateCfarOffersTakeoverDisplay(basePath: string, hCSessionId: string): Observable<any> {
+  postCreateCfarOffersTakeoverDisplay(basePath: string, hCSessionId: string, cfarOffersIds: Array<string>): Observable<any> {
     // Init services
     this._overrideConfiguration(basePath);
 
     // Build the event
     let event: CfarOffersTakeoverDisplay = {
       occurredDateTime: new Date(),
+      cfarOffersIds: cfarOffersIds,
       type: "cfar_offers_takeover_display"
     }
     
     return this._customerService.postCustomerEvents(event, hCSessionId);
   }
   
-  postCreateCfarForcedChoiceWarning(basePath: string, hCSessionId: string): Observable<any> {
+  postCreateCfarForcedChoiceWarning(basePath: string, hCSessionId: string, cfarOffersIds: Array<string>): Observable<any> {
     // Init services
     this._overrideConfiguration(basePath);
 
     // Build the event
     let event: CfarForcedChoiceWarning = {
       occurredDateTime: new Date(),
+      cfarOffersIds: cfarOffersIds,
       type: "cfar_forced_choice_warning"
     }
     
     return this._customerService.postCustomerEvents(event, hCSessionId);
   }
   
-  postCreateCfarViewInfo(basePath: string, hCSessionId: string, uiSource: UiSource): Observable<any> {
+  postCreateCfarViewInfo(basePath: string, hCSessionId: string, cfarOffersIds: Array<string>, uiSource: UiSource): Observable<any> {
     // Init services
     this._overrideConfiguration(basePath);
 
     // Build the event
     let event: CfarViewInfo = {
       occurredDateTime: new Date(),
+      cfarOffersIds: cfarOffersIds,
       uiSource: uiSource,
       type: "cfar_view_info"
     }
@@ -72,13 +76,14 @@ export class HopperEventsService extends HopperProxyService {
     return this._customerService.postCustomerEvents(event, hCSessionId);
   }
   
-  postCreateCfarDenyPurchase(basePath: string, hCSessionId: string, uiSource: UiSource): Observable<any> {
+  postCreateCfarDenyPurchase(basePath: string, hCSessionId: string, cfarOffersIds: Array<string>, uiSource: UiSource): Observable<any> {
     // Init services
     this._overrideConfiguration(basePath);
 
     // Build the event
     let event: CfarDenyPurchase = {
       occurredDateTime: new Date(),
+      cfarOffersIds: cfarOffersIds,
       uiSource: uiSource,
       type: "cfar_view_info"
     }
