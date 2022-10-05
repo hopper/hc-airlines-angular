@@ -130,7 +130,7 @@ export class CfarOfferBannerLargeComponent extends GlobalComponent implements On
       nbTravelers += pp.passengerCount.count
     });
 
-    return +offer.coverage / (nbTravelers || 1);
+    return +offer.premium / (nbTravelers || 1);
   }
 
   // -----------------------------------------------
