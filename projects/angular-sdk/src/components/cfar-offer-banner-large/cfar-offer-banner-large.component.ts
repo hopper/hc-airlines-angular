@@ -23,6 +23,7 @@ export class CfarOfferBannerLargeComponent extends GlobalComponent implements On
 
   @Input() hCSessionId!: string;
   @Input() itineraries!: CfarItinerary[];
+  @Input() uiVariant!: UiVariant;
   @Input() hasNoCoverageOption: boolean = true;
   @Input() hasWarningCoverageMessage: boolean = false;
 
@@ -31,7 +32,6 @@ export class CfarOfferBannerLargeComponent extends GlobalComponent implements On
 
   private contractsByChoiceIndex = new Map<number, CfarContractCustomer>();
   private uiSource!: UiSource;
-  private uiVariant!: UiVariant;
 
   constructor(
     private _adapter: DateAdapter<any>,
@@ -247,7 +247,7 @@ export class CfarOfferBannerLargeComponent extends GlobalComponent implements On
    * @returns 
    */
   private _initUiElements() {
-    this.uiVariant = this.hasNoCoverageOption ? UiVariant.A : UiVariant.B;
+    // this.uiVariant = this.hasNoCoverageOption ? UiVariant.A : UiVariant.B;
     this.uiSource = this.hasNoCoverageOption ? UiSource.BannerVariantA : UiSource.BannerVariantB;
   }
 

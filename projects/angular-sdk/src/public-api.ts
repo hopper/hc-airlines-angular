@@ -1,24 +1,16 @@
 /*
  * Public API Surface of the SDK
+ * (only items required to be shared with customers)
  */
 
-// SERVICES (only specific elements)
-// export * from './services/hopper-events.service';
-// export * from './services/hopper-cfar.service';
-// export * from './services/hopper-proxy.service';
-
-// DIRECTIVES (only specific elements)
-// export * from './directives/hopper-events.directive';
-
-// COMPONENTS (only specific elements)
+// COMPONENTS
 export * from './components/cfar-offer-banner/cfar-offer-banner.component';
 export * from './components/cfar-offer-banner-large/cfar-offer-banner-large.component';
 export * from './components/cfar-offer-dialog/cfar-offer-dialog.component';
 export * from './components/cfar-exercise-flow/cfar-exercise-flow.component';
-// export * from './components/event-button/event-button.component';
 
-// UTILIY CLASSES (only specific elements)
+// UTILIY CLASSES
 export * from './utils/dialog.utils';
 
-// MODULES (only specific elements)
+// MODULES
 export * from './angular-sdk.module';
