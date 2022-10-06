@@ -9,12 +9,11 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { PassengerCount } from './passengerCount';
 
-export interface PassengerPricing { 
-    passengerCount: PassengerCount;
-    /**
-     * Price per passenger
-     */
-    individualPrice: string;
-}
+export type ExerciseStepResult = 'success' | 'failure' | 'technical_error';
+
+export const ExerciseStepResult = {
+    Success: 'success' as ExerciseStepResult,
+    Failure: 'failure' as ExerciseStepResult,
+    TechnicalError: 'technical_error' as ExerciseStepResult
+};

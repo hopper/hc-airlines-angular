@@ -11,9 +11,18 @@
  */
 import { CfarDenyPurchase } from './cfarDenyPurchase';
 import { CfarEventWithContract } from './cfarEventWithContract';
+import { CfarExerciseCallbackLaunched } from './cfarExerciseCallbackLaunched';
+import { CfarExerciseCustomerDataComplete } from './cfarExerciseCustomerDataComplete';
+import { CfarExerciseEmailDelivered } from './cfarExerciseEmailDelivered';
+import { CfarExerciseEmailOpened } from './cfarExerciseEmailOpened';
+import { CfarExerciseEmailSent } from './cfarExerciseEmailSent';
+import { CfarExercisePortalComplete } from './cfarExercisePortalComplete';
+import { CfarExercisePortalDisplay } from './cfarExercisePortalDisplay';
+import { CfarExerciseVerificationComplete } from './cfarExerciseVerificationComplete';
+import { CfarExerciseVerificationSent } from './cfarExerciseVerificationSent';
 import { CfarForcedChoiceWarning } from './cfarForcedChoiceWarning';
 import { CfarOffersBannerDisplay } from './cfarOffersBannerDisplay';
 import { CfarOffersTakeoverDisplay } from './cfarOffersTakeoverDisplay';
 import { CfarViewInfo } from './cfarViewInfo';
 
-export type Event = CfarDenyPurchase | CfarEventWithContract | CfarForcedChoiceWarning | CfarOffersBannerDisplay | CfarOffersTakeoverDisplay | CfarViewInfo;
+export type Event = CfarDenyPurchase | CfarEventWithContract | CfarExerciseCallbackLaunched | CfarExerciseCustomerDataComplete | CfarExerciseEmailDelivered | CfarExerciseEmailOpened | CfarExerciseEmailSent | CfarExercisePortalComplete | CfarExercisePortalDisplay | CfarExerciseVerificationComplete | CfarExerciseVerificationSent | CfarForcedChoiceWarning | CfarOffersBannerDisplay | CfarOffersTakeoverDisplay | CfarViewInfo;

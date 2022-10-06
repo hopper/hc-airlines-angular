@@ -9,12 +9,15 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { PassengerCount } from './passengerCount';
 
-export interface PassengerPricing { 
-    passengerCount: PassengerCount;
+export interface CfarExerciseEmailSent { 
     /**
-     * Price per passenger
+     * A UTC [RFC3339](https://xml2rfc.tools.ietf.org/public/rfc/html/rfc3339.html#anchor14) datetime;  the date and time at which an event occurred on a client device
      */
-    individualPrice: string;
+    occurredDateTime: Date;
+    /**
+     * Unique identifier for a CFAR exercise
+     */
+    cfarExerciseId: string;
+    type: string;
 }
