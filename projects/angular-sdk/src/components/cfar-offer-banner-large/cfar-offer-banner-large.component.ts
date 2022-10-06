@@ -1,19 +1,19 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { take } from 'rxjs/operators';
-import { CfarContractCustomer, CfarItinerary, CfarOfferCustomer, CreateCfarContractCustomerRequest, CreateCfarOfferCustomerRequest, RequestType, UiSource, UiVariant } from '../../apis/hopper-cloud-airline/v1';
-import { GlobalComponent } from '../global.component';
+import { CfarContractCustomer, CfarItinerary, CfarOfferCustomer, UiSource, UiVariant } from '../../apis/hopper-cloud-airline/v1';
 import { TranslateService } from '@ngx-translate/core';
 import { DateAdapter } from "@angular/material/core";
 import { ApiTranslatorUtils } from '../../utils/api-translator.utils';
 import { HopperCfarService } from '../../services/hopper-cfar.service';
 import { HopperEventsService } from '../../services/hopper-events.service';
+import { GlobalEventComponent } from '../global-event.component';
 
 @Component({
   selector: 'hopper-cfar-offer-banner-large',
   templateUrl: './cfar-offer-banner-large.component.html',
   styleUrls: ['./cfar-offer-banner-large.component.scss']
 })
-export class CfarOfferBannerLargeComponent extends GlobalComponent implements OnInit {
+export class CfarOfferBannerLargeComponent extends GlobalEventComponent implements OnInit {
 
   public cfarOffers!: CfarOfferCustomer[];
   public selectedCfarOffer!: CfarOfferCustomer;
@@ -31,7 +31,6 @@ export class CfarOfferBannerLargeComponent extends GlobalComponent implements On
   @Output() offersLoaded = new EventEmitter();
 
   private contractsByChoiceIndex = new Map<number, CfarContractCustomer>();
-  private uiSource!: UiSource;
 
   constructor(
     private _adapter: DateAdapter<any>,
@@ -39,7 +38,7 @@ export class CfarOfferBannerLargeComponent extends GlobalComponent implements On
     private _hopperCfarService: HopperCfarService,
     private _hopperEventService: HopperEventsService,
   ) {
-    super(_adapter, _translateService);
+    super(_adapter, _translateService, _hopperEventService);
   }
 
   // -----------------------------------------------
@@ -157,8 +156,9 @@ export class CfarOfferBannerLargeComponent extends GlobalComponent implements On
           this.offersLoaded.emit(this.cfarOffers);          
           this.isLoading = false;
 
-          // Build corresponding events
-          this.createEventsAfterInit();
+          // Int events context and build corresponding events
+          this.initCfarPurchaseEventParameters(this.hCSessionId, this.toCfarOffersIds(), this.uiVariant);
+          this.createPurchaseEventsAfterInit(this.hasWarningCoverageMessage);
         },
         error: (error) => {
           console.error(error);
@@ -170,70 +170,6 @@ export class CfarOfferBannerLargeComponent extends GlobalComponent implements On
 
   protected toCfarOffersIds(): Array<string> {
     return this.cfarOffers.map(cfarOffer => cfarOffer.id)
-  }
-
-  protected createEventsAfterInit(): void {
-    if (this.isFakeBackend) {
-      return;
-    }    
-    this._hopperEventService
-      .postCreateCfarOffersBannerDisplay(this.basePath, this.hCSessionId, this.toCfarOffersIds(), this.uiVariant)
-      .pipe(take(1))
-      .subscribe({
-        next: () => {
-          if (this.hasWarningCoverageMessage) {
-            this.createWarningMessageEvent();
-          }
-        },
-        error: (error) => {
-          console.error(error);
-        }
-      });
-  }
-  
-  protected createWarningMessageEvent(): void {
-    if (this.isFakeBackend) {
-      return;
-    }
-    this._hopperEventService
-      .postCreateCfarForcedChoiceWarning(this.basePath, this.hCSessionId, this.toCfarOffersIds())
-      .pipe(take(1))
-      .subscribe({
-        next: () => {},
-        error: (error) => {
-          console.error(error);
-        }
-      });
-  }
-  
-  protected createTermsAndConditionsEvent(): void {
-    if (this.isFakeBackend) {
-      return;
-    }
-    this._hopperEventService
-      .postCreateCfarViewInfo(this.basePath, this.hCSessionId, this.toCfarOffersIds(), this.uiSource)
-      .pipe(take(1))
-      .subscribe({
-        next: () => {},
-        error: (error) => {
-          console.error(error);
-        }
-      });
-  }
-  
-  protected createDenyPurchaseEvent(): void {
-    if (this.isFakeBackend) {
-      return;
-    }
-    this._hopperEventService
-      .postCreateCfarDenyPurchase(this.basePath, this.hCSessionId, this.toCfarOffersIds(), this.uiSource)
-      .pipe(take(1))
-      .subscribe({
-        next: () => {},
-        error: (error) => {
-          console.error(error);
-        }
-      });
   }
 
   // -----------------------------------------------

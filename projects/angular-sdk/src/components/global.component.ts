@@ -3,7 +3,7 @@ import { Locales } from "../i18n";
 import { TranslateService } from '@ngx-translate/core';
 import { I18n } from "../i18n/i18n.interface";
 import { DateAdapter } from "@angular/material/core";
-import { CfarContractCustomer, CfarItinerary, CfarOfferCustomer, CreateCfarContractCustomerRequest, CreateCfarOfferCustomerRequest, RequestType, UiSource } from "../apis/hopper-cloud-airline/v1";
+import { AirlineRefundMethod, CfarContractCustomer, CfarItinerary, CfarOfferCustomer, CfarStatus, CreateCfarContractCustomerRequest, CreateCfarOfferCustomerRequest, GetCfarExerciseCustomerResponse, RequestType, UiSource } from "../apis/hopper-cloud-airline/v1";
 import { CountryCode } from "../enums/country-code.enum";
 import { take } from "rxjs/operators";
 import { HttpErrorResponse } from "@angular/common/http";
@@ -113,6 +113,8 @@ export class GlobalComponent implements OnChanges {
         };
       }
     
+    protected _fakeCfarContractId: string = "1ecf85ab-211f-68b7-9bb3-4b1a314f1a42";
+  
     protected _buildFakePostCfarOffersResponse(): CfarOfferCustomer[] {   
         return [
             {
@@ -310,10 +312,85 @@ export class GlobalComponent implements OnChanges {
 
     protected _buildFakePostCfarContractsResponse(): CfarContractCustomer {
         return {
-            id: "1ecf85ab-211f-68b7-9bb3-4b1a314f1a42",
+            id: this._fakeCfarContractId,
             premium: "10.00"
         };
     }
+
+    protected _fakeCfarContractExerciseId: string = "1ecf85ab-211f-68b7-9bb3-f1d35b1c2045";
+
+    protected _buildFakeCfarExercisesResponse(): GetCfarExerciseCustomerResponse {
+      return {
+        id: this._fakeCfarContractExerciseId,
+        contractId: this._fakeCfarContractId,
+        itinerary: {
+          passengerPricing: [
+            {
+              passengerCount: {
+                count: 3,
+                type: "adult"
+              },
+              individualPrice: "null"
+            }
+          ],
+          currency: "CAD",
+          slices: [
+            {
+              segments: [
+                {
+                  originAirport: "YYZ",
+                  destinationAirport: "YUL",
+                  departureDateTime: "2022-07-09T18:00",
+                  arrivalDateTime: "2022-07-09T19:14",
+                  flightNumber: "AC894",
+                  validatingCarrierCode: "AC",
+                  fareClass: "economy"
+                },
+                {
+                  originAirport: "YUL",
+                  destinationAirport: "NCE",
+                  departureDateTime: "2022-07-09T20:50",
+                  arrivalDateTime: "2022-07-10T10:25",
+                  flightNumber: "AC878",
+                  validatingCarrierCode: "AC",
+                  fareClass: "economy"
+                }
+              ]
+            },
+            {
+              segments: [
+                {
+                  originAirport: "NCE",
+                  destinationAirport: "YUL",
+                  departureDateTime: "2022-07-15T13:15",
+                  arrivalDateTime: "2022-07-15T15:55",
+                  flightNumber: "AC879",
+                  validatingCarrierCode: "AC",
+                  fareClass: "economy"
+                },
+                {
+                  originAirport: "YUL",
+                  destinationAirport: "YYZ",
+                  departureDateTime: "2022-07-15T17:30",
+                  arrivalDateTime: "2022-07-15T18:50",
+                  flightNumber: "AC895",
+                  validatingCarrierCode: "AC",
+                  fareClass: "economy"
+                }
+              ]
+            }
+          ],
+          ancillaries: [],
+          totalPrice: "71.96"
+        },
+        hopperRefund: "57.78",
+        hopperRefundMethod: AirlineRefundMethod.Ftc,
+        hopperRefundCurrency: "CAD",
+        contractExpiryDateTime: new Date("2022-07-08T18:00Z"),
+        status: CfarStatus.Created
+      };
+    }
+    
     // -----------------------------------------------
     // Public Methods
     // -----------------------------------------------
