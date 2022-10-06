@@ -14,11 +14,11 @@ export class HopperCfarService extends HopperProxyService {
     super(_httpClient, _customerService)
   }
 
-  postCfarOffers(basePath: string, hCSessionId: string, language: string, request: CreateCfarOfferCustomerRequest): Observable<CfarOfferCustomer[]> {
+  postCfarOffers(basePath: string, hCSessionId: string, request: CreateCfarOfferCustomerRequest): Observable<CfarOfferCustomer[]> {
     // Init services
     this._overrideConfiguration(basePath);
 
-    return this._customerService.postCustomerCfarOffers(request, hCSessionId, language.toUpperCase());
+    return this._customerService.postCustomerCfarOffers(request, hCSessionId);
   }
 
   postCfarContracts(basePath: string, hCSessionId: string, request: CreateCfarContractCustomerRequest): Observable<CfarContractCustomer> {
