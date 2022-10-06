@@ -4,6 +4,7 @@
 General:
 - Price per traveler is now based of the premium amount (iso the coverage amount)
 - Offer description is now refreshed when the language is updated
+- Manage additional parameters for analytics events
 
 <a name="4.2.3"></a>
 
