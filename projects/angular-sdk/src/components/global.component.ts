@@ -105,4 +105,12 @@ export class GlobalComponent implements OnChanges {
             return HcAirlinesError.buildDefault();
         }
     }
+
+    // -----------------------------------------------
+    // Public Methods
+    // -----------------------------------------------
+
+    public getOfferDescription(offer: CfarOfferCustomer) {
+        return offer.offerDescription[this.currentLang];
+    }
 }

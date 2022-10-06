@@ -10,6 +10,7 @@
  * Do not edit the class manually.
  */
 import { CfarItinerary } from './cfarItinerary';
+import { MapStringArray } from './mapStringArray';
 import { RequestType } from './requestType';
 
 /**
@@ -46,5 +47,5 @@ export interface CfarOfferCustomer {
      */
     createdDateTime: Date;
     itinerary: CfarItinerary;
-    offerDescription: Array<string>;
+    offerDescription: MapStringArray;
 }

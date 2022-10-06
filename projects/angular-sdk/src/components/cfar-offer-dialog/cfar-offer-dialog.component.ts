@@ -133,7 +133,7 @@ export class CfarOfferDialogComponent extends GlobalComponent implements OnInit,
     this.isLoading = true;
     
     this._hopperCfarService
-    .postCfarOffers(this.basePath, this._hCSessionId, this.currentLang, ApiTranslatorUtils.modelToSnakeCase(this._buildCreateCfarOfferRequest()))
+    .postCfarOffers(this.basePath, this._hCSessionId, ApiTranslatorUtils.modelToSnakeCase(this._buildCreateCfarOfferRequest()))
     .pipe(take(1))
     .subscribe({
       next: (cfarOffers) => {
@@ -297,11 +297,27 @@ export class CfarOfferDialogComponent extends GlobalComponent implements OnInit,
           ancillaries: [],
           totalPrice: "71.96"
         },
-        offerDescription: [
-          "Add the flexibility to cancel your flight for any reason up to 24 hours before departure",
-          "Cancel and get a refund of your flight base fare and taxes, excluding additional services (paid seats, paid bags...)",
-          "Get instant resolution, no forms or claims required"
-        ]
+        offerDescription: {
+          "en": [
+            "Add the flexibility to cancel your flight for any reason up to <b> 24 hours </b> before departure",
+            "Cancel and get a refund of your flight base fare and taxes, excluding additional services (paid seats, paid bags...)",
+            "Get instant resolution, no forms or claims required"
+          ],
+          "fr": [
+            "Offrez-vous la flexibilité d'une annulation sans aucune justification jusqu'à <b>24 heures</b> avant le départ",
+            "Annulez et recevez un rembousement du prix de votre vol avec les taxes, à l'exclusion des services additionnels (sièges payant, bagages supplémentaires...)",
+            "Traitement instantané, aucun formulaire ou dossier à remplir"
+          ],
+          "es": ["Date la flexibilidad de una cancelación sin justificación hasta <b>24 horas</b> antes de la salida",
+            "Cancela y recibe un reembolso del precio de tu vuelo con impuestos, excluyendo servicios adicionales (asientos pagados, equipaje adicional, etc.)",
+            "Procesamiento instantáneo, sin formularios ni archivos para completar"
+          ],
+          "zh": [
+            "在出发前 <b>24 小时</b> 之前，让自己在没有任何理由的情况下灵活取消",
+            "取消并获得含税的航班价格退款，不包括额外服务（付费座位、额外行李等）",
+            "即时处理，无需填写表格或文件"
+          ]
+        }
       },
       {
         id: "1ecf859e-8785-625f-8eda-198d1ce0d6c5",
@@ -372,11 +388,27 @@ export class CfarOfferDialogComponent extends GlobalComponent implements OnInit,
           ancillaries: [],
           totalPrice: "71.96"
         },
-        offerDescription: [
-          "Add the flexibility to cancel your flight for any reason up to 24 hours before departure",
-          "Cancel and get a refund of your flight base fare and taxes, excluding additional services (paid seats, paid bags...)",
-          "Get instant resolution, no forms or claims required"
-        ]
+        offerDescription: {
+          "en": [
+            "Add the flexibility to cancel your flight for any reason up to <b> 24 hours </b> before departure",
+            "Cancel and get a refund of your flight base fare and taxes, excluding additional services (paid seats, paid bags...)",
+            "Get instant resolution, no forms or claims required"
+          ],
+          "fr": [
+            "Offrez-vous la flexibilité d'une annulation sans aucune justification jusqu'à <b>24 heures</b> avant le départ",
+            "Annulez et recevez un rembousement du prix de votre vol avec les taxes, à l'exclusion des services additionnels (sièges payant, bagages supplémentaires...)",
+            "Traitement instantané, aucun formulaire ou dossier à remplir"
+          ],
+          "es": ["Date la flexibilidad de una cancelación sin justificación hasta <b>24 horas</b> antes de la salida",
+            "Cancela y recibe un reembolso del precio de tu vuelo con impuestos, excluyendo servicios adicionales (asientos pagados, equipaje adicional, etc.)",
+            "Procesamiento instantáneo, sin formularios ni archivos para completar"
+          ],
+          "zh": [
+            "在出发前 <b>24 小时</b> 之前，让自己在没有任何理由的情况下灵活取消",
+            "取消并获得含税的航班价格退款，不包括额外服务（付费座位、额外行李等）",
+            "即时处理，无需填写表格或文件"
+          ]
+        }
       }
     ];
   }

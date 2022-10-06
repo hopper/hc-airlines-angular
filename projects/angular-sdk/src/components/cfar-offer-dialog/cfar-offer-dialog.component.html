@@ -23,7 +23,7 @@
         <ng-container *ngIf="cfarOffers && cfarOffers.length > 0">
             <div class="p-32" ngClass.lt-md="px-16" fxLayout="row wrap" fxLayoutAlign="start center">
         
-                <div fxFlex="100" class="py-8" *ngFor="let desc of selectedCfarOffer?.offerDescription" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
+                <div fxFlex="100" class="py-8" *ngFor="let desc of getOfferDescription(selectedCfarOffer)" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
                     <mat-icon class="check-icon">check</mat-icon>
                     <span innerHtml="{{ desc }}"></span>
                 </div>

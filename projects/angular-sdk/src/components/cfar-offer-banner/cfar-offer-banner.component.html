@@ -16,7 +16,7 @@
                         <h2 class="offer-title">{{ 'CFAR_OFFER_BANNER.TITLE' | translate }}</h2>
                     </div>
 
-                    <ng-container *ngFor="let desc of cheapestOffer?.offerDescription; let i = index;">
+                    <ng-container *ngFor="let desc of getOfferDescription(cheapestOffer); let i = index;">
                         <div class="py-16" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
                             <mat-icon class="check-icon">check</mat-icon>
                             <span innerHtml="{{ desc }}"></span>

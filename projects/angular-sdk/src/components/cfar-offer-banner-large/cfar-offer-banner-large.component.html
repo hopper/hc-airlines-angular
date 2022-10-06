@@ -23,7 +23,7 @@
     
                     <div fxFlex="80" fxFlex.lt-md="100" fxLayout="column" fxLayoutGap="16px" fxLayoutAlign="center start">
 
-                        <ng-container *ngFor="let desc of selectedCfarOffer?.offerDescription; let i = index;">
+                        <ng-container *ngFor="let desc of getOfferDescription(selectedCfarOffer); let i = index;">
                             <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
                                 <mat-icon class="check-icon">check</mat-icon>
                                 <span innerHtml="{{ desc }}"></span>

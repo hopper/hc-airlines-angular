@@ -28,14 +28,15 @@ export abstract class CommonGuidesComponent implements OnInit, OnDestroy {
   public abstract htmlCode: string;
 
   // Parameters
-  public hCSessionId = "8b8c00b3-34c4-4538-abee-b75adc3301ec";
+  public hCSessionId = "8ab96efe-164a-4343-a4a2-ce1741a21048";
   public currency = "EUR";
   public passengers: PassengerPricing[] = [
     {
       passengerCount: {
         count: 3,
         type: "adult"
-      }
+      },
+      individualPrice: "30.55"
     }
   ];
   public pnrReference = "123456";
@@ -50,8 +51,8 @@ export abstract class CommonGuidesComponent implements OnInit, OnDestroy {
             {
               originAirport: "LGA",
               destinationAirport: "BOS",
-              departureDateTime: "2022-09-30T18:34:30",
-              arrivalDateTime: "2022-09-30T19:12:30",
+              departureDateTime: "2022-10-30T18:34:30",
+              arrivalDateTime: "2022-10-30T19:12:30",
               flightNumber: "JB776",
               validatingCarrierCode: "B6",
               fareClass: "basic_economy"
@@ -77,8 +78,8 @@ export abstract class CommonGuidesComponent implements OnInit, OnDestroy {
           {
             originAirport: "LGA",
             destinationAirport: "BOS",
-            departureDateTime: "2022-09-30T18:34:30",
-            arrivalDateTime: "2022-09-30T19:12:30",
+            departureDateTime: "2022-10-30T18:34:30",
+            arrivalDateTime: "2022-10-30T19:12:30",
             flightNumber: "JB776",
             validatingCarrierCode: "B6",
             fareClass: "basic_economy"
