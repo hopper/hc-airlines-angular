@@ -11,6 +11,7 @@
  */
 import { CfarItinerary } from './cfarItinerary';
 import { MapString } from './mapString';
+import { MapStringArray } from './mapStringArray';
 import { RequestType } from './requestType';
 
 /**
@@ -47,6 +48,6 @@ export interface CfarOffer {
      */
     createdDateTime: Date;
     itinerary: CfarItinerary;
-    offerDescription: Array<string>;
+    offerDescription: MapStringArray;
     extAttributes: MapString;
 }
