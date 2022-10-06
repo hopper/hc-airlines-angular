@@ -16,6 +16,7 @@ import { ExerciseActionStep } from '../../enums/exercise-action-step.enum';
 import { SendCfarContractExerciceVerificationCodeResponse } from '../../apis/hopper-cloud-airline/v1';
 import { ErrorCode } from '../../enums/error-code.enum';
 import { HopperCfarService } from '../../services/hopper-cfar.service';
+import { HopperEventsService } from '../../services/hopper-events.service';
 
 @Component({
   selector: 'hopper-cfar-exercise-flow',
@@ -67,6 +68,7 @@ export class CfarExerciseFlowComponent extends GlobalComponent implements OnInit
     private _adapter: DateAdapter<any>,
     private _translateService: TranslateService,
     private _hopperCfarService: HopperCfarService,
+    private _hopperEventService: HopperEventsService,
     private _formBuilder: FormBuilder,
     private _http: HttpClient,
     private _datePipe: DatePipe
