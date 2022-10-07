@@ -47,6 +47,7 @@ import { HopperProxyService } from './services/hopper-proxy.service';
 import { GlobalComponent } from './components/global.component';
 import { HopperCfarService } from './services/hopper-cfar.service';
 import { HopperEventsService } from './services/hopper-events.service';
+import { GlobalEventComponent } from './components/global-event.component';
 
 // Supported Languages for Datepicker
 registerLocaleData(localeFr, 'fr', localeFrExtra);
@@ -58,6 +59,7 @@ registerLocaleData(localeZh, 'zh', localeZhExtra);
     declarations: [
         // Component
         GlobalComponent,
+        GlobalEventComponent,
         CfarOfferBannerComponent,
         CfarOfferBannerLargeComponent,
         CfarOfferDialogComponent,

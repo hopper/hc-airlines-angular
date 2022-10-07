@@ -1,7 +1,7 @@
 import { Component, ElementRef, EventEmitter, HostListener, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { take } from 'rxjs/operators';
-import { CfarContract, CfarStatus, CfarItinerary, CheckCfarContractExerciceVerificationCodeResponse, CheckCfarContractExerciseVerificationCodeRequest, CreateRefundAuthorizationRequest, CreateRefundRecipientRequest, InitiateRefundRequest, RefundAuthorization, RefundRecipient, AirlineRefundMethod, GetCfarExerciseCustomerResponse, InitiateRefundResponse } from '../../apis/hopper-cloud-airline/v1';
-import { GlobalComponent } from '../global.component';
+import { CfarStatus, CfarItinerary, CheckCfarContractExerciceVerificationCodeResponse, CheckCfarContractExerciseVerificationCodeRequest, CreateRefundAuthorizationRequest, CreateRefundRecipientRequest, InitiateRefundRequest, RefundAuthorization, RefundRecipient, AirlineRefundMethod, GetCfarExerciseCustomerResponse, InitiateRefundResponse, ExerciseStepResult } from '../../apis/hopper-cloud-airline/v1';
+import { GlobalEventComponent } from '../global-event.component';
 import { TranslateService } from '@ngx-translate/core';
 import { DateAdapter } from "@angular/material/core";
 import { ApiTranslatorUtils } from '../../utils/api-translator.utils';
@@ -16,16 +16,16 @@ import { ExerciseActionStep } from '../../enums/exercise-action-step.enum';
 import { SendCfarContractExerciceVerificationCodeResponse } from '../../apis/hopper-cloud-airline/v1';
 import { ErrorCode } from '../../enums/error-code.enum';
 import { HopperCfarService } from '../../services/hopper-cfar.service';
+import { HopperEventsService } from '../../services/hopper-events.service';
 
 @Component({
   selector: 'hopper-cfar-exercise-flow',
   templateUrl: './cfar-exercise-flow.component.html',
   styleUrls: ['./cfar-exercise-flow.component.scss']
 })
-export class CfarExerciseFlowComponent extends GlobalComponent implements OnInit {
+export class CfarExerciseFlowComponent extends GlobalEventComponent implements OnInit {
 
   public selectedRefundMethod?: 'ftc' | 'cash';
-  //public cfarContract!: CfarContract;
   public cfarExercise!: GetCfarExerciseCustomerResponse;
   public refundMethods!: { value: 'ftc' | 'cash', label: string }[];
   public isHopperRefund!: boolean;
@@ -49,8 +49,6 @@ export class CfarExerciseFlowComponent extends GlobalComponent implements OnInit
   @Output() flowCompleted = new EventEmitter();
 
   // Fake values
-  private _fakeContractId: string = "1ecf85ab-211f-68b7-9bb3-4b1a314f1a42";
-  private _fakeContractExerciseId: string = "1ecf85ab-211f-68b7-9bb3-f1d35b1c2045";
   private _fakeVerificationTokenId: string = "1ed2d2bb-8885-67a4-968f-81c642e12735";
   private _minLengthVerificationCode: number = 6;
 
@@ -67,11 +65,12 @@ export class CfarExerciseFlowComponent extends GlobalComponent implements OnInit
     private _adapter: DateAdapter<any>,
     private _translateService: TranslateService,
     private _hopperCfarService: HopperCfarService,
+    private _hopperEventService: HopperEventsService,
     private _formBuilder: FormBuilder,
     private _http: HttpClient,
     private _datePipe: DatePipe
   ) {
-    super(_adapter, _translateService);
+    super(_adapter, _translateService, _hopperEventService);
 
     // Create material icon for refundable ticket
     this._matIconRegistry.addSvgIcon(
@@ -96,7 +95,15 @@ export class CfarExerciseFlowComponent extends GlobalComponent implements OnInit
     ];
     
     this._initForms();
+
+    // Int events context and build corresponding events
+    this.initCfarExerciseEventParameters(this.hCSessionId, this.exerciseId);
+    this.createCfarExercisePortalDisplayEvent();
   }
+
+  // -----------------------------------------------
+  // Protected Methods
+  // -----------------------------------------------
 
   // -----------------------------------------------
   // Publics Methods
@@ -174,6 +181,9 @@ export class CfarExerciseFlowComponent extends GlobalComponent implements OnInit
         .pipe(take(1))
         .subscribe({
           next: (refundRecipient: RefundRecipient) => {
+            // Events management
+            this.createCfarExerciseCustomerDataCompleteEvent(ExerciseStepResult.Success)
+
             const userId = refundRecipient.id;
             const url = this.hyperwalletUrl + userId + "/" + this.currentLang + ".min.js";
             const mainScript = document.createElement('script');
@@ -183,6 +193,10 @@ export class CfarExerciseFlowComponent extends GlobalComponent implements OnInit
             mainScript.src = url;
             mainScript.onerror = (error) => {
               console.error('Error loading Hyperwallet script', error);
+              
+              // Events management
+              this.createCfarExercisePortalCompleteEvent(ExerciseStepResult.TechnicalError)
+              
               this.isLoadingHyperwallet = false;
               this.isErrorHyperwallet = true;
             }
@@ -226,6 +240,9 @@ export class CfarExerciseFlowComponent extends GlobalComponent implements OnInit
             
                     document.body.appendChild(script);
                     this.isLoadingHyperwallet = false;
+              
+                    // Events management
+                    this.createCfarExercisePortalCompleteEvent(ExerciseStepResult.Success)
                   },
                   error: (error: any) => {
                     const builtError = this._getHcAirlinesErrorResponse(error);
@@ -233,6 +250,9 @@ export class CfarExerciseFlowComponent extends GlobalComponent implements OnInit
                     
                     this.isLoadingHyperwallet = false;
                     this.isErrorHyperwallet = true;
+              
+                    // Events management
+                    this.createCfarExercisePortalCompleteEvent(ExerciseStepResult.TechnicalError)                    
 
                     // Scroll on the error message
                     this.onScrollToTop(this._errorTimer);
@@ -248,6 +268,9 @@ export class CfarExerciseFlowComponent extends GlobalComponent implements OnInit
   
             this.isLoadingHyperwallet = false;
             this.isErrorHyperwallet = true;
+
+            // Events management
+            this.createCfarExerciseCustomerDataCompleteEvent(ExerciseStepResult.Failure)
   
             // Scroll on the error message
             this.onScrollToTop(this._errorTimer);
@@ -278,6 +301,13 @@ export class CfarExerciseFlowComponent extends GlobalComponent implements OnInit
           this.userEmail = event.detail.trmObject.email;
           this.stepper.next();
 
+          // Events management
+          if (redirectionToken !== null && redirectionToken.length > 0) {
+            this.createCfarExerciseCallbackLaunchedEvent(ExerciseStepResult.Success)
+          } else {
+            this.createCfarExerciseCallbackLaunchedEvent(ExerciseStepResult.Failure)
+          }
+
           // The flow is completed
           this.flowCompleted.emit(redirectionToken);
         },
@@ -286,6 +316,9 @@ export class CfarExerciseFlowComponent extends GlobalComponent implements OnInit
           this.errorCode = builtError.code;
           
           this.isLoadingHyperwallet = false;
+
+          // Events management
+          this.createCfarExercisePortalCompleteEvent(ExerciseStepResult.TechnicalError)
 
           // Scroll on the error message
           this.onScrollToTop(this._errorTimer);
@@ -337,6 +370,8 @@ export class CfarExerciseFlowComponent extends GlobalComponent implements OnInit
             this.cfarContractUserEmail = result.anonymizedEmailAddress;
             this._setStep(ExerciseActionStep.CHECK_VERIFICATION_STEP);
 
+            this.createCfarExerciseVerificationSentEvent();
+
             this.isLoading = false;
           },
           error: (error: any) => {
@@ -377,12 +412,19 @@ export class CfarExerciseFlowComponent extends GlobalComponent implements OnInit
             if (result.compliant) {                    
               this.exerciseId = result.exerciseId;
 
+              // Events management
+              this.updateCfarExerciseIdForEvent(this.exerciseId);
+              this.createCfarExerciseVerificationCompleteEvent(ExerciseStepResult.Success);
+
               // Load the contract and the associated exercise
               this._loadContractExercise();
             } else {
               // Invalid verification code
               this.errorCode = ErrorCode.EX019;
               this.isLoading = false;
+
+              // Events management
+              this.createCfarExerciseVerificationCompleteEvent(ExerciseStepResult.Failure)
             }     
           },
           error: (error: any) => {
@@ -390,6 +432,9 @@ export class CfarExerciseFlowComponent extends GlobalComponent implements OnInit
             this.errorCode = builtError.code;
 
             this.isLoading = false;
+
+            // Events management
+            this.createCfarExerciseVerificationCompleteEvent(ExerciseStepResult.TechnicalError);
 
             // Scroll on the error message
             this.onScrollToTop(this._errorTimer);
@@ -440,78 +485,6 @@ export class CfarExerciseFlowComponent extends GlobalComponent implements OnInit
           }
         });
     }
-  }
-
-  private _buildFakeCfarExercisesResponse(): GetCfarExerciseCustomerResponse {
-    return {
-      id: this._fakeContractExerciseId,
-      contractId: this._fakeContractId,
-      itinerary: {
-        passengerPricing: [
-          {
-            passengerCount: {
-              count: 3,
-              type: "adult"
-            },
-            individualPrice: "null"
-          }
-        ],
-        currency: "CAD",
-        slices: [
-          {
-            segments: [
-              {
-                originAirport: "YYZ",
-                destinationAirport: "YUL",
-                departureDateTime: "2022-07-09T18:00",
-                arrivalDateTime: "2022-07-09T19:14",
-                flightNumber: "AC894",
-                validatingCarrierCode: "AC",
-                fareClass: "economy"
-              },
-              {
-                originAirport: "YUL",
-                destinationAirport: "NCE",
-                departureDateTime: "2022-07-09T20:50",
-                arrivalDateTime: "2022-07-10T10:25",
-                flightNumber: "AC878",
-                validatingCarrierCode: "AC",
-                fareClass: "economy"
-              }
-            ]
-          },
-          {
-            segments: [
-              {
-                originAirport: "NCE",
-                destinationAirport: "YUL",
-                departureDateTime: "2022-07-15T13:15",
-                arrivalDateTime: "2022-07-15T15:55",
-                flightNumber: "AC879",
-                validatingCarrierCode: "AC",
-                fareClass: "economy"
-              },
-              {
-                originAirport: "YUL",
-                destinationAirport: "YYZ",
-                departureDateTime: "2022-07-15T17:30",
-                arrivalDateTime: "2022-07-15T18:50",
-                flightNumber: "AC895",
-                validatingCarrierCode: "AC",
-                fareClass: "economy"
-              }
-            ]
-          }
-        ],
-        ancillaries: [],
-        totalPrice: "71.96"
-      },
-      hopperRefund: "57.78",
-      hopperRefundMethod: AirlineRefundMethod.Ftc,
-      hopperRefundCurrency: "CAD",
-      contractExpiryDateTime: new Date("2022-07-08T18:00Z"),
-      status: CfarStatus.Created
-    };
   }
 
   private _initNavigationContext(): void {
