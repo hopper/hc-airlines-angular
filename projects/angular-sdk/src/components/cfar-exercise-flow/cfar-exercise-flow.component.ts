@@ -181,6 +181,9 @@ export class CfarExerciseFlowComponent extends GlobalEventComponent implements O
         .pipe(take(1))
         .subscribe({
           next: (refundRecipient: RefundRecipient) => {
+            // Events management
+            this.createCfarExerciseCustomerDataCompleteEvent(ExerciseStepResult.Success)
+
             const userId = refundRecipient.id;
             const url = this.hyperwalletUrl + userId + "/" + this.currentLang + ".min.js";
             const mainScript = document.createElement('script');
@@ -190,6 +193,10 @@ export class CfarExerciseFlowComponent extends GlobalEventComponent implements O
             mainScript.src = url;
             mainScript.onerror = (error) => {
               console.error('Error loading Hyperwallet script', error);
+              
+              // Events management
+              this.createCfarExercisePortalCompleteEvent(ExerciseStepResult.TechnicalError)
+              
               this.isLoadingHyperwallet = false;
               this.isErrorHyperwallet = true;
             }
@@ -233,6 +240,9 @@ export class CfarExerciseFlowComponent extends GlobalEventComponent implements O
             
                     document.body.appendChild(script);
                     this.isLoadingHyperwallet = false;
+              
+                    // Events management
+                    this.createCfarExercisePortalCompleteEvent(ExerciseStepResult.Success)
                   },
                   error: (error: any) => {
                     const builtError = this._getHcAirlinesErrorResponse(error);
@@ -240,6 +250,9 @@ export class CfarExerciseFlowComponent extends GlobalEventComponent implements O
                     
                     this.isLoadingHyperwallet = false;
                     this.isErrorHyperwallet = true;
+              
+                    // Events management
+                    this.createCfarExercisePortalCompleteEvent(ExerciseStepResult.TechnicalError)                    
 
                     // Scroll on the error message
                     this.onScrollToTop(this._errorTimer);
@@ -255,6 +268,9 @@ export class CfarExerciseFlowComponent extends GlobalEventComponent implements O
   
             this.isLoadingHyperwallet = false;
             this.isErrorHyperwallet = true;
+
+            // Events management
+            this.createCfarExerciseCustomerDataCompleteEvent(ExerciseStepResult.Failure)
   
             // Scroll on the error message
             this.onScrollToTop(this._errorTimer);
@@ -285,6 +301,13 @@ export class CfarExerciseFlowComponent extends GlobalEventComponent implements O
           this.userEmail = event.detail.trmObject.email;
           this.stepper.next();
 
+          // Events management
+          if (redirectionToken !== null && redirectionToken.length > 0) {
+            this.createCfarExerciseCallbackLaunchedEvent(ExerciseStepResult.Success)
+          } else {
+            this.createCfarExerciseCallbackLaunchedEvent(ExerciseStepResult.Failure)
+          }
+
           // The flow is completed
           this.flowCompleted.emit(redirectionToken);
         },
@@ -293,6 +316,9 @@ export class CfarExerciseFlowComponent extends GlobalEventComponent implements O
           this.errorCode = builtError.code;
           
           this.isLoadingHyperwallet = false;
+
+          // Events management
+          this.createCfarExercisePortalCompleteEvent(ExerciseStepResult.TechnicalError)
 
           // Scroll on the error message
           this.onScrollToTop(this._errorTimer);
@@ -397,6 +423,7 @@ export class CfarExerciseFlowComponent extends GlobalEventComponent implements O
               this.errorCode = ErrorCode.EX019;
               this.isLoading = false;
 
+              // Events management
               this.createCfarExerciseVerificationCompleteEvent(ExerciseStepResult.Failure)
             }     
           },
@@ -406,7 +433,7 @@ export class CfarExerciseFlowComponent extends GlobalEventComponent implements O
 
             this.isLoading = false;
 
-
+            // Events management
             this.createCfarExerciseVerificationCompleteEvent(ExerciseStepResult.TechnicalError);
 
             // Scroll on the error message
