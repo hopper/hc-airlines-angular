@@ -1,6 +1,6 @@
 import { Component, ElementRef, EventEmitter, HostListener, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { take } from 'rxjs/operators';
-import { CfarStatus, CfarItinerary, CheckCfarContractExerciceVerificationCodeResponse, CheckCfarContractExerciseVerificationCodeRequest, CreateRefundAuthorizationRequest, CreateRefundRecipientRequest, InitiateRefundRequest, RefundAuthorization, RefundRecipient, AirlineRefundMethod, GetCfarExerciseCustomerResponse, InitiateRefundResponse } from '../../apis/hopper-cloud-airline/v1';
+import { CfarStatus, CfarItinerary, CheckCfarContractExerciceVerificationCodeResponse, CheckCfarContractExerciseVerificationCodeRequest, CreateRefundAuthorizationRequest, CreateRefundRecipientRequest, InitiateRefundRequest, RefundAuthorization, RefundRecipient, AirlineRefundMethod, GetCfarExerciseCustomerResponse, InitiateRefundResponse, ExerciseStepResult } from '../../apis/hopper-cloud-airline/v1';
 import { GlobalEventComponent } from '../global-event.component';
 import { TranslateService } from '@ngx-translate/core';
 import { DateAdapter } from "@angular/material/core";
@@ -344,6 +344,8 @@ export class CfarExerciseFlowComponent extends GlobalEventComponent implements O
             this.cfarContractUserEmail = result.anonymizedEmailAddress;
             this._setStep(ExerciseActionStep.CHECK_VERIFICATION_STEP);
 
+            this.createCfarExerciseVerificationSentEvent();
+
             this.isLoading = false;
           },
           error: (error: any) => {
@@ -384,12 +386,18 @@ export class CfarExerciseFlowComponent extends GlobalEventComponent implements O
             if (result.compliant) {                    
               this.exerciseId = result.exerciseId;
 
+              // Events management
+              this.updateCfarExerciseIdForEvent(this.exerciseId);
+              this.createCfarExerciseVerificationCompleteEvent(ExerciseStepResult.Success);
+
               // Load the contract and the associated exercise
               this._loadContractExercise();
             } else {
               // Invalid verification code
               this.errorCode = ErrorCode.EX019;
               this.isLoading = false;
+
+              this.createCfarExerciseVerificationCompleteEvent(ExerciseStepResult.Failure)
             }     
           },
           error: (error: any) => {
@@ -397,6 +405,9 @@ export class CfarExerciseFlowComponent extends GlobalEventComponent implements O
             this.errorCode = builtError.code;
 
             this.isLoading = false;
+
+
+            this.createCfarExerciseVerificationCompleteEvent(ExerciseStepResult.TechnicalError);
 
             // Scroll on the error message
             this.onScrollToTop(this._errorTimer);

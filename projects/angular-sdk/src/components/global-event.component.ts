@@ -1,7 +1,7 @@
 import { Directive } from "@angular/core";
 import { TranslateService } from '@ngx-translate/core';
 import { DateAdapter } from "@angular/material/core";
-import { AirlineRefundMethod, CfarContractCustomer, CfarItinerary, CfarOfferCustomer, CfarStatus, CreateCfarContractCustomerRequest, CreateCfarOfferCustomerRequest, GetCfarExerciseCustomerResponse, RequestType, UiSource, UiVariant } from "../apis/hopper-cloud-airline/v1";
+import { AirlineRefundMethod, CfarContractCustomer, CfarItinerary, CfarOfferCustomer, CfarStatus, CreateCfarContractCustomerRequest, CreateCfarOfferCustomerRequest, ExerciseStepResult, GetCfarExerciseCustomerResponse, RequestType, UiSource, UiVariant } from "../apis/hopper-cloud-airline/v1";
 import { CountryCode } from "../enums/country-code.enum";
 import { take } from "rxjs/operators";
 import { HttpErrorResponse } from "@angular/common/http";
@@ -134,6 +134,13 @@ export class GlobalEventComponent extends GlobalComponent {
         this.eventHcSessionId = hCSessionId;
         this.cfarExerciseId = cfarExerciseId
     }
+    
+    protected updateCfarExerciseIdForEvent(cfarExerciseId: string): void {
+        if (this.isFakeBackend) {
+            return;
+        }
+        this.cfarExerciseId = cfarExerciseId
+    }
 
     private isExerciseEventPossible(): boolean {
         if (!this.isFakeBackend 
@@ -166,6 +173,21 @@ export class GlobalEventComponent extends GlobalComponent {
         }
         this.hopperEventService
         .postCreateCfarExerciseVerificationSent(this.basePath, this.eventHcSessionId, this.cfarExerciseId)
+        .pipe(take(1))
+        .subscribe({
+            next: () => {},
+            error: (error) => {
+            console.error(error);
+            }
+        });
+    }
+
+    protected createCfarExerciseVerificationCompleteEvent(exerciseStepResult: ExerciseStepResult): void {
+        if (!this.isExerciseEventPossible) {
+            return;
+        }
+        this.hopperEventService
+        .postCreateCfarExerciseVerificationComplete(this.basePath, this.eventHcSessionId, this.cfarExerciseId, exerciseStepResult)
         .pipe(take(1))
         .subscribe({
             next: () => {},
