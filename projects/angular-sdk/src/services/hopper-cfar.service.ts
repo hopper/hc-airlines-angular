@@ -14,18 +14,18 @@ export class HopperCfarService extends HopperProxyService {
     super(_httpClient, _customerService)
   }
 
-  postCfarOffers(basePath: string, hCSessionId: string, request: CreateCfarOfferCustomerRequest): Observable<CfarOfferCustomer[]> {
+  postCfarOffers(basePath: string, hCSessionId: string, language: string, request: CreateCfarOfferCustomerRequest): Observable<CfarOfferCustomer[]> {
     // Init services
     this._overrideConfiguration(basePath);
 
-    return this._customerService.postCustomerCfarOffers(request, hCSessionId);
+    return this._customerService.postCustomerCfarOffers(request, hCSessionId, language);
   }
 
-  postCfarContracts(basePath: string, hCSessionId: string, request: CreateCfarContractCustomerRequest): Observable<CfarContractCustomer> {
+  postCfarContracts(basePath: string, hCSessionId: string, language: string, request: CreateCfarContractCustomerRequest): Observable<CfarContractCustomer> {
     // Init services
     this._overrideConfiguration(basePath);
 
-    return this._customerService.postCustomerCfarContracts(request, hCSessionId);
+    return this._customerService.postCustomerCfarContracts(request, hCSessionId, language);
   }
 
   getCfarExerciseById(basePath: string, hCSessionId: string, id: string): Observable<GetCfarExerciseCustomerResponse> {

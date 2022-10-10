@@ -51,7 +51,7 @@ export class CfarOfferBannerComponent extends GlobalComponent implements OnInit 
       this.isLoading = true;
 
       this._hopperCfarService
-        .postCfarOffers(this.basePath, this.hCSessionId, ApiTranslatorUtils.modelToSnakeCase(this._buildCreateCfarOfferRequest(this.itineraries)))
+        .postCfarOffers(this.basePath, this.hCSessionId, this.currentLang, ApiTranslatorUtils.modelToSnakeCase(this._buildCreateCfarOfferRequest(this.itineraries)))
         .pipe(take(1))
         .subscribe({
           next: (cfarOffers) => {

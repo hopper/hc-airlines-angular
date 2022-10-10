@@ -93,7 +93,7 @@ export class CfarOfferBannerLargeComponent extends GlobalEventComponent implemen
 
           // Create CFAR Contract
           this._hopperCfarService
-            .postCfarContracts(this.basePath, this.hCSessionId, ApiTranslatorUtils.modelToSnakeCase(this._buildCreateCfarContractRequest(this.selectedCfarOffer, this.uiSource)))
+            .postCfarContracts(this.basePath, this.hCSessionId, this.currentLang, ApiTranslatorUtils.modelToSnakeCase(this._buildCreateCfarContractRequest(this.selectedCfarOffer, this.uiSource)))
             .pipe(take(1))
             .subscribe({
               next: (cfarContract: CfarContractCustomer) => {
@@ -139,7 +139,7 @@ export class CfarOfferBannerLargeComponent extends GlobalEventComponent implemen
   protected initCfarOffers(): void {
     this.isLoading = true;
     this._hopperCfarService
-      .postCfarOffers(this.basePath, this.hCSessionId, ApiTranslatorUtils.modelToSnakeCase(this._buildCreateCfarOfferRequest(this.itineraries)))
+      .postCfarOffers(this.basePath, this.hCSessionId, this.currentLang, ApiTranslatorUtils.modelToSnakeCase(this._buildCreateCfarOfferRequest(this.itineraries)))
       .pipe(take(1))
       .subscribe({
         next: (cfarOffers) => {
