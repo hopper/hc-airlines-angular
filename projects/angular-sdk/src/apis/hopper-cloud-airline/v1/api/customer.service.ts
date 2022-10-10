@@ -127,10 +127,10 @@ export class CustomerService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public postCustomerCfarContracts(body: CreateCfarContractCustomerRequest, hCSessionID?: string, observe?: 'body', reportProgress?: boolean): Observable<CfarContractCustomer>;
-    public postCustomerCfarContracts(body: CreateCfarContractCustomerRequest, hCSessionID?: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<CfarContractCustomer>>;
-    public postCustomerCfarContracts(body: CreateCfarContractCustomerRequest, hCSessionID?: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<CfarContractCustomer>>;
-    public postCustomerCfarContracts(body: CreateCfarContractCustomerRequest, hCSessionID?: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public postCustomerCfarContracts(body: CreateCfarContractCustomerRequest, hCSessionID?: string, language?: string, observe?: 'body', reportProgress?: boolean): Observable<CfarContractCustomer>;
+    public postCustomerCfarContracts(body: CreateCfarContractCustomerRequest, hCSessionID?: string, language?: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<CfarContractCustomer>>;
+    public postCustomerCfarContracts(body: CreateCfarContractCustomerRequest, hCSessionID?: string, language?: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<CfarContractCustomer>>;
+    public postCustomerCfarContracts(body: CreateCfarContractCustomerRequest, hCSessionID?: string, language?: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (body === null || body === undefined) {
             throw new Error('Required parameter body was null or undefined when calling postCustomerCfarContracts.');
@@ -140,6 +140,9 @@ export class CustomerService {
         let headers = this.defaultHeaders;
         if (hCSessionID !== undefined && hCSessionID !== null) {
             headers = headers.set('HC-Session-ID', String(hCSessionID));
+        }
+        if (language !== undefined && language !== null) {
+            headers = headers.set('language', String(language.toUpperCase()));
         }
 
         // to determine the Accept header
@@ -176,14 +179,14 @@ export class CustomerService {
      * Create a CFAR offers for a customer&#x27;s trip
      * @param body 
      * @param hCSessionID The ID of the current airline session, see [Sessions](#tag/Sessions)
-     * @param language 
+     * @param language language of the customer
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public postCustomerCfarOffers(body: CreateCfarOfferCustomerRequest, hCSessionID?: string, observe?: 'body', reportProgress?: boolean): Observable<Array<CfarOfferCustomer>>;
-    public postCustomerCfarOffers(body: CreateCfarOfferCustomerRequest, hCSessionID?: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<CfarOfferCustomer>>>;
-    public postCustomerCfarOffers(body: CreateCfarOfferCustomerRequest, hCSessionID?: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<CfarOfferCustomer>>>;
-    public postCustomerCfarOffers(body: CreateCfarOfferCustomerRequest, hCSessionID?: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public postCustomerCfarOffers(body: CreateCfarOfferCustomerRequest, hCSessionID?: string, language?: string, observe?: 'body', reportProgress?: boolean): Observable<Array<CfarOfferCustomer>>;
+    public postCustomerCfarOffers(body: CreateCfarOfferCustomerRequest, hCSessionID?: string, language?: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<CfarOfferCustomer>>>;
+    public postCustomerCfarOffers(body: CreateCfarOfferCustomerRequest, hCSessionID?: string, language?: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<CfarOfferCustomer>>>;
+    public postCustomerCfarOffers(body: CreateCfarOfferCustomerRequest, hCSessionID?: string, language?: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (body === null || body === undefined) {
             throw new Error('Required parameter body was null or undefined when calling postCustomerCfarOffers.');
@@ -192,6 +195,9 @@ export class CustomerService {
         let headers = this.defaultHeaders;
         if (hCSessionID !== undefined && hCSessionID !== null) {
             headers = headers.set('HC-Session-ID', String(hCSessionID));
+        }
+        if (language !== undefined && language !== null) {
+            headers = headers.set('language', String(language.toUpperCase()));
         }
 
         // to determine the Accept header

@@ -81,7 +81,7 @@ export class CfarOfferDialogComponent extends GlobalComponent implements OnInit,
 
     // Create CFAR Contract
     this._hopperCfarService
-      .postCfarContracts(this.basePath, this._hCSessionId, ApiTranslatorUtils.modelToSnakeCase(this._buildCreateCfarContractRequest(this.selectedCfarOffer, UiSource.Takeover)))
+      .postCfarContracts(this.basePath, this._hCSessionId, this.currentLang, ApiTranslatorUtils.modelToSnakeCase(this._buildCreateCfarContractRequest(this.selectedCfarOffer, UiSource.Takeover)))
       .pipe(take(1))
       .subscribe({
         next: (cfarContract: CfarContractCustomer) => {
@@ -133,7 +133,7 @@ export class CfarOfferDialogComponent extends GlobalComponent implements OnInit,
     this.isLoading = true;
     
     this._hopperCfarService
-    .postCfarOffers(this.basePath, this._hCSessionId, ApiTranslatorUtils.modelToSnakeCase(this._buildCreateCfarOfferRequest(this._itineraries)))
+    .postCfarOffers(this.basePath, this._hCSessionId, this.currentLang, ApiTranslatorUtils.modelToSnakeCase(this._buildCreateCfarOfferRequest(this._itineraries)))
     .pipe(take(1))
     .subscribe({
       next: (cfarOffers) => {
