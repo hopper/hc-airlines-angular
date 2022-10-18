@@ -1,3 +1,9 @@
+<a name="4.2.5"></a>
+
+# 4.2.5 (2022-10-18)
+General:
+- Replaced the "powered by" logo by "provided by" logo
+
 <a name="4.2.4"></a>
 
 # 4.2.4 (2022-10-07)
