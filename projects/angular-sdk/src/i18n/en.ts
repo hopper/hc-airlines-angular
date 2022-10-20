@@ -262,7 +262,7 @@ export const locale: I18n = {
                 CLOSE: 'Close'
             },
             TERMS_LINK_TEXT: "Terms & Conditions apply",
-            COVERAGE_PERCENTAGE: "{{ coverage }} flight cost covered",
+            COVERAGE_PERCENTAGE: "{{ coverage }}% flight cost covered",
             PRICE_PER_TRAVELER: "<span class='price-per-traveler'>{{ price }}</span><span>per traveler</span>",
             ERROR_CODE: {
                 DEFAULT: "Internal error. Please contact the support.",
@@ -335,7 +335,7 @@ export const locale: I18n = {
             VIEW_DETAILS: "View details",
             BUTTON: {
                 CANCEL: "Continue Without Coverage",
-                SUBMIT: "Continue With {{ coverage }} Coverage"
+                SUBMIT: "Continue With {{ coverage }}% Coverage"
             },
             NO_OFFERS: "No offer available",
             LOADING: "Loading offers in progress...",

@@ -1,3 +1,9 @@
+<a name="4.2.6"></a>
+
+# 4.2.6 (2022-10-20)
+General:
+- Added coverage percentage in returned offers and used it instead of computing it
+
 <a name="4.2.5"></a>
 
 # 4.2.5 (2022-10-18)

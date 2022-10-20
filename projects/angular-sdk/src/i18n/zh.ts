@@ -262,7 +262,7 @@ export const locale: I18n = {
                 CLOSE: '关'
             },
             TERMS_LINK_TEXT: "条款和条件",
-            COVERAGE_PERCENTAGE: "承保飞行费用的 {{ coverage }}",
+            COVERAGE_PERCENTAGE: "承保飞行费用的 {{ coverage }}%",
             PRICE_PER_TRAVELER: "<span>每位乘客</span><span class='price-per-traveler'>{{ price }}</span>",
             ERROR_CODE: {
                 DEFAULT: "Internal error. Please contact the support.",

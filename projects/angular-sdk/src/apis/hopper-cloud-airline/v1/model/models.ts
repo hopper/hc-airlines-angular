@@ -1,7 +1,6 @@
 export * from './airlineRefundMethod';
 export * from './ancillary';
 export * from './badRequest';
-export * from './cfarContract';
 export * from './cfarContractCustomer';
 export * from './cfarContractExercise';
 export * from './cfarDenyPurchase';
@@ -19,7 +18,6 @@ export * from './cfarForcedChoiceWarning';
 export * from './cfarItinerary';
 export * from './cfarItinerarySlice';
 export * from './cfarItinerarySliceSegment';
-export * from './cfarOffer';
 export * from './cfarOfferCustomer';
 export * from './cfarOffersBannerDisplay';
 export * from './cfarOffersTakeoverDisplay';
