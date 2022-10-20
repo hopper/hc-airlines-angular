@@ -262,7 +262,7 @@ export const locale: I18n = {
                 CLOSE: 'Fermer'
             },
             TERMS_LINK_TEXT: "Voir les conditions générales",
-            COVERAGE_PERCENTAGE: "{{ coverage }} du montant des billets remboursés",
+            COVERAGE_PERCENTAGE: "{{ coverage }}% du montant des billets remboursés",
             PRICE_PER_TRAVELER: "<span class='price-per-traveler'>{{ price }}</span><span>par passager</span>",
             ERROR_CODE: {
                 DEFAULT: "Erreur interne. Veuillez contacter l'assistance.",
@@ -335,7 +335,7 @@ export const locale: I18n = {
             VIEW_DETAILS: "Voir détails",
             BUTTON: {
                 CANCEL: "Continuer sans l'option",
-                SUBMIT: "Continuer avec {{ coverage }} de couverture"
+                SUBMIT: "Continuer avec {{ coverage }}% de couverture"
             },
             NO_OFFERS: "Aucune offre disponible",
             LOADING: "Chargement des offres en cours...",

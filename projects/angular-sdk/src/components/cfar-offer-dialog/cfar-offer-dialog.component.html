@@ -46,7 +46,7 @@
                         <h3 class="offer-title">
                             {{ 'COMMON.COVERAGE_PERCENTAGE' | translate: 
                                 {
-                                    coverage: (computePercentage(offer) | percent)
+                                    coverage: (offer.coveragePercentage | number: '1.0-0')
                                 }
                             }}
                         </h3>
@@ -91,7 +91,7 @@
         <button mat-raised-button color="accent" *ngIf="selectedCfarOffer" ngClass.lt-sm="full-width" (click)="onSubmit()"
             attr.aria-label="{{ 'CFAR_OFFER_DIALOG.BUTTON.SUBMIT' | translate }}">
             {{ 'CFAR_OFFER_DIALOG.BUTTON.SUBMIT' | translate: { 
-                coverage: (computePercentage(selectedCfarOffer) | percent)
+                coverage: (selectedCfarOffer.coveragePercentage | number: '1.0-0')
             } }}
         </button>
     </div>

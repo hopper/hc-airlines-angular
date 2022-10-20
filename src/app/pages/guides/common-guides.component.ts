@@ -28,7 +28,7 @@ export abstract class CommonGuidesComponent implements OnInit, OnDestroy {
   public abstract htmlCode: string;
 
   // Parameters
-  public hCSessionId = "8ab96efe-164a-4343-a4a2-ce1741a21048";
+  public hCSessionId = "a19f0e16-4fc3-4141-81b6-72989cba1595";
   public currency = "EUR";
   public passengers: PassengerPricing[] = [
     {
@@ -36,7 +36,7 @@ export abstract class CommonGuidesComponent implements OnInit, OnDestroy {
         count: 3,
         type: "adult"
       },
-      individualPrice: "30.55"
+      individualPrice: "128.78"
     }
   ];
   public pnrReference = "123456";
@@ -60,7 +60,7 @@ export abstract class CommonGuidesComponent implements OnInit, OnDestroy {
           ]
         }
       ],
-      totalPrice: "91.65",
+      totalPrice: "386.34",
       ancillaries: [
         {
           totalPrice: "30.55",
@@ -87,7 +87,7 @@ export abstract class CommonGuidesComponent implements OnInit, OnDestroy {
         ]
       }
     ],
-    totalPrice: "91.65",
+    totalPrice: "386.34",
     ancillaries: [
       {
         totalPrice: "30.55",

@@ -104,17 +104,6 @@ export class CfarOfferDialogComponent extends GlobalComponent implements OnInit,
     this.createTermsAndConditionsEvent();
   }
 
-  public computePercentage(offer: CfarOfferCustomer): number {
-    if (offer) {
-      const coverage = Number.parseFloat(offer.coverage);
-      const totalPrice = Number.parseFloat(offer.itinerary.totalPrice);
-  
-      return coverage / (totalPrice || 1.0);
-    }
-
-    return 0;
-  }
-
   public getPricePerTraveler(offer: CfarOfferCustomer): number {
     var nbTravelers = 0;
     

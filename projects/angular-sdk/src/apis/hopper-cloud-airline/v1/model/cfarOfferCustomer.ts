@@ -30,6 +30,10 @@ export interface CfarOfferCustomer {
      */
     coverage: string;
     /**
+     * Percentage of the amount to be refunded to customer compared to flight tickets price
+     */
+    coveragePercentage: string;
+    /**
      * Currency of offer
      */
     currency: string;

@@ -61,17 +61,6 @@ export class CfarOfferBannerLargeComponent extends GlobalEventComponent implemen
   // Publics Methods
   // -----------------------------------------------
 
-  public computePercentage(offer: CfarOfferCustomer): number {
-    if (offer) {
-      const coverage = Number.parseFloat(offer.coverage);
-      const totalPrice = Number.parseFloat(offer.itinerary.totalPrice);
-  
-      return coverage / (totalPrice || 1.0);
-    }
-
-    return 0;
-  }
-
   public onChooseCoverage(): void {
     // After the first choice, we force the display of the 'decline' option
     this.hasNoCoverageOption = true;

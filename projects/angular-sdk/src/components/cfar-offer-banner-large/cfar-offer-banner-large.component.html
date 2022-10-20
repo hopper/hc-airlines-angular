@@ -50,7 +50,7 @@
                             <div fxFlex class="offer-choice" fxLayout="row wrap" fxLayoutAlign="start start" *ngFor="let offer of cfarOffers; let i = index;">
                                 <mat-radio-button fxFlex="100" value="{{ i }}" class="important-text bold">
                                     {{ 'COMMON.COVERAGE_PERCENTAGE' | translate: 
-                                        { coverage: (computePercentage(offer) | percent) }
+                                        { coverage: (offer.coveragePercentage | number: '1.0-0') }
                                     }}
                                 </mat-radio-button>
 
