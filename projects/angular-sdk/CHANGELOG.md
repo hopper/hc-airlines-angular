@@ -1,3 +1,9 @@
+<a name="4.2.7"></a>
+
+# 4.2.7 (2022-XX-XX)
+General:
+- Added all news errors labels
+
 <a name="4.2.6"></a>
 
 # 4.2.6 (2022-10-20)
