@@ -3,6 +3,11 @@
 # 4.2.7 (2022-XX-XX)
 General:
 - Added all news errors labels
+
+Offer banner:
+- Improved accessibility
+- Fixed the display of the error message
+
 Offer banner large:
 - Reduced margin between error message and banner
 
