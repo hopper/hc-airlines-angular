@@ -99,7 +99,8 @@ export class GlobalComponent implements OnChanges {
             
         if (ArrayUtils.isNotEmpty(apiErrors)) {
             const mainApiError = apiErrors[0] as Error;
-            return new HcAirlinesError(mainApiError.message, mainApiError.code || ErrorCode.DEFAULT);
+            // RF009 = Unknown
+            return new HcAirlinesError(mainApiError.message, mainApiError.code || ErrorCode.RF009);
         } else {
             console.error(apiError);
             return HcAirlinesError.buildDefault();

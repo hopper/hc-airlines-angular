@@ -16,16 +16,16 @@
 
 </div>
 
-<mat-dialog-content class="mat-typography">
+<mat-dialog-content class="mat-typography" fxLayout="column">
   
     <ng-container *ngIf="!isLoading">
 
         <ng-container *ngIf="cfarOffers && cfarOffers.length > 0">
-            <div class="p-32" ngClass.lt-md="px-16" fxLayout="row wrap" fxLayoutAlign="start center">
+            <div class="px-32 mt-16" ngClass.lt-md="p-16" fxLayout="row wrap" fxLayoutAlign="start center">
         
                 <div fxFlex="100" class="py-8" *ngFor="let desc of getOfferDescription(selectedCfarOffer)" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
                     <mat-icon class="check-icon">check</mat-icon>
-                    <span innerHtml="{{ desc }}"></span>
+                    <span attr.aria-label="{{ desc }}" innerHtml="{{ desc }}"></span>
                 </div>
 
                 <div fxFlex="100" class="py-8" fxLayout="row" fxLayout.lt-sm="column" fxLayoutAlign="start center" fxLayoutGap="8px" (click)="onOpenTermsAndConditions()">
@@ -43,16 +43,22 @@
                 <mat-card class="full-width m-16" fxFlex fxLayout="row wrap" *ngFor="let offer of cfarOffers" 
                     [ngClass]="{ 'active': offer == selectedCfarOffer }">
                     <div fxFlex="100" (click)="onSelectOffer(offer)">
-                        <h3 class="offer-title">
+                        <h3 class="offer-title" 
+                            attr.aria-label="{{ 'COMMON.COVERAGE_PERCENTAGE' | translate: 
+                                { coverage: (offer.coveragePercentage | number: '1.0-0') }
+                            }}"
+                        >
                             {{ 'COMMON.COVERAGE_PERCENTAGE' | translate: 
-                                {
-                                    coverage: (offer.coveragePercentage | number: '1.0-0')
-                                }
+                                { coverage: (offer.coveragePercentage | number: '1.0-0') }
                             }}
                         </h3>
-                        <div class="price" innerHtml="{{ 'COMMON.PRICE_PER_TRAVELER' | translate: 
-                            { price: (getPricePerTraveler(offer) | currency:offer?.currency:'symbol':undefined:currentLang) }
-                        }}"
+                        <div class="price" 
+                            attr.aria-label="{{ 'COMMON.PRICE_PER_TRAVELER' | translate: 
+                                { price: (getPricePerTraveler(offer) | currency:offer?.currency:'symbol':undefined:currentLang) }
+                            }}"
+                            innerHtml="{{ 'COMMON.PRICE_PER_TRAVELER' | translate: 
+                                { price: (getPricePerTraveler(offer) | currency:offer?.currency:'symbol':undefined:currentLang) }
+                            }}"
                         ></div>
                     </div>
                 </mat-card>
@@ -62,7 +68,7 @@
 
         <!-- ERROR MESSAGE -->
         <ng-container *ngIf="errorCode">
-            <div fxFlex="100" class="error-message m-16" fxLayout="row" fxLayoutAlign="start center">
+            <div class="error-message mx-32 my-16" fxLayout="row wrap" fxLayoutAlign="start center">
                 <mat-icon>error</mat-icon>
                 <span class="p-16">{{ ('COMMON.ERROR_CODE.' + errorCode) | translate }}</span>
             </div>
@@ -89,7 +95,9 @@
             {{ 'CFAR_OFFER_DIALOG.BUTTON.CANCEL' | translate }}
         </button>
         <button mat-raised-button color="accent" *ngIf="selectedCfarOffer" ngClass.lt-sm="full-width" (click)="onSubmit()"
-            attr.aria-label="{{ 'CFAR_OFFER_DIALOG.BUTTON.SUBMIT' | translate }}">
+            attr.aria-label="{{ 'CFAR_OFFER_DIALOG.BUTTON.SUBMIT' | translate: { 
+                coverage: (selectedCfarOffer.coveragePercentage | number: '1.0-0')
+            } }}">
             {{ 'CFAR_OFFER_DIALOG.BUTTON.SUBMIT' | translate: { 
                 coverage: (selectedCfarOffer.coveragePercentage | number: '1.0-0')
             } }}

@@ -77,23 +77,25 @@ export class CfarOfferDialogComponent extends GlobalComponent implements OnInit,
   }
 
   public onSubmit(): void {
-    this.isLoading = true;
+    if (!this.isFakeBackend) {
+      this.isLoading = true;
 
-    // Create CFAR Contract
-    this._hopperCfarService
-      .postCfarContracts(this.basePath, this._hCSessionId, this.currentLang, ApiTranslatorUtils.modelToSnakeCase(this._buildCreateCfarContractRequest(this.selectedCfarOffer, UiSource.Takeover)))
-      .pipe(take(1))
-      .subscribe({
-        next: (cfarContract: CfarContractCustomer) => {
-          this._dialogRef.close(ApiTranslatorUtils.modelToCamelCase(cfarContract) as CfarContractCustomer);
-        },
-        error: (error) => {
-          const builtError = this._getHcAirlinesErrorResponse(error);
-          this.errorCode = builtError.code;
-          
-          this.isLoading = false;
-        }
-      });
+      // Create CFAR Contract
+      this._hopperCfarService
+        .postCfarContracts(this.basePath, this._hCSessionId, this.currentLang, ApiTranslatorUtils.modelToSnakeCase(this._buildCreateCfarContractRequest(this.selectedCfarOffer, UiSource.Takeover)))
+        .pipe(take(1))
+        .subscribe({
+          next: (cfarContract: CfarContractCustomer) => {
+            this._dialogRef.close(ApiTranslatorUtils.modelToCamelCase(cfarContract) as CfarContractCustomer);
+          },
+          error: (error) => {
+            const builtError = this._getHcAirlinesErrorResponse(error);
+            this.errorCode = builtError.code;
+            
+            this.isLoading = false;
+          }
+        });
+    }
   }
 
   public onSelectOffer(cfarOffer: CfarOfferCustomer): void {

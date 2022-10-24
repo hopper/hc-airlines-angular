@@ -1,3 +1,16 @@
+<a name="4.2.7"></a>
+
+# 4.2.7 (2022-10-24)
+General:
+- Added all news errors labels
+
+Offer banner:
+- Improved accessibility
+- Fixed the display of the error message
+
+Offer banner large:
+- Reduced margin between error message and banner
+
 <a name="4.2.6"></a>
 
 # 4.2.6 (2022-10-20)
