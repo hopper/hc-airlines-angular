@@ -63,6 +63,7 @@ export enum ErrorCode {
     // The contract was not found.
     CO033 = "CO033",
     // The contract exercise was not found.
+
     EX001 = "EX001",
     // It is too late to use CFAR to cancel your booking.
     EX002 = "EX002",
@@ -124,6 +125,46 @@ export enum ErrorCode {
     EX035 = "EX035",
     // No Cfar contract for this booking reference.
     EX036 = "EX036",
+
+    // The manual exercise could not be created.
+    ME001 = "ME001",
+    // The manual exercise could not be saved.
+    ME002 = "ME002",
+    // The manual exercise could not be confirmed.
+    ME003 = "ME003",
+    // The manual exercise could not be found.
+    ME004 = "ME004",
+    // The manual exercise could not be found.
+    ME005 = "ME005",
+    // The input passengers do not match with the passengers on the initial contract.
+    ME006 = "ME006",
+    // It is too late to use CFAR to cancel your booking.
+    ME007 = "ME007",
+    // No Cfar contract for this booking reference.
+    ME008 = "ME008",
+    // The contract was not confirmed.
+    ME009 = "ME009",
+    // Invalid data for the initialization of a manual exercise.
+    ME010 = "ME010",
+    // Confirmed manual exercises could not be found.
+    ME011 = "ME011",
+    // The manual exercise status is incorrect.
+    ME012 = "ME012",
+    // No coverage amount found to complete the manual exercise.
+    ME013 = "ME013",
+    // The verification code to proceed a manual exercise has nos been sent.
+    ME014 = "ME014",
+    // The contract does not have a verification code.
+    ME015 = "ME015",
+    // The contract was not found.
+    ME016 = "ME016",
+    // The contract does not have an expiration date for its verification code.
+    ME017 = "ME017",
+    // The verification code has expired.
+    ME018 = "ME018",
+    // The verification code is not valid.
+    ME019 = "ME019",
+
     // An offer could not be saved.
     OF001 = "OF001",
     // An offer could not be saved.
@@ -158,6 +199,7 @@ export enum ErrorCode {
     OF018 = "OF018",
     // An prediction could not be saved.
     OF019 = "OF019",
+
     // The session was not found.
     SE001 = "SE001",
     // The session was not found.
@@ -184,11 +226,13 @@ export enum ErrorCode {
     SE012 = "SE012",
     // The session does not have the correct flow type.
     SE013 = "SE013",
+
     // Email could not be sent.
     EM001 = "EM001",
     // Email could not be sent.
     EM002 = "EM002",
     // The contract was not found.
+
     RF001 = "RF001",
     // The contract exercise was not found.
     RF002 = "RF002",
@@ -208,6 +252,7 @@ export enum ErrorCode {
     RF009 = "RF009",
     // The exercise could not be saved.
     RF010 = "RF010",
+
     // User properties for the event could not be retrieved.
     EV001 = "EV001",
     // Platform properties for the event could not be retrieved.
