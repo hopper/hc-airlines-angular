@@ -94,7 +94,7 @@ export class CfarOfferBannerLargeComponent extends GlobalEventComponent implemen
                 this.isLoading = false;
               },
               error: (error) => {
-                this.manageSdkError(error, "contracts");
+                this.pushSdkError(error, "contracts");
                 this.isLoading = false;
               }
             });
@@ -152,7 +152,7 @@ export class CfarOfferBannerLargeComponent extends GlobalEventComponent implemen
           this.createPurchaseEventsAfterInit(this.hasWarningCoverageMessage);
         },
         error: (error) => {
-          this.manageSdkError(error, "offers");
+          this.pushSdkError(error, "offers");
           this.offersLoaded.emit();
           this.isLoading = false;
         }

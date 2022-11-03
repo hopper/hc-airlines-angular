@@ -405,7 +405,7 @@ export class GlobalComponent implements OnChanges {
         return offer.offerDescription[this.currentLang];
     }
 
-    public manageSdkError(error: any, errorEndPoint: string) {
+    public pushSdkError(error: any, errorEndPoint: string) {
         console.error(error);
         const builtError = this._getHcAirlinesErrorResponse(error);
         if (builtError !== null) {
