@@ -15,13 +15,13 @@
                     <h2 class="offer-title px-16 m-0">{{ 'CFAR_OFFER_BANNER_LARGE.TITLE' | translate }}</h2>
                 </div>
 
-                <div class="mb-32" fxFlex="100" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="16px">
+                <div class="mb-32 mt-16" fxFlex="100" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="16px">
     
-                    <div fxFlex="calc(20% - 16px)" fxHide.lt-md fxLayout="row" fxLayoutAlign="center center" class="p-16" ngClass.lt-sm="px-0">
+                    <div fxFlex="calc(20% - 16px)" fxFlex.lt-md="calc(30% - 16px)" fxHide.lt-sm fxLayout="row" fxLayoutAlign="center center" class="p-16" ngClass.lt-sm="px-0">
                         <img class="responsive-image" src="{{ imageBasePath || '' }}assets/offer-banner-icon.svg">
                     </div>
     
-                    <div fxFlex="80" fxFlex.lt-md="100" fxLayout="column" fxLayoutGap="16px" fxLayoutAlign="center start">
+                    <div fxFlex="80" fxFlex.lt-md="70" fxFlex.lt-sm="100" fxLayout="column" fxLayoutGap="16px" fxLayoutAlign="center start">
 
                         <ng-container *ngFor="let desc of getOfferDescription(selectedCfarOffer); let i = index;">
                             <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
@@ -31,7 +31,7 @@
                         </ng-container>
 
                         <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px" (click)="onOpenTermsAndConditions()">
-                            <a href="#" attr.aria-describedby="{{ 'COMMON.TERMS_LINK_TEXT' | translate }}" target="_blank">
+                            <a href="{{ termsLink }}" attr.aria-describedby="{{ 'COMMON.TERMS_LINK_TEXT' | translate }}" target="_blank">
                                 {{ 'COMMON.TERMS_LINK_TEXT' | translate }}
                             </a>
                         </div>
@@ -59,6 +59,10 @@
                                         { price: (getPricePerTraveler(offer) | currency:offer?.currency:'symbol':undefined:currentLang) }
                                     }}"
                                 ></div>
+
+                                <div class="mt-8 incl-taxes" fxFlex="100" fxLayoutAlign="start center" fxLayoutGap="8px">
+                                    {{ 'COMMON.INCL_TAXES' | translate }}
+                                </div>
                             </div>
 
                         </div>

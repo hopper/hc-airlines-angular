@@ -28,7 +28,7 @@ export abstract class CommonGuidesComponent implements OnInit, OnDestroy {
   public abstract htmlCode: string;
 
   // Parameters
-  public hCSessionId = "3fada401-9526-4eca-9178-551a0a3df9df";
+  public hCSessionId = "05b4b209-26f2-45bc-83ad-dc31fd773eb8";
   public currency = "EUR";
   public passengers: PassengerPricing[] = [
     {
@@ -95,12 +95,13 @@ export abstract class CommonGuidesComponent implements OnInit, OnDestroy {
       }
     ]
   };
-  public exerciseId = "1ed2df96-ee3c-61e6-a57a-a7e77771ba29";
+  public exerciseId = "1ed56cb3-e482-6a5d-af17-c996464a398c";
   public hyperwalletUrl: string = "https://sandbox.hyperwallet.com/rest/widgets/transfer-methods/";
   public hasNoCoverageOption = false;
   public hasWarningCoverageMessage = true;
   public uiVariant = UiVariant.A;
-
+  public termsLink = "http://hopper.com/legal/Air-Canada-CFAR";
+  
   constructor(
     protected _store: Store<AppState>,
     protected _clipboard: Clipboard,

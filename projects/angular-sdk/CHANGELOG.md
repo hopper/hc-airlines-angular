@@ -4,6 +4,10 @@
 General:
 - Added all news errors labels - part 2
 
+Offer banner large and offer dialog:
+- Added a new parameter for T&Cs link (termsLink)
+- Added Incl. taxes label under the price
+
 <a name="4.2.7"></a>
 
 # 4.2.7 (2022-10-24)

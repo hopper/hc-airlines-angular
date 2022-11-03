@@ -87,6 +87,10 @@
                 }
             }
 
+            .incl-taxes {
+                color: map-get($fg-palette, "secondary-text")
+            }
+
             a {
                 color: map-get($accent-palette, default);
             }

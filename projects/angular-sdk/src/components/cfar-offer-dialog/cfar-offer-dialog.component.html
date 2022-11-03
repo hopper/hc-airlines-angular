@@ -30,7 +30,7 @@
 
                 <div fxFlex="100" class="py-8" fxLayout="row" fxLayout.lt-sm="column" fxLayoutAlign="start center" fxLayoutGap="8px" (click)="onOpenTermsAndConditions()">
                     <span>{{ 'CFAR_OFFER_DIALOG.TERMS_WARNING' | translate }}</span>
-                    <a href="#" attr.aria-describedby="{{ 'COMMON.TERMS_LINK_TEXT' | translate }}" 
+                    <a href="{{ termsLink }}" attr.aria-describedby="{{ 'COMMON.TERMS_LINK_TEXT' | translate }}" 
                         target="_blank">
                         {{ 'COMMON.TERMS_LINK_TEXT' | translate }}
                     </a>
@@ -42,8 +42,8 @@
         
                 <mat-card class="full-width m-16" fxFlex fxLayout="row wrap" *ngFor="let offer of cfarOffers" 
                     [ngClass]="{ 'active': offer == selectedCfarOffer }">
-                    <div fxFlex="100" (click)="onSelectOffer(offer)">
-                        <h3 class="offer-title" 
+                    <div fxFlex="100"  fxLayout="row wrap" fxLayoutAlign="start center" (click)="onSelectOffer(offer)">
+                        <h3 fxFlex="100" class="offer-title" 
                             attr.aria-label="{{ 'COMMON.COVERAGE_PERCENTAGE' | translate: 
                                 { coverage: (offer.coveragePercentage | number: '1.0-0') }
                             }}"
@@ -52,7 +52,7 @@
                                 { coverage: (offer.coveragePercentage | number: '1.0-0') }
                             }}
                         </h3>
-                        <div class="price" 
+                        <div fxFlex="100" class="price" 
                             attr.aria-label="{{ 'COMMON.PRICE_PER_TRAVELER' | translate: 
                                 { price: (getPricePerTraveler(offer) | currency:offer?.currency:'symbol':undefined:currentLang) }
                             }}"
@@ -60,6 +60,10 @@
                                 { price: (getPricePerTraveler(offer) | currency:offer?.currency:'symbol':undefined:currentLang) }
                             }}"
                         ></div>
+                        <div class="incl-taxes mt-8" fxFlex="100"
+                            attr.aria-label="{{ 'COMMON.INCL_TAXES' | translate }}">
+                            {{ 'COMMON.INCL_TAXES' | translate }}
+                        </div>
                     </div>
                 </mat-card>
 

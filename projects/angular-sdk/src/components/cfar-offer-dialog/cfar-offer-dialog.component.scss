@@ -97,6 +97,10 @@
                     font-weight: bold;
                     margin-right: 8px;
                 }
+
+                .incl-taxes {
+                    color: map-get($fg-palette, "secondary-text")
+                }
             }
         }
 

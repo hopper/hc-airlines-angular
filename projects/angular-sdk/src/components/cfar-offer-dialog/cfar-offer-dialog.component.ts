@@ -20,6 +20,7 @@ export class CfarOfferDialogComponent extends GlobalComponent implements OnInit,
   public selectedCfarOffer!: CfarOfferCustomer;
   public isLoading!: boolean;
   public errorCode?: string;
+  public termsLink!: string;
 
   private _hCSessionId!: string;
   private _itineraries!: CfarItinerary[];
@@ -45,6 +46,7 @@ export class CfarOfferDialogComponent extends GlobalComponent implements OnInit,
     this.isFakeBackend = data.isFakeBackend;
     this.currentLang = data.currentLang;
     this.basePath = data.basePath;
+    this.termsLink = data.termsLink;
   }
 
   // -----------------------------------------------

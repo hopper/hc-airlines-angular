@@ -22,6 +22,7 @@ export class CfarOfferBannerLargePageComponent extends CommonGuidesComponent {
       [currentLang]="currentLang"
       [hCSessionId]="hCSessionId"
       [itineraries]="itineraries"
+      [termsLink]="termsLink"
       [hasNoCoverageOption]="hasNoCoverageOption"
       [hasWarningCoverageMessage]="hasWarningCoverageMessage"
       [uiVariant]="uiVariant"
@@ -115,6 +116,13 @@ export class CfarOfferBannerLargePageComponent extends CommonGuidesComponent {
         description: `
           Used to do AB testing with differents displays of the component. <br />
           Possibles values: 'variant_a', 'variant_b' or 'variant_c'
+        `,
+        required: true
+      },
+      {
+        name: 'termsLink',
+        description: `
+          Link for Terms and conditions
         `,
         required: true
       }

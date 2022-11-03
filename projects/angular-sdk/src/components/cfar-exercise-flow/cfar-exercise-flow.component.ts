@@ -223,7 +223,9 @@ export class CfarExerciseFlowComponent extends GlobalEventComponent implements O
                         template: 'plain',
                         el: document.getElementById("TransferMethodUI"),
                         transferMethodConfiguration: {
-                          profileType: 'INDIVIDUAL'
+                          profileType: 'INDIVIDUAL',
+                          "country": "CA", 
+                          "currency": "CAD"
                         },
                         onComplete: function(trmObject, completionResult) {
                           if (trmObject) {

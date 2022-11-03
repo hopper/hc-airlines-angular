@@ -264,6 +264,7 @@ export const locale: I18n = {
             TERMS_LINK_TEXT: "Términos y Condiciones",
             COVERAGE_PERCENTAGE: "{{ coverage }}% de los costos de vuelo cubiertos",
             PRICE_PER_TRAVELER: "<span class='price-per-traveler'>{{ price }}</span><span>por pasajero</span>",
+            INCL_TAXES: "(Incl. impuestos si corresponde)",
             ERROR_CODE: {
                 CO003: "No se encontró el contrato.",
                 CO004: "No se encontró el contrato.",

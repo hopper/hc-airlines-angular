@@ -264,6 +264,7 @@ export const locale: I18n = {
             TERMS_LINK_TEXT: "Voir les conditions générales",
             COVERAGE_PERCENTAGE: "{{ coverage }}% du montant des billets remboursés",
             PRICE_PER_TRAVELER: "<span class='price-per-traveler'>{{ price }}</span><span>par passager</span>",
+            INCL_TAXES: "(Incl. les taxes si applicables)",
             ERROR_CODE: {
                 CO003: "Le contrat n'a pas été trouvé.",
                 CO004: "Le contrat n'a pas été trouvé.",
