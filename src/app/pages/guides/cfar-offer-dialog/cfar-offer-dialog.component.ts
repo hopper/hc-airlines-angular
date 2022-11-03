@@ -169,6 +169,13 @@ export class CfarOfferDialogPageComponent extends CommonGuidesComponent {
         description: `
           When the close/cancel button is pressed, the dialog returns nothing
         `
+      },
+      {
+        name: 'errorOccurred',
+        description: `
+          Event triggered when an error occurs into the SDK<br />
+          Returns a ErrorSdkModel : { endpoint: string, errorCode: string, errorDescription: string }
+        `
       }
     ];
   }

@@ -455,7 +455,7 @@ export const locale: I18n = {
             NO_CONTRACT: "No contract available",
             LOADING: "Loading in progress...",
             LOADING_HYPERWALLET: "Loading in progress...",
-            LOADING_HYPERWALLET_ERROR: "An error occured, please contact our customer support via <a href='{{ link }}' target='_blank'>this form.</a>",
+            LOADING_HYPERWALLET_ERROR: "An error occurred, please contact our customer support via <a href='{{ link }}' target='_blank'>this form.</a>",
             STEP: {
                 FIRST: "Booking summary",
                 SECOND: "General information",

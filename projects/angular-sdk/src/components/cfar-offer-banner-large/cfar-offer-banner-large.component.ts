@@ -94,7 +94,7 @@ export class CfarOfferBannerLargeComponent extends GlobalEventComponent implemen
                 this.isLoading = false;
               },
               error: (error) => {
-                console.error(error);
+                this.manageSdkError(error, "contracts");
                 this.isLoading = false;
               }
             });
@@ -128,6 +128,7 @@ export class CfarOfferBannerLargeComponent extends GlobalEventComponent implemen
 
   protected initCfarOffers(): void {
     this.isLoading = true;
+    console.log(this.hCSessionId)
     this._hopperCfarService
       .postCfarOffers(this.basePath, this.hCSessionId, this.currentLang, ApiTranslatorUtils.modelToSnakeCase(this._buildCreateCfarOfferRequest(this.itineraries)))
       .pipe(take(1))
@@ -151,7 +152,7 @@ export class CfarOfferBannerLargeComponent extends GlobalEventComponent implemen
           this.createPurchaseEventsAfterInit(this.hasWarningCoverageMessage);
         },
         error: (error) => {
-          console.error(error);
+          this.manageSdkError(error, "offers");
           this.offersLoaded.emit();
           this.isLoading = false;
         }
