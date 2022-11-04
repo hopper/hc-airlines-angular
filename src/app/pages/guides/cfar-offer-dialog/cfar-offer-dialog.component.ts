@@ -57,12 +57,13 @@ export class CfarOfferDialogPageComponent extends CommonGuidesComponent {
       const dialogConfig = DialogUtils.getDialogConfig(dialogData, this.currentTheme);
       const dialogRef = this._dialog.open(CfarOfferDialogComponent, dialogConfig);
 
-      // In case you want to subscribe to the event ErrorOccurred managed in the dialog
-      const dialogErrorOccurredSubscription = dialogRef.componentInstance.errorOccurred.subscribe((error: ErrorSdkModel) => {
-        console.log(error);
-        // Unsubscription
-        dialogErrorOccurredSubscription.unsubscribe();
-      });
+      // Declare a dialogErrorOccurredSubscription variable in case you want 
+      // to subscribe to the event ErrorOccurred managed in the dialog
+      const dialogErrorOccurredSubscription = dialogRef.componentInstance.errorOccurred
+        .pipe(take(1))
+        .subscribe((error: ErrorSdkModel) => {
+          console.log(error);
+        });
 
       dialogRef.afterClosed()
         .pipe(take(1))
@@ -75,6 +76,10 @@ export class CfarOfferDialogPageComponent extends CommonGuidesComponent {
             }
           },
           error: (error) => console.log(error)
+        })
+        // Add this block in case you have to unsubscribe to the event ErrorOccurred managed in the dialog      
+        .add(() => {
+          dialogErrorOccurredSubscription.unsubscribe();
         });
     }
   `;
@@ -203,11 +208,11 @@ export class CfarOfferDialogPageComponent extends CommonGuidesComponent {
     const dialogConfig = DialogUtils.getDialogConfig(dialogData);
     const dialogRef = this._dialog.open(CfarOfferDialogComponent, dialogConfig);
 
-    const dialogErrorOccurredSubscription = dialogRef.componentInstance.errorOccurred.subscribe((error: ErrorSdkModel) => {
-      console.log(error);
-      // Unsubscription
-      dialogErrorOccurredSubscription.unsubscribe();
-    });
+    const dialogErrorOccurredSubscription = dialogRef.componentInstance.errorOccurred
+      .pipe(take(1))
+      .subscribe((error: ErrorSdkModel) => {
+        console.log(error);
+      });
 
     dialogRef.afterClosed()
       .pipe(take(1))
@@ -221,6 +226,9 @@ export class CfarOfferDialogPageComponent extends CommonGuidesComponent {
           }
         },
         error: (error) => console.log(error)
+      })
+      .add(() => {
+        dialogErrorOccurredSubscription.unsubscribe();
       });
   }
 }
