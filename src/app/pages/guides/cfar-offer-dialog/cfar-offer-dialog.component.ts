@@ -11,6 +11,7 @@ import { Locales } from "projects/angular-sdk/src/i18n";
 import { DialogUtils } from "projects/angular-sdk/src/utils/dialog.utils";
 import { CfarOfferDialogComponent } from "projects/angular-sdk/src/components/cfar-offer-dialog/cfar-offer-dialog.component";
 import { CfarContractCustomer } from "projects/angular-sdk/src/apis/hopper-cloud-airline/v1";
+import { ErrorSdkModel } from "projects/angular-sdk/src/models";
 
 
 @Component({
@@ -29,6 +30,7 @@ export class CfarOfferDialogPageComponent extends CommonGuidesComponent {
   public tsCode: string = `
     import { CfarContractCustomer } from "@hopper-cloud-airlines/angular-sdk/apis/hopper-cloud-airline/v1";
     import { CfarOfferDialogComponent, DialogUtils } from "@hopper-cloud-airlines/angular-sdk";
+    import { ErrorSdkModel } from "@hopper-cloud-airlines/angular-sdk/models";
     import { MatDialog } from "@angular/material/dialog";
     import { take } from "rxjs/operators";
     
@@ -54,6 +56,13 @@ export class CfarOfferDialogPageComponent extends CommonGuidesComponent {
       };
       const dialogConfig = DialogUtils.getDialogConfig(dialogData, this.currentTheme);
       const dialogRef = this._dialog.open(CfarOfferDialogComponent, dialogConfig);
+
+      // In case you want to subscribe to the event ErrorOccurred managed in the dialog
+      const dialogErrorOccurredSubscription = dialogRef.componentInstance.errorOccurred.subscribe((error: ErrorSdkModel) => {
+        console.log(error);
+        // Unsubscription
+        dialogErrorOccurredSubscription.unsubscribe();
+      });
 
       dialogRef.afterClosed()
         .pipe(take(1))
@@ -174,7 +183,8 @@ export class CfarOfferDialogPageComponent extends CommonGuidesComponent {
         name: 'errorOccurred',
         description: `
           Event triggered when an error occurs into the SDK<br />
-          Returns a ErrorSdkModel : { endpoint: string, errorCode: string, errorDescription: string }
+          Returns a ErrorSdkModel : { endpoint: string, errorCode: string, errorDescription: string }<br />
+          If you want to subscribe to this event, you must implement this subscription into the component which opens the dialog component.
         `
       }
     ];
@@ -192,6 +202,12 @@ export class CfarOfferDialogPageComponent extends CommonGuidesComponent {
     };
     const dialogConfig = DialogUtils.getDialogConfig(dialogData);
     const dialogRef = this._dialog.open(CfarOfferDialogComponent, dialogConfig);
+
+    const dialogErrorOccurredSubscription = dialogRef.componentInstance.errorOccurred.subscribe((error: ErrorSdkModel) => {
+      console.log(error);
+      // Unsubscription
+      dialogErrorOccurredSubscription.unsubscribe();
+    });
 
     dialogRef.afterClosed()
       .pipe(take(1))
