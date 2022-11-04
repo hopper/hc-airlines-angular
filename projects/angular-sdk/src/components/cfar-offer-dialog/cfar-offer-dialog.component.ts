@@ -93,6 +93,8 @@ export class CfarOfferDialogComponent extends GlobalComponent implements OnInit,
           error: (error) => {
             const builtError = this._getHcAirlinesErrorResponse(error);
             this.errorCode = builtError.code;
+                    
+            this.pushSdkError(error, "contracts");
             
             this.isLoading = false;
           }
