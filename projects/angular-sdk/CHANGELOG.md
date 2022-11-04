@@ -3,7 +3,7 @@
 # 4.2.8 (2022-XX-XX)
 General:
 - Added all news errors labels - part 2
-- Implements an output property in every components, to raise an event when an errors occurs in the SDK
+- Implements an output property in every components, to raise an event when errors occurs in the SDK
 
 Offer banner large and offer dialog:
 - Added a new parameter for T&Cs link (termsLink)
