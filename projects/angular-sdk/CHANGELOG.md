@@ -1,12 +1,13 @@
 <a name="4.2.8"></a>
 
-# 4.2.8 (2022-XX-XX)
+# 4.2.8 (2022-11-07)
 General:
 - Added all news errors labels - part 2
 - Implements an output property in every components, to raise an event when an errors occurs into the SDK
 
 Offer banner large and offer dialog:
 - Added Incl. taxes label under the price
+- Added link to Terms and conditions
 
 <a name="4.2.7"></a>
 

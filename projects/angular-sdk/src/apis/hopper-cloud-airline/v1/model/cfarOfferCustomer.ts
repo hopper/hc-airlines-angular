@@ -52,4 +52,5 @@ export interface CfarOfferCustomer {
     createdDateTime: Date;
     itinerary: CfarItinerary;
     offerDescription: MapStringArray;
+    termsConditionsUrl: string;
 }

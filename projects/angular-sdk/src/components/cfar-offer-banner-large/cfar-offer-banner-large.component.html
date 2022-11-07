@@ -31,7 +31,7 @@
                         </ng-container>
 
                         <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px" (click)="onOpenTermsAndConditions()">
-                            <a href="#" attr.aria-describedby="{{ 'COMMON.TERMS_LINK_TEXT' | translate }}" target="_blank">
+                            <a href="{{selectedCfarOffer.termsConditionsUrl}}" attr.aria-describedby="{{ 'COMMON.TERMS_LINK_TEXT' | translate }}" target="_blank">
                                 {{ 'COMMON.TERMS_LINK_TEXT' | translate }}
                             </a>
                         </div>
