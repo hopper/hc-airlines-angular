@@ -6,6 +6,7 @@ import { InputModel, OutputModel } from "src/app/shared/models";
 import { AppState } from "src/app/shared/ngrx";
 import { CommonGuidesComponent } from "../common-guides.component";
 import { Clipboard } from '@angular/cdk/clipboard';
+import { ErrorSdkModel } from "projects/angular-sdk/src/models";
 
 @Component({
   selector: "app-cfar-exercise-flow",
@@ -24,16 +25,23 @@ export class CfarExerciseFlowPageComponent extends CommonGuidesComponent {
       [hyperwalletUrl]="hyperwalletUrl"
       (airlineRefundSelected)="onAirlineRefundSelected($event)"
       (flowCompleted)="onFlowCompleted($event)"
+      (errorOccurred)="onErrorOccurred($event)"
     ></hopper-cfar-exercise-flow>
   `;
 
   public  tsCode: string = `
+    import { ErrorSdkModel } from "@hopper-cloud-airlines/angular-sdk/models";
+
     public onAirlineRefundSelected(data: string): void {
       console.log(data);
     }
 
     public onFlowCompleted(data: string): void {
       console.log(data);
+    }
+
+    public onErrorOccurred(error: ErrorSdkModel): void {
+      console.log(error);
     }
   `;
 
@@ -121,6 +129,13 @@ export class CfarExerciseFlowPageComponent extends CommonGuidesComponent {
         description: `
           Event triggered when the flow is completed
         `
+      },
+      {
+        name: 'errorOccurred',
+        description: `
+          Event triggered when an error occurs into the SDK<br />
+          Returns a ErrorSdkModel : { endpoint: string, errorCode: string, errorDescription?: string }
+        `
       }
     ];
   }
@@ -131,5 +146,9 @@ export class CfarExerciseFlowPageComponent extends CommonGuidesComponent {
 
   public onFlowCompleted(data: string): void {
     console.log(data);
+  }
+
+  public onErrorOccurred(error: ErrorSdkModel): void {
+    console.log(error);
   }
 }

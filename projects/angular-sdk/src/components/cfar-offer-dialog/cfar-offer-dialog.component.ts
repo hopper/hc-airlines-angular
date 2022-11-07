@@ -91,6 +91,8 @@ export class CfarOfferDialogComponent extends GlobalComponent implements OnInit,
           error: (error) => {
             const builtError = this._getHcAirlinesErrorResponse(error);
             this.errorCode = builtError.code;
+                    
+            this.pushSdkError(error, "contracts");
             
             this.isLoading = false;
           }
@@ -147,6 +149,8 @@ export class CfarOfferDialogComponent extends GlobalComponent implements OnInit,
       error: (error) => {
         const builtError = this._getHcAirlinesErrorResponse(error);
         this.errorCode = builtError.code;
+                    
+        this.pushSdkError(error, "offers");
 
         this.isLoading = false;
       }
@@ -157,8 +161,16 @@ export class CfarOfferDialogComponent extends GlobalComponent implements OnInit,
     return this.cfarOffers.map(cfarOffer => cfarOffer.id)
   }
 
+  private isOfferDialogEventPossible(): boolean {
+      if (!this.isFakeBackend 
+          && (this.cfarOffers !== undefined && this.cfarOffers !== null && this.cfarOffers.length > 0)) {
+         return true;
+      }
+      return false;  
+  }
+
   protected createEventsAfterInit(): void {
-    if (this.isFakeBackend) {
+    if (!this.isOfferDialogEventPossible()) {
       return;
     }
     this._hopperEventService
@@ -173,7 +185,7 @@ export class CfarOfferDialogComponent extends GlobalComponent implements OnInit,
   }
   
   protected createTermsAndConditionsEvent(): void {
-    if (this.isFakeBackend) {
+    if (!this.isOfferDialogEventPossible()) {
       return;
     }
     this._hopperEventService
@@ -188,7 +200,7 @@ export class CfarOfferDialogComponent extends GlobalComponent implements OnInit,
   }
   
   protected createDenyPurchaseEvent(): void {
-    if (this.isFakeBackend) {
+    if (!this.isOfferDialogEventPossible()) {
       return;
     }
     this._hopperEventService

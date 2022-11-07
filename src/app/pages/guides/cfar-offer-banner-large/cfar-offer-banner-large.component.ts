@@ -7,6 +7,7 @@ import { InputModel, OutputModel } from "src/app/shared/models";
 import { AppState } from "src/app/shared/ngrx";
 import { CommonGuidesComponent } from "../common-guides.component";
 import { Clipboard } from '@angular/cdk/clipboard';
+import { ErrorSdkModel } from "projects/angular-sdk/src/models";
 
 @Component({
   selector: "app-cfar-offer-banner-large",
@@ -27,11 +28,13 @@ export class CfarOfferBannerLargePageComponent extends CommonGuidesComponent {
       [uiVariant]="uiVariant"
       (chooseCoverage)="onChooseCoverage($event)"
       (offersLoaded)="onOffersLoaded($event)"
+      (errorOccurred)="onErrorOccurred($event)"
     ></hopper-cfar-offer-banner-large>
   `;
 
   public  tsCode: string = `
     import { CfarContractCustomer, CfarOfferCustomer } from "@hopper-cloud-airlines/angular-sdk/apis/hopper-cloud-airline/v1";
+    import { ErrorSdkModel } from "@hopper-cloud-airlines/angular-sdk/models";
     
     // ...
 
@@ -41,6 +44,10 @@ export class CfarOfferBannerLargePageComponent extends CommonGuidesComponent {
 
     onOffersLoaded(cfarOffers: CfarOfferCustomer[]): void {
       console.log(cfarOffers);
+    }
+
+    onErrorOccurred(error: ErrorSdkModel): void {
+      console.log(error);
     }
   `;
 
@@ -136,6 +143,13 @@ export class CfarOfferBannerLargePageComponent extends CommonGuidesComponent {
           Event triggered when the offers are loaded (or not)<br />
           Returns a CfarOfferCustomer array or null
         `
+      },
+      {
+        name: 'errorOccurred',
+        description: `
+          Event triggered when an error occurs into the SDK<br />
+          Returns a ErrorSdkModel : { endpoint: string, errorCode: string, errorDescription?: string }
+        `
       }
     ];
   }
@@ -146,5 +160,9 @@ export class CfarOfferBannerLargePageComponent extends CommonGuidesComponent {
 
   onOffersLoaded(cfarOffers: CfarOfferCustomer[]): void {
     console.log(cfarOffers);
+  }
+
+  onErrorOccurred(error: ErrorSdkModel): void {
+    console.log(error);
   }
 }

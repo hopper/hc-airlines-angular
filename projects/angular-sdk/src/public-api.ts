@@ -12,5 +12,8 @@ export * from './components/cfar-exercise-flow/cfar-exercise-flow.component';
 // UTILIY CLASSES
 export * from './utils/dialog.utils';
 
+// MODELS
+export * from './models';
+
 // MODULES
 export * from './angular-sdk.module';

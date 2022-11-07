@@ -262,6 +262,7 @@ export interface I18n {
             TERMS_LINK_TEXT: string;
             COVERAGE_PERCENTAGE: string;
             PRICE_PER_TRAVELER: string;
+            INCL_TAXES: string;
             ERROR_CODE: {
                 CO003: string;
                 CO004: string;
@@ -324,6 +325,25 @@ export interface I18n {
                 EX034: string;
                 EX035: string;
                 EX036: string;
+                ME001: string;
+                ME002: string;
+                ME003: string;
+                ME004: string;
+                ME005: string;
+                ME006: string;
+                ME007: string;
+                ME008: string;
+                ME009: string;
+                ME010: string;
+                ME011: string;
+                ME012: string;
+                ME013: string;
+                ME014: string;
+                ME015: string;
+                ME016: string;
+                ME017: string;
+                ME018: string;
+                ME019: string;
                 OF001: string;
                 OF002: string;
                 OF003: string;

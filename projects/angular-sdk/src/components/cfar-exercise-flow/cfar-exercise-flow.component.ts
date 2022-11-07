@@ -223,7 +223,9 @@ export class CfarExerciseFlowComponent extends GlobalEventComponent implements O
                         template: 'plain',
                         el: document.getElementById("TransferMethodUI"),
                         transferMethodConfiguration: {
-                          profileType: 'INDIVIDUAL'
+                          profileType: 'INDIVIDUAL',
+                          "country": "CA", 
+                          "currency": "CAD"
                         },
                         onComplete: function(trmObject, completionResult) {
                           if (trmObject) {
@@ -248,6 +250,8 @@ export class CfarExerciseFlowComponent extends GlobalEventComponent implements O
                     const builtError = this._getHcAirlinesErrorResponse(error);
                     this.errorCode = builtError.code;
                     
+                    this.pushSdkError(error, "exercise");
+                    
                     this.isLoadingHyperwallet = false;
                     this.isErrorHyperwallet = true;
               
@@ -265,6 +269,8 @@ export class CfarExerciseFlowComponent extends GlobalEventComponent implements O
           error: (error: any) => {
             const builtError = this._getHcAirlinesErrorResponse(error);
             this.errorCode = builtError.code;
+                    
+            this.pushSdkError(error, "exercise");
   
             this.isLoadingHyperwallet = false;
             this.isErrorHyperwallet = true;
@@ -314,6 +320,8 @@ export class CfarExerciseFlowComponent extends GlobalEventComponent implements O
         error: (error) => {
           const builtError = this._getHcAirlinesErrorResponse(error);
           this.errorCode = builtError.code;
+                    
+          this.pushSdkError(error, "exercise");
           
           this.isLoadingHyperwallet = false;
 
@@ -377,6 +385,8 @@ export class CfarExerciseFlowComponent extends GlobalEventComponent implements O
           error: (error: any) => {
             const builtError = this._getHcAirlinesErrorResponse(error);
             this.errorCode = builtError.code;
+                    
+            this.pushSdkError(error, "exercise");
 
             this.isLoading = false;
 
@@ -430,6 +440,8 @@ export class CfarExerciseFlowComponent extends GlobalEventComponent implements O
           error: (error: any) => {
             const builtError = this._getHcAirlinesErrorResponse(error);
             this.errorCode = builtError.code;
+                    
+            this.pushSdkError(error, "exercise");
 
             this.isLoading = false;
 
@@ -477,6 +489,8 @@ export class CfarExerciseFlowComponent extends GlobalEventComponent implements O
           error: (error: any) => {
             const builtError = this._getHcAirlinesErrorResponse(error);
             this.errorCode = builtError.code;
+                    
+            this.pushSdkError(error, "exercise");
 
             this.isLoading = false;
 

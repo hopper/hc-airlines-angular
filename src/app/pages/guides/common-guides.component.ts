@@ -28,7 +28,7 @@ export abstract class CommonGuidesComponent implements OnInit, OnDestroy {
   public abstract htmlCode: string;
 
   // Parameters
-  public hCSessionId = "a19f0e16-4fc3-4141-81b6-72989cba1595";
+  public hCSessionId = "8f6ad31c-8919-476b-ab57-a5821cfeca9e";
   public currency = "EUR";
   public passengers: PassengerPricing[] = [
     {
@@ -36,7 +36,7 @@ export abstract class CommonGuidesComponent implements OnInit, OnDestroy {
         count: 3,
         type: "adult"
       },
-      individualPrice: "128.78"
+      individualPrice: "50.10"
     }
   ];
   public pnrReference = "123456";
@@ -51,8 +51,8 @@ export abstract class CommonGuidesComponent implements OnInit, OnDestroy {
             {
               originAirport: "LGA",
               destinationAirport: "BOS",
-              departureDateTime: "2022-10-30T18:34:30",
-              arrivalDateTime: "2022-10-30T19:12:30",
+              departureDateTime: "2022-11-01T18:34:30",
+              arrivalDateTime: "2022-11-02T19:12:30",
               flightNumber: "JB776",
               validatingCarrierCode: "B6",
               fareClass: "basic_economy"
@@ -60,7 +60,7 @@ export abstract class CommonGuidesComponent implements OnInit, OnDestroy {
           ]
         }
       ],
-      totalPrice: "386.34",
+      totalPrice: "150.30",
       ancillaries: [
         {
           totalPrice: "30.55",
@@ -78,8 +78,8 @@ export abstract class CommonGuidesComponent implements OnInit, OnDestroy {
           {
             originAirport: "LGA",
             destinationAirport: "BOS",
-            departureDateTime: "2022-10-30T18:34:30",
-            arrivalDateTime: "2022-10-30T19:12:30",
+            departureDateTime: "2022-11-01T18:34:30",
+            arrivalDateTime: "2022-10-1-02T19:12:30",
             flightNumber: "JB776",
             validatingCarrierCode: "B6",
             fareClass: "basic_economy"
@@ -87,7 +87,7 @@ export abstract class CommonGuidesComponent implements OnInit, OnDestroy {
         ]
       }
     ],
-    totalPrice: "386.34",
+    totalPrice: "150.30",
     ancillaries: [
       {
         totalPrice: "30.55",
@@ -95,12 +95,12 @@ export abstract class CommonGuidesComponent implements OnInit, OnDestroy {
       }
     ]
   };
-  public exerciseId = "1ed2df96-ee3c-61e6-a57a-a7e77771ba29";
+  public exerciseId = "1ed56cb3-e482-6a5d-af17-c996464a398c";
   public hyperwalletUrl: string = "https://sandbox.hyperwallet.com/rest/widgets/transfer-methods/";
   public hasNoCoverageOption = false;
   public hasWarningCoverageMessage = true;
   public uiVariant = UiVariant.A;
-
+  
   constructor(
     protected _store: Store<AppState>,
     protected _clipboard: Clipboard,

@@ -1,4 +1,4 @@
-import { Directive, Input, OnChanges, SimpleChanges } from "@angular/core";
+import { Directive, EventEmitter, Input, OnChanges, Output, SimpleChanges } from "@angular/core";
 import { Locales } from "../i18n";
 import { TranslateService } from '@ngx-translate/core';
 import { I18n } from "../i18n/i18n.interface";
@@ -11,6 +11,7 @@ import { ArrayUtils } from "../utils/array-utils";
 import { HcAirlinesError } from "../models/hc-airlines-error";
 import { Error } from '../apis/hopper-cloud-airline/v1';
 import { ErrorCode } from "../enums/error-code.enum";
+import { ErrorSdkModel } from "../models";
 
 @Directive({
     selector: '[HopperGlobalComponent]'
@@ -23,6 +24,8 @@ export class GlobalComponent implements OnChanges {
     @Input() basePath!: string;
     @Input() imageBasePath?: string;
     @Input() isFakeBackend?: boolean;
+
+    @Output() errorOccurred = new EventEmitter();
 
     public mapCountries: Map<string, string>;
 
@@ -208,7 +211,8 @@ export class GlobalComponent implements OnChanges {
                     "取消并获得含税的航班价格退款，不包括额外服务（付费座位、额外行李等）",
                     "即时处理，无需填写表格或文件"
                     ]
-                }
+                },
+                termsConditionsUrl: "https://www.google.com"
             },
             {
                 id: "1ecf859e-8785-625f-8eda-198d1ce0d6c5",
@@ -300,7 +304,8 @@ export class GlobalComponent implements OnChanges {
                     "取消并获得含税的航班价格退款，不包括额外服务（付费座位、额外行李等）",
                     "即时处理，无需填写表格或文件"
                     ]
-                }
+                },
+                termsConditionsUrl: "https://www.google.com"
             }
         ];
     }
@@ -400,5 +405,22 @@ export class GlobalComponent implements OnChanges {
 
     public getOfferDescription(offer: CfarOfferCustomer) {
         return offer.offerDescription[this.currentLang];
+    }
+
+    public pushSdkError(error: any, errorEndPoint: string) {
+        console.error(error);
+        const builtError = this._getHcAirlinesErrorResponse(error);
+        if (builtError !== null) {
+            const errorCode = builtError.code;
+            if (errorCode !== undefined && errorCode !== null) {
+                // Get Error Label and emit the event
+                this.translateService.get('COMMON.ERROR_CODE.' + errorCode)
+                .pipe(take(1))
+                .subscribe(errorDescription => {
+                    const errorSdk: ErrorSdkModel = {endpoint: errorEndPoint, errorCode: errorCode, errorDescription: errorDescription}
+                    this.errorOccurred.emit(errorSdk);
+                });
+            }
+        }
     }
 }
