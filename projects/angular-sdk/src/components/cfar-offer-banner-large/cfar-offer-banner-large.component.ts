@@ -26,7 +26,6 @@ export class CfarOfferBannerLargeComponent extends GlobalEventComponent implemen
   @Input() uiVariant!: UiVariant;
   @Input() hasNoCoverageOption: boolean = true;
   @Input() hasWarningCoverageMessage: boolean = false;
-  @Input() termsLink!: string;
 
   @Output() chooseCoverage = new EventEmitter();
   @Output() offersLoaded = new EventEmitter();

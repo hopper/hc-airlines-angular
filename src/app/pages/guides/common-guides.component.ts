@@ -100,7 +100,6 @@ export abstract class CommonGuidesComponent implements OnInit, OnDestroy {
   public hasNoCoverageOption = false;
   public hasWarningCoverageMessage = true;
   public uiVariant = UiVariant.A;
-  public termsLink = "http://hopper.com/legal/Air-Canada-CFAR";
   
   constructor(
     protected _store: Store<AppState>,

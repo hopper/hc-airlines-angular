@@ -6,7 +6,6 @@ General:
 - Implements an output property in every components, to raise an event when an errors occurs into the SDK
 
 Offer banner large and offer dialog:
-- Added a new parameter for T&Cs link (termsLink)
 - Added Incl. taxes label under the price
 
 <a name="4.2.7"></a>

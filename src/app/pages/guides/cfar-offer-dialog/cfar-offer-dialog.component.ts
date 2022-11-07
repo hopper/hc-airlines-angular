@@ -48,7 +48,6 @@ export class CfarOfferDialogPageComponent extends CommonGuidesComponent {
         basePath: this.basePath,
         imageBasePath: this.imageBasePath,
         hCSessionId: this.hCSessionId,
-        termsLink: this.termsLink,
         // Choice 1 : The component will create offers based of the itineraries
         itineraries: this.itineraries
         // Choice 2 : The component will load directly the offers
@@ -139,13 +138,6 @@ export class CfarOfferDialogPageComponent extends CommonGuidesComponent {
         required: true
       },
       {
-        name: 'termsLink',
-        description: `
-          Link for Terms and conditions
-        `,
-        required: true
-      },
-      {
         name: 'itineraries',
         description: `
           Itineraries are required in order to create new offers <br />
@@ -202,7 +194,6 @@ export class CfarOfferDialogPageComponent extends CommonGuidesComponent {
       imageBasePath: this.imageBasePath,
       currentLang: this.currentLang,
       hCSessionId: this.hCSessionId,
-      termsLink: this.termsLink,
       itineraries: this.itineraries,
     };
     const dialogConfig = DialogUtils.getDialogConfig(dialogData);
