@@ -211,7 +211,8 @@ export class GlobalComponent implements OnChanges {
                     "取消并获得含税的航班价格退款，不包括额外服务（付费座位、额外行李等）",
                     "即时处理，无需填写表格或文件"
                     ]
-                }
+                },
+                termsConditionsUrl: "https://www.google.com"
             },
             {
                 id: "1ecf859e-8785-625f-8eda-198d1ce0d6c5",
@@ -303,7 +304,8 @@ export class GlobalComponent implements OnChanges {
                     "取消并获得含税的航班价格退款，不包括额外服务（付费座位、额外行李等）",
                     "即时处理，无需填写表格或文件"
                     ]
-                }
+                },
+                termsConditionsUrl: "https://www.google.com"
             }
         ];
     }
