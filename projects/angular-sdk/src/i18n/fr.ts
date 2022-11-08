@@ -263,6 +263,7 @@ export const locale: I18n = {
             },
             TERMS_LINK_TEXT: "Voir les conditions générales",
             COVERAGE_PERCENTAGE: "{{ coverage }}% du montant des billets remboursés",
+            COVERAGE_PERCENTAGE_ACCESSIBILITY: "{{ coverage }}% du montant des billets remboursés. {{ price }} par passager. (Incl. les taxes si applicables)",
             PRICE_PER_TRAVELER: "<span class='price-per-traveler'>{{ price }}</span><span>par passager</span>",
             INCL_TAXES: "(Incl. les taxes si applicables)",
             ERROR_CODE: {

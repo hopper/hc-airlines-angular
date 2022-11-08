@@ -5,6 +5,9 @@ Exercise flow:
 - Improved the payment flow UI
 - Restricted the country to Canada and currency to CAD in payment widget
 
+Offer dialog:
+- Improved accessibility
+
 <a name="4.2.8"></a>
 
 # 4.2.8 (2022-11-07)

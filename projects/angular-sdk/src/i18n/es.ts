@@ -263,6 +263,7 @@ export const locale: I18n = {
             },
             TERMS_LINK_TEXT: "Términos y Condiciones",
             COVERAGE_PERCENTAGE: "{{ coverage }}% de los costos de vuelo cubiertos",
+            COVERAGE_PERCENTAGE_ACCESSIBILITY: "{{ coverage }}% de los costos de vuelo cubiertos. {{ price }} por pasajero. (Incl. impuestos si corresponde)",
             PRICE_PER_TRAVELER: "<span class='price-per-traveler'>{{ price }}</span><span>por pasajero</span>",
             INCL_TAXES: "(Incl. impuestos si corresponde)",
             ERROR_CODE: {
