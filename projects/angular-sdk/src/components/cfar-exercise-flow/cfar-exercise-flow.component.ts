@@ -185,7 +185,7 @@ export class CfarExerciseFlowComponent extends GlobalEventComponent implements O
             this.createCfarExerciseCustomerDataCompleteEvent(ExerciseStepResult.Success)
 
             const userId = refundRecipient.id;
-            const url = this.hyperwalletUrl + userId + "/" + this.currentLang + ".min.js";
+            const url = this.hyperwalletUrl + userId + "/" + this.currentLang + ".v2_4_5.min.js";
             const mainScript = document.createElement('script');
   
             mainScript.type = 'text/javascript';
@@ -220,24 +220,24 @@ export class CfarExerciseFlowComponent extends GlobalEventComponent implements O
                       });
             
                       window.HWWidgets.transferMethods.configure({
-                        template: 'plain',
-                        el: document.getElementById("TransferMethodUI"),
-                        transferMethodConfiguration: {
-                          profileType: 'INDIVIDUAL',
-                          "country": "CA", 
-                          "currency": "CAD"
-                        },
-                        onComplete: function(trmObject, completionResult) {
-                          if (trmObject) {
-                            window.dispatchEvent(new CustomEvent('hopper-hyperwallet', {
-                              'detail': {
-                                trmObject: trmObject,
-                                completionResult: completionResult
-                              }}
-                            ));
-                          }
+                        "template": 'plain',
+                        el: document.getElementById("TransferMethodUI")
+                      }).create({
+                        profileType: 'INDIVIDUAL',
+                        country: 'CA',
+                        currency: 'CAD'
+                      });
+
+                      window.HWWidgets.events.on("widget:transfermethods:completed", (trmObject, completionResult) => {
+                        if (trmObject) {
+                          window.dispatchEvent(new CustomEvent('hopper-hyperwallet', {
+                            'detail': {
+                              trmObject: trmObject,
+                              completionResult: completionResult
+                            }}
+                          ));
                         }
-                      }).display();
+                      });
                     `;
             
                     document.body.appendChild(script);

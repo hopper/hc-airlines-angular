@@ -28,7 +28,7 @@ export abstract class CommonGuidesComponent implements OnInit, OnDestroy {
   public abstract htmlCode: string;
 
   // Parameters
-  public hCSessionId = "8f6ad31c-8919-476b-ab57-a5821cfeca9e";
+  public hCSessionId = "37745550-be4e-4b57-97f0-7c5bdb7a0798";
   public currency = "EUR";
   public passengers: PassengerPricing[] = [
     {
@@ -40,7 +40,7 @@ export abstract class CommonGuidesComponent implements OnInit, OnDestroy {
     }
   ];
   public pnrReference = "123456";
-  public contractId = "1ed2df96-ee3c-61e6-a57a-a7e77771ba29";
+  public contractId = "1ed5f483-6287-6b77-acb5-9719296bfa68";
   public itineraries: CfarItinerary[] = [
     {
       currency: this.currency,
@@ -95,8 +95,8 @@ export abstract class CommonGuidesComponent implements OnInit, OnDestroy {
       }
     ]
   };
-  public exerciseId = "1ed56cb3-e482-6a5d-af17-c996464a398c";
-  public hyperwalletUrl: string = "https://sandbox.hyperwallet.com/rest/widgets/transfer-methods/";
+  public exerciseId = "1ed5f4a1-46a1-6b9b-acb5-23e1f0ab3079";
+  public hyperwalletUrl: string = "https://uat.hyperwallet.com/rest/widgets/transfer-methods/";
   public hasNoCoverageOption = false;
   public hasWarningCoverageMessage = true;
   public uiVariant = UiVariant.A;
