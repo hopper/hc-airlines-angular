@@ -4,6 +4,7 @@
 Exercise flow:
 - Improved the payment flow UI
 - Restricted the country to Canada and currency to CAD in payment widget
+- Added a warning message regarding the transfer method via bank account limited to Canada
 
 Offer dialog:
 - Improved accessibility

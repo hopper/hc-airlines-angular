@@ -496,6 +496,7 @@ export interface I18n {
                 LAP_INFANT: string;
             },
             CONTRACT_ALREADY_REFUNDED: string;
+            BANK_ACCOUNT_INFO: string;
         }
     }
 }

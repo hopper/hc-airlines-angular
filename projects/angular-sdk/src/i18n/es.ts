@@ -496,7 +496,8 @@ export const locale: I18n = {
                 SEATED_INFANT: "Bebé sentado",
                 LAP_INFANT: "Infante de regazo"
             },
-            CONTRACT_ALREADY_REFUNDED: "Tu solicitud de cancelación ya ha sido tenida en cuenta y su reembolso está en curso. Si necesita ayuda, puede ponerse en contacto con nuestro equipo de atención al cliente a través de <a href='{{ link }}' target='_blank'>este formulario.</a>"
+            CONTRACT_ALREADY_REFUNDED: "Tu solicitud de cancelación ya ha sido tenida en cuenta y su reembolso está en curso. Si necesita ayuda, puede ponerse en contacto con nuestro equipo de atención al cliente a través de <a href='{{ link }}' target='_blank'>este formulario.</a>",
+            BANK_ACCOUNT_INFO: "Elija un método de transferencia para el reembolso.<br />Solo los titulares de cuentas bancarias canadienses son elegibles para el método de transferencia de cuenta bancaria."
         }
     }
 }

@@ -496,7 +496,8 @@ export const locale: I18n = {
                 SEATED_INFANT: "Bébé assis",
                 LAP_INFANT: "Bébé sur les genoux"
             },
-            CONTRACT_ALREADY_REFUNDED: "Votre demande d'annulation a déjà été prise en compte et votre remboursement est en cours. Si vous avez besoin d'aide, vous pouvez contacter notre service clients via <a href='{{ link }}' target='_blank'>ce formulaire.</a>"
+            CONTRACT_ALREADY_REFUNDED: "Votre demande d'annulation a déjà été prise en compte et votre remboursement est en cours. Si vous avez besoin d'aide, vous pouvez contacter notre service clients via <a href='{{ link }}' target='_blank'>ce formulaire.</a>",
+            BANK_ACCOUNT_INFO: "Veuillez choisir une méthode de transfert pour le remboursement.<br />Seuls les titulaires de comptes bancaires canadiens sont éligibles à la méthode de transfert de compte bancaire."
         }
     }
 }

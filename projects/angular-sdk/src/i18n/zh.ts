@@ -496,7 +496,8 @@ export const locale: I18n = {
                 SEATED_INFANT: "坐着的婴儿",
                 LAP_INFANT: "膝上婴儿"
             },
-            CONTRACT_ALREADY_REFUNDED: "您的取消请求已被考虑在内，您的退款正在进行中。如果您需要帮助，可以通过<a href='{{ link }}' target='_blank'>此表格联系我们的客户支持团队。</a>"
+            CONTRACT_ALREADY_REFUNDED: "您的取消请求已被考虑在内，您的退款正在进行中。如果您需要帮助，可以通过<a href='{{ link }}' target='_blank'>此表格联系我们的客户支持团队。</a>",
+            BANK_ACCOUNT_INFO: "退款请选择转账方式。<br />只有加拿大银行账户持有人才有资格使用银行账户转账方式。"
         }
     }
 }

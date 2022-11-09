@@ -123,6 +123,14 @@
                 color: black;
             }
 
+            .warning-message {
+                background: rgb(255 200 115 / 25%);
+                padding: 16px;
+                color: #ffa000;
+                border: 1px solid #ffa000;
+                margin: 16px;
+            }
+
             .information-message {
                 width: 100%;
                 text-align: center;
