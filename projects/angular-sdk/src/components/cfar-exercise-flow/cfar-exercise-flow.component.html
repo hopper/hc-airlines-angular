@@ -72,7 +72,7 @@
                         <div class="full-width p-32" ngClass.lt-md="p-16" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="16px">
                             <span class="information-message p-16"
                                 innerHtml="{{ 'CFAR_EXERCISE_FLOW.CONTRACT_ALREADY_REFUNDED' | translate: 
-                                    { link: '#' }
+                                    { link: contactFormUrl }
                                 }}"
                             ></span>
                         </div>
@@ -373,7 +373,7 @@
                                     <div *ngIf="isErrorHyperwallet" fxFlex="100" class="p-32" ngClass.lt-md="p-16" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="16px">
                                         <span class="error-message p-16" innerHtml="
                                             {{ 'CFAR_EXERCISE_FLOW.LOADING_HYPERWALLET_ERROR' | translate: {
-                                                link: '#'
+                                                link: contactFormUrl
                                             } }}">
                                         </span>
                                     </div>

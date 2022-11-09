@@ -8,7 +8,6 @@ import { ApiTranslatorUtils } from '../../utils/api-translator.utils';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { StepperSelectionEvent } from '@angular/cdk/stepper';
 import { MatStepper } from '@angular/material/stepper';
 import { HttpClient } from '@angular/common/http';
 import { DatePipe } from '@angular/common';
@@ -44,6 +43,7 @@ export class CfarExerciseFlowComponent extends GlobalEventComponent implements O
   @Input() hCSessionId!: string;
   @Input() exerciseId!: string;
   @Input() hyperwalletUrl!: string;
+  @Input() contactFormUrl!: string;
 
   @Output() airlineRefundSelected = new EventEmitter();
   @Output() flowCompleted = new EventEmitter();
