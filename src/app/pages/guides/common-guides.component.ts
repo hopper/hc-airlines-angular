@@ -28,7 +28,7 @@ export abstract class CommonGuidesComponent implements OnInit, OnDestroy {
   public abstract htmlCode: string;
 
   // Parameters
-  public hCSessionId = "37745550-be4e-4b57-97f0-7c5bdb7a0798";
+  public hCSessionId = "c831f683-b16c-4d68-a7d3-df9743a11a07";
   public currency = "EUR";
   public passengers: PassengerPricing[] = [
     {
@@ -95,7 +95,7 @@ export abstract class CommonGuidesComponent implements OnInit, OnDestroy {
       }
     ]
   };
-  public exerciseId = "1ed5f4a1-46a1-6b9b-acb5-23e1f0ab3079";
+  public exerciseId = "1ed601f0-f02d-65df-a242-73115a1d8e8c";
   public hyperwalletUrl: string = "https://uat.hyperwallet.com/rest/widgets/transfer-methods/";
   public hasNoCoverageOption = false;
   public hasWarningCoverageMessage = true;
@@ -109,7 +109,7 @@ export abstract class CommonGuidesComponent implements OnInit, OnDestroy {
     this._unsubcriber = new Subject<any>();
     
     // Active fake data in components
-    this.isFakeBackend = true;
+    this.isFakeBackend = false;
   }
   
   // -----------------------------------------------
