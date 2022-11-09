@@ -23,12 +23,14 @@ export abstract class CommonGuidesComponent implements OnInit, OnDestroy {
   public isFakeBackend!: boolean;
 
   protected _unsubcriber: Subject<any>;
-
+  
   public abstract tsCode: string;
   public abstract htmlCode: string;
-
+  
   // Parameters
-  public hCSessionId = "72f5cbd7-86ee-4073-89ed-8e34a576bb29";
+  public hCSessionId = "7ac1573c-e291-49f7-a151-cb553565f19f";
+  public contractId = "1ed5f483-6287-6b77-acb5-9719296bfa68";
+  public exerciseId = "1ed603b2-c4db-6380-a242-2f6178643d87";
   public currency = "EUR";
   public passengers: PassengerPricing[] = [
     {
@@ -40,7 +42,6 @@ export abstract class CommonGuidesComponent implements OnInit, OnDestroy {
     }
   ];
   public pnrReference = "123456";
-  public contractId = "1ed5f483-6287-6b77-acb5-9719296bfa68";
   public itineraries: CfarItinerary[] = [
     {
       currency: this.currency,
@@ -95,7 +96,6 @@ export abstract class CommonGuidesComponent implements OnInit, OnDestroy {
       }
     ]
   };
-  public exerciseId = "1ed602fe-3d0e-614a-a242-63a29623d981";
   public hyperwalletUrl: string = "https://uat.hyperwallet.com/rest/widgets/transfer-methods/";
   public contactFormUrl: string = "https://www.google.com";
   public hasNoCoverageOption = false;
