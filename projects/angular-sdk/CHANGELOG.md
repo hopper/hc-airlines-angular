@@ -1,6 +1,6 @@
 <a name="4.2.9"></a>
 
-# 4.2.9 (2022-XX-XX)
+# 4.2.9 (2022-11-09)
 Exercise flow:
 - Improved the payment flow UI
 - Restricted the country to Canada and currency to CAD in payment widget
