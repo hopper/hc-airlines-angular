@@ -23,12 +23,14 @@ export abstract class CommonGuidesComponent implements OnInit, OnDestroy {
   public isFakeBackend!: boolean;
 
   protected _unsubcriber: Subject<any>;
-
+  
   public abstract tsCode: string;
   public abstract htmlCode: string;
-
+  
   // Parameters
-  public hCSessionId = "8f6ad31c-8919-476b-ab57-a5821cfeca9e";
+  public hCSessionId = "7ac1573c-e291-49f7-a151-cb553565f19f";
+  public contractId = "1ed5f483-6287-6b77-acb5-9719296bfa68";
+  public exerciseId = "1ed603b2-c4db-6380-a242-2f6178643d87";
   public currency = "EUR";
   public passengers: PassengerPricing[] = [
     {
@@ -40,7 +42,6 @@ export abstract class CommonGuidesComponent implements OnInit, OnDestroy {
     }
   ];
   public pnrReference = "123456";
-  public contractId = "1ed2df96-ee3c-61e6-a57a-a7e77771ba29";
   public itineraries: CfarItinerary[] = [
     {
       currency: this.currency,
@@ -95,8 +96,8 @@ export abstract class CommonGuidesComponent implements OnInit, OnDestroy {
       }
     ]
   };
-  public exerciseId = "1ed56cb3-e482-6a5d-af17-c996464a398c";
-  public hyperwalletUrl: string = "https://sandbox.hyperwallet.com/rest/widgets/transfer-methods/";
+  public hyperwalletUrl: string = "https://uat.hyperwallet.com/rest/widgets/transfer-methods/";
+  public contactFormUrl: string = "https://www.google.com";
   public hasNoCoverageOption = false;
   public hasWarningCoverageMessage = true;
   public uiVariant = UiVariant.A;

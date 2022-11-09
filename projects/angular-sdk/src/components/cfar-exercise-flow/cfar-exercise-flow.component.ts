@@ -8,7 +8,6 @@ import { ApiTranslatorUtils } from '../../utils/api-translator.utils';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { StepperSelectionEvent } from '@angular/cdk/stepper';
 import { MatStepper } from '@angular/material/stepper';
 import { HttpClient } from '@angular/common/http';
 import { DatePipe } from '@angular/common';
@@ -44,6 +43,7 @@ export class CfarExerciseFlowComponent extends GlobalEventComponent implements O
   @Input() hCSessionId!: string;
   @Input() exerciseId!: string;
   @Input() hyperwalletUrl!: string;
+  @Input() contactFormUrl!: string;
 
   @Output() airlineRefundSelected = new EventEmitter();
   @Output() flowCompleted = new EventEmitter();
@@ -185,7 +185,7 @@ export class CfarExerciseFlowComponent extends GlobalEventComponent implements O
             this.createCfarExerciseCustomerDataCompleteEvent(ExerciseStepResult.Success)
 
             const userId = refundRecipient.id;
-            const url = this.hyperwalletUrl + userId + "/" + this.currentLang + ".min.js";
+            const url = this.hyperwalletUrl + userId + "/" + this.currentLang + ".v2_4_5.min.js";
             const mainScript = document.createElement('script');
   
             mainScript.type = 'text/javascript';
@@ -220,24 +220,24 @@ export class CfarExerciseFlowComponent extends GlobalEventComponent implements O
                       });
             
                       window.HWWidgets.transferMethods.configure({
-                        template: 'plain',
-                        el: document.getElementById("TransferMethodUI"),
-                        transferMethodConfiguration: {
-                          profileType: 'INDIVIDUAL',
-                          "country": "CA", 
-                          "currency": "CAD"
-                        },
-                        onComplete: function(trmObject, completionResult) {
-                          if (trmObject) {
-                            window.dispatchEvent(new CustomEvent('hopper-hyperwallet', {
-                              'detail': {
-                                trmObject: trmObject,
-                                completionResult: completionResult
-                              }}
-                            ));
-                          }
+                        "template": 'plain',
+                        el: document.getElementById("TransferMethodUI")
+                      }).create({
+                        profileType: 'INDIVIDUAL',
+                        country: 'CA',
+                        currency: 'CAD'
+                      });
+
+                      window.HWWidgets.events.on("widget:transfermethods:completed", (trmObject, completionResult) => {
+                        if (trmObject) {
+                          window.dispatchEvent(new CustomEvent('hopper-hyperwallet', {
+                            'detail': {
+                              trmObject: trmObject,
+                              completionResult: completionResult
+                            }}
+                          ));
                         }
-                      }).display();
+                      });
                     `;
             
                     document.body.appendChild(script);

@@ -11,6 +11,7 @@
  */
 import { CfarItinerary } from './cfarItinerary';
 import { RequestType } from './requestType';
+import { UiVariant } from './uiVariant';
 
 /**
  * A create CFAR offer request
@@ -19,4 +20,5 @@ export interface CreateCfarOfferCustomerRequest {
     itinerary: Array<CfarItinerary>;
     requestType: RequestType;
     bookingDateTime?: Date;
+    uiVariant?: UiVariant;
 }

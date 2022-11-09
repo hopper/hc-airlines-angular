@@ -23,6 +23,7 @@ export class CfarExerciseFlowPageComponent extends CommonGuidesComponent {
       [hCSessionId]="hCSessionId"
       [exerciseId]="exerciseId"
       [hyperwalletUrl]="hyperwalletUrl"
+      [contactFormUrl]="contactFormUrl"
       (airlineRefundSelected)="onAirlineRefundSelected($event)"
       (flowCompleted)="onFlowCompleted($event)"
       (errorOccurred)="onErrorOccurred($event)"
@@ -109,6 +110,13 @@ export class CfarExerciseFlowPageComponent extends CommonGuidesComponent {
         name: 'hyperwalletUrl',
         description: `
           Url for hyperwallet integration
+        `,
+        required: true
+      },
+      {
+        name: 'contactFormUrl',
+        description: `
+          Url for support
         `,
         required: true
       }

@@ -261,6 +261,7 @@ export interface I18n {
             },
             TERMS_LINK_TEXT: string;
             COVERAGE_PERCENTAGE: string;
+            COVERAGE_PERCENTAGE_ACCESSIBILITY: string;
             PRICE_PER_TRAVELER: string;
             INCL_TAXES: string;
             ERROR_CODE: {
@@ -495,6 +496,7 @@ export interface I18n {
                 LAP_INFANT: string;
             },
             CONTRACT_ALREADY_REFUNDED: string;
+            BANK_ACCOUNT_INFO: string;
         }
     }
 }

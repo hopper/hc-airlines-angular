@@ -1,3 +1,15 @@
+<a name="4.2.9"></a>
+
+# 4.2.9 (2022-11-09)
+Exercise flow:
+- Improved the payment flow UI
+- Restricted the country to Canada and currency to CAD in payment widget
+- Added a warning message regarding the transfer method via bank account limited to Canada
+- Added new parameter: contactFormUrl
+
+Offer dialog:
+- Improved accessibility
+
 <a name="4.2.8"></a>
 
 # 4.2.8 (2022-11-07)

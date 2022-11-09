@@ -48,19 +48,32 @@
                             fxLayoutAlign.lt-md="center start">
 
                             <div fxFlex class="offer-choice" fxLayout="row wrap" fxLayoutAlign="start start" *ngFor="let offer of cfarOffers; let i = index;">
-                                <mat-radio-button fxFlex="100" value="{{ i }}" class="important-text bold">
+                                <mat-radio-button fxFlex="100" value="{{ i }}" class="important-text bold"
+                                    attr.aria-label="
+                                    {{ 'COMMON.COVERAGE_PERCENTAGE_ACCESSIBILITY' | translate: 
+                                        { 
+                                            coverage: (offer.coveragePercentage | number: '1.0-0'),
+                                            price: (getPricePerTraveler(offer) | currency:offer?.currency:'symbol':undefined:currentLang)
+                                        }
+                                    }}
+                                    "
+                                >
                                     {{ 'COMMON.COVERAGE_PERCENTAGE' | translate: 
                                         { coverage: (offer.coveragePercentage | number: '1.0-0') }
                                     }}
                                 </mat-radio-button>
 
-                                <div class="mt-8" fxFlex="100" fxLayoutAlign="start center" fxLayoutGap="8px"
+                                <div class="mt-8" fxFlex="100" fxLayoutAlign="start center"
+                                    attr.aria-label="{{ 'COMMON.PRICE_PER_TRAVELER' | translate: 
+                                        { price: (getPricePerTraveler(offer) | currency:offer?.currency:'symbol':undefined:currentLang) }
+                                    }}"
                                     innerHtml="{{ 'COMMON.PRICE_PER_TRAVELER' | translate: 
                                         { price: (getPricePerTraveler(offer) | currency:offer?.currency:'symbol':undefined:currentLang) }
                                     }}"
                                 ></div>
 
-                                <div class="mt-8 incl-taxes" fxFlex="100" fxLayoutAlign="start center" fxLayoutGap="8px">
+                                <div class="mt-8 incl-taxes" fxFlex="100" fxLayoutAlign="start center"
+                                    attr.aria-label="{{ 'COMMON.INCL_TAXES' | translate }}">
                                     {{ 'COMMON.INCL_TAXES' | translate }}
                                 </div>
                             </div>

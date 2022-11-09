@@ -127,9 +127,9 @@ export class CfarOfferBannerLargeComponent extends GlobalEventComponent implemen
 
   protected initCfarOffers(): void {
     this.isLoading = true;
-    console.log(this.hCSessionId)
+    
     this._hopperCfarService
-      .postCfarOffers(this.basePath, this.hCSessionId, this.currentLang, ApiTranslatorUtils.modelToSnakeCase(this._buildCreateCfarOfferRequest(this.itineraries)))
+      .postCfarOffers(this.basePath, this.hCSessionId, this.currentLang, ApiTranslatorUtils.modelToSnakeCase(this._buildCreateCfarOfferRequest(this.itineraries, this.uiVariant)))
       .pipe(take(1))
       .subscribe({
         next: (cfarOffers) => {

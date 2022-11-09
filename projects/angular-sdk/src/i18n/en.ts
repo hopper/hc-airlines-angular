@@ -263,6 +263,7 @@ export const locale: I18n = {
             },
             TERMS_LINK_TEXT: "Terms & Conditions apply",
             COVERAGE_PERCENTAGE: "{{ coverage }}% flight cost covered",
+            COVERAGE_PERCENTAGE_ACCESSIBILITY: "{{ coverage }}% flight cost covered. {{ price }} per traveler. (Incl. taxes if applicable)",
             PRICE_PER_TRAVELER: "<span class='price-per-traveler'>{{ price }}</span><span>per traveler</span>",
             INCL_TAXES: "(Incl. taxes if applicable)",
             ERROR_CODE: {
@@ -495,7 +496,8 @@ export const locale: I18n = {
                 SEATED_INFANT: "Seated infant",
                 LAP_INFANT: "Lap infant"
             },
-            CONTRACT_ALREADY_REFUNDED: "Your cancellation request has already been taken into account and your refund is in progress. If you need help, you may contact our customer support team via <a href='{{ link }}' target='_blank'>this form.</a>"
+            CONTRACT_ALREADY_REFUNDED: "Your cancellation request has already been taken into account and your refund is in progress. If you need help, you may contact our customer support team via <a href='{{ link }}' target='_blank'>this form.</a>",
+            BANK_ACCOUNT_INFO: "Please choose a transfer method for the refund.<br />Only Canadian bank account holders are eligible to bank account transfer method."
         }
     }
 }

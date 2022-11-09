@@ -263,6 +263,7 @@ export const locale: I18n = {
             },
             TERMS_LINK_TEXT: "条款和条件",
             COVERAGE_PERCENTAGE: "承保飞行费用的 {{ coverage }}%",
+            COVERAGE_PERCENTAGE_ACCESSIBILITY: "承保飞行费用的 {{ coverage }}%. 每位乘客 {{ price }}. 包括税（如果适用）",
             PRICE_PER_TRAVELER: "<span>每位乘客</span><span class='price-per-traveler'>{{ price }}</span>",
             INCL_TAXES: "包括税（如果适用）",
             ERROR_CODE: {
@@ -495,7 +496,8 @@ export const locale: I18n = {
                 SEATED_INFANT: "坐着的婴儿",
                 LAP_INFANT: "膝上婴儿"
             },
-            CONTRACT_ALREADY_REFUNDED: "您的取消请求已被考虑在内，您的退款正在进行中。如果您需要帮助，可以通过<a href='{{ link }}' target='_blank'>此表格联系我们的客户支持团队。</a>"
+            CONTRACT_ALREADY_REFUNDED: "您的取消请求已被考虑在内，您的退款正在进行中。如果您需要帮助，可以通过<a href='{{ link }}' target='_blank'>此表格联系我们的客户支持团队。</a>",
+            BANK_ACCOUNT_INFO: "退款请选择转账方式。<br />只有加拿大银行账户持有人才有资格使用银行账户转账方式。"
         }
     }
 }

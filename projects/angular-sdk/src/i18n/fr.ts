@@ -263,6 +263,7 @@ export const locale: I18n = {
             },
             TERMS_LINK_TEXT: "Voir les conditions générales",
             COVERAGE_PERCENTAGE: "{{ coverage }}% du montant des billets remboursés",
+            COVERAGE_PERCENTAGE_ACCESSIBILITY: "{{ coverage }}% du montant des billets remboursés. {{ price }} par passager. (Incl. les taxes si applicables)",
             PRICE_PER_TRAVELER: "<span class='price-per-traveler'>{{ price }}</span><span>par passager</span>",
             INCL_TAXES: "(Incl. les taxes si applicables)",
             ERROR_CODE: {
@@ -495,7 +496,8 @@ export const locale: I18n = {
                 SEATED_INFANT: "Bébé assis",
                 LAP_INFANT: "Bébé sur les genoux"
             },
-            CONTRACT_ALREADY_REFUNDED: "Votre demande d'annulation a déjà été prise en compte et votre remboursement est en cours. Si vous avez besoin d'aide, vous pouvez contacter notre service clients via <a href='{{ link }}' target='_blank'>ce formulaire.</a>"
+            CONTRACT_ALREADY_REFUNDED: "Votre demande d'annulation a déjà été prise en compte et votre remboursement est en cours. Si vous avez besoin d'aide, vous pouvez contacter notre service clients via <a href='{{ link }}' target='_blank'>ce formulaire.</a>",
+            BANK_ACCOUNT_INFO: "Veuillez choisir une méthode de transfert pour le remboursement.<br />Seuls les titulaires de comptes bancaires canadiens sont éligibles à la méthode de transfert de compte bancaire."
         }
     }
 }
