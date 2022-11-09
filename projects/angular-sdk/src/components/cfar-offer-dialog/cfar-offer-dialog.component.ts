@@ -61,6 +61,7 @@ export class CfarOfferDialogComponent extends GlobalComponent implements OnInit,
     } else if (this.cfarOffers && this.cfarOffers?.length > 0) {
       this.selectedCfarOffer = this._getCheapestOffer(this.cfarOffers);
     } else {
+      // No offers exist. We create offers from itineraries data first
       this.initCfarOffers();      
     }
   }
