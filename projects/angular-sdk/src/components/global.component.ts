@@ -3,7 +3,7 @@ import { Locales } from "../i18n";
 import { TranslateService } from '@ngx-translate/core';
 import { I18n } from "../i18n/i18n.interface";
 import { DateAdapter } from "@angular/material/core";
-import { AirlineRefundMethod, CfarContractCustomer, CfarItinerary, CfarOfferCustomer, CfarStatus, CreateCfarContractCustomerRequest, CreateCfarOfferCustomerRequest, GetCfarExerciseCustomerResponse, RequestType, UiSource } from "../apis/hopper-cloud-airline/v1";
+import { AirlineRefundMethod, CfarContractCustomer, CfarItinerary, CfarOfferCustomer, CfarStatus, CreateCfarContractCustomerRequest, CreateCfarOfferCustomerRequest, GetCfarExerciseCustomerResponse, RequestType, UiSource, UiVariant } from "../apis/hopper-cloud-airline/v1";
 import { CountryCode } from "../enums/country-code.enum";
 import { take } from "rxjs/operators";
 import { HttpErrorResponse } from "@angular/common/http";
@@ -110,10 +110,11 @@ export class GlobalComponent implements OnChanges {
         }
     }
 
-    protected _buildCreateCfarOfferRequest(itineraries: CfarItinerary[]): CreateCfarOfferCustomerRequest {
+    protected _buildCreateCfarOfferRequest(itineraries: CfarItinerary[], uiVariant?: UiVariant): CreateCfarOfferCustomerRequest {
         return {
           itinerary: itineraries,
-          requestType: RequestType.Ancillary
+          requestType: RequestType.Ancillary,
+          uiVariant: uiVariant
         };
       }
     
