@@ -262,8 +262,8 @@ export const locale: I18n = {
                 CLOSE: '关'
             },
             TERMS_LINK_TEXT: "条款和条件",
-            COVERAGE_PERCENTAGE: "承保飞行费用的 {{ coverage }}%",
-            COVERAGE_PERCENTAGE_ACCESSIBILITY: "承保飞行费用的 {{ coverage }}%. 每位乘客 {{ price }}. 包括税（如果适用）",
+            COVERAGE_PERCENTAGE: "{{ coverage }}% 承保飞行费用的",
+            COVERAGE_PERCENTAGE_ACCESSIBILITY: "{{ coverage }}% 承保飞行费用的. 每位乘客 {{ price }}. 包括税（如果适用）",
             PRICE_PER_TRAVELER: "<span>每位乘客</span><span class='price-per-traveler'>{{ price }}</span>",
             INCL_TAXES: "包括税（如果适用）",
             ERROR_CODE: {

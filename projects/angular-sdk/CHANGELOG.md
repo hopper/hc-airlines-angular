@@ -1,3 +1,10 @@
+<a name="4.2.11"></a>
+
+# 4.2.11 (2022-11-16)
+Offer Dialog & Offer Banner large:
+- Fixed display of the percentage in Chinese
+- Fixed margin between price and "per traveler" label
+
 <a name="4.2.10"></a>
 
 # 4.2.10 (2022-11-09)

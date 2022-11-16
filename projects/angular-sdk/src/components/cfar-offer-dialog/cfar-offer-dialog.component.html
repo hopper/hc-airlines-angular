@@ -57,7 +57,7 @@
                                 { coverage: (offer.coveragePercentage | number: '1.0-0') }
                             }}
                         </h3>
-                        <div fxFlex="100" class="price" 
+                        <div fxFlex="100" class="price" fxLayoutGap="8px"
                             attr.aria-label="{{ 'COMMON.PRICE_PER_TRAVELER' | translate: 
                                 { price: (getPricePerTraveler(offer) | currency:offer?.currency:'symbol':undefined:currentLang) }
                             }}"
