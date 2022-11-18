@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
-import { Event, CustomerService, CfarOffersBannerDisplay, UiVariant, CfarOffersTakeoverDisplay, CfarForcedChoiceWarning, CfarViewInfo, UiSource, CfarDenyPurchase, CfarExercisePortalDisplay, CfarExerciseVerificationSent, CfarExerciseVerificationComplete, ExerciseStepResult, CfarExerciseCustomerDataComplete, CfarExercisePortalComplete, CfarExerciseCallbackLaunched, CfarExerciseEmailSent, CfarExerciseEmailOpened, CfarExerciseEmailDelivered } from "../apis/hopper-cloud-airline/v1";
+import { Event, CustomerService, CfarOffersBannerDisplay, UiVariant, CfarOffersTakeoverDisplay, CfarForcedChoiceWarning, CfarViewInfo, UiSource, CfarDenyPurchase, CfarExercisePortalDisplay, CfarExerciseVerificationSent, CfarExerciseVerificationComplete, ExerciseStepResult, CfarExerciseCustomerDataComplete, CfarExercisePortalComplete, CfarExerciseCallbackLaunched } from "../apis/hopper-cloud-airline/v1";
 import { ApiTranslatorUtils } from "../utils/api-translator.utils";
 import { HopperProxyService } from "./hopper-proxy.service";
 
@@ -199,50 +199,4 @@ export class HopperEventsService extends HopperProxyService {
     
     return this._postCustomerEventRequest(hCSessionId, event);
   }
-  
-  postCreateCfarExerciseEmailSent(basePath: string, hCSessionId: string, cfarExerciseId: string): Observable<any> {
-    // Init services
-    this._overrideConfiguration(basePath);
-
-    // Build the event
-    let event: CfarExerciseEmailSent = {
-      occurredDateTime: new Date(),
-      cfarExerciseId: cfarExerciseId,
-      type: "cfar_exercise_email_sent"
-    }
-    
-    return this._postCustomerEventRequest(hCSessionId, event);
-  }
-  
-  postCreateCfarExerciseEmailDelivered(basePath: string, hCSessionId: string, cfarExerciseId: string): Observable<any> {
-    // Init services
-    this._overrideConfiguration(basePath);
-
-    // Build the event
-    let event: CfarExerciseEmailDelivered = {
-      occurredDateTime: new Date(),
-      cfarExerciseId: cfarExerciseId,
-      type: "cfar_exercise_email_delivered"
-    }
-    
-    return this._postCustomerEventRequest(hCSessionId, event);
-  }
-  
-  postCreateCfarExerciseEmailOpened(basePath: string, hCSessionId: string, cfarExerciseId: string): Observable<any> {
-    // Init services
-    this._overrideConfiguration(basePath);
-
-    // Build the event
-    let event: CfarExerciseEmailOpened = {
-      occurredDateTime: new Date(),
-      cfarExerciseId: cfarExerciseId,
-      type: "cfar_exercise_email_opened"
-    }
-    
-    return this._postCustomerEventRequest(hCSessionId, event);
-  }
-  
-  // ----------------------------------------------------------
-  // PRIVATES METHODS
-  // ----------------------------------------------------------
 }

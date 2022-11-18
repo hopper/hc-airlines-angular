@@ -3,7 +3,7 @@ import { Locales } from "../i18n";
 import { TranslateService } from '@ngx-translate/core';
 import { I18n } from "../i18n/i18n.interface";
 import { DateAdapter } from "@angular/material/core";
-import { AirlineRefundMethod, CfarContractCustomer, CfarItinerary, CfarOfferCustomer, CfarStatus, CreateCfarContractCustomerRequest, CreateCfarOfferCustomerRequest, GetCfarExerciseCustomerResponse, RequestType, UiSource, UiVariant } from "../apis/hopper-cloud-airline/v1";
+import { AirlineRefundMethod, CfarContractCustomer, CfarItinerary, CfarOfferCustomer, CfarStatus, CreateCfarContractCustomerRequest, CreateCfarOfferCustomerRequest, GetCfarExerciseCustomerResponse, PassengerType, RequestType, UiSource, UiVariant } from "../apis/hopper-cloud-airline/v1";
 import { CountryCode } from "../enums/country-code.enum";
 import { take } from "rxjs/operators";
 import { HttpErrorResponse } from "@angular/common/http";
@@ -337,7 +337,7 @@ export class GlobalComponent implements OnChanges {
             {
               passengerCount: {
                 count: 3,
-                type: "adult"
+                type: PassengerType.Adult
               },
               individualPrice: "null"
             }
@@ -392,6 +392,12 @@ export class GlobalComponent implements OnChanges {
           ancillaries: [],
           totalPrice: "71.96"
         },
+        cfarPrices: [{
+            coverage: '19.26',
+            nbPax: 3,
+            passengerType: PassengerType.Adult,
+            premium: '8'
+        }],
         hopperRefund: "57.78",
         hopperRefundMethod: AirlineRefundMethod.Ftc,
         hopperRefundCurrency: "CAD",

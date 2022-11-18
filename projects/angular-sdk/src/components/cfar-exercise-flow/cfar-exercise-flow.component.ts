@@ -39,6 +39,7 @@ export class CfarExerciseFlowComponent extends GlobalEventComponent implements O
 
   private _navigationStep!: ExerciseActionStep;
   private _errorTimer: number = 1000;
+  private _verificationCode!: string;
 
   @Input() hCSessionId!: string;
   @Input() exerciseId!: string;
@@ -177,7 +178,7 @@ export class CfarExerciseFlowComponent extends GlobalEventComponent implements O
       }, 2000);
     } else {
       this._hopperCfarService
-        .postRefundRecipients(this.basePath, this.hCSessionId, ApiTranslatorUtils.modelToSnakeCase(this._buildCreateRefundRecipientRequest()))
+        .postRefundRecipients(this.basePath, this.hCSessionId, this._verificationCode, ApiTranslatorUtils.modelToSnakeCase(this._buildCreateRefundRecipientRequest()))
         .pipe(take(1))
         .subscribe({
           next: (refundRecipient: RefundRecipient) => {
@@ -206,7 +207,7 @@ export class CfarExerciseFlowComponent extends GlobalEventComponent implements O
               };
           
               this._hopperCfarService
-                .postRefundAuthorizations(this.basePath, this.hCSessionId, ApiTranslatorUtils.modelToSnakeCase(request))
+                .postRefundAuthorizations(this.basePath, this.hCSessionId, this._verificationCode, ApiTranslatorUtils.modelToSnakeCase(request))
                 .pipe(take(1))
                 .subscribe({
                   next: (authorization: RefundAuthorization) => {
@@ -296,7 +297,7 @@ export class CfarExerciseFlowComponent extends GlobalEventComponent implements O
     };
 
     this._hopperCfarService
-      .postInitiateRefund(this.basePath, this.hCSessionId, ApiTranslatorUtils.modelToSnakeCase(request))
+      .postInitiateRefund(this.basePath, this.hCSessionId, this._verificationCode, ApiTranslatorUtils.modelToSnakeCase(request))
       .pipe(take(1))
       .subscribe({
         next: (initiateRefundResponse: InitiateRefundResponse) => {
@@ -412,8 +413,10 @@ export class CfarExerciseFlowComponent extends GlobalEventComponent implements O
     } else {
       this.isLoading = true;
 
+      const request = ApiTranslatorUtils.modelToSnakeCase(this._buildCheckExerciseVerificationCodeRequest());
+
       this._hopperCfarService
-        .postCheckCfarExerciseVerificationCode(this.basePath, this.hCSessionId, this.exerciseId, ApiTranslatorUtils.modelToSnakeCase(this._buildCheckExerciseVerificationCodeRequest()))
+        .postCheckCfarExerciseVerificationCode(this.basePath, this.hCSessionId, this.exerciseId, request)
         .pipe(take(1))
         .subscribe({
           next: (checkVerificationCodeResult: CheckCfarContractExerciceVerificationCodeResponse) => {
@@ -421,6 +424,9 @@ export class CfarExerciseFlowComponent extends GlobalEventComponent implements O
 
             if (result.compliant) {                    
               this.exerciseId = result.exerciseId;
+
+              // Save the verificationCode
+              this._verificationCode = this.checkVerificationCodeForm.get('verificationCode')?.value,
 
               // Events management
               this.updateCfarExerciseIdForEvent(this.exerciseId);

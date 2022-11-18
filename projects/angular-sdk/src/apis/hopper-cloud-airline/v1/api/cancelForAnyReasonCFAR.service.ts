@@ -70,7 +70,7 @@ export class CancelForAnyReasonCFARService {
      * Check a verification code associated with a CFAR exercise
      * Check a verification code to a user required to process a CFAR exercise
      * @param body 
-     * @param id A unique identifier for a CFAR contract
+     * @param id A unique identifier for a CFAR exercise
      * @param hCSessionID The ID of the current airline session, see [Sessions](#tag/Sessions)
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -127,7 +127,7 @@ export class CancelForAnyReasonCFARService {
      * Send a verification code associated with a CFAR exercise
      * Send a verification code to a user required to process a CFAR exercise
      * @param body 
-     * @param id A unique identifier for a CFAR contract
+     * @param id A unique identifier for a CFAR exercise
      * @param hCSessionID The ID of the current airline session, see [Sessions](#tag/Sessions)
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -185,22 +185,27 @@ export class CancelForAnyReasonCFARService {
      * Initiate the Refund
      * @param body 
      * @param hCSessionID The ID of the current airline session, see [Sessions](#tag/Sessions)
+     * @param verificationCode 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public postCustomerInitiateRefund(body: InitiateRefundRequest, hCSessionID?: string, observe?: 'body', reportProgress?: boolean): Observable<InitiateRefundResponse>;
-    public postCustomerInitiateRefund(body: InitiateRefundRequest, hCSessionID?: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<InitiateRefundResponse>>;
-    public postCustomerInitiateRefund(body: InitiateRefundRequest, hCSessionID?: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<InitiateRefundResponse>>;
-    public postCustomerInitiateRefund(body: InitiateRefundRequest, hCSessionID?: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public postCustomerInitiateRefund(body: InitiateRefundRequest, hCSessionID?: string, verificationCode?: string, observe?: 'body', reportProgress?: boolean): Observable<InitiateRefundResponse>;
+    public postCustomerInitiateRefund(body: InitiateRefundRequest, hCSessionID?: string, verificationCode?: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<InitiateRefundResponse>>;
+    public postCustomerInitiateRefund(body: InitiateRefundRequest, hCSessionID?: string, verificationCode?: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<InitiateRefundResponse>>;
+    public postCustomerInitiateRefund(body: InitiateRefundRequest, hCSessionID?: string, verificationCode?: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (body === null || body === undefined) {
             throw new Error('Required parameter body was null or undefined when calling postCustomerInitiateRefund.');
         }
 
 
+
         let headers = this.defaultHeaders;
         if (hCSessionID !== undefined && hCSessionID !== null) {
             headers = headers.set('HC-Session-ID', String(hCSessionID));
+        }
+        if (verificationCode !== undefined && verificationCode !== null) {
+            headers = headers.set('verification-code', String(verificationCode));
         }
 
         // to determine the Accept header
@@ -237,22 +242,27 @@ export class CancelForAnyReasonCFARService {
      * Create a Refund Authorization Token
      * @param body 
      * @param hCSessionID The ID of the current airline session, see [Sessions](#tag/Sessions)
+     * @param verificationCode 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public postCustomerRefundAuthorizations(body: CreateRefundAuthorizationRequest, hCSessionID?: string, observe?: 'body', reportProgress?: boolean): Observable<RefundAuthorization>;
-    public postCustomerRefundAuthorizations(body: CreateRefundAuthorizationRequest, hCSessionID?: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<RefundAuthorization>>;
-    public postCustomerRefundAuthorizations(body: CreateRefundAuthorizationRequest, hCSessionID?: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<RefundAuthorization>>;
-    public postCustomerRefundAuthorizations(body: CreateRefundAuthorizationRequest, hCSessionID?: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public postCustomerRefundAuthorizations(body: CreateRefundAuthorizationRequest, hCSessionID?: string, verificationCode?: string, observe?: 'body', reportProgress?: boolean): Observable<RefundAuthorization>;
+    public postCustomerRefundAuthorizations(body: CreateRefundAuthorizationRequest, hCSessionID?: string, verificationCode?: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<RefundAuthorization>>;
+    public postCustomerRefundAuthorizations(body: CreateRefundAuthorizationRequest, hCSessionID?: string, verificationCode?: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<RefundAuthorization>>;
+    public postCustomerRefundAuthorizations(body: CreateRefundAuthorizationRequest, hCSessionID?: string, verificationCode?: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (body === null || body === undefined) {
             throw new Error('Required parameter body was null or undefined when calling postCustomerRefundAuthorizations.');
         }
 
 
+
         let headers = this.defaultHeaders;
         if (hCSessionID !== undefined && hCSessionID !== null) {
             headers = headers.set('HC-Session-ID', String(hCSessionID));
+        }
+        if (verificationCode !== undefined && verificationCode !== null) {
+            headers = headers.set('verification-code', String(verificationCode));
         }
 
         // to determine the Accept header
@@ -289,22 +299,27 @@ export class CancelForAnyReasonCFARService {
      * Create a Refund Recipient
      * @param body 
      * @param hCSessionID The ID of the current airline session, see [Sessions](#tag/Sessions)
+     * @param verificationCode 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public postCustomerRefundRecipients(body: CreateRefundRecipientRequest, hCSessionID?: string, observe?: 'body', reportProgress?: boolean): Observable<RefundRecipient>;
-    public postCustomerRefundRecipients(body: CreateRefundRecipientRequest, hCSessionID?: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<RefundRecipient>>;
-    public postCustomerRefundRecipients(body: CreateRefundRecipientRequest, hCSessionID?: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<RefundRecipient>>;
-    public postCustomerRefundRecipients(body: CreateRefundRecipientRequest, hCSessionID?: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public postCustomerRefundRecipients(body: CreateRefundRecipientRequest, hCSessionID?: string, verificationCode?: string, observe?: 'body', reportProgress?: boolean): Observable<RefundRecipient>;
+    public postCustomerRefundRecipients(body: CreateRefundRecipientRequest, hCSessionID?: string, verificationCode?: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<RefundRecipient>>;
+    public postCustomerRefundRecipients(body: CreateRefundRecipientRequest, hCSessionID?: string, verificationCode?: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<RefundRecipient>>;
+    public postCustomerRefundRecipients(body: CreateRefundRecipientRequest, hCSessionID?: string, verificationCode?: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (body === null || body === undefined) {
             throw new Error('Required parameter body was null or undefined when calling postCustomerRefundRecipients.');
         }
 
 
+
         let headers = this.defaultHeaders;
         if (hCSessionID !== undefined && hCSessionID !== null) {
             headers = headers.set('HC-Session-ID', String(hCSessionID));
+        }
+        if (verificationCode !== undefined && verificationCode !== null) {
+            headers = headers.set('verification-code', String(verificationCode));
         }
 
         // to determine the Accept header
