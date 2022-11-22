@@ -110,7 +110,7 @@ export abstract class CommonGuidesComponent implements OnInit, OnDestroy {
     this._unsubcriber = new Subject<any>();
     
     // Active fake data in components
-    this.isFakeBackend = false;
+    this.isFakeBackend = true;
   }
   
   // -----------------------------------------------

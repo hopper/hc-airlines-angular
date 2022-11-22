@@ -383,6 +383,8 @@ export interface I18n {
                 SE011: string;
                 SE012: string;
                 SE013: string;
+                SE014: string;
+                SE015: string;
                 EM001: string;
                 EM002: string;
                 RF001: string;

@@ -385,6 +385,8 @@ export const locale: I18n = {
                 SE011: "La session est introuvable.",
                 SE012: "La session est introuvable.",
                 SE013: "La session n'a pas le bon type de flux.",
+                SE014: "La session est introuvable.",
+                SE015: "La session est introuvable.",
                 EM001: "L'e-mail n'a pas pu être envoyé.",
                 EM002: "L'e-mail n'a pas pu être envoyé.",
                 RF001: "Le contrat n'a pas été trouvé.",

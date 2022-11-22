@@ -385,6 +385,8 @@ export const locale: I18n = {
                 SE011: "The session was not found.",
                 SE012: "The session was not found.",
                 SE013: "The session does not have the correct flow type.",
+                SE014: "The session was not found.",
+                SE015: "The session was not found.",
                 EM001: "Email could not be sent.",
                 EM002: "Email could not be sent.",
                 RF001: "The contract was not found.",

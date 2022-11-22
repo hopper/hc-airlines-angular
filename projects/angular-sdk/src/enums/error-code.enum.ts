@@ -243,6 +243,10 @@ export enum ErrorCode {
     SE012 = "SE012",
     // The session does not have the correct flow type.
     SE013 = "SE013",
+    // The session was not found.
+    SE014 = "SE014",
+    // The session was not found.
+    SE015 = "SE015",
 
     // Email could not be sent.
     EM001 = "EM001",
