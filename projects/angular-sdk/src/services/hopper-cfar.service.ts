@@ -35,25 +35,31 @@ export class HopperCfarService extends HopperProxyService {
     return this._customerService.getCustomerCfarExercisesId(id, hCSessionId);
   }
 
-  postRefundAuthorizations(basePath: string, hCSessionId: string, request: CreateRefundAuthorizationRequest): Observable<RefundAuthorization> {
+  postRefundAuthorizations(basePath: string, hCSessionId: string, verificationCode: string, request: CreateRefundAuthorizationRequest): Observable<RefundAuthorization> {
     // Init services
     this._overrideConfiguration(basePath);
     
-    return this._customerService.postCustomerRefundAuthorizations(request, hCSessionId);
+    console.log(verificationCode);
+
+    return this._customerService.postCustomerRefundAuthorizations(request, hCSessionId, verificationCode);
   }
 
-  postRefundRecipients(basePath: string, hCSessionId: string, request: CreateRefundRecipientRequest): Observable<RefundRecipient> {
+  postRefundRecipients(basePath: string, hCSessionId: string, verificationCode: string, request: CreateRefundRecipientRequest): Observable<RefundRecipient> {
     // Init services
     this._overrideConfiguration(basePath);
 
-    return this._customerService.postCustomerRefundRecipients(request, hCSessionId);
+    console.log(verificationCode);
+
+    return this._customerService.postCustomerRefundRecipients(request, hCSessionId, verificationCode);
   }
 
-  postInitiateRefund(basePath: string, hCSessionId: string, request: InitiateRefundRequest): Observable<InitiateRefundResponse> {
+  postInitiateRefund(basePath: string, hCSessionId: string, verificationCode: string, request: InitiateRefundRequest): Observable<InitiateRefundResponse> {
     // Init services
     this._overrideConfiguration(basePath);
     
-    return this._customerService.postCustomerInitiateRefund(request, hCSessionId);
+    console.log(verificationCode);
+    
+    return this._customerService.postCustomerInitiateRefund(request, hCSessionId, verificationCode);
   }
 
   postSendCfarExerciseVerificationCode(basePath: string, hCSessionId: string, contractId: string, request: SendCfarContractExerciseVerificationCodeRequest): Observable<SendCfarContractExerciceVerificationCodeResponse> {

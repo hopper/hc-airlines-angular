@@ -295,6 +295,7 @@ export interface I18n {
                 CO031: string;
                 CO032: string;
                 CO033: string;
+                CO034: string;
                 EX001: string;
                 EX002: string;
                 EX003: string;
@@ -326,6 +327,13 @@ export interface I18n {
                 EX034: string;
                 EX035: string;
                 EX036: string;
+                EX037: string;
+                EX038: string;
+                EX039: string;
+                EX040: string;
+                EX041: string;
+                EX042: string;
+                EX043: string;
                 ME001: string;
                 ME002: string;
                 ME003: string;
@@ -375,6 +383,8 @@ export interface I18n {
                 SE011: string;
                 SE012: string;
                 SE013: string;
+                SE014: string;
+                SE015: string;
                 EM001: string;
                 EM002: string;
                 RF001: string;
@@ -387,13 +397,10 @@ export interface I18n {
                 RF008: string;
                 RF009: string;
                 RF010: string;
-                EV001: string;
-                EV002: string;
-                EV003: string;
-                EV004: string;
-                EV005: string;
-                EV006: string;
-                EV007: string;
+                RF011: string;
+                RF012: string;
+                RF013: string;
+                RF014: string;
             }
         },
         CFAR_OFFER_BANNER: {

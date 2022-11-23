@@ -241,49 +241,4 @@ export class GlobalEventComponent extends GlobalComponent {
             }
         });
     }
-
-    protected createCfarExerciseEmailSentEvent(): void {
-        if (!this.isExerciseEventPossible) {
-            return;
-        }
-        this.hopperEventService
-        .postCreateCfarExerciseEmailSent(this.basePath, this.eventHcSessionId, this.cfarExerciseId)
-        .pipe(take(1))
-        .subscribe({
-            next: () => {},
-            error: (error) => {
-            console.error(error);
-            }
-        });
-    }
-
-    protected createCfarExerciseEmailDeliveredEvent(): void {
-        if (!this.isExerciseEventPossible) {
-            return;
-        }
-        this.hopperEventService
-        .postCreateCfarExerciseEmailDelivered(this.basePath, this.eventHcSessionId, this.cfarExerciseId)
-        .pipe(take(1))
-        .subscribe({
-            next: () => {},
-            error: (error) => {
-            console.error(error);
-            }
-        });
-    }
-
-    protected createCfarExerciseEmailOpenedEvent(): void {
-        if (!this.isExerciseEventPossible) {
-            return;
-        }
-        this.hopperEventService
-        .postCreateCfarExerciseEmailOpened(this.basePath, this.eventHcSessionId, this.cfarExerciseId)
-        .pipe(take(1))
-        .subscribe({
-            next: () => {},
-            error: (error) => {
-            console.error(error);
-            }
-        });
-    }
 }

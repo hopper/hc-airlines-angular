@@ -10,12 +10,8 @@
  * Do not edit the class manually.
  */
 
-/**
- * The flow type for which the session is opened.
- */
-export type FlowType = 'purchase' | 'exercise';
+export interface MapListString extends Record<string, Array<any>> { 
+  [key: string]: Array<string>;
 
-export const FlowType = {
-    Purchase: 'purchase' as FlowType,
-    Exercise: 'exercise' as FlowType
-};
+
+}

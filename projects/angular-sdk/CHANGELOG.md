@@ -1,3 +1,12 @@
+<a name="4.2.12"></a>
+
+# 4.2.12 (2022-XX-XX)
+Exercise flow:
+- Improved security on hyperwallet steps
+
+General:
+- Added new errors labels
+
 <a name="4.2.11"></a>
 
 # 4.2.11 (2022-11-16)
