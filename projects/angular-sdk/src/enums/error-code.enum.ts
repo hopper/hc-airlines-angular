@@ -1,5 +1,6 @@
 /**
- * Exaustive list of error managed by the API
+ * Non exaustive list of error managed by the API
+ * Excluded codes : event (EVXXX)
  */
 export enum ErrorCode {
     // The contract was not found.
@@ -62,8 +63,10 @@ export enum ErrorCode {
     CO032 = "CO032",
     // The contract was not found.
     CO033 = "CO033",
-    // The contract exercise was not found.
+    // The contract could not be saved.
+    CO034 = "C0034",
 
+    // The contract exercise was not found.
     EX001 = "EX001",
     // It is too late to use CFAR to cancel your booking.
     EX002 = "EX002",
@@ -125,6 +128,20 @@ export enum ErrorCode {
     EX035 = "EX035",
     // No Cfar contract for this booking reference.
     EX036 = "EX036",
+    // The verification code has already been sent.
+    EX037 = "EX037",
+    // The contract exercise was not found.
+    EX038 = "EXO38",
+    // Session already has an exercise.
+    EX039 = "EX039",
+    // Too Many Verification Attempts.
+    EX040 = "EX040",
+    // The contract exercise was not found.
+    EX041 = "EX041",
+    // he contract exercise was not found.
+    EX042 = "EX042",
+    // The verification code is not valid.
+    EX043 = "EX043",
 
     // The manual exercise could not be created.
     ME001 = "ME001",
@@ -226,6 +243,10 @@ export enum ErrorCode {
     SE012 = "SE012",
     // The session does not have the correct flow type.
     SE013 = "SE013",
+    // The session was not found.
+    SE014 = "SE014",
+    // The session was not found.
+    SE015 = "SE015",
 
     // Email could not be sent.
     EM001 = "EM001",
@@ -252,19 +273,12 @@ export enum ErrorCode {
     RF009 = "RF009",
     // The exercise could not be saved.
     RF010 = "RF010",
-
-    // User properties for the event could not be retrieved.
-    EV001 = "EV001",
-    // Platform properties for the event could not be retrieved.
-    EV002 = "EV002",
-    // Trip properties for the event could not be retrieved.
-    EV003 = "EV003",
-    // Fare properties for the event could not be retrieved.
-    EV004 = "EV004",
-    // Offers properties for the event could not be retrieved.
-    EV005 = "EV005",
-    // Purchase properties for the event could not be retrieved.
-    EV006 = "EV006",
-    // Exercise properties for the event could not be retrieved.
-    EV007 = "EV007"
+    // The exercise has incorrect refund information.
+    RF011 = "RF011",
+    // The exercise has incorrect refund information.
+    RF012 = "RF012",
+    // The exercise has incorrect refund information.
+    RF013 = "RF013",
+    // The exercise has incorrect refund information.
+    RF014 = "RF014"
 }

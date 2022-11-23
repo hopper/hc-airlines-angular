@@ -30,7 +30,7 @@ export abstract class CommonGuidesComponent implements OnInit, OnDestroy {
   // Parameters
   public hCSessionId = "898edbd2-7807-4e47-917b-d8cded6161b5";
   public contractId = "1ed5f483-6287-6b77-acb5-9719296bfa68";
-  public exerciseId = "1ed603b2-c4db-6380-a242-2f6178643d87";
+  public exerciseId = "1ed674ba-8cf4-6f62-a76e-6d912b93e078";
   public currency = "EUR";
   public passengers: PassengerPricing[] = [
     {

@@ -11,6 +11,7 @@
  */
 import { AirlineRefundMethod } from './airlineRefundMethod';
 import { CfarItinerary } from './cfarItinerary';
+import { CfarPrice } from './cfarPrice';
 import { CfarStatus } from './cfarStatus';
 
 /**
@@ -34,4 +35,5 @@ export interface GetCfarExerciseCustomerResponse {
     status: CfarStatus;
     contractExpiryDateTime: Date;
     itinerary: CfarItinerary;
+    cfarPrices: Array<CfarPrice>;
 }

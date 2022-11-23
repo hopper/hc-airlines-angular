@@ -9,9 +9,11 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
+import { PassengerType } from './passengerType';
 
-export interface MapStringArray extends Record<string, Array<string>> { 
-  [key: string]: Array<string>;
-
-
+export interface CfarPrice { 
+    passengerType: PassengerType;
+    nbPax: number;
+    coverage: string;
+    premium: string;
 }

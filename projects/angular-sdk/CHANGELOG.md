@@ -1,8 +1,12 @@
 <a name="4.2.12"></a>
 
-# 4.2.11 (2022-11-24)
+# 4.2.12 (2022-11-24)
+Exercise flow:
+- Improved security on hyperwallet steps
+
 General:
-Added fare brand on itinerary slice and segment objects
+- Added new errors labels
+- Added fare brand on itinerary slice and segment objects
 
 <a name="4.2.11"></a>
 
