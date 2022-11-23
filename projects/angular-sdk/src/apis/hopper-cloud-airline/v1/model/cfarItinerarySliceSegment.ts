@@ -40,4 +40,5 @@ export interface CfarItinerarySliceSegment {
      */
     validatingCarrierCode: string;
     fareClass: FareClass;
+    fareBrand?: string;
 }

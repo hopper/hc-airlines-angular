@@ -28,7 +28,7 @@ export abstract class CommonGuidesComponent implements OnInit, OnDestroy {
   public abstract htmlCode: string;
   
   // Parameters
-  public hCSessionId = "7ac1573c-e291-49f7-a151-cb553565f19f";
+  public hCSessionId = "898edbd2-7807-4e47-917b-d8cded6161b5";
   public contractId = "1ed5f483-6287-6b77-acb5-9719296bfa68";
   public exerciseId = "1ed603b2-c4db-6380-a242-2f6178643d87";
   public currency = "EUR";
@@ -48,15 +48,17 @@ export abstract class CommonGuidesComponent implements OnInit, OnDestroy {
       passengerPricing: this.passengers,
       slices: [
         {
+          fareBrand: "comfort",
           segments: [
             {
               originAirport: "LGA",
               destinationAirport: "BOS",
-              departureDateTime: "2022-11-01T18:34:30",
-              arrivalDateTime: "2022-11-02T19:12:30",
+              departureDateTime: "2022-12-01T18:34:30",
+              arrivalDateTime: "2022-12-02T19:12:30",
               flightNumber: "JB776",
               validatingCarrierCode: "B6",
-              fareClass: "basic_economy"
+              fareClass: "economy",
+              fareBrand: "comfort"
             }
           ]
         }
@@ -75,15 +77,17 @@ export abstract class CommonGuidesComponent implements OnInit, OnDestroy {
     passengerPricing: this.passengers,
     slices: [
       {
+        fareBrand: "comfort",
         segments: [
           {
             originAirport: "LGA",
             destinationAirport: "BOS",
-            departureDateTime: "2022-11-01T18:34:30",
-            arrivalDateTime: "2022-10-1-02T19:12:30",
+            departureDateTime: "2022-12-01T18:34:30",
+            arrivalDateTime: "2022-12-02T19:12:30",
             flightNumber: "JB776",
             validatingCarrierCode: "B6",
-            fareClass: "basic_economy"
+            fareClass: "economy",
+            fareBrand: "comfort"
           }
         ]
       }
