@@ -10,6 +10,7 @@
  * Do not edit the class manually.
  */
 import { CfarItinerary } from './cfarItinerary';
+import { CfarTax } from './cfarTax';
 import { MapListString } from './mapListString';
 import { RequestType } from './requestType';
 
@@ -37,6 +38,14 @@ export interface CfarOfferCustomer {
      * Currency of offer
      */
     currency: string;
+    /**
+     * Total of taxes included in the premium
+     */
+    taxesTotal?: string;
+    /**
+     * List of taxes included in the premium
+     */
+    taxes?: Array<CfarTax>;
     requestType: RequestType;
     /**
      * USD Exchange rate for currency; amount * toUsdExchangeRate == USD

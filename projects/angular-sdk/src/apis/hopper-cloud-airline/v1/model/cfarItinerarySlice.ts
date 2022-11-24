@@ -19,5 +19,8 @@ export interface CfarItinerarySlice {
      * A list of segments which make up the slice of the fare
      */
     segments: Array<CfarItinerarySliceSegment>;
+    /**
+     * Fare brand of the slice
+     */
     fareBrand?: string;
 }

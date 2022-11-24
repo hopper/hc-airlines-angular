@@ -300,13 +300,13 @@
             
                                             <mat-form-field fxFlex="100" appearance="outline">
                                                 <mat-label>{{ 'CFAR_EXERCISE_FLOW.FORM.ADDRESS_LINE_1' | translate }}</mat-label>
-                                                <input matInput formControlName="addressLine1">
+                                                <input matInput formControlName="addressLine1" maxlength="100">
                                                 <mat-error *ngIf="step2Form.get('addressLine1')?.invalid">{{ 'CFAR_EXERCISE_FLOW.FORM.ADDRESS_LINE_1_ERROR' | translate }}</mat-error>
                                             </mat-form-field>
                 
                                             <mat-form-field fxFlex="100" appearance="outline">
                                                 <mat-label>{{ 'CFAR_EXERCISE_FLOW.FORM.ADDRESS_LINE_2' | translate }}</mat-label>
-                                                <input matInput formControlName="addressLine2">
+                                                <input matInput formControlName="addressLine2" maxlength="100">
                                             </mat-form-field>
                 
                                             <div fxFlex="100" fxLayoutGap="16px" fxLayout="row" fxLayout.lt-md="column">

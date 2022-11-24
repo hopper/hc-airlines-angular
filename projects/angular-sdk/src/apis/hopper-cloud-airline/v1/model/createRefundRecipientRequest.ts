@@ -20,7 +20,8 @@ export interface CreateRefundRecipientRequest {
      * The refund recipient's date of birth in ISO Local Date format
      */
     dateOfBirth: string;
-    address: string;
+    addressLine1: string;
+    addressLine2?: string;
     city: string;
     stateProvince: string;
     country: string;

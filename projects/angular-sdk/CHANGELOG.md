@@ -3,6 +3,7 @@
 # 4.2.12 (2022-11-24)
 Exercise flow:
 - Improved security on hyperwallet steps
+- Fixed an issue with 'address' fields
 
 General:
 - Added new errors labels

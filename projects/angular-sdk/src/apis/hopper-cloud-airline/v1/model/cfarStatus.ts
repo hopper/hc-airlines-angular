@@ -10,9 +10,13 @@
  * Do not edit the class manually.
  */
 
-export type CfarStatus = 'created' | 'confirmed';
+export type CfarStatus = 'created' | 'confirmed' | 'failed' | 'cancelled' | 'charged_back' | 'voided';
 
 export const CfarStatus = {
     Created: 'created' as CfarStatus,
-    Confirmed: 'confirmed' as CfarStatus
+    Confirmed: 'confirmed' as CfarStatus,
+    Failed: 'failed' as CfarStatus,
+    Cancelled: 'cancelled' as CfarStatus,
+    ChargedBack: 'charged_back' as CfarStatus,
+    Voided: 'voided' as CfarStatus
 };
