@@ -78,8 +78,6 @@ export class CfarOfferBannerLargeComponent extends GlobalEventComponent implemen
           this.chooseCoverage.emit(this.contractsByChoiceIndex.get(this.selectedChoice));
         // Backend call
         } else {
-          this.isLoading = true;
-
           // Create CFAR Contract
           this._hopperCfarService
             .postCfarContracts(this.basePath, this.hCSessionId, this.currentLang, ApiTranslatorUtils.modelToSnakeCase(this._buildCreateCfarContractRequest(this.selectedCfarOffer, this.uiSource)))
@@ -90,11 +88,9 @@ export class CfarOfferBannerLargeComponent extends GlobalEventComponent implemen
                 this.contractsByChoiceIndex.set(this.selectedChoice, cfarContract);
   
                 this.chooseCoverage.emit(cfarContract);
-                this.isLoading = false;
               },
               error: (error) => {
                 this.pushSdkError(error, "contracts");
-                this.isLoading = false;
               }
             });
         } 
