@@ -496,7 +496,7 @@ export const locale: I18n = {
             },
             CONFIRMATION_MESSAGE_1: "您的航班已取消，正在处理您的退款。",
             CONFIRMATION_MESSAGE_2: "稍后将向 {{ userEmail }} 发送一封确认电子邮件，其中包含有关如何使用您的航空公司积分的详细信息",
-            REFUND_DETAILS: "{{ amount }} 在 {{ method }}",
+            REFUND_DETAILS: "{{ amount }}",
             PASSENGER_TYPE: {
                 ADULT: "成人",
                 CHILD: "孩子",

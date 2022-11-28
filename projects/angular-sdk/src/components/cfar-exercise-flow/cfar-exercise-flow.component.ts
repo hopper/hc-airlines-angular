@@ -530,7 +530,7 @@ export class CfarExerciseFlowComponent extends GlobalEventComponent implements O
       firstName: new FormControl(null, [Validators.required]),
       middleName: new FormControl(null),
       lastName: new FormControl(null, [Validators.required]),
-      dateOfBirth: new FormControl({ value: new Date(), disabled: true }, [Validators.required]),
+      dateOfBirth: new FormControl(null, [Validators.required]),
       addressLine1: new FormControl(null, [Validators.required]),
       addressLine2: new FormControl(),
       city: new FormControl(null, [Validators.required]),

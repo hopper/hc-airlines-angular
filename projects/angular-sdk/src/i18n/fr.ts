@@ -496,7 +496,7 @@ export const locale: I18n = {
             },
             CONFIRMATION_MESSAGE_1: "Ne fermez pas cette page, votre demande de remboursement est en cours de traitement",
             CONFIRMATION_MESSAGE_2: "Une fois votre demande traitée, vous recevrez un courriel de confirmation à votre adresse {{ userEmail }}",
-            REFUND_DETAILS: "{{ amount }} en {{ method }}",
+            REFUND_DETAILS: "{{ amount }}",
             PASSENGER_TYPE: {
                 ADULT: "Adulte",
                 CHILD: "Enfant",

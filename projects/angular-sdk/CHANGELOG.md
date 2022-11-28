@@ -1,3 +1,10 @@
+<a name="4.2.13"></a>
+
+# 4.2.13 (2022-11-28)
+Exercise flow:
+- Removed payout 'in cash'
+- Made date of birth empty and mandatory
+
 <a name="4.2.12"></a>
 
 # 4.2.12 (2022-11-24)
