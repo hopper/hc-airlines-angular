@@ -45,6 +45,7 @@ export class CfarOfferDialogComponent extends GlobalComponent implements OnInit,
     this.isFakeBackend = data.isFakeBackend;
     this.currentLang = data.currentLang;
     this.basePath = data.basePath;
+    this.imageBasePath = data.imageBasePath;
   }
 
   // -----------------------------------------------

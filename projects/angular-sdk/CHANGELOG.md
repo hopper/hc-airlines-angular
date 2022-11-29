@@ -1,3 +1,9 @@
+<a name="4.2.14"></a>
+
+# 4.2.14 (2022-11-29)
+Offer dialog:
+- Fixed imageBasePath issue
+
 <a name="4.2.13"></a>
 
 # 4.2.13 (2022-11-28)
