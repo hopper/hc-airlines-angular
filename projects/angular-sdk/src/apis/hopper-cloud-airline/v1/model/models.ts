@@ -1,5 +1,4 @@
 export * from './airlineRefundMethod';
-export * from './airlineSession';
 export * from './ancillary';
 export * from './badRequest';
 export * from './bookingConfirmed';
@@ -25,7 +24,6 @@ export * from './cfarTax';
 export * from './cfarViewInfo';
 export * from './checkCfarContractExerciceVerificationCodeResponse';
 export * from './checkCfarContractExerciseVerificationCodeRequest';
-export * from './createAirlineSessionCustomerRequest';
 export * from './createCfarContractCustomerRequest';
 export * from './createCfarOfferCustomerRequest';
 export * from './createRefundAuthorizationRequest';
