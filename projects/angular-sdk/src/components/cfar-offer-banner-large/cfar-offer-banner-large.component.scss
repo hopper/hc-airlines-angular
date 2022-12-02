@@ -56,7 +56,9 @@
     
             .offer-title {
                 border-left: 2px solid map-get($primary-palette, 300);
-                font-weight: bold;
+                font-size: 20px;
+                font-family: "Open Sans", Arial;
+                font-weight: 600;
             }
 
             .default-choice {
@@ -76,6 +78,7 @@
             .price-per-traveler {
                 font-weight: bold;
                 color: map-get($accent-palette, default);
+                text-indent: 28px;
             }
 
             .offer-choice {
@@ -88,7 +91,8 @@
             }
 
             .incl-taxes {
-                color: map-get($fg-palette, "secondary-text")
+                color: map-get($fg-palette, "secondary-text");
+                text-indent: 28px;
             }
 
             a {
