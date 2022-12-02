@@ -17,13 +17,11 @@ import { CustomHttpUrlEncodingCodec }                        from '../encoder';
 
 import { Observable }                                        from 'rxjs';
 
-import { AirlineSession } from '../model/airlineSession';
 import { BadRequest } from '../model/badRequest';
 import { CfarContractCustomer } from '../model/cfarContractCustomer';
 import { CfarOfferCustomer } from '../model/cfarOfferCustomer';
 import { CheckCfarContractExerciceVerificationCodeResponse } from '../model/checkCfarContractExerciceVerificationCodeResponse';
 import { CheckCfarContractExerciseVerificationCodeRequest } from '../model/checkCfarContractExerciseVerificationCodeRequest';
-import { CreateAirlineSessionCustomerRequest } from '../model/createAirlineSessionCustomerRequest';
 import { CreateCfarContractCustomerRequest } from '../model/createCfarContractCustomerRequest';
 import { CreateCfarOfferCustomerRequest } from '../model/createCfarOfferCustomerRequest';
 import { CreateRefundAuthorizationRequest } from '../model/createRefundAuthorizationRequest';
@@ -651,53 +649,6 @@ export class CustomerService {
         }
 
         return this.httpClient.request<RefundRecipient>('post',`${this.basePath}/customer/refund_recipients`,
-            {
-                body: body,
-                withCredentials: this.configuration.withCredentials,
-                headers: headers,
-                observe: observe,
-                reportProgress: reportProgress
-            }
-        );
-    }
-
-    /**
-     * Create a customer Session
-     * Create a new session for which events will be collected
-     * @param body 
-     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
-     * @param reportProgress flag to report request and response progress.
-     */
-    public postCustomerSessions(body: CreateAirlineSessionCustomerRequest, observe?: 'body', reportProgress?: boolean): Observable<AirlineSession>;
-    public postCustomerSessions(body: CreateAirlineSessionCustomerRequest, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<AirlineSession>>;
-    public postCustomerSessions(body: CreateAirlineSessionCustomerRequest, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<AirlineSession>>;
-    public postCustomerSessions(body: CreateAirlineSessionCustomerRequest, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
-
-        if (body === null || body === undefined) {
-            throw new Error('Required parameter body was null or undefined when calling postCustomerSessions.');
-        }
-
-        let headers = this.defaultHeaders;
-
-        // to determine the Accept header
-        let httpHeaderAccepts: string[] = [
-            'application/json'
-        ];
-        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
-        if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set('Accept', httpHeaderAcceptSelected);
-        }
-
-        // to determine the Content-Type header
-        const consumes: string[] = [
-            'application/json'
-        ];
-        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
-        if (httpContentTypeSelected != undefined) {
-            headers = headers.set('Content-Type', httpContentTypeSelected);
-        }
-
-        return this.httpClient.request<AirlineSession>('post',`${this.basePath}/customer/sessions`,
             {
                 body: body,
                 withCredentials: this.configuration.withCredentials,
