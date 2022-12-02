@@ -7,6 +7,7 @@ General:
 Offer banner large:
 - Reduced the size of the image
 - Reduced the size of the title
+- Added some indents
 
 <a name="4.2.14"></a>
 
