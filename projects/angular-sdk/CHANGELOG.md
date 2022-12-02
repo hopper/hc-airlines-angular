@@ -4,6 +4,10 @@
 General:
 - Updated and Added new errors labels
 
+Offer banner large:
+- Reduced the size of the image
+- Reduced the size of the title
+
 <a name="4.2.14"></a>
 
 # 4.2.14 (2022-11-29)
