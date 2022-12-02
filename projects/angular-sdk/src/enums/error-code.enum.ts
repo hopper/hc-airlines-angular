@@ -65,6 +65,10 @@ export enum ErrorCode {
     CO033 = "CO033",
     // The contract could not be saved.
     CO034 = "C0034",
+    // The contract could not be created.
+    CO035 = "CO036",
+    // The contract was not found.
+    CO036 = "CO037",
 
     // The contract exercise was not found.
     EX001 = "EX001",
@@ -82,7 +86,7 @@ export enum ErrorCode {
     EX010 = "EX010",
     // The exercise could not be saved.
     EX012 = "EX012",
-    // The exercise has already been updated.
+    // The exercise has already been completed.
     EX013 = "EX013",
     // The contract exercise was not found.
     EX014 = "EX014",
@@ -118,7 +122,7 @@ export enum ErrorCode {
     EX030 = "EX030",
     // The exercise could not be created.
     EX031 = "EX031",
-    // The verification code to proceed an exercise has nos been sent.
+    // The verification code to proceed an exercise has not been sent.
     EX032 = "EX032",
     // Missing parameters to complete the exercise.
     EX033 = "EX033",
@@ -126,7 +130,7 @@ export enum ErrorCode {
     EX034 = "EX034",
     // The contract exercise was not found.
     EX035 = "EX035",
-    // No Cfar contract for this booking reference.
+    // The number of passengers in the itinerary does not match the number of passengers already concerned by an exercise.
     EX036 = "EX036",
     // The verification code has already been sent.
     EX037 = "EX037",
@@ -142,6 +146,14 @@ export enum ErrorCode {
     EX042 = "EX042",
     // The verification code is not valid.
     EX043 = "EX043",
+    // The contract exercise was not found.
+    EX047 = "EX047",
+    // The contract exercise was not found.
+    EX048 = "EX048",
+    // The contract exercise was not found.
+    EX049 = "EX049",
+    // The contract exercise was not found.
+    EX050 = "EX050",
 
     // The manual exercise could not be created.
     ME001 = "ME001",
@@ -181,6 +193,10 @@ export enum ErrorCode {
     ME018 = "ME018",
     // The verification code is not valid.
     ME019 = "ME019",
+    // The manual exercise could not be found.
+    ME020 = "ME021",
+    // The manual exercise could not be found.
+    ME021 = "ME022",
 
     // An offer could not be saved.
     OF001 = "OF001",
@@ -190,9 +206,9 @@ export enum ErrorCode {
     OF003 = "OF003",
     // Offers could not be saved.
     OF004 = "OF004",
-    // The contract does not have an offer.
+    // No offers have been found.
     OF007 = "OF007",
-    // The contract does not have an offer.
+    // No offers have been found.
     OF008 = "OF008",
     // Invalid Airport code
     OF009 = "OF009",
@@ -204,18 +220,22 @@ export enum ErrorCode {
     OF012 = "OF012",
     // The offer was not found.
     OF013 = "OF013",
-    // An offer could not be saved.
+    // Offers could not be predicted.
     OF014 = "OF014",
-    // An offer could not be saved.
+    // Offers could not be predicted.
     OF015 = "OF015",
-    // An offer could not be saved.
+    // Offers could not be predicted.
     OF016 = "OF016",
     // The offer itinerary is not valid
     OF017 = "OF017",
     // A prediction could not be saved.
     OF018 = "OF018",
-    // An prediction could not be saved.
+    // An prediction could not be retrieved.
     OF019 = "OF019",
+    // No offers have been found.
+    OF022 = "OF022",
+    // No offers have been found.
+    OF023 = "OF023",
 
     // The session was not found.
     SE001 = "SE001",
@@ -225,7 +245,7 @@ export enum ErrorCode {
     SE003 = "SE003",
     // The session was not found.
     SE004 = "SE004",
-    // The session could not be save.
+    // The session could not be saved.
     SE005 = "SE005",
     // The session was not found.
     SE006 = "SE006",
@@ -247,6 +267,8 @@ export enum ErrorCode {
     SE014 = "SE014",
     // The session was not found.
     SE015 = "SE015",
+    // The session does not have the correct flow type.
+    SE018 = "SE018",
 
     // Email could not be sent.
     EM001 = "EM001",

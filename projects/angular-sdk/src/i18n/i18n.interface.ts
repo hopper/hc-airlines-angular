@@ -296,6 +296,8 @@ export interface I18n {
                 CO032: string;
                 CO033: string;
                 CO034: string;
+                CO036: string;
+                CO037: string;
                 EX001: string;
                 EX002: string;
                 EX003: string;
@@ -334,6 +336,10 @@ export interface I18n {
                 EX041: string;
                 EX042: string;
                 EX043: string;
+                EX047: string;
+                EX048: string;
+                EX049: string;
+                EX050: string;
                 ME001: string;
                 ME002: string;
                 ME003: string;
@@ -353,6 +359,8 @@ export interface I18n {
                 ME017: string;
                 ME018: string;
                 ME019: string;
+                ME020: string;
+                ME021: string;
                 OF001: string;
                 OF002: string;
                 OF003: string;
@@ -370,6 +378,8 @@ export interface I18n {
                 OF017: string;
                 OF018: string;
                 OF019: string;
+                OF022: string;
+                OF023: string;
                 SE001: string;
                 SE002: string;
                 SE003: string;
@@ -385,6 +395,7 @@ export interface I18n {
                 SE013: string;
                 SE014: string;
                 SE015: string;
+                SE018: string;
                 EM001: string;
                 EM002: string;
                 RF001: string;
