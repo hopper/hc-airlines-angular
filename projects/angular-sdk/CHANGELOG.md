@@ -1,3 +1,9 @@
+<a name="4.2.16"></a>
+
+# 4.2.16 (2022-12-05)
+Offer banner large:
+- Css adjustment
+
 <a name="4.2.15"></a>
 
 # 4.2.15 (2022-12-02)
