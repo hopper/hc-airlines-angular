@@ -194,23 +194,24 @@ export class GlobalComponent implements OnChanges {
                 },
                 offerDescription: {
                     "en": [
-                    "Add the flexibility to cancel your flight for any reason up to <b> 24 hours </b> before departure",
-                    "Cancel and get a refund of your flight base fare and taxes, excluding additional services (paid seats, paid bags...)",
-                    "Get instant resolution, no forms or claims required"
+                        "Cancel any time up to <b> 24 hours </b> before departure - truly for any reason",
+                        "Get a <b>cash</b> refund of your flight base fare and taxes, excluding additional services (paid seats, bags...)",
+                        "Cancel the trip yourself via our self serve option"
                     ],
                     "fr": [
-                    "Offrez-vous la flexibilité d'une annulation sans aucune justification jusqu'à <b>24 heures</b> avant le départ",
-                    "Annulez et recevez un rembousement du prix de votre vol avec les taxes, à l'exclusion des services additionnels (sièges payant, bagages supplémentaires...)",
-                    "Traitement instantané, aucun formulaire ou dossier à remplir"
+                        "Annulez à tout moment jusqu'à <b> 24 heures </b> avant le départ - vraiment pour n'importe quelle raison",
+                        "Obtenez un remboursement <b>cash</b> de votre tarif de base de vol et des taxes, hors services supplémentaires (sièges payants, bagages...)",
+                        "Annulez vous-même le voyage via notre option libre-service"
                     ],
-                    "es": ["Date la flexibilidad de una cancelación sin justificación hasta <b>24 horas</b> antes de la salida",
-                    "Cancela y recibe un reembolso del precio de tu vuelo con impuestos, excluyendo servicios adicionales (asientos pagados, equipaje adicional, etc.)",
-                    "Procesamiento instantáneo, sin formularios ni archivos para completar"
+                    "es": [
+                        "Cancelar en cualquier momento hasta <b> 24 horas </b> antes de la salida, realmente por cualquier motivo",
+                        "Obtenga un reembolso <b>en efectivo</b> de la tarifa base de su vuelo e impuestos, excluyendo servicios adicionales (asientos pagados, equipaje...)",
+                        "Cancele el viaje usted mismo a través de nuestra opción de autoservicio"
                     ],
                     "zh": [
-                    "在出发前 <b>24 小时</b> 之前，让自己在没有任何理由的情况下灵活取消",
-                    "取消并获得含税的航班价格退款，不包括额外服务（付费座位、额外行李等）",
-                    "即时处理，无需填写表格或文件"
+                        "在出发前 <b> 24 小时 </b> 内随时取消 - 真正出于任何原因",
+                        "获得航班基本票价和税费的<b>现金</b>退款，不包括附加服务（付费座位、行李……）",
+                        "通过我们的自助服务选项自行取消旅行"
                     ]
                 },
                 termsConditionsUrl: "https://www.google.com"
@@ -287,23 +288,24 @@ export class GlobalComponent implements OnChanges {
                 },
                 offerDescription: {
                     "en": [
-                    "Add the flexibility to cancel your flight for any reason up to <b> 24 hours </b> before departure",
-                    "Cancel and get a refund of your flight base fare and taxes, excluding additional services (paid seats, paid bags...)",
-                    "Get instant resolution, no forms or claims required"
+                        "Cancel any time up to <b> 24 hours </b> before departure - truly for any reason",
+                        "Get a <b>cash</b> refund of your flight base fare and taxes, excluding additional services (paid seats, bags...)",
+                        "Cancel the trip yourself via our self serve option"
                     ],
                     "fr": [
-                    "Offrez-vous la flexibilité d'une annulation sans aucune justification jusqu'à <b>24 heures</b> avant le départ",
-                    "Annulez et recevez un rembousement du prix de votre vol avec les taxes, à l'exclusion des services additionnels (sièges payant, bagages supplémentaires...)",
-                    "Traitement instantané, aucun formulaire ou dossier à remplir"
+                        "Annulez à tout moment jusqu'à <b> 24 heures </b> avant le départ - vraiment pour n'importe quelle raison",
+                        "Obtenez un remboursement <b>cash</b> de votre tarif de base de vol et des taxes, hors services supplémentaires (sièges payants, bagages...)",
+                        "Annulez vous-même le voyage via notre option libre-service"
                     ],
-                    "es": ["Date la flexibilidad de una cancelación sin justificación hasta <b>24 horas</b> antes de la salida",
-                    "Cancela y recibe un reembolso del precio de tu vuelo con impuestos, excluyendo servicios adicionales (asientos pagados, equipaje adicional, etc.)",
-                    "Procesamiento instantáneo, sin formularios ni archivos para completar"
+                    "es": [
+                        "Cancelar en cualquier momento hasta <b> 24 horas </b> antes de la salida, realmente por cualquier motivo",
+                        "Obtenga un reembolso <b>en efectivo</b> de la tarifa base de su vuelo e impuestos, excluyendo servicios adicionales (asientos pagados, equipaje...)",
+                        "Cancele el viaje usted mismo a través de nuestra opción de autoservicio"
                     ],
                     "zh": [
-                    "在出发前 <b>24 小时</b> 之前，让自己在没有任何理由的情况下灵活取消",
-                    "取消并获得含税的航班价格退款，不包括额外服务（付费座位、额外行李等）",
-                    "即时处理，无需填写表格或文件"
+                        "在出发前 <b> 24 小时 </b> 内随时取消 - 真正出于任何原因",
+                        "获得航班基本票价和税费的<b>现金</b>退款，不包括附加服务（付费座位、行李……）",
+                        "通过我们的自助服务选项自行取消旅行"
                     ]
                 },
                 termsConditionsUrl: "https://www.google.com"
