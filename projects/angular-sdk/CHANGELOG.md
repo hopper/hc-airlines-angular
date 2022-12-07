@@ -1,3 +1,9 @@
+<a name="4.2.17"></a>
+
+# 4.2.17 (2022-12-07)
+Exercise flow: 
+- Fixed component header (from accessibility point of view)
+
 <a name="4.2.16"></a>
 
 # 4.2.16 (2022-12-05)
