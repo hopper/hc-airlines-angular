@@ -17,7 +17,6 @@ export class CfarOfferBannerLargeComponent extends GlobalEventComponent implemen
 
   public cfarOffers!: CfarOfferCustomer[];
   public selectedCfarOffer!: CfarOfferCustomer;
-  public isLoading!: boolean;
   public selectedChoice!: number;
   public currency!: string;
 
@@ -122,8 +121,6 @@ export class CfarOfferBannerLargeComponent extends GlobalEventComponent implemen
   // -----------------------------------------------
 
   protected initCfarOffers(): void {
-    this.isLoading = true;
-    
     this._hopperCfarService
       .postCfarOffers(this.basePath, this.hCSessionId, this.currentLang, ApiTranslatorUtils.modelToSnakeCase(this._buildCreateCfarOfferRequest(this.itineraries, this.uiVariant)))
       .pipe(take(1))
@@ -140,7 +137,6 @@ export class CfarOfferBannerLargeComponent extends GlobalEventComponent implemen
           this.cfarOffers = results;
           this.selectedCfarOffer = this._getCheapestOffer(this.cfarOffers);
           this.offersLoaded.emit(this.cfarOffers);          
-          this.isLoading = false;
 
           // Int events context and build corresponding events
           this.initCfarPurchaseEventParameters(this.hCSessionId, this.toCfarOffersIds(), this.uiVariant);
@@ -149,7 +145,6 @@ export class CfarOfferBannerLargeComponent extends GlobalEventComponent implemen
         error: (error) => {
           this.pushSdkError(error, "offers");
           this.offersLoaded.emit();
-          this.isLoading = false;
         }
       });
   }

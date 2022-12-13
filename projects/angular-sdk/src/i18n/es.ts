@@ -425,7 +425,6 @@ export const locale: I18n = {
         },
         CFAR_OFFER_BANNER_LARGE: {
             TITLE: "Cancele su vuelo en cualquier momento, por cualquier motivo.",
-            LOADING: "Cargando ofertas en curso...",
             NO_COVERAGE_OPTION: "No quiero comprar Cancelar por cualquier motivo.",
             WARNING_MESSAGE: "Elija o rechace Cancelar por cualquier motivo."
         },

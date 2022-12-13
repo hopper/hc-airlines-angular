@@ -425,7 +425,6 @@ export const locale: I18n = {
         },
         CFAR_OFFER_BANNER_LARGE: {
             TITLE: "随时以任何理由取消您的航班。",
-            LOADING: "正在加载优惠...",
             NO_COVERAGE_OPTION: "我不想出于任何原因购买取消。",
             WARNING_MESSAGE: "请选择或拒绝出于任何原因取消。"
         },

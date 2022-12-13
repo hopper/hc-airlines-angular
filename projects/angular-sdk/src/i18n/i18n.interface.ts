@@ -423,7 +423,6 @@ export interface I18n {
         },
         CFAR_OFFER_BANNER_LARGE: {
             TITLE: string;
-            LOADING: string;
             NO_COVERAGE_OPTION: string;
             WARNING_MESSAGE: string;
         },
