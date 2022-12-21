@@ -194,9 +194,15 @@ export enum ErrorCode {
     // The verification code is not valid.
     ME019 = "ME019",
     // The manual exercise could not be found.
-    ME020 = "ME021",
+    ME020 = "ME020",
     // The manual exercise could not be found.
-    ME021 = "ME022",
+    ME021 = "ME021",
+    // The manual exercise status is incorrect.
+    ME022 = "ME022",
+    // The manual exercise could not be found.
+    ME023 = "ME023",
+    // The manual exercise could not be found.
+    ME024 = "ME024",
 
     // An offer could not be saved.
     OF001 = "OF001",

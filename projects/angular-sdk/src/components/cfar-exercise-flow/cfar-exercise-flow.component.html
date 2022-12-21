@@ -23,8 +23,8 @@
                 <div fxFlex="100" class="p-16" fxLayout="column" *ngIf="isSendVerificationCodeStep()">
                     <h2 class="mb-32">{{ 'CFAR_EXERCISE_FLOW.CHECK_VERIFICATION_TITLE' | translate }}</h2>
                     <span class="text-justify mb-32">{{ 'CFAR_EXERCISE_FLOW.CHECK_VERIFICATION_TEXT' | translate }}</span>
-                    
-                    <div fxLayoutAlign="center center">
+
+                    <div fxLayoutAlign="center center" *ngIf="!isVerificationCodeAlreadySent">
                         <button mat-raised-button color="accent" ngClass.lt-sm="full-width" ngClass.gt-sm="mid-width" (click)="onSendVerificationCode()"
                             attr.aria-label="{{ 'CFAR_EXERCISE_FLOW.BUTTON.SEND_VERIFICATION_CODE' | translate }}">
                             {{ 'CFAR_EXERCISE_FLOW.BUTTON.SEND_VERIFICATION_CODE' | translate }}

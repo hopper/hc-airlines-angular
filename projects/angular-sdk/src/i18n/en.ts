@@ -331,7 +331,7 @@ export const locale: I18n = {
                 EX034: "The contract exercise was not found.",
                 EX035: "The contract exercise was not found.",
                 EX036: "The number of passengers in the itinerary does not match the number of passengers already concerned by an exercise.",
-                EX037: "The verification code has already been sent.",
+                EX037: "The verification code has already been sent. Please wait and retry in 30 minutes.",
                 EX038: "The contract exercise was not found.",
                 EX039: "Session already has an exercise.",
                 EX040: "Too Many Verification Attempts.",

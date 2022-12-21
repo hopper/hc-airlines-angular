@@ -331,7 +331,7 @@ export const locale: I18n = {
                 EX034: "No se encontró el ejercicio del contrato.",
                 EX035: "No se encontró el ejercicio del contrato.",
                 EX036: "El número de pasajeros en el itinerario no coincide con el número de pasajeros ya afectados por un ejercicio.",
-                EX037: "El código de verificación ya ha sido enviado.",
+                EX037: "El código de verificación ya ha sido enviado. Espere y vuelva a intentarlo en 30 minutos.",
                 EX038: "No se encontró el ejercicio del contrato.",
                 EX039: "La sesión ya tiene un ejercicio.",
                 EX040: "Demasiados intentos de verificación.",

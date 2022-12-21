@@ -7,7 +7,7 @@ import { Theme } from "src/app/shared/enums/theme.enum";
 export const environment = {
   production: false,
   defaultTheme: Theme.THEME_LIGHT_HOPPER,
-  version: 'v4.2.18'
+  version: 'v4.2.19'
 };
 
 /*

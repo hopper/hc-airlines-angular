@@ -1,3 +1,19 @@
+<a name="4.2.19"></a>
+
+# 4.2.19 (2022-12-21)
+General:
+- Updated and Added new errors labels
+
+Exercise flow:
+- RW-39702 defect
+- RW-39699 defect
+
+<a name="4.2.18"></a>
+
+# 4.2.18 (2022-12-13)
+Exercise flow:
+- Removed the spinner at the first offer-banner-large component loading's.
+
 <a name="4.2.17"></a>
 
 # 4.2.17 (2022-12-07)

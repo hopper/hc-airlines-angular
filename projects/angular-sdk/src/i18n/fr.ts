@@ -331,7 +331,7 @@ export const locale: I18n = {
                 EX034: "L'exercice du contrat est introuvable.",
                 EX035: "L'exercice du contrat est introuvable.",
                 EX036: "Le nombre de passagers de l’itinéraire ne correspond pas au nombre de passagers déjà concernés par un exercice.",
-                EX037: "Le code de vérification a déjà été envoyé.",
+                EX037: "Le code de vérification a déjà été envoyé. Veuillez patienter et réessayer dans 30 minutes.",
                 EX038: "L'exercice du contrat n'a pas été trouvé.",
                 EX039: "La session contient déjà un exercice.",
                 EX040: "Trop de tentatives de vérification.",
