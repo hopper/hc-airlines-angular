@@ -151,7 +151,7 @@ export class GlobalComponent implements OnChanges {
                             destinationAirport: "YUL",
                             departureDateTime: "2022-07-09T18:00",
                             arrivalDateTime: "2022-07-09T19:14",
-                            flightNumber: "AC894",
+                            flightNumber: "894",
                             validatingCarrierCode: "AC",
                             fareClass: "economy"
                         },
@@ -160,7 +160,7 @@ export class GlobalComponent implements OnChanges {
                             destinationAirport: "NCE",
                             departureDateTime: "2022-07-09T20:50",
                             arrivalDateTime: "2022-07-10T10:25",
-                            flightNumber: "AC878",
+                            flightNumber: "878",
                             validatingCarrierCode: "AC",
                             fareClass: "economy"
                         }
@@ -173,7 +173,7 @@ export class GlobalComponent implements OnChanges {
                             destinationAirport: "YUL",
                             departureDateTime: "2022-07-15T13:15",
                             arrivalDateTime: "2022-07-15T15:55",
-                            flightNumber: "AC879",
+                            flightNumber: "879",
                             validatingCarrierCode: "AC",
                             fareClass: "economy"
                         },
@@ -182,7 +182,7 @@ export class GlobalComponent implements OnChanges {
                             destinationAirport: "YYZ",
                             departureDateTime: "2022-07-15T17:30",
                             arrivalDateTime: "2022-07-15T18:50",
-                            flightNumber: "AC895",
+                            flightNumber: "895",
                             validatingCarrierCode: "AC",
                             fareClass: "economy"
                         }
@@ -245,7 +245,7 @@ export class GlobalComponent implements OnChanges {
                             destinationAirport: "YUL",
                             departureDateTime: "2022-07-09T18:00",
                             arrivalDateTime: "2022-07-09T19:14",
-                            flightNumber: "AC894",
+                            flightNumber: "894",
                             validatingCarrierCode: "AC",
                             fareClass: "economy"
                         },
@@ -254,7 +254,7 @@ export class GlobalComponent implements OnChanges {
                             destinationAirport: "NCE",
                             departureDateTime: "2022-07-09T20:50",
                             arrivalDateTime: "2022-07-10T10:25",
-                            flightNumber: "AC878",
+                            flightNumber: "878",
                             validatingCarrierCode: "AC",
                             fareClass: "economy"
                         }
@@ -267,7 +267,7 @@ export class GlobalComponent implements OnChanges {
                             destinationAirport: "YUL",
                             departureDateTime: "2022-07-15T13:15",
                             arrivalDateTime: "2022-07-15T15:55",
-                            flightNumber: "AC879",
+                            flightNumber: "879",
                             validatingCarrierCode: "AC",
                             fareClass: "economy"
                         },
@@ -276,7 +276,7 @@ export class GlobalComponent implements OnChanges {
                             destinationAirport: "YYZ",
                             departureDateTime: "2022-07-15T17:30",
                             arrivalDateTime: "2022-07-15T18:50",
-                            flightNumber: "AC895",
+                            flightNumber: "895",
                             validatingCarrierCode: "AC",
                             fareClass: "economy"
                         }
@@ -353,7 +353,7 @@ export class GlobalComponent implements OnChanges {
                   destinationAirport: "YUL",
                   departureDateTime: "2022-07-09T18:00",
                   arrivalDateTime: "2022-07-09T19:14",
-                  flightNumber: "AC894",
+                  flightNumber: "894",
                   validatingCarrierCode: "AC",
                   fareClass: "economy"
                 },
@@ -362,7 +362,7 @@ export class GlobalComponent implements OnChanges {
                   destinationAirport: "NCE",
                   departureDateTime: "2022-07-09T20:50",
                   arrivalDateTime: "2022-07-10T10:25",
-                  flightNumber: "AC878",
+                  flightNumber: "878",
                   validatingCarrierCode: "AC",
                   fareClass: "economy"
                 }
@@ -375,7 +375,7 @@ export class GlobalComponent implements OnChanges {
                   destinationAirport: "YUL",
                   departureDateTime: "2022-07-15T13:15",
                   arrivalDateTime: "2022-07-15T15:55",
-                  flightNumber: "AC879",
+                  flightNumber: "879",
                   validatingCarrierCode: "AC",
                   fareClass: "economy"
                 },
@@ -384,7 +384,7 @@ export class GlobalComponent implements OnChanges {
                   destinationAirport: "YYZ",
                   departureDateTime: "2022-07-15T17:30",
                   arrivalDateTime: "2022-07-15T18:50",
-                  flightNumber: "AC895",
+                  flightNumber: "895",
                   validatingCarrierCode: "AC",
                   fareClass: "economy"
                 }

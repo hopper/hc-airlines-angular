@@ -147,7 +147,7 @@
                                                     <div fxFlex fxLayoutAlign="center center">
                                                         {{ segment?.departureDateTime | date: ('COMMON.DATE_FORMAT.DATE' | translate):'':currentLang }}
                                                     </div>
-                                                    <div fxFlex fxLayoutAlign="center center">{{ segment?.flightNumber }}</div>
+                                                    <div fxFlex fxLayoutAlign="center center">{{ segment?.validatingCarrierCode + '' + segment?.flightNumber }}</div>
                                                     <div fxFlex fxLayoutAlign="center center">
                                                         {{ segment?.arrivalDateTime | date: ('COMMON.DATE_FORMAT.DATE' | translate):'':currentLang }}
                                                     </div>

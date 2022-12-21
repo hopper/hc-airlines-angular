@@ -1,3 +1,9 @@
+<a name="4.2.20"></a>
+
+# 4.2.20 (2022-12-21)
+Exercise flow:
+- RW-39650 defect: display the carrier code with the flight number
+
 <a name="4.2.19"></a>
 
 # 4.2.19 (2022-12-21)
