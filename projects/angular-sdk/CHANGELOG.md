@@ -4,6 +4,10 @@
 General:
 - Updated and Added new errors labels
 
+Exercise flow:
+- RW-39702 defect
+- RW-39699 defect
+
 <a name="4.2.18"></a>
 
 # 4.2.18 (2022-12-13)

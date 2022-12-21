@@ -33,6 +33,7 @@ export class CfarExerciseFlowComponent extends GlobalEventComponent implements O
   public isSidebar!: boolean;
   public isValidHyperwalletSubmit!: boolean;
   public isErrorHyperwallet!: boolean;
+  public isVerificationCodeAlreadySent!: boolean;
   public userEmail!: string;
   public cfarContractUserEmail!: string;
   public errorCode?: string;
@@ -386,8 +387,13 @@ export class CfarExerciseFlowComponent extends GlobalEventComponent implements O
           error: (error: any) => {
             const builtError = this._getHcAirlinesErrorResponse(error);
             this.errorCode = builtError.code;
-                    
+
             this.pushSdkError(error, "exercise");
+
+            // Code already sent
+            if (this.errorCode === "EX037") {
+              this.isVerificationCodeAlreadySent = true;
+            }
 
             this.isLoading = false;
 
@@ -517,6 +523,7 @@ export class CfarExerciseFlowComponent extends GlobalEventComponent implements O
 
   private _purgeErrorContext() {
     this.errorCode = undefined;
+    this.isVerificationCodeAlreadySent = false;
   }
 
   private _initForms(): void {
