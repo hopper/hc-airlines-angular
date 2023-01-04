@@ -1,3 +1,9 @@
+<a name="4.2.21"></a>
+
+# 4.2.21 (2023-01-04)
+General:
+- Application of final labels
+
 <a name="4.2.20"></a>
 
 # 4.2.20 (2022-12-21)

@@ -417,14 +417,14 @@ export const locale: I18n = {
             }
         },
         CFAR_OFFER_BANNER: {
-            TITLE: "Cancel your flight at any time, for any reason.",
+            TITLE: "Cancel your flight booking, for any reason.",
             LOADING: "Loading offers in progress...",
             BUTTON: {
                 SELECT: "Select"
             }
         },
         CFAR_OFFER_BANNER_LARGE: {
-            TITLE: "Cancel your flight at any time, for any reason.",
+            TITLE: "Cancel your flight booking, for any reason.",
             NO_COVERAGE_OPTION: "I do not want to purchase Cancel For Any Reason.",
             WARNING_MESSAGE: "Please choose or decline Cancel For Any Reason to continue"
         },
@@ -440,7 +440,7 @@ export const locale: I18n = {
             TERMS_WARNING: "If you don't add this, your ticket is non-refundable."
         },
         CFAR_EXERCISE_FLOW: {
-            TITLE: "Cancel your flight with Hopper",
+            TITLE: "Cancel your flight booking with Hopper",
             SUBTITLE: "Cancel For Any Reason",
             DEADLINE_SENTENCE_1: "You have purchased a Cancel For Any Reason policy with your booking which enables you to cancel your booking free of charge until ",
             DEADLINE_SENTENCE_2: "Don't forget that the cancellation is only possible for the entire trip and all the passengers in the booking. Based on your coverage amount, you will be refunded of a total of {{ amount }}.",
