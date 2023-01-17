@@ -39,8 +39,6 @@ export class HopperCfarService extends HopperProxyService {
     // Init services
     this._overrideConfiguration(basePath);
     
-    console.log(verificationCode);
-
     return this._customerService.postCustomerRefundAuthorizations(request, hCSessionId, verificationCode);
   }
 
@@ -48,16 +46,12 @@ export class HopperCfarService extends HopperProxyService {
     // Init services
     this._overrideConfiguration(basePath);
 
-    console.log(verificationCode);
-
     return this._customerService.postCustomerRefundRecipients(request, hCSessionId, verificationCode);
   }
 
   postInitiateRefund(basePath: string, hCSessionId: string, verificationCode: string, request: InitiateRefundRequest): Observable<InitiateRefundResponse> {
     // Init services
     this._overrideConfiguration(basePath);
-    
-    console.log(verificationCode);
     
     return this._customerService.postCustomerInitiateRefund(request, hCSessionId, verificationCode);
   }

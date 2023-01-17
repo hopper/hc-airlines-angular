@@ -84,7 +84,7 @@
                         <mat-vertical-stepper orientation="vertical" #stepper linear (selectionChange)="onScrollToTop()">
                             
                             <!-- STEP 1 -->
-                            <mat-step>
+                            <mat-step completed="false" editable="false">
                                 <ng-template matStepLabel>{{ 'CFAR_EXERCISE_FLOW.STEP.FIRST' | translate }}</ng-template>
             
                                 <div class="p-16" fxLayout="row wrap" fxLayoutAlign="start center">
@@ -256,7 +256,7 @@
                             <!-- / STEP 1 -->
             
                             <!-- STEP 2 -->
-                            <mat-step [stepControl]="step2Form" *ngIf="isHopperRefund">
+                            <mat-step completed="false" editable="false" *ngIf="isHopperRefund">
                                 <ng-template matStepLabel>{{ 'CFAR_EXERCISE_FLOW.STEP.SECOND' | translate }}</ng-template>
             
                                 <div class="p-16" ngClass.lt-md="px-16" fxLayout="row wrap" fxLayoutAlign="start center">
@@ -346,10 +346,6 @@
                                 </div>
             
                                 <div class="p-16" fxLayoutGap="16px" ngClass.lt-md="px-16" fxFlex="100" fxLayout="row" fxLayout.lt-sm="column" fxLayoutAlign="center center">
-                                    <button mat-raised-button ngClass.lt-sm="full-width" matStepperPrevious
-                                        attr.aria-label="{{ 'CFAR_EXERCISE_FLOW.BUTTON.BACK' | translate }}">
-                                        {{ 'CFAR_EXERCISE_FLOW.BUTTON.BACK' | translate }}
-                                    </button>
                                     <button mat-raised-button color="accent" (click)="onSubmitStep2()" ngClass.lt-sm="full-width" 
                                         [disabled]="step2Form.invalid" attr.aria-label="{{ 'CFAR_EXERCISE_FLOW.BUTTON.CONTINUE' | translate }}">
                                         {{ 'CFAR_EXERCISE_FLOW.BUTTON.CONTINUE' | translate }}
@@ -359,7 +355,7 @@
                             <!-- / STEP 2 -->
             
                             <!-- STEP 3 -->
-                            <mat-step [completed]="isValidHyperwalletSubmit" *ngIf="isHopperRefund">
+                            <mat-step completed="false" editable="false" *ngIf="isHopperRefund">
                                 <ng-template matStepLabel>{{ 'CFAR_EXERCISE_FLOW.STEP.THIRD' | translate }}</ng-template>
             
                                 <div class="p-16" ngClass.lt-md="px-16" fxLayout="row wrap" fxLayoutAlign="start center">
@@ -377,7 +373,7 @@
                                         </span>
                                     </div>
 
-                                    <div fxFlex="100" *ngIf="!isLoadingHyperwallet" fxLayout="row" fxLayoutAlign="start center">
+                                    <div fxFlex="100" *ngIf="!isLoadingHyperwallet && !isErrorHyperwallet" fxLayout="row" fxLayoutAlign="start center">
                                         <p innerHtml="{{ 'CFAR_EXERCISE_FLOW.BANK_ACCOUNT_INFO' | translate }}"></p>
                                     </div>
             
@@ -389,7 +385,7 @@
                             <!-- / STEP 3 -->
             
                             <!-- STEP 4 -->
-                            <mat-step *ngIf="isHopperRefund">
+                            <mat-step completed="false" editable="false" *ngIf="isHopperRefund">
                                 <ng-template matStepLabel>{{ 'CFAR_EXERCISE_FLOW.STEP.FOURTH' | translate }}</ng-template>
             
                                 <div class="p-16" ngClass.lt-md="px-16" fxLayout="row wrap" fxLayoutAlign="start center">
@@ -445,33 +441,6 @@
                                                         {{ segment?.arrivalDateTime | date: ('COMMON.DATE_FORMAT.DATE' | translate):'':currentLang }}
                                                     </div>
                                                 </div>
-            
-                                                <!--
-                                                <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px"
-                                                    class="mb-16">
-                                                    <mat-icon color="accent" class="rotate-90">flight</mat-icon>
-                                                    <span class="subtitle">
-                                                        {{ segment?.originAirport }}
-                                                        {{ 'CFAR_EXERCISE_FLOW.TO' | translate }}
-                                                        {{ segment?.destinationAirport }}
-                                                    </span>
-                                                </div>
-            
-                                                <div class="ml-32">
-                                                    <p>
-                                                        <b>{{ 'CFAR_EXERCISE_FLOW.DEPARTURE' | translate }}</b>
-                                                        {{ segment?.departureDateTime | date: ('COMMON.DATE_FORMAT_SHORT' | translate):'':currentLang }}
-                                                    </p>
-                                                    <p>
-                                                        <b>{{ 'CFAR_EXERCISE_FLOW.ARRIVAL' | translate }}</b>
-                                                        {{ segment?.arrivalDateTime | date: ('COMMON.DATE_FORMAT_SHORT' | translate):'':currentLang }}
-                                                    </p>
-                                                    <p>
-                                                        <b>{{ 'CFAR_EXERCISE_FLOW.FLIGHT' | translate }}</b>
-                                                        {{ segment?.flightNumber }}
-                                                    </p>
-                                                </div>
-                                                -->
             
                                             </div>
             

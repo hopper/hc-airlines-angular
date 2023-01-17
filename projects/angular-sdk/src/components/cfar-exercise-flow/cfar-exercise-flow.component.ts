@@ -9,7 +9,6 @@ import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatStepper } from '@angular/material/stepper';
-import { HttpClient } from '@angular/common/http';
 import { DatePipe } from '@angular/common';
 import { ExerciseActionStep } from '../../enums/exercise-action-step.enum';
 import { SendCfarContractExerciceVerificationCodeResponse } from '../../apis/hopper-cloud-airline/v1';
@@ -31,7 +30,6 @@ export class CfarExerciseFlowComponent extends GlobalEventComponent implements O
   public isLoading!: boolean;
   public isLoadingHyperwallet!: boolean;
   public isSidebar!: boolean;
-  public isValidHyperwalletSubmit!: boolean;
   public isErrorHyperwallet!: boolean;
   public isVerificationCodeAlreadySent!: boolean;
   public userEmail!: string;
@@ -69,7 +67,6 @@ export class CfarExerciseFlowComponent extends GlobalEventComponent implements O
     private _hopperCfarService: HopperCfarService,
     private _hopperEventService: HopperEventsService,
     private _formBuilder: FormBuilder,
-    private _http: HttpClient,
     private _datePipe: DatePipe
   ) {
     super(_adapter, _translateService, _hopperEventService);
@@ -102,10 +99,6 @@ export class CfarExerciseFlowComponent extends GlobalEventComponent implements O
     this.initCfarExerciseEventParameters(this.hCSessionId, this.exerciseId);
     this.createCfarExercisePortalDisplayEvent();
   }
-
-  // -----------------------------------------------
-  // Protected Methods
-  // -----------------------------------------------
 
   // -----------------------------------------------
   // Publics Methods
@@ -150,7 +143,7 @@ export class CfarExerciseFlowComponent extends GlobalEventComponent implements O
   public onSubmitStep1(): void {
     if (this.isHopperRefund) {
       // Go to the next step
-      this.stepper.next();
+      this._validCurrentStep();
     } else {
       // Send a notification to the client
       this.airlineRefundSelected.emit("AIRLINE_REFUND");
@@ -160,19 +153,22 @@ export class CfarExerciseFlowComponent extends GlobalEventComponent implements O
   public onSubmitStep2(): void {
     this._purgeErrorContext();
 
-    // Go to the next step
-    this.stepper.next();
-
     this.isErrorHyperwallet = false;
     this.isLoadingHyperwallet = true;
+    // this.isValidStep2 = false;
 
     if (this.isFakeBackend) {
-      this.isValidHyperwalletSubmit = true;
+      // this.isValidHyperwalletSubmit = true;
+
+      // Go to the next step
+      this._validCurrentStep();
 
       setTimeout(() => {
         this.isLoadingHyperwallet = true;
         this.userEmail = "sample@hopper.com";
-        this.stepper.next();
+
+        // Go to the next step
+        this._validCurrentStep();
 
         // The flow is completed
         this.flowCompleted.emit(this._fakeVerificationTokenId);
@@ -186,6 +182,13 @@ export class CfarExerciseFlowComponent extends GlobalEventComponent implements O
             // Events management
             this.createCfarExerciseCustomerDataCompleteEvent(ExerciseStepResult.Success)
 
+            // this.isValidStep2 = true;
+
+            setTimeout(() => {
+              // Go to the next step
+              this._validCurrentStep();
+            }, 0);
+            
             const userId = refundRecipient.id;
             const url = this.hyperwalletUrl + userId + "/" + this.currentLang + ".v2_4_5.min.js";
             const mainScript = document.createElement('script');
@@ -253,7 +256,7 @@ export class CfarExerciseFlowComponent extends GlobalEventComponent implements O
                     this.errorCode = builtError.code;
                     
                     this.pushSdkError(error, "exercise");
-                    
+
                     this.isLoadingHyperwallet = false;
                     this.isErrorHyperwallet = true;
               
@@ -291,7 +294,7 @@ export class CfarExerciseFlowComponent extends GlobalEventComponent implements O
   public checkHyperwalletCallback(event: CustomEvent): void {
     this._purgeErrorContext();
 
-    this.isValidHyperwalletSubmit = true;
+    // this.isValidHyperwalletSubmit = true;
 
     const request: InitiateRefundRequest = {
       transferMethodId: event.detail.trmObject.token
@@ -307,7 +310,9 @@ export class CfarExerciseFlowComponent extends GlobalEventComponent implements O
 
           this.isLoadingHyperwallet = false;
           this.userEmail = event.detail.trmObject.email;
-          this.stepper.next();
+          
+          // Go to the next step
+          this._validCurrentStep();
 
           // Events management
           if (redirectionToken !== null && redirectionToken.length > 0) {
@@ -335,10 +340,6 @@ export class CfarExerciseFlowComponent extends GlobalEventComponent implements O
         }
       });
   }
-
-  // -----------------------------------------------
-  // Navigation
-  // -----------------------------------------------
 
   public isSendVerificationCodeStep(): Boolean {
     return this._navigationStep === ExerciseActionStep.SEND_VERIFICATION_STEP;
@@ -565,5 +566,17 @@ export class CfarExerciseFlowComponent extends GlobalEventComponent implements O
     return {
       verificationCode: this.checkVerificationCodeForm.get('verificationCode')?.value
     };
+  }
+
+  private _validCurrentStep(): void {
+    if (this.stepper) {
+      if (this.stepper.selected) {
+        // complete the current step
+        this.stepper.selected.completed = true;
+      }
+
+      // move to next step
+      this.stepper.next();
+    }
   }
 }

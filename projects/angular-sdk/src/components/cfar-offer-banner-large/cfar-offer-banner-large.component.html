@@ -46,7 +46,7 @@
                         fxLayoutAlign.lt-md="center start">
 
                         <div fxFlex class="offer-choice" fxLayout="row wrap" fxLayoutAlign="start start" *ngFor="let offer of cfarOffers; let i = index;">
-                            <mat-radio-button fxFlex="100" value="{{ i }}" class="important-text bold"
+                            <mat-radio-button color="accent" fxFlex="100" value="{{ i }}" class="important-text bold"
                                 attr.aria-label="
                                 {{ 'COMMON.COVERAGE_PERCENTAGE_ACCESSIBILITY' | translate: 
                                     { 
@@ -78,7 +78,7 @@
 
                     </div>
                     
-                    <mat-radio-button *ngIf="hasNoCoverageOption" class="default-choice mt-16 p-16" fxFlex="100" value="-1">
+                    <mat-radio-button color="accent" *ngIf="hasNoCoverageOption" class="default-choice mt-16 p-16" fxFlex="100" value="-1">
                         {{ 'CFAR_OFFER_BANNER_LARGE.NO_COVERAGE_OPTION' | translate }}
                     </mat-radio-button>
                 </mat-radio-group>

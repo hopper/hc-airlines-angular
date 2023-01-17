@@ -1,3 +1,12 @@
+<a name="4.2.22"></a>
+
+# 4.2.22 (2023-01-XX)
+Offer banner large:
+- Fixed the display of the checkbox (Defect 40182)
+
+Exercise flow:
+- Improved the flow
+
 <a name="4.2.21"></a>
 
 # 4.2.21 (2023-01-04)
