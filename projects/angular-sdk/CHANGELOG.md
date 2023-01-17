@@ -1,6 +1,6 @@
 <a name="4.2.22"></a>
 
-# 4.2.22 (2023-01-XX)
+# 4.2.22 (2023-01-17)
 Offer banner large:
 - Fixed the display of the checkbox (Defect 40182)
 
