@@ -429,7 +429,7 @@ export const locale: I18n = {
             WARNING_MESSAGE: "请选择或拒绝无理由取消服务，以便继续"
         },
         CFAR_OFFER_DIALOG: {
-            TITLE: "出于任何原因取消",
+            TITLE: "无理由取消您的航班预订。",
             VIEW_DETAILS: "查看详情",
             BUTTON: {
                 CANCEL: "继续无覆盖",

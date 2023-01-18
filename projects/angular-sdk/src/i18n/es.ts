@@ -429,7 +429,7 @@ export const locale: I18n = {
             WARNING_MESSAGE: "Elija o rechace Cancelar por cualquier motivo."
         },
         CFAR_OFFER_DIALOG: {
-            TITLE: "Cancelar por cualquier motivo",
+            TITLE: "Cancele su vuelo en cualquier momento, por cualquier motivo.",
             VIEW_DETAILS: "Ver detalles",
             BUTTON: {
                 CANCEL: "Continuar sin cobertura",

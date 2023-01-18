@@ -429,7 +429,7 @@ export const locale: I18n = {
             WARNING_MESSAGE: "Please choose or decline Cancel For Any Reason to continue"
         },
         CFAR_OFFER_DIALOG: {
-            TITLE: "Cancel For Any Reason",
+            TITLE: "Cancel your flight booking, for any reason.",
             VIEW_DETAILS: "View details",
             BUTTON: {
                 CANCEL: "Continue Without Coverage",

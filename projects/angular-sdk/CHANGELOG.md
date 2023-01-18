@@ -1,3 +1,9 @@
+<a name="4.2.23"></a>
+
+# 4.2.23 (2023-01-18)
+Offer dialog:
+- Updated the title of the dialog (label)
+
 <a name="4.2.22"></a>
 
 # 4.2.22 (2023-01-17)
