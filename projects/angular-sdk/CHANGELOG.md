@@ -3,6 +3,7 @@
 # 4.2.24 (2023-01-24)
 General: 
 - Improvements on mobile
+- Fixed the date format in French
 
 Offer Dialog:
 - Removal of the warning sentence linked to the T&Cs
