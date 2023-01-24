@@ -1,3 +1,9 @@
+<a name="4.2.25"></a>
+
+# 4.2.25 (2023-01-24)
+General:
+- Fixed the date format in French
+
 <a name="4.2.24"></a>
 
 # 4.2.24 (2023-01-24)

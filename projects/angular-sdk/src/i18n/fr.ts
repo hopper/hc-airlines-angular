@@ -7,7 +7,7 @@ export const locale: I18n = {
             DATE_FORMAT: {
                 HOUR: 'hh:mm a',
                 DATE: 'ddMMM',
-                HOUR_AND_DATE: 'EEEE le d MMMM y à H:mm z'
+                HOUR_AND_DATE: 'EEEE d MMMM y à H:mm z'
             },
             COUNTRY: {
                 AF: "Afghanistan",
