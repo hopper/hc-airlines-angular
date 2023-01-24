@@ -436,7 +436,6 @@ export interface I18n {
             },
             NO_OFFERS: string;
             LOADING: string;
-            TERMS_WARNING: string;
         },
         CFAR_EXERCISE_FLOW: {
             TITLE: string;

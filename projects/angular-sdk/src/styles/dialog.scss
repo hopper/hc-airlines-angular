@@ -24,6 +24,16 @@
             padding: 0px !important;
             border-radius: 0px;
 
+            .mat-dialog-content {
+                // Full height - header - footer
+                max-height: calc(100% - 212px);
+
+                @include media-breakpoint('lt-sm') {
+                    // Full height - header - mobile footer
+                    max-height: calc(100% - 264px);
+                }
+            }
+
             .mat-dialog-content,
             .mat-dialog-actions {
                 padding: 0px !important;

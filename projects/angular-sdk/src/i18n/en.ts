@@ -7,7 +7,7 @@ export const locale: I18n = {
             DATE_FORMAT: {
                 HOUR: 'hh:mm a',
                 DATE: 'ddMMM',
-                HOUR_AND_DATE: 'EEEE, MMMM d, y, h:mm:ss a z'
+                HOUR_AND_DATE: 'EEEE, MMMM d, y, h:mm a z'
             },
             COUNTRY: {
                 AF: "Afghanistan",
@@ -436,8 +436,7 @@ export const locale: I18n = {
                 SUBMIT: "Continue With {{ coverage }}% Coverage"
             },
             NO_OFFERS: "No offer available",
-            LOADING: "Loading offers in progress...",
-            TERMS_WARNING: "If you don't add this, your ticket is non-refundable."
+            LOADING: "Loading offers in progress..."
         },
         CFAR_EXERCISE_FLOW: {
             TITLE: "Cancel your flight booking with Hopper",

@@ -62,6 +62,10 @@
                 color: green;
             }
 
+            .text-justify {
+                text-align: justify;
+            }
+
             .error-message {
                 background: map-get($warn-palette, 50);
                 border: 1px solid map-get($warn-palette, default);
@@ -76,9 +80,10 @@
             mat-card {
                 color: map-get($fg-palette, default);
                 border-radius: 0px;
+                cursor: pointer;
                 
                 &:hover {
-                    @include mat.elevation(4);
+                    @include mat.elevation(6);
                 }
 
                 &.active {

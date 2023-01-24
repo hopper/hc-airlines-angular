@@ -194,9 +194,10 @@ export class GlobalComponent implements OnChanges {
                 },
                 offerDescription: {
                     "en": [
-                        "Cancel any time up to <b> 24 hours </b> before departure - truly for any reason",
-                        "Get a <b>cash</b> refund of your flight base fare and taxes, excluding additional services (paid seats, bags...)",
-                        "Cancel the trip yourself via our self serve option"
+                        "Cancel your booking up to <b> 24 hours </b> before departure, no reason required",
+                        "Receive a cash refund from Hopper of your booking air transportation charges and taxes, fees and charges excluding any additional services",
+                        "Cancelling is easy via the My Bookings page",
+                        "Can only be selected for all passengers on your booking"
                     ],
                     "fr": [
                         "Annulez à tout moment jusqu'à <b> 24 heures </b> avant le départ - vraiment pour n'importe quelle raison",
@@ -288,9 +289,10 @@ export class GlobalComponent implements OnChanges {
                 },
                 offerDescription: {
                     "en": [
-                        "Cancel any time up to <b> 24 hours </b> before departure - truly for any reason",
-                        "Get a <b>cash</b> refund of your flight base fare and taxes, excluding additional services (paid seats, bags...)",
-                        "Cancel the trip yourself via our self serve option"
+                        "Cancel your booking up to <b> 24 hours </b> before departure, no reason required",
+                        "Receive a cash refund from Hopper of your booking air transportation charges and taxes, fees and charges excluding any additional services",
+                        "Cancelling is easy via the My Bookings page",
+                        "Can only be selected for all passengers on your booking"
                     ],
                     "fr": [
                         "Annulez à tout moment jusqu'à <b> 24 heures </b> avant le départ - vraiment pour n'importe quelle raison",
@@ -417,7 +419,6 @@ export class GlobalComponent implements OnChanges {
     }
 
     public pushSdkError(error: any, errorEndPoint: string) {
-        console.error(error);
         const builtError = this._getHcAirlinesErrorResponse(error);
         if (builtError !== null) {
             const errorCode = builtError.code;

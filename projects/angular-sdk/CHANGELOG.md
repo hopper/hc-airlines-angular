@@ -1,3 +1,12 @@
+<a name="4.2.24"></a>
+
+# 4.2.24 (2023-01-24)
+General: 
+- Improvements on mobile
+
+Offer Dialog:
+- Removal of the warning sentence linked to the T&Cs
+
 <a name="4.2.23"></a>
 
 # 4.2.23 (2023-01-18)

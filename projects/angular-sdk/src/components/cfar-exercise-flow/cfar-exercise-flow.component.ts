@@ -164,7 +164,7 @@ export class CfarExerciseFlowComponent extends GlobalEventComponent implements O
       this._validCurrentStep();
 
       setTimeout(() => {
-        this.isLoadingHyperwallet = true;
+        this.isLoadingHyperwallet = false;
         this.userEmail = "sample@hopper.com";
 
         // Go to the next step

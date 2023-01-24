@@ -7,7 +7,7 @@ export const locale: I18n = {
             DATE_FORMAT: {
                 HOUR: 'hh:mm a',
                 DATE: 'ddMMM',
-                HOUR_AND_DATE: 'EEEE, MMMM d, y, h:mm:ss a z'
+                HOUR_AND_DATE: 'EEEE, MMMM d, y, h:mm a z'
             },
             COUNTRY: {
                 AF: "Afganistán",
@@ -436,8 +436,7 @@ export const locale: I18n = {
                 SUBMIT: "Continuar con {{ coverage }}% de cobertura"
             },
             NO_OFFERS: "No hay ofertas disponibles",
-            LOADING: "Cargando ofertas en curso...",
-            TERMS_WARNING: "Si no agrega esto, su boleto no es reembolsable"
+            LOADING: "Cargando ofertas en curso..."
         },
         CFAR_EXERCISE_FLOW: {
             TITLE: "Cancelar vuelo",

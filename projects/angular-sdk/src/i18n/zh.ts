@@ -7,7 +7,7 @@ export const locale: I18n = {
             DATE_FORMAT: {
                 HOUR: 'hh:mm a',
                 DATE: 'ddMMM',
-                HOUR_AND_DATE: 'EEEE, MMMM d, y, h:mm:ss a z'
+                HOUR_AND_DATE: 'EEEE, MMMM d, y, h:mm a z'
             },
             COUNTRY: {
                 AF: "阿富汗",
@@ -436,8 +436,7 @@ export const locale: I18n = {
                 SUBMIT: "添加{{ coverage }}的保障，并继续下一步"
             },
             NO_OFFERS: "没有可用的优惠",
-            LOADING: "正在加载优惠...",
-            TERMS_WARNING: "如果您不添加此服务，您的机票将无法退款。"
+            LOADING: "正在加载优惠..."
         },
         CFAR_EXERCISE_FLOW: {
             TITLE: "取消您在Hopper上的航班预订",
