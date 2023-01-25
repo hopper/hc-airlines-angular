@@ -195,24 +195,27 @@ export class GlobalComponent implements OnChanges {
                 offerDescription: {
                     "en": [
                         "Cancel your booking up to <b> 24 hours </b> before departure, no reason required",
-                        "Receive a cash refund from Hopper of your booking air transportation charges and taxes, fees and charges excluding any additional services",
-                        "Cancelling is easy via the My Bookings page",
-                        "Can only be selected for all passengers on your booking"
+                        "Receive a <b>cash</b> refund of your flight cost (air transportation charges, taxes, fees and charges, excluding any additional services)",
+                        "Cancelling is easy via the My Bookings page, refund is provided by Hopper",
+                        "Offer is only available at time of booking and can only be purchased for all passengers"
                     ],
                     "fr": [
-                        "Annulez à tout moment jusqu'à <b> 24 heures </b> avant le départ - vraiment pour n'importe quelle raison",
-                        "Obtenez un remboursement <b>cash</b> de votre tarif de base de vol et des taxes, hors services supplémentaires (sièges payants, bagages...)",
-                        "Annulez vous-même le voyage via notre option libre-service"
+                        "Annulez votre réservation jusqu'à <b>24 heures</b> avant le départ, sans motif",
+                        "Recevez un remboursement <b>en espèces</b> de vos frais de vol (frais de transport aérien, taxes, frais et charges, à l'exclusion de tout service supplémentaire)",
+                        "L'annulation est facile via la page Mes réservations, le remboursement est assuré par Hopper",
+                        "L'offre n'est disponible qu'au moment de la réservation et ne peut être achetée que pour tous les passagers"
                     ],
                     "es": [
-                        "Cancelar en cualquier momento hasta <b> 24 horas </b> antes de la salida, realmente por cualquier motivo",
-                        "Obtenga un reembolso <b>en efectivo</b> de la tarifa base de su vuelo e impuestos, excluyendo servicios adicionales (asientos pagados, equipaje...)",
-                        "Cancele el viaje usted mismo a través de nuestra opción de autoservicio"
+                        "Cancele su reserva hasta <b>24 horas</b> antes de la salida, sin necesidad de motivo",
+                        "Reciba un reembolso en <b>efectivo</b> del costo de su vuelo (cargos de transporte aéreo, impuestos, tarifas y cargos, excluyendo cualquier servicio adicional)",
+                        "Cancelar es fácil a través de la página Mis reservas, Hopper proporciona el reembolso",
+                        "La oferta solo está disponible al momento de la reserva y solo se puede comprar para todos los pasajeros"
                     ],
                     "zh": [
-                        "在出发前 <b> 24 小时 </b> 内随时取消 - 真正出于任何原因",
-                        "获得航班基本票价和税费的<b>现金</b>退款，不包括附加服务（付费座位、行李……）",
-                        "通过我们的自助服务选项自行取消旅行"
+                        "在出发前 <b> 24 小时 </b> 取消您的预订，无需任何理由",
+                        "获得航班费用的<b>现金</b>退款（航空运输费、税费、费用和收费，不包括任何附加服务）",
+                        "通过我的预订页面取消很容易, Hopper 提供退款",
+                        "优惠仅在预订时可用，并且只能为所有乘客购买",
                     ]
                 },
                 termsConditionsUrl: "https://www.google.com"
@@ -290,24 +293,27 @@ export class GlobalComponent implements OnChanges {
                 offerDescription: {
                     "en": [
                         "Cancel your booking up to <b> 24 hours </b> before departure, no reason required",
-                        "Receive a cash refund from Hopper of your booking air transportation charges and taxes, fees and charges excluding any additional services",
-                        "Cancelling is easy via the My Bookings page",
-                        "Can only be selected for all passengers on your booking"
+                        "Receive a <b>cash</b> refund of your flight cost (air transportation charges, taxes, fees and charges, excluding any additional services)",
+                        "Cancelling is easy via the My Bookings page, refund is provided by Hopper",
+                        "Offer is only available at time of booking and can only be purchased for all passengers"
                     ],
                     "fr": [
-                        "Annulez à tout moment jusqu'à <b> 24 heures </b> avant le départ - vraiment pour n'importe quelle raison",
-                        "Obtenez un remboursement <b>cash</b> de votre tarif de base de vol et des taxes, hors services supplémentaires (sièges payants, bagages...)",
-                        "Annulez vous-même le voyage via notre option libre-service"
+                        "Annulez votre réservation jusqu'à <b>24 heures</b> avant le départ, sans motif",
+                        "Recevez un remboursement <b>en espèces</b> de vos frais de vol (frais de transport aérien, taxes, frais et charges, à l'exclusion de tout service supplémentaire)",
+                        "L'annulation est facile via la page Mes réservations, le remboursement est assuré par Hopper",
+                        "L'offre n'est disponible qu'au moment de la réservation et ne peut être achetée que pour tous les passagers"
                     ],
                     "es": [
-                        "Cancelar en cualquier momento hasta <b> 24 horas </b> antes de la salida, realmente por cualquier motivo",
-                        "Obtenga un reembolso <b>en efectivo</b> de la tarifa base de su vuelo e impuestos, excluyendo servicios adicionales (asientos pagados, equipaje...)",
-                        "Cancele el viaje usted mismo a través de nuestra opción de autoservicio"
+                        "Cancele su reserva hasta <b>24 horas</b> antes de la salida, sin necesidad de motivo",
+                        "Reciba un reembolso en <b>efectivo</b> del costo de su vuelo (cargos de transporte aéreo, impuestos, tarifas y cargos, excluyendo cualquier servicio adicional)",
+                        "Cancelar es fácil a través de la página Mis reservas, Hopper proporciona el reembolso",
+                        "La oferta solo está disponible al momento de la reserva y solo se puede comprar para todos los pasajeros"
                     ],
                     "zh": [
-                        "在出发前 <b> 24 小时 </b> 内随时取消 - 真正出于任何原因",
-                        "获得航班基本票价和税费的<b>现金</b>退款，不包括附加服务（付费座位、行李……）",
-                        "通过我们的自助服务选项自行取消旅行"
+                        "在出发前 <b> 24 小时 </b> 取消您的预订，无需任何理由",
+                        "获得航班费用的<b>现金</b>退款（航空运输费、税费、费用和收费，不包括任何附加服务）",
+                        "通过我的预订页面取消很容易, Hopper 提供退款",
+                        "优惠仅在预订时可用，并且只能为所有乘客购买",
                     ]
                 },
                 termsConditionsUrl: "https://www.google.com"
