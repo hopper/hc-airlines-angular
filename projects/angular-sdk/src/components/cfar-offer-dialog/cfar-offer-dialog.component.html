@@ -29,7 +29,7 @@
                 </div>
 
                 <div fxFlex="100" class="py-8" fxLayout="row" fxLayout.lt-sm="column" fxLayoutAlign="start center" fxLayoutGap="8px" (click)="onOpenTermsAndConditions()">
-                    <a href="{{selectedCfarOffer.termsConditionsUrl}}" attr.aria-describedby="{{ 'COMMON.TERMS_LINK_TEXT' | translate }}" 
+                    <a href="{{getTCsUrl(selectedCfarOffer)}}" attr.aria-describedby="{{ 'COMMON.TERMS_LINK_TEXT' | translate }}" 
                         target="_blank">
                         {{ 'COMMON.TERMS_LINK_TEXT' | translate }}
                     </a>

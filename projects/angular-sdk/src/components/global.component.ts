@@ -218,7 +218,10 @@ export class GlobalComponent implements OnChanges {
                         "优惠仅在预订时可用，并且只能为所有乘客购买",
                     ]
                 },
-                termsConditionsUrl: "https://www.google.com"
+                termsConditionsUrl: {
+                    "en": "https://hopper.com/",
+                    "fr": "https://hopper.com/fr"
+                }
             },
             {
                 id: "1ecf859e-8785-625f-8eda-198d1ce0d6c5",
@@ -316,7 +319,10 @@ export class GlobalComponent implements OnChanges {
                         "优惠仅在预订时可用，并且只能为所有乘客购买",
                     ]
                 },
-                termsConditionsUrl: "https://www.google.com"
+                termsConditionsUrl: {
+                    "en": "https://hopper.com/",
+                    "fr": "https://hopper.com/fr"
+                }
             }
         ];
     }
@@ -422,6 +428,15 @@ export class GlobalComponent implements OnChanges {
 
     public getOfferDescription(offer: CfarOfferCustomer) {
         return offer.offerDescription[this.currentLang];
+    }
+
+    public getTCsUrl(offer: CfarOfferCustomer): string {
+        if (offer) {
+            return offer.termsConditionsUrl[this.currentLang] ? 
+                offer.termsConditionsUrl[this.currentLang] : offer.termsConditionsUrl['en'];
+        }
+
+        return '';
     }
 
     public pushSdkError(error: any, errorEndPoint: string) {

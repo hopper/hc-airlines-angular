@@ -10,12 +10,8 @@
  * Do not edit the class manually.
  */
 
-export type CfarStatus = 'created' | 'confirmed' | 'failed' | 'charged_back' | 'voided';
+export interface MapString extends Record<string, string> { 
+  [key: string]: string;
 
-export const CfarStatus = {
-    Created: 'created' as CfarStatus,
-    Confirmed: 'confirmed' as CfarStatus,
-    Failed: 'failed' as CfarStatus,
-    ChargedBack: 'charged_back' as CfarStatus,
-    Voided: 'voided' as CfarStatus
-};
+
+}

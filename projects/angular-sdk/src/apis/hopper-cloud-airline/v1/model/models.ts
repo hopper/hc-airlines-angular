@@ -37,6 +37,7 @@ export * from './getSessionCustomerResponse';
 export * from './initiateRefundRequest';
 export * from './initiateRefundResponse';
 export * from './mapListString';
+export * from './mapString';
 export * from './passengerCount';
 export * from './passengerPricing';
 export * from './passengerType';

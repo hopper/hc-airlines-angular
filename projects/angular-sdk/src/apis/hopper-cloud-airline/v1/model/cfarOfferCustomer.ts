@@ -12,6 +12,7 @@
 import { CfarItinerary } from './cfarItinerary';
 import { CfarTax } from './cfarTax';
 import { MapListString } from './mapListString';
+import { MapString } from './mapString';
 import { RequestType } from './requestType';
 
 /**
@@ -60,6 +61,6 @@ export interface CfarOfferCustomer {
      */
     createdDateTime: Date;
     itinerary: CfarItinerary;
-    termsConditionsUrl?: string;
+    termsConditionsUrl: MapString;
     offerDescription: MapListString;
 }
