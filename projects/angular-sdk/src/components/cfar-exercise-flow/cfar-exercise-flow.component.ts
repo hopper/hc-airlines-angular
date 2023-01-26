@@ -190,8 +190,8 @@ export class CfarExerciseFlowComponent extends GlobalEventComponent implements O
             }, 0);
             
             const userId = refundRecipient.id;
-            // const url = this.hyperwalletUrl + userId + "/" + this.currentLang + ".v2_4_5.min.js";
-            const url = this.hyperwalletUrl + userId + "/" + this.currentLang + ".min.js";
+            const url = this.hyperwalletUrl + userId + "/" + this.currentLang + ".v2_4_5.min.js";
+            // const url = this.hyperwalletUrl + userId + "/" + this.currentLang + ".min.js";
             const mainScript = document.createElement('script');
   
             mainScript.type = 'text/javascript';
