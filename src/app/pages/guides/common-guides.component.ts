@@ -100,8 +100,10 @@ export abstract class CommonGuidesComponent implements OnInit, OnDestroy {
       }
     ]
   };
-  public hyperwalletUrl: string = "https://uat.hyperwallet.com/rest/widgets/transfer-methods/";
+  // public hyperwalletUrl: string = "https://uat.hyperwallet.com/rest/widgets/transfer-methods/";
   // public hyperwalletUrl: string = "https://hyperwallet.com/rest/widgets/transfer-methods/";
+  public hyperwalletUrl: string = "https://uat-api.paylution.com/rest/widgets/transfer-methods/";
+  // public hyperwalletUrl: string = "https://api.paylution.com/rest/widgets/transfer-methods/";
   public contactFormUrl: string = "https://www.google.com";
   public hasNoCoverageOption = false;
   public hasWarningCoverageMessage = true;
@@ -115,7 +117,7 @@ export abstract class CommonGuidesComponent implements OnInit, OnDestroy {
     this._unsubcriber = new Subject<any>();
     
     // Active fake data in components
-    this.isFakeBackend = true;
+    this.isFakeBackend = false;
   }
   
   // -----------------------------------------------

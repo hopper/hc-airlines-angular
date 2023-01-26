@@ -1,3 +1,9 @@
+<a name="4.2.27"></a>
+
+# 4.2.27 (2023-01-26)
+General:
+- Updated the hyperwallet url
+
 <a name="4.2.26"></a>
 
 # 4.2.26 (2023-01-25)
