@@ -200,10 +200,10 @@ export class GlobalComponent implements OnChanges {
                         "Offer is only available at time of booking and can only be purchased for all passengers"
                     ],
                     "fr": [
-                        "Annulez votre réservation jusqu'à <b>24 heures</b> avant le départ, sans motif",
-                        "Recevez un remboursement <b>en espèces</b> de vos frais de vol (frais de transport aérien, taxes, frais et charges, à l'exclusion de tout service supplémentaire)",
-                        "L'annulation est facile via la page Mes réservations, le remboursement est assuré par Hopper",
-                        "L'offre n'est disponible qu'au moment de la réservation et ne peut être achetée que pour tous les passagers"
+                        "Annulez votre réservation jusqu'à <b>24 heures</b> avant le départ, aucun motif requis",
+                        "Recevez un remboursement <b>en argent comptant</b> du coût de votre vol (frais de transport aérien, taxes, frais et droits, à l'exclusion de tout service additionnel)",
+                        "Annulez en toute simplicité sur la page Mes réservations, le remboursement est effectué par Hopper",
+                        "L'offre est uniquement disponible au moment de la réservation et ne peut être achetée que pour tous les passagers"
                     ],
                     "es": [
                         "Cancele su reserva hasta <b>24 horas</b> antes de la salida, sin necesidad de motivo",
@@ -301,10 +301,10 @@ export class GlobalComponent implements OnChanges {
                         "Offer is only available at time of booking and can only be purchased for all passengers"
                     ],
                     "fr": [
-                        "Annulez votre réservation jusqu'à <b>24 heures</b> avant le départ, sans motif",
-                        "Recevez un remboursement <b>en espèces</b> de vos frais de vol (frais de transport aérien, taxes, frais et charges, à l'exclusion de tout service supplémentaire)",
-                        "L'annulation est facile via la page Mes réservations, le remboursement est assuré par Hopper",
-                        "L'offre n'est disponible qu'au moment de la réservation et ne peut être achetée que pour tous les passagers"
+                        "Annulez votre réservation jusqu'à <b>24 heures</b> avant le départ, aucun motif requis",
+                        "Recevez un remboursement <b>en argent comptant</b> du coût de votre vol (frais de transport aérien, taxes, frais et droits, à l'exclusion de tout service additionnel)",
+                        "Annulez en toute simplicité sur la page Mes réservations, le remboursement est effectué par Hopper",
+                        "L'offre est uniquement disponible au moment de la réservation et ne peut être achetée que pour tous les passagers"
                     ],
                     "es": [
                         "Cancele su reserva hasta <b>24 horas</b> antes de la salida, sin necesidad de motivo",
@@ -313,10 +313,10 @@ export class GlobalComponent implements OnChanges {
                         "La oferta solo está disponible al momento de la reserva y solo se puede comprar para todos los pasajeros"
                     ],
                     "zh": [
-                        "在出发前 <b> 24 小时 </b> 取消您的预订，无需任何理由",
-                        "获得航班费用的<b>现金</b>退款（航空运输费、税费、费用和收费，不包括任何附加服务）",
-                        "通过我的预订页面取消很容易, Hopper 提供退款",
-                        "优惠仅在预订时可用，并且只能为所有乘客购买",
+                        "最迟可在出发前24小时无理由取消订单",
+                        "获得航班费用的现金退款（航空运输费用、税费和其他费用，额外服务费除外）",
+                        "您可以通过“我的订单 (My Bookings) 页面轻松取消预订, 退款由Hopper提供",
+                        "优惠仅在预订时有效，且必须为所有乘客购买"
                     ]
                 },
                 termsConditionsUrl: {
