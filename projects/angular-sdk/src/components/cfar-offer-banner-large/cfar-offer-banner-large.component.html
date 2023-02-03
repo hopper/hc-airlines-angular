@@ -1,4 +1,4 @@
-<div class="px-32" ngClass.lt-md="px-16" fxLayout="row wrap" fxLayoutAlign="center center">
+<div ngClass.gt-sm="px-32" ngClass.lt-md="px-16" ngClass.lt-sm="px-8" fxLayout="row wrap" fxLayoutAlign="center center">
 
     <div fxFlex="100" *ngIf="cfarOffers && hasWarningCoverageMessage && !selectedChoice" class="warning-message mx-16 mt-16" fxLayout="row" fxLayoutAlign="start center">
         <mat-icon>error</mat-icon>
@@ -86,7 +86,7 @@
             </div>
 
             <div fxFlex="100" fxLayout="row" fxLayoutAlign="end center">
-                <img class="provided-by-image" src="{{ imageBasePath || '' }}assets/provided-by-hopper.svg" />
+                <img class="provided-by-image" src="{{ imageBasePath || '' }}assets/provided-by-hopper/{{ currentLang || 'en' }}.svg" />
             </div>
             
         </div>

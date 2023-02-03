@@ -28,7 +28,7 @@ export abstract class CommonGuidesComponent implements OnInit, OnDestroy {
   public abstract htmlCode: string;
   
   // Parameters
-  public hCSessionId = "26990fba-5f7a-4966-9ef2-39192200b023";
+  public hCSessionId = "6b30ccc9-e994-4006-af21-7ec97d7f109d";
   public contractId = "1ed5f483-6287-6b77-acb5-9719296bfa68";
   public exerciseId = "1ed8111d-be97-62ec-93a9-d3f344379cc2";
   public currency = "EUR";
@@ -53,8 +53,8 @@ export abstract class CommonGuidesComponent implements OnInit, OnDestroy {
             {
               originAirport: "LGA",
               destinationAirport: "BOS",
-              departureDateTime: "2023-02-01T18:34:30",
-              arrivalDateTime: "2023-02-02T19:12:30",
+              departureDateTime: "2023-03-01T18:34:30",
+              arrivalDateTime: "2023-03-02T19:12:30",
               flightNumber: "JB776",
               validatingCarrierCode: "B6",
               fareClass: "economy",
@@ -82,8 +82,8 @@ export abstract class CommonGuidesComponent implements OnInit, OnDestroy {
           {
             originAirport: "LGA",
             destinationAirport: "BOS",
-            departureDateTime: "2023-02-01T18:34:30",
-            arrivalDateTime: "2023-02-02T19:12:30",
+            departureDateTime: "2023-03-01T18:34:30",
+            arrivalDateTime: "2023-03-02T19:12:30",
             flightNumber: "JB776",
             validatingCarrierCode: "B6",
             fareClass: "economy",
@@ -100,8 +100,6 @@ export abstract class CommonGuidesComponent implements OnInit, OnDestroy {
       }
     ]
   };
-  // public hyperwalletUrl: string = "https://uat.hyperwallet.com/rest/widgets/transfer-methods/";
-  // public hyperwalletUrl: string = "https://hyperwallet.com/rest/widgets/transfer-methods/";
   public hyperwalletUrl: string = "https://uat-api.paylution.com/rest/widgets/transfer-methods/";
   // public hyperwalletUrl: string = "https://api.paylution.com/rest/widgets/transfer-methods/";
   public contactFormUrl: string = "https://www.google.com";

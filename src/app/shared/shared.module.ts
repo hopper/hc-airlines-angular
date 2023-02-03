@@ -13,15 +13,15 @@ import { LayoutComponent } from './components/layout/layout.component';
 import { MatListModule } from '@angular/material/list';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
-import { NavBarComponent } from './components/navbar/navbar.component';
 import { InputsComponent } from './components/inputs/inputs.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
+import { MatSidenavModule } from '@angular/material/sidenav';
 import { OutputsComponent } from './components/outputs/outputs.component';
+import { LayoutModule } from '@angular/cdk/layout';
 
 @NgModule({
   declarations: [
-    NavBarComponent,
     LayoutComponent,
     InputsComponent,
     OutputsComponent
@@ -40,12 +40,13 @@ import { OutputsComponent } from './components/outputs/outputs.component';
     MatMenuModule,
     MatTableModule,
     MatSortModule,
+    MatSidenavModule,
+    LayoutModule,
 
     // Misc Modules
     FlexLayoutModule
   ],
   exports: [
-    NavBarComponent,
     LayoutComponent,
     InputsComponent,
     OutputsComponent

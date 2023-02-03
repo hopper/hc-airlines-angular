@@ -44,8 +44,11 @@
 
                 .provided-by-image {
                     margin-top: 1rem;
-                    height: 2rem;
+                    height: 1.5rem;
+                    background: white;
                     position: relative;
+                    padding: 4px 16px;
+                    border-radius: 16px;
                 }
             }
         }

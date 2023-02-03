@@ -33,6 +33,10 @@
             border-radius: 0px; 
         }
 
+        .mat-radio-label {
+            white-space: normal;
+        }
+
         .warning-message {
             background: map-get($warn-palette, 50);
             border: 1px solid map-get($warn-palette, default);
@@ -46,8 +50,11 @@
 
             .provided-by-image {
                 margin-top: 1rem;
-                height: 2rem;
+                height: 1.5rem;
+                background: white;
                 position: relative;
+                padding: 4px 16px;
+                border-radius: 16px;
             }
 
             .check-icon {

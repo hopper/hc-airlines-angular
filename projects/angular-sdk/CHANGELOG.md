@@ -1,3 +1,17 @@
+<a name="4.2.29"></a>
+
+# 4.2.29 (2023-02-03)
+General:
+- Added a "powered by" logo by language
+- Removed the spanish
+- Reduced spacings in mobile view
+
+Exercise flow:
+- Fixed the width of buttons in tablet view
+
+Offer banner large:
+- Fixed the display of the decline choice in mobile view
+
 <a name="4.2.28"></a>
 
 # 4.2.28 (2023-01-26)

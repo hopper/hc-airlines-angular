@@ -25,7 +25,7 @@
                     <span class="text-justify mb-32">{{ 'CFAR_EXERCISE_FLOW.CHECK_VERIFICATION_TEXT' | translate }}</span>
 
                     <div fxLayoutAlign="center center" *ngIf="!isVerificationCodeAlreadySent">
-                        <button mat-raised-button color="accent" ngClass.lt-sm="full-width" ngClass.gt-sm="mid-width" (click)="onSendVerificationCode()"
+                        <button mat-raised-button color="accent" ngClass.gt-sm="mid-width" ngClass.lt-md="full-width" (click)="onSendVerificationCode()"
                             attr.aria-label="{{ 'CFAR_EXERCISE_FLOW.BUTTON.SEND_VERIFICATION_CODE' | translate }}">
                             {{ 'CFAR_EXERCISE_FLOW.BUTTON.SEND_VERIFICATION_CODE' | translate }}
                         </button>
@@ -51,12 +51,12 @@
                     </form>
         
                     <div fxLayoutAlign="center center" fxLayout="column" fxLayoutGap="16px">
-                        <button mat-raised-button color="accent" ngClass.lt-sm="full-width" ngClass.gt-sm="mid-width" [disabled]="!isCheckVerificationCodeFormValid()" 
+                        <button mat-raised-button color="accent" ngClass.gt-sm="mid-width" ngClass.lt-md="full-width" [disabled]="!isCheckVerificationCodeFormValid()" 
                             (click)="onCheckVerificationCode()" attr.aria-label="{{ 'CFAR_EXERCISE_FLOW.BUTTON.CONTINUE' | translate }}">
                             {{ 'CFAR_EXERCISE_FLOW.BUTTON.CONTINUE' | translate }}
                         </button>
         
-                        <button mat-button color="accent" ngClass.lt-sm="full-width" ngClass.gt-sm="mid-width" 
+                        <button mat-button color="accent" ngClass.gt-sm="mid-width" ngClass.lt-md="full-width"
                             attr.aria-label="{{ 'CFAR_EXERCISE_FLOW.BUTTON.RESEND_VERIFICATION_CODE' | translate }}" (click)="onSendVerificationCode()">
                             {{ 'CFAR_EXERCISE_FLOW.BUTTON.RESEND_VERIFICATION_CODE' | translate }}
                         </button>

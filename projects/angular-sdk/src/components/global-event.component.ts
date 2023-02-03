@@ -1,14 +1,8 @@
 import { Directive } from "@angular/core";
 import { TranslateService } from '@ngx-translate/core';
 import { DateAdapter } from "@angular/material/core";
-import { AirlineRefundMethod, CfarContractCustomer, CfarItinerary, CfarOfferCustomer, CfarStatus, CreateCfarContractCustomerRequest, CreateCfarOfferCustomerRequest, ExerciseStepResult, GetCfarExerciseCustomerResponse, RequestType, UiSource, UiVariant } from "../apis/hopper-cloud-airline/v1";
-import { CountryCode } from "../enums/country-code.enum";
+import { ExerciseStepResult, UiSource, UiVariant } from "../apis/hopper-cloud-airline/v1";
 import { take } from "rxjs/operators";
-import { HttpErrorResponse } from "@angular/common/http";
-import { ArrayUtils } from "../utils/array-utils";
-import { HcAirlinesError } from "../models/hc-airlines-error";
-import { Error } from '../apis/hopper-cloud-airline/v1';
-import { ErrorCode } from "../enums/error-code.enum";
 import { GlobalComponent } from "./global.component";
 import { HopperEventsService } from "../services/hopper-events.service";
 
@@ -83,14 +77,14 @@ export class GlobalEventComponent extends GlobalComponent {
             return;
         }
         this.hopperEventService
-        .postCreateCfarForcedChoiceWarning(this.basePath, this.eventHcSessionId, this.cfarOffersIds)
-        .pipe(take(1))
-        .subscribe({
-            next: () => {},
-            error: (error) => {
-            console.error(error);
-            }
-        });
+            .postCreateCfarForcedChoiceWarning(this.basePath, this.eventHcSessionId, this.cfarOffersIds)
+            .pipe(take(1))
+            .subscribe({
+                next: () => {},
+                error: (error) => {
+                console.error(error);
+                }
+            });
     }
 
     protected createTermsAndConditionsEvent(): void {
@@ -98,14 +92,14 @@ export class GlobalEventComponent extends GlobalComponent {
             return;
         }
         this.hopperEventService
-        .postCreateCfarViewInfo(this.basePath, this.eventHcSessionId, this.cfarOffersIds, this.uiSource)
-        .pipe(take(1))
-        .subscribe({
-            next: () => {},
-            error: (error) => {
-            console.error(error);
-            }
-        });
+            .postCreateCfarViewInfo(this.basePath, this.eventHcSessionId, this.cfarOffersIds, this.uiSource)
+            .pipe(take(1))
+            .subscribe({
+                next: () => {},
+                error: (error) => {
+                console.error(error);
+                }
+            });
     }
 
     protected createDenyPurchaseEvent(): void {
@@ -113,14 +107,14 @@ export class GlobalEventComponent extends GlobalComponent {
             return;
         }
         this.hopperEventService
-        .postCreateCfarDenyPurchase(this.basePath, this.eventHcSessionId, this.cfarOffersIds, this.uiSource)
-        .pipe(take(1))
-        .subscribe({
-            next: () => {},
-            error: (error) => {
-            console.error(error);
-            }
-        });
+            .postCreateCfarDenyPurchase(this.basePath, this.eventHcSessionId, this.cfarOffersIds, this.uiSource)
+            .pipe(take(1))
+            .subscribe({
+                next: () => {},
+                error: (error) => {
+                console.error(error);
+                }
+            });
     }
 
     // ********** Cfar purchase / payment events **********/
@@ -157,14 +151,14 @@ export class GlobalEventComponent extends GlobalComponent {
             return;
         }
         this.hopperEventService
-        .postCreateCfarExercisePortalDisplay(this.basePath, this.eventHcSessionId, this.cfarExerciseId)
-        .pipe(take(1))
-        .subscribe({
-            next: () => {},
-            error: (error) => {
-            console.error(error);
-            }
-        });
+            .postCreateCfarExercisePortalDisplay(this.basePath, this.eventHcSessionId, this.cfarExerciseId)
+            .pipe(take(1))
+            .subscribe({
+                next: () => {},
+                error: (error) => {
+                console.error(error);
+                }
+            });
     }
 
     protected createCfarExerciseVerificationSentEvent(): void {
@@ -172,14 +166,14 @@ export class GlobalEventComponent extends GlobalComponent {
             return;
         }
         this.hopperEventService
-        .postCreateCfarExerciseVerificationSent(this.basePath, this.eventHcSessionId, this.cfarExerciseId)
-        .pipe(take(1))
-        .subscribe({
-            next: () => {},
-            error: (error) => {
-            console.error(error);
-            }
-        });
+            .postCreateCfarExerciseVerificationSent(this.basePath, this.eventHcSessionId, this.cfarExerciseId)
+            .pipe(take(1))
+            .subscribe({
+                next: () => {},
+                error: (error) => {
+                console.error(error);
+                }
+            });
     }
 
     protected createCfarExerciseVerificationCompleteEvent(exerciseStepResult: ExerciseStepResult): void {
@@ -187,14 +181,14 @@ export class GlobalEventComponent extends GlobalComponent {
             return;
         }
         this.hopperEventService
-        .postCreateCfarExerciseVerificationComplete(this.basePath, this.eventHcSessionId, this.cfarExerciseId, exerciseStepResult)
-        .pipe(take(1))
-        .subscribe({
-            next: () => {},
-            error: (error) => {
-            console.error(error);
-            }
-        });
+            .postCreateCfarExerciseVerificationComplete(this.basePath, this.eventHcSessionId, this.cfarExerciseId, exerciseStepResult)
+            .pipe(take(1))
+            .subscribe({
+                next: () => {},
+                error: (error) => {
+                console.error(error);
+                }
+            });
     }
 
     protected createCfarExerciseCustomerDataCompleteEvent(exerciseStepResult: ExerciseStepResult): void {
@@ -202,14 +196,14 @@ export class GlobalEventComponent extends GlobalComponent {
             return;
         }
         this.hopperEventService
-        .postCreateCfarExerciseCustomerDataComplete(this.basePath, this.eventHcSessionId, this.cfarExerciseId, exerciseStepResult)
-        .pipe(take(1))
-        .subscribe({
-            next: () => {},
-            error: (error) => {
-            console.error(error);
-            }
-        });
+            .postCreateCfarExerciseCustomerDataComplete(this.basePath, this.eventHcSessionId, this.cfarExerciseId, exerciseStepResult)
+            .pipe(take(1))
+            .subscribe({
+                next: () => {},
+                error: (error) => {
+                console.error(error);
+                }
+            });
     }
 
     protected createCfarExercisePortalCompleteEvent(exerciseStepResult: ExerciseStepResult): void {
@@ -217,14 +211,14 @@ export class GlobalEventComponent extends GlobalComponent {
             return;
         }
         this.hopperEventService
-        .postCreateCfarExercisePortalComplete(this.basePath, this.eventHcSessionId, this.cfarExerciseId, exerciseStepResult)
-        .pipe(take(1))
-        .subscribe({
-            next: () => {},
-            error: (error) => {
-            console.error(error);
-            }
-        });
+            .postCreateCfarExercisePortalComplete(this.basePath, this.eventHcSessionId, this.cfarExerciseId, exerciseStepResult)
+            .pipe(take(1))
+            .subscribe({
+                next: () => {},
+                error: (error) => {
+                console.error(error);
+                }
+            });
     }
 
     protected createCfarExerciseCallbackLaunchedEvent(exerciseStepResult: ExerciseStepResult): void {
@@ -232,13 +226,13 @@ export class GlobalEventComponent extends GlobalComponent {
             return;
         }
         this.hopperEventService
-        .postCreateCfarExerciseCallbackLaunched(this.basePath, this.eventHcSessionId, this.cfarExerciseId, exerciseStepResult)
-        .pipe(take(1))
-        .subscribe({
-            next: () => {},
-            error: (error) => {
-            console.error(error);
-            }
-        });
+            .postCreateCfarExerciseCallbackLaunched(this.basePath, this.eventHcSessionId, this.cfarExerciseId, exerciseStepResult)
+            .pipe(take(1))
+            .subscribe({
+                next: () => {},
+                error: (error) => {
+                console.error(error);
+                }
+            });
     }
 }

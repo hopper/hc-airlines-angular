@@ -98,7 +98,7 @@ export class HopperEventsService extends HopperProxyService {
       occurredDateTime: new Date(),
       cfarOffersIds: cfarOffersIds,
       uiSource: uiSource,
-      type: "cfar_view_info"
+      type: "cfar_deny_purchase"
     }
     
     return this._postCustomerEventRequest(hCSessionId, event);

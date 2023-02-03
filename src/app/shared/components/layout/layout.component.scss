@@ -24,14 +24,20 @@
     app-layout {
         background-color: map-get($bg-palette, background);
         color: map-get($fg-palette, text);
-        // Full Height - header height
-        height: calc(100% - 64px);
+        height: 100%;
+        width: 100%;
 
         .layout-container {
             height: 100%;
 
-            .aside {
-                overflow: scroll;
+            .toolbar-container {
+                min-height: 64px;
+                z-index: 1;
+                position: relative;
+            } 
+
+            mat-sidenav {
+                overflow: auto;
                 background-color: map-get($bg-palette, app-bar);
                 @include mat.elevation(4);
 
@@ -47,8 +53,12 @@
                 }  
             }
 
+            .sidenav-container {
+                height: calc(100% - 64px);
+                z-index: 0;
+            }
             .content {
-                overflow: scroll;
+                overflow: auto;
             }
         }
     }
