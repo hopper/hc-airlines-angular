@@ -55,6 +55,7 @@
                                     }
                                 }}
                                 "
+                                [disabled]="isLoadingContract"
                             >
                                 {{ 'COMMON.COVERAGE_PERCENTAGE' | translate: 
                                     { coverage: (offer.coveragePercentage | number: '1.0-0') }

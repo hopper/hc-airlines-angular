@@ -1,3 +1,9 @@
+<a name="4.2.30"></a>
+
+# 4.2.30 (2023-02-14)
+Offer banner large:
+- Fixed an issue causing occasional HTTP errors 
+
 <a name="4.2.29"></a>
 
 # 4.2.29 (2023-02-03)

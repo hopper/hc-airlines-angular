@@ -19,6 +19,7 @@ export class CfarOfferBannerLargeComponent extends GlobalEventComponent implemen
   public selectedCfarOffer!: CfarOfferCustomer;
   public selectedChoice!: number;
   public currency!: string;
+  public isLoadingContract!: boolean;
 
   @Input() hCSessionId!: string;
   @Input() itineraries!: CfarItinerary[];
@@ -63,7 +64,7 @@ export class CfarOfferBannerLargeComponent extends GlobalEventComponent implemen
   public onChooseCoverage(): void {
     // After the first choice, we force the display of the 'decline' option
     this.hasNoCoverageOption = true;
-    
+
     // Update descriptions
     this.selectedCfarOffer = this.selectedChoice > -1 ? this.cfarOffers[this.selectedChoice] : this._getCheapestOffer(this.cfarOffers);
   
@@ -77,6 +78,9 @@ export class CfarOfferBannerLargeComponent extends GlobalEventComponent implemen
           this.chooseCoverage.emit(this.contractsByChoiceIndex.get(this.selectedChoice));
         // Backend call
         } else {
+          // Lock the checkboxes until the API response
+          this.isLoadingContract = true;
+
           // Create CFAR Contract
           this._hopperCfarService
             .postCfarContracts(this.basePath, this.hCSessionId, this.currentLang, ApiTranslatorUtils.modelToSnakeCase(this._buildCreateCfarContractRequest(this.selectedCfarOffer, this.uiSource)))
@@ -87,9 +91,15 @@ export class CfarOfferBannerLargeComponent extends GlobalEventComponent implemen
                 this.contractsByChoiceIndex.set(this.selectedChoice, cfarContract);
   
                 this.chooseCoverage.emit(cfarContract);
+
+                // Unlock the checkboxes
+                this.isLoadingContract = false;
               },
               error: (error) => {
                 this.pushSdkError(error, "contracts");
+
+                // Unlock the checkboxes
+                this.isLoadingContract = false;
               }
             });
         } 
