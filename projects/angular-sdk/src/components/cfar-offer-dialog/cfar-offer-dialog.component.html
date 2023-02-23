@@ -40,22 +40,22 @@
             <div class="px-32" ngClass.lt-md="px-16" fxLayout="column" fxLayoutAlign="center center">
         
                 <mat-card attr.aria-label="
-                {{ 'COMMON.COVERAGE_PERCENTAGE_ACCESSIBILITY' | translate: 
-                    { 
-                        coverage: (offer.coveragePercentage | number: '1.0-0'),
-                        price: (getPricePerTraveler(offer) | currency:offer?.currency:'symbol':undefined:currentLang)
-                    }
-                }}
-                " class="full-width m-16 mat-elevation-z4" fxFlex fxLayout="row wrap" *ngFor="let offer of cfarOffers" 
-                    [ngClass]="{ 'active': offer == selectedCfarOffer }">
-                    <div fxFlex="100" attr.aria-label="
                     {{ 'COMMON.COVERAGE_PERCENTAGE_ACCESSIBILITY' | translate: 
                         { 
                             coverage: (offer.coveragePercentage | number: '1.0-0'),
                             price: (getPricePerTraveler(offer) | currency:offer?.currency:'symbol':undefined:currentLang)
                         }
                     }}
-                    " fxLayout="row wrap" fxLayoutAlign="start center" (click)="onSelectOffer(offer)">
+                    " class="full-width m-16 mat-elevation-z4" fxFlex fxLayout="row wrap" *ngFor="let offer of cfarOffers" 
+                        [ngClass]="{ 'active': offer == selectedCfarOffer }">
+                    <div fxFlex="100" attr.aria-label="
+                        {{ 'COMMON.COVERAGE_PERCENTAGE_ACCESSIBILITY' | translate: 
+                            { 
+                                coverage: (offer.coveragePercentage | number: '1.0-0'),
+                                price: (getPricePerTraveler(offer) | currency:offer?.currency:'symbol':undefined:currentLang)
+                            }
+                        }}
+                        " fxLayout="row wrap" fxLayoutAlign="start center" (click)="onSelectOffer(offer)">
                         <h3 fxFlex="100" class="offer-title" 
                             attr.aria-label="
                             {{ 'COMMON.COVERAGE_PERCENTAGE_ACCESSIBILITY' | translate: 
@@ -116,12 +116,8 @@
             {{ 'CFAR_OFFER_DIALOG.BUTTON.CANCEL' | translate }}
         </button>
         <button mat-raised-button color="accent" *ngIf="selectedCfarOffer" ngClass.lt-sm="full-width" (click)="onSubmit()"
-            attr.aria-label="{{ 'CFAR_OFFER_DIALOG.BUTTON.SUBMIT' | translate: { 
-                coverage: (selectedCfarOffer.coveragePercentage | number: '1.0-0')
-            } }}">
-            {{ 'CFAR_OFFER_DIALOG.BUTTON.SUBMIT' | translate: { 
-                coverage: (selectedCfarOffer.coveragePercentage | number: '1.0-0')
-            } }}
+            attr.aria-label="{{ getDynamicCoverage() }}">
+            {{ getDynamicCoverage() }}
         </button>
     </div>
   

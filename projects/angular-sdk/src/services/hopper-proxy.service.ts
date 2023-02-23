@@ -1,13 +1,15 @@
 import { HttpClient } from "@angular/common/http";
-import { Injectable } from "@angular/core";
+import { ErrorHandler } from "@angular/core";
 import { CustomerService } from "../apis/hopper-cloud-airline/v1";
 
-export class HopperProxyService {
+export class HopperProxyService extends ErrorHandler {
 
   constructor(
     protected _httpClient: HttpClient,
     protected _customerService: CustomerService
-  ) {}
+  ) {
+    super();
+  }
 
   // ----------------------------------------------------------
   // PROTECTED METHODS

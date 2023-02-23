@@ -8,6 +8,7 @@ import { GlobalComponent } from '../global.component';
 import { ApiTranslatorUtils } from '../../utils/api-translator.utils';
 import { HopperCfarService } from '../../services/hopper-cfar.service';
 import { HopperEventsService } from '../../services/hopper-events.service';
+import { DecimalPipe } from '@angular/common';
 
 @Component({
   selector: 'hopper-cfar-offer-dialog',
@@ -30,7 +31,8 @@ export class CfarOfferDialogComponent extends GlobalComponent implements OnInit,
     private _dialogRef: MatDialogRef<CfarOfferDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private _hopperCfarService: HopperCfarService,
-    private _hopperEventService: HopperEventsService
+    private _hopperEventService: HopperEventsService,
+    private _decimalPipe: DecimalPipe
   ) {
     super(_adapter, _translateService);
 
@@ -118,6 +120,19 @@ export class CfarOfferDialogComponent extends GlobalComponent implements OnInit,
     });
 
     return +offer.premium / (nbTravelers || 1);
+  }
+
+  public getDynamicCoverage(): string {
+    let dynamicCoverage: string = '';
+
+    this._translateService
+      .get('CFAR_OFFER_DIALOG.BUTTON.SUBMIT', { 
+        coverage: this._decimalPipe.transform(this.selectedCfarOffer.coveragePercentage, '1.0-0')
+      })
+      .pipe(take(1))
+      .subscribe(label => dynamicCoverage = label);
+
+    return dynamicCoverage;
   }
 
   // -----------------------------------------------

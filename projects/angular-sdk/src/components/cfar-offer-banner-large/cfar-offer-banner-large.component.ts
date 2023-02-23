@@ -30,7 +30,7 @@ export class CfarOfferBannerLargeComponent extends GlobalEventComponent implemen
   @Output() chooseCoverage = new EventEmitter();
   @Output() offersLoaded = new EventEmitter();
 
-  private contractsByChoiceIndex = new Map<number, CfarContractCustomer>();
+  private _contractsByChoiceIndex = new Map<number, CfarContractCustomer>();
 
   constructor(
     private _adapter: DateAdapter<any>,
@@ -74,8 +74,8 @@ export class CfarOfferBannerLargeComponent extends GlobalEventComponent implemen
         this.chooseCoverage.emit(this._buildFakePostCfarContractsResponse());
       } else {
         // Emit the cached element
-        if (this.contractsByChoiceIndex.has(this.selectedChoice)) {
-          this.chooseCoverage.emit(this.contractsByChoiceIndex.get(this.selectedChoice));
+        if (this._contractsByChoiceIndex.has(this.selectedChoice)) {
+          this.chooseCoverage.emit(this._contractsByChoiceIndex.get(this.selectedChoice));
         // Backend call
         } else {
           // Lock the checkboxes until the API response
@@ -88,7 +88,7 @@ export class CfarOfferBannerLargeComponent extends GlobalEventComponent implemen
             .subscribe({
               next: (cfarContract: CfarContractCustomer) => {
                 // Cache the result into a map (for API performance)
-                this.contractsByChoiceIndex.set(this.selectedChoice, cfarContract);
+                this._contractsByChoiceIndex.set(this.selectedChoice, cfarContract);
   
                 this.chooseCoverage.emit(cfarContract);
 

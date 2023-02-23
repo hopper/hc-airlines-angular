@@ -1,8 +1,8 @@
-import { NgModule } from '@angular/core';
+import { ErrorHandler, NgModule } from '@angular/core';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { HttpClientModule } from '@angular/common/http';
-import { CommonModule, DatePipe, registerLocaleData } from '@angular/common';
+import { CommonModule, DatePipe, DecimalPipe, registerLocaleData } from '@angular/common';
 
 import { TranslateModule } from '@ngx-translate/core';
 
@@ -45,6 +45,7 @@ import { GlobalComponent } from './components/global.component';
 import { HopperCfarService } from './services/hopper-cfar.service';
 import { HopperEventsService } from './services/hopper-events.service';
 import { GlobalEventComponent } from './components/global-event.component';
+import { HopperErrorHandlerService } from './services/hopper-error-handler.service';
 
 // Supported Languages for Datepicker
 registerLocaleData(localeFr, 'fr', localeFrExtra);
@@ -98,9 +99,11 @@ registerLocaleData(localeZh, 'zh', localeZhExtra);
     providers: [
         { provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] },
         { provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS },
+        { provide: ErrorHandler, useClass: HopperErrorHandlerService },
         HopperCfarService,
         HopperEventsService,
-        DatePipe
+        DatePipe,
+        DecimalPipe
     ]
 })
 export class HopperCloudAirlinesAngularSdkModule { }

@@ -1,3 +1,13 @@
+<a name="4.2.31"></a>
+
+# 4.2.31 (2023-02-23)
+Offer banner large:
+- Partially fixed the loading of icons on slow networks
+- Fixed the spacing under the last choice ('decline' choice).
+
+Offer dialog:
+- Fixed a display issue with IOS 14+
+
 <a name="4.2.30"></a>
 
 # 4.2.30 (2023-02-14)
