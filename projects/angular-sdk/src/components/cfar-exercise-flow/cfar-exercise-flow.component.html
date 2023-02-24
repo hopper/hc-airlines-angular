@@ -102,9 +102,9 @@
                                                 {{ cfarExercise.contractExpiryDateTime| date: ('COMMON.DATE_FORMAT.HOUR_AND_DATE' | translate):'':currentLang }}
                                             </b>
                                         </p>
-                                        <p *ngIf="isHopperRefund">
+                                        <p>
                                             {{ 'CFAR_EXERCISE_FLOW.DEADLINE_SENTENCE_2' | translate: {
-                                                amount: cfarExercise.hopperRefund | currency:cfarExercise.hopperRefundCurrency:'symbol':undefined:currentLang
+                                                amount: cfarExercise.cashRefundAllowance | currency:cfarExercise.hopperRefundCurrency:'symbol':undefined:currentLang
                                             } }}
                                         </p>
                                     </div>
@@ -220,26 +220,17 @@
                                     </div>
             
                                     <div fxFlex="100" fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="8px" class="mb-16">
-                                        <p *ngIf="isHopperRefund">
+                                        <p>
                                             {{ 'CFAR_EXERCISE_FLOW.REFUND_DETAILS' | translate: {
-                                                amount: cfarExercise.hopperRefund | currency:cfarExercise.hopperRefundCurrency:'symbol':undefined:currentLang
+                                                amount: cfarExercise.cashRefundAllowance | currency:cfarExercise.hopperRefundCurrency:'symbol':undefined:currentLang
                                             } }}
                                         </p>
-                    
-                                        <!--
-                                        <p *ngIf="!isHopperRefund">
-                                            {{ 'CFAR_EXERCISE_FLOW.REFUND_DETAILS' | translate: {
-                                                amount: cfarExercise.airlineRefundAllowance | currency:cfarExercise.hopperRefundCurrency:'symbol':undefined:currentLang,
-                                                method: cfarExercise.airlineRefundMethod
-                                            } }}
-                                        </p>
-                                        -->
                                     </div>
             
-                                    <div fxFlex="100" *ngIf="isHopperRefund">
+                                    <div fxFlex="100">
                                         <p class="text-justify">
                                             {{ 'CFAR_EXERCISE_FLOW.REFUND_WARNING_MESSAGE' | translate: {
-                                                amount: cfarExercise.hopperRefund | currency:cfarExercise.hopperRefundCurrency:'symbol':undefined:currentLang
+                                                amount: cfarExercise.cashRefundAllowance | currency:cfarExercise.hopperRefundCurrency:'symbol':undefined:currentLang
                                             } }}
                                         </p>
                                     </div>
@@ -256,7 +247,7 @@
                             <!-- / STEP 1 -->
             
                             <!-- STEP 2 -->
-                            <mat-step completed="false" editable="false" *ngIf="isHopperRefund">
+                            <mat-step completed="false" editable="false">
                                 <ng-template matStepLabel>{{ 'CFAR_EXERCISE_FLOW.STEP.SECOND' | translate }}</ng-template>
             
                                 <div class="p-16" ngClass.lt-md="px-16" fxLayout="row wrap" fxLayoutAlign="start center">
@@ -355,7 +346,7 @@
                             <!-- / STEP 2 -->
             
                             <!-- STEP 3 -->
-                            <mat-step completed="false" editable="false" *ngIf="isHopperRefund">
+                            <mat-step completed="false" editable="false">
                                 <ng-template matStepLabel>{{ 'CFAR_EXERCISE_FLOW.STEP.THIRD' | translate }}</ng-template>
             
                                 <div class="p-16" ngClass.lt-md="px-16" fxLayout="row wrap" fxLayoutAlign="start center">
@@ -385,7 +376,7 @@
                             <!-- / STEP 3 -->
             
                             <!-- STEP 4 -->
-                            <mat-step completed="false" editable="false" *ngIf="isHopperRefund">
+                            <mat-step completed="false" editable="false">
                                 <ng-template matStepLabel>{{ 'CFAR_EXERCISE_FLOW.STEP.FOURTH' | translate }}</ng-template>
             
                                 <div class="p-16" ngClass.lt-md="px-16" fxLayout="row wrap" fxLayoutAlign="start center">
@@ -479,21 +470,11 @@
                                 </div>
             
                                 <div fxFlex="100" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px" class="mb-16">
-                                    <p *ngIf="isHopperRefund">
+                                    <p>
                                         {{ 'CFAR_EXERCISE_FLOW.REFUND_DETAILS' | translate: {
-                                            amount: cfarExercise.hopperRefund | currency:cfarExercise.hopperRefundCurrency:'symbol':undefined:currentLang,
-                                            method: cfarExercise.hopperRefundMethod
+                                            amount: cfarExercise.cashRefundAllowance | currency:cfarExercise.hopperRefundCurrency:'symbol':undefined:currentLang
                                         } }}
                                     </p>
-                
-                                    <!--
-                                    <p *ngIf="!isHopperRefund">
-                                        {{ 'CFAR_EXERCISE_FLOW.REFUND_DETAILS' | translate: {
-                                            amount: cfarExercise.airlineRefundAllowance | currency:cfarExercise.hopperRefundCurrency:'symbol':undefined:currentLang,
-                                            method: cfarExercise.airlineRefundMethod
-                                        } }}
-                                    </p>
-                                    -->
                                 </div>
                             </mat-step>
                             <!-- / STEP 4 -->

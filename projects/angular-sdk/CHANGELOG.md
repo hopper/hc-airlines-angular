@@ -1,3 +1,10 @@
+<a name="4.3.0"></a>
+
+# 4.3.0 (2023-02-24)
+
+General:
+- Migration of the API to the v1.1
+
 <a name="4.2.31"></a>
 
 # 4.2.31 (2023-02-23)

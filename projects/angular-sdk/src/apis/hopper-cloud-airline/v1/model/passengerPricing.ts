@@ -9,6 +9,7 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
+import { CfarPassengerTax } from './cfarPassengerTax';
 import { PassengerCount } from './passengerCount';
 
 export interface PassengerPricing { 
@@ -17,4 +18,5 @@ export interface PassengerPricing {
      * Price per passenger
      */
     individualPrice: string;
+    taxes?: Array<CfarPassengerTax>;
 }

@@ -24,7 +24,6 @@ export class CfarExerciseFlowPageComponent extends CommonGuidesComponent {
       [exerciseId]="exerciseId"
       [hyperwalletUrl]="hyperwalletUrl"
       [contactFormUrl]="contactFormUrl"
-      (airlineRefundSelected)="onAirlineRefundSelected($event)"
       (flowCompleted)="onFlowCompleted($event)"
       (errorOccurred)="onErrorOccurred($event)"
     ></hopper-cfar-exercise-flow>
@@ -32,10 +31,6 @@ export class CfarExerciseFlowPageComponent extends CommonGuidesComponent {
 
   public  tsCode: string = `
     import { ErrorSdkModel } from "@hopper-cloud-airlines/angular-sdk/models";
-
-    public onAirlineRefundSelected(data: string): void {
-      console.log(data);
-    }
 
     public onFlowCompleted(data: string): void {
       console.log(data);
@@ -126,13 +121,6 @@ export class CfarExerciseFlowPageComponent extends CommonGuidesComponent {
   public  getOutputs(): OutputModel[] {
     return [
       {
-        name: 'airlineRefundSelected',
-        description: `
-          Event triggered when the user select the airline refund method<br />
-          Returns a string (AIRLINE_REFUND)
-        `
-      },
-      {
         name: 'flowCompleted',
         description: `
           Event triggered when the flow is completed
@@ -146,10 +134,6 @@ export class CfarExerciseFlowPageComponent extends CommonGuidesComponent {
         `
       }
     ];
-  }
-
-  public onAirlineRefundSelected(data: string): void {
-    console.log(data);
   }
 
   public onFlowCompleted(data: string): void {

@@ -9,7 +9,6 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { AirlineRefundMethod } from './airlineRefundMethod';
 import { CfarItinerary } from './cfarItinerary';
 import { CfarPrice } from './cfarPrice';
 import { CfarStatus } from './cfarStatus';
@@ -26,11 +25,7 @@ export interface GetCfarExerciseCustomerResponse {
      * Unique identifier for a contract
      */
     contractId: string;
-    /**
-     * The partner's share of the amount refunded to the customer to complete the CFAR contract exercise
-     */
-    hopperRefund: string;
-    hopperRefundMethod: AirlineRefundMethod;
+    cashRefundAllowance: string;
     hopperRefundCurrency: string;
     status: CfarStatus;
     contractExpiryDateTime: Date;
