@@ -48,7 +48,7 @@ export class CfarOfferBannerLargeComponent extends GlobalEventComponent implemen
   ngOnInit(): void {
     if (this.isFakeBackend) {
       this.cfarOffers = this._buildFakePostCfarOffersResponse();
-      this.selectedCfarOffer = this._getCheapestOffer(this.cfarOffers);
+      this.selectedCfarOffer = this._getDefaultOffer(this.cfarOffers);
       this.offersLoaded.emit(this.cfarOffers);
     } else {
       this._initUiParameters();
@@ -66,7 +66,7 @@ export class CfarOfferBannerLargeComponent extends GlobalEventComponent implemen
     this.hasNoCoverageOption = true;
 
     // Update descriptions
-    this.selectedCfarOffer = this.selectedChoice > -1 ? this.cfarOffers[this.selectedChoice] : this._getCheapestOffer(this.cfarOffers);
+    this.selectedCfarOffer = this.selectedChoice > -1 ? this.cfarOffers[this.selectedChoice] : this._getDefaultOffer(this.cfarOffers);
   
     if (this.selectedChoice != -1) {
 
@@ -145,7 +145,7 @@ export class CfarOfferBannerLargeComponent extends GlobalEventComponent implemen
           }
           
           this.cfarOffers = results;
-          this.selectedCfarOffer = this._getCheapestOffer(this.cfarOffers);
+          this.selectedCfarOffer = this._getDefaultOffer(this.cfarOffers);
           this.offersLoaded.emit(this.cfarOffers);          
 
           // Int events context and build corresponding events

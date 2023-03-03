@@ -69,10 +69,12 @@ export class GlobalComponent implements OnChanges {
     // Protected Methods
     // -----------------------------------------------
 
-    protected _getCheapestOffer(offers: CfarOfferCustomer[]): CfarOfferCustomer {
-        return offers.reduce((previous: CfarOfferCustomer, current: CfarOfferCustomer) => {
-            return +previous?.premium < +current?.premium ? previous : current;
-        });
+    protected _getDefaultOffer(offers: CfarOfferCustomer[]): CfarOfferCustomer {
+        // return offers.reduce((previous: CfarOfferCustomer, current: CfarOfferCustomer) => {
+        //     return +previous?.premium < +current?.premium ? previous : current;
+        // });
+
+        return offers[0];
     }
 
     protected _updateLanguage(newLanguage: string): void {

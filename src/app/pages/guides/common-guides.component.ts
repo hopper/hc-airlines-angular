@@ -28,9 +28,9 @@ export abstract class CommonGuidesComponent implements OnInit, OnDestroy {
   public abstract htmlCode: string;
   
   // Parameters
-  public hCSessionId = "b0dc86cd-ebf0-462d-b021-345d3d1c9bed";
+  public hCSessionId = "cdb5a0c4-6d7c-49a2-b7a3-df4011040798";
   public contractId = "1ed5f483-6287-6b77-acb5-9719296bfa70";
-  public exerciseId = "1edb4232-5fe6-6f86-aafe-cbe77c8a5a94";
+  public exerciseId = "1edb6b19-1151-6d7b-aafe-9f5d2df1ac02";
   public currency = "EUR";
   public passengers: PassengerPricing[] = [
     {
