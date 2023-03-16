@@ -1,12 +1,12 @@
 <div ngClass.gt-md="px-32" ngClass.gt-sm="px-16" ngClass.lt-md="px-0" fxLayout="row" fxLayoutAlign="center center">
 
-    <mat-card class="mat-elevation-z4 pointer" ngClass.gt-sm="m-16" fxFlex fxLayout="row wrap">
-    
+    <mat-card ngClass.gt-sm="mat-elevation-z4" fxFlex fxLayout="row wrap">
+
         <div fxFlex="100" class="header" fxLayout="row" fxLayoutAlign="center center">
             <h1>{{ 'CFAR_EXERCISE_FLOW.TITLE' | translate }}</h1>
         </div>
 
-        <div fxFlex="100" class="content" fxLayout="row wrap" #scrollAnchor>
+        <div fxFlex="100" class="card-content" fxLayout="row wrap">
 
             <ng-container *ngIf="!isLoading">
 
@@ -81,7 +81,7 @@
                     
                     <ng-container *ngIf="!isCfarContractExercised()">
                         
-                        <mat-vertical-stepper orientation="vertical" #stepper linear (selectionChange)="onScrollToTop()">
+                        <mat-vertical-stepper orientation="vertical" #stepper linear (selectionChange)="stepCompleted.emit()">
                             
                             <!-- STEP 1 -->
                             <mat-step completed="false" editable="false">
@@ -102,9 +102,9 @@
                                                 {{ cfarExercise.contractExpiryDateTime| date: ('COMMON.DATE_FORMAT.HOUR_AND_DATE' | translate):'':currentLang }}
                                             </b>
                                         </p>
-                                        <p *ngIf="isHopperRefund">
+                                        <p>
                                             {{ 'CFAR_EXERCISE_FLOW.DEADLINE_SENTENCE_2' | translate: {
-                                                amount: cfarExercise.hopperRefund | currency:cfarExercise.hopperRefundCurrency:'symbol':undefined:currentLang
+                                                amount: cfarExercise.cashRefundAllowance | currency:cfarExercise.hopperRefundCurrency:'symbol':undefined:currentLang
                                             } }}
                                         </p>
                                     </div>
@@ -120,7 +120,7 @@
             
                                         <ng-container *ngFor="let slice of cfarExercise?.itinerary?.slices">
             
-                                            <div fxLayout="row wrap" fxLayoutAlign="start center" 
+                                            <div class="full-width" fxLayout="row wrap" fxLayoutAlign="center center" 
                                                 *ngFor="let segment of slice?.segments">
             
                                                 <div fxFlex="100" class="mb-8">
@@ -152,34 +152,7 @@
                                                         {{ segment?.arrivalDateTime | date: ('COMMON.DATE_FORMAT.DATE' | translate):'':currentLang }}
                                                     </div>
                                                 </div>
-            
-                                                <!--
-                                                <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px"
-                                                    class="mb-16">
-                                                    <mat-icon color="accent" class="rotate-90">flight</mat-icon>
-                                                    <span class="subtitle">
-                                                        {{ segment?.originAirport }}
-                                                        {{ 'CFAR_EXERCISE_FLOW.TO' | translate }}
-                                                        {{ segment?.destinationAirport }}
-                                                    </span>
-                                                </div>
-            
-                                                <div class="ml-32">
-                                                    <p>
-                                                        <b>{{ 'CFAR_EXERCISE_FLOW.DEPARTURE' | translate }}</b>
-                                                        {{ segment?.departureDateTime | date: ('COMMON.DATE_FORMAT_SHORT' | translate):'':currentLang }}
-                                                    </p>
-                                                    <p>
-                                                        <b>{{ 'CFAR_EXERCISE_FLOW.ARRIVAL' | translate }}</b>
-                                                        {{ segment?.arrivalDateTime | date: ('COMMON.DATE_FORMAT_SHORT' | translate):'':currentLang }}
-                                                    </p>
-                                                    <p>
-                                                        <b>{{ 'CFAR_EXERCISE_FLOW.FLIGHT' | translate }}</b>
-                                                        {{ segment?.flightNumber }}
-                                                    </p>
-                                                </div>
-                                                -->
-            
+        
                                             </div>
             
                                         </ng-container>
@@ -220,26 +193,17 @@
                                     </div>
             
                                     <div fxFlex="100" fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="8px" class="mb-16">
-                                        <p *ngIf="isHopperRefund">
+                                        <p>
                                             {{ 'CFAR_EXERCISE_FLOW.REFUND_DETAILS' | translate: {
-                                                amount: cfarExercise.hopperRefund | currency:cfarExercise.hopperRefundCurrency:'symbol':undefined:currentLang
+                                                amount: cfarExercise.cashRefundAllowance | currency:cfarExercise.hopperRefundCurrency:'symbol':undefined:currentLang
                                             } }}
                                         </p>
-                    
-                                        <!--
-                                        <p *ngIf="!isHopperRefund">
-                                            {{ 'CFAR_EXERCISE_FLOW.REFUND_DETAILS' | translate: {
-                                                amount: cfarExercise.airlineRefundAllowance | currency:cfarExercise.hopperRefundCurrency:'symbol':undefined:currentLang,
-                                                method: cfarExercise.airlineRefundMethod
-                                            } }}
-                                        </p>
-                                        -->
                                     </div>
             
-                                    <div fxFlex="100" *ngIf="isHopperRefund">
+                                    <div fxFlex="100">
                                         <p class="text-justify">
                                             {{ 'CFAR_EXERCISE_FLOW.REFUND_WARNING_MESSAGE' | translate: {
-                                                amount: cfarExercise.hopperRefund | currency:cfarExercise.hopperRefundCurrency:'symbol':undefined:currentLang
+                                                amount: cfarExercise.cashRefundAllowance | currency:cfarExercise.hopperRefundCurrency:'symbol':undefined:currentLang
                                             } }}
                                         </p>
                                     </div>
@@ -256,14 +220,14 @@
                             <!-- / STEP 1 -->
             
                             <!-- STEP 2 -->
-                            <mat-step completed="false" editable="false" *ngIf="isHopperRefund">
+                            <mat-step completed="false" editable="false">
                                 <ng-template matStepLabel>{{ 'CFAR_EXERCISE_FLOW.STEP.SECOND' | translate }}</ng-template>
             
                                 <div class="p-16" ngClass.lt-md="px-16" fxLayout="row wrap" fxLayoutAlign="start center">
             
                                     <form [formGroup]="step2Form" class="full-width" fxLayout="column" fxLayoutGap="16px" fxLayoutAlign="center center">             
                                         <!-- PERSONAL INFORMATION -->
-                                        <fieldset class="p-16" fxFlex="100" fxLayout="row wrap" fxLayoutAlign="start center">
+                                        <fieldset class="full-width p-16" fxLayout="row wrap" fxLayoutAlign="start center">
                                             <legend class="px-16 py-8">{{ 'CFAR_EXERCISE_FLOW.FORM.PERSONAL_INFORMATION' | translate }}</legend>
                                             
                                             <mat-form-field fxFlex="100" appearance="outline">
@@ -294,7 +258,7 @@
                                         <!-- / PERSONAL INFORMATION -->
             
                                         <!-- HOME ADDRESS -->
-                                        <fieldset class="p-16" fxFlex="100" fxLayout="row wrap" fxLayoutAlign="start center">
+                                        <fieldset class="full-width p-16" fxLayout="row wrap" fxLayoutAlign="start center">
                                             <legend class="px-16 py-8">{{ 'CFAR_EXERCISE_FLOW.FORM.HOME_ADDRESS' | translate }}</legend>
             
                                             <mat-form-field fxFlex="100" appearance="outline">
@@ -347,7 +311,7 @@
             
                                 <div class="p-16" fxLayoutGap="16px" ngClass.lt-md="px-16" fxFlex="100" fxLayout="row" fxLayout.lt-sm="column" fxLayoutAlign="center center">
                                     <button mat-raised-button color="accent" (click)="onSubmitStep2()" ngClass.lt-sm="full-width" 
-                                        [disabled]="step2Form.invalid" attr.aria-label="{{ 'CFAR_EXERCISE_FLOW.BUTTON.CONTINUE' | translate }}">
+                                        [disabled]="step2Form.invalid || isLoadingHyperwallet" attr.aria-label="{{ 'CFAR_EXERCISE_FLOW.BUTTON.CONTINUE' | translate }}">
                                         {{ 'CFAR_EXERCISE_FLOW.BUTTON.CONTINUE' | translate }}
                                     </button>
                                 </div>
@@ -355,7 +319,7 @@
                             <!-- / STEP 2 -->
             
                             <!-- STEP 3 -->
-                            <mat-step completed="false" editable="false" *ngIf="isHopperRefund">
+                            <mat-step completed="false" editable="false">
                                 <ng-template matStepLabel>{{ 'CFAR_EXERCISE_FLOW.STEP.THIRD' | translate }}</ng-template>
             
                                 <div class="p-16" ngClass.lt-md="px-16" fxLayout="row wrap" fxLayoutAlign="start center">
@@ -385,7 +349,7 @@
                             <!-- / STEP 3 -->
             
                             <!-- STEP 4 -->
-                            <mat-step completed="false" editable="false" *ngIf="isHopperRefund">
+                            <mat-step completed="false" editable="false">
                                 <ng-template matStepLabel>{{ 'CFAR_EXERCISE_FLOW.STEP.FOURTH' | translate }}</ng-template>
             
                                 <div class="p-16" ngClass.lt-md="px-16" fxLayout="row wrap" fxLayoutAlign="start center">
@@ -409,7 +373,7 @@
             
                                         <ng-container *ngFor="let slice of cfarExercise?.itinerary?.slices">
             
-                                            <div fxLayout="row wrap" fxLayoutAlign="start center" 
+                                            <div class="full-width" fxLayout="row wrap" fxLayoutAlign="center center" 
                                                 *ngFor="let segment of slice?.segments">
             
                                                 <div fxFlex="100" class="mb-8">
@@ -479,21 +443,11 @@
                                 </div>
             
                                 <div fxFlex="100" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px" class="mb-16">
-                                    <p *ngIf="isHopperRefund">
+                                    <p>
                                         {{ 'CFAR_EXERCISE_FLOW.REFUND_DETAILS' | translate: {
-                                            amount: cfarExercise.hopperRefund | currency:cfarExercise.hopperRefundCurrency:'symbol':undefined:currentLang,
-                                            method: cfarExercise.hopperRefundMethod
+                                            amount: cfarExercise.cashRefundAllowance | currency:cfarExercise.hopperRefundCurrency:'symbol':undefined:currentLang
                                         } }}
                                     </p>
-                
-                                    <!--
-                                    <p *ngIf="!isHopperRefund">
-                                        {{ 'CFAR_EXERCISE_FLOW.REFUND_DETAILS' | translate: {
-                                            amount: cfarExercise.airlineRefundAllowance | currency:cfarExercise.hopperRefundCurrency:'symbol':undefined:currentLang,
-                                            method: cfarExercise.airlineRefundMethod
-                                        } }}
-                                    </p>
-                                    -->
                                 </div>
                             </mat-step>
                             <!-- / STEP 4 -->

@@ -60,9 +60,9 @@ export class CfarOfferDialogComponent extends GlobalComponent implements OnInit,
 
     if (this.isFakeBackend) {
       this.cfarOffers = this._buildFakePostCfarOffersResponse();
-      this.selectedCfarOffer = this._getCheapestOffer(this.cfarOffers);
+      this.selectedCfarOffer = this._getDefaultOffer(this.cfarOffers);
     } else if (this.cfarOffers && this.cfarOffers?.length > 0) {
-      this.selectedCfarOffer = this._getCheapestOffer(this.cfarOffers);
+      this.selectedCfarOffer = this._getDefaultOffer(this.cfarOffers);
     } else {
       // No offers exist. We create offers from itineraries data first
       this.initCfarOffers();      
@@ -157,7 +157,7 @@ export class CfarOfferDialogComponent extends GlobalComponent implements OnInit,
         
         this.cfarOffers = results;
         // The cheapest by default
-        this.selectedCfarOffer = this._getCheapestOffer(this.cfarOffers);
+        this.selectedCfarOffer = this._getDefaultOffer(this.cfarOffers);
         this.isLoading = false;
 
         // Build corresponding events

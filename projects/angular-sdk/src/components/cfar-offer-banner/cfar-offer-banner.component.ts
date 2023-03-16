@@ -17,7 +17,7 @@ import { DialogUtils } from '../../utils/dialog.utils';
 })
 export class CfarOfferBannerComponent extends GlobalComponent implements OnInit {
 
-  public cheapestOffer!: CfarOfferCustomer;
+  public selectedCfarOffer!: CfarOfferCustomer;
   public isLoading!: boolean;
 
   private _cfarOffers!: CfarOfferCustomer[];
@@ -45,7 +45,7 @@ export class CfarOfferBannerComponent extends GlobalComponent implements OnInit 
   ngOnInit(): void {
     if (this.isFakeBackend) {
       this._cfarOffers = this._buildFakePostCfarOffersResponse();
-      this.cheapestOffer = this._getCheapestOffer(this._cfarOffers);
+      this.selectedCfarOffer = this._getDefaultOffer(this._cfarOffers);
       this.offersLoaded.emit(this._cfarOffers);
     } else {
       this.isLoading = true;
@@ -64,7 +64,7 @@ export class CfarOfferBannerComponent extends GlobalComponent implements OnInit 
             }
             
             this._cfarOffers = results;
-            this.cheapestOffer = this._getCheapestOffer(this._cfarOffers);
+            this.selectedCfarOffer = this._getDefaultOffer(this._cfarOffers);
             this.offersLoaded.emit(this._cfarOffers);
             
             this.isLoading = false;

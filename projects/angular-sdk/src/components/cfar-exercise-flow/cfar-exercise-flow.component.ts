@@ -1,6 +1,6 @@
 import { Component, ElementRef, EventEmitter, HostListener, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { take } from 'rxjs/operators';
-import { CfarStatus, CfarItinerary, CheckCfarContractExerciceVerificationCodeResponse, CheckCfarContractExerciseVerificationCodeRequest, CreateRefundAuthorizationRequest, CreateRefundRecipientRequest, InitiateRefundRequest, RefundAuthorization, RefundRecipient, AirlineRefundMethod, GetCfarExerciseCustomerResponse, InitiateRefundResponse, ExerciseStepResult } from '../../apis/hopper-cloud-airline/v1';
+import { CfarStatus, CfarItinerary, CheckCfarContractExerciceVerificationCodeResponse, CheckCfarContractExerciseVerificationCodeRequest, CreateRefundAuthorizationRequest, CreateRefundRecipientRequest, InitiateRefundRequest, RefundAuthorization, RefundRecipient, GetCfarExerciseCustomerResponse, InitiateRefundResponse, ExerciseStepResult } from '../../apis/hopper-cloud-airline/v1';
 import { GlobalEventComponent } from '../global-event.component';
 import { TranslateService } from '@ngx-translate/core';
 import { DateAdapter } from "@angular/material/core";
@@ -25,8 +25,6 @@ export class CfarExerciseFlowComponent extends GlobalEventComponent implements O
 
   public selectedRefundMethod?: 'ftc' | 'cash';
   public cfarExercise!: GetCfarExerciseCustomerResponse;
-  public refundMethods!: { value: 'ftc' | 'cash', label: string }[];
-  public isHopperRefund!: boolean;
   public isLoading!: boolean;
   public isLoadingHyperwallet!: boolean;
   public isSidebar!: boolean;
@@ -45,8 +43,8 @@ export class CfarExerciseFlowComponent extends GlobalEventComponent implements O
   @Input() hyperwalletUrl!: string;
   @Input() contactFormUrl!: string;
 
-  @Output() airlineRefundSelected = new EventEmitter();
   @Output() flowCompleted = new EventEmitter();
+  @Output() stepCompleted = new EventEmitter();
 
   // Fake values
   private _fakeVerificationTokenId: string = "1ed2d2bb-8885-67a4-968f-81c642e12735";
@@ -56,7 +54,6 @@ export class CfarExerciseFlowComponent extends GlobalEventComponent implements O
   public checkVerificationCodeForm!: FormGroup;
   public step2Form!: FormGroup;
 
-  @ViewChild('scrollAnchor') public anchor!: ElementRef;
   @ViewChild('stepper') public stepper!: MatStepper;
 
   constructor(
@@ -88,11 +85,6 @@ export class CfarExerciseFlowComponent extends GlobalEventComponent implements O
     // Init Navigation Context
     this._initNavigationContext();
 
-    this.refundMethods = [
-      { value: 'ftc', label: 'FTC' },
-      { value: 'cash', label: 'CASH' }
-    ];
-    
     this._initForms();
 
     // Int events context and build corresponding events
@@ -103,15 +95,6 @@ export class CfarExerciseFlowComponent extends GlobalEventComponent implements O
   // -----------------------------------------------
   // Publics Methods
   // -----------------------------------------------
-
-  public onSelectRefundType(type: string): void {
-    this.isHopperRefund = type == 'hopper';
-  }
-
-  public onScrollToTop(timer?: number): void {
-    // Scroll to top of component (timer due to rendering delay)
-    setTimeout(() => this.anchor.nativeElement.scrollTo(0,0), timer || 0);
-  }
 
   public getNbPassengers(itinerary: CfarItinerary): number {
     let nbPassengers = 0;
@@ -141,13 +124,8 @@ export class CfarExerciseFlowComponent extends GlobalEventComponent implements O
   }
 
   public onSubmitStep1(): void {
-    if (this.isHopperRefund) {
-      // Go to the next step
-      this._validCurrentStep();
-    } else {
-      // Send a notification to the client
-      this.airlineRefundSelected.emit("AIRLINE_REFUND");
-    }
+    // Go to the next step
+    this._validCurrentStep();
   }
 
   public onSubmitStep2(): void {
@@ -265,7 +243,7 @@ export class CfarExerciseFlowComponent extends GlobalEventComponent implements O
                     this.createCfarExercisePortalCompleteEvent(ExerciseStepResult.TechnicalError)                    
 
                     // Scroll on the error message
-                    this.onScrollToTop(this._errorTimer);
+                    this.stepCompleted.emit(this._errorTimer);
                   }
               });
             };
@@ -285,7 +263,7 @@ export class CfarExerciseFlowComponent extends GlobalEventComponent implements O
             this.createCfarExerciseCustomerDataCompleteEvent(ExerciseStepResult.Failure)
   
             // Scroll on the error message
-            this.onScrollToTop(this._errorTimer);
+            this.stepCompleted.emit(this._errorTimer);
           }
         });
     }
@@ -337,7 +315,7 @@ export class CfarExerciseFlowComponent extends GlobalEventComponent implements O
           this.createCfarExercisePortalCompleteEvent(ExerciseStepResult.TechnicalError)
 
           // Scroll on the error message
-          this.onScrollToTop(this._errorTimer);
+          this.stepCompleted.emit(this._errorTimer);
         }
       });
   }
@@ -400,7 +378,7 @@ export class CfarExerciseFlowComponent extends GlobalEventComponent implements O
             this.isLoading = false;
 
             // Scroll on the error message
-            this.onScrollToTop(this._errorTimer);
+            this.stepCompleted.emit(this._errorTimer);
           }
         });
     }
@@ -463,7 +441,7 @@ export class CfarExerciseFlowComponent extends GlobalEventComponent implements O
             this.createCfarExerciseVerificationCompleteEvent(ExerciseStepResult.TechnicalError);
 
             // Scroll on the error message
-            this.onScrollToTop(this._errorTimer);
+            this.stepCompleted.emit(this._errorTimer);
           }
         });
     }
@@ -479,9 +457,6 @@ export class CfarExerciseFlowComponent extends GlobalEventComponent implements O
 
     if (this.isFakeBackend) {
       this.cfarExercise = this._buildFakeCfarExercisesResponse();
-
-      // Force to true for the MVP
-      this.isHopperRefund = true;
     } else {
       this.isLoading = true;
 
@@ -496,9 +471,6 @@ export class CfarExerciseFlowComponent extends GlobalEventComponent implements O
             this.cfarExercise = result;
 
             this.isLoading = false;
-            
-            // Hopper offer by default
-            this.isHopperRefund = true;
           },
           error: (error: any) => {
             const builtError = this._getHcAirlinesErrorResponse(error);
@@ -509,7 +481,7 @@ export class CfarExerciseFlowComponent extends GlobalEventComponent implements O
             this.isLoading = false;
 
             // Scroll on the error message
-            this.onScrollToTop(this._errorTimer);
+            this.stepCompleted.emit(this._errorTimer);
           }
         });
     }

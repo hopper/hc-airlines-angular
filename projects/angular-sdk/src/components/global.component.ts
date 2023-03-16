@@ -3,7 +3,7 @@ import { Locales } from "../i18n";
 import { TranslateService } from '@ngx-translate/core';
 import { I18n } from "../i18n/i18n.interface";
 import { DateAdapter } from "@angular/material/core";
-import { AirlineRefundMethod, CfarContractCustomer, CfarItinerary, CfarOfferCustomer, CfarStatus, CreateCfarContractCustomerRequest, CreateCfarOfferCustomerRequest, GetCfarExerciseCustomerResponse, PassengerType, RequestType, UiSource, UiVariant } from "../apis/hopper-cloud-airline/v1";
+import { CfarContractCustomer, CfarItinerary, CfarOfferCustomer, CfarStatus, CreateCfarContractCustomerRequest, CreateCfarOfferCustomerRequest, GetCfarExerciseCustomerResponse, PassengerType, RequestType, UiSource, UiVariant } from "../apis/hopper-cloud-airline/v1";
 import { CountryCode } from "../enums/country-code.enum";
 import { take } from "rxjs/operators";
 import { HttpErrorResponse } from "@angular/common/http";
@@ -69,10 +69,12 @@ export class GlobalComponent implements OnChanges {
     // Protected Methods
     // -----------------------------------------------
 
-    protected _getCheapestOffer(offers: CfarOfferCustomer[]): CfarOfferCustomer {
-        return offers.reduce((previous: CfarOfferCustomer, current: CfarOfferCustomer) => {
-            return +previous?.premium < +current?.premium ? previous : current;
-        });
+    protected _getDefaultOffer(offers: CfarOfferCustomer[]): CfarOfferCustomer {
+        // return offers.reduce((previous: CfarOfferCustomer, current: CfarOfferCustomer) => {
+        //     return +previous?.premium < +current?.premium ? previous : current;
+        // });
+
+        return offers[0];
     }
 
     protected _updateLanguage(newLanguage: string): void {
@@ -98,7 +100,7 @@ export class GlobalComponent implements OnChanges {
     }
 
     protected _getHcAirlinesErrorResponse(apiError: HttpErrorResponse): HcAirlinesError {
-        const apiErrors = apiError.error.errors;
+        const apiErrors = apiError?.error?.errors;
             
         if (ArrayUtils.isNotEmpty(apiErrors)) {
             const mainApiError = apiErrors[0] as Error;
@@ -129,9 +131,9 @@ export class GlobalComponent implements OnChanges {
                 coveragePercentage: "80.0",
                 currency: "CAD",
                 requestType: "ancillary",
-                toUsdExchangeRate: "0.7744877537996369201410187302118379",
                 contractExpiryDateTime: new Date("2022-07-08T22:00:00Z"),
                 createdDateTime: new Date("2022-06-30T09:49:17.762Z"),
+                taxesTotal: '2',
                 itinerary: {
                     passengerPricing: [
                     {
@@ -192,31 +194,34 @@ export class GlobalComponent implements OnChanges {
                     ancillaries: [],
                     totalPrice: "71.96"
                 },
-                offerDescription: {
-                    "en": [
-                        "Cancel your booking up to <b> 24 hours </b> before departure, no reason required",
-                        "Receive a <b>cash</b> refund of your flight cost (air transportation charges, taxes, fees and charges, excluding any additional services)",
-                        "Cancelling is easy via the My Bookings page, refund is provided by Hopper",
-                        "Offer is only available at time of booking and can only be purchased for all passengers"
-                    ],
-                    "fr": [
-                        "Annulez votre réservation jusqu'à <b>24 heures</b> avant le départ, aucun motif requis",
-                        "Recevez un remboursement <b>en argent comptant</b> du coût de votre vol (frais de transport aérien, taxes, frais et droits, à l'exclusion de tout service additionnel)",
-                        "Annulez en toute simplicité sur la page Mes réservations, le remboursement est effectué par Hopper",
-                        "L'offre est uniquement disponible au moment de la réservation et ne peut être achetée que pour tous les passagers"
-                    ],
-                    "es": [
-                        "Cancele su reserva hasta <b>24 horas</b> antes de la salida, sin necesidad de motivo",
-                        "Reciba un reembolso en <b>efectivo</b> del costo de su vuelo (cargos de transporte aéreo, impuestos, tarifas y cargos, excluyendo cualquier servicio adicional)",
-                        "Cancelar es fácil a través de la página Mis reservas, Hopper proporciona el reembolso",
-                        "La oferta solo está disponible al momento de la reserva y solo se puede comprar para todos los pasajeros"
-                    ],
-                    "zh": [
-                        "在出发前 <b> 24 小时 </b> 取消您的预订，无需任何理由",
-                        "获得航班费用的<b>现金</b>退款（航空运输费、税费、费用和收费，不包括任何附加服务）",
-                        "通过我的预订页面取消很容易, Hopper 提供退款",
-                        "优惠仅在预订时可用，并且只能为所有乘客购买",
-                    ]
+                contents: {
+                    "en": {
+                        bulletPoints: [
+                            "Cancel your booking up to <b> 24 hours </b> before departure, no reason required",
+                            "Receive a <b>cash</b> refund of your flight cost (air transportation charges, taxes, fees and charges, excluding any additional services)",
+                            "Cancelling is easy via the My Bookings page, refund is provided by Hopper",
+                            "Offer is only available at time of booking and can only be purchased for all passengers"
+                        ],
+                        labels: {}
+                    },
+                    "fr": {
+                        bulletPoints: [
+                            "Annulez votre réservation jusqu'à <b>24 heures</b> avant le départ, aucun motif requis",
+                            "Recevez un remboursement <b>en argent comptant</b> du coût de votre vol (frais de transport aérien, taxes, frais et droits, à l'exclusion de tout service additionnel)",
+                            "Annulez en toute simplicité sur la page Mes réservations, le remboursement est effectué par Hopper",
+                            "L'offre est uniquement disponible au moment de la réservation et ne peut être achetée que pour tous les passagers"
+                        ],
+                        labels: {}
+                    },
+                    "zh": {
+                        bulletPoints: [
+                            "最迟可在出发前24小时无理由取消订单",
+                            "获得航班费用的现金退款（航空运输费用、税费和其他费用，额外服务费除外）",
+                            "您可以通过“我的订单 (My Bookings) 页面轻松取消预订, 退款由Hopper提供",
+                            "优惠仅在预订时有效，且必须为所有乘客购买"
+                        ],
+                        labels: {}
+                    }
                 },
                 termsConditionsUrl: {
                     "en": "https://hopper.com/",
@@ -230,9 +235,9 @@ export class GlobalComponent implements OnChanges {
                 coveragePercentage: "100.0",
                 currency: "CAD",
                 requestType: "ancillary",
-                toUsdExchangeRate: "0.7744877537996369201410187302118379",
                 contractExpiryDateTime: new Date("2022-07-08T22:00:00Z"),
                 createdDateTime: new Date("2022-06-30T09:49:17.762Z"),
+                taxesTotal: '2',
                 itinerary: {
                     passengerPricing: [
                     {
@@ -293,31 +298,34 @@ export class GlobalComponent implements OnChanges {
                     ancillaries: [],
                     totalPrice: "71.96"
                 },
-                offerDescription: {
-                    "en": [
-                        "Cancel your booking up to <b> 24 hours </b> before departure, no reason required",
-                        "Receive a <b>cash</b> refund of your flight cost (air transportation charges, taxes, fees and charges, excluding any additional services)",
-                        "Cancelling is easy via the My Bookings page, refund is provided by Hopper",
-                        "Offer is only available at time of booking and can only be purchased for all passengers"
-                    ],
-                    "fr": [
-                        "Annulez votre réservation jusqu'à <b>24 heures</b> avant le départ, aucun motif requis",
-                        "Recevez un remboursement <b>en argent comptant</b> du coût de votre vol (frais de transport aérien, taxes, frais et droits, à l'exclusion de tout service additionnel)",
-                        "Annulez en toute simplicité sur la page Mes réservations, le remboursement est effectué par Hopper",
-                        "L'offre est uniquement disponible au moment de la réservation et ne peut être achetée que pour tous les passagers"
-                    ],
-                    "es": [
-                        "Cancele su reserva hasta <b>24 horas</b> antes de la salida, sin necesidad de motivo",
-                        "Reciba un reembolso en <b>efectivo</b> del costo de su vuelo (cargos de transporte aéreo, impuestos, tarifas y cargos, excluyendo cualquier servicio adicional)",
-                        "Cancelar es fácil a través de la página Mis reservas, Hopper proporciona el reembolso",
-                        "La oferta solo está disponible al momento de la reserva y solo se puede comprar para todos los pasajeros"
-                    ],
-                    "zh": [
-                        "最迟可在出发前24小时无理由取消订单",
-                        "获得航班费用的现金退款（航空运输费用、税费和其他费用，额外服务费除外）",
-                        "您可以通过“我的订单 (My Bookings) 页面轻松取消预订, 退款由Hopper提供",
-                        "优惠仅在预订时有效，且必须为所有乘客购买"
-                    ]
+                contents: {
+                    "en": {
+                        bulletPoints: [
+                            "Cancel your booking up to <b> 24 hours </b> before departure, no reason required",
+                            "Receive a <b>cash</b> refund of your flight cost (air transportation charges, taxes, fees and charges, excluding any additional services)",
+                            "Cancelling is easy via the My Bookings page, refund is provided by Hopper",
+                            "Offer is only available at time of booking and can only be purchased for all passengers"
+                        ],
+                        labels: {}
+                    },
+                    "fr": {
+                        bulletPoints: [
+                            "Annulez votre réservation jusqu'à <b>24 heures</b> avant le départ, aucun motif requis",
+                            "Recevez un remboursement <b>en argent comptant</b> du coût de votre vol (frais de transport aérien, taxes, frais et droits, à l'exclusion de tout service additionnel)",
+                            "Annulez en toute simplicité sur la page Mes réservations, le remboursement est effectué par Hopper",
+                            "L'offre est uniquement disponible au moment de la réservation et ne peut être achetée que pour tous les passagers"
+                        ],
+                        labels: {}
+                    },
+                    "zh": {
+                        bulletPoints: [
+                            "最迟可在出发前24小时无理由取消订单",
+                            "获得航班费用的现金退款（航空运输费用、税费和其他费用，额外服务费除外）",
+                            "您可以通过“我的订单 (My Bookings) 页面轻松取消预订, 退款由Hopper提供",
+                            "优惠仅在预订时有效，且必须为所有乘客购买"
+                        ],
+                        labels: {}
+                    }
                 },
                 termsConditionsUrl: {
                     "en": "https://hopper.com/",
@@ -414,8 +422,7 @@ export class GlobalComponent implements OnChanges {
             passengerType: PassengerType.Adult,
             premium: '8'
         }],
-        hopperRefund: "57.78",
-        hopperRefundMethod: AirlineRefundMethod.Ftc,
+        cashRefundAllowance: "57.78",
         hopperRefundCurrency: "CAD",
         contractExpiryDateTime: new Date("2022-07-08T18:00Z"),
         status: CfarStatus.Created
@@ -426,8 +433,8 @@ export class GlobalComponent implements OnChanges {
     // Public Methods
     // -----------------------------------------------
 
-    public getOfferDescription(offer: CfarOfferCustomer) {
-        return offer.offerDescription[this.currentLang];
+    public getOfferDescription(offer: CfarOfferCustomer): string[] {
+        return offer.contents[this.currentLang || 'en']?.bulletPoints;
     }
 
     public getTCsUrl(offer: CfarOfferCustomer): string {

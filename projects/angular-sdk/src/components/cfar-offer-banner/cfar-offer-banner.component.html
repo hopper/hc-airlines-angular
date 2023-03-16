@@ -2,7 +2,7 @@
 
     <ng-container *ngIf="!isLoading">
 
-        <mat-card *ngIf="cheapestOffer" class="m-16 pointer" fxFlex fxLayout="row wrap">
+        <mat-card *ngIf="selectedCfarOffer" class="m-16 pointer" fxFlex fxLayout="row wrap">
     
             <div fxFlex="100" fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="16px">
     
@@ -16,7 +16,7 @@
                         <h2 class="offer-title">{{ 'CFAR_OFFER_BANNER.TITLE' | translate }}</h2>
                     </div>
 
-                    <ng-container *ngFor="let desc of getOfferDescription(cheapestOffer); let i = index;">
+                    <ng-container *ngFor="let desc of getOfferDescription(selectedCfarOffer); let i = index;">
                         <div class="py-16" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
                             <mat-icon class="check-icon">check</mat-icon>
                             <span innerHtml="{{ desc }}"></span>
@@ -26,7 +26,7 @@
                 </div>
 
                 <div fxFlex="calc(20% - 16px)" fxFlex.lt-md="100" fxLayout="row" fxLayoutAlign="center center" fxLayoutAlign.lt-md="end center">
-                    <button mat-raised-button (click)="onSubmit(cheapestOffer)" 
+                    <button mat-raised-button (click)="onSubmit(selectedCfarOffer)" 
                         attr.aria-label="{{ 'CFAR_OFFER_BANNER.BUTTON.SELECT' | translate }}">
                         {{ 'CFAR_OFFER_BANNER.BUTTON.SELECT' | translate }}
                     </button>

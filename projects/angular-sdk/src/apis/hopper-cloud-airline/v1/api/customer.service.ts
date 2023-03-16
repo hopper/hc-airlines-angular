@@ -44,7 +44,7 @@ import { Configuration }                                     from '../configurat
 @Injectable()
 export class CustomerService {
 
-    protected basePath = '/airline/v1.0';
+    protected basePath = '/airline/v1.1';
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
 

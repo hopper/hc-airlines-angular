@@ -16,9 +16,9 @@ export abstract class CommonGuidesComponent implements OnInit, OnDestroy {
     
   public currentTheme!: string;
   public currentLang!: string;
-  public basePath: string = 'http://localhost:7071/airline/v1.0';
-  // public basePath: string = 'http://unit.hc-airlines.svc.cluster.local:7070/airline/v1.0';
-  // public basePath: string = 'https://airlines-api.staging.hopper.com/airline/v1.0';
+  public basePath: string = 'http://localhost:7071/airline/v1.1';
+  // public basePath: string = 'http://unit.hc-airlines.svc.cluster.local:7070/airline/v1.1';
+  // public basePath: string = 'https://airlines-api.staging.hopper.com/airline/v1.1';
   public imageBasePath: string = ''; // 'http://localhost:4200/';
   public isFakeBackend!: boolean;
 
@@ -28,9 +28,9 @@ export abstract class CommonGuidesComponent implements OnInit, OnDestroy {
   public abstract htmlCode: string;
   
   // Parameters
-  public hCSessionId = "05918ba0-1bf5-46e9-839d-c2704133c655";
-  public contractId = "1ed5f483-6287-6b77-acb5-9719296bfa68";
-  public exerciseId = "1ed8111d-be97-62ec-93a9-d3f344379cc2";
+  public hCSessionId = "cdb5a0c4-6d7c-49a2-b7a3-df4011040798";
+  public contractId = "1ed5f483-6287-6b77-acb5-9719296bfa70";
+  public exerciseId = "1edb6b19-1151-6d7b-aafe-9f5d2df1ac02";
   public currency = "EUR";
   public passengers: PassengerPricing[] = [
     {
