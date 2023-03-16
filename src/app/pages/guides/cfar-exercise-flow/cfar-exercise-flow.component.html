@@ -1,6 +1,6 @@
 <div class="cfar-exercise-flow-page-container" 
     ngClass.gt-sm="p-32" ngClass.lt-md="p-16" ngClass.lt-sm="p-8" 
-    fxLayout="row wrap" fxLayoutAlign="start start">
+    fxLayout="row wrap" fxLayoutAlign="start start" #scrollAnchor>
 
     <p fxFlex="100">This page is displayed to the User following the successful retrieval of a CFAR contract for a booking eligible to the refund.
         The User gets a display of the booking’s itinerary that can be cancelled and is prompted to choose the refund type.<br />
@@ -21,6 +21,7 @@
                     [contactFormUrl]="contactFormUrl"
                     (flowCompleted)="onFlowCompleted($event)"
                     (errorOccurred)="onErrorOccurred($event)"
+                    (stepCompleted)="onStepCompleted($event)"
                 ></hopper-cfar-exercise-flow>
             </div>
         </mat-tab>

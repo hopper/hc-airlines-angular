@@ -44,6 +44,7 @@ export class CfarExerciseFlowComponent extends GlobalEventComponent implements O
   @Input() contactFormUrl!: string;
 
   @Output() flowCompleted = new EventEmitter();
+  @Output() stepCompleted = new EventEmitter();
 
   // Fake values
   private _fakeVerificationTokenId: string = "1ed2d2bb-8885-67a4-968f-81c642e12735";
@@ -53,7 +54,6 @@ export class CfarExerciseFlowComponent extends GlobalEventComponent implements O
   public checkVerificationCodeForm!: FormGroup;
   public step2Form!: FormGroup;
 
-  @ViewChild('scrollAnchor') public anchor!: ElementRef;
   @ViewChild('stepper') public stepper!: MatStepper;
 
   constructor(
@@ -95,11 +95,6 @@ export class CfarExerciseFlowComponent extends GlobalEventComponent implements O
   // -----------------------------------------------
   // Publics Methods
   // -----------------------------------------------
-
-  public onScrollToTop(timer?: number): void {
-    // Scroll to top of component (timer due to rendering delay)
-    setTimeout(() => this.anchor.nativeElement.scrollTo(0,0), timer || 0);
-  }
 
   public getNbPassengers(itinerary: CfarItinerary): number {
     let nbPassengers = 0;
@@ -248,7 +243,7 @@ export class CfarExerciseFlowComponent extends GlobalEventComponent implements O
                     this.createCfarExercisePortalCompleteEvent(ExerciseStepResult.TechnicalError)                    
 
                     // Scroll on the error message
-                    this.onScrollToTop(this._errorTimer);
+                    this.stepCompleted.emit(this._errorTimer);
                   }
               });
             };
@@ -268,7 +263,7 @@ export class CfarExerciseFlowComponent extends GlobalEventComponent implements O
             this.createCfarExerciseCustomerDataCompleteEvent(ExerciseStepResult.Failure)
   
             // Scroll on the error message
-            this.onScrollToTop(this._errorTimer);
+            this.stepCompleted.emit(this._errorTimer);
           }
         });
     }
@@ -320,7 +315,7 @@ export class CfarExerciseFlowComponent extends GlobalEventComponent implements O
           this.createCfarExercisePortalCompleteEvent(ExerciseStepResult.TechnicalError)
 
           // Scroll on the error message
-          this.onScrollToTop(this._errorTimer);
+          this.stepCompleted.emit(this._errorTimer);
         }
       });
   }
@@ -383,7 +378,7 @@ export class CfarExerciseFlowComponent extends GlobalEventComponent implements O
             this.isLoading = false;
 
             // Scroll on the error message
-            this.onScrollToTop(this._errorTimer);
+            this.stepCompleted.emit(this._errorTimer);
           }
         });
     }
@@ -446,7 +441,7 @@ export class CfarExerciseFlowComponent extends GlobalEventComponent implements O
             this.createCfarExerciseVerificationCompleteEvent(ExerciseStepResult.TechnicalError);
 
             // Scroll on the error message
-            this.onScrollToTop(this._errorTimer);
+            this.stepCompleted.emit(this._errorTimer);
           }
         });
     }
@@ -486,7 +481,7 @@ export class CfarExerciseFlowComponent extends GlobalEventComponent implements O
             this.isLoading = false;
 
             // Scroll on the error message
-            this.onScrollToTop(this._errorTimer);
+            this.stepCompleted.emit(this._errorTimer);
           }
         });
     }

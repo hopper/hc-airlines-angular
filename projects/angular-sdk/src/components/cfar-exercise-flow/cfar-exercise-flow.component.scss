@@ -39,7 +39,31 @@
             border-bottom: 1px solid map-get($fg-palette, divider);
         }
 
-        .content {
+        .card-content {
+            max-width: 100%;
+
+            mat-vertical-stepper {
+                width: 100%;
+            }
+
+            .mat-vertical-stepper-content[aria-expanded="false"] {
+                display: none;
+            }
+
+            @include media-breakpoint('lt-md') {
+                mat-step-header {
+                    padding: 16px 0px;
+                }
+
+                .mat-vertical-content-container  {
+                    margin-left: 12px;
+
+                    .mat-vertical-content {
+                        padding: 16px;
+                    }
+                }
+            }
+
             @include media-breakpoint('lt-sm') {
                 // Full-height - header height
                 max-height: calc(100% - 48px);
@@ -81,6 +105,7 @@
 
             .itinerary-container {
                 border-right: 1px solid map-get($fg-palette, divider);
+                width: 100%;
                 
                 @include media-breakpoint('lt-sm') {
                     border-right: none;

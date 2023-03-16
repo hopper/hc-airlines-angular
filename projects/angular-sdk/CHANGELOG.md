@@ -1,12 +1,15 @@
 <a name="4.3.1"></a>
 
-# 4.3.1 (2023-XX-XX)
+# 4.3.1 (2023-03-16)
 
 General:
 - Fixed the size of the "powered by hopper" logo
 
 Exercise flow:
 - Fixed an occasional issue that allowed skipping 2 steps at once.
+- Fixed display of general information form on large screens.
+- Added a new event when a step is completed.
+- Improved rendering on mobile.
 
 Offer banner large and Offer dialog:
 - Display of offers respecting the order of the API response

@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, ElementRef, ViewChild } from "@angular/core";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { Store } from "@ngrx/store";
 import { Locales } from "projects/angular-sdk/src/i18n";
@@ -16,21 +16,27 @@ import { ErrorSdkModel } from "projects/angular-sdk/src/models";
 export class CfarExerciseFlowPageComponent extends CommonGuidesComponent {
 
   public  htmlCode: string = `
-    <hopper-cfar-exercise-flow
-      [basePath]="basePath"
-      [imageBasePath]="imageBasePath"
-      [currentLang]="currentLang"
-      [hCSessionId]="hCSessionId"
-      [exerciseId]="exerciseId"
-      [hyperwalletUrl]="hyperwalletUrl"
-      [contactFormUrl]="contactFormUrl"
-      (flowCompleted)="onFlowCompleted($event)"
-      (errorOccurred)="onErrorOccurred($event)"
-    ></hopper-cfar-exercise-flow>
+    <div id="parentDiv" #scrollAnchor>
+      <hopper-cfar-exercise-flow
+        [basePath]="basePath"
+        [imageBasePath]="imageBasePath"
+        [currentLang]="currentLang"
+        [hCSessionId]="hCSessionId"
+        [exerciseId]="exerciseId"
+        [hyperwalletUrl]="hyperwalletUrl"
+        [contactFormUrl]="contactFormUrl"
+        (flowCompleted)="onFlowCompleted($event)"
+        (errorOccurred)="onErrorOccurred($event)"
+      ></hopper-cfar-exercise-flow>
+    </div>
   `;
 
   public  tsCode: string = `
     import { ErrorSdkModel } from "@hopper-cloud-airlines/angular-sdk/models";
+
+    @ViewChild('scrollAnchor') public anchor!: ElementRef;
+
+    // ....
 
     public onFlowCompleted(data: string): void {
       console.log(data);
@@ -39,7 +45,14 @@ export class CfarExerciseFlowPageComponent extends CommonGuidesComponent {
     public onErrorOccurred(error: ErrorSdkModel): void {
       console.log(error);
     }
+
+    public onStepCompleted(timer?: number): void {
+      // Scroll to top of component (timer due to rendering delay)
+      setTimeout(() => this.anchor.nativeElement.scrollTo(0,0), timer || 0);
+    }
   `;
+
+  @ViewChild('scrollAnchor') public anchor!: ElementRef;
 
   constructor(
     protected _store: Store<AppState>,
@@ -132,7 +145,13 @@ export class CfarExerciseFlowPageComponent extends CommonGuidesComponent {
           Event triggered when an error occurs into the SDK<br />
           Returns a ErrorSdkModel : { endpoint: string, errorCode: string, errorDescription?: string }
         `
-      }
+      },
+      {
+        name: 'stepCompleted',
+        description: `
+          Event triggered when a step is completed
+        `
+      },
     ];
   }
 
@@ -142,5 +161,10 @@ export class CfarExerciseFlowPageComponent extends CommonGuidesComponent {
 
   public onErrorOccurred(error: ErrorSdkModel): void {
     console.log(error);
+  }
+
+  public onStepCompleted(timer?: number): void {
+    // Scroll to top of component (timer due to rendering delay)
+    setTimeout(() => this.anchor.nativeElement.scrollTo(0,0), timer || 0);
   }
 }

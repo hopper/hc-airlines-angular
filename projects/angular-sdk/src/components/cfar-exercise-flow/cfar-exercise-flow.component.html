@@ -1,12 +1,12 @@
 <div ngClass.gt-md="px-32" ngClass.gt-sm="px-16" ngClass.lt-md="px-0" fxLayout="row" fxLayoutAlign="center center">
 
-    <mat-card class="mat-elevation-z4 pointer" ngClass.gt-sm="m-16" fxFlex fxLayout="row wrap">
-    
+    <mat-card ngClass.gt-sm="mat-elevation-z4" fxFlex fxLayout="row wrap">
+
         <div fxFlex="100" class="header" fxLayout="row" fxLayoutAlign="center center">
             <h1>{{ 'CFAR_EXERCISE_FLOW.TITLE' | translate }}</h1>
         </div>
 
-        <div fxFlex="100" class="content" fxLayout="row wrap" #scrollAnchor>
+        <div fxFlex="100" class="card-content" fxLayout="row wrap">
 
             <ng-container *ngIf="!isLoading">
 
@@ -81,7 +81,7 @@
                     
                     <ng-container *ngIf="!isCfarContractExercised()">
                         
-                        <mat-vertical-stepper orientation="vertical" #stepper linear (selectionChange)="onScrollToTop()">
+                        <mat-vertical-stepper orientation="vertical" #stepper linear (selectionChange)="stepCompleted.emit()">
                             
                             <!-- STEP 1 -->
                             <mat-step completed="false" editable="false">
@@ -120,7 +120,7 @@
             
                                         <ng-container *ngFor="let slice of cfarExercise?.itinerary?.slices">
             
-                                            <div fxLayout="row wrap" fxLayoutAlign="start center" 
+                                            <div class="full-width" fxLayout="row wrap" fxLayoutAlign="center center" 
                                                 *ngFor="let segment of slice?.segments">
             
                                                 <div fxFlex="100" class="mb-8">
@@ -227,7 +227,7 @@
             
                                     <form [formGroup]="step2Form" class="full-width" fxLayout="column" fxLayoutGap="16px" fxLayoutAlign="center center">             
                                         <!-- PERSONAL INFORMATION -->
-                                        <fieldset class="p-16" fxFlex="100" fxLayout="row wrap" fxLayoutAlign="start center">
+                                        <fieldset class="full-width p-16" fxLayout="row wrap" fxLayoutAlign="start center">
                                             <legend class="px-16 py-8">{{ 'CFAR_EXERCISE_FLOW.FORM.PERSONAL_INFORMATION' | translate }}</legend>
                                             
                                             <mat-form-field fxFlex="100" appearance="outline">
@@ -258,7 +258,7 @@
                                         <!-- / PERSONAL INFORMATION -->
             
                                         <!-- HOME ADDRESS -->
-                                        <fieldset class="p-16" fxFlex="100" fxLayout="row wrap" fxLayoutAlign="start center">
+                                        <fieldset class="full-width p-16" fxLayout="row wrap" fxLayoutAlign="start center">
                                             <legend class="px-16 py-8">{{ 'CFAR_EXERCISE_FLOW.FORM.HOME_ADDRESS' | translate }}</legend>
             
                                             <mat-form-field fxFlex="100" appearance="outline">
@@ -373,7 +373,7 @@
             
                                         <ng-container *ngFor="let slice of cfarExercise?.itinerary?.slices">
             
-                                            <div fxLayout="row wrap" fxLayoutAlign="start center" 
+                                            <div class="full-width" fxLayout="row wrap" fxLayoutAlign="center center" 
                                                 *ngFor="let segment of slice?.segments">
             
                                                 <div fxFlex="100" class="mb-8">
