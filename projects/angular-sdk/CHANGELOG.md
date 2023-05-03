@@ -1,3 +1,10 @@
+<a name="4.3.2"></a>
+
+# 4.3.2 (2023-05-03)
+
+General:
+- Update errors labels
+
 <a name="4.3.1"></a>
 
 # 4.3.1 (2023-03-16)
