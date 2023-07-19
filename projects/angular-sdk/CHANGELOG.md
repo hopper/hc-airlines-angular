@@ -1,3 +1,10 @@
+<a name="4.3.2"></a>
+
+# 4.3.2 (2023-07-19)
+
+General:
+- Minor changes on the API
+
 <a name="4.3.1"></a>
 
 # 4.3.1 (2023-03-16)

@@ -3,7 +3,7 @@ import { Locales } from "../i18n";
 import { TranslateService } from '@ngx-translate/core';
 import { I18n } from "../i18n/i18n.interface";
 import { DateAdapter } from "@angular/material/core";
-import { CfarContractCustomer, CfarItinerary, CfarOfferCustomer, CfarStatus, CreateCfarContractCustomerRequest, CreateCfarOfferCustomerRequest, GetCfarExerciseCustomerResponse, PassengerType, RequestType, UiSource, UiVariant } from "../apis/hopper-cloud-airline/v1";
+import { CfarContractCustomer, CfarItinerary, CfarOfferCustomer, CfarPriceType, CfarStatus, CreateCfarContractCustomerRequest, CreateCfarOfferCustomerRequest, GetCfarExerciseCustomerResponse, PassengerType, RequestType, UiSource, UiVariant } from "../apis/hopper-cloud-airline/v1";
 import { CountryCode } from "../enums/country-code.enum";
 import { take } from "rxjs/operators";
 import { HttpErrorResponse } from "@angular/common/http";
@@ -420,7 +420,8 @@ export class GlobalComponent implements OnChanges {
             coverage: '19.26',
             nbPax: 3,
             passengerType: PassengerType.Adult,
-            premium: '8'
+            premium: '8',
+            cfarPriceType: CfarPriceType.Ancillary
         }],
         cashRefundAllowance: "57.78",
         hopperRefundCurrency: "CAD",

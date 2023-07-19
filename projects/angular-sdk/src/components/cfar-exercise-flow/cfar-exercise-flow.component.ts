@@ -462,7 +462,7 @@ export class CfarExerciseFlowComponent extends GlobalEventComponent implements O
 
       // Get the contract with the exercise
       this._hopperCfarService
-        .getCfarExerciseById(this.basePath, this.hCSessionId, this.exerciseId)
+        .getCfarExercises(this.basePath, this.hCSessionId, this._verificationCode)
         .pipe(take(1))
         .subscribe({
           next: (cfarExercise: GetCfarExerciseCustomerResponse) => {

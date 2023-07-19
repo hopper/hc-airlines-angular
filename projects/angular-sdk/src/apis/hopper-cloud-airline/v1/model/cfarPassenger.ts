@@ -9,11 +9,17 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
+import { Gender } from './gender';
+import { PassengerType } from './passengerType';
 
-export interface BookingConfirmed { 
-    /**
-     * A UTC [RFC3339](https://xml2rfc.tools.ietf.org/public/rfc/html/rfc3339.html#anchor14) datetime;  the date and time at which an event occurred on a client device
-     */
-    occurredDateTime: Date;
-    type: string;
+/**
+ * An object detailing the Passenger Information
+ */
+export interface CfarPassenger { 
+    passengerReference: string;
+    passengerType: PassengerType;
+    firstName?: string;
+    lastName?: string;
+    dateOfBirth?: string;
+    gender?: Gender;
 }

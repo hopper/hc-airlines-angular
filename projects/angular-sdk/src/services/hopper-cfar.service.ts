@@ -28,11 +28,11 @@ export class HopperCfarService extends HopperProxyService {
     return this._customerService.postCustomerCfarContracts(request, hCSessionId, language);
   }
 
-  getCfarExerciseById(basePath: string, hCSessionId: string, id: string): Observable<GetCfarExerciseCustomerResponse> {
+  getCfarExercises(basePath: string, hCSessionId: string, verificationCode: string): Observable<GetCfarExerciseCustomerResponse> {
     // Init services
     this._overrideConfiguration(basePath);
 
-    return this._customerService.getCustomerCfarExercisesId(id, hCSessionId);
+    return this._customerService.getCustomerCfarExercises(verificationCode, hCSessionId);
   }
 
   postRefundAuthorizations(basePath: string, hCSessionId: string, verificationCode: string, request: CreateRefundAuthorizationRequest): Observable<RefundAuthorization> {
@@ -56,17 +56,17 @@ export class HopperCfarService extends HopperProxyService {
     return this._customerService.postCustomerInitiateRefund(request, hCSessionId, verificationCode);
   }
 
-  postSendCfarExerciseVerificationCode(basePath: string, hCSessionId: string, contractId: string, request: SendCfarContractExerciseVerificationCodeRequest): Observable<SendCfarContractExerciceVerificationCodeResponse> {
+  postSendCfarExerciseVerificationCode(basePath: string, hCSessionId: string, exerciseId: string, request: SendCfarContractExerciseVerificationCodeRequest): Observable<SendCfarContractExerciceVerificationCodeResponse> {
     // Init services
     this._overrideConfiguration(basePath);
     
-    return this._customerService.postCustomerIdSendExerciseVerificationCode(request, contractId, hCSessionId);
+    return this._customerService.postCustomerIdSendExerciseVerificationCode(request, exerciseId, hCSessionId);
   }
 
-  postCheckCfarExerciseVerificationCode(basePath: string, hCSessionId: string, contractId: string, request: CheckCfarContractExerciseVerificationCodeRequest): Observable<CheckCfarContractExerciceVerificationCodeResponse> {
+  postCheckCfarExerciseVerificationCode(basePath: string, hCSessionId: string, exerciseId: string, request: CheckCfarContractExerciseVerificationCodeRequest): Observable<CheckCfarContractExerciceVerificationCodeResponse> {
     // Init services
     this._overrideConfiguration(basePath);
     
-    return this._customerService.postCustomerIdCheckExerciseVerificationCode(request, contractId, hCSessionId);
+    return this._customerService.postCustomerIdCheckExerciseVerificationCode(request, exerciseId, hCSessionId);
   }
 }

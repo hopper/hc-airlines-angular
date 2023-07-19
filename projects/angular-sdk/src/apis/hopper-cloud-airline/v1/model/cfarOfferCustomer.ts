@@ -59,4 +59,5 @@ export interface CfarOfferCustomer {
     itinerary: CfarItinerary;
     termsConditionsUrl: MapString;
     contents: MapCfarContents;
+    coverageExtension?: string;
 }

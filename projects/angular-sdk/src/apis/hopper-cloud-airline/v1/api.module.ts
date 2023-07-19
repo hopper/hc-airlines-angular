@@ -2,8 +2,6 @@ import { NgModule, ModuleWithProviders, SkipSelf, Optional } from '@angular/core
 import { Configuration } from './configuration';
 import { HttpClient } from '@angular/common/http';
 
-
-import { CancelForAnyReasonCFARService } from './api/cancelForAnyReasonCFAR.service';
 import { CustomerService } from './api/customer.service';
 
 @NgModule({
@@ -11,7 +9,6 @@ import { CustomerService } from './api/customer.service';
   declarations: [],
   exports:      [],
   providers: [
-    CancelForAnyReasonCFARService,
     CustomerService ]
 })
 export class ApiModule {
