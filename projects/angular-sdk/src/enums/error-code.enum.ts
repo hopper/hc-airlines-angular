@@ -72,13 +72,13 @@ export enum ErrorCode {
 
     // The contract exercise was not found.
     EX001 = "EX001",
-    // It is too late to use CFAR to cancel your booking.
+    // The contract has expired. It is too late to create an associated exercise.
     EX002 = "EX002",
-    // No Cfar contract for this booking reference.
+    // No contract for this booking reference.
     EX003 = "EX003",
-    // No CFAR exercise for this booking.
+    // No exercise for this booking.
     EX004 = "EX004",
-    // It is too late to use CFAR to cancel your booking.
+    // The contract has expired. It is too late to create an associated exercise.
     EX008 = "EX008",
     // An exercise is in progress.
     EX009 = "EX009",
@@ -167,9 +167,9 @@ export enum ErrorCode {
     ME005 = "ME005",
     // The input passengers do not match with the passengers on the initial contract.
     ME006 = "ME006",
-    // It is too late to use CFAR to cancel your booking.
+    // The contract has expired. It is too late to create an associated exercise.
     ME007 = "ME007",
-    // No Cfar contract for this booking reference.
+    // No contract for this booking reference.
     ME008 = "ME008",
     // The contract was not confirmed.
     ME009 = "ME009",
