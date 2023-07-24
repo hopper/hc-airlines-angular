@@ -7,7 +7,7 @@ import { DateAdapter } from "@angular/material/core";
 import { ApiTranslatorUtils } from '../../utils/api-translator.utils';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { MatStepper } from '@angular/material/stepper';
 import { DatePipe } from '@angular/common';
 import { ExerciseActionStep } from '../../enums/exercise-action-step.enum';
@@ -51,8 +51,8 @@ export class CfarExerciseFlowComponent extends GlobalEventComponent implements O
   private _minLengthVerificationCode: number = 6;
 
   // Forms
-  public checkVerificationCodeForm!: FormGroup;
-  public step2Form!: FormGroup;
+  public checkVerificationCodeForm!: UntypedFormGroup;
+  public step2Form!: UntypedFormGroup;
 
   @ViewChild('stepper') public stepper!: MatStepper;
 
@@ -63,7 +63,7 @@ export class CfarExerciseFlowComponent extends GlobalEventComponent implements O
     private _translateService: TranslateService,
     private _hopperCfarService: HopperCfarService,
     private _hopperEventService: HopperEventsService,
-    private _formBuilder: FormBuilder,
+    private _formBuilder: UntypedFormBuilder,
     private _datePipe: DatePipe
   ) {
     super(_adapter, _translateService, _hopperEventService);
@@ -508,16 +508,16 @@ export class CfarExerciseFlowComponent extends GlobalEventComponent implements O
     });
 
     this.step2Form = this._formBuilder.group({
-      firstName: new FormControl(null, [Validators.required]),
-      middleName: new FormControl(null),
-      lastName: new FormControl(null, [Validators.required]),
-      dateOfBirth: new FormControl(null, [Validators.required]),
-      addressLine1: new FormControl(null, [Validators.required]),
-      addressLine2: new FormControl(),
-      city: new FormControl(null, [Validators.required]),
-      country: new FormControl(null, [Validators.required]),
-      state: new FormControl(null, [Validators.required]),
-      zip: new FormControl(null, [Validators.required])
+      firstName: new UntypedFormControl(null, [Validators.required]),
+      middleName: new UntypedFormControl(null),
+      lastName: new UntypedFormControl(null, [Validators.required]),
+      dateOfBirth: new UntypedFormControl(null, [Validators.required]),
+      addressLine1: new UntypedFormControl(null, [Validators.required]),
+      addressLine2: new UntypedFormControl(),
+      city: new UntypedFormControl(null, [Validators.required]),
+      country: new UntypedFormControl(null, [Validators.required]),
+      state: new UntypedFormControl(null, [Validators.required]),
+      zip: new UntypedFormControl(null, [Validators.required])
     });
   }
 

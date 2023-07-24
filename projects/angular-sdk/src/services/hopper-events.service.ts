@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
-import { Event, CustomerService, CfarOffersBannerDisplay, UiVariant, CfarOffersTakeoverDisplay, CfarForcedChoiceWarning, CfarViewInfo, UiSource, CfarDenyPurchase, CfarExercisePortalDisplay, CfarExerciseVerificationSent, CfarExerciseVerificationComplete, ExerciseStepResult, CfarExerciseCustomerDataComplete, CfarExercisePortalComplete, CfarExerciseCallbackLaunched } from "../apis/hopper-cloud-airline/v1";
+import { CustomerService, CfarOffersBannerDisplay, UiVariant, CfarOffersTakeoverDisplay, CfarForcedChoiceWarning, CfarViewInfo, UiSource, CfarDenyPurchase, CfarExercisePortalDisplay, CfarExerciseVerificationSent, CfarExerciseVerificationComplete, ExerciseStepResult, CfarExerciseCustomerDataComplete, CfarExercisePortalComplete, CfarExerciseCallbackLaunched } from "../apis/hopper-cloud-airline/v1";
 import { ApiTranslatorUtils } from "../utils/api-translator.utils";
 import { HopperProxyService } from "./hopper-proxy.service";
 
