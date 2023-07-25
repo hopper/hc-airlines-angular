@@ -1,6 +1,6 @@
 <a name="5.0.0"></a>
 
-# 5.0.0 (2023-XX-XX)
+# 5.0.0 (2023-07-25)
 
 ### Major changes
 - Added support for Angular 14

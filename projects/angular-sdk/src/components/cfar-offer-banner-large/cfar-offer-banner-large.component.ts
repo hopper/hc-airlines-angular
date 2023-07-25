@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { take } from 'rxjs/operators';
 import { CfarContractCustomer, CfarItinerary, CfarOfferCustomer, UiSource, UiVariant } from '../../apis/hopper-cloud-airline/v1';
 import { TranslateService } from '@ngx-translate/core';
@@ -37,8 +37,9 @@ export class CfarOfferBannerLargeComponent extends GlobalEventComponent implemen
     private _translateService: TranslateService,
     private _hopperCfarService: HopperCfarService,
     private _hopperEventService: HopperEventsService,
+    private _cdRef: ChangeDetectorRef
   ) {
-    super(_adapter, _translateService, _hopperEventService);
+    super(_adapter, _translateService, _hopperEventService, _cdRef);
   }
 
   // -----------------------------------------------

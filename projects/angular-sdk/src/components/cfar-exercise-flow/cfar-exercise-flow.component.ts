@@ -1,4 +1,4 @@
-import { Component, EventEmitter, HostListener, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, HostListener, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { take } from 'rxjs/operators';
 import { CfarStatus, CfarItinerary, CheckCfarContractExerciceVerificationCodeResponse, CheckCfarContractExerciseVerificationCodeRequest, CreateRefundAuthorizationRequest, CreateRefundRecipientRequest, InitiateRefundRequest, RefundAuthorization, RefundRecipient, GetCfarExerciseCustomerResponse, InitiateRefundResponse, ExerciseStepResult } from '../../apis/hopper-cloud-airline/v1';
 import { GlobalEventComponent } from '../global-event.component';
@@ -64,9 +64,10 @@ export class CfarExerciseFlowComponent extends GlobalEventComponent implements O
     private _hopperCfarService: HopperCfarService,
     private _hopperEventService: HopperEventsService,
     private _formBuilder: UntypedFormBuilder,
-    private _datePipe: DatePipe
+    private _datePipe: DatePipe,
+    private _cdRef: ChangeDetectorRef
   ) {
-    super(_adapter, _translateService, _hopperEventService);
+    super(_adapter, _translateService, _hopperEventService, _cdRef);
 
     // Create material icon for refundable ticket
     this._matIconRegistry.addSvgIcon(

@@ -1,4 +1,4 @@
-import { Directive, EventEmitter, Input, OnChanges, Output, SimpleChanges } from "@angular/core";
+import { ChangeDetectorRef, Directive, EventEmitter, Input, OnChanges, Output, SimpleChanges } from "@angular/core";
 import { Locales } from "../i18n";
 import { TranslateService } from '@ngx-translate/core';
 import { I18n } from "../i18n/i18n.interface";
@@ -31,7 +31,8 @@ export class GlobalComponent implements OnChanges {
 
     constructor(
         protected adapter: DateAdapter<any>,
-        protected translateService: TranslateService
+        protected translateService: TranslateService,
+        protected cdRef: ChangeDetectorRef
     ) {
         // Set Labels
         Locales.forEach((locale: I18n) => {
@@ -63,6 +64,10 @@ export class GlobalComponent implements OnChanges {
             // Update countries labels
             this._setCountriesLabels();
         }
+    }
+
+    ngAfterContentChecked(): void {
+        this.cdRef.detectChanges();
     }
 
     // -----------------------------------------------

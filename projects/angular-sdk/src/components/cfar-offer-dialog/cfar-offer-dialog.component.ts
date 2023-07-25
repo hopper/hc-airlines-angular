@@ -1,4 +1,4 @@
-import { Component, Inject, OnChanges, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Inject, OnChanges, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { take } from 'rxjs/operators';
 import { CfarContractCustomer, CfarItinerary, CfarOfferCustomer, CreateCfarContractCustomerRequest, CreateCfarOfferCustomerRequest, RequestType, UiSource, UiVariant } from '../../apis/hopper-cloud-airline/v1';
@@ -32,9 +32,10 @@ export class CfarOfferDialogComponent extends GlobalComponent implements OnInit,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private _hopperCfarService: HopperCfarService,
     private _hopperEventService: HopperEventsService,
-    private _decimalPipe: DecimalPipe
+    private _decimalPipe: DecimalPipe,
+    private _cdRef: ChangeDetectorRef
   ) {
-    super(_adapter, _translateService);
+    super(_adapter, _translateService, _cdRef);
 
     // Mandatory data
     this._hCSessionId = data.hCSessionId;
@@ -67,6 +68,10 @@ export class CfarOfferDialogComponent extends GlobalComponent implements OnInit,
       // No offers exist. We create offers from itineraries data first
       this.initCfarOffers();      
     }
+  }
+
+  ngAfterContentChecked(): void {
+    this._cdRef.detectChanges();
   }
 
   // -----------------------------------------------
