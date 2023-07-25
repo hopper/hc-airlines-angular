@@ -15,7 +15,7 @@ jobs:
         with:
           node-version: 16.17.0
           registry-url: https://registry.npmjs.org/
-      - run: npm install -g @angular/cli@13.3.9
+      - run: npm install -g @angular/cli@14.2.12
       - run: npm install
       - run: ng build "angular-sdk"
       - run: |

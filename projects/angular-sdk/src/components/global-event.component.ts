@@ -1,4 +1,4 @@
-import { Directive } from "@angular/core";
+import { ChangeDetectorRef, Directive } from "@angular/core";
 import { TranslateService } from '@ngx-translate/core';
 import { DateAdapter } from "@angular/material/core";
 import { ExerciseStepResult, UiSource, UiVariant } from "../apis/hopper-cloud-airline/v1";
@@ -20,9 +20,10 @@ export class GlobalEventComponent extends GlobalComponent {
     constructor(
         protected adapter: DateAdapter<any>,
         protected translateService: TranslateService,
-        protected hopperEventService: HopperEventsService
+        protected hopperEventService: HopperEventsService,
+        protected cdRef: ChangeDetectorRef
     ) {
-        super(adapter, translateService);
+        super(adapter, translateService, cdRef);
     }
 
     // -----------------------------------------------
@@ -144,7 +145,6 @@ export class GlobalEventComponent extends GlobalComponent {
         }
         return false;  
     }
-
 
     protected createCfarExercisePortalDisplayEvent(): void {
         if (!this.isExerciseEventPossible) {

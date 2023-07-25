@@ -81,7 +81,7 @@
                     
                     <ng-container *ngIf="!isCfarContractExercised()">
                         
-                        <mat-vertical-stepper orientation="vertical" #stepper linear (selectionChange)="stepCompleted.emit()">
+                        <mat-stepper orientation="vertical" #stepper linear (selectionChange)="stepCompleted.emit()">
                             
                             <!-- STEP 1 -->
                             <mat-step completed="false" editable="false">
@@ -452,7 +452,7 @@
                             </mat-step>
                             <!-- / STEP 4 -->
                             
-                        </mat-vertical-stepper>
+                        </mat-stepper>
 
                     </ng-container>
 

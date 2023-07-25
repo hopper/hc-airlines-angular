@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { take } from 'rxjs/operators';
 import { CfarContractCustomer, CfarItinerary, CfarOfferCustomer, CreateCfarOfferCustomerRequest, RequestType } from '../../apis/hopper-cloud-airline/v1';
 import { GlobalComponent } from '../global.component';
@@ -33,9 +33,10 @@ export class CfarOfferBannerComponent extends GlobalComponent implements OnInit 
     private _adapter: DateAdapter<any>,
     private _translateService: TranslateService,
     private _hopperCfarService: HopperCfarService,
-    private _dialog: MatDialog
-  ) {
-    super(_adapter, _translateService);
+    private _dialog: MatDialog,
+    private _cdRef: ChangeDetectorRef
+    ) {
+      super(_adapter, _translateService, _cdRef);
   }
 
   // -----------------------------------------------
@@ -76,6 +77,10 @@ export class CfarOfferBannerComponent extends GlobalComponent implements OnInit 
           }
         });
     }
+  }
+
+  ngAfterContentChecked(): void {
+    this._cdRef.detectChanges();
   }
 
   // -----------------------------------------------

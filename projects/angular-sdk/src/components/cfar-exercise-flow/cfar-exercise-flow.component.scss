@@ -42,7 +42,7 @@
         .card-content {
             max-width: 100%;
 
-            mat-vertical-stepper {
+            mat-stepper {
                 width: 100%;
             }
 
@@ -95,6 +95,7 @@
                 font-size: 32px;
                 width: 32px;
                 height: 32px;
+                overflow: unset;
             }
 
             .decorative-stroke {
