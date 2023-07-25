@@ -1,3 +1,10 @@
+<a name="5.0.1"></a>
+
+# 5.0.1 (2023-07-25)
+
+General:
+- Fixed the minimum requirements of the SDK
+
 <a name="5.0.0"></a>
 
 # 5.0.0 (2023-07-25)
