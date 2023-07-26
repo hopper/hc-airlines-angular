@@ -28,7 +28,7 @@
 
 .theme-light-blue {
   // Apply the theme to all Angular Material Components
-  @include mat.all-component-themes($light-blue-theme);
+  @include mat.all-legacy-component-themes($light-blue-theme);
 
   // Apply the theme to the library components
   @include hopper-cloud-airlines-angular-sdk-components-theme($light-blue-theme);
@@ -42,7 +42,7 @@
 
 .theme-light-yellow {
   // Apply the theme to all Angular Material Components
-  @include mat.all-component-themes($light-yellow-theme);
+  @include mat.all-legacy-component-themes($light-yellow-theme);
 
   // Apply the theme to the library components
   @include hopper-cloud-airlines-angular-sdk-components-theme($light-yellow-theme);
