@@ -24,11 +24,11 @@
     // ----------------------------------------------
 
     hopper-cfar-exercise-flow {
-        .mat-button, 
-        .mat-flat-button, 
-        .mat-icon-button, 
-        .mat-raised-button,
-        .mat-stroked-button { 
+        .mat-mdc-button, 
+        .mat-mdc-unelevated-button, 
+        .mat-mdc-icon-button, 
+        .mat-mdc-raised-button,
+        .mat-mdc-outlined-button { 
             border-radius: 0px; 
         }
 
@@ -37,6 +37,12 @@
             margin: 0px;
             text-align: center;
             border-bottom: 1px solid map-get($fg-palette, divider);
+        }
+
+        .mat-mdc-card {
+            @include media-breakpoint('gt-sm') {
+                @include mat.elevation(4);
+            }
         }
 
         .card-content {
@@ -92,9 +98,10 @@
 
             .flight-icon {
                 transform: rotate(90deg);
-                font-size: 32px;
-                width: 32px;
-                height: 32px;
+                font-size: 32px !important;
+                width: 32px !important;
+                height: 32px !important;
+                min-width: 32px !important;
                 overflow: unset;
             }
 
@@ -112,22 +119,6 @@
                     border-right: none;
                     border-bottom: 1px solid map-get($fg-palette, divider);
                     padding-bottom: 16px;
-                }
-            }
-
-            mat-card {
-                border-radius: 0px;
-                
-                &:hover {
-                    @include mat.elevation(4);
-                }
-
-                &.active {
-                    border: 2px solid map-get($accent-palette, default);
-                }
-
-                .offer-title {
-                    font-weight: bold;
                 }
             }
 

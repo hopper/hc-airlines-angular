@@ -23,7 +23,8 @@
 
     app-guides-page {
         .guides-page-container {
-            mat-card {
+            
+            .mat-mdc-card {
                 max-width: 300px;
                 background-color: map-get($accent-palette, default);
                 color: map-get($accent-palette, "default-contrast");

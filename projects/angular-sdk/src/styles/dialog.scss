@@ -3,15 +3,12 @@
 ::ng-deep {
     .hopper-dialog-container {
         max-width: 640px !important;
-        min-width: 500px !important;
 
         @include media-breakpoint('gt-md') {
             min-height: 600px !important;    
         }
 
         @include media-breakpoint('lt-md') {
-            max-width: 80% !important;
-            min-width: 300px !important;
             height: 80%;    
         }
 
@@ -20,11 +17,11 @@
             height: 100%;
         }
     
-        .mat-dialog-container {
+        .mat-mdc-dialog-container {
             padding: 0px !important;
             border-radius: 0px;
 
-            .mat-dialog-content {
+            .mat-mdc-dialog-content {
                 // Full height - header - footer
                 max-height: calc(100% - 212px);
 
@@ -34,8 +31,8 @@
                 }
             }
 
-            .mat-dialog-content,
-            .mat-dialog-actions {
+            .mat-mdc-dialog-content,
+            .mat-mdc-dialog-actions {
                 padding: 0px !important;
                 margin: 0px !important;
             }

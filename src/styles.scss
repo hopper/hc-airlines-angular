@@ -13,9 +13,9 @@
 //  If you specify typography styles for the components you use elsewhere, you should delete this line.
 //  If you don't need the default component typographies but still want the hierarchy styles,
 //  you can delete this line and instead use:
-//    `@include mat.legacy-typography-hierarchy(mat.define-legacy-typography-config());`
-@include mat.all-legacy-component-typographies();
-@include mat.legacy-core();
+//    `@include mat.legacy-typography-hierarchy(mat.define-typography-config());`
+@include mat.all-component-typographies();
+@include mat.core();
 
 $dark-primary-text: rgba(black, 0.87);
 $light-primary-text: white;
@@ -151,7 +151,7 @@ $hopper-light-theme: mat.define-light-theme((
 
 .theme-dark-hopper {
   // Apply the theme to all Angular Material Components
-  @include mat.all-legacy-component-themes($hopper-dark-theme);
+  @include mat.all-component-themes($hopper-dark-theme);
 
   // Apply the theme to the library components
   @include hopper-cloud-airlines-angular-sdk-components-theme($hopper-dark-theme);
@@ -162,7 +162,7 @@ $hopper-light-theme: mat.define-light-theme((
 
 .theme-light-hopper {
   // Apply the theme to all Angular Material Components
-  @include mat.all-legacy-component-themes($hopper-light-theme);
+  @include mat.all-component-themes($hopper-light-theme);
 
   // Apply the theme to the library components
   @include hopper-cloud-airlines-angular-sdk-components-theme($hopper-light-theme);
@@ -177,7 +177,7 @@ $hopper-light-theme: mat.define-light-theme((
 
 .theme-light-blue {
   // Apply the theme to all Angular Material Components
-  @include mat.all-legacy-component-themes($light-blue-theme);
+  @include mat.all-component-themes($light-blue-theme);
 
   // Apply the theme to the library components
   @include hopper-cloud-airlines-angular-sdk-components-theme($light-blue-theme);
@@ -188,7 +188,7 @@ $hopper-light-theme: mat.define-light-theme((
 
 .theme-light-yellow {
   // Apply the theme to all Angular Material Components
-  @include mat.all-legacy-component-themes($light-yellow-theme);
+  @include mat.all-component-themes($light-yellow-theme);
 
   // Apply the theme to the library components
   @include hopper-cloud-airlines-angular-sdk-components-theme($light-yellow-theme);

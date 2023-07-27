@@ -25,15 +25,15 @@
     // ----------------------------------------------
 
     hopper-cfar-offer-banner {
-        .mat-button, 
-        .mat-flat-button, 
-        .mat-icon-button, 
-        .mat-raised-button,
-        .mat-stroked-button { 
+        .mat-mdc-button, 
+        .mat-mdc-unelevated-button, 
+        .mat-mdc-icon-button, 
+        .mat-mdc-raised-button,
+        .mat-mdc-outlined-button { 
             border-radius: 0px; 
         }
-
-        mat-card {
+        
+        .mat-mdc-card {
             background: map-get($accent-palette, 50) !important;
             color: map-get($accent-palette, "50-contrast") !important;
             border-radius: 0px;
@@ -41,6 +41,10 @@
             .check-icon {
                 font-weight: bold;
                 color: green;
+                font-size: 1.5rem;
+                height: 1.5rem;
+                min-width: 1.5rem;
+                width: 1.5rem;
             }
     
             .offer-title {
