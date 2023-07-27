@@ -25,10 +25,10 @@
 
     app-outputs {
 
-        .mat-header-row {
+        .mat-mdc-header-row {
             background-color: map-get($primary-palette, 500);
             
-            .mat-header-cell {
+            .mat-mdc-header-cell {
                 color: map-get($primary-palette, "500-contrast");
             }
         }

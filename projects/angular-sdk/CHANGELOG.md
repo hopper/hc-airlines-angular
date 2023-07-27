@@ -1,3 +1,11 @@
+<a name="6.0.0"></a>
+
+# 6.0.0 (2023-07-27)
+
+### Major changes
+- Added support for Angular 15
+
+
 <a name="5.0.1"></a>
 
 # 5.0.1 (2023-07-25)

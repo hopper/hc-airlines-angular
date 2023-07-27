@@ -26,15 +26,15 @@
     // ----------------------------------------------
 
     hopper-cfar-offer-dialog {
-        .mat-button, 
-        .mat-flat-button, 
-        .mat-icon-button, 
-        .mat-raised-button,
-        .mat-stroked-button { 
+        .mat-mdc-button, 
+        .mat-mdc-unelevated-button, 
+        .mat-mdc-icon-button, 
+        .mat-mdc-raised-button,
+        .mat-mdc-outlined-button { 
             border-radius: 0px; 
         }
         
-        .mat-dialog-title {
+        .mat-mdc-dialog-title {
             background-color: map-get($primary-palette, 900);
             color: map-get($primary-palette, "900-contrast");
             margin: 0px;
@@ -52,7 +52,7 @@
             }
         }
 
-        .mat-dialog-content {
+        .mat-mdc-dialog-content {
             @if($is-dark) {
                 background-color: rgb(52,52,52);
             } @else {
@@ -62,6 +62,10 @@
             .check-icon {
                 font-weight: bold;
                 color: green;
+                font-size: 1.5rem;
+                height: 1.5rem;
+                min-width: 1.5rem;
+                width: 1.5rem;
             }
 
             .text-justify {
@@ -78,11 +82,12 @@
             a {
                 color: map-get($accent-palette, default);
             }
-
-            mat-card {
+            
+            .mat-mdc-card {
                 color: map-get($fg-palette, default);
                 border-radius: 0px;
                 cursor: pointer;
+                @include mat.elevation(4);
                 
                 &:hover {
                     @include mat.elevation(6);
@@ -112,14 +117,14 @@
             }
         }
 
-        .mat-dialog-actions {
+        .mat-mdc-dialog-actions {
             @if($is-dark) {
                 background-color: rgb(52,52,52);
             } @else {
                 background-color: rgb(255,255,255);
             }
 
-            .mat-button-base+.mat-button-base,
+            .mat-mdc-button-base+.mat-button-base,
             .mat-mdc-button-base+.mat-mdc-button-base {
                 margin: 0px;
             }

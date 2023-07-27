@@ -29,8 +29,8 @@
 
             .tab-group {
                 @include mat.elevation(4);
-    
-                mat-tab-body {
+                
+                .mat-mdc-tab-body {
                     background-color: map-get($bg-palette, card);
 
                     .hljs {

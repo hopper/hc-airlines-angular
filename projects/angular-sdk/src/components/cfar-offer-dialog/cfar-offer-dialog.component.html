@@ -46,7 +46,7 @@
                             price: (getPricePerTraveler(offer) | currency:offer?.currency:'symbol':undefined:currentLang)
                         }
                     }}
-                    " class="full-width m-16 mat-elevation-z4" fxFlex fxLayout="row wrap" *ngFor="let offer of cfarOffers" 
+                    " class="full-width m-16 p-16" fxFlex fxLayout="row wrap" *ngFor="let offer of cfarOffers" 
                         [ngClass]="{ 'active': offer == selectedCfarOffer }">
                     <div fxFlex="100" attr.aria-label="
                         {{ 'COMMON.COVERAGE_PERCENTAGE_ACCESSIBILITY' | translate: 

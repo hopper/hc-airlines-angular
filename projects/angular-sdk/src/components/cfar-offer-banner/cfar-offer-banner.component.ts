@@ -55,7 +55,7 @@ export class CfarOfferBannerComponent extends GlobalComponent implements OnInit 
         .postCfarOffers(this.basePath, this.hCSessionId, this.currentLang, ApiTranslatorUtils.modelToSnakeCase(this._buildCreateCfarOfferRequest(this.itineraries)))
         .pipe(take(1))
         .subscribe({
-          next: (cfarOffers) => {
+          next: (cfarOffers: CfarOfferCustomer[]) => {
             let results: CfarOfferCustomer[] = [];
 
             if (cfarOffers) {
