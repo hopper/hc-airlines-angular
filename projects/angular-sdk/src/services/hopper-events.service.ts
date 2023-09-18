@@ -19,8 +19,11 @@ export class HopperEventsService extends HopperProxyService {
   // Private Methods
   // -----------------------------------------------
 
-  private _postCustomerEventRequest(hCSessionId: string, event: any): Observable<any> {
-    return this._customerService.postCustomerEvents(ApiTranslatorUtils.modelToSnakeCase(event), hCSessionId);
+  private _postCustomerEventRequest(basePath: string, hCSessionId: string, event: any): Observable<any> {
+    // Init services
+    this._overrideConfiguration(basePath, hCSessionId);
+
+    return this._customerService.postCustomerEvents(ApiTranslatorUtils.modelToSnakeCase(event));
   }
 
   // -----------------------------------------------
@@ -32,9 +35,6 @@ export class HopperEventsService extends HopperProxyService {
   // *********************
 
   postCreateCfarOffersBannerDisplay(basePath: string, hCSessionId: string, cfarOffersIds: Array<string>, uiVariant: UiVariant): Observable<any> {
-    // Init services
-    this._overrideConfiguration(basePath);
-
     // Build the event
     let event: CfarOffersBannerDisplay = {
       occurredDateTime: new Date(),
@@ -43,13 +43,10 @@ export class HopperEventsService extends HopperProxyService {
       type: "cfar_offers_banner_display"
     }
     
-    return this._postCustomerEventRequest(hCSessionId, event);
+    return this._postCustomerEventRequest(basePath, hCSessionId, event);
   }
   
   postCreateCfarOffersTakeoverDisplay(basePath: string, hCSessionId: string, cfarOffersIds: Array<string>): Observable<any> {
-    // Init services
-    this._overrideConfiguration(basePath);
-
     // Build the event
     let event: CfarOffersTakeoverDisplay = {
       occurredDateTime: new Date(),
@@ -57,13 +54,10 @@ export class HopperEventsService extends HopperProxyService {
       type: "cfar_offers_takeover_display"
     }
     
-    return this._postCustomerEventRequest(hCSessionId, event);
+    return this._postCustomerEventRequest(basePath, hCSessionId, event);
   }
   
   postCreateCfarForcedChoiceWarning(basePath: string, hCSessionId: string, cfarOffersIds: Array<string>): Observable<any> {
-    // Init services
-    this._overrideConfiguration(basePath);
-
     // Build the event
     let event: CfarForcedChoiceWarning = {
       occurredDateTime: new Date(),
@@ -71,13 +65,10 @@ export class HopperEventsService extends HopperProxyService {
       type: "cfar_forced_choice_warning"
     }
     
-    return this._postCustomerEventRequest(hCSessionId, event);
+    return this._postCustomerEventRequest(basePath, hCSessionId, event);
   }
   
   postCreateCfarViewInfo(basePath: string, hCSessionId: string, cfarOffersIds: Array<string>, uiSource: UiSource): Observable<any> {
-    // Init services
-    this._overrideConfiguration(basePath);
-
     // Build the event
     let event: CfarViewInfo = {
       occurredDateTime: new Date(),
@@ -86,13 +77,10 @@ export class HopperEventsService extends HopperProxyService {
       type: "cfar_view_info"
     }
     
-    return this._postCustomerEventRequest(hCSessionId, event);
+    return this._postCustomerEventRequest(basePath, hCSessionId, event);
   }
   
   postCreateCfarDenyPurchase(basePath: string, hCSessionId: string, cfarOffersIds: Array<string>, uiSource: UiSource): Observable<any> {
-    // Init services
-    this._overrideConfiguration(basePath);
-
     // Build the event
     let event: CfarDenyPurchase = {
       occurredDateTime: new Date(),
@@ -101,7 +89,7 @@ export class HopperEventsService extends HopperProxyService {
       type: "cfar_deny_purchase"
     }
     
-    return this._postCustomerEventRequest(hCSessionId, event);
+    return this._postCustomerEventRequest(basePath, hCSessionId, event);
   }
 
   // *********************
@@ -113,9 +101,6 @@ export class HopperEventsService extends HopperProxyService {
   // *********************
   
   postCreateCfarExercisePortalDisplay(basePath: string, hCSessionId: string, cfarExerciseId: string): Observable<any> {
-    // Init services
-    this._overrideConfiguration(basePath);
-
     // Build the event
     let event: CfarExercisePortalDisplay = {
       occurredDateTime: new Date(),
@@ -123,13 +108,10 @@ export class HopperEventsService extends HopperProxyService {
       type: "cfar_exercise_portal_display"
     }
     
-    return this._postCustomerEventRequest(hCSessionId, event);
+    return this._postCustomerEventRequest(basePath, hCSessionId, event);
   }
   
   postCreateCfarExerciseVerificationSent(basePath: string, hCSessionId: string, cfarExerciseId: string): Observable<any> {
-    // Init services
-    this._overrideConfiguration(basePath);
-
     // Build the event
     let event: CfarExerciseVerificationSent = {
       occurredDateTime: new Date(),
@@ -137,13 +119,10 @@ export class HopperEventsService extends HopperProxyService {
       type: "cfar_exercise_verification_sent"
     }
     
-    return this._postCustomerEventRequest(hCSessionId, event);
+    return this._postCustomerEventRequest(basePath, hCSessionId, event);
   }
   
   postCreateCfarExerciseVerificationComplete(basePath: string, hCSessionId: string, cfarExerciseId: string, exerciseStepResult: ExerciseStepResult): Observable<any> {
-    // Init services
-    this._overrideConfiguration(basePath);
-
     // Build the event
     let event: CfarExerciseVerificationComplete = {
       occurredDateTime: new Date(),
@@ -152,13 +131,10 @@ export class HopperEventsService extends HopperProxyService {
       type: "cfar_exercise_verification_complete"
     }
     
-    return this._postCustomerEventRequest(hCSessionId, event);
+    return this._postCustomerEventRequest(basePath, hCSessionId, event);
   }
   
   postCreateCfarExerciseCustomerDataComplete(basePath: string, hCSessionId: string, cfarExerciseId: string, exerciseStepResult: ExerciseStepResult): Observable<any> {
-    // Init services
-    this._overrideConfiguration(basePath);
-
     // Build the event
     let event: CfarExerciseCustomerDataComplete = {
       occurredDateTime: new Date(),
@@ -167,13 +143,10 @@ export class HopperEventsService extends HopperProxyService {
       type: "cfar_exercise_customer_data_complete"
     }
     
-    return this._postCustomerEventRequest(hCSessionId, event);
+    return this._postCustomerEventRequest(basePath, hCSessionId, event);
   }
   
   postCreateCfarExercisePortalComplete(basePath: string, hCSessionId: string, cfarExerciseId: string, exerciseStepResult: ExerciseStepResult): Observable<any> {
-    // Init services
-    this._overrideConfiguration(basePath);
-
     // Build the event
     let event: CfarExercisePortalComplete = {
       occurredDateTime: new Date(),
@@ -182,13 +155,10 @@ export class HopperEventsService extends HopperProxyService {
       type: "cfar_exercise_portal_complete"
     }
     
-    return this._postCustomerEventRequest(hCSessionId, event);
+    return this._postCustomerEventRequest(basePath, hCSessionId, event);
   }
   
   postCreateCfarExerciseCallbackLaunched(basePath: string, hCSessionId: string, cfarExerciseId: string, exerciseStepResult: ExerciseStepResult): Observable<any> {
-    // Init services
-    this._overrideConfiguration(basePath);
-
     // Build the event
     let event: CfarExerciseCallbackLaunched = {
       occurredDateTime: new Date(),
@@ -197,6 +167,6 @@ export class HopperEventsService extends HopperProxyService {
       type: "cfar_exercise_callback_launched"
     }
     
-    return this._postCustomerEventRequest(hCSessionId, event);
+    return this._postCustomerEventRequest(basePath, hCSessionId, event);
   }
 }

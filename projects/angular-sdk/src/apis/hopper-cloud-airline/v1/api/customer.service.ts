@@ -19,6 +19,7 @@ import { Observable }                                        from 'rxjs';
 
 import { BadRequest } from '../model/badRequest';
 import { CfarContractCustomer } from '../model/cfarContractCustomer';
+import { CfarEvent } from '../model/cfarEvent';
 import { CfarOfferCustomer } from '../model/cfarOfferCustomer';
 import { CheckCfarContractExerciceVerificationCodeResponse } from '../model/checkCfarContractExerciceVerificationCodeResponse';
 import { CheckCfarContractExerciseVerificationCodeRequest } from '../model/checkCfarContractExerciseVerificationCodeRequest';
@@ -26,7 +27,6 @@ import { CreateCfarContractCustomerRequest } from '../model/createCfarContractCu
 import { CreateCfarOfferCustomerRequest } from '../model/createCfarOfferCustomerRequest';
 import { CreateRefundAuthorizationRequest } from '../model/createRefundAuthorizationRequest';
 import { CreateRefundRecipientRequest } from '../model/createRefundRecipientRequest';
-import { Event } from '../model/event';
 import { GetCfarExerciseCustomerResponse } from '../model/getCfarExerciseCustomerResponse';
 import { GetSessionCustomerResponse } from '../model/getSessionCustomerResponse';
 import { InitiateRefundRequest } from '../model/initiateRefundRequest';
@@ -74,7 +74,7 @@ export class CustomerService {
 
 
     /**
-     * Create an Event with a tracking pixel
+     * Create an event using a tracking pixel
      * Create a new event for analytics using a tracking pixel
      * @param hcSessionId A unique identifier for a session
      * @param eventName The identifier of an event name
@@ -124,24 +124,23 @@ export class CustomerService {
      * Get a CFAR Exercise
      * Get a CFAR contract
      * @param verificationCode 
-     * @param hCSessionID A unique identifier for a session
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getCustomerCfarExercises(verificationCode?: string, hCSessionID?: string, observe?: 'body', reportProgress?: boolean): Observable<GetCfarExerciseCustomerResponse>;
-    public getCustomerCfarExercises(verificationCode?: string, hCSessionID?: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<GetCfarExerciseCustomerResponse>>;
-    public getCustomerCfarExercises(verificationCode?: string, hCSessionID?: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<GetCfarExerciseCustomerResponse>>;
-    public getCustomerCfarExercises(verificationCode?: string, hCSessionID?: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public getCustomerCfarExercises(verificationCode?: string, observe?: 'body', reportProgress?: boolean): Observable<GetCfarExerciseCustomerResponse>;
+    public getCustomerCfarExercises(verificationCode?: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<GetCfarExerciseCustomerResponse>>;
+    public getCustomerCfarExercises(verificationCode?: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<GetCfarExerciseCustomerResponse>>;
+    public getCustomerCfarExercises(verificationCode?: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
 
         let headers = this.defaultHeaders;
-
         if (verificationCode !== undefined && verificationCode !== null) {
             headers = headers.set('verification-code', String(verificationCode));
         }
 
-        if (hCSessionID !== undefined && hCSessionID !== null) {
-            headers = headers.set('HC-Session-ID', String(hCSessionID));
+        // authentication (apiKeyAuth1) required
+        if (this.configuration.apiKeys && this.configuration.apiKeys["HC-Session-ID"]) {
+            headers = headers.set('HC-Session-ID', this.configuration.apiKeys["HC-Session-ID"]);
         }
 
         // to determine the Accept header
@@ -171,19 +170,19 @@ export class CustomerService {
     /**
      * Get data for a customer session
      * Retrieve main data of a customer session
-     * @param hCSessionID The ID of the current airline session, see [Sessions](#tag/Sessions)
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getCustomerSessionsRetrieve(hCSessionID?: string, observe?: 'body', reportProgress?: boolean): Observable<GetSessionCustomerResponse>;
-    public getCustomerSessionsRetrieve(hCSessionID?: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<GetSessionCustomerResponse>>;
-    public getCustomerSessionsRetrieve(hCSessionID?: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<GetSessionCustomerResponse>>;
-    public getCustomerSessionsRetrieve(hCSessionID?: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
-
+    public getCustomerSessionsRetrieve(observe?: 'body', reportProgress?: boolean): Observable<GetSessionCustomerResponse>;
+    public getCustomerSessionsRetrieve(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<GetSessionCustomerResponse>>;
+    public getCustomerSessionsRetrieve(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<GetSessionCustomerResponse>>;
+    public getCustomerSessionsRetrieve(observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         let headers = this.defaultHeaders;
-        if (hCSessionID !== undefined && hCSessionID !== null) {
-            headers = headers.set('HC-Session-ID', String(hCSessionID));
+
+        // authentication (apiKeyAuth1) required
+        if (this.configuration.apiKeys && this.configuration.apiKeys["HC-Session-ID"]) {
+            headers = headers.set('HC-Session-ID', this.configuration.apiKeys["HC-Session-ID"]);
         }
 
         // to determine the Accept header
@@ -213,28 +212,28 @@ export class CustomerService {
      * Create a CFAR Contract
      * Create a CFAR contract from purchased CFAR offers
      * @param body 
-     * @param hCSessionID The ID of the current airline session, see [Sessions](#tag/Sessions)
      * @param language 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public postCustomerCfarContracts(body: CreateCfarContractCustomerRequest, hCSessionID?: string, language?: string, observe?: 'body', reportProgress?: boolean): Observable<CfarContractCustomer>;
-    public postCustomerCfarContracts(body: CreateCfarContractCustomerRequest, hCSessionID?: string, language?: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<CfarContractCustomer>>;
-    public postCustomerCfarContracts(body: CreateCfarContractCustomerRequest, hCSessionID?: string, language?: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<CfarContractCustomer>>;
-    public postCustomerCfarContracts(body: CreateCfarContractCustomerRequest, hCSessionID?: string, language?: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public postCustomerCfarContracts(body: CreateCfarContractCustomerRequest, language?: string, observe?: 'body', reportProgress?: boolean): Observable<CfarContractCustomer>;
+    public postCustomerCfarContracts(body: CreateCfarContractCustomerRequest, language?: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<CfarContractCustomer>>;
+    public postCustomerCfarContracts(body: CreateCfarContractCustomerRequest, language?: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<CfarContractCustomer>>;
+    public postCustomerCfarContracts(body: CreateCfarContractCustomerRequest, language?: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (body === null || body === undefined) {
             throw new Error('Required parameter body was null or undefined when calling postCustomerCfarContracts.');
         }
 
 
-
         let headers = this.defaultHeaders;
-        if (hCSessionID !== undefined && hCSessionID !== null) {
-            headers = headers.set('HC-Session-ID', String(hCSessionID));
-        }
         if (language !== undefined && language !== null) {
             headers = headers.set('language', String(language));
+        }
+
+        // authentication (apiKeyAuth1) required
+        if (this.configuration.apiKeys && this.configuration.apiKeys["HC-Session-ID"]) {
+            headers = headers.set('HC-Session-ID', this.configuration.apiKeys["HC-Session-ID"]);
         }
 
         // to determine the Accept header
@@ -270,15 +269,15 @@ export class CustomerService {
      * Create CFAR Offers
      * Create a CFAR offers for a customer&#x27;s trip
      * @param body 
-     * @param hCSessionID The ID of the current airline session, see [Sessions](#tag/Sessions)
      * @param language 
+     * @param userAgent 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public postCustomerCfarOffers(body: CreateCfarOfferCustomerRequest, hCSessionID?: string, language?: string, observe?: 'body', reportProgress?: boolean): Observable<Array<CfarOfferCustomer>>;
-    public postCustomerCfarOffers(body: CreateCfarOfferCustomerRequest, hCSessionID?: string, language?: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<CfarOfferCustomer>>>;
-    public postCustomerCfarOffers(body: CreateCfarOfferCustomerRequest, hCSessionID?: string, language?: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<CfarOfferCustomer>>>;
-    public postCustomerCfarOffers(body: CreateCfarOfferCustomerRequest, hCSessionID?: string, language?: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public postCustomerCfarOffers(body: CreateCfarOfferCustomerRequest, language?: string, userAgent?: string, observe?: 'body', reportProgress?: boolean): Observable<Array<CfarOfferCustomer>>;
+    public postCustomerCfarOffers(body: CreateCfarOfferCustomerRequest, language?: string, userAgent?: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<CfarOfferCustomer>>>;
+    public postCustomerCfarOffers(body: CreateCfarOfferCustomerRequest, language?: string, userAgent?: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<CfarOfferCustomer>>>;
+    public postCustomerCfarOffers(body: CreateCfarOfferCustomerRequest, language?: string, userAgent?: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (body === null || body === undefined) {
             throw new Error('Required parameter body was null or undefined when calling postCustomerCfarOffers.');
@@ -287,11 +286,16 @@ export class CustomerService {
 
 
         let headers = this.defaultHeaders;
-        if (hCSessionID !== undefined && hCSessionID !== null) {
-            headers = headers.set('HC-Session-ID', String(hCSessionID));
-        }
         if (language !== undefined && language !== null) {
             headers = headers.set('language', String(language));
+        }
+        if (userAgent !== undefined && userAgent !== null) {
+            headers = headers.set('User-Agent', String(userAgent));
+        }
+
+        // authentication (apiKeyAuth1) required
+        if (this.configuration.apiKeys && this.configuration.apiKeys["HC-Session-ID"]) {
+            headers = headers.set('HC-Session-ID', this.configuration.apiKeys["HC-Session-ID"]);
         }
 
         // to determine the Accept header
@@ -327,23 +331,23 @@ export class CustomerService {
      * Create an Event
      * Create a new event for analytics
      * @param body 
-     * @param hCSessionID The ID of the current airline session, see [Sessions](#tag/Sessions)
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public postCustomerEvents(body: Event, hCSessionID?: string, observe?: 'body', reportProgress?: boolean): Observable<any>;
-    public postCustomerEvents(body: Event, hCSessionID?: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
-    public postCustomerEvents(body: Event, hCSessionID?: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
-    public postCustomerEvents(body: Event, hCSessionID?: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public postCustomerEvents(body: CfarEvent, observe?: 'body', reportProgress?: boolean): Observable<any>;
+    public postCustomerEvents(body: CfarEvent, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
+    public postCustomerEvents(body: CfarEvent, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
+    public postCustomerEvents(body: CfarEvent, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (body === null || body === undefined) {
             throw new Error('Required parameter body was null or undefined when calling postCustomerEvents.');
         }
 
-
         let headers = this.defaultHeaders;
-        if (hCSessionID !== undefined && hCSessionID !== null) {
-            headers = headers.set('HC-Session-ID', String(hCSessionID));
+
+        // authentication (apiKeyAuth1) required
+        if (this.configuration.apiKeys && this.configuration.apiKeys["HC-Session-ID"]) {
+            headers = headers.set('HC-Session-ID', this.configuration.apiKeys["HC-Session-ID"]);
         }
 
         // to determine the Accept header
@@ -379,15 +383,14 @@ export class CustomerService {
      * Check a verification code associated with a CFAR exercise
      * Check a verification code to a user required to process a CFAR exercise
      * @param body 
-     * @param id A unique identifier for a CFAR exercise
-     * @param hCSessionID The ID of the current airline session, see [Sessions](#tag/Sessions)
+     * @param id A unique identifier for a exercise
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public postCustomerIdCheckExerciseVerificationCode(body: CheckCfarContractExerciseVerificationCodeRequest, id: string, hCSessionID?: string, observe?: 'body', reportProgress?: boolean): Observable<CheckCfarContractExerciceVerificationCodeResponse>;
-    public postCustomerIdCheckExerciseVerificationCode(body: CheckCfarContractExerciseVerificationCodeRequest, id: string, hCSessionID?: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<CheckCfarContractExerciceVerificationCodeResponse>>;
-    public postCustomerIdCheckExerciseVerificationCode(body: CheckCfarContractExerciseVerificationCodeRequest, id: string, hCSessionID?: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<CheckCfarContractExerciceVerificationCodeResponse>>;
-    public postCustomerIdCheckExerciseVerificationCode(body: CheckCfarContractExerciseVerificationCodeRequest, id: string, hCSessionID?: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public postCustomerIdCheckExerciseVerificationCode(body: CheckCfarContractExerciseVerificationCodeRequest, id: string, observe?: 'body', reportProgress?: boolean): Observable<CheckCfarContractExerciceVerificationCodeResponse>;
+    public postCustomerIdCheckExerciseVerificationCode(body: CheckCfarContractExerciseVerificationCodeRequest, id: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<CheckCfarContractExerciceVerificationCodeResponse>>;
+    public postCustomerIdCheckExerciseVerificationCode(body: CheckCfarContractExerciseVerificationCodeRequest, id: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<CheckCfarContractExerciceVerificationCodeResponse>>;
+    public postCustomerIdCheckExerciseVerificationCode(body: CheckCfarContractExerciseVerificationCodeRequest, id: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (body === null || body === undefined) {
             throw new Error('Required parameter body was null or undefined when calling postCustomerIdCheckExerciseVerificationCode.');
@@ -397,10 +400,11 @@ export class CustomerService {
             throw new Error('Required parameter id was null or undefined when calling postCustomerIdCheckExerciseVerificationCode.');
         }
 
-
         let headers = this.defaultHeaders;
-        if (hCSessionID !== undefined && hCSessionID !== null) {
-            headers = headers.set('HC-Session-ID', String(hCSessionID));
+
+        // authentication (apiKeyAuth1) required
+        if (this.configuration.apiKeys && this.configuration.apiKeys["HC-Session-ID"]) {
+            headers = headers.set('HC-Session-ID', this.configuration.apiKeys["HC-Session-ID"]);
         }
 
         // to determine the Accept header
@@ -436,15 +440,14 @@ export class CustomerService {
      * Send a verification code associated with a CFAR exercise
      * Send a verification code to a user required to process a CFAR exercise
      * @param body 
-     * @param id A unique identifier for a CFAR exercise
-     * @param hCSessionID The ID of the current airline session, see [Sessions](#tag/Sessions)
+     * @param id A unique identifier for a exercise
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public postCustomerIdSendExerciseVerificationCode(body: SendCfarContractExerciseVerificationCodeRequest, id: string, hCSessionID?: string, observe?: 'body', reportProgress?: boolean): Observable<SendCfarContractExerciceVerificationCodeResponse>;
-    public postCustomerIdSendExerciseVerificationCode(body: SendCfarContractExerciseVerificationCodeRequest, id: string, hCSessionID?: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<SendCfarContractExerciceVerificationCodeResponse>>;
-    public postCustomerIdSendExerciseVerificationCode(body: SendCfarContractExerciseVerificationCodeRequest, id: string, hCSessionID?: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<SendCfarContractExerciceVerificationCodeResponse>>;
-    public postCustomerIdSendExerciseVerificationCode(body: SendCfarContractExerciseVerificationCodeRequest, id: string, hCSessionID?: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public postCustomerIdSendExerciseVerificationCode(body: SendCfarContractExerciseVerificationCodeRequest, id: string, observe?: 'body', reportProgress?: boolean): Observable<SendCfarContractExerciceVerificationCodeResponse>;
+    public postCustomerIdSendExerciseVerificationCode(body: SendCfarContractExerciseVerificationCodeRequest, id: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<SendCfarContractExerciceVerificationCodeResponse>>;
+    public postCustomerIdSendExerciseVerificationCode(body: SendCfarContractExerciseVerificationCodeRequest, id: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<SendCfarContractExerciceVerificationCodeResponse>>;
+    public postCustomerIdSendExerciseVerificationCode(body: SendCfarContractExerciseVerificationCodeRequest, id: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (body === null || body === undefined) {
             throw new Error('Required parameter body was null or undefined when calling postCustomerIdSendExerciseVerificationCode.');
@@ -454,10 +457,11 @@ export class CustomerService {
             throw new Error('Required parameter id was null or undefined when calling postCustomerIdSendExerciseVerificationCode.');
         }
 
-
         let headers = this.defaultHeaders;
-        if (hCSessionID !== undefined && hCSessionID !== null) {
-            headers = headers.set('HC-Session-ID', String(hCSessionID));
+
+        // authentication (apiKeyAuth1) required
+        if (this.configuration.apiKeys && this.configuration.apiKeys["HC-Session-ID"]) {
+            headers = headers.set('HC-Session-ID', this.configuration.apiKeys["HC-Session-ID"]);
         }
 
         // to determine the Accept header
@@ -493,28 +497,28 @@ export class CustomerService {
      * Create a Refund
      * Initiate the Refund
      * @param body 
-     * @param hCSessionID The ID of the current airline session, see [Sessions](#tag/Sessions)
      * @param verificationCode 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public postCustomerInitiateRefund(body: InitiateRefundRequest, hCSessionID?: string, verificationCode?: string, observe?: 'body', reportProgress?: boolean): Observable<InitiateRefundResponse>;
-    public postCustomerInitiateRefund(body: InitiateRefundRequest, hCSessionID?: string, verificationCode?: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<InitiateRefundResponse>>;
-    public postCustomerInitiateRefund(body: InitiateRefundRequest, hCSessionID?: string, verificationCode?: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<InitiateRefundResponse>>;
-    public postCustomerInitiateRefund(body: InitiateRefundRequest, hCSessionID?: string, verificationCode?: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public postCustomerInitiateRefund(body: InitiateRefundRequest, verificationCode?: string, observe?: 'body', reportProgress?: boolean): Observable<InitiateRefundResponse>;
+    public postCustomerInitiateRefund(body: InitiateRefundRequest, verificationCode?: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<InitiateRefundResponse>>;
+    public postCustomerInitiateRefund(body: InitiateRefundRequest, verificationCode?: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<InitiateRefundResponse>>;
+    public postCustomerInitiateRefund(body: InitiateRefundRequest, verificationCode?: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (body === null || body === undefined) {
             throw new Error('Required parameter body was null or undefined when calling postCustomerInitiateRefund.');
         }
 
 
-
         let headers = this.defaultHeaders;
-        if (hCSessionID !== undefined && hCSessionID !== null) {
-            headers = headers.set('HC-Session-ID', String(hCSessionID));
-        }
         if (verificationCode !== undefined && verificationCode !== null) {
             headers = headers.set('verification-code', String(verificationCode));
+        }
+
+        // authentication (apiKeyAuth1) required
+        if (this.configuration.apiKeys && this.configuration.apiKeys["HC-Session-ID"]) {
+            headers = headers.set('HC-Session-ID', this.configuration.apiKeys["HC-Session-ID"]);
         }
 
         // to determine the Accept header
@@ -550,28 +554,28 @@ export class CustomerService {
      * Create a Refund Authorization Token
      * Create a Refund Authorization Token
      * @param body 
-     * @param hCSessionID The ID of the current airline session, see [Sessions](#tag/Sessions)
      * @param verificationCode 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public postCustomerRefundAuthorizations(body: CreateRefundAuthorizationRequest, hCSessionID?: string, verificationCode?: string, observe?: 'body', reportProgress?: boolean): Observable<RefundAuthorization>;
-    public postCustomerRefundAuthorizations(body: CreateRefundAuthorizationRequest, hCSessionID?: string, verificationCode?: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<RefundAuthorization>>;
-    public postCustomerRefundAuthorizations(body: CreateRefundAuthorizationRequest, hCSessionID?: string, verificationCode?: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<RefundAuthorization>>;
-    public postCustomerRefundAuthorizations(body: CreateRefundAuthorizationRequest, hCSessionID?: string, verificationCode?: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public postCustomerRefundAuthorizations(body: CreateRefundAuthorizationRequest, verificationCode?: string, observe?: 'body', reportProgress?: boolean): Observable<RefundAuthorization>;
+    public postCustomerRefundAuthorizations(body: CreateRefundAuthorizationRequest, verificationCode?: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<RefundAuthorization>>;
+    public postCustomerRefundAuthorizations(body: CreateRefundAuthorizationRequest, verificationCode?: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<RefundAuthorization>>;
+    public postCustomerRefundAuthorizations(body: CreateRefundAuthorizationRequest, verificationCode?: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (body === null || body === undefined) {
             throw new Error('Required parameter body was null or undefined when calling postCustomerRefundAuthorizations.');
         }
 
 
-
         let headers = this.defaultHeaders;
-        if (hCSessionID !== undefined && hCSessionID !== null) {
-            headers = headers.set('HC-Session-ID', String(hCSessionID));
-        }
         if (verificationCode !== undefined && verificationCode !== null) {
             headers = headers.set('verification-code', String(verificationCode));
+        }
+
+        // authentication (apiKeyAuth1) required
+        if (this.configuration.apiKeys && this.configuration.apiKeys["HC-Session-ID"]) {
+            headers = headers.set('HC-Session-ID', this.configuration.apiKeys["HC-Session-ID"]);
         }
 
         // to determine the Accept header
@@ -607,28 +611,28 @@ export class CustomerService {
      * Create a Refund Recipient
      * Create a Refund Recipient
      * @param body 
-     * @param hCSessionID The ID of the current airline session, see [Sessions](#tag/Sessions)
      * @param verificationCode 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public postCustomerRefundRecipients(body: CreateRefundRecipientRequest, hCSessionID?: string, verificationCode?: string, observe?: 'body', reportProgress?: boolean): Observable<RefundRecipient>;
-    public postCustomerRefundRecipients(body: CreateRefundRecipientRequest, hCSessionID?: string, verificationCode?: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<RefundRecipient>>;
-    public postCustomerRefundRecipients(body: CreateRefundRecipientRequest, hCSessionID?: string, verificationCode?: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<RefundRecipient>>;
-    public postCustomerRefundRecipients(body: CreateRefundRecipientRequest, hCSessionID?: string, verificationCode?: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public postCustomerRefundRecipients(body: CreateRefundRecipientRequest, verificationCode?: string, observe?: 'body', reportProgress?: boolean): Observable<RefundRecipient>;
+    public postCustomerRefundRecipients(body: CreateRefundRecipientRequest, verificationCode?: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<RefundRecipient>>;
+    public postCustomerRefundRecipients(body: CreateRefundRecipientRequest, verificationCode?: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<RefundRecipient>>;
+    public postCustomerRefundRecipients(body: CreateRefundRecipientRequest, verificationCode?: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (body === null || body === undefined) {
             throw new Error('Required parameter body was null or undefined when calling postCustomerRefundRecipients.');
         }
 
 
-
         let headers = this.defaultHeaders;
-        if (hCSessionID !== undefined && hCSessionID !== null) {
-            headers = headers.set('HC-Session-ID', String(hCSessionID));
-        }
         if (verificationCode !== undefined && verificationCode !== null) {
             headers = headers.set('verification-code', String(verificationCode));
+        }
+
+        // authentication (apiKeyAuth1) required
+        if (this.configuration.apiKeys && this.configuration.apiKeys["HC-Session-ID"]) {
+            headers = headers.set('HC-Session-ID', this.configuration.apiKeys["HC-Session-ID"]);
         }
 
         // to determine the Accept header
