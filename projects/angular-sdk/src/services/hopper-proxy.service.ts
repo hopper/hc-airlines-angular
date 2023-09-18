@@ -14,12 +14,21 @@ export class HopperProxyService extends ErrorHandler {
   // ----------------------------------------------------------
   // PROTECTED METHODS
   // ----------------------------------------------------------
-
-  protected _overrideConfiguration(basePath: string): void {
-    this._customerService = new CustomerService(this._httpClient, basePath, {
-      selectHeaderAccept: (accepts: ['application/json']) => 'application/json',
-      selectHeaderContentType: (contentsTypes: ['application/json']) => 'application/json',
-      isJsonMime: (mime: 'application/json') => true
-    });
+  
+  protected _overrideConfiguration(basePath: string, hcSessionId?: string): void {
+    if (hcSessionId !== undefined) {
+      this._customerService = new CustomerService(this._httpClient, basePath, {
+        selectHeaderAccept: (accepts: ['application/json']) => 'application/json',
+        selectHeaderContentType: (contentsTypes: ['application/json']) => 'application/json',
+        isJsonMime: (mime: 'application/json') => true,
+        apiKeys: {"HC-Session-ID": hcSessionId}
+      });
+    } else {
+      this._customerService = new CustomerService(this._httpClient, basePath, {
+        selectHeaderAccept: (accepts: ['application/json']) => 'application/json',
+        selectHeaderContentType: (contentsTypes: ['application/json']) => 'application/json',
+        isJsonMime: (mime: 'application/json') => true
+      });
+    }
   }
 }

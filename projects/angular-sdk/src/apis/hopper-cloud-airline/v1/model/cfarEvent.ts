@@ -22,5 +22,6 @@ import { CfarForcedChoiceWarning } from './cfarForcedChoiceWarning';
 import { CfarOffersBannerDisplay } from './cfarOffersBannerDisplay';
 import { CfarOffersTakeoverDisplay } from './cfarOffersTakeoverDisplay';
 import { CfarViewInfo } from './cfarViewInfo';
+import { OffersDisplayed } from './offersDisplayed';
 
-export type Event = BookingConfirmed | CfarDenyPurchase | CfarEventWithContract | CfarExerciseCallbackLaunched | CfarExerciseCustomerDataComplete | CfarExercisePortalComplete | CfarExercisePortalDisplay | CfarExerciseVerificationComplete | CfarExerciseVerificationSent | CfarForcedChoiceWarning | CfarOffersBannerDisplay | CfarOffersTakeoverDisplay | CfarViewInfo;
+export type CfarEvent = BookingConfirmed | CfarDenyPurchase | CfarEventWithContract | CfarExerciseCallbackLaunched | CfarExerciseCustomerDataComplete | CfarExercisePortalComplete | CfarExercisePortalDisplay | CfarExerciseVerificationComplete | CfarExerciseVerificationSent | CfarForcedChoiceWarning | CfarOffersBannerDisplay | CfarOffersTakeoverDisplay | CfarViewInfo | OffersDisplayed;
