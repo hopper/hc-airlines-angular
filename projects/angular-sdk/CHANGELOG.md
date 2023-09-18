@@ -1,3 +1,10 @@
+<a name="6.0.1"></a>
+
+# 6.0.1 (2023-09-18)
+
+Security:
+- Change the way to pass the HC Session ID when calling API endpoints
+
 <a name="6.0.0"></a>
 
 # 6.0.0 (2023-07-27)
