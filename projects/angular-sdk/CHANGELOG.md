@@ -1,3 +1,10 @@
+<a name="6.0.2"></a>
+
+# 6.0.2 (2023-10-04)
+
+General:
+- Replacement of the Hopper logo with HTS
+
 <a name="6.0.1"></a>
 
 # 6.0.1 (2023-09-18)
