@@ -3,7 +3,7 @@
 # 6.0.3 (2023-10-16)
 
 General:
-- In case of failure when calling an API endpoint, the error description is extracted directly in the HTTP response
+- In case of failure when calling an API endpoint, the translation of the error description is extracted directly from the HTTP response
 
 <a name="6.0.2"></a>
 
