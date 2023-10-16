@@ -20,7 +20,6 @@ export class CfarOfferDialogComponent extends GlobalComponent implements OnInit,
   public cfarOffers!: CfarOfferCustomer[];
   public selectedCfarOffer!: CfarOfferCustomer;
   public isLoading!: boolean;
-  public errorCode?: string;
 
   private _hCSessionId!: string;
   private _itineraries!: CfarItinerary[];
@@ -98,10 +97,7 @@ export class CfarOfferDialogComponent extends GlobalComponent implements OnInit,
             this._dialogRef.close(ApiTranslatorUtils.modelToCamelCase(cfarContract) as CfarContractCustomer);
           },
           error: (error) => {
-            const builtError = this._getHcAirlinesErrorResponse(error);
-            this.errorCode = builtError.code;
-                    
-            this.pushSdkError(error, "contracts");
+            this.handleApiError(error, "contracts");
             
             this.isLoading = false;
           }
@@ -168,11 +164,8 @@ export class CfarOfferDialogComponent extends GlobalComponent implements OnInit,
         // Build corresponding events
         this.createEventsAfterInit();
       },
-      error: (error) => {
-        const builtError = this._getHcAirlinesErrorResponse(error);
-        this.errorCode = builtError.code;
-                    
-        this.pushSdkError(error, "offers");
+      error: (error) => {                    
+        this.handleApiError(error, "offers");
 
         this.isLoading = false;
       }

@@ -32,7 +32,6 @@ export class CfarExerciseFlowComponent extends GlobalEventComponent implements O
   public isVerificationCodeAlreadySent!: boolean;
   public userEmail!: string;
   public cfarContractUserEmail!: string;
-  public errorCode?: string;
 
   private _navigationStep!: ExerciseActionStep;
   private _errorTimer: number = 1000;
@@ -232,10 +231,7 @@ export class CfarExerciseFlowComponent extends GlobalEventComponent implements O
                     this.createCfarExercisePortalCompleteEvent(ExerciseStepResult.Success)
                   },
                   error: (error: any) => {
-                    const builtError = this._getHcAirlinesErrorResponse(error);
-                    this.errorCode = builtError.code;
-                    
-                    this.pushSdkError(error, "exercise");
+                    this.handleApiError(error, "exercise")
 
                     this.isLoadingHyperwallet = false;
                     this.isErrorHyperwallet = true;
@@ -252,10 +248,7 @@ export class CfarExerciseFlowComponent extends GlobalEventComponent implements O
             document.head.appendChild(mainScript);
           },
           error: (error: any) => {
-            const builtError = this._getHcAirlinesErrorResponse(error);
-            this.errorCode = builtError.code;
-                    
-            this.pushSdkError(error, "exercise");
+            this.handleApiError(error, "exercise")
   
             this.isLoadingHyperwallet = false;
             this.isErrorHyperwallet = true;
@@ -305,10 +298,7 @@ export class CfarExerciseFlowComponent extends GlobalEventComponent implements O
           this.flowCompleted.emit(redirectionToken);
         },
         error: (error) => {
-          const builtError = this._getHcAirlinesErrorResponse(error);
-          this.errorCode = builtError.code;
-                    
-          this.pushSdkError(error, "exercise");
+          this.handleApiError(error, "exercise")
           
           this.isLoadingHyperwallet = false;
 
@@ -366,13 +356,10 @@ export class CfarExerciseFlowComponent extends GlobalEventComponent implements O
             this.isLoading = false;
           },
           error: (error: any) => {
-            const builtError = this._getHcAirlinesErrorResponse(error);
-            this.errorCode = builtError.code;
-
-            this.pushSdkError(error, "exercise");
+            this.handleApiError(error, "exercise");
 
             // Code already sent
-            if (this.errorCode === "EX037") {
+            if (this.errorCode === ErrorCode.EX037) {
               this.isVerificationCodeAlreadySent = true;
             }
 
@@ -431,10 +418,7 @@ export class CfarExerciseFlowComponent extends GlobalEventComponent implements O
             }     
           },
           error: (error: any) => {
-            const builtError = this._getHcAirlinesErrorResponse(error);
-            this.errorCode = builtError.code;
-                    
-            this.pushSdkError(error, "exercise");
+            this.handleApiError(error, "exercise")
 
             this.isLoading = false;
 
@@ -474,10 +458,7 @@ export class CfarExerciseFlowComponent extends GlobalEventComponent implements O
             this.isLoading = false;
           },
           error: (error: any) => {
-            const builtError = this._getHcAirlinesErrorResponse(error);
-            this.errorCode = builtError.code;
-                    
-            this.pushSdkError(error, "exercise");
+            this.handleApiError(error, "exercise")
 
             this.isLoading = false;
 

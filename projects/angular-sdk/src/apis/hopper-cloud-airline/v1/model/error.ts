@@ -9,8 +9,10 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
+import { MapString } from './mapString';
 
 export interface Error { 
     message: string;
     code?: string;
+    messages?: MapString;
 }
