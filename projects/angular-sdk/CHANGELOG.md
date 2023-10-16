@@ -4,7 +4,7 @@
 # 6.0.4 (2023-10-16)
 
 General:
-- Errors description pushed by the sdk must be retrieved in UI project
+- Errors description pushed by the sdk must be retrieved in UI project.
 
 <a name="6.0.3"></a>
 
