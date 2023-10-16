@@ -26,7 +26,8 @@ export class GlobalComponent implements OnChanges {
     @Input() isFakeBackend?: boolean;
 
     @Output() errorOccurred = new EventEmitter();
-
+    
+    public errorCode?: string;
     public mapCountries: Map<string, string>;
 
     constructor(
@@ -110,11 +111,19 @@ export class GlobalComponent implements OnChanges {
         if (ArrayUtils.isNotEmpty(apiErrors)) {
             const mainApiError = apiErrors[0] as Error;
             // RF009 = Unknown
-            return new HcAirlinesError(mainApiError.message, mainApiError.code || ErrorCode.RF009);
+            return new HcAirlinesError(this._extractErrorMessage(mainApiError), mainApiError.code || ErrorCode.RF009);
         } else {
             console.error(apiError);
             return HcAirlinesError.buildDefault();
         }
+    }
+
+    protected _extractErrorMessage(error: Error): any {
+        if (error.messages !== undefined) {
+            const defaultErrorMessage = error.messages['en'] ? error.messages['en'] : error.message
+            return error.messages[this.currentLang] ? error.messages[this.currentLang] : defaultErrorMessage
+        } else 
+            return error.message
     }
 
     protected _buildCreateCfarOfferRequest(itineraries: CfarItinerary[], uiVariant?: UiVariant): CreateCfarOfferCustomerRequest {
@@ -452,19 +461,47 @@ export class GlobalComponent implements OnChanges {
         return '';
     }
 
-    public pushSdkError(error: any, errorEndPoint: string) {
+    // *********************
+    // Errors
+    // *********************
+
+    public handleApiError(error: any, errorEndPoint: string) {
         const builtError = this._getHcAirlinesErrorResponse(error);
         if (builtError !== null) {
             const errorCode = builtError.code;
-            if (errorCode !== undefined && errorCode !== null) {
-                // Get Error Label and emit the event
-                this.translateService.get('COMMON.ERROR_CODE.' + errorCode)
-                .pipe(take(1))
-                .subscribe(errorDescription => {
-                    const errorSdk: ErrorSdkModel = {endpoint: errorEndPoint, errorCode: errorCode, errorDescription: errorDescription}
-                    this.errorOccurred.emit(errorSdk);
-                });
+            this.errorCode = errorCode;
+
+            if (errorCode !== undefined && errorCode !== null) {                    
+                // Push the error context for the client
+                this.pushSdkError(errorEndPoint, builtError);
             }
+        }
+    }
+
+    /**
+     * Get Error Label and emit the event
+     * @param errorEndPoint 
+     * @param builtError 
+     * @param takeErrorLabelFromUIProject 
+     */
+    public pushSdkError(errorEndPoint: string, builtError: HcAirlinesError, takeErrorLabelFromUIProject: boolean = false) {
+        let emitWithUIProjectLabel = true;
+        if (!takeErrorLabelFromUIProject) {
+            const builtErrorMessage = builtError.message
+            if (builtErrorMessage !== null && builtErrorMessage.length > 0) {
+                emitWithUIProjectLabel = false;
+                const errorSdk: ErrorSdkModel = {endpoint: errorEndPoint, errorCode: builtError.code, errorDescription: builtErrorMessage}
+                this.errorOccurred.emit(errorSdk);
+            }
+        }
+        
+        if (emitWithUIProjectLabel) {
+            this.translateService.get('COMMON.ERROR_CODE.' + builtError.code)
+            .pipe(take(1))
+            .subscribe(errorDescription => {
+                const errorSdk: ErrorSdkModel = {endpoint: errorEndPoint, errorCode: builtError.code, errorDescription: errorDescription}
+                this.errorOccurred.emit(errorSdk);
+            });
         }
     }
 }

@@ -71,7 +71,8 @@ export class CfarOfferBannerComponent extends GlobalComponent implements OnInit 
             this.isLoading = false;
           },
           error: (error: any) => {
-            this.pushSdkError(error, "offers");
+            this.handleApiError(error, "offers")
+            
             this.offersLoaded.emit();
             this.isLoading = false;
           }

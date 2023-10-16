@@ -97,7 +97,7 @@ export class CfarOfferBannerLargeComponent extends GlobalEventComponent implemen
                 this.isLoadingContract = false;
               },
               error: (error) => {
-                this.pushSdkError(error, "contracts");
+                this.handleApiError(error, "contracts");
 
                 // Unlock the checkboxes
                 this.isLoadingContract = false;
@@ -154,7 +154,7 @@ export class CfarOfferBannerLargeComponent extends GlobalEventComponent implemen
           this.createPurchaseEventsAfterInit(this.hasWarningCoverageMessage);
         },
         error: (error) => {
-          this.pushSdkError(error, "offers");
+          this.handleApiError(error, "offers");
           this.offersLoaded.emit();
         }
       });
