@@ -482,9 +482,9 @@ export class GlobalComponent implements OnChanges {
      * Get Error Label and emit the event
      * @param errorEndPoint 
      * @param builtError 
-     * @param takeErrorLabelFromUIProject 
+     * @param takeErrorLabelFromUIProject Must be set to false in the future
      */
-    public pushSdkError(errorEndPoint: string, builtError: HcAirlinesError, takeErrorLabelFromUIProject: boolean = false) {
+    public pushSdkError(errorEndPoint: string, builtError: HcAirlinesError, takeErrorLabelFromUIProject: boolean = true) {
         let emitWithUIProjectLabel = true;
         if (!takeErrorLabelFromUIProject) {
             const builtErrorMessage = builtError.message
