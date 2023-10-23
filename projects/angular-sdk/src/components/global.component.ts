@@ -470,7 +470,6 @@ export class GlobalComponent implements OnChanges {
         const builtError = this._getHcAirlinesErrorResponse(error);
         if (builtError !== null) {
             this.errorCode = builtError.code;
-            this.errorMessage = builtError.message;
 
             if (this.errorCode !== undefined && this.errorCode !== null) {                    
                 // Push the error context for the client
@@ -487,11 +486,13 @@ export class GlobalComponent implements OnChanges {
      */
     public pushSdkError(errorEndPoint: string, builtError: HcAirlinesError, takeErrorLabelFromUIProject: boolean = true) {
         let emitWithUIProjectLabel = true;
+        let errorMessage = builtError.message;
+
         if (!takeErrorLabelFromUIProject) {
-            const builtErrorMessage = builtError.message
-            if (builtErrorMessage !== null && builtErrorMessage.length > 0) {
+            if (errorMessage !== null && errorMessage.length > 0) {
                 emitWithUIProjectLabel = false;
-                const errorSdk: ErrorSdkModel = {endpoint: errorEndPoint, errorCode: builtError.code, errorDescription: builtErrorMessage}
+
+                const errorSdk: ErrorSdkModel = {endpoint: errorEndPoint, errorCode: builtError.code, errorDescription: errorMessage}
                 this.errorOccurred.emit(errorSdk);
             }
         }
@@ -500,9 +501,13 @@ export class GlobalComponent implements OnChanges {
             this.translateService.get('COMMON.ERROR_CODE.' + builtError.code)
             .pipe(take(1))
             .subscribe(errorDescription => {
+                errorMessage = errorDescription;
+
                 const errorSdk: ErrorSdkModel = {endpoint: errorEndPoint, errorCode: builtError.code, errorDescription: errorDescription}
                 this.errorOccurred.emit(errorSdk);
             });
         }
+
+        this.errorMessage = errorMessage;
     }
 }
