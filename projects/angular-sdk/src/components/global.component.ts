@@ -28,6 +28,7 @@ export class GlobalComponent implements OnChanges {
     @Output() errorOccurred = new EventEmitter();
     
     public errorCode?: string;
+    public errorMessage?: string;
     public mapCountries: Map<string, string>;
 
     constructor(
@@ -120,10 +121,10 @@ export class GlobalComponent implements OnChanges {
 
     protected _extractErrorMessage(error: Error): any {
         if (error.messages !== undefined) {
-            const defaultErrorMessage = error.messages['en'] ? error.messages['en'] : error.message
-            return error.messages[this.currentLang] ? error.messages[this.currentLang] : defaultErrorMessage
+            const defaultErrorMessage = error.messages['en'] ? error.messages['en'] : error.message;
+            return error.messages[this.currentLang] ? error.messages[this.currentLang] : defaultErrorMessage;
         } else 
-            return error.message
+            return error.message;
     }
 
     protected _buildCreateCfarOfferRequest(itineraries: CfarItinerary[], uiVariant?: UiVariant): CreateCfarOfferCustomerRequest {
@@ -468,10 +469,10 @@ export class GlobalComponent implements OnChanges {
     public handleApiError(error: any, errorEndPoint: string) {
         const builtError = this._getHcAirlinesErrorResponse(error);
         if (builtError !== null) {
-            const errorCode = builtError.code;
-            this.errorCode = errorCode;
+            this.errorCode = builtError.code;
+            this.errorMessage = builtError.message;
 
-            if (errorCode !== undefined && errorCode !== null) {                    
+            if (this.errorCode !== undefined && this.errorCode !== null) {                    
                 // Push the error context for the client
                 this.pushSdkError(errorEndPoint, builtError);
             }

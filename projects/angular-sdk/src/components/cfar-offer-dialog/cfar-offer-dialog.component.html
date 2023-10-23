@@ -94,7 +94,7 @@
         <ng-container *ngIf="errorCode">
             <div class="error-message mx-32 my-16" fxLayout="row wrap" fxLayoutAlign="start center">
                 <mat-icon>error</mat-icon>
-                <span class="p-16">{{ ('COMMON.ERROR_CODE.' + errorCode) | translate }}</span>
+                <span class="p-16">{{ errorMessage }}</span>
             </div>
         </ng-container>
         <!-- / ERROR MESSAGE -->

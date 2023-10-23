@@ -479,6 +479,7 @@ export class CfarExerciseFlowComponent extends GlobalEventComponent implements O
 
   private _purgeErrorContext() {
     this.errorCode = undefined;
+    this.errorMessage = undefined;
     this.isVerificationCodeAlreadySent = false;
   }
 
