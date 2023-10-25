@@ -119,10 +119,10 @@ export class GlobalComponent implements OnChanges {
         }
     }
 
-    protected _extractErrorMessage(error: Error): any {
+    protected _extractErrorMessage(error: Error): string {
         if (error.messages !== undefined) {
-            const defaultErrorMessage = error.messages['en'] ? error.messages['en'] : error.message;
-            return error.messages[this.currentLang] ? error.messages[this.currentLang] : defaultErrorMessage;
+            const defaultErrorMessage = error.messages['EN'] ? error.messages['EN'] : error.message;
+            return error.messages[this.currentLang.toUpperCase()] ? error.messages[this.currentLang.toUpperCase()] : defaultErrorMessage;
         } else 
             return error.message;
     }
@@ -468,6 +468,7 @@ export class GlobalComponent implements OnChanges {
 
     public handleApiError(error: any, errorEndPoint: string) {
         const builtError = this._getHcAirlinesErrorResponse(error);
+
         if (builtError !== null) {
             this.errorCode = builtError.code;
 
