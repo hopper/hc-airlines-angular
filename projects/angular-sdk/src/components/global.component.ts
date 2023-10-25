@@ -214,7 +214,7 @@ export class GlobalComponent implements OnChanges {
                         bulletPoints: [
                             "Cancel your booking up to <b> 24 hours </b> before departure, no reason required",
                             "Receive a <b>cash</b> refund of your flight cost (air transportation charges, taxes, fees and charges, excluding any additional services)",
-                            "Cancelling is easy via the My Bookings page, refund is provided by Hopper",
+                            "Cancelling is easy via the My Bookings page, refund is provided by HTS",
                             "Offer is only available at time of booking and can only be purchased for all passengers"
                         ],
                         labels: {}
@@ -232,7 +232,7 @@ export class GlobalComponent implements OnChanges {
                         bulletPoints: [
                             "最迟可在出发前24小时无理由取消订单",
                             "获得航班费用的现金退款（航空运输费用、税费和其他费用，额外服务费除外）",
-                            "您可以通过“我的订单 (My Bookings) 页面轻松取消预订, 退款由Hopper提供",
+                            "您可以通过“我的订单 (My Bookings) 页面轻松取消预订, 退款由HTS提供",
                             "优惠仅在预订时有效，且必须为所有乘客购买"
                         ],
                         labels: {}
@@ -318,7 +318,7 @@ export class GlobalComponent implements OnChanges {
                         bulletPoints: [
                             "Cancel your booking up to <b> 24 hours </b> before departure, no reason required",
                             "Receive a <b>cash</b> refund of your flight cost (air transportation charges, taxes, fees and charges, excluding any additional services)",
-                            "Cancelling is easy via the My Bookings page, refund is provided by Hopper",
+                            "Cancelling is easy via the My Bookings page, refund is provided by HTS",
                             "Offer is only available at time of booking and can only be purchased for all passengers"
                         ],
                         labels: {}
@@ -327,7 +327,7 @@ export class GlobalComponent implements OnChanges {
                         bulletPoints: [
                             "Annulez votre réservation jusqu'à <b>24 heures</b> avant le départ, aucun motif requis",
                             "Recevez un remboursement <b>en argent comptant</b> du coût de votre vol (frais de transport aérien, taxes, frais et droits, à l'exclusion de tout service additionnel)",
-                            "Annulez en toute simplicité sur la page Mes réservations, le remboursement est effectué par Hopper",
+                            "Annulez en toute simplicité sur la page Mes réservations, le remboursement est effectué par HTS",
                             "L'offre est uniquement disponible au moment de la réservation et ne peut être achetée que pour tous les passagers"
                         ],
                         labels: {}
@@ -336,7 +336,7 @@ export class GlobalComponent implements OnChanges {
                         bulletPoints: [
                             "最迟可在出发前24小时无理由取消订单",
                             "获得航班费用的现金退款（航空运输费用、税费和其他费用，额外服务费除外）",
-                            "您可以通过“我的订单 (My Bookings) 页面轻松取消预订, 退款由Hopper提供",
+                            "您可以通过“我的订单 (My Bookings) 页面轻松取消预订, 退款由HTS提供",
                             "优惠仅在预订时有效，且必须为所有乘客购买"
                         ],
                         labels: {}
@@ -484,7 +484,7 @@ export class GlobalComponent implements OnChanges {
      * @param builtError 
      * @param takeErrorLabelFromUIProject Must be set to false in the future
      */
-    public pushSdkError(errorEndPoint: string, builtError: HcAirlinesError, takeErrorLabelFromUIProject: boolean = true) {
+    public pushSdkError(errorEndPoint: string, builtError: HcAirlinesError, takeErrorLabelFromUIProject: boolean = false) {
         let emitWithUIProjectLabel = true;
         let errorMessage = builtError.message;
 

@@ -1,6 +1,6 @@
 # angular-sdk
 
-This project aims to provide a set of Angular components to subscribe to Hopper services such as "Cancel for any reason".
+This project aims to provide a set of Angular components to subscribe to HTS services such as "Cancel for any reason".
 
 ## Changelog
 
@@ -50,18 +50,18 @@ export class YourModule { }
     In your `styles.scss`, add following code :
 
     ```
-    // Apply the theme to Hopper components 
+    // Apply the theme to HTS components 
     @import "node_modules/@hopper-cloud-airlines/angular-sdk/src/styles/theme.scss";
     
     @include hopper-cloud-airlines-angular-sdk-components-theme($your-angular-material-theme);
     ```
 
-2. If you want to use a theme provided by Hopper
+2. If you want to use a theme provided by HTS
 
     In your `styles.scss`, add following code :
 
     ```
-    // Load the themes provided by Hopper
+    // Load the themes provided by HTS
     @import "node_modules/@hopper-cloud-airlines/angular-sdk/src/styles/theme.scss";
     ```
 
@@ -80,7 +80,7 @@ export class YourModule { }
     ```
     - For other components :
 
-    Encapsulate each Hopper components into an HTML element with the hopper theme class :
+    Encapsulate each HTS components into an HTML element with the HTS theme class :
 
     ```
     <div class="HOPPER-THEME-CLASS">
@@ -88,7 +88,7 @@ export class YourModule { }
     </div>
     ```
 
-    More simply you can also add the hopper theme class in the class attribute of the Body tag
+    More simply you can also add the HTS theme class in the class attribute of the Body tag
 
     ```
     <body class="HOPPER-THEME-CLASS">

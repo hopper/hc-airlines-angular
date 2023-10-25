@@ -1,10 +1,10 @@
 {
   "name": "@hopper-cloud-airlines/angular-sdk",
-  "version": "6.0.4",
+  "version": "6.0.5",
   "license": "Apache-2.0",
   "author": {
-    "name": "Hopper Cloud Airlines Team",
-    "url": "https://cloud.hopper.com/"
+    "name": "HTS - Airlines Team",
+    "url": "https://hts.hopper.com/"
   },
   "peerDependencies": {
     "@angular/common": ">=15.2.9",
