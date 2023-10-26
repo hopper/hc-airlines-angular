@@ -28,6 +28,7 @@ export class GlobalComponent implements OnChanges {
     @Output() errorOccurred = new EventEmitter();
     
     public errorCode?: string;
+    public errorMessage?: string;
     public mapCountries: Map<string, string>;
 
     constructor(
@@ -118,12 +119,12 @@ export class GlobalComponent implements OnChanges {
         }
     }
 
-    protected _extractErrorMessage(error: Error): any {
+    protected _extractErrorMessage(error: Error): string {
         if (error.messages !== undefined) {
-            const defaultErrorMessage = error.messages['en'] ? error.messages['en'] : error.message
-            return error.messages[this.currentLang] ? error.messages[this.currentLang] : defaultErrorMessage
+            const defaultErrorMessage = error.messages['EN'] ? error.messages['EN'] : error.message;
+            return error.messages[this.currentLang.toUpperCase()] ? error.messages[this.currentLang.toUpperCase()] : defaultErrorMessage;
         } else 
-            return error.message
+            return error.message;
     }
 
     protected _buildCreateCfarOfferRequest(itineraries: CfarItinerary[], uiVariant?: UiVariant): CreateCfarOfferCustomerRequest {
@@ -213,7 +214,7 @@ export class GlobalComponent implements OnChanges {
                         bulletPoints: [
                             "Cancel your booking up to <b> 24 hours </b> before departure, no reason required",
                             "Receive a <b>cash</b> refund of your flight cost (air transportation charges, taxes, fees and charges, excluding any additional services)",
-                            "Cancelling is easy via the My Bookings page, refund is provided by Hopper",
+                            "Cancelling is easy via the My Bookings page, refund is provided by HTS",
                             "Offer is only available at time of booking and can only be purchased for all passengers"
                         ],
                         labels: {}
@@ -231,7 +232,7 @@ export class GlobalComponent implements OnChanges {
                         bulletPoints: [
                             "最迟可在出发前24小时无理由取消订单",
                             "获得航班费用的现金退款（航空运输费用、税费和其他费用，额外服务费除外）",
-                            "您可以通过“我的订单 (My Bookings) 页面轻松取消预订, 退款由Hopper提供",
+                            "您可以通过“我的订单 (My Bookings) 页面轻松取消预订, 退款由HTS提供",
                             "优惠仅在预订时有效，且必须为所有乘客购买"
                         ],
                         labels: {}
@@ -317,7 +318,7 @@ export class GlobalComponent implements OnChanges {
                         bulletPoints: [
                             "Cancel your booking up to <b> 24 hours </b> before departure, no reason required",
                             "Receive a <b>cash</b> refund of your flight cost (air transportation charges, taxes, fees and charges, excluding any additional services)",
-                            "Cancelling is easy via the My Bookings page, refund is provided by Hopper",
+                            "Cancelling is easy via the My Bookings page, refund is provided by HTS",
                             "Offer is only available at time of booking and can only be purchased for all passengers"
                         ],
                         labels: {}
@@ -326,7 +327,7 @@ export class GlobalComponent implements OnChanges {
                         bulletPoints: [
                             "Annulez votre réservation jusqu'à <b>24 heures</b> avant le départ, aucun motif requis",
                             "Recevez un remboursement <b>en argent comptant</b> du coût de votre vol (frais de transport aérien, taxes, frais et droits, à l'exclusion de tout service additionnel)",
-                            "Annulez en toute simplicité sur la page Mes réservations, le remboursement est effectué par Hopper",
+                            "Annulez en toute simplicité sur la page Mes réservations, le remboursement est effectué par HTS",
                             "L'offre est uniquement disponible au moment de la réservation et ne peut être achetée que pour tous les passagers"
                         ],
                         labels: {}
@@ -335,7 +336,7 @@ export class GlobalComponent implements OnChanges {
                         bulletPoints: [
                             "最迟可在出发前24小时无理由取消订单",
                             "获得航班费用的现金退款（航空运输费用、税费和其他费用，额外服务费除外）",
-                            "您可以通过“我的订单 (My Bookings) 页面轻松取消预订, 退款由Hopper提供",
+                            "您可以通过“我的订单 (My Bookings) 页面轻松取消预订, 退款由HTS提供",
                             "优惠仅在预订时有效，且必须为所有乘客购买"
                         ],
                         labels: {}
@@ -467,11 +468,11 @@ export class GlobalComponent implements OnChanges {
 
     public handleApiError(error: any, errorEndPoint: string) {
         const builtError = this._getHcAirlinesErrorResponse(error);
-        if (builtError !== null) {
-            const errorCode = builtError.code;
-            this.errorCode = errorCode;
 
-            if (errorCode !== undefined && errorCode !== null) {                    
+        if (builtError !== null) {
+            this.errorCode = builtError.code;
+
+            if (this.errorCode !== undefined && this.errorCode !== null) {                    
                 // Push the error context for the client
                 this.pushSdkError(errorEndPoint, builtError);
             }
@@ -484,13 +485,16 @@ export class GlobalComponent implements OnChanges {
      * @param builtError 
      * @param takeErrorLabelFromUIProject Must be set to false in the future
      */
-    public pushSdkError(errorEndPoint: string, builtError: HcAirlinesError, takeErrorLabelFromUIProject: boolean = true) {
+    public pushSdkError(errorEndPoint: string, builtError: HcAirlinesError, takeErrorLabelFromUIProject: boolean = false) {
         let emitWithUIProjectLabel = true;
+        let errorMessage = builtError.message;
+
         if (!takeErrorLabelFromUIProject) {
-            const builtErrorMessage = builtError.message
-            if (builtErrorMessage !== null && builtErrorMessage.length > 0) {
+            if (errorMessage !== null && errorMessage.length > 0) {
                 emitWithUIProjectLabel = false;
-                const errorSdk: ErrorSdkModel = {endpoint: errorEndPoint, errorCode: builtError.code, errorDescription: builtErrorMessage}
+                this.errorMessage = errorMessage;
+
+                const errorSdk: ErrorSdkModel = {endpoint: errorEndPoint, errorCode: builtError.code, errorDescription: errorMessage}
                 this.errorOccurred.emit(errorSdk);
             }
         }
@@ -499,9 +503,12 @@ export class GlobalComponent implements OnChanges {
             this.translateService.get('COMMON.ERROR_CODE.' + builtError.code)
             .pipe(take(1))
             .subscribe(errorDescription => {
+                this.errorMessage = errorDescription;
+
                 const errorSdk: ErrorSdkModel = {endpoint: errorEndPoint, errorCode: builtError.code, errorDescription: errorDescription}
                 this.errorOccurred.emit(errorSdk);
             });
         }
+
     }
 }

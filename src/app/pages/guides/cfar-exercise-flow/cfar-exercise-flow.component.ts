@@ -80,7 +80,7 @@ export class CfarExerciseFlowPageComponent extends CommonGuidesComponent {
       {
         name: 'basePath',
         description: `
-          The Hopper Cloud Airlines API url base path
+          The HTS API url base path
         `,
         required: true
       },
@@ -94,7 +94,7 @@ export class CfarExerciseFlowPageComponent extends CommonGuidesComponent {
       {
         name: 'currentTheme',
         description: `
-          The active theme managed by Hopper.
+          The active theme managed by HTS.
           If you have an Angular material theme, this field can be ignored
         `,
         required: false

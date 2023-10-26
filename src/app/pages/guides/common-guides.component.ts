@@ -28,7 +28,7 @@ export abstract class CommonGuidesComponent implements OnInit, OnDestroy {
   public abstract htmlCode: string;
   
   // Parameters
-  public hCSessionId = "45de2501-5a13-446e-9c0e-581e8fa6845d";
+  public hCSessionId = "b7c98b1c-00c3-4082-a72b-cce39a29a640";
   public contractId = "1ed5f483-6287-6b77-acb5-9719296bfa70";
   public exerciseId = "1ee262de-901f-6f60-af7f-1b34c81fb4d6";
   public currency = "EUR";
@@ -53,8 +53,8 @@ export abstract class CommonGuidesComponent implements OnInit, OnDestroy {
             {
               originAirport: "LGA",
               destinationAirport: "BOS",
-              departureDateTime: "2023-03-01T18:34:30",
-              arrivalDateTime: "2023-03-02T19:12:30",
+              departureDateTime: "2023-11-01T18:34:30",
+              arrivalDateTime: "2023-11-02T19:12:30",
               flightNumber: "JB776",
               validatingCarrierCode: "B6",
               fareClass: "economy",
@@ -82,8 +82,8 @@ export abstract class CommonGuidesComponent implements OnInit, OnDestroy {
           {
             originAirport: "LGA",
             destinationAirport: "BOS",
-            departureDateTime: "2023-03-01T18:34:30",
-            arrivalDateTime: "2023-03-02T19:12:30",
+            departureDateTime: "2023-11-01T18:34:30",
+            arrivalDateTime: "2023-11-02T19:12:30",
             flightNumber: "JB776",
             validatingCarrierCode: "B6",
             fareClass: "economy",
