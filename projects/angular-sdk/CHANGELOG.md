@@ -1,7 +1,7 @@
 
 <a name="6.0.5"></a>
 
-# 6.0.5 (2023-XX-XX)
+# 6.0.5 (2023-10-26)
 
 General:
 - Fixes some texts related to Hopper/HTS.
