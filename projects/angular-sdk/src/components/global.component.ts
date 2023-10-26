@@ -492,6 +492,7 @@ export class GlobalComponent implements OnChanges {
         if (!takeErrorLabelFromUIProject) {
             if (errorMessage !== null && errorMessage.length > 0) {
                 emitWithUIProjectLabel = false;
+                this.errorMessage = errorMessage;
 
                 const errorSdk: ErrorSdkModel = {endpoint: errorEndPoint, errorCode: builtError.code, errorDescription: errorMessage}
                 this.errorOccurred.emit(errorSdk);
@@ -502,13 +503,12 @@ export class GlobalComponent implements OnChanges {
             this.translateService.get('COMMON.ERROR_CODE.' + builtError.code)
             .pipe(take(1))
             .subscribe(errorDescription => {
-                errorMessage = errorDescription;
+                this.errorMessage = errorDescription;
 
                 const errorSdk: ErrorSdkModel = {endpoint: errorEndPoint, errorCode: builtError.code, errorDescription: errorDescription}
                 this.errorOccurred.emit(errorSdk);
             });
         }
 
-        this.errorMessage = errorMessage;
     }
 }
