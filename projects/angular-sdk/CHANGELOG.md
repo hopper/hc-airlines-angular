@@ -1,4 +1,10 @@
 
+<a name="6.0.6"></a>
+
+# 6.0.6 (2023-12-14)
+
+General:
+- Add support for logging.
 <a name="6.0.5"></a>
 
 # 6.0.5 (2023-10-26)
