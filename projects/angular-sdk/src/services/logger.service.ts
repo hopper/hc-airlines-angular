@@ -12,6 +12,7 @@ export class Logger {
     clientToken: "pubf78a0a6e00c46c5f03f09a96e79bb939",
     site: "datadoghq.com",
     service: "hts-airlines-angular-sdk",
+    env: environment.production ? 'production' : 'development',
     forwardErrorsToLogs: true,
     sessionSampleRate: 100,
     silentMultipleInit: true,

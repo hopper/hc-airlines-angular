@@ -66,8 +66,6 @@ export class CfarOfferBannerLargeComponent extends GlobalEventComponent implemen
   public onChooseCoverage(): void {
     // After the first choice, we force the display of the 'decline' option
     this.hasNoCoverageOption = true;
-    this._logger.warn("test warning");
-    throw new Error("Method not implemented.");
     // Update descriptions
     this.selectedCfarOffer = this.selectedChoice > -1 ? this.cfarOffers[this.selectedChoice] : this._getDefaultOffer(this.cfarOffers);
   
