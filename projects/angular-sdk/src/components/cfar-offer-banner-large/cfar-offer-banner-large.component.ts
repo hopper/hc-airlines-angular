@@ -7,6 +7,7 @@ import { ApiTranslatorUtils } from '../../utils/api-translator.utils';
 import { HopperCfarService } from '../../services/hopper-cfar.service';
 import { HopperEventsService } from '../../services/hopper-events.service';
 import { GlobalEventComponent } from '../global-event.component';
+import { Logger } from '../../services/logger.service';
 
 @Component({
   selector: 'hopper-cfar-offer-banner-large',
@@ -37,7 +38,8 @@ export class CfarOfferBannerLargeComponent extends GlobalEventComponent implemen
     private _translateService: TranslateService,
     private _hopperCfarService: HopperCfarService,
     private _hopperEventService: HopperEventsService,
-    private _cdRef: ChangeDetectorRef
+    private _cdRef: ChangeDetectorRef,
+    private _logger: Logger
   ) {
     super(_adapter, _translateService, _hopperEventService, _cdRef);
   }
@@ -53,7 +55,6 @@ export class CfarOfferBannerLargeComponent extends GlobalEventComponent implemen
       this.offersLoaded.emit(this.cfarOffers);
     } else {
       this._initUiParameters();
-
       this.initCfarOffers();
     }
   }
@@ -65,7 +66,6 @@ export class CfarOfferBannerLargeComponent extends GlobalEventComponent implemen
   public onChooseCoverage(): void {
     // After the first choice, we force the display of the 'decline' option
     this.hasNoCoverageOption = true;
-
     // Update descriptions
     this.selectedCfarOffer = this.selectedChoice > -1 ? this.cfarOffers[this.selectedChoice] : this._getDefaultOffer(this.cfarOffers);
   

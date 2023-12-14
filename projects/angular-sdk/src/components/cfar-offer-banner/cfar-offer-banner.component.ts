@@ -9,6 +9,7 @@ import { HopperCfarService } from '../../services/hopper-cfar.service';
 import { MatDialog } from '@angular/material/dialog';
 import { CfarOfferDialogComponent } from '../cfar-offer-dialog/cfar-offer-dialog.component';
 import { DialogUtils } from '../../utils/dialog.utils';
+import { Logger } from '../../services/logger.service';
 
 @Component({
   selector: 'hopper-cfar-offer-banner',
@@ -34,7 +35,8 @@ export class CfarOfferBannerComponent extends GlobalComponent implements OnInit 
     private _translateService: TranslateService,
     private _hopperCfarService: HopperCfarService,
     private _dialog: MatDialog,
-    private _cdRef: ChangeDetectorRef
+    private _cdRef: ChangeDetectorRef,
+    private _logger: Logger
     ) {
       super(_adapter, _translateService, _cdRef);
   }
