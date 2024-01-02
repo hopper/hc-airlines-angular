@@ -21,7 +21,7 @@ export class Logger {
 
     datadog.init(_initConfig);
     this._logger = datadog.createLogger('angular-sdk');
-    this._logger.setHandler(HandlerType.http);
+    this._logger.setHandler( env = "production" ? HandlerType.http : HandlerType.console);
     this._context = {
       data: {
         jsonPayload: {
