@@ -21,6 +21,7 @@ export abstract class CommonGuidesComponent implements OnInit, OnDestroy {
   // public basePath: string = 'https://airlines-api.staging.hopper.com/airline/v1.1';
   public imageBasePath: string = ''; // 'http://localhost:4200/';
   public isFakeBackend!: boolean;
+  public env!: string;
 
   protected _unsubcriber: Subject<any>;
   
@@ -116,6 +117,7 @@ export abstract class CommonGuidesComponent implements OnInit, OnDestroy {
     
     // Active fake data in components
     this.isFakeBackend = true;
+    this.env = 'development'
   }
   
   // -----------------------------------------------
