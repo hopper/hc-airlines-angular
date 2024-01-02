@@ -26,6 +26,7 @@ export class CfarOfferBannerComponent extends GlobalComponent implements OnInit 
   @Input() hCSessionId!: string;
   @Input() itineraries!: CfarItinerary[];
   @Input() currentTheme!: string;
+  @Input() env: string = "production";
 
   @Output() offerAccepted = new EventEmitter();
   @Output() offersLoaded = new EventEmitter();
