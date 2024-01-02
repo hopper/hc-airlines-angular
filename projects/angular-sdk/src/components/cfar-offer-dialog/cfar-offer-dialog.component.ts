@@ -9,7 +9,6 @@ import { ApiTranslatorUtils } from '../../utils/api-translator.utils';
 import { HopperCfarService } from '../../services/hopper-cfar.service';
 import { HopperEventsService } from '../../services/hopper-events.service';
 import { DecimalPipe } from '@angular/common';
-import { Logger } from '../../services/logger.service';
 
 @Component({
   selector: 'hopper-cfar-offer-dialog',
@@ -34,7 +33,6 @@ export class CfarOfferDialogComponent extends GlobalComponent implements OnInit,
     private _hopperEventService: HopperEventsService,
     private _decimalPipe: DecimalPipe,
     private _cdRef: ChangeDetectorRef,
-    private _logger: Logger
   ) {
     super(_adapter, _translateService, _cdRef);
 
