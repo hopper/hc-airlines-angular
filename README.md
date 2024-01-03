@@ -1,4 +1,4 @@
-# HcAirlinesAngular
+# Angular SDK
 
 This repository contains all the Angular projects of the HTS - airlines team
 
