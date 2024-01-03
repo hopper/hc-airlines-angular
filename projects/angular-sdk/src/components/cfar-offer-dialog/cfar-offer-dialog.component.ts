@@ -57,6 +57,7 @@ export class CfarOfferDialogComponent extends GlobalComponent implements OnInit,
   // -----------------------------------------------
 
   ngOnInit(): void {
+    super.ngOnInit();
     // Update languages/labels manually (dialog limitation)
     this._updateLanguage(this.currentLang);
 

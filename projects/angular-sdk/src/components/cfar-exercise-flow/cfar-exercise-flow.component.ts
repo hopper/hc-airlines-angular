@@ -84,6 +84,7 @@ export class CfarExerciseFlowComponent extends GlobalEventComponent implements O
   // -----------------------------------------------
 
   ngOnInit(): void {
+    super.ngOnInit();
     // Init Navigation Context
     this._initNavigationContext();
 

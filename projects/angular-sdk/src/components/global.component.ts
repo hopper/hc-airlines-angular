@@ -62,7 +62,7 @@ export class GlobalComponent implements OnChanges {
     // -----------------------------------------------
 
     ngOnInit(): void {
-        this.logger.setEnv(this.env)
+        this.logger.setEnv(this.env);
     }
 
     ngOnChanges(changes: SimpleChanges): void {

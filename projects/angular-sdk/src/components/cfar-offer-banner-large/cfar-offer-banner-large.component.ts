@@ -49,6 +49,7 @@ export class CfarOfferBannerLargeComponent extends GlobalEventComponent implemen
   // -----------------------------------------------
 
   ngOnInit(): void {
+    super.ngOnInit();
     if (this.isFakeBackend) {
       this.cfarOffers = this._buildFakePostCfarOffersResponse();
       this.selectedCfarOffer = this._getDefaultOffer(this.cfarOffers);

@@ -34,7 +34,7 @@ export class Logger {
 
   public setEnv(env?: string): void {
     this._env = env ? env : "production";
-    datadog.setGlobalContext({ env: this._env })
+    datadog.setGlobalContext({ env: this._env });
     this._context.data.jsonPayload.env = env;
     this._logger.setContext(this._context);
     this._logger.setHandler(this._env === "production" ? HandlerType.http : HandlerType.console);
