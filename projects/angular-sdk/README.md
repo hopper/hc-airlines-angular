@@ -1,4 +1,4 @@
-# angular-sdk
+# Angular SDK
 
 This project aims to provide a set of Angular components to subscribe to HTS services such as "Cancel for any reason".
 
