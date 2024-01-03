@@ -27,22 +27,21 @@ export class CfarOfferBannerLargeComponent extends GlobalEventComponent implemen
   @Input() uiVariant!: UiVariant;
   @Input() hasNoCoverageOption: boolean = true;
   @Input() hasWarningCoverageMessage: boolean = false;
-  @Input() env: string = "production";
 
   @Output() chooseCoverage = new EventEmitter();
   @Output() offersLoaded = new EventEmitter();
 
   private _contractsByChoiceIndex = new Map<number, CfarContractCustomer>();
-
+  
   constructor(
     private _adapter: DateAdapter<any>,
     private _translateService: TranslateService,
     private _hopperCfarService: HopperCfarService,
     private _hopperEventService: HopperEventsService,
     private _cdRef: ChangeDetectorRef,
-    private _logger: Logger
+    private _logger: Logger,
   ) {
-    super(_adapter, _translateService, _hopperEventService, _cdRef);
+    super(_adapter, _translateService, _hopperEventService, _cdRef, _logger);
   }
 
   // -----------------------------------------------
@@ -50,6 +49,7 @@ export class CfarOfferBannerLargeComponent extends GlobalEventComponent implemen
   // -----------------------------------------------
 
   ngOnInit(): void {
+    super.ngOnInit();
     if (this.isFakeBackend) {
       this.cfarOffers = this._buildFakePostCfarOffersResponse();
       this.selectedCfarOffer = this._getDefaultOffer(this.cfarOffers);

@@ -26,7 +26,6 @@ export class CfarOfferBannerComponent extends GlobalComponent implements OnInit 
   @Input() hCSessionId!: string;
   @Input() itineraries!: CfarItinerary[];
   @Input() currentTheme!: string;
-  @Input() env: string = "production";
 
   @Output() offerAccepted = new EventEmitter();
   @Output() offersLoaded = new EventEmitter();
@@ -37,9 +36,9 @@ export class CfarOfferBannerComponent extends GlobalComponent implements OnInit 
     private _hopperCfarService: HopperCfarService,
     private _dialog: MatDialog,
     private _cdRef: ChangeDetectorRef,
-    private _logger: Logger
+    private _logger: Logger,
     ) {
-      super(_adapter, _translateService, _cdRef);
+      super(_adapter, _translateService, _cdRef, _logger);
   }
 
   // -----------------------------------------------
@@ -47,6 +46,7 @@ export class CfarOfferBannerComponent extends GlobalComponent implements OnInit 
   // -----------------------------------------------
 
   ngOnInit(): void {
+    super.ngOnInit();
     if (this.isFakeBackend) {
       this._cfarOffers = this._buildFakePostCfarOffersResponse();
       this.selectedCfarOffer = this._getDefaultOffer(this._cfarOffers);

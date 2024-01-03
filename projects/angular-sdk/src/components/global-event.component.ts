@@ -5,6 +5,7 @@ import { ExerciseStepResult, UiSource, UiVariant } from "../apis/hopper-cloud-ai
 import { take } from "rxjs/operators";
 import { GlobalComponent } from "./global.component";
 import { HopperEventsService } from "../services/hopper-events.service";
+import { Logger } from "../services/logger.service";
 
 @Directive({
     selector: '[HopperGlobalEventComponent]'
@@ -21,9 +22,10 @@ export class GlobalEventComponent extends GlobalComponent {
         protected adapter: DateAdapter<any>,
         protected translateService: TranslateService,
         protected hopperEventService: HopperEventsService,
-        protected cdRef: ChangeDetectorRef
+        protected cdRef: ChangeDetectorRef,
+        protected logger: Logger
     ) {
-        super(adapter, translateService, cdRef);
+        super(adapter, translateService, cdRef, logger);
     }
 
     // -----------------------------------------------

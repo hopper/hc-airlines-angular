@@ -12,6 +12,7 @@ import { HcAirlinesError } from "../models/hc-airlines-error";
 import { Error } from '../apis/hopper-cloud-airline/v1';
 import { ErrorCode } from "../enums/error-code.enum";
 import { ErrorSdkModel } from "../models";
+import { Logger } from "../services/logger.service";
 
 @Directive({
     selector: '[HopperGlobalComponent]'
@@ -24,6 +25,7 @@ export class GlobalComponent implements OnChanges {
     @Input() basePath!: string;
     @Input() imageBasePath?: string;
     @Input() isFakeBackend?: boolean;
+    @Input() env?: string;
 
     @Output() errorOccurred = new EventEmitter();
     
@@ -34,7 +36,8 @@ export class GlobalComponent implements OnChanges {
     constructor(
         protected adapter: DateAdapter<any>,
         protected translateService: TranslateService,
-        protected cdRef: ChangeDetectorRef
+        protected cdRef: ChangeDetectorRef,
+        protected logger: Logger
     ) {
         // Set Labels
         Locales.forEach((locale: I18n) => {
@@ -57,6 +60,10 @@ export class GlobalComponent implements OnChanges {
     // -----------------------------------------------
     // Life Cycle Hooks
     // -----------------------------------------------
+
+    ngOnInit(): void {
+        this.logger.setEnv(this.env);
+    }
 
     ngOnChanges(changes: SimpleChanges): void {
         if (changes.currentLang && changes.currentLang.currentValue) {
