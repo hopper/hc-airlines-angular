@@ -1,3 +1,7 @@
+<a name="6.0.7"></a>
+
+# 6.0.7 (2024-XX-XX)
+- Fix logging issue.
 
 <a name="6.0.6"></a>
 

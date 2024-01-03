@@ -18,6 +18,7 @@ export class CfarOfferBannerPageComponent extends CommonGuidesComponent {
 
   public  htmlCode: string = `
     <hopper-cfar-offer-banner
+      [env]="env"
       [basePath]="basePath"
       [imageBasePath]="imageBasePath"
       [currentLang]="currentLang"
@@ -107,6 +108,15 @@ export class CfarOfferBannerPageComponent extends CommonGuidesComponent {
           See <a target="_blank" aria-describedby="api documentation" href="https://airlines-api.staging.hopper.com/airline/v1.1/docs/index.html#operation/postCfar_offers">API documentation</a>
         `,
         required: true
+      },
+      {
+        name: 'env',
+        description: `
+          Used for logging purpose. <br />
+          Possibles values: 'development', 'production'
+          Default value: 'production'
+        `,
+        required: false
       }
     ];
   }

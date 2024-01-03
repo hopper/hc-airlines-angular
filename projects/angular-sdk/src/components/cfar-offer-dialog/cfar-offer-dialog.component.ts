@@ -44,12 +44,13 @@ export class CfarOfferDialogComponent extends GlobalComponent implements OnInit,
     // Optional data
     this._itineraries = data.itineraries;
     this.cfarOffers = data.cfarOffers;
-
+    
     // Update parents @inputs manually (Dialog limitation)
     this.isFakeBackend = data.isFakeBackend;
     this.currentLang = data.currentLang;
     this.basePath = data.basePath;
     this.imageBasePath = data.imageBasePath;
+    this.env = data.env;
   }
 
   // -----------------------------------------------
@@ -58,6 +59,7 @@ export class CfarOfferDialogComponent extends GlobalComponent implements OnInit,
 
   ngOnInit(): void {
     super.ngOnInit();
+    
     // Update languages/labels manually (dialog limitation)
     this._updateLanguage(this.currentLang);
 

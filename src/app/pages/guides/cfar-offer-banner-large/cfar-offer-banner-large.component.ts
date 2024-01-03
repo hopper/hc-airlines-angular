@@ -18,6 +18,7 @@ export class CfarOfferBannerLargePageComponent extends CommonGuidesComponent {
 
   public  htmlCode: string = `
     <hopper-cfar-offer-banner-large
+      [env]="env"
       [basePath]="basePath"
       [imageBasePath]="imageBasePath"
       [currentLang]="currentLang"
@@ -124,6 +125,15 @@ export class CfarOfferBannerLargePageComponent extends CommonGuidesComponent {
           Possibles values: 'variant_a', 'variant_b' or 'variant_c'
         `,
         required: true
+      },
+      {
+        name: 'env',
+        description: `
+          Used for logging purpose. <br />
+          Possibles values: 'development', 'production'
+          Default value: 'production'
+        `,
+        required: false
       }
     ];
   }

@@ -44,6 +44,7 @@ export class CfarOfferDialogPageComponent extends CommonGuidesComponent {
 
     public onOpenCfarOfferDialog(): void {
       const dialogData = { 
+        env: this.env,
         currentLang: this.currentLang,
         basePath: this.basePath,
         imageBasePath: this.imageBasePath,
@@ -158,6 +159,15 @@ export class CfarOfferDialogPageComponent extends CommonGuidesComponent {
           You need to pass itineraries OR cfarOffers.
         `,
         required: true
+      },
+      {
+        name: 'env',
+        description: `
+          Used for logging purpose. <br />
+          Possibles values: 'development', 'production'
+          Default value: 'production'
+        `,
+        required: false
       }
     ];
   }
@@ -189,12 +199,13 @@ export class CfarOfferDialogPageComponent extends CommonGuidesComponent {
 
   public onOpenCfarOfferDialog(): void {
     const dialogData = { 
+      env: this.env,
       isFakeBackend: this.isFakeBackend,
       basePath: this.basePath,
       imageBasePath: this.imageBasePath,
       currentLang: this.currentLang,
       hCSessionId: this.hCSessionId,
-      itineraries: this.itineraries,
+      itineraries: this.itineraries
     };
     const dialogConfig = DialogUtils.getDialogConfig(dialogData);
     const dialogRef = this._dialog.open(CfarOfferDialogComponent, dialogConfig);
