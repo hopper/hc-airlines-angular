@@ -117,7 +117,6 @@ export abstract class CommonGuidesComponent implements OnInit, OnDestroy {
     
     // Active fake data in components
     this.isFakeBackend = true;
-    this.env = 'development'
   }
   
   // -----------------------------------------------

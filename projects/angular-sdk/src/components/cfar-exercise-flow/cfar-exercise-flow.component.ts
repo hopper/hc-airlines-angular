@@ -15,6 +15,7 @@ import { SendCfarContractExerciceVerificationCodeResponse } from '../../apis/hop
 import { ErrorCode } from '../../enums/error-code.enum';
 import { HopperCfarService } from '../../services/hopper-cfar.service';
 import { HopperEventsService } from '../../services/hopper-events.service';
+import { Logger } from '../../services/logger.service';
 
 @Component({
   selector: 'hopper-cfar-exercise-flow',
@@ -64,9 +65,10 @@ export class CfarExerciseFlowComponent extends GlobalEventComponent implements O
     private _hopperEventService: HopperEventsService,
     private _formBuilder: UntypedFormBuilder,
     private _datePipe: DatePipe,
-    private _cdRef: ChangeDetectorRef
+    private _cdRef: ChangeDetectorRef,
+    private _logger: Logger,
   ) {
-    super(_adapter, _translateService, _hopperEventService, _cdRef);
+    super(_adapter, _translateService, _hopperEventService, _cdRef, _logger);
 
     // Create material icon for refundable ticket
     this._matIconRegistry.addSvgIcon(
