@@ -4,15 +4,16 @@ import { TranslateService } from '@ngx-translate/core';
 import { I18n } from "../i18n/i18n.interface";
 import { DateAdapter } from "@angular/material/core";
 import { CfarContractCustomer, CfarItinerary, CfarOfferCustomer, CfarPriceType, CfarStatus, CreateCfarContractCustomerRequest, CreateCfarOfferCustomerRequest, GetCfarExerciseCustomerResponse, PassengerType, RequestType, UiSource, UiVariant } from "../apis/hopper-cloud-airline/v1";
-import { CountryCode } from "../enums/country-code.enum";
 import { take } from "rxjs/operators";
 import { HttpErrorResponse } from "@angular/common/http";
 import { ArrayUtils } from "../utils/array-utils";
 import { HcAirlinesError } from "../models/hc-airlines-error";
 import { Error } from '../apis/hopper-cloud-airline/v1';
-import { ErrorCode } from "../enums/error-code.enum";
 import { ErrorSdkModel } from "../models";
 import { Logger } from "../services/logger.service";
+import { CountryCode } from "../enums/country-code.enum";
+import { ErrorCode } from "../enums/error-code.enum";
+import { StateCode } from "../enums/state-code.enum";
 
 @Directive({
     selector: '[HopperGlobalComponent]'
@@ -32,6 +33,7 @@ export class GlobalComponent implements OnChanges {
   public errorCode?: string;
   public errorMessage?: string;
   public mapCountries: Map<string, string>;
+  public mapStates!: Map<string, string>;
 
   constructor(
     protected adapter: DateAdapter<any>,
@@ -55,6 +57,7 @@ export class GlobalComponent implements OnChanges {
 
     // Init map
     this.mapCountries = new Map<string, string>();
+    this.mapStates = new Map<string, string>();
   }
   
   // -----------------------------------------------
@@ -70,8 +73,8 @@ export class GlobalComponent implements OnChanges {
       // Update languages
       this._updateLanguage(changes.currentLang.currentValue);
 
-      // Update countries labels
-      this._setCountriesLabels();
+      // Update Maps labels
+      this._setMapsLabels();
     }
   }
 
@@ -99,18 +102,29 @@ export class GlobalComponent implements OnChanges {
     this.adapter.setLocale(newLanguage);
   }
 
-  protected _setCountriesLabels(): void {
+  protected _setMapsLabels(): void {
     const countries = Object.keys(CountryCode);
-
+    const states = Object.keys(StateCode);
+    
     countries.forEach(countryCode => {
         // Get Label and fill the map
         this.translateService.get('COMMON.COUNTRY.' + countryCode)
             .pipe(take(1))
             .subscribe(label => this.mapCountries.set(countryCode, label));            
     });
+
+    states.forEach(stateCode => {
+      // Get Label and fill the map
+      this.translateService.get('COMMON.STATE.' + stateCode)
+          .pipe(take(1))
+          .subscribe(label => {
+            this.mapStates.set(stateCode, label);
+          });
+    });
     
-    // Sort the map by label (alphabetical order)
+    // Sort the maps by label (alphabetical order)
     this.mapCountries = new Map([...this.mapCountries.entries()].sort((a, b) => a[1].localeCompare(b[1])));
+    this.mapStates = new Map([...this.mapStates.entries()].sort((a, b) => a[1].localeCompare(b[1])));
   }
 
   protected _getHcAirlinesErrorResponse(apiError: HttpErrorResponse): HcAirlinesError {

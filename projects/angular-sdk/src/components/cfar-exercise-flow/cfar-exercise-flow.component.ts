@@ -10,12 +10,11 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { MatStepper } from '@angular/material/stepper';
 import { DatePipe } from '@angular/common';
-import { ExerciseActionStep } from '../../enums/exercise-action-step.enum';
 import { SendCfarContractExerciceVerificationCodeResponse } from '../../apis/hopper-cloud-airline/v1';
-import { ErrorCode } from '../../enums/error-code.enum';
 import { HopperCfarService } from '../../services/hopper-cfar.service';
 import { HopperEventsService } from '../../services/hopper-events.service';
 import { Logger } from '../../services/logger.service';
+import { ErrorCode, ExerciseActionStep } from '../../enums';
 
 @Component({
   selector: 'hopper-cfar-exercise-flow',

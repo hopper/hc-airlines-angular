@@ -291,11 +291,25 @@
                                             </div>
                 
                                             <div fxFlex="100" fxLayoutGap="16px" fxLayout="row" fxLayout.lt-md="column">
-                                                <mat-form-field fxFlex appearance="outline">
-                                                    <mat-label>{{ 'CFAR_EXERCISE_FLOW.FORM.STATE' | translate }}</mat-label>
-                                                    <input matInput formControlName="state">
-                                                    <mat-error *ngIf="step2Form.get('state')?.invalid">{{ 'CFAR_EXERCISE_FLOW.FORM.STATE_ERROR' | translate }}</mat-error>
-                                                </mat-form-field>
+                                                <ng-container *ngIf="'US' !== step2Form.get('country')?.value">
+                                                    <mat-form-field fxFlex appearance="outline">
+                                                        <mat-label>{{ 'CFAR_EXERCISE_FLOW.FORM.STATE' | translate }}</mat-label>
+                                                        <input matInput formControlName="state">
+                                                        <mat-error *ngIf="step2Form.get('state')?.invalid">{{ 'CFAR_EXERCISE_FLOW.FORM.STATE_ERROR' | translate }}</mat-error>
+                                                    </mat-form-field>
+                                                </ng-container>
+                            
+                                                <ng-container *ngIf="'US' === step2Form.get('country')?.value">
+                                                    <mat-form-field fxFlex appearance="outline">
+                                                        <mat-label>{{ 'CFAR_EXERCISE_FLOW.FORM.STATE' | translate }}</mat-label>
+                                                        <mat-select formControlName="state">
+                                                            <mat-option *ngFor="let s of mapStates | keyvalue: asIsOrder" [value]="s.key">
+                                                                {{ s.value }}
+                                                            </mat-option>
+                                                        </mat-select>
+                                                        <mat-error *ngIf="step2Form.get('state')?.invalid">{{ 'CFAR_EXERCISE_FLOW.FORM.STATE_ERROR' | translate }}</mat-error>
+                                                    </mat-form-field>
+                                                </ng-container>
                     
                                                 <mat-form-field fxFlex appearance="outline">
                                                     <mat-label>{{ 'CFAR_EXERCISE_FLOW.FORM.ZIP' | translate }}</mat-label>
