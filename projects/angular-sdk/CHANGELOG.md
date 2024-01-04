@@ -1,6 +1,6 @@
 <a name="6.0.7"></a>
 
-# 6.0.7 (2024-XX-XX)
+# 6.0.7 (2024-01-04)
 
 - Fixed logging issue.
 - Fixed an issue with US states in the refund form
