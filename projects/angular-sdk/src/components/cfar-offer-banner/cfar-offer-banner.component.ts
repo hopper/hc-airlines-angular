@@ -9,7 +9,7 @@ import { HopperCfarService } from '../../services/hopper-cfar.service';
 import { MatDialog } from '@angular/material/dialog';
 import { CfarOfferDialogComponent } from '../cfar-offer-dialog/cfar-offer-dialog.component';
 import { DialogUtils } from '../../utils/dialog.utils';
-import { Logger } from '../../services/logger.service';
+import { LoggerService } from '../../services/logger.service';
 
 @Component({
   selector: 'hopper-cfar-offer-banner',
@@ -31,14 +31,14 @@ export class CfarOfferBannerComponent extends GlobalComponent implements OnInit 
   @Output() offersLoaded = new EventEmitter();
   
   constructor(
-    private _adapter: DateAdapter<any>,
-    private _translateService: TranslateService,
+    protected override _adapter: DateAdapter<any>,
+    protected override _translateService: TranslateService,
+    protected override _cdRef: ChangeDetectorRef,
+    protected override _loggerService: LoggerService,
     private _hopperCfarService: HopperCfarService,
     private _dialog: MatDialog,
-    private _cdRef: ChangeDetectorRef,
-    private _logger: Logger,
   ) {
-    super(_adapter, _translateService, _cdRef, _logger);
+    super(_adapter, _translateService, _cdRef, _loggerService);
   }
 
   // -----------------------------------------------

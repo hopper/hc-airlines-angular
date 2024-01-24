@@ -9,7 +9,7 @@ import { ApiTranslatorUtils } from '../../utils/api-translator.utils';
 import { HopperCfarService } from '../../services/hopper-cfar.service';
 import { HopperEventsService } from '../../services/hopper-events.service';
 import { DecimalPipe } from '@angular/common';
-import { Logger } from '../../services/logger.service';
+import { LoggerService } from '../../services/logger.service';
 
 @Component({
   selector: 'hopper-cfar-offer-dialog',
@@ -26,17 +26,17 @@ export class CfarOfferDialogComponent extends GlobalComponent implements OnInit,
   private _itineraries!: CfarItinerary[];
 
   constructor(
-    private _adapter: DateAdapter<any>,
-    private _translateService: TranslateService,
+    protected override _adapter: DateAdapter<any>,
+    protected override _translateService: TranslateService,
+    protected override _cdRef: ChangeDetectorRef,
+    protected override _loggerService: LoggerService,
     private _dialogRef: MatDialogRef<CfarOfferDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private _hopperCfarService: HopperCfarService,
     private _hopperEventService: HopperEventsService,
     private _decimalPipe: DecimalPipe,
-    private _cdRef: ChangeDetectorRef,
-    private _logger: Logger,
   ) {
-    super(_adapter, _translateService, _cdRef, _logger);
+    super(_adapter, _translateService, _cdRef, _loggerService);
 
     // Mandatory data
     this._hCSessionId = data.hCSessionId;

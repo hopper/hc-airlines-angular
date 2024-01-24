@@ -10,7 +10,7 @@ import { ArrayUtils } from "../utils/array-utils";
 import { HcAirlinesError } from "../models/hc-airlines-error";
 import { Error } from '../apis/hopper-cloud-airline/v1';
 import { ErrorSdkModel } from "../models";
-import { Logger } from "../services/logger.service";
+import { LoggerService } from "../services/logger.service";
 import { CountryCode } from "../enums/country-code.enum";
 import { ErrorCode } from "../enums/error-code.enum";
 import { StateCode } from "../enums/state-code.enum";
@@ -36,24 +36,24 @@ export class GlobalComponent implements OnChanges {
   public mapStates!: Map<string, string>;
 
   constructor(
-    protected adapter: DateAdapter<any>,
-    protected translateService: TranslateService,
-    protected cdRef: ChangeDetectorRef,
-    protected logger: Logger
+    protected _adapter: DateAdapter<any>,
+    protected _translateService: TranslateService,
+    protected _cdRef: ChangeDetectorRef,
+    protected _loggerService: LoggerService
   ) {
     // Set Labels
     Locales.forEach((locale: I18n) => {
-        this.translateService.setTranslation(locale.lang, locale.data, true);
+        this._translateService.setTranslation(locale.lang, locale.data, true);
     });
 
     // Set availables languages
-    this.translateService.addLangs(Locales.map(i18n => i18n.lang));
+    this._translateService.addLangs(Locales.map(i18n => i18n.lang));
 
     // Set default language
-    this.translateService.use(this.translateService.getBrowserLang() || 'en');
+    this._translateService.use(this._translateService.getBrowserLang() || 'en');
 
     // Set default language for datepickers
-    this.adapter.setLocale(this.translateService.getBrowserLang());
+    this._adapter.setLocale(this._translateService.getBrowserLang());
 
     // Init map
     this.mapCountries = new Map<string, string>();
@@ -65,7 +65,7 @@ export class GlobalComponent implements OnChanges {
   // -----------------------------------------------
 
   ngOnInit(): void {
-    this.logger.setEnv(this.env);
+    this._loggerService.setEnv(this.env);
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -79,7 +79,7 @@ export class GlobalComponent implements OnChanges {
   }
 
   ngAfterContentChecked(): void {
-    this.cdRef.detectChanges();
+    this._cdRef.detectChanges();
   }
 
   // -----------------------------------------------
@@ -96,10 +96,10 @@ export class GlobalComponent implements OnChanges {
 
   protected _updateLanguage(newLanguage: string): void {
     // Set language for components
-    this.translateService.use(newLanguage);
+    this._translateService.use(newLanguage);
 
     // Set language for datepickers
-    this.adapter.setLocale(newLanguage);
+    this._adapter.setLocale(newLanguage);
   }
 
   protected _setMapsLabels(): void {
@@ -108,14 +108,14 @@ export class GlobalComponent implements OnChanges {
     
     countries.forEach(countryCode => {
         // Get Label and fill the map
-        this.translateService.get('COMMON.COUNTRY.' + countryCode)
+        this._translateService.get('COMMON.COUNTRY.' + countryCode)
             .pipe(take(1))
             .subscribe(label => this.mapCountries.set(countryCode, label));            
     });
 
     states.forEach(stateCode => {
       // Get Label and fill the map
-      this.translateService.get('COMMON.STATE.' + stateCode)
+      this._translateService.get('COMMON.STATE.' + stateCode)
           .pipe(take(1))
           .subscribe(label => {
             this.mapStates.set(stateCode, label);
@@ -521,7 +521,7 @@ export class GlobalComponent implements OnChanges {
     }
     
     if (emitWithUIProjectLabel) {
-      this.translateService.get('COMMON.ERROR_CODE.' + builtError.code)
+      this._translateService.get('COMMON.ERROR_CODE.' + builtError.code)
       .pipe(take(1))
       .subscribe(errorDescription => {
         this.errorMessage = errorDescription;

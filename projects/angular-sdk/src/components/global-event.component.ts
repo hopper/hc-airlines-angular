@@ -5,7 +5,7 @@ import { ExerciseStepResult, UiSource, UiVariant } from "../apis/hopper-cloud-ai
 import { take } from "rxjs/operators";
 import { GlobalComponent } from "./global.component";
 import { HopperEventsService } from "../services/hopper-events.service";
-import { Logger } from "../services/logger.service";
+import { LoggerService } from "../services/logger.service";
 
 @Directive({
     selector: '[HopperGlobalEventComponent]'
@@ -19,13 +19,13 @@ export class GlobalEventComponent extends GlobalComponent {
     protected cfarExerciseId!: string;
 
     constructor(
-        protected adapter: DateAdapter<any>,
-        protected translateService: TranslateService,
-        protected hopperEventService: HopperEventsService,
-        protected cdRef: ChangeDetectorRef,
-        protected logger: Logger
+        protected _adapter: DateAdapter<any>,
+        protected _translateService: TranslateService,
+        protected _hopperEventService: HopperEventsService,
+        protected _cdRef: ChangeDetectorRef,
+        protected override _loggerService: LoggerService
     ) {
-        super(adapter, translateService, cdRef, logger);
+        super(_adapter, _translateService, _cdRef, _loggerService);
     }
 
     // -----------------------------------------------
@@ -60,7 +60,7 @@ export class GlobalEventComponent extends GlobalComponent {
         if (!this.isPurchaseEventPossible()) {
             return;
         }
-        this.hopperEventService
+        this._hopperEventService
             .postCreateCfarOffersBannerDisplay(this.basePath, this.eventHcSessionId, this.cfarOffersIds, this.uiVariant)
             .pipe(take(1))
             .subscribe({
@@ -79,7 +79,7 @@ export class GlobalEventComponent extends GlobalComponent {
         if (!this.isPurchaseEventPossible()) {
             return;
         }
-        this.hopperEventService
+        this._hopperEventService
             .postCreateCfarForcedChoiceWarning(this.basePath, this.eventHcSessionId, this.cfarOffersIds)
             .pipe(take(1))
             .subscribe({
@@ -94,7 +94,7 @@ export class GlobalEventComponent extends GlobalComponent {
         if (!this.isPurchaseEventPossible()) {
             return;
         }
-        this.hopperEventService
+        this._hopperEventService
             .postCreateCfarViewInfo(this.basePath, this.eventHcSessionId, this.cfarOffersIds, this.uiSource)
             .pipe(take(1))
             .subscribe({
@@ -109,7 +109,7 @@ export class GlobalEventComponent extends GlobalComponent {
         if (!this.isPurchaseEventPossible()) {
             return;
         }
-        this.hopperEventService
+        this._hopperEventService
             .postCreateCfarDenyPurchase(this.basePath, this.eventHcSessionId, this.cfarOffersIds, this.uiSource)
             .pipe(take(1))
             .subscribe({
@@ -152,7 +152,7 @@ export class GlobalEventComponent extends GlobalComponent {
         if (!this.isExerciseEventPossible) {
             return;
         }
-        this.hopperEventService
+        this._hopperEventService
             .postCreateCfarExercisePortalDisplay(this.basePath, this.eventHcSessionId, this.cfarExerciseId)
             .pipe(take(1))
             .subscribe({
@@ -167,7 +167,7 @@ export class GlobalEventComponent extends GlobalComponent {
         if (!this.isExerciseEventPossible) {
             return;
         }
-        this.hopperEventService
+        this._hopperEventService
             .postCreateCfarExerciseVerificationSent(this.basePath, this.eventHcSessionId, this.cfarExerciseId)
             .pipe(take(1))
             .subscribe({
@@ -182,7 +182,7 @@ export class GlobalEventComponent extends GlobalComponent {
         if (!this.isExerciseEventPossible) {
             return;
         }
-        this.hopperEventService
+        this._hopperEventService
             .postCreateCfarExerciseVerificationComplete(this.basePath, this.eventHcSessionId, this.cfarExerciseId, exerciseStepResult)
             .pipe(take(1))
             .subscribe({
@@ -197,7 +197,7 @@ export class GlobalEventComponent extends GlobalComponent {
         if (!this.isExerciseEventPossible) {
             return;
         }
-        this.hopperEventService
+        this._hopperEventService
             .postCreateCfarExerciseCustomerDataComplete(this.basePath, this.eventHcSessionId, this.cfarExerciseId, exerciseStepResult)
             .pipe(take(1))
             .subscribe({
@@ -212,7 +212,7 @@ export class GlobalEventComponent extends GlobalComponent {
         if (!this.isExerciseEventPossible) {
             return;
         }
-        this.hopperEventService
+        this._hopperEventService
             .postCreateCfarExercisePortalComplete(this.basePath, this.eventHcSessionId, this.cfarExerciseId, exerciseStepResult)
             .pipe(take(1))
             .subscribe({
@@ -227,7 +227,7 @@ export class GlobalEventComponent extends GlobalComponent {
         if (!this.isExerciseEventPossible) {
             return;
         }
-        this.hopperEventService
+        this._hopperEventService
             .postCreateCfarExerciseCallbackLaunched(this.basePath, this.eventHcSessionId, this.cfarExerciseId, exerciseStepResult)
             .pipe(take(1))
             .subscribe({

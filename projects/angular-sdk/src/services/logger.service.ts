@@ -1,10 +1,9 @@
-import { Injectable, Inject, Optional } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { HandlerType, datadogLogs as datadog } from '@datadog/browser-logs';
 
-@Injectable({
-  providedIn: 'root'
-})
-export class Logger {
+@Injectable()
+export class LoggerService {
+
   private _context: any = {};
   private _logger;
   private _env: string = "production";
@@ -20,6 +19,7 @@ export class Logger {
     };
 
     datadog.init(_initConfig);
+
     this._logger = datadog.createLogger('angular-sdk');
     this._logger.setHandler(HandlerType.http);
     this._context = {
@@ -31,6 +31,10 @@ export class Logger {
     };
     this._logger.setContext(this._context);
   }
+
+  // ----------------------------------------------------------
+  // PUBLICS METHODS
+  // ----------------------------------------------------------
 
   public setEnv(env?: string): void {
     this._env = env ? env : "production";

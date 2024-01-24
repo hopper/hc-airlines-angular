@@ -7,7 +7,7 @@ import { ApiTranslatorUtils } from '../../utils/api-translator.utils';
 import { HopperCfarService } from '../../services/hopper-cfar.service';
 import { HopperEventsService } from '../../services/hopper-events.service';
 import { GlobalEventComponent } from '../global-event.component';
-import { Logger } from '../../services/logger.service';
+import { LoggerService } from '../../services/logger.service';
 
 @Component({
   selector: 'hopper-cfar-offer-banner-large',
@@ -34,14 +34,14 @@ export class CfarOfferBannerLargeComponent extends GlobalEventComponent implemen
   private _contractsByChoiceIndex = new Map<number, CfarContractCustomer>();
   
   constructor(
-    private _adapter: DateAdapter<any>,
-    private _translateService: TranslateService,
+    protected override _adapter: DateAdapter<any>,
+    protected override _translateService: TranslateService,
+    protected override _hopperEventService: HopperEventsService,
+    protected override _cdRef: ChangeDetectorRef,
+    protected override _loggerService: LoggerService,
     private _hopperCfarService: HopperCfarService,
-    private _hopperEventService: HopperEventsService,
-    private _cdRef: ChangeDetectorRef,
-    private _logger: Logger,
   ) {
-    super(_adapter, _translateService, _hopperEventService, _cdRef, _logger);
+    super(_adapter, _translateService, _hopperEventService, _cdRef, _loggerService);
   }
 
   // -----------------------------------------------

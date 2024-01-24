@@ -13,7 +13,7 @@ import { DatePipe } from '@angular/common';
 import { SendCfarContractExerciceVerificationCodeResponse } from '../../apis/hopper-cloud-airline/v1';
 import { HopperCfarService } from '../../services/hopper-cfar.service';
 import { HopperEventsService } from '../../services/hopper-events.service';
-import { Logger } from '../../services/logger.service';
+import { LoggerService } from '../../services/logger.service';
 import { ErrorCode, ExerciseActionStep } from '../../enums';
 
 @Component({
@@ -56,18 +56,18 @@ export class CfarExerciseFlowComponent extends GlobalEventComponent implements O
   @ViewChild('stepper') public stepper!: MatStepper;
 
   constructor(
+    protected override _adapter: DateAdapter<any>,
+    protected override _translateService: TranslateService,
+    protected override _hopperEventService: HopperEventsService,
+    protected override _cdRef: ChangeDetectorRef,
+    protected override _loggerService: LoggerService,
     private _matIconRegistry: MatIconRegistry,
     private _domSanitizer: DomSanitizer,
-    private _adapter: DateAdapter<any>,
-    private _translateService: TranslateService,
     private _hopperCfarService: HopperCfarService,
-    private _hopperEventService: HopperEventsService,
     private _formBuilder: UntypedFormBuilder,
     private _datePipe: DatePipe,
-    private _cdRef: ChangeDetectorRef,
-    private _logger: Logger,
   ) {
-    super(_adapter, _translateService, _hopperEventService, _cdRef, _logger);
+    super(_adapter, _translateService, _hopperEventService, _cdRef, _loggerService);
 
     // Create material icon for refundable ticket
     this._matIconRegistry.addSvgIcon(
@@ -178,11 +178,12 @@ export class CfarExerciseFlowComponent extends GlobalEventComponent implements O
             mainScript.async = true;
             mainScript.src = url;
             mainScript.onerror = (error) => {
-              console.error('Error loading Hyperwallet script', error);
-              
               // Events management
-              this.createCfarExercisePortalCompleteEvent(ExerciseStepResult.TechnicalError)
-              
+              this.createCfarExercisePortalCompleteEvent(ExerciseStepResult.TechnicalError);
+
+              // Datadog event
+              this._loggerService.error(`[Cfar Exercise Flow] - onSubmitStep2 / postRefundRecipients - error: ${error}`);
+
               this.isLoadingHyperwallet = false;
               this.isErrorHyperwallet = true;
             }
@@ -239,7 +240,9 @@ export class CfarExerciseFlowComponent extends GlobalEventComponent implements O
                     this.isErrorHyperwallet = true;
               
                     // Events management
-                    this.createCfarExercisePortalCompleteEvent(ExerciseStepResult.TechnicalError)                    
+                    this.createCfarExercisePortalCompleteEvent(ExerciseStepResult.TechnicalError);
+                    
+                    this._loggerService.error(`[Cfar Exercise Flow] - onSubmitStep2 / postRefundAuthorizations - error: ${error}`);
 
                     // Scroll on the error message
                     this.stepCompleted.emit(this._errorTimer);
@@ -305,7 +308,9 @@ export class CfarExerciseFlowComponent extends GlobalEventComponent implements O
           this.isLoadingHyperwallet = false;
 
           // Events management
-          this.createCfarExercisePortalCompleteEvent(ExerciseStepResult.TechnicalError)
+          this.createCfarExercisePortalCompleteEvent(ExerciseStepResult.TechnicalError);
+
+          this._loggerService.error(`[Cfar Exercise Flow] - checkHyperwalletCallback - error: ${error}`);
 
           // Scroll on the error message
           this.stepCompleted.emit(this._errorTimer);

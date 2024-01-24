@@ -46,6 +46,7 @@ import { HopperCfarService } from './services/hopper-cfar.service';
 import { HopperEventsService } from './services/hopper-events.service';
 import { GlobalEventComponent } from './components/global-event.component';
 import { HopperErrorHandlerService } from './services/hopper-error-handler.service';
+import { LoggerService } from './services/logger.service';
 
 // Supported Languages for Datepicker
 registerLocaleData(localeFr, 'fr', localeFrExtra);
@@ -102,6 +103,7 @@ registerLocaleData(localeZh, 'zh', localeZhExtra);
         { provide: ErrorHandler, useClass: HopperErrorHandlerService },
         HopperCfarService,
         HopperEventsService,
+        LoggerService,
         DatePipe,
         DecimalPipe
     ]
