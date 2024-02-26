@@ -6,6 +6,16 @@ name: Publish new npm version
 on:
   workflow_dispatch
 
+inputs:
+  tag:
+    description: 'The tag to publish'
+    required: true
+    default: 'latest'
+    type: choice
+    options:
+      - 'latest'
+      - 'next'
+
 jobs:
   publish-to-npm:
     runs-on: ubuntu-latest
@@ -20,6 +30,6 @@ jobs:
       - run: ng build "angular-sdk"
       - run: |
           cd dist/angular-sdk
-          npm publish --access public
+          npm publish --access public --tag ${{ inputs.tag }}
         env:
           NODE_AUTH_TOKEN: ${{secrets.npm_token}}
