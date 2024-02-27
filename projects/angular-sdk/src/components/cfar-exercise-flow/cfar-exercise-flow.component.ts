@@ -211,7 +211,7 @@ export class CfarExerciseFlowComponent extends GlobalEventComponent implements O
                         el: document.getElementById("TransferMethodUI")
                       }).create({
                         profileType: 'INDIVIDUAL',
-                        currency: ${this.cfarExercise.itinerary.currency},
+                        currency: "${this.cfarExercise.itinerary.currency}",
                       });
 
                       window.HWWidgets.events.on("widget:transfermethods:completed", (trmObject, completionResult) => {
