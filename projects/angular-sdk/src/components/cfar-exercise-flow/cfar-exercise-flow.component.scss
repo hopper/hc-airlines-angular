@@ -169,11 +169,6 @@
 
             // Hyperwallet
             .hw-form-transfer-methods {
-                fieldset {
-                    padding: 16px;
-                    margin: 16px 0px;
-                }
-
                 .hw-fields {
                     display: flex;
                     flex-flow: row wrap;
@@ -196,12 +191,11 @@
                     }
                 }
             }
-
-            #hw-widget-selection-step-tmc-selection-form {
-                .hw-group-with-template {
-                    // Hide useless block
-                    display: none;
-                }
+            
+            fieldset {
+                padding: 0;
+                border: 0;
+                margin: 0;
             }
             
             .hw-custom-transfermethodtype-items {
