@@ -425,7 +425,7 @@ export const locale: I18n = {
                 LAP_INFANT: "Lap infant"
             },
             CONTRACT_ALREADY_REFUNDED: "Your cancellation request has already been taken into account and your refund is in progress. If you need help, you may contact our customer support team via <a href='{{ link }}' target='_blank'>this form.</a>",
-            BANK_ACCOUNT_INFO: "Please choose a transfer method for the refund.<br />Only Canadian bank account holders are eligible to bank account transfer method."
+            BANK_ACCOUNT_INFO: "Please choose a transfer method for the refund."
         }
     }
 }
