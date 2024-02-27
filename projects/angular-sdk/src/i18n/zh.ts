@@ -425,7 +425,7 @@ export const locale: I18n = {
                 LAP_INFANT: "膝上婴儿"
             },
             CONTRACT_ALREADY_REFUNDED: "您的取消申请已被受理，退款正在处理中。如果您需要帮助，可以通过<a href='{{ link }}' target='_blank'>此表</a>联系我们的客服。",
-            BANK_ACCOUNT_INFO: "请选择退款转账方式。<br />只有加拿大银行账户持有人才有资格使用银行账户转账方式。"
+            BANK_ACCOUNT_INFO: "请选择退款转账方式。"
         }
     }
 }

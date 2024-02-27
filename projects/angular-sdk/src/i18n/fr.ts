@@ -425,7 +425,7 @@ export const locale: I18n = {
                 LAP_INFANT: "Bébé sur les genoux"
             },
             CONTRACT_ALREADY_REFUNDED: "Votre demande d'annulation a déjà été reçue et votre remboursement est en cours de traitement. Si vous avez besoin d'aide, vous pouvez utiliser <a href='{{ link }}' target='_blank'>ce formulaire</a> pour contacter notre équipe du service à la clientèle.",
-            BANK_ACCOUNT_INFO: "Veuillez choisir un mode de versement pour le remboursement.<br />Seuls les titulaires de comptes bancaires canadiens sont admissibles au virement bancaire."
+            BANK_ACCOUNT_INFO: "Veuillez choisir un mode de versement pour le remboursement."
         }
     }
 }
