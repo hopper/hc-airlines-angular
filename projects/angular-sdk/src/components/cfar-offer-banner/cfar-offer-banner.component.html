@@ -1,46 +1,91 @@
-<div class="px-32" ngClass.lt-md="px-16" fxLayout="row" fxLayoutAlign="center center">
+<div
+  class="px-32"
+  ngClass.lt-md="px-16"
+  fxLayout="row"
+  fxLayoutAlign="center center"
+>
+  <ng-container *ngIf="!isLoading">
+    <mat-card
+      *ngIf="selectedCfarOffer"
+      class="m-16 p-16 pointer"
+      fxFlex
+      fxLayout="row wrap"
+    >
+      <div
+        fxFlex="100"
+        fxLayout="row wrap"
+        fxLayoutAlign="start center"
+        fxLayoutGap="16px"
+      >
+        <div
+          fxFlex="calc(20% - 16px)"
+          fxHide.lt-md
+          fxLayout="row"
+          fxLayoutAlign="center center"
+          class="p-16"
+          ngClass.lt-sm="px-0"
+        >
+          <img src="{{ imageBasePath || '' }}assets/offer-banner-icon.svg" />
+        </div>
 
-    <ng-container *ngIf="!isLoading">
+        <div
+          fxFlex="60"
+          fxFlex.lt-md="100"
+          fxLayout="column"
+          fxLayoutAlign="center start"
+        >
+          <div fxLayout="row" fxLayoutAlign="start center">
+            <h2 class="offer-title">
+              {{ 'CFAR_OFFER_BANNER.TITLE' | translate }}
+            </h2>
+          </div>
 
-        <mat-card *ngIf="selectedCfarOffer" class="m-16 p-16 pointer" fxFlex fxLayout="row wrap">
-    
-            <div fxFlex="100" fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="16px">
-    
-                <div fxFlex="calc(20% - 16px)" fxHide.lt-md fxLayout="row" fxLayoutAlign="center center" class="p-16" ngClass.lt-sm="px-0">
-                    <img src="{{ imageBasePath || '' }}assets/offer-banner-icon.svg">
-                </div>
-
-                <div fxFlex="60" fxFlex.lt-md="100" fxLayout="column" fxLayoutAlign="center start">
-    
-                    <div fxLayout="row" fxLayoutAlign="start center">
-                        <h2 class="offer-title">{{ 'CFAR_OFFER_BANNER.TITLE' | translate }}</h2>
-                    </div>
-
-                    <ng-container *ngFor="let desc of getOfferDescription(selectedCfarOffer); let i = index;">
-                        <div class="py-16" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
-                            <mat-icon class="check-icon">check</mat-icon>
-                            <span innerHtml="{{ desc }}"></span>
-                        </div>
-                    </ng-container>
-            
-                </div>
-
-                <div fxFlex="calc(20% - 16px)" fxFlex.lt-md="100" fxLayout="row" fxLayoutAlign="center center" fxLayoutAlign.lt-md="end center">
-                    <button mat-raised-button (click)="onSubmit(selectedCfarOffer)" 
-                        attr.aria-label="{{ 'CFAR_OFFER_BANNER.BUTTON.SELECT' | translate }}">
-                        {{ 'CFAR_OFFER_BANNER.BUTTON.SELECT' | translate }}
-                    </button>
-                </div>
-    
+          <ng-container
+            *ngFor="
+              let desc of getOfferDescription(selectedCfarOffer);
+              let i = index
+            "
+          >
+            <div
+              class="py-16"
+              fxLayout="row"
+              fxLayoutAlign="start center"
+              fxLayoutGap="8px"
+            >
+              <mat-icon class="check-icon">check</mat-icon>
+              <span innerHtml="{{ desc }}"></span>
             </div>
-            
-        </mat-card>
+          </ng-container>
+        </div>
 
-    </ng-container>
+        <div
+          fxFlex="calc(20% - 16px)"
+          fxFlex.lt-md="100"
+          fxLayout="row"
+          fxLayoutAlign="center center"
+          fxLayoutAlign.lt-md="end center"
+        >
+          <button
+            mat-raised-button
+            (click)="onSubmit(selectedCfarOffer)"
+            attr.aria-label="{{
+              'CFAR_OFFER_BANNER.BUTTON.SELECT' | translate
+            }}"
+          >
+            {{ 'CFAR_OFFER_BANNER.BUTTON.SELECT' | translate }}
+          </button>
+        </div>
+      </div>
+    </mat-card>
+  </ng-container>
 
-    <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="16px" *ngIf="isLoading">
-        <mat-spinner></mat-spinner>
-        <p>{{ 'CFAR_OFFER_BANNER.LOADING' | translate }}</p>
-    </div>
-
+  <div
+    fxLayout="column"
+    fxLayoutAlign="center center"
+    fxLayoutGap="16px"
+    *ngIf="isLoading"
+  >
+    <mat-spinner></mat-spinner>
+    <p>{{ 'CFAR_OFFER_BANNER.LOADING' | translate }}</p>
+  </div>
 </div>

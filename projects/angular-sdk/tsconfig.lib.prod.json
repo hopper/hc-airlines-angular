@@ -9,6 +9,6 @@
     "compilationMode": "partial",
     "preserveWhitespaces": "false",
     "enableResourceInlining": "true",
-    "generateCodeForLibraries": "true",
+    "generateCodeForLibraries": "true"
   }
 }

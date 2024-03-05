@@ -33,7 +33,7 @@ $light-yellow-primary-palette: (
     A200: $dark-primary-text,
     A400: $dark-primary-text,
     A700: $dark-primary-text,
-  )
+  ),
 );
 
 $light-yellow-accent-palette: (
@@ -66,17 +66,29 @@ $light-yellow-accent-palette: (
     A200: $dark-primary-text,
     A400: $dark-primary-text,
     A700: $dark-primary-text,
-  )
+  ),
 );
 
-$light-yellow-primary: mat.define-palette($light-yellow-primary-palette, 500, 300, 700);
-$light-yellow-accent: mat.define-palette($light-yellow-accent-palette, 500, 300, 700);
+$light-yellow-primary: mat.define-palette(
+  $light-yellow-primary-palette,
+  500,
+  300,
+  700
+);
+$light-yellow-accent: mat.define-palette(
+  $light-yellow-accent-palette,
+  500,
+  300,
+  700
+);
 $light-yellow-warn: mat.define-palette(mat.$red-palette);
 
-$light-yellow-theme: mat.define-light-theme((
-  color: (
-    primary: $light-yellow-primary,
-    accent: $light-yellow-accent,
-    warn: $light-yellow-warn,
+$light-yellow-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $light-yellow-primary,
+      accent: $light-yellow-accent,
+      warn: $light-yellow-warn,
+    ),
   )
-));
+);

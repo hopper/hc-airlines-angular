@@ -2,7 +2,12 @@ import { ErrorHandler, NgModule } from '@angular/core';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { HttpClientModule } from '@angular/common/http';
-import { CommonModule, DatePipe, DecimalPipe, registerLocaleData } from '@angular/common';
+import {
+  CommonModule,
+  DatePipe,
+  DecimalPipe,
+  registerLocaleData,
+} from '@angular/common';
 
 import { TranslateModule } from '@ngx-translate/core';
 
@@ -10,8 +15,15 @@ import { CfarOfferBannerComponent } from './components/cfar-offer-banner/cfar-of
 import { CfarOfferDialogComponent } from './components/cfar-offer-dialog/cfar-offer-dialog.component';
 import { CfarExerciseFlowComponent } from './components/cfar-exercise-flow/cfar-exercise-flow.component';
 
-import { MomentDateAdapter, MAT_MOMENT_DATE_FORMATS } from '@angular/material-moment-adapter';
-import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
+import {
+  MomentDateAdapter,
+  MAT_MOMENT_DATE_FORMATS,
+} from '@angular/material-moment-adapter';
+import {
+  DateAdapter,
+  MAT_DATE_FORMATS,
+  MAT_DATE_LOCALE,
+} from '@angular/material/core';
 
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
@@ -54,58 +66,62 @@ registerLocaleData(localeEn, 'en', localeEnExtra);
 registerLocaleData(localeZh, 'zh', localeZhExtra);
 
 @NgModule({
-    declarations: [
-        // Component
-        GlobalComponent,
-        GlobalEventComponent,
-        CfarOfferBannerComponent,
-        CfarOfferBannerLargeComponent,
-        CfarOfferDialogComponent,
-        CfarExerciseFlowComponent
-    ],
-    imports: [
-        // Angular Module
-        CommonModule,
-        HttpClientModule,
-        ReactiveFormsModule,
-        FormsModule,
-        // Flex Layout
-        FlexLayoutModule,
-        // Angular Material
-        MatButtonModule,
-        MatDialogModule,
-        MatIconModule,
-        MatCardModule,
-        MatSlideToggleModule,
-        MatDividerModule,
-        MatSelectModule,
-        MatProgressSpinnerModule,
-        MatStepperModule,
-        MatFormFieldModule,
-        MatInputModule,
-        MatDatepickerModule,
-        MatRadioModule,
-        // APIs
-        ApiModule,
-        // I18n
-        TranslateModule.forRoot()
-    ],
-    exports: [
-        // Component
-        CfarOfferBannerComponent,
-        CfarOfferBannerLargeComponent,
-        CfarOfferDialogComponent,
-        CfarExerciseFlowComponent
-    ],
-    providers: [
-        { provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] },
-        { provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS },
-        { provide: ErrorHandler, useClass: HopperErrorHandlerService },
-        HopperCfarService,
-        HopperEventsService,
-        LoggerService,
-        DatePipe,
-        DecimalPipe
-    ]
+  declarations: [
+    // Component
+    GlobalComponent,
+    GlobalEventComponent,
+    CfarOfferBannerComponent,
+    CfarOfferBannerLargeComponent,
+    CfarOfferDialogComponent,
+    CfarExerciseFlowComponent,
+  ],
+  imports: [
+    // Angular Module
+    CommonModule,
+    HttpClientModule,
+    ReactiveFormsModule,
+    FormsModule,
+    // Flex Layout
+    FlexLayoutModule,
+    // Angular Material
+    MatButtonModule,
+    MatDialogModule,
+    MatIconModule,
+    MatCardModule,
+    MatSlideToggleModule,
+    MatDividerModule,
+    MatSelectModule,
+    MatProgressSpinnerModule,
+    MatStepperModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatDatepickerModule,
+    MatRadioModule,
+    // APIs
+    ApiModule,
+    // I18n
+    TranslateModule.forRoot(),
+  ],
+  exports: [
+    // Component
+    CfarOfferBannerComponent,
+    CfarOfferBannerLargeComponent,
+    CfarOfferDialogComponent,
+    CfarExerciseFlowComponent,
+  ],
+  providers: [
+    {
+      provide: DateAdapter,
+      useClass: MomentDateAdapter,
+      deps: [MAT_DATE_LOCALE],
+    },
+    { provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS },
+    { provide: ErrorHandler, useClass: HopperErrorHandlerService },
+    HopperCfarService,
+    HopperEventsService,
+    LoggerService,
+    DatePipe,
+    DecimalPipe,
+  ],
 })
-export class HopperCloudAirlinesAngularSdkModule { }
+export class HopperCloudAirlinesAngularSdkModule {}

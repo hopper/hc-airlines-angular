@@ -1,25 +1,45 @@
-import { ChangeDetectorRef, Directive, EventEmitter, Input, OnChanges, Output, SimpleChanges } from "@angular/core";
-import { Locales } from "../i18n";
+import {
+  ChangeDetectorRef,
+  Directive,
+  EventEmitter,
+  Input,
+  OnChanges,
+  Output,
+  SimpleChanges,
+} from '@angular/core';
+import { Locales } from '../i18n';
 import { TranslateService } from '@ngx-translate/core';
-import { I18n } from "../i18n/i18n.interface";
-import { DateAdapter } from "@angular/material/core";
-import { CfarContractCustomer, CfarItinerary, CfarOfferCustomer, CfarPriceType, CfarStatus, CreateCfarContractCustomerRequest, CreateCfarOfferCustomerRequest, GetCfarExerciseCustomerResponse, PassengerType, RequestType, UiSource, UiVariant } from "../apis/hopper-cloud-airline/v1";
-import { take } from "rxjs/operators";
-import { HttpErrorResponse } from "@angular/common/http";
-import { ArrayUtils } from "../utils/array-utils";
-import { HcAirlinesError } from "../models/hc-airlines-error";
+import { I18n } from '../i18n/i18n.interface';
+import { DateAdapter } from '@angular/material/core';
+import {
+  CfarContractCustomer,
+  CfarItinerary,
+  CfarOfferCustomer,
+  CfarPriceType,
+  CfarStatus,
+  CreateCfarContractCustomerRequest,
+  CreateCfarOfferCustomerRequest,
+  GetCfarExerciseCustomerResponse,
+  PassengerType,
+  RequestType,
+  UiSource,
+  UiVariant,
+} from '../apis/hopper-cloud-airline/v1';
+import { take } from 'rxjs/operators';
+import { HttpErrorResponse } from '@angular/common/http';
+import { ArrayUtils } from '../utils/array-utils';
+import { HcAirlinesError } from '../models/hc-airlines-error';
 import { Error } from '../apis/hopper-cloud-airline/v1';
-import { ErrorSdkModel } from "../models";
-import { LoggerService } from "../services/logger.service";
-import { CountryCode } from "../enums/country-code.enum";
-import { ErrorCode } from "../enums/error-code.enum";
-import { StateCode } from "../enums/state-code.enum";
+import { ErrorSdkModel } from '../models';
+import { LoggerService } from '../services/logger.service';
+import { CountryCode } from '../enums/country-code.enum';
+import { ErrorCode } from '../enums/error-code.enum';
+import { StateCode } from '../enums/state-code.enum';
 
 @Directive({
-    selector: '[HopperGlobalComponent]'
+  selector: '[HopperGlobalComponent]',
 })
 export class GlobalComponent implements OnChanges {
-    
   protected static readonly HTTP_ERROR_UNPROCESSABLE_ENTITY_CODE = 422;
 
   @Input() currentLang!: string;
@@ -29,7 +49,7 @@ export class GlobalComponent implements OnChanges {
   @Input() env?: string;
 
   @Output() errorOccurred = new EventEmitter();
-  
+
   public errorCode?: string;
   public errorMessage?: string;
   public mapCountries: Map<string, string>;
@@ -39,15 +59,15 @@ export class GlobalComponent implements OnChanges {
     protected _adapter: DateAdapter<any>,
     protected _translateService: TranslateService,
     protected _cdRef: ChangeDetectorRef,
-    protected _loggerService: LoggerService
+    protected _loggerService: LoggerService,
   ) {
     // Set Labels
     Locales.forEach((locale: I18n) => {
-        this._translateService.setTranslation(locale.lang, locale.data, true);
+      this._translateService.setTranslation(locale.lang, locale.data, true);
     });
 
     // Set availables languages
-    this._translateService.addLangs(Locales.map(i18n => i18n.lang));
+    this._translateService.addLangs(Locales.map((i18n) => i18n.lang));
 
     // Set default language
     this._translateService.use(this._translateService.getBrowserLang() || 'en');
@@ -59,7 +79,7 @@ export class GlobalComponent implements OnChanges {
     this.mapCountries = new Map<string, string>();
     this.mapStates = new Map<string, string>();
   }
-  
+
   // -----------------------------------------------
   // Life Cycle Hooks
   // -----------------------------------------------
@@ -105,288 +125,310 @@ export class GlobalComponent implements OnChanges {
   protected _setMapsLabels(): void {
     const countries = Object.keys(CountryCode);
     const states = Object.keys(StateCode);
-    
-    countries.forEach(countryCode => {
-        // Get Label and fill the map
-        this._translateService.get('COMMON.COUNTRY.' + countryCode)
-            .pipe(take(1))
-            .subscribe(label => this.mapCountries.set(countryCode, label));            
+
+    countries.forEach((countryCode) => {
+      // Get Label and fill the map
+      this._translateService
+        .get('COMMON.COUNTRY.' + countryCode)
+        .pipe(take(1))
+        .subscribe((label) => this.mapCountries.set(countryCode, label));
     });
 
-    states.forEach(stateCode => {
+    states.forEach((stateCode) => {
       // Get Label and fill the map
-      this._translateService.get('COMMON.STATE.' + stateCode)
-          .pipe(take(1))
-          .subscribe(label => {
-            this.mapStates.set(stateCode, label);
-          });
+      this._translateService
+        .get('COMMON.STATE.' + stateCode)
+        .pipe(take(1))
+        .subscribe((label) => {
+          this.mapStates.set(stateCode, label);
+        });
     });
-    
+
     // Sort the maps by label (alphabetical order)
-    this.mapCountries = new Map([...this.mapCountries.entries()].sort((a, b) => a[1].localeCompare(b[1])));
-    this.mapStates = new Map([...this.mapStates.entries()].sort((a, b) => a[1].localeCompare(b[1])));
+    this.mapCountries = new Map(
+      [...this.mapCountries.entries()].sort((a, b) => a[1].localeCompare(b[1])),
+    );
+    this.mapStates = new Map(
+      [...this.mapStates.entries()].sort((a, b) => a[1].localeCompare(b[1])),
+    );
   }
 
-  protected _getHcAirlinesErrorResponse(apiError: HttpErrorResponse): HcAirlinesError {
+  protected _getHcAirlinesErrorResponse(
+    apiError: HttpErrorResponse,
+  ): HcAirlinesError {
     const apiErrors = apiError?.error?.errors;
-        
+
     if (ArrayUtils.isNotEmpty(apiErrors)) {
-        const mainApiError = apiErrors[0] as Error;
-        // RF009 = Unknown
-        return new HcAirlinesError(this._extractErrorMessage(mainApiError), mainApiError.code || ErrorCode.RF009);
+      const mainApiError = apiErrors[0] as Error;
+      // RF009 = Unknown
+      return new HcAirlinesError(
+        this._extractErrorMessage(mainApiError),
+        mainApiError.code || ErrorCode.RF009,
+      );
     } else {
-        console.error(apiError);
-        return HcAirlinesError.buildDefault();
+      console.error(apiError);
+      return HcAirlinesError.buildDefault();
     }
   }
 
   protected _extractErrorMessage(error: Error): string {
     if (error.messages !== undefined) {
-        const defaultErrorMessage = error.messages['EN'] ? error.messages['EN'] : error.message;
-        return error.messages[this.currentLang.toUpperCase()] ? error.messages[this.currentLang.toUpperCase()] : defaultErrorMessage;
-    } else 
-        return error.message;
+      const defaultErrorMessage = error.messages['EN']
+        ? error.messages['EN']
+        : error.message;
+      return error.messages[this.currentLang.toUpperCase()]
+        ? error.messages[this.currentLang.toUpperCase()]
+        : defaultErrorMessage;
+    } else return error.message;
   }
 
-  protected _buildCreateCfarOfferRequest(itineraries: CfarItinerary[], uiVariant?: UiVariant): CreateCfarOfferCustomerRequest {
-      return {
-        itinerary: itineraries,
-        requestType: RequestType.Ancillary,
-        uiVariant: uiVariant
-      };
-    }
-  
-  protected _fakeCfarContractId: string = "1ecf85ab-211f-68b7-9bb3-4b1a314f1a42";
+  protected _buildCreateCfarOfferRequest(
+    itineraries: CfarItinerary[],
+    uiVariant?: UiVariant,
+  ): CreateCfarOfferCustomerRequest {
+    return {
+      itinerary: itineraries,
+      requestType: RequestType.Ancillary,
+      uiVariant: uiVariant,
+    };
+  }
 
-  protected _buildFakePostCfarOffersResponse(): CfarOfferCustomer[] {   
+  protected _fakeCfarContractId: string =
+    '1ecf85ab-211f-68b7-9bb3-4b1a314f1a42';
+
+  protected _buildFakePostCfarOffersResponse(): CfarOfferCustomer[] {
     return [
       {
-          id: "1ecf859e-8785-625f-8eda-198d1ce0d6c4",
-          premium: "8.00",
-          coverage: "57.78",
-          coveragePercentage: "80.0",
-          currency: "CAD",
-          requestType: "ancillary",
-          contractExpiryDateTime: new Date("2022-07-08T22:00:00Z"),
-          createdDateTime: new Date("2022-06-30T09:49:17.762Z"),
-          taxesTotal: '2',
-          itinerary: {
-              passengerPricing: [
-              {
-                  passengerCount: {
-                      count: 3,
-                      type: "adult"
-                  },
-                  individualPrice: "null"
-              }
+        id: '1ecf859e-8785-625f-8eda-198d1ce0d6c4',
+        premium: '8.00',
+        coverage: '57.78',
+        coveragePercentage: '80.0',
+        currency: 'CAD',
+        requestType: 'ancillary',
+        contractExpiryDateTime: new Date('2022-07-08T22:00:00Z'),
+        createdDateTime: new Date('2022-06-30T09:49:17.762Z'),
+        taxesTotal: '2',
+        itinerary: {
+          passengerPricing: [
+            {
+              passengerCount: {
+                count: 3,
+                type: 'adult',
+              },
+              individualPrice: 'null',
+            },
+          ],
+          currency: 'CAD',
+          slices: [
+            {
+              segments: [
+                {
+                  originAirport: 'YYZ',
+                  destinationAirport: 'YUL',
+                  departureDateTime: '2022-07-09T18:00',
+                  arrivalDateTime: '2022-07-09T19:14',
+                  flightNumber: '894',
+                  validatingCarrierCode: 'AC',
+                  fareClass: 'economy',
+                },
+                {
+                  originAirport: 'YUL',
+                  destinationAirport: 'NCE',
+                  departureDateTime: '2022-07-09T20:50',
+                  arrivalDateTime: '2022-07-10T10:25',
+                  flightNumber: '878',
+                  validatingCarrierCode: 'AC',
+                  fareClass: 'economy',
+                },
               ],
-              "currency": "CAD",
-              slices: [
-              {
-                  segments: [
-                  {
-                      originAirport: "YYZ",
-                      destinationAirport: "YUL",
-                      departureDateTime: "2022-07-09T18:00",
-                      arrivalDateTime: "2022-07-09T19:14",
-                      flightNumber: "894",
-                      validatingCarrierCode: "AC",
-                      fareClass: "economy"
-                  },
-                  {
-                      originAirport: "YUL",
-                      destinationAirport: "NCE",
-                      departureDateTime: "2022-07-09T20:50",
-                      arrivalDateTime: "2022-07-10T10:25",
-                      flightNumber: "878",
-                      validatingCarrierCode: "AC",
-                      fareClass: "economy"
-                  }
-                  ]
-              },
-              {
-                  segments: [
-                  {
-                      originAirport: "NCE",
-                      destinationAirport: "YUL",
-                      departureDateTime: "2022-07-15T13:15",
-                      arrivalDateTime: "2022-07-15T15:55",
-                      flightNumber: "879",
-                      validatingCarrierCode: "AC",
-                      fareClass: "economy"
-                  },
-                  {
-                      originAirport: "YUL",
-                      destinationAirport: "YYZ",
-                      departureDateTime: "2022-07-15T17:30",
-                      arrivalDateTime: "2022-07-15T18:50",
-                      flightNumber: "895",
-                      validatingCarrierCode: "AC",
-                      fareClass: "economy"
-                  }
-                  ]
-              }
+            },
+            {
+              segments: [
+                {
+                  originAirport: 'NCE',
+                  destinationAirport: 'YUL',
+                  departureDateTime: '2022-07-15T13:15',
+                  arrivalDateTime: '2022-07-15T15:55',
+                  flightNumber: '879',
+                  validatingCarrierCode: 'AC',
+                  fareClass: 'economy',
+                },
+                {
+                  originAirport: 'YUL',
+                  destinationAirport: 'YYZ',
+                  departureDateTime: '2022-07-15T17:30',
+                  arrivalDateTime: '2022-07-15T18:50',
+                  flightNumber: '895',
+                  validatingCarrierCode: 'AC',
+                  fareClass: 'economy',
+                },
               ],
-              ancillaries: [],
-              totalPrice: "71.96"
+            },
+          ],
+          ancillaries: [],
+          totalPrice: '71.96',
+        },
+        contents: {
+          en: {
+            bulletPoints: [
+              'Cancel your booking up to <b> 24 hours </b> before departure, no reason required',
+              'Receive a <b>cash</b> refund of your flight cost (air transportation charges, taxes, fees and charges, excluding any additional services)',
+              'Cancelling is easy via the My Bookings page, refund is provided by HTS',
+              'Offer is only available at time of booking and can only be purchased for all passengers',
+            ],
+            labels: {},
           },
-          contents: {
-              "en": {
-                  bulletPoints: [
-                      "Cancel your booking up to <b> 24 hours </b> before departure, no reason required",
-                      "Receive a <b>cash</b> refund of your flight cost (air transportation charges, taxes, fees and charges, excluding any additional services)",
-                      "Cancelling is easy via the My Bookings page, refund is provided by HTS",
-                      "Offer is only available at time of booking and can only be purchased for all passengers"
-                  ],
-                  labels: {}
-              },
-              "fr": {
-                  bulletPoints: [
-                      "Annulez votre réservation jusqu'à <b>24 heures</b> avant le départ, aucun motif requis",
-                      "Recevez un remboursement <b>en argent comptant</b> du coût de votre vol (frais de transport aérien, taxes, frais et droits, à l'exclusion de tout service additionnel)",
-                      "Annulez en toute simplicité sur la page Mes réservations, le remboursement est effectué par Hopper",
-                      "L'offre est uniquement disponible au moment de la réservation et ne peut être achetée que pour tous les passagers"
-                  ],
-                  labels: {}
-              },
-              "zh": {
-                  bulletPoints: [
-                      "最迟可在出发前24小时无理由取消订单",
-                      "获得航班费用的现金退款（航空运输费用、税费和其他费用，额外服务费除外）",
-                      "您可以通过“我的订单 (My Bookings) 页面轻松取消预订, 退款由HTS提供",
-                      "优惠仅在预订时有效，且必须为所有乘客购买"
-                  ],
-                  labels: {}
-              }
+          fr: {
+            bulletPoints: [
+              "Annulez votre réservation jusqu'à <b>24 heures</b> avant le départ, aucun motif requis",
+              "Recevez un remboursement <b>en argent comptant</b> du coût de votre vol (frais de transport aérien, taxes, frais et droits, à l'exclusion de tout service additionnel)",
+              'Annulez en toute simplicité sur la page Mes réservations, le remboursement est effectué par Hopper',
+              "L'offre est uniquement disponible au moment de la réservation et ne peut être achetée que pour tous les passagers",
+            ],
+            labels: {},
           },
-          termsConditionsUrl: {
-              "en": "https://hopper.com/",
-              "fr": "https://hopper.com/fr"
-          }
+          zh: {
+            bulletPoints: [
+              '最迟可在出发前24小时无理由取消订单',
+              '获得航班费用的现金退款（航空运输费用、税费和其他费用，额外服务费除外）',
+              '您可以通过“我的订单 (My Bookings) 页面轻松取消预订, 退款由HTS提供',
+              '优惠仅在预订时有效，且必须为所有乘客购买',
+            ],
+            labels: {},
+          },
+        },
+        termsConditionsUrl: {
+          en: 'https://hopper.com/',
+          fr: 'https://hopper.com/fr',
+        },
       },
       {
-          id: "1ecf859e-8785-625f-8eda-198d1ce0d6c5",
-          premium: "10.00",
-          coverage: "71.96",
-          coveragePercentage: "100.0",
-          currency: "CAD",
-          requestType: "ancillary",
-          contractExpiryDateTime: new Date("2022-07-08T22:00:00Z"),
-          createdDateTime: new Date("2022-06-30T09:49:17.762Z"),
-          taxesTotal: '2',
-          itinerary: {
-              passengerPricing: [
-              {
-                  passengerCount: {
-                      count: 3,
-                      type: "adult"
-                  },
-                  individualPrice: "null"
-              }
+        id: '1ecf859e-8785-625f-8eda-198d1ce0d6c5',
+        premium: '10.00',
+        coverage: '71.96',
+        coveragePercentage: '100.0',
+        currency: 'CAD',
+        requestType: 'ancillary',
+        contractExpiryDateTime: new Date('2022-07-08T22:00:00Z'),
+        createdDateTime: new Date('2022-06-30T09:49:17.762Z'),
+        taxesTotal: '2',
+        itinerary: {
+          passengerPricing: [
+            {
+              passengerCount: {
+                count: 3,
+                type: 'adult',
+              },
+              individualPrice: 'null',
+            },
+          ],
+          currency: 'CAD',
+          slices: [
+            {
+              segments: [
+                {
+                  originAirport: 'YYZ',
+                  destinationAirport: 'YUL',
+                  departureDateTime: '2022-07-09T18:00',
+                  arrivalDateTime: '2022-07-09T19:14',
+                  flightNumber: '894',
+                  validatingCarrierCode: 'AC',
+                  fareClass: 'economy',
+                },
+                {
+                  originAirport: 'YUL',
+                  destinationAirport: 'NCE',
+                  departureDateTime: '2022-07-09T20:50',
+                  arrivalDateTime: '2022-07-10T10:25',
+                  flightNumber: '878',
+                  validatingCarrierCode: 'AC',
+                  fareClass: 'economy',
+                },
               ],
-              currency: "CAD",
-              slices: [
-              {
-                  segments: [
-                  {
-                      originAirport: "YYZ",
-                      destinationAirport: "YUL",
-                      departureDateTime: "2022-07-09T18:00",
-                      arrivalDateTime: "2022-07-09T19:14",
-                      flightNumber: "894",
-                      validatingCarrierCode: "AC",
-                      fareClass: "economy"
-                  },
-                  {
-                      originAirport: "YUL",
-                      destinationAirport: "NCE",
-                      departureDateTime: "2022-07-09T20:50",
-                      arrivalDateTime: "2022-07-10T10:25",
-                      flightNumber: "878",
-                      validatingCarrierCode: "AC",
-                      fareClass: "economy"
-                  }
-                  ]
-              },
-              {
-                  segments: [
-                  {
-                      originAirport: "NCE",
-                      destinationAirport: "YUL",
-                      departureDateTime: "2022-07-15T13:15",
-                      arrivalDateTime: "2022-07-15T15:55",
-                      flightNumber: "879",
-                      validatingCarrierCode: "AC",
-                      fareClass: "economy"
-                  },
-                  {
-                      originAirport: "YUL",
-                      destinationAirport: "YYZ",
-                      departureDateTime: "2022-07-15T17:30",
-                      arrivalDateTime: "2022-07-15T18:50",
-                      flightNumber: "895",
-                      validatingCarrierCode: "AC",
-                      fareClass: "economy"
-                  }
-                  ]
-              }
+            },
+            {
+              segments: [
+                {
+                  originAirport: 'NCE',
+                  destinationAirport: 'YUL',
+                  departureDateTime: '2022-07-15T13:15',
+                  arrivalDateTime: '2022-07-15T15:55',
+                  flightNumber: '879',
+                  validatingCarrierCode: 'AC',
+                  fareClass: 'economy',
+                },
+                {
+                  originAirport: 'YUL',
+                  destinationAirport: 'YYZ',
+                  departureDateTime: '2022-07-15T17:30',
+                  arrivalDateTime: '2022-07-15T18:50',
+                  flightNumber: '895',
+                  validatingCarrierCode: 'AC',
+                  fareClass: 'economy',
+                },
               ],
-              ancillaries: [],
-              totalPrice: "71.96"
+            },
+          ],
+          ancillaries: [],
+          totalPrice: '71.96',
+        },
+        contents: {
+          en: {
+            bulletPoints: [
+              'Cancel your booking up to <b> 24 hours </b> before departure, no reason required',
+              'Receive a <b>cash</b> refund of your flight cost (air transportation charges, taxes, fees and charges, excluding any additional services)',
+              'Cancelling is easy via the My Bookings page, refund is provided by HTS',
+              'Offer is only available at time of booking and can only be purchased for all passengers',
+            ],
+            labels: {},
           },
-          contents: {
-              "en": {
-                  bulletPoints: [
-                      "Cancel your booking up to <b> 24 hours </b> before departure, no reason required",
-                      "Receive a <b>cash</b> refund of your flight cost (air transportation charges, taxes, fees and charges, excluding any additional services)",
-                      "Cancelling is easy via the My Bookings page, refund is provided by HTS",
-                      "Offer is only available at time of booking and can only be purchased for all passengers"
-                  ],
-                  labels: {}
-              },
-              "fr": {
-                  bulletPoints: [
-                      "Annulez votre réservation jusqu'à <b>24 heures</b> avant le départ, aucun motif requis",
-                      "Recevez un remboursement <b>en argent comptant</b> du coût de votre vol (frais de transport aérien, taxes, frais et droits, à l'exclusion de tout service additionnel)",
-                      "Annulez en toute simplicité sur la page Mes réservations, le remboursement est effectué par HTS",
-                      "L'offre est uniquement disponible au moment de la réservation et ne peut être achetée que pour tous les passagers"
-                  ],
-                  labels: {}
-              },
-              "zh": {
-                  bulletPoints: [
-                      "最迟可在出发前24小时无理由取消订单",
-                      "获得航班费用的现金退款（航空运输费用、税费和其他费用，额外服务费除外）",
-                      "您可以通过“我的订单 (My Bookings) 页面轻松取消预订, 退款由HTS提供",
-                      "优惠仅在预订时有效，且必须为所有乘客购买"
-                  ],
-                  labels: {}
-              }
+          fr: {
+            bulletPoints: [
+              "Annulez votre réservation jusqu'à <b>24 heures</b> avant le départ, aucun motif requis",
+              "Recevez un remboursement <b>en argent comptant</b> du coût de votre vol (frais de transport aérien, taxes, frais et droits, à l'exclusion de tout service additionnel)",
+              'Annulez en toute simplicité sur la page Mes réservations, le remboursement est effectué par HTS',
+              "L'offre est uniquement disponible au moment de la réservation et ne peut être achetée que pour tous les passagers",
+            ],
+            labels: {},
           },
-          termsConditionsUrl: {
-              "en": "https://hopper.com/",
-              "fr": "https://hopper.com/fr"
-          }
-      }
+          zh: {
+            bulletPoints: [
+              '最迟可在出发前24小时无理由取消订单',
+              '获得航班费用的现金退款（航空运输费用、税费和其他费用，额外服务费除外）',
+              '您可以通过“我的订单 (My Bookings) 页面轻松取消预订, 退款由HTS提供',
+              '优惠仅在预订时有效，且必须为所有乘客购买',
+            ],
+            labels: {},
+          },
+        },
+        termsConditionsUrl: {
+          en: 'https://hopper.com/',
+          fr: 'https://hopper.com/fr',
+        },
+      },
     ];
   }
 
-  protected _buildCreateCfarContractRequest(offer: CfarOfferCustomer, uiSource: UiSource): CreateCfarContractCustomerRequest {
+  protected _buildCreateCfarContractRequest(
+    offer: CfarOfferCustomer,
+    uiSource: UiSource,
+  ): CreateCfarContractCustomerRequest {
     return {
       offerIds: [offer.id],
       itinerary: offer.itinerary,
-      uiSource: uiSource
+      uiSource: uiSource,
     };
   }
 
   protected _buildFakePostCfarContractsResponse(): CfarContractCustomer {
     return {
       id: this._fakeCfarContractId,
-      premium: "10.00"
+      premium: '10.00',
     };
   }
 
-  protected _fakeCfarContractExerciseId: string = "1ecf85ab-211f-68b7-9bb3-f1d35b1c2045";
+  protected _fakeCfarContractExerciseId: string =
+    '1ecf85ab-211f-68b7-9bb3-f1d35b1c2045';
 
   protected _buildFakeCfarExercisesResponse(): GetCfarExerciseCustomerResponse {
     return {
@@ -397,75 +439,77 @@ export class GlobalComponent implements OnChanges {
           {
             passengerCount: {
               count: 3,
-              type: PassengerType.Adult
+              type: PassengerType.Adult,
             },
-            individualPrice: "null"
-          }
+            individualPrice: 'null',
+          },
         ],
-        currency: "CAD",
+        currency: 'CAD',
         slices: [
           {
             segments: [
               {
-                originAirport: "YYZ",
-                destinationAirport: "YUL",
-                departureDateTime: "2022-07-09T18:00",
-                arrivalDateTime: "2022-07-09T19:14",
-                flightNumber: "894",
-                validatingCarrierCode: "AC",
-                fareClass: "economy"
+                originAirport: 'YYZ',
+                destinationAirport: 'YUL',
+                departureDateTime: '2022-07-09T18:00',
+                arrivalDateTime: '2022-07-09T19:14',
+                flightNumber: '894',
+                validatingCarrierCode: 'AC',
+                fareClass: 'economy',
               },
               {
-                originAirport: "YUL",
-                destinationAirport: "NCE",
-                departureDateTime: "2022-07-09T20:50",
-                arrivalDateTime: "2022-07-10T10:25",
-                flightNumber: "878",
-                validatingCarrierCode: "AC",
-                fareClass: "economy"
-              }
-            ]
+                originAirport: 'YUL',
+                destinationAirport: 'NCE',
+                departureDateTime: '2022-07-09T20:50',
+                arrivalDateTime: '2022-07-10T10:25',
+                flightNumber: '878',
+                validatingCarrierCode: 'AC',
+                fareClass: 'economy',
+              },
+            ],
           },
           {
             segments: [
               {
-                originAirport: "NCE",
-                destinationAirport: "YUL",
-                departureDateTime: "2022-07-15T13:15",
-                arrivalDateTime: "2022-07-15T15:55",
-                flightNumber: "879",
-                validatingCarrierCode: "AC",
-                fareClass: "economy"
+                originAirport: 'NCE',
+                destinationAirport: 'YUL',
+                departureDateTime: '2022-07-15T13:15',
+                arrivalDateTime: '2022-07-15T15:55',
+                flightNumber: '879',
+                validatingCarrierCode: 'AC',
+                fareClass: 'economy',
               },
               {
-                originAirport: "YUL",
-                destinationAirport: "YYZ",
-                departureDateTime: "2022-07-15T17:30",
-                arrivalDateTime: "2022-07-15T18:50",
-                flightNumber: "895",
-                validatingCarrierCode: "AC",
-                fareClass: "economy"
-              }
-            ]
-          }
+                originAirport: 'YUL',
+                destinationAirport: 'YYZ',
+                departureDateTime: '2022-07-15T17:30',
+                arrivalDateTime: '2022-07-15T18:50',
+                flightNumber: '895',
+                validatingCarrierCode: 'AC',
+                fareClass: 'economy',
+              },
+            ],
+          },
         ],
         ancillaries: [],
-        totalPrice: "71.96"
+        totalPrice: '71.96',
       },
-      cfarPrices: [{
+      cfarPrices: [
+        {
           coverage: '19.26',
           nbPax: 3,
           passengerType: PassengerType.Adult,
           premium: '8',
-          cfarPriceType: CfarPriceType.Ancillary
-      }],
-      cashRefundAllowance: "57.78",
-      hopperRefundCurrency: "CAD",
-      contractExpiryDateTime: new Date("2022-07-08T18:00Z"),
-      status: CfarStatus.Created
+          cfarPriceType: CfarPriceType.Ancillary,
+        },
+      ],
+      cashRefundAllowance: '57.78',
+      hopperRefundCurrency: 'CAD',
+      contractExpiryDateTime: new Date('2022-07-08T18:00Z'),
+      status: CfarStatus.Created,
     };
   }
-  
+
   // -----------------------------------------------
   // Public Methods
   // -----------------------------------------------
@@ -476,8 +520,9 @@ export class GlobalComponent implements OnChanges {
 
   public getTCsUrl(offer: CfarOfferCustomer): string {
     if (offer) {
-      return offer.termsConditionsUrl[this.currentLang] ? 
-        offer.termsConditionsUrl[this.currentLang] : offer.termsConditionsUrl['en'];
+      return offer.termsConditionsUrl[this.currentLang]
+        ? offer.termsConditionsUrl[this.currentLang]
+        : offer.termsConditionsUrl['en'];
     }
 
     return '';
@@ -493,7 +538,7 @@ export class GlobalComponent implements OnChanges {
     if (builtError !== null) {
       this.errorCode = builtError.code;
 
-      if (this.errorCode !== undefined && this.errorCode !== null) {                    
+      if (this.errorCode !== undefined && this.errorCode !== null) {
         // Push the error context for the client
         this.pushSdkError(errorEndPoint, builtError);
       }
@@ -502,11 +547,15 @@ export class GlobalComponent implements OnChanges {
 
   /**
    * Get Error Label and emit the event
-   * @param errorEndPoint 
-   * @param builtError 
+   * @param errorEndPoint
+   * @param builtError
    * @param takeErrorLabelFromUIProject Must be set to false in the future
    */
-  public pushSdkError(errorEndPoint: string, builtError: HcAirlinesError, takeErrorLabelFromUIProject: boolean = false) {
+  public pushSdkError(
+    errorEndPoint: string,
+    builtError: HcAirlinesError,
+    takeErrorLabelFromUIProject: boolean = false,
+  ) {
     let emitWithUIProjectLabel = true;
     let errorMessage = builtError.message;
 
@@ -515,20 +564,29 @@ export class GlobalComponent implements OnChanges {
         emitWithUIProjectLabel = false;
         this.errorMessage = errorMessage;
 
-        const errorSdk: ErrorSdkModel = {endpoint: errorEndPoint, errorCode: builtError.code, errorDescription: errorMessage}
+        const errorSdk: ErrorSdkModel = {
+          endpoint: errorEndPoint,
+          errorCode: builtError.code,
+          errorDescription: errorMessage,
+        };
         this.errorOccurred.emit(errorSdk);
       }
     }
-    
-    if (emitWithUIProjectLabel) {
-      this._translateService.get('COMMON.ERROR_CODE.' + builtError.code)
-      .pipe(take(1))
-      .subscribe(errorDescription => {
-        this.errorMessage = errorDescription;
 
-        const errorSdk: ErrorSdkModel = {endpoint: errorEndPoint, errorCode: builtError.code, errorDescription: errorDescription}
-        this.errorOccurred.emit(errorSdk);
-      });
+    if (emitWithUIProjectLabel) {
+      this._translateService
+        .get('COMMON.ERROR_CODE.' + builtError.code)
+        .pipe(take(1))
+        .subscribe((errorDescription) => {
+          this.errorMessage = errorDescription;
+
+          const errorSdk: ErrorSdkModel = {
+            endpoint: errorEndPoint,
+            errorCode: builtError.code,
+            errorDescription: errorDescription,
+          };
+          this.errorOccurred.emit(errorSdk);
+        });
     }
   }
 }

@@ -1,56 +1,54 @@
 @import '../../styles/helper.scss';
 
-
 // How to use : https://tomastrajan.medium.com/the-complete-guide-to-angular-material-themes-4d165a9d24d1
 @mixin cfar-offer-banner-theme($theme) {
+  // Colors used for element backgrounds
+  $bg-palette: map-get($theme, background);
 
-    // Colors used for element backgrounds
-    $bg-palette: map-get($theme, background);
+  // Colors used for texts and icons
+  $fg-palette: map-get($theme, foreground);
 
-    // Colors used for texts and icons
-    $fg-palette: map-get($theme, foreground);
+  // Main color most widely used across all screens and components
+  $primary-palette: map-get($theme, primary);
 
-    // Main color most widely used across all screens and components
-    $primary-palette: map-get($theme, primary);
+  // Also known as the secondary color. Used for floating action buttons and interactive elements.
+  $accent-palette: map-get($theme, accent);
 
-    // Also known as the secondary color. Used for floating action buttons and interactive elements.
-    $accent-palette: map-get($theme, accent);
+  // Color to convey error state
+  $warn-palette: map-get($theme, warn);
 
-    // Color to convey error state
-    $warn-palette: map-get($theme, warn);
+  // If it's dark theme or not
+  $is-dark: map-get($theme, is-dark);
 
-    // If it's dark theme or not
-    $is-dark: map-get($theme, is-dark);
+  // ----------------------------------------------
 
-    // ----------------------------------------------
-
-    hopper-cfar-offer-banner {
-        .mat-mdc-button, 
-        .mat-mdc-unelevated-button, 
-        .mat-mdc-icon-button, 
-        .mat-mdc-raised-button,
-        .mat-mdc-outlined-button { 
-            border-radius: 0px; 
-        }
-        
-        .mat-mdc-card {
-            background: map-get($accent-palette, 50) !important;
-            color: map-get($accent-palette, "50-contrast") !important;
-            border-radius: 0px;
-
-            .check-icon {
-                font-weight: bold;
-                color: green;
-                font-size: 1.5rem;
-                height: 1.5rem;
-                min-width: 1.5rem;
-                width: 1.5rem;
-            }
-    
-            .offer-title {
-                font-weight: bold;
-                margin: 0px;
-            }
-        }
+  hopper-cfar-offer-banner {
+    .mat-mdc-button,
+    .mat-mdc-unelevated-button,
+    .mat-mdc-icon-button,
+    .mat-mdc-raised-button,
+    .mat-mdc-outlined-button {
+      border-radius: 0px;
     }
+
+    .mat-mdc-card {
+      background: map-get($accent-palette, 50) !important;
+      color: map-get($accent-palette, '50-contrast') !important;
+      border-radius: 0px;
+
+      .check-icon {
+        font-weight: bold;
+        color: green;
+        font-size: 1.5rem;
+        height: 1.5rem;
+        min-width: 1.5rem;
+        width: 1.5rem;
+      }
+
+      .offer-title {
+        font-weight: bold;
+        margin: 0px;
+      }
+    }
+  }
 }

@@ -1,0 +1,14 @@
+README.md
+CHANGELOG.md
+coverage
+dist
+node_modules
+*.tsbuildinfo
+.DS_STORE
+pnpm-lock.yaml
+
+# Translations
+projects/angular-sdk/src/i18n
+
+# Generated Clients
+projects/angular-sdk/src/apis/hopper-cloud-airline

@@ -1,126 +1,257 @@
-<div mat-dialog-title class="p-32" ngClass.lt-md="px-16" fxLayout="row" fxLayout="start center" fxLayoutGap="16px">
-    
-    <div fxFlex="calc(80% - 16px)"  fxLayoutAlign="center start" fxLayout="column">
-        <h2>{{ 'CFAR_OFFER_DIALOG.TITLE' | translate }}</h2>
-    </div>
+<div
+  mat-dialog-title
+  class="p-32"
+  ngClass.lt-md="px-16"
+  fxLayout="row"
+  fxLayout="start center"
+  fxLayoutGap="16px"
+>
+  <div fxFlex="calc(80% - 16px)" fxLayoutAlign="center start" fxLayout="column">
+    <h2>{{ 'CFAR_OFFER_DIALOG.TITLE' | translate }}</h2>
+  </div>
 
-    <div fxFlex="calc(20% - 16px)" fxLayoutAlign="end start">
-        <button mat-mini-fab color="primary" (click)="onClose()" attr.aria-label="{{ 'COMMON.BUTTON.CLOSE' | translate }}">
-            <mat-icon>clear</mat-icon>
-        </button>
-    </div>
+  <div fxFlex="calc(20% - 16px)" fxLayoutAlign="end start">
+    <button
+      mat-mini-fab
+      color="primary"
+      (click)="onClose()"
+      attr.aria-label="{{ 'COMMON.BUTTON.CLOSE' | translate }}"
+    >
+      <mat-icon>clear</mat-icon>
+    </button>
+  </div>
 
-    <div fxFlex="100" class="provided-by-container">
-        <a href="https://hts.hopper.com/" target="_blank">
-            <img class="provided-by-image" src="{{ imageBasePath || '' }}assets/provided-by-hopper/{{ currentLang || 'en' }}.svg" />
-        </a>
-    </div>
-
+  <div fxFlex="100" class="provided-by-container">
+    <a href="https://hts.hopper.com/" target="_blank">
+      <img
+        class="provided-by-image"
+        src="{{ imageBasePath || '' }}assets/provided-by-hopper/{{
+          currentLang || 'en'
+        }}.svg"
+      />
+    </a>
+  </div>
 </div>
 
 <mat-dialog-content class="mat-typography" fxLayout="column">
-  
-    <ng-container *ngIf="!isLoading">
-
-        <ng-container *ngIf="cfarOffers && cfarOffers.length > 0">
-            <div class="px-32 mt-16" ngClass.lt-md="p-16" fxLayout="row wrap" fxLayoutAlign="start center">
-        
-                <div fxFlex="100" class="py-8" *ngFor="let desc of getOfferDescription(selectedCfarOffer)" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
-                    <mat-icon class="check-icon">check</mat-icon>
-                    <span class="text-justify" attr.aria-label="{{ desc }}" innerHtml="{{ desc }}"></span>
-                </div>
-
-                <div fxFlex="100" class="py-8" fxLayout="row" fxLayout.lt-sm="column" fxLayoutAlign="start center" fxLayoutGap="8px" (click)="onOpenTermsAndConditions()">
-                    <a href="{{getTCsUrl(selectedCfarOffer)}}" attr.aria-describedby="{{ 'COMMON.TERMS_LINK_TEXT' | translate }}" 
-                        target="_blank">
-                        {{ 'COMMON.TERMS_LINK_TEXT' | translate }}
-                    </a>
-                </div>
-            
-            </div>
-
-            <div class="px-32" ngClass.lt-md="px-16" fxLayout="column" fxLayoutAlign="center center">
-        
-                <mat-card attr.aria-label="
-                    {{ 'COMMON.COVERAGE_PERCENTAGE_ACCESSIBILITY' | translate: 
-                        { 
-                            coverage: (offer.coveragePercentage | number: '1.0-0'),
-                            price: (getPricePerTraveler(offer) | currency:offer?.currency:'symbol':undefined:currentLang)
-                        }
-                    }}
-                    " class="full-width m-16 p-16" fxFlex fxLayout="row wrap" *ngFor="let offer of cfarOffers" 
-                        [ngClass]="{ 'active': offer == selectedCfarOffer }">
-                    <div fxFlex="100" attr.aria-label="
-                        {{ 'COMMON.COVERAGE_PERCENTAGE_ACCESSIBILITY' | translate: 
-                            { 
-                                coverage: (offer.coveragePercentage | number: '1.0-0'),
-                                price: (getPricePerTraveler(offer) | currency:offer?.currency:'symbol':undefined:currentLang)
-                            }
-                        }}
-                        " fxLayout="row wrap" fxLayoutAlign="start center" (click)="onSelectOffer(offer)">
-                        <h3 fxFlex="100" class="offer-title" 
-                            attr.aria-label="
-                            {{ 'COMMON.COVERAGE_PERCENTAGE_ACCESSIBILITY' | translate: 
-                                { 
-                                    coverage: (offer.coveragePercentage | number: '1.0-0'),
-                                    price: (getPricePerTraveler(offer) | currency:offer?.currency:'symbol':undefined:currentLang)
-                                }
-                            }}
-                            "
-                        >
-                            {{ 'COMMON.COVERAGE_PERCENTAGE' | translate: 
-                                { coverage: (offer.coveragePercentage | number: '1.0-0') }
-                            }}
-                        </h3>
-                        <div fxFlex="100" class="price" fxLayoutGap="8px"
-                            attr.aria-label="{{ 'COMMON.PRICE_PER_TRAVELER' | translate: 
-                                { price: (getPricePerTraveler(offer) | currency:offer?.currency:'symbol':undefined:currentLang) }
-                            }}"
-                            innerHtml="{{ 'COMMON.PRICE_PER_TRAVELER' | translate: 
-                                { price: (getPricePerTraveler(offer) | currency:offer?.currency:'symbol':undefined:currentLang) }
-                            }}"
-                        ></div>
-                        <div class="incl-taxes mt-8" fxFlex="100"
-                            attr.aria-label="{{ 'COMMON.INCL_TAXES' | translate }}">
-                            {{ 'COMMON.INCL_TAXES' | translate }}
-                        </div>
-                    </div>
-                </mat-card>
-
-            </div>
-        </ng-container>
-
-        <!-- ERROR MESSAGE -->
-        <ng-container *ngIf="errorCode">
-            <div class="error-message mx-32 my-32" fxLayout="row" fxLayoutAlign="start center">
-                <mat-icon fxFlex="24px">error</mat-icon>
-                <span fxFlex="calc(100% - 24px)" class="p-16">{{ errorMessage }}</span>
-            </div>
-        </ng-container>
-        <!-- / ERROR MESSAGE -->
-
-    </ng-container>
-
-    <ng-container *ngIf="isLoading">
-        <div class="p-32" ngClass.lt-md="p-16" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="16px">
-            <mat-spinner></mat-spinner>
-            <p>{{ 'CFAR_OFFER_DIALOG.LOADING' | translate }}</p>
+  <ng-container *ngIf="!isLoading">
+    <ng-container *ngIf="cfarOffers && cfarOffers.length > 0">
+      <div
+        class="px-32 mt-16"
+        ngClass.lt-md="p-16"
+        fxLayout="row wrap"
+        fxLayoutAlign="start center"
+      >
+        <div
+          fxFlex="100"
+          class="py-8"
+          *ngFor="let desc of getOfferDescription(selectedCfarOffer)"
+          fxLayout="row"
+          fxLayoutAlign="start center"
+          fxLayoutGap="8px"
+        >
+          <mat-icon class="check-icon">check</mat-icon>
+          <span
+            class="text-justify"
+            attr.aria-label="{{ desc }}"
+            innerHtml="{{ desc }}"
+          ></span>
         </div>
+
+        <div
+          fxFlex="100"
+          class="py-8"
+          fxLayout="row"
+          fxLayout.lt-sm="column"
+          fxLayoutAlign="start center"
+          fxLayoutGap="8px"
+          (click)="onOpenTermsAndConditions()"
+        >
+          <a
+            href="{{ getTCsUrl(selectedCfarOffer) }}"
+            attr.aria-describedby="{{ 'COMMON.TERMS_LINK_TEXT' | translate }}"
+            target="_blank"
+          >
+            {{ 'COMMON.TERMS_LINK_TEXT' | translate }}
+          </a>
+        </div>
+      </div>
+
+      <div
+        class="px-32"
+        ngClass.lt-md="px-16"
+        fxLayout="column"
+        fxLayoutAlign="center center"
+      >
+        <mat-card
+          attr.aria-label="
+                    {{
+            'COMMON.COVERAGE_PERCENTAGE_ACCESSIBILITY'
+              | translate
+                : {
+                    coverage: (offer.coveragePercentage | number: '1.0-0'),
+                    price:
+                      (getPricePerTraveler(offer)
+                      | currency
+                        : offer?.currency
+                        : 'symbol'
+                        : undefined
+                        : currentLang)
+                  }
+          }}
+                    "
+          class="full-width m-16 p-16"
+          fxFlex
+          fxLayout="row wrap"
+          *ngFor="let offer of cfarOffers"
+          [ngClass]="{ active: offer == selectedCfarOffer }"
+        >
+          <div
+            fxFlex="100"
+            attr.aria-label="
+                        {{
+              'COMMON.COVERAGE_PERCENTAGE_ACCESSIBILITY'
+                | translate
+                  : {
+                      coverage: (offer.coveragePercentage | number: '1.0-0'),
+                      price:
+                        (getPricePerTraveler(offer)
+                        | currency
+                          : offer?.currency
+                          : 'symbol'
+                          : undefined
+                          : currentLang)
+                    }
+            }}
+                        "
+            fxLayout="row wrap"
+            fxLayoutAlign="start center"
+            (click)="onSelectOffer(offer)"
+          >
+            <h3
+              fxFlex="100"
+              class="offer-title"
+              attr.aria-label="
+                            {{
+                'COMMON.COVERAGE_PERCENTAGE_ACCESSIBILITY'
+                  | translate
+                    : {
+                        coverage: (offer.coveragePercentage | number: '1.0-0'),
+                        price:
+                          (getPricePerTraveler(offer)
+                          | currency
+                            : offer?.currency
+                            : 'symbol'
+                            : undefined
+                            : currentLang)
+                      }
+              }}
+                            "
+            >
+              {{
+                'COMMON.COVERAGE_PERCENTAGE'
+                  | translate
+                    : { coverage: (offer.coveragePercentage | number: '1.0-0') }
+              }}
+            </h3>
+            <div
+              fxFlex="100"
+              class="price"
+              fxLayoutGap="8px"
+              attr.aria-label="{{
+                'COMMON.PRICE_PER_TRAVELER'
+                  | translate
+                    : {
+                        price:
+                          (getPricePerTraveler(offer)
+                          | currency
+                            : offer?.currency
+                            : 'symbol'
+                            : undefined
+                            : currentLang)
+                      }
+              }}"
+              innerHtml="{{
+                'COMMON.PRICE_PER_TRAVELER'
+                  | translate
+                    : {
+                        price:
+                          (getPricePerTraveler(offer)
+                          | currency
+                            : offer?.currency
+                            : 'symbol'
+                            : undefined
+                            : currentLang)
+                      }
+              }}"
+            ></div>
+            <div
+              class="incl-taxes mt-8"
+              fxFlex="100"
+              attr.aria-label="{{ 'COMMON.INCL_TAXES' | translate }}"
+            >
+              {{ 'COMMON.INCL_TAXES' | translate }}
+            </div>
+          </div>
+        </mat-card>
+      </div>
     </ng-container>
-    
+
+    <!-- ERROR MESSAGE -->
+    <ng-container *ngIf="errorCode">
+      <div
+        class="error-message mx-32 my-32"
+        fxLayout="row"
+        fxLayoutAlign="start center"
+      >
+        <mat-icon fxFlex="24px">error</mat-icon>
+        <span fxFlex="calc(100% - 24px)" class="p-16">{{ errorMessage }}</span>
+      </div>
+    </ng-container>
+    <!-- / ERROR MESSAGE -->
+  </ng-container>
+
+  <ng-container *ngIf="isLoading">
+    <div
+      class="p-32"
+      ngClass.lt-md="p-16"
+      fxLayout="column"
+      fxLayoutAlign="center center"
+      fxLayoutGap="16px"
+    >
+      <mat-spinner></mat-spinner>
+      <p>{{ 'CFAR_OFFER_DIALOG.LOADING' | translate }}</p>
+    </div>
+  </ng-container>
 </mat-dialog-content>
 
 <mat-dialog-actions>
-
-    <div class="p-16" *ngIf="!isLoading" fxFlex="100" fxLayout="row wrap" fxLayoutGap="16px" fxLayout.lt-sm="column" fxLayoutAlign="center center">
-        <button mat-raised-button ngClass.lt-sm="full-width" (click)="onClose()"
-            attr.aria-label="{{ 'CFAR_OFFER_DIALOG.BUTTON.CANCEL' | translate }}">
-            {{ 'CFAR_OFFER_DIALOG.BUTTON.CANCEL' | translate }}
-        </button>
-        <button mat-raised-button color="accent" *ngIf="selectedCfarOffer" ngClass.lt-sm="full-width" (click)="onSubmit()"
-            attr.aria-label="{{ getDynamicCoverage() }}">
-            {{ getDynamicCoverage() }}
-        </button>
-    </div>
-  
+  <div
+    class="p-16"
+    *ngIf="!isLoading"
+    fxFlex="100"
+    fxLayout="row wrap"
+    fxLayoutGap="16px"
+    fxLayout.lt-sm="column"
+    fxLayoutAlign="center center"
+  >
+    <button
+      mat-raised-button
+      ngClass.lt-sm="full-width"
+      (click)="onClose()"
+      attr.aria-label="{{ 'CFAR_OFFER_DIALOG.BUTTON.CANCEL' | translate }}"
+    >
+      {{ 'CFAR_OFFER_DIALOG.BUTTON.CANCEL' | translate }}
+    </button>
+    <button
+      mat-raised-button
+      color="accent"
+      *ngIf="selectedCfarOffer"
+      ngClass.lt-sm="full-width"
+      (click)="onSubmit()"
+      attr.aria-label="{{ getDynamicCoverage() }}"
+    >
+      {{ getDynamicCoverage() }}
+    </button>
+  </div>
 </mat-dialog-actions>
