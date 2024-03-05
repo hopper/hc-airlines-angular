@@ -58,6 +58,7 @@
               attr.aria-label="{{
                 'CFAR_EXERCISE_FLOW.BUTTON.SEND_VERIFICATION_CODE' | translate
               }}"
+              data-testid="sendCode"
             >
               {{
                 'CFAR_EXERCISE_FLOW.BUTTON.SEND_VERIFICATION_CODE' | translate
@@ -91,7 +92,11 @@
                 <mat-label>{{
                   'CFAR_EXERCISE_FLOW.FORM.VERIFICATION_CODE' | translate
                 }}</mat-label>
-                <input matInput formControlName="verificationCode" />
+                <input
+                  matInput
+                  formControlName="verificationCode"
+                  data-testid="verificationCode"
+                />
                 <mat-error
                   *ngIf="
                     checkVerificationCodeForm.get('verificationCode')?.invalid
@@ -120,6 +125,7 @@
               attr.aria-label="{{
                 'CFAR_EXERCISE_FLOW.BUTTON.CONTINUE' | translate
               }}"
+              data-testid="continue"
             >
               {{ 'CFAR_EXERCISE_FLOW.BUTTON.CONTINUE' | translate }}
             </button>
@@ -133,6 +139,7 @@
                 'CFAR_EXERCISE_FLOW.BUTTON.RESEND_VERIFICATION_CODE' | translate
               }}"
               (click)="onSendVerificationCode()"
+              data-testid="resendCode"
             >
               {{
                 'CFAR_EXERCISE_FLOW.BUTTON.RESEND_VERIFICATION_CODE' | translate
@@ -474,6 +481,7 @@
                     attr.aria-label="{{
                       'CFAR_EXERCISE_FLOW.BUTTON.CONTINUE' | translate
                     }}"
+                    data-testid="continue"
                   >
                     {{ 'CFAR_EXERCISE_FLOW.BUTTON.CONTINUE' | translate }}
                   </button>
@@ -517,7 +525,11 @@
                         <mat-label>{{
                           'CFAR_EXERCISE_FLOW.FORM.FIRST_NAME' | translate
                         }}</mat-label>
-                        <input matInput formControlName="firstName" />
+                        <input
+                          matInput
+                          formControlName="firstName"
+                          data-testid="firstName"
+                        />
                         <mat-error
                           *ngIf="step2Form.get('firstName')?.invalid"
                           >{{
@@ -531,14 +543,22 @@
                         <mat-label>{{
                           'CFAR_EXERCISE_FLOW.FORM.MIDDLE_NAME' | translate
                         }}</mat-label>
-                        <input matInput formControlName="middleName" />
+                        <input
+                          matInput
+                          formControlName="middleName"
+                          data-testid="middleName"
+                        />
                       </mat-form-field>
 
                       <mat-form-field fxFlex="100" appearance="outline">
                         <mat-label>{{
                           'CFAR_EXERCISE_FLOW.FORM.LAST_NAME' | translate
                         }}</mat-label>
-                        <input matInput formControlName="lastName" />
+                        <input
+                          matInput
+                          formControlName="lastName"
+                          data-testid="lastName"
+                        />
                         <mat-error *ngIf="step2Form.get('lastName')?.invalid">{{
                           'CFAR_EXERCISE_FLOW.FORM.LAST_NAME_ERROR' | translate
                         }}</mat-error>
@@ -548,6 +568,7 @@
                         fxFlex="100"
                         appearance="outline"
                         (click)="picker.open()"
+                        data-testid="dateOfBirth"
                       >
                         <mat-label>{{
                           'CFAR_EXERCISE_FLOW.FORM.DATE_OF_BIRTH' | translate
@@ -593,6 +614,7 @@
                         <input
                           matInput
                           formControlName="addressLine1"
+                          data-testid="addressLine1"
                           maxlength="100"
                         />
                         <mat-error
@@ -612,6 +634,7 @@
                           matInput
                           formControlName="addressLine2"
                           maxlength="100"
+                          data-testid="addressLine2"
                         />
                       </mat-form-field>
 
@@ -625,7 +648,11 @@
                           <mat-label>{{
                             'CFAR_EXERCISE_FLOW.FORM.CITY' | translate
                           }}</mat-label>
-                          <input matInput formControlName="city" />
+                          <input
+                            matInput
+                            formControlName="city"
+                            data-testid="city"
+                          />
                           <mat-error *ngIf="step2Form.get('city')?.invalid">{{
                             'CFAR_EXERCISE_FLOW.FORM.CITY_ERROR' | translate
                           }}</mat-error>
@@ -635,7 +662,10 @@
                           <mat-label>{{
                             'CFAR_EXERCISE_FLOW.FORM.COUNTRY' | translate
                           }}</mat-label>
-                          <mat-select formControlName="country">
+                          <mat-select
+                            formControlName="country"
+                            data-testid="country"
+                          >
                             <mat-option
                               *ngFor="
                                 let c of mapCountries | keyvalue: asIsOrder
@@ -668,7 +698,11 @@
                             <mat-label>{{
                               'CFAR_EXERCISE_FLOW.FORM.STATE' | translate
                             }}</mat-label>
-                            <input matInput formControlName="state" />
+                            <input
+                              matInput
+                              formControlName="state"
+                              data-testid="state"
+                            />
                             <mat-error
                               *ngIf="step2Form.get('state')?.invalid"
                               >{{
@@ -686,7 +720,10 @@
                             <mat-label>{{
                               'CFAR_EXERCISE_FLOW.FORM.STATE' | translate
                             }}</mat-label>
-                            <mat-select formControlName="state">
+                            <mat-select
+                              formControlName="state"
+                              data-testid="state"
+                            >
                               <mat-option
                                 *ngFor="
                                   let s of mapStates | keyvalue: asIsOrder
@@ -710,7 +747,11 @@
                           <mat-label>{{
                             'CFAR_EXERCISE_FLOW.FORM.ZIP' | translate
                           }}</mat-label>
-                          <input matInput formControlName="zip" />
+                          <input
+                            matInput
+                            formControlName="zip"
+                            data-testid="zip"
+                          />
                           <mat-error *ngIf="step2Form.get('zip')?.invalid">{{
                             'CFAR_EXERCISE_FLOW.FORM.ZIP_ERROR' | translate
                           }}</mat-error>
@@ -739,6 +780,7 @@
                     attr.aria-label="{{
                       'CFAR_EXERCISE_FLOW.BUTTON.CONTINUE' | translate
                     }}"
+                    data-testid="continue"
                   >
                     {{ 'CFAR_EXERCISE_FLOW.BUTTON.CONTINUE' | translate }}
                   </button>
