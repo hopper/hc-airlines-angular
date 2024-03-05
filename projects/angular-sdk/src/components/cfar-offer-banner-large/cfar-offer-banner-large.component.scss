@@ -1,115 +1,113 @@
 @import '../../styles/helper.scss';
 
-
 // How to use : https://tomastrajan.medium.com/the-complete-guide-to-angular-material-themes-4d165a9d24d1
 @mixin cfar-offer-banner-large-theme($theme) {
+  // Colors used for element backgrounds
+  $bg-palette: map-get($theme, background);
 
-    // Colors used for element backgrounds
-    $bg-palette: map-get($theme, background);
+  // Colors used for texts and icons
+  $fg-palette: map-get($theme, foreground);
 
-    // Colors used for texts and icons
-    $fg-palette: map-get($theme, foreground);
+  // Main color most widely used across all screens and components
+  $primary-palette: map-get($theme, primary);
 
-    // Main color most widely used across all screens and components
-    $primary-palette: map-get($theme, primary);
+  // Also known as the secondary color. Used for floating action buttons and interactive elements.
+  $accent-palette: map-get($theme, accent);
 
-    // Also known as the secondary color. Used for floating action buttons and interactive elements.
-    $accent-palette: map-get($theme, accent);
+  // Color to convey error state
+  $warn-palette: map-get($theme, warn);
 
-    // Color to convey error state
-    $warn-palette: map-get($theme, warn);
+  // If it's dark theme or not
+  $is-dark: map-get($theme, is-dark);
 
-    // If it's dark theme or not
-    $is-dark: map-get($theme, is-dark);
+  // ----------------------------------------------
 
-    // ----------------------------------------------
-
-    hopper-cfar-offer-banner-large {
-        .mat-mdc-button, 
-        .mat-mdc-unelevated-button, 
-        .mat-mdc-icon-button, 
-        .mat-mdc-raised-button,
-        .mat-mdc-outlined-button { 
-            border-radius: 0px; 
-        }
-        
-        .mat-mdc-radio-label {
-            white-space: normal;
-        }
-
-        .warning-message {
-            background: map-get($warn-palette, 50);
-            border: 1px solid map-get($warn-palette, default);
-            padding: 0px 16px;
-            color: black;
-        }
-        
-        .mat-mdc-card {
-            border: 1px solid map-get($accent-palette, "A200") !important;
-            border-radius: 0px;
-            @include mat.elevation(4);
-
-            .provided-by-image {
-                background: white;
-                position: relative;
-                padding: 4px 16px;
-                border-radius: 16px;
-            }
-
-            .check-icon {
-                font-weight: bold;
-                color: green;
-                font-size: 1.5rem;
-                height: 1.5rem;
-                min-width: 1.5rem;
-                width: 1.5rem;
-            }
-    
-            .offer-title {
-                border-left: 2px solid map-get($primary-palette, 300);
-                font-size: 20px;
-                font-family: "Open Sans", Arial;
-                font-weight: 600;
-                line-height: 20px;
-            }
-
-            .default-choice {
-                background: map-get($bg-palette, "background");
-                border: 1px solid map-get($bg-palette, "status-bar");
-                color: map-get($fg-palette, "text");
-            }
-
-            .responsive-image {
-                width: 100%;
-            }
-
-            .important-text {
-                font-size: 1rem;
-            }
-
-            .price-per-traveler {
-                font-weight: bold;
-                color: map-get($accent-palette, default);
-                text-indent: 28px;
-            }
-
-            .offer-choice {
-                border-left: 2px solid map-get($primary-palette, 300);
-                padding-left: 16px;
-
-                @include media-breakpoint('lt-md') {
-                    border: none;
-                }
-            }
-
-            .incl-taxes {
-                color: map-get($fg-palette, "secondary-text");
-                text-indent: 28px;
-            }
-
-            a {
-                color: map-get($accent-palette, default);
-            }
-        }
+  hopper-cfar-offer-banner-large {
+    .mat-mdc-button,
+    .mat-mdc-unelevated-button,
+    .mat-mdc-icon-button,
+    .mat-mdc-raised-button,
+    .mat-mdc-outlined-button {
+      border-radius: 0px;
     }
+
+    .mat-mdc-radio-label {
+      white-space: normal;
+    }
+
+    .warning-message {
+      background: map-get($warn-palette, 50);
+      border: 1px solid map-get($warn-palette, default);
+      padding: 0px 16px;
+      color: black;
+    }
+
+    .mat-mdc-card {
+      border: 1px solid map-get($accent-palette, 'A200') !important;
+      border-radius: 0px;
+      @include mat.elevation(4);
+
+      .provided-by-image {
+        background: white;
+        position: relative;
+        padding: 4px 16px;
+        border-radius: 16px;
+      }
+
+      .check-icon {
+        font-weight: bold;
+        color: green;
+        font-size: 1.5rem;
+        height: 1.5rem;
+        min-width: 1.5rem;
+        width: 1.5rem;
+      }
+
+      .offer-title {
+        border-left: 2px solid map-get($primary-palette, 300);
+        font-size: 20px;
+        font-family: 'Open Sans', Arial;
+        font-weight: 600;
+        line-height: 20px;
+      }
+
+      .default-choice {
+        background: map-get($bg-palette, 'background');
+        border: 1px solid map-get($bg-palette, 'status-bar');
+        color: map-get($fg-palette, 'text');
+      }
+
+      .responsive-image {
+        width: 100%;
+      }
+
+      .important-text {
+        font-size: 1rem;
+      }
+
+      .price-per-traveler {
+        font-weight: bold;
+        color: map-get($accent-palette, default);
+        text-indent: 28px;
+      }
+
+      .offer-choice {
+        border-left: 2px solid map-get($primary-palette, 300);
+        padding-left: 16px;
+
+        @include media-breakpoint('lt-md') {
+          border: none;
+        }
+      }
+
+      .incl-taxes {
+        color: map-get($fg-palette, 'secondary-text');
+        text-indent: 28px;
+      }
+
+      a {
+        color: map-get($accent-palette, default);
+      }
+    }
+  }
 }

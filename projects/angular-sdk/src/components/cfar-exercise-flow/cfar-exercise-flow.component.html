@@ -1,493 +1,1084 @@
-<div ngClass.gt-md="px-32" ngClass.gt-sm="px-16" ngClass.lt-md="px-0" fxLayout="row" fxLayoutAlign="center center">
+<div
+  ngClass.gt-md="px-32"
+  ngClass.gt-sm="px-16"
+  ngClass.lt-md="px-0"
+  fxLayout="row"
+  fxLayoutAlign="center center"
+>
+  <mat-card class="p-16" fxFlex fxLayout="row wrap">
+    <div
+      fxFlex="100"
+      class="header"
+      fxLayout="row"
+      fxLayoutAlign="center center"
+    >
+      <h1>{{ 'CFAR_EXERCISE_FLOW.TITLE' | translate }}</h1>
+    </div>
 
-    <mat-card class="p-16" fxFlex fxLayout="row wrap">
+    <div fxFlex="100" class="card-content" fxLayout="row wrap">
+      <ng-container *ngIf="!isLoading">
+        <!-- ERROR MESSAGE -->
+        <ng-container *ngIf="errorCode">
+          <div
+            fxFlex="100"
+            class="error-message m-16"
+            fxLayout="row"
+            fxLayoutAlign="start center"
+          >
+            <mat-icon>error</mat-icon>
+            <span class="p-16">{{ errorMessage }}</span>
+          </div>
+        </ng-container>
+        <!-- / ERROR MESSAGE -->
 
-        <div fxFlex="100" class="header" fxLayout="row" fxLayoutAlign="center center">
-            <h1>{{ 'CFAR_EXERCISE_FLOW.TITLE' | translate }}</h1>
+        <!-- STEP SEND VERIFICATION CODE -->
+        <div
+          fxFlex="100"
+          class="p-16"
+          fxLayout="column"
+          *ngIf="isSendVerificationCodeStep()"
+        >
+          <h2 class="mb-32">
+            {{ 'CFAR_EXERCISE_FLOW.CHECK_VERIFICATION_TITLE' | translate }}
+          </h2>
+          <span class="text-justify mb-32">{{
+            'CFAR_EXERCISE_FLOW.CHECK_VERIFICATION_TEXT' | translate
+          }}</span>
+
+          <div
+            fxLayoutAlign="center center"
+            *ngIf="!isVerificationCodeAlreadySent"
+          >
+            <button
+              mat-raised-button
+              color="accent"
+              ngClass.gt-sm="mid-width"
+              ngClass.lt-md="full-width"
+              (click)="onSendVerificationCode()"
+              attr.aria-label="{{
+                'CFAR_EXERCISE_FLOW.BUTTON.SEND_VERIFICATION_CODE' | translate
+              }}"
+            >
+              {{
+                'CFAR_EXERCISE_FLOW.BUTTON.SEND_VERIFICATION_CODE' | translate
+              }}
+            </button>
+          </div>
         </div>
+        <!-- / STEP SEND VERIFICATION CODE -->
 
-        <div fxFlex="100" class="card-content" fxLayout="row wrap">
+        <!-- STEP CHECK VERIFICATION CODE -->
+        <div
+          fxFlex="100"
+          class="p-16"
+          fxLayout="column"
+          *ngIf="isCheckVerificationCodeStep()"
+        >
+          <h2 class="mb-32">
+            {{ 'CFAR_EXERCISE_FLOW.SEND_VERIFICATION_TITLE' | translate }}
+          </h2>
+          <span class="text-justify mb-32">{{
+            'CFAR_EXERCISE_FLOW.SEND_VERIFICATION_TEXT'
+              | translate
+                : {
+                    email: cfarContractUserEmail
+                  }
+          }}</span>
 
-            <ng-container *ngIf="!isLoading">
+          <form [formGroup]="checkVerificationCodeForm" class="mb-4">
+            <div fxFlex="100" appearance="outline" fxLayoutGap="8px">
+              <mat-form-field fxFlex="100" appearance="outline">
+                <mat-label>{{
+                  'CFAR_EXERCISE_FLOW.FORM.VERIFICATION_CODE' | translate
+                }}</mat-label>
+                <input matInput formControlName="verificationCode" />
+                <mat-error
+                  *ngIf="
+                    checkVerificationCodeForm.get('verificationCode')?.invalid
+                  "
+                  >{{
+                    'CFAR_EXERCISE_FLOW.FORM.VERIFICATION_CODE_ERROR'
+                      | translate
+                  }}</mat-error
+                >
+              </mat-form-field>
+            </div>
+          </form>
 
-                <!-- ERROR MESSAGE -->
-                <ng-container *ngIf="errorCode">
-                    <div fxFlex="100" class="error-message m-16" fxLayout="row" fxLayoutAlign="start center">
-                        <mat-icon>error</mat-icon>
-                        <span class="p-16">{{ errorMessage }}</span>
-                    </div>
-                </ng-container>
-                <!-- / ERROR MESSAGE -->
+          <div
+            fxLayoutAlign="center center"
+            fxLayout="column"
+            fxLayoutGap="16px"
+          >
+            <button
+              mat-raised-button
+              color="accent"
+              ngClass.gt-sm="mid-width"
+              ngClass.lt-md="full-width"
+              [disabled]="!isCheckVerificationCodeFormValid()"
+              (click)="onCheckVerificationCode()"
+              attr.aria-label="{{
+                'CFAR_EXERCISE_FLOW.BUTTON.CONTINUE' | translate
+              }}"
+            >
+              {{ 'CFAR_EXERCISE_FLOW.BUTTON.CONTINUE' | translate }}
+            </button>
 
-                <!-- STEP SEND VERIFICATION CODE -->
-                <div fxFlex="100" class="p-16" fxLayout="column" *ngIf="isSendVerificationCodeStep()">
-                    <h2 class="mb-32">{{ 'CFAR_EXERCISE_FLOW.CHECK_VERIFICATION_TITLE' | translate }}</h2>
-                    <span class="text-justify mb-32">{{ 'CFAR_EXERCISE_FLOW.CHECK_VERIFICATION_TEXT' | translate }}</span>
+            <button
+              mat-button
+              color="accent"
+              ngClass.gt-sm="mid-width"
+              ngClass.lt-md="full-width"
+              attr.aria-label="{{
+                'CFAR_EXERCISE_FLOW.BUTTON.RESEND_VERIFICATION_CODE' | translate
+              }}"
+              (click)="onSendVerificationCode()"
+            >
+              {{
+                'CFAR_EXERCISE_FLOW.BUTTON.RESEND_VERIFICATION_CODE' | translate
+              }}
+            </button>
+          </div>
+        </div>
+        <!-- / STEP CHECK VERIFICATION CODE -->
 
-                    <div fxLayoutAlign="center center" *ngIf="!isVerificationCodeAlreadySent">
-                        <button mat-raised-button color="accent" ngClass.gt-sm="mid-width" ngClass.lt-md="full-width" (click)="onSendVerificationCode()"
-                            attr.aria-label="{{ 'CFAR_EXERCISE_FLOW.BUTTON.SEND_VERIFICATION_CODE' | translate }}">
-                            {{ 'CFAR_EXERCISE_FLOW.BUTTON.SEND_VERIFICATION_CODE' | translate }}
-                        </button>
-                    </div>
-                </div>                
-                <!-- / STEP SEND VERIFICATION CODE -->
-                
-                <!-- STEP CHECK VERIFICATION CODE -->
-                <div fxFlex="100" class="p-16" fxLayout="column" *ngIf="isCheckVerificationCodeStep()">
-                    <h2 class="mb-32">{{ 'CFAR_EXERCISE_FLOW.SEND_VERIFICATION_TITLE' | translate }}</h2>
-                    <span class="text-justify mb-32">{{ 'CFAR_EXERCISE_FLOW.SEND_VERIFICATION_TEXT' | translate: {
-                        email: cfarContractUserEmail
-                    } }}</span>
-        
-                    <form [formGroup]="checkVerificationCodeForm" class="mb-4">
-                        <div fxFlex="100" appearance="outline" fxLayoutGap="8px">
-                            <mat-form-field fxFlex="100" appearance="outline">                        
-                                <mat-label>{{ 'CFAR_EXERCISE_FLOW.FORM.VERIFICATION_CODE' | translate }}</mat-label>
-                                <input matInput formControlName="verificationCode">
-                                <mat-error *ngIf="checkVerificationCodeForm.get('verificationCode')?.invalid">{{ 'CFAR_EXERCISE_FLOW.FORM.VERIFICATION_CODE_ERROR' | translate }}</mat-error>
-                            </mat-form-field>
-                        </div>
-                    </form>
-        
-                    <div fxLayoutAlign="center center" fxLayout="column" fxLayoutGap="16px">
-                        <button mat-raised-button color="accent" ngClass.gt-sm="mid-width" ngClass.lt-md="full-width" [disabled]="!isCheckVerificationCodeFormValid()" 
-                            (click)="onCheckVerificationCode()" attr.aria-label="{{ 'CFAR_EXERCISE_FLOW.BUTTON.CONTINUE' | translate }}">
-                            {{ 'CFAR_EXERCISE_FLOW.BUTTON.CONTINUE' | translate }}
-                        </button>
-        
-                        <button mat-button color="accent" ngClass.gt-sm="mid-width" ngClass.lt-md="full-width"
-                            attr.aria-label="{{ 'CFAR_EXERCISE_FLOW.BUTTON.RESEND_VERIFICATION_CODE' | translate }}" (click)="onSendVerificationCode()">
-                            {{ 'CFAR_EXERCISE_FLOW.BUTTON.RESEND_VERIFICATION_CODE' | translate }}
-                        </button>
-                    </div>
-                </div>                
-                <!-- / STEP CHECK VERIFICATION CODE -->
-        
-                <!-- EXERCISE STEPPER -->
-                <ng-container *ngIf="cfarExercise && isProcessCfarExerciseStep()">
-                    
-                    <!-- IF THE CONTRACT HAS BEEN REFUNDED -->
-                    <ng-container *ngIf="isCfarContractExercised()">
-                        <div class="full-width p-32" ngClass.lt-md="p-16" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="16px">
-                            <span class="information-message p-16"
-                                innerHtml="{{ 'CFAR_EXERCISE_FLOW.CONTRACT_ALREADY_REFUNDED' | translate: 
-                                    { link: contactFormUrl }
-                                }}"
-                            ></span>
-                        </div>
-                    </ng-container>
-                    <!-- / CONTRACT ALREADY REFUNDED -->
-                    
-                    <ng-container *ngIf="!isCfarContractExercised()">
-                        
-                        <mat-stepper orientation="vertical" #stepper linear (selectionChange)="stepCompleted.emit()">
-                            
-                            <!-- STEP 1 -->
-                            <mat-step completed="false" editable="false">
-                                <ng-template matStepLabel>{{ 'CFAR_EXERCISE_FLOW.STEP.FIRST' | translate }}</ng-template>
-            
-                                <div class="p-16" fxLayout="row wrap" fxLayoutAlign="start center">
-            
-                                    <div fxFlex="100" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px"
-                                        class="mb-16">
-                                        <mat-icon svgIcon="refundable_ticket" class="custom-icon"></mat-icon>
-                                        <span class="title">{{ 'CFAR_EXERCISE_FLOW.SUBTITLE' | translate }}</span>
-                                    </div>
-            
-                                    <div fxFlex="100">
-                                        <p>
-                                            {{ 'CFAR_EXERCISE_FLOW.DEADLINE_SENTENCE_1' | translate }}
-                                            <b>
-                                                {{ cfarExercise.contractExpiryDateTime| date: ('COMMON.DATE_FORMAT.HOUR_AND_DATE' | translate):'':currentLang }}
-                                            </b>
-                                        </p>
-                                        <p>
-                                            {{ 'CFAR_EXERCISE_FLOW.DEADLINE_SENTENCE_2' | translate: {
-                                                amount: cfarExercise.cashRefundAllowance | currency:cfarExercise.hopperRefundCurrency:'symbol':undefined:currentLang
-                                            } }}
-                                        </p>
-                                    </div>
-            
-                                </div>
-            
-                                <mat-divider></mat-divider>
-            
-                                <div ngClass.gt-sm="p-16" ngClass.lt-md="py-16" fxLayout="row" fxLayout.lt-sm="column" fxLayoutAlign="start start"
-                                    fxLayoutGap="16px"
-                                >
-                                    <div fxFlex class="itinerary-container pr-16" fxLayout="column" fxLayoutAlign="center start" fxLayoutGap="32px">
-            
-                                        <ng-container *ngFor="let slice of cfarExercise?.itinerary?.slices">
-            
-                                            <div class="full-width" fxLayout="row wrap" fxLayoutAlign="center center" 
-                                                *ngFor="let segment of slice?.segments">
-            
-                                                <div fxFlex="100" class="mb-8">
-                                                    <div fxFlex fxLayoutAlign="center center">
-                                                        {{ segment?.departureDateTime | date: ('COMMON.DATE_FORMAT.HOUR' | translate):'':currentLang }}
-                                                    </div>
-                                                    <div fxFlex fxLayoutAlign="center center"><!-- Let empty --></div>
-                                                    <div fxFlex fxLayoutAlign="center center">
-                                                        {{ segment?.arrivalDateTime | date: ('COMMON.DATE_FORMAT.HOUR' | translate):'':currentLang }}
-                                                    </div>
-                                                </div>
-            
-                                                <div fxFlex="100" class="mb-8">
-                                                    <div fxFlex class="origin-destination" fxLayoutAlign="center center">{{ segment?.originAirport }}</div>
-                                                    <div fxFlex fxLayoutAlign="center center" fxLayoutGap="8px">
-                                                        <div class="decorative-stroke"></div>
-                                                        <mat-icon color="accent" class="flight-icon">flight</mat-icon>
-                                                        <div class="decorative-stroke"></div>
-                                                    </div>
-                                                    <div fxFlex class="origin-destination" fxLayoutAlign="center center">{{ segment?.destinationAirport }}</div>
-                                                </div>
-            
-                                                <div fxFlex="100">
-                                                    <div fxFlex fxLayoutAlign="center center">
-                                                        {{ segment?.departureDateTime | date: ('COMMON.DATE_FORMAT.DATE' | translate):'':currentLang }}
-                                                    </div>
-                                                    <div fxFlex fxLayoutAlign="center center">{{ segment?.validatingCarrierCode + '' + segment?.flightNumber }}</div>
-                                                    <div fxFlex fxLayoutAlign="center center">
-                                                        {{ segment?.arrivalDateTime | date: ('COMMON.DATE_FORMAT.DATE' | translate):'':currentLang }}
-                                                    </div>
-                                                </div>
-        
-                                            </div>
-            
-                                        </ng-container>
-            
-                                    </div>
-            
-                                    <div fxFlex fxLayout="column" fxLayoutAlign="center start">
-                                        <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px" class="mb-16">
-                                            <mat-icon color="accent">person</mat-icon>
-                                            <span class="subtitle" *ngIf="getNbPassengers(cfarExercise.itinerary) <= 1">
-                                                {{ 'CFAR_EXERCISE_FLOW.PASSENGER' | translate: {
-                                                    nbPassenger: getNbPassengers(cfarExercise.itinerary)
-                                                } }}
-                                            </span>
-                                            <span class="subtitle" *ngIf="getNbPassengers(cfarExercise.itinerary) > 1">
-                                                {{ 'CFAR_EXERCISE_FLOW.PASSENGERS' | translate: {
-                                                    nbPassenger: getNbPassengers(cfarExercise.itinerary)
-                                                } }}
-                                            </span>
-                                        </div>
-            
-                                        <div class="ml-32">
-                                            <p *ngFor="let passenger of getMapPassengers(cfarExercise.itinerary) | keyvalue">
-                                                <b>{{ ('CFAR_EXERCISE_FLOW.PASSENGER_TYPE.' + passenger?.key?.toUpperCase()) | translate }}</b> : {{ passenger?.value }}
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-            
-                                <mat-divider></mat-divider>
-            
-                                <div class="p-16" ngClass.lt-md="px-16" fxLayout="row wrap" fxLayoutAlign="center center">
-            
-                                    <div fxFlex="100" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px"
-                                        class="mb-16">
-                                        <mat-icon color="accent">monetization_on</mat-icon>
-                                        <span class="subtitle">{{ 'CFAR_EXERCISE_FLOW.REFUND_DETAILS_TITLE' | translate }}</span>
-                                    </div>
-            
-                                    <div fxFlex="100" fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="8px" class="mb-16">
-                                        <p>
-                                            {{ 'CFAR_EXERCISE_FLOW.REFUND_DETAILS' | translate: {
-                                                amount: cfarExercise.cashRefundAllowance | currency:cfarExercise.hopperRefundCurrency:'symbol':undefined:currentLang
-                                            } }}
-                                        </p>
-                                    </div>
-            
-                                    <div fxFlex="100">
-                                        <p class="text-justify">
-                                            {{ 'CFAR_EXERCISE_FLOW.REFUND_WARNING_MESSAGE' | translate: {
-                                                amount: cfarExercise.cashRefundAllowance | currency:cfarExercise.hopperRefundCurrency:'symbol':undefined:currentLang
-                                            } }}
-                                        </p>
-                                    </div>
-            
-                                </div>
-            
-                                <div class="p-16" fxLayoutGap="16px" ngClass.lt-md="px-16" fxFlex="100" fxLayout="row wrap" fxLayoutAlign="center center">
-                                    <button mat-raised-button color="accent" (click)="onSubmitStep1()" ngClass.lt-sm="full-width"
-                                        attr.aria-label="{{ 'CFAR_EXERCISE_FLOW.BUTTON.CONTINUE' | translate }}">
-                                        {{ 'CFAR_EXERCISE_FLOW.BUTTON.CONTINUE' | translate }}
-                                    </button>
-                                </div>
-                            </mat-step>
-                            <!-- / STEP 1 -->
-            
-                            <!-- STEP 2 -->
-                            <mat-step completed="false" editable="false">
-                                <ng-template matStepLabel>{{ 'CFAR_EXERCISE_FLOW.STEP.SECOND' | translate }}</ng-template>
-            
-                                <div class="p-16" ngClass.lt-md="px-16" fxLayout="row wrap" fxLayoutAlign="start center">
-            
-                                    <form [formGroup]="step2Form" class="full-width" fxLayout="column" fxLayoutGap="16px" fxLayoutAlign="center center">             
-                                        <!-- PERSONAL INFORMATION -->
-                                        <fieldset class="full-width p-16" fxLayout="row wrap" fxLayoutAlign="start center">
-                                            <legend class="px-16 py-8">{{ 'CFAR_EXERCISE_FLOW.FORM.PERSONAL_INFORMATION' | translate }}</legend>
-                                            
-                                            <mat-form-field fxFlex="100" appearance="outline">
-                                                <mat-label>{{ 'CFAR_EXERCISE_FLOW.FORM.FIRST_NAME' | translate }}</mat-label>
-                                                <input matInput formControlName="firstName">
-                                                <mat-error *ngIf="step2Form.get('firstName')?.invalid">{{ 'CFAR_EXERCISE_FLOW.FORM.FIRST_NAME_ERROR' | translate }}</mat-error>
-                                            </mat-form-field>
-                
-                                            <mat-form-field fxFlex="100" appearance="outline">
-                                                <mat-label>{{ 'CFAR_EXERCISE_FLOW.FORM.MIDDLE_NAME' | translate }}</mat-label>
-                                                <input matInput formControlName="middleName">
-                                            </mat-form-field>
-                
-                                            <mat-form-field fxFlex="100" appearance="outline">
-                                                <mat-label>{{ 'CFAR_EXERCISE_FLOW.FORM.LAST_NAME' | translate }}</mat-label>
-                                                <input matInput formControlName="lastName">
-                                                <mat-error *ngIf="step2Form.get('lastName')?.invalid">{{ 'CFAR_EXERCISE_FLOW.FORM.LAST_NAME_ERROR' | translate }}</mat-error>
-                                            </mat-form-field>
-                
-                                            <mat-form-field fxFlex="100" appearance="outline" (click)="picker.open()">
-                                                <mat-label>{{ 'CFAR_EXERCISE_FLOW.FORM.DATE_OF_BIRTH' | translate }}</mat-label>
-                                                <input matInput formControlName="dateOfBirth" [matDatepicker]="picker">
-                                                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                                                <mat-datepicker [disabled]="false" #picker></mat-datepicker>
-                                                <mat-error *ngIf="step2Form.get('dateOfBirth')?.invalid">{{ 'CFAR_EXERCISE_FLOW.FORM.DATE_OF_BIRTH_ERROR' | translate }}</mat-error>
-                                            </mat-form-field>
-                                        </fieldset>
-                                        <!-- / PERSONAL INFORMATION -->
-            
-                                        <!-- HOME ADDRESS -->
-                                        <fieldset class="full-width p-16" fxLayout="row wrap" fxLayoutAlign="start center">
-                                            <legend class="px-16 py-8">{{ 'CFAR_EXERCISE_FLOW.FORM.HOME_ADDRESS' | translate }}</legend>
-            
-                                            <mat-form-field fxFlex="100" appearance="outline">
-                                                <mat-label>{{ 'CFAR_EXERCISE_FLOW.FORM.ADDRESS_LINE_1' | translate }}</mat-label>
-                                                <input matInput formControlName="addressLine1" maxlength="100">
-                                                <mat-error *ngIf="step2Form.get('addressLine1')?.invalid">{{ 'CFAR_EXERCISE_FLOW.FORM.ADDRESS_LINE_1_ERROR' | translate }}</mat-error>
-                                            </mat-form-field>
-                
-                                            <mat-form-field fxFlex="100" appearance="outline">
-                                                <mat-label>{{ 'CFAR_EXERCISE_FLOW.FORM.ADDRESS_LINE_2' | translate }}</mat-label>
-                                                <input matInput formControlName="addressLine2" maxlength="100">
-                                            </mat-form-field>
-                
-                                            <div fxFlex="100" fxLayoutGap="16px" fxLayout="row" fxLayout.lt-md="column">
-                                                <mat-form-field fxFlex appearance="outline">
-                                                    <mat-label>{{ 'CFAR_EXERCISE_FLOW.FORM.CITY' | translate }}</mat-label>
-                                                    <input matInput formControlName="city">
-                                                    <mat-error *ngIf="step2Form.get('city')?.invalid">{{ 'CFAR_EXERCISE_FLOW.FORM.CITY_ERROR' | translate }}</mat-error>
-                                                </mat-form-field>
-                    
-                                                <mat-form-field fxFlex appearance="outline">
-                                                    <mat-label>{{ 'CFAR_EXERCISE_FLOW.FORM.COUNTRY' | translate }}</mat-label>
-                                                    <mat-select formControlName="country">
-                                                        <mat-option *ngFor="let c of mapCountries | keyvalue: asIsOrder" [value]="c.key">
-                                                            {{ c.value }}
-                                                        </mat-option>
-                                                    </mat-select>
-                                                    <mat-error *ngIf="step2Form.get('country')?.invalid">{{ 'CFAR_EXERCISE_FLOW.FORM.COUNTRY_ERROR' | translate }}</mat-error>
-                                                </mat-form-field>
-                                            </div>
-                
-                                            <div fxFlex="100" fxLayoutGap="16px" fxLayout="row" fxLayout.lt-md="column">
-                                                <ng-container *ngIf="'US' !== step2Form.get('country')?.value">
-                                                    <mat-form-field fxFlex appearance="outline">
-                                                        <mat-label>{{ 'CFAR_EXERCISE_FLOW.FORM.STATE' | translate }}</mat-label>
-                                                        <input matInput formControlName="state">
-                                                        <mat-error *ngIf="step2Form.get('state')?.invalid">{{ 'CFAR_EXERCISE_FLOW.FORM.STATE_ERROR' | translate }}</mat-error>
-                                                    </mat-form-field>
-                                                </ng-container>
-                            
-                                                <ng-container *ngIf="'US' === step2Form.get('country')?.value">
-                                                    <mat-form-field fxFlex appearance="outline">
-                                                        <mat-label>{{ 'CFAR_EXERCISE_FLOW.FORM.STATE' | translate }}</mat-label>
-                                                        <mat-select formControlName="state">
-                                                            <mat-option *ngFor="let s of mapStates | keyvalue: asIsOrder" [value]="s.key">
-                                                                {{ s.value }}
-                                                            </mat-option>
-                                                        </mat-select>
-                                                        <mat-error *ngIf="step2Form.get('state')?.invalid">{{ 'CFAR_EXERCISE_FLOW.FORM.STATE_ERROR' | translate }}</mat-error>
-                                                    </mat-form-field>
-                                                </ng-container>
-                    
-                                                <mat-form-field fxFlex appearance="outline">
-                                                    <mat-label>{{ 'CFAR_EXERCISE_FLOW.FORM.ZIP' | translate }}</mat-label>
-                                                    <input matInput formControlName="zip">
-                                                    <mat-error *ngIf="step2Form.get('zip')?.invalid">{{ 'CFAR_EXERCISE_FLOW.FORM.ZIP_ERROR' | translate }}</mat-error>
-                                                </mat-form-field>
-                                            </div>
-                                        </fieldset>
-                                        <!-- / HOME ADDRESS -->
-                                    </form>
-                                    
-                                </div>
-            
-                                <div class="p-16" fxLayoutGap="16px" ngClass.lt-md="px-16" fxFlex="100" fxLayout="row" fxLayout.lt-sm="column" fxLayoutAlign="center center">
-                                    <button mat-raised-button color="accent" (click)="onSubmitStep2()" ngClass.lt-sm="full-width" 
-                                        [disabled]="step2Form.invalid || isLoadingHyperwallet" attr.aria-label="{{ 'CFAR_EXERCISE_FLOW.BUTTON.CONTINUE' | translate }}">
-                                        {{ 'CFAR_EXERCISE_FLOW.BUTTON.CONTINUE' | translate }}
-                                    </button>
-                                </div>
-                            </mat-step>
-                            <!-- / STEP 2 -->
-            
-                            <!-- STEP 3 -->
-                            <mat-step completed="false" editable="false">
-                                <ng-template matStepLabel>{{ 'CFAR_EXERCISE_FLOW.STEP.THIRD' | translate }}</ng-template>
-            
-                                <div class="p-16" ngClass.lt-md="px-16" fxLayout="row wrap" fxLayoutAlign="start center">
-                                    
-                                    <div fxFlex="100" *ngIf="isLoadingHyperwallet" class="p-32" ngClass.lt-md="px-16" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="16px">
-                                        <mat-spinner></mat-spinner>
-                                        <p>{{ 'CFAR_EXERCISE_FLOW.LOADING_HYPERWALLET' | translate }}</p>
-                                    </div>
-            
-                                    <div *ngIf="isErrorHyperwallet" fxFlex="100" class="p-32" ngClass.lt-md="p-16" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="16px">
-                                        <span class="error-message p-16" innerHtml="
-                                            {{ 'CFAR_EXERCISE_FLOW.LOADING_HYPERWALLET_ERROR' | translate: {
-                                                link: contactFormUrl
-                                            } }}">
-                                        </span>
-                                    </div>
+        <!-- EXERCISE STEPPER -->
+        <ng-container *ngIf="cfarExercise && isProcessCfarExerciseStep()">
+          <!-- IF THE CONTRACT HAS BEEN REFUNDED -->
+          <ng-container *ngIf="isCfarContractExercised()">
+            <div
+              class="full-width p-32"
+              ngClass.lt-md="p-16"
+              fxLayout="column"
+              fxLayoutAlign="center center"
+              fxLayoutGap="16px"
+            >
+              <span
+                class="information-message p-16"
+                innerHtml="{{
+                  'CFAR_EXERCISE_FLOW.CONTRACT_ALREADY_REFUNDED'
+                    | translate: { link: contactFormUrl }
+                }}"
+              ></span>
+            </div>
+          </ng-container>
+          <!-- / CONTRACT ALREADY REFUNDED -->
 
-                                    <div fxFlex="100" *ngIf="!isLoadingHyperwallet && !isErrorHyperwallet" fxLayout="row" fxLayoutAlign="start center">
-                                        <p innerHtml="{{ 'CFAR_EXERCISE_FLOW.BANK_ACCOUNT_INFO' | translate }}"></p>
-                                    </div>
-            
-                                    <div fxFlex="100">
-                                        <div id="TransferMethodUI"><!-- INJECTED CONTENT --></div>
-                                    </div>
-                                </div>
-                            </mat-step>
-                            <!-- / STEP 3 -->
-            
-                            <!-- STEP 4 -->
-                            <mat-step completed="false" editable="false">
-                                <ng-template matStepLabel>{{ 'CFAR_EXERCISE_FLOW.STEP.FOURTH' | translate }}</ng-template>
-            
-                                <div class="p-16" ngClass.lt-md="px-16" fxLayout="row wrap" fxLayoutAlign="start center">
-                                    <div fxFlex="100" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="16px">
-                                        <mat-icon class="confirmation-icon">checked</mat-icon>
-                                        <p class="title">{{ 'CFAR_EXERCISE_FLOW.CONFIRMATION_MESSAGE_1' | translate }}</p>
-                                        <p>
-                                            {{ 'CFAR_EXERCISE_FLOW.CONFIRMATION_MESSAGE_2' | translate: {
-                                                userEmail: userEmail
-                                            } }}
-                                        </p>
-                                    </div>
-                                </div>
-            
-                                <mat-divider></mat-divider>
-            
-                                <div ngClass.gt-sm="p-16" ngClass.lt-md="py-16" fxLayout="row" fxLayout.lt-sm="column" fxLayoutAlign="start start"
-                                    fxLayoutGap="16px"
-                                >
-                                    <div fxFlex class="itinerary-container pr-16" fxLayout="column" fxLayoutAlign="center start" fxLayoutGap="32px">
-            
-                                        <ng-container *ngFor="let slice of cfarExercise?.itinerary?.slices">
-            
-                                            <div class="full-width" fxLayout="row wrap" fxLayoutAlign="center center" 
-                                                *ngFor="let segment of slice?.segments">
-            
-                                                <div fxFlex="100" class="mb-8">
-                                                    <div fxFlex fxLayoutAlign="center center">
-                                                        {{ segment?.departureDateTime | date: ('COMMON.DATE_FORMAT.HOUR' | translate):'':currentLang }}
-                                                    </div>
-                                                    <div fxFlex fxLayoutAlign="center center"><!-- Let empty --></div>
-                                                    <div fxFlex fxLayoutAlign="center center">
-                                                        {{ segment?.arrivalDateTime | date: ('COMMON.DATE_FORMAT.HOUR' | translate):'':currentLang }}
-                                                    </div>
-                                                </div>
-            
-                                                <div fxFlex="100" class="mb-8">
-                                                    <div fxFlex class="origin-destination" fxLayoutAlign="center center">{{ segment?.originAirport }}</div>
-                                                    <div fxFlex fxLayoutAlign="center center" fxLayoutGap="8px">
-                                                        <div class="decorative-stroke"></div>
-                                                        <mat-icon color="accent" class="flight-icon">flight</mat-icon>
-                                                        <div class="decorative-stroke"></div>
-                                                    </div>
-                                                    <div fxFlex class="origin-destination" fxLayoutAlign="center center">{{ segment?.destinationAirport }}</div>
-                                                </div>
-            
-                                                <div fxFlex="100">
-                                                    <div fxFlex fxLayoutAlign="center center">
-                                                        {{ segment?.departureDateTime | date: ('COMMON.DATE_FORMAT.DATE' | translate):'':currentLang }}
-                                                    </div>
-                                                    <div fxFlex fxLayoutAlign="center center">{{ segment?.flightNumber }}</div>
-                                                    <div fxFlex fxLayoutAlign="center center">
-                                                        {{ segment?.arrivalDateTime | date: ('COMMON.DATE_FORMAT.DATE' | translate):'':currentLang }}
-                                                    </div>
-                                                </div>
-            
-                                            </div>
-            
-                                        </ng-container>
-            
-                                    </div>
-            
-                                    <div fxFlex fxLayout="column" fxLayoutAlign="center start">
-                                        <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px" class="mb-16">
-                                            <mat-icon color="accent">person</mat-icon>
-                                            <span class="subtitle" *ngIf="getNbPassengers(cfarExercise.itinerary) <= 1">
-                                                {{ 'CFAR_EXERCISE_FLOW.PASSENGER' | translate: {
-                                                    nbPassenger: getNbPassengers(cfarExercise.itinerary)
-                                                } }}
-                                            </span>
-                                            <span class="subtitle" *ngIf="getNbPassengers(cfarExercise.itinerary) > 1">
-                                                {{ 'CFAR_EXERCISE_FLOW.PASSENGERS' | translate: {
-                                                    nbPassenger: getNbPassengers(cfarExercise.itinerary)
-                                                } }}
-                                            </span>
-                                        </div>
-            
-                                        <div class="ml-32">
-                                            <p *ngFor="let passenger of getMapPassengers(cfarExercise.itinerary) | keyvalue">
-                                                <b>{{ ('CFAR_EXERCISE_FLOW.PASSENGER_TYPE.' + passenger?.key?.toUpperCase()) | translate }}</b> : {{ passenger?.value }}
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-            
-                                <mat-divider></mat-divider>
-            
-                                <div fxFlex="100" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px" class="my-16">
-                                    <mat-icon color="accent">monetization_on</mat-icon>
-                                    <span class="subtitle">{{ 'CFAR_EXERCISE_FLOW.REFUND_METHOD' | translate }}</span>
-                                </div>
-            
-                                <div fxFlex="100" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px" class="mb-16">
-                                    <p>
-                                        {{ 'CFAR_EXERCISE_FLOW.REFUND_DETAILS' | translate: {
-                                            amount: cfarExercise.cashRefundAllowance | currency:cfarExercise.hopperRefundCurrency:'symbol':undefined:currentLang
-                                        } }}
-                                    </p>
-                                </div>
-                            </mat-step>
-                            <!-- / STEP 4 -->
-                            
-                        </mat-stepper>
+          <ng-container *ngIf="!isCfarContractExercised()">
+            <mat-stepper
+              orientation="vertical"
+              #stepper
+              linear
+              (selectionChange)="stepCompleted.emit()"
+            >
+              <!-- STEP 1 -->
+              <mat-step completed="false" editable="false">
+                <ng-template matStepLabel>{{
+                  'CFAR_EXERCISE_FLOW.STEP.FIRST' | translate
+                }}</ng-template>
 
-                    </ng-container>
+                <div
+                  class="p-16"
+                  fxLayout="row wrap"
+                  fxLayoutAlign="start center"
+                >
+                  <div
+                    fxFlex="100"
+                    fxLayout="row"
+                    fxLayoutAlign="start center"
+                    fxLayoutGap="8px"
+                    class="mb-16"
+                  >
+                    <mat-icon
+                      svgIcon="refundable_ticket"
+                      class="custom-icon"
+                    ></mat-icon>
+                    <span class="title">{{
+                      'CFAR_EXERCISE_FLOW.SUBTITLE' | translate
+                    }}</span>
+                  </div>
 
-                </ng-container>
-                <!-- / EXERCISE STEPPER -->
-        
-            </ng-container>
-        
-            <ng-container *ngIf="isLoading">
-                <div fxFlex="100" class="p-16" fxLayout="column">
-                    <div class="p-16" ngClass.lt-md="px-16" fxLayoutAlign="center center" fxLayoutGap="16px">
-                        <mat-spinner></mat-spinner>
-                    </div>
-                    <div class="p-8" ngClass.lt-md="px-8" fxLayoutAlign="center center" fxLayoutGap="16px">
-                        <p>{{ 'CFAR_EXERCISE_FLOW.LOADING' | translate }}</p>
-                    </div>
+                  <div fxFlex="100">
+                    <p>
+                      {{ 'CFAR_EXERCISE_FLOW.DEADLINE_SENTENCE_1' | translate }}
+                      <b>
+                        {{
+                          cfarExercise.contractExpiryDateTime
+                            | date
+                              : ('COMMON.DATE_FORMAT.HOUR_AND_DATE' | translate)
+                              : ''
+                              : currentLang
+                        }}
+                      </b>
+                    </p>
+                    <p>
+                      {{
+                        'CFAR_EXERCISE_FLOW.DEADLINE_SENTENCE_2'
+                          | translate
+                            : {
+                                amount:
+                                  cfarExercise.cashRefundAllowance
+                                  | currency
+                                    : cfarExercise.hopperRefundCurrency
+                                    : 'symbol'
+                                    : undefined
+                                    : currentLang
+                              }
+                      }}
+                    </p>
+                  </div>
                 </div>
-            </ng-container>
 
+                <mat-divider></mat-divider>
+
+                <div
+                  ngClass.gt-sm="p-16"
+                  ngClass.lt-md="py-16"
+                  fxLayout="row"
+                  fxLayout.lt-sm="column"
+                  fxLayoutAlign="start start"
+                  fxLayoutGap="16px"
+                >
+                  <div
+                    fxFlex
+                    class="itinerary-container pr-16"
+                    fxLayout="column"
+                    fxLayoutAlign="center start"
+                    fxLayoutGap="32px"
+                  >
+                    <ng-container
+                      *ngFor="let slice of cfarExercise?.itinerary?.slices"
+                    >
+                      <div
+                        class="full-width"
+                        fxLayout="row wrap"
+                        fxLayoutAlign="center center"
+                        *ngFor="let segment of slice?.segments"
+                      >
+                        <div fxFlex="100" class="mb-8">
+                          <div fxFlex fxLayoutAlign="center center">
+                            {{
+                              segment?.departureDateTime
+                                | date
+                                  : ('COMMON.DATE_FORMAT.HOUR' | translate)
+                                  : ''
+                                  : currentLang
+                            }}
+                          </div>
+                          <div fxFlex fxLayoutAlign="center center">
+                            <!-- Let empty -->
+                          </div>
+                          <div fxFlex fxLayoutAlign="center center">
+                            {{
+                              segment?.arrivalDateTime
+                                | date
+                                  : ('COMMON.DATE_FORMAT.HOUR' | translate)
+                                  : ''
+                                  : currentLang
+                            }}
+                          </div>
+                        </div>
+
+                        <div fxFlex="100" class="mb-8">
+                          <div
+                            fxFlex
+                            class="origin-destination"
+                            fxLayoutAlign="center center"
+                          >
+                            {{ segment?.originAirport }}
+                          </div>
+                          <div
+                            fxFlex
+                            fxLayoutAlign="center center"
+                            fxLayoutGap="8px"
+                          >
+                            <div class="decorative-stroke"></div>
+                            <mat-icon color="accent" class="flight-icon"
+                              >flight</mat-icon
+                            >
+                            <div class="decorative-stroke"></div>
+                          </div>
+                          <div
+                            fxFlex
+                            class="origin-destination"
+                            fxLayoutAlign="center center"
+                          >
+                            {{ segment?.destinationAirport }}
+                          </div>
+                        </div>
+
+                        <div fxFlex="100">
+                          <div fxFlex fxLayoutAlign="center center">
+                            {{
+                              segment?.departureDateTime
+                                | date
+                                  : ('COMMON.DATE_FORMAT.DATE' | translate)
+                                  : ''
+                                  : currentLang
+                            }}
+                          </div>
+                          <div fxFlex fxLayoutAlign="center center">
+                            {{
+                              segment?.validatingCarrierCode +
+                                '' +
+                                segment?.flightNumber
+                            }}
+                          </div>
+                          <div fxFlex fxLayoutAlign="center center">
+                            {{
+                              segment?.arrivalDateTime
+                                | date
+                                  : ('COMMON.DATE_FORMAT.DATE' | translate)
+                                  : ''
+                                  : currentLang
+                            }}
+                          </div>
+                        </div>
+                      </div>
+                    </ng-container>
+                  </div>
+
+                  <div fxFlex fxLayout="column" fxLayoutAlign="center start">
+                    <div
+                      fxLayout="row"
+                      fxLayoutAlign="start center"
+                      fxLayoutGap="8px"
+                      class="mb-16"
+                    >
+                      <mat-icon color="accent">person</mat-icon>
+                      <span
+                        class="subtitle"
+                        *ngIf="getNbPassengers(cfarExercise.itinerary) <= 1"
+                      >
+                        {{
+                          'CFAR_EXERCISE_FLOW.PASSENGER'
+                            | translate
+                              : {
+                                  nbPassenger: getNbPassengers(
+                                    cfarExercise.itinerary
+                                  )
+                                }
+                        }}
+                      </span>
+                      <span
+                        class="subtitle"
+                        *ngIf="getNbPassengers(cfarExercise.itinerary) > 1"
+                      >
+                        {{
+                          'CFAR_EXERCISE_FLOW.PASSENGERS'
+                            | translate
+                              : {
+                                  nbPassenger: getNbPassengers(
+                                    cfarExercise.itinerary
+                                  )
+                                }
+                        }}
+                      </span>
+                    </div>
+
+                    <div class="ml-32">
+                      <p
+                        *ngFor="
+                          let passenger of getMapPassengers(
+                            cfarExercise.itinerary
+                          ) | keyvalue
+                        "
+                      >
+                        <b>{{
+                          'CFAR_EXERCISE_FLOW.PASSENGER_TYPE.' +
+                            passenger?.key?.toUpperCase() | translate
+                        }}</b>
+                        : {{ passenger?.value }}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <mat-divider></mat-divider>
+
+                <div
+                  class="p-16"
+                  ngClass.lt-md="px-16"
+                  fxLayout="row wrap"
+                  fxLayoutAlign="center center"
+                >
+                  <div
+                    fxFlex="100"
+                    fxLayout="row"
+                    fxLayoutAlign="start center"
+                    fxLayoutGap="8px"
+                    class="mb-16"
+                  >
+                    <mat-icon color="accent">monetization_on</mat-icon>
+                    <span class="subtitle">{{
+                      'CFAR_EXERCISE_FLOW.REFUND_DETAILS_TITLE' | translate
+                    }}</span>
+                  </div>
+
+                  <div
+                    fxFlex="100"
+                    fxLayout="row wrap"
+                    fxLayoutAlign="start center"
+                    fxLayoutGap="8px"
+                    class="mb-16"
+                  >
+                    <p>
+                      {{
+                        'CFAR_EXERCISE_FLOW.REFUND_DETAILS'
+                          | translate
+                            : {
+                                amount:
+                                  cfarExercise.cashRefundAllowance
+                                  | currency
+                                    : cfarExercise.hopperRefundCurrency
+                                    : 'symbol'
+                                    : undefined
+                                    : currentLang
+                              }
+                      }}
+                    </p>
+                  </div>
+
+                  <div fxFlex="100">
+                    <p class="text-justify">
+                      {{
+                        'CFAR_EXERCISE_FLOW.REFUND_WARNING_MESSAGE'
+                          | translate
+                            : {
+                                amount:
+                                  cfarExercise.cashRefundAllowance
+                                  | currency
+                                    : cfarExercise.hopperRefundCurrency
+                                    : 'symbol'
+                                    : undefined
+                                    : currentLang
+                              }
+                      }}
+                    </p>
+                  </div>
+                </div>
+
+                <div
+                  class="p-16"
+                  fxLayoutGap="16px"
+                  ngClass.lt-md="px-16"
+                  fxFlex="100"
+                  fxLayout="row wrap"
+                  fxLayoutAlign="center center"
+                >
+                  <button
+                    mat-raised-button
+                    color="accent"
+                    (click)="onSubmitStep1()"
+                    ngClass.lt-sm="full-width"
+                    attr.aria-label="{{
+                      'CFAR_EXERCISE_FLOW.BUTTON.CONTINUE' | translate
+                    }}"
+                  >
+                    {{ 'CFAR_EXERCISE_FLOW.BUTTON.CONTINUE' | translate }}
+                  </button>
+                </div>
+              </mat-step>
+              <!-- / STEP 1 -->
+
+              <!-- STEP 2 -->
+              <mat-step completed="false" editable="false">
+                <ng-template matStepLabel>{{
+                  'CFAR_EXERCISE_FLOW.STEP.SECOND' | translate
+                }}</ng-template>
+
+                <div
+                  class="p-16"
+                  ngClass.lt-md="px-16"
+                  fxLayout="row wrap"
+                  fxLayoutAlign="start center"
+                >
+                  <form
+                    [formGroup]="step2Form"
+                    class="full-width"
+                    fxLayout="column"
+                    fxLayoutGap="16px"
+                    fxLayoutAlign="center center"
+                  >
+                    <!-- PERSONAL INFORMATION -->
+                    <fieldset
+                      class="full-width p-16"
+                      fxLayout="row wrap"
+                      fxLayoutAlign="start center"
+                    >
+                      <legend class="px-16 py-8">
+                        {{
+                          'CFAR_EXERCISE_FLOW.FORM.PERSONAL_INFORMATION'
+                            | translate
+                        }}
+                      </legend>
+
+                      <mat-form-field fxFlex="100" appearance="outline">
+                        <mat-label>{{
+                          'CFAR_EXERCISE_FLOW.FORM.FIRST_NAME' | translate
+                        }}</mat-label>
+                        <input matInput formControlName="firstName" />
+                        <mat-error
+                          *ngIf="step2Form.get('firstName')?.invalid"
+                          >{{
+                            'CFAR_EXERCISE_FLOW.FORM.FIRST_NAME_ERROR'
+                              | translate
+                          }}</mat-error
+                        >
+                      </mat-form-field>
+
+                      <mat-form-field fxFlex="100" appearance="outline">
+                        <mat-label>{{
+                          'CFAR_EXERCISE_FLOW.FORM.MIDDLE_NAME' | translate
+                        }}</mat-label>
+                        <input matInput formControlName="middleName" />
+                      </mat-form-field>
+
+                      <mat-form-field fxFlex="100" appearance="outline">
+                        <mat-label>{{
+                          'CFAR_EXERCISE_FLOW.FORM.LAST_NAME' | translate
+                        }}</mat-label>
+                        <input matInput formControlName="lastName" />
+                        <mat-error *ngIf="step2Form.get('lastName')?.invalid">{{
+                          'CFAR_EXERCISE_FLOW.FORM.LAST_NAME_ERROR' | translate
+                        }}</mat-error>
+                      </mat-form-field>
+
+                      <mat-form-field
+                        fxFlex="100"
+                        appearance="outline"
+                        (click)="picker.open()"
+                      >
+                        <mat-label>{{
+                          'CFAR_EXERCISE_FLOW.FORM.DATE_OF_BIRTH' | translate
+                        }}</mat-label>
+                        <input
+                          matInput
+                          formControlName="dateOfBirth"
+                          [matDatepicker]="picker"
+                        />
+                        <mat-datepicker-toggle
+                          matSuffix
+                          [for]="picker"
+                        ></mat-datepicker-toggle>
+                        <mat-datepicker
+                          [disabled]="false"
+                          #picker
+                        ></mat-datepicker>
+                        <mat-error
+                          *ngIf="step2Form.get('dateOfBirth')?.invalid"
+                          >{{
+                            'CFAR_EXERCISE_FLOW.FORM.DATE_OF_BIRTH_ERROR'
+                              | translate
+                          }}</mat-error
+                        >
+                      </mat-form-field>
+                    </fieldset>
+                    <!-- / PERSONAL INFORMATION -->
+
+                    <!-- HOME ADDRESS -->
+                    <fieldset
+                      class="full-width p-16"
+                      fxLayout="row wrap"
+                      fxLayoutAlign="start center"
+                    >
+                      <legend class="px-16 py-8">
+                        {{ 'CFAR_EXERCISE_FLOW.FORM.HOME_ADDRESS' | translate }}
+                      </legend>
+
+                      <mat-form-field fxFlex="100" appearance="outline">
+                        <mat-label>{{
+                          'CFAR_EXERCISE_FLOW.FORM.ADDRESS_LINE_1' | translate
+                        }}</mat-label>
+                        <input
+                          matInput
+                          formControlName="addressLine1"
+                          maxlength="100"
+                        />
+                        <mat-error
+                          *ngIf="step2Form.get('addressLine1')?.invalid"
+                          >{{
+                            'CFAR_EXERCISE_FLOW.FORM.ADDRESS_LINE_1_ERROR'
+                              | translate
+                          }}</mat-error
+                        >
+                      </mat-form-field>
+
+                      <mat-form-field fxFlex="100" appearance="outline">
+                        <mat-label>{{
+                          'CFAR_EXERCISE_FLOW.FORM.ADDRESS_LINE_2' | translate
+                        }}</mat-label>
+                        <input
+                          matInput
+                          formControlName="addressLine2"
+                          maxlength="100"
+                        />
+                      </mat-form-field>
+
+                      <div
+                        fxFlex="100"
+                        fxLayoutGap="16px"
+                        fxLayout="row"
+                        fxLayout.lt-md="column"
+                      >
+                        <mat-form-field fxFlex appearance="outline">
+                          <mat-label>{{
+                            'CFAR_EXERCISE_FLOW.FORM.CITY' | translate
+                          }}</mat-label>
+                          <input matInput formControlName="city" />
+                          <mat-error *ngIf="step2Form.get('city')?.invalid">{{
+                            'CFAR_EXERCISE_FLOW.FORM.CITY_ERROR' | translate
+                          }}</mat-error>
+                        </mat-form-field>
+
+                        <mat-form-field fxFlex appearance="outline">
+                          <mat-label>{{
+                            'CFAR_EXERCISE_FLOW.FORM.COUNTRY' | translate
+                          }}</mat-label>
+                          <mat-select formControlName="country">
+                            <mat-option
+                              *ngFor="
+                                let c of mapCountries | keyvalue: asIsOrder
+                              "
+                              [value]="c.key"
+                            >
+                              {{ c.value }}
+                            </mat-option>
+                          </mat-select>
+                          <mat-error
+                            *ngIf="step2Form.get('country')?.invalid"
+                            >{{
+                              'CFAR_EXERCISE_FLOW.FORM.COUNTRY_ERROR'
+                                | translate
+                            }}</mat-error
+                          >
+                        </mat-form-field>
+                      </div>
+
+                      <div
+                        fxFlex="100"
+                        fxLayoutGap="16px"
+                        fxLayout="row"
+                        fxLayout.lt-md="column"
+                      >
+                        <ng-container
+                          *ngIf="'US' !== step2Form.get('country')?.value"
+                        >
+                          <mat-form-field fxFlex appearance="outline">
+                            <mat-label>{{
+                              'CFAR_EXERCISE_FLOW.FORM.STATE' | translate
+                            }}</mat-label>
+                            <input matInput formControlName="state" />
+                            <mat-error
+                              *ngIf="step2Form.get('state')?.invalid"
+                              >{{
+                                'CFAR_EXERCISE_FLOW.FORM.STATE_ERROR'
+                                  | translate
+                              }}</mat-error
+                            >
+                          </mat-form-field>
+                        </ng-container>
+
+                        <ng-container
+                          *ngIf="'US' === step2Form.get('country')?.value"
+                        >
+                          <mat-form-field fxFlex appearance="outline">
+                            <mat-label>{{
+                              'CFAR_EXERCISE_FLOW.FORM.STATE' | translate
+                            }}</mat-label>
+                            <mat-select formControlName="state">
+                              <mat-option
+                                *ngFor="
+                                  let s of mapStates | keyvalue: asIsOrder
+                                "
+                                [value]="s.key"
+                              >
+                                {{ s.value }}
+                              </mat-option>
+                            </mat-select>
+                            <mat-error
+                              *ngIf="step2Form.get('state')?.invalid"
+                              >{{
+                                'CFAR_EXERCISE_FLOW.FORM.STATE_ERROR'
+                                  | translate
+                              }}</mat-error
+                            >
+                          </mat-form-field>
+                        </ng-container>
+
+                        <mat-form-field fxFlex appearance="outline">
+                          <mat-label>{{
+                            'CFAR_EXERCISE_FLOW.FORM.ZIP' | translate
+                          }}</mat-label>
+                          <input matInput formControlName="zip" />
+                          <mat-error *ngIf="step2Form.get('zip')?.invalid">{{
+                            'CFAR_EXERCISE_FLOW.FORM.ZIP_ERROR' | translate
+                          }}</mat-error>
+                        </mat-form-field>
+                      </div>
+                    </fieldset>
+                    <!-- / HOME ADDRESS -->
+                  </form>
+                </div>
+
+                <div
+                  class="p-16"
+                  fxLayoutGap="16px"
+                  ngClass.lt-md="px-16"
+                  fxFlex="100"
+                  fxLayout="row"
+                  fxLayout.lt-sm="column"
+                  fxLayoutAlign="center center"
+                >
+                  <button
+                    mat-raised-button
+                    color="accent"
+                    (click)="onSubmitStep2()"
+                    ngClass.lt-sm="full-width"
+                    [disabled]="step2Form.invalid || isLoadingHyperwallet"
+                    attr.aria-label="{{
+                      'CFAR_EXERCISE_FLOW.BUTTON.CONTINUE' | translate
+                    }}"
+                  >
+                    {{ 'CFAR_EXERCISE_FLOW.BUTTON.CONTINUE' | translate }}
+                  </button>
+                </div>
+              </mat-step>
+              <!-- / STEP 2 -->
+
+              <!-- STEP 3 -->
+              <mat-step completed="false" editable="false">
+                <ng-template matStepLabel>{{
+                  'CFAR_EXERCISE_FLOW.STEP.THIRD' | translate
+                }}</ng-template>
+
+                <div
+                  class="p-16"
+                  ngClass.lt-md="px-16"
+                  fxLayout="row wrap"
+                  fxLayoutAlign="start center"
+                >
+                  <div
+                    fxFlex="100"
+                    *ngIf="isLoadingHyperwallet"
+                    class="p-32"
+                    ngClass.lt-md="px-16"
+                    fxLayout="column"
+                    fxLayoutAlign="center center"
+                    fxLayoutGap="16px"
+                  >
+                    <mat-spinner></mat-spinner>
+                    <p>
+                      {{ 'CFAR_EXERCISE_FLOW.LOADING_HYPERWALLET' | translate }}
+                    </p>
+                  </div>
+
+                  <div
+                    *ngIf="isErrorHyperwallet"
+                    fxFlex="100"
+                    class="p-32"
+                    ngClass.lt-md="p-16"
+                    fxLayout="column"
+                    fxLayoutAlign="center center"
+                    fxLayoutGap="16px"
+                  >
+                    <span
+                      class="error-message p-16"
+                      innerHtml="
+                                            {{
+                        'CFAR_EXERCISE_FLOW.LOADING_HYPERWALLET_ERROR'
+                          | translate
+                            : {
+                                link: contactFormUrl
+                              }
+                      }}"
+                    >
+                    </span>
+                  </div>
+
+                  <div
+                    fxFlex="100"
+                    *ngIf="!isLoadingHyperwallet && !isErrorHyperwallet"
+                    fxLayout="row"
+                    fxLayoutAlign="start center"
+                  >
+                    <p
+                      innerHtml="{{
+                        'CFAR_EXERCISE_FLOW.BANK_ACCOUNT_INFO' | translate
+                      }}"
+                    ></p>
+                  </div>
+
+                  <div fxFlex="100">
+                    <div id="TransferMethodUI"><!-- INJECTED CONTENT --></div>
+                  </div>
+                </div>
+              </mat-step>
+              <!-- / STEP 3 -->
+
+              <!-- STEP 4 -->
+              <mat-step completed="false" editable="false">
+                <ng-template matStepLabel>{{
+                  'CFAR_EXERCISE_FLOW.STEP.FOURTH' | translate
+                }}</ng-template>
+
+                <div
+                  class="p-16"
+                  ngClass.lt-md="px-16"
+                  fxLayout="row wrap"
+                  fxLayoutAlign="start center"
+                >
+                  <div
+                    fxFlex="100"
+                    fxLayout="column"
+                    fxLayoutAlign="center center"
+                    fxLayoutGap="16px"
+                  >
+                    <mat-icon class="confirmation-icon">checked</mat-icon>
+                    <p class="title">
+                      {{
+                        'CFAR_EXERCISE_FLOW.CONFIRMATION_MESSAGE_1' | translate
+                      }}
+                    </p>
+                    <p>
+                      {{
+                        'CFAR_EXERCISE_FLOW.CONFIRMATION_MESSAGE_2'
+                          | translate
+                            : {
+                                userEmail: userEmail
+                              }
+                      }}
+                    </p>
+                  </div>
+                </div>
+
+                <mat-divider></mat-divider>
+
+                <div
+                  ngClass.gt-sm="p-16"
+                  ngClass.lt-md="py-16"
+                  fxLayout="row"
+                  fxLayout.lt-sm="column"
+                  fxLayoutAlign="start start"
+                  fxLayoutGap="16px"
+                >
+                  <div
+                    fxFlex
+                    class="itinerary-container pr-16"
+                    fxLayout="column"
+                    fxLayoutAlign="center start"
+                    fxLayoutGap="32px"
+                  >
+                    <ng-container
+                      *ngFor="let slice of cfarExercise?.itinerary?.slices"
+                    >
+                      <div
+                        class="full-width"
+                        fxLayout="row wrap"
+                        fxLayoutAlign="center center"
+                        *ngFor="let segment of slice?.segments"
+                      >
+                        <div fxFlex="100" class="mb-8">
+                          <div fxFlex fxLayoutAlign="center center">
+                            {{
+                              segment?.departureDateTime
+                                | date
+                                  : ('COMMON.DATE_FORMAT.HOUR' | translate)
+                                  : ''
+                                  : currentLang
+                            }}
+                          </div>
+                          <div fxFlex fxLayoutAlign="center center">
+                            <!-- Let empty -->
+                          </div>
+                          <div fxFlex fxLayoutAlign="center center">
+                            {{
+                              segment?.arrivalDateTime
+                                | date
+                                  : ('COMMON.DATE_FORMAT.HOUR' | translate)
+                                  : ''
+                                  : currentLang
+                            }}
+                          </div>
+                        </div>
+
+                        <div fxFlex="100" class="mb-8">
+                          <div
+                            fxFlex
+                            class="origin-destination"
+                            fxLayoutAlign="center center"
+                          >
+                            {{ segment?.originAirport }}
+                          </div>
+                          <div
+                            fxFlex
+                            fxLayoutAlign="center center"
+                            fxLayoutGap="8px"
+                          >
+                            <div class="decorative-stroke"></div>
+                            <mat-icon color="accent" class="flight-icon"
+                              >flight</mat-icon
+                            >
+                            <div class="decorative-stroke"></div>
+                          </div>
+                          <div
+                            fxFlex
+                            class="origin-destination"
+                            fxLayoutAlign="center center"
+                          >
+                            {{ segment?.destinationAirport }}
+                          </div>
+                        </div>
+
+                        <div fxFlex="100">
+                          <div fxFlex fxLayoutAlign="center center">
+                            {{
+                              segment?.departureDateTime
+                                | date
+                                  : ('COMMON.DATE_FORMAT.DATE' | translate)
+                                  : ''
+                                  : currentLang
+                            }}
+                          </div>
+                          <div fxFlex fxLayoutAlign="center center">
+                            {{ segment?.flightNumber }}
+                          </div>
+                          <div fxFlex fxLayoutAlign="center center">
+                            {{
+                              segment?.arrivalDateTime
+                                | date
+                                  : ('COMMON.DATE_FORMAT.DATE' | translate)
+                                  : ''
+                                  : currentLang
+                            }}
+                          </div>
+                        </div>
+                      </div>
+                    </ng-container>
+                  </div>
+
+                  <div fxFlex fxLayout="column" fxLayoutAlign="center start">
+                    <div
+                      fxLayout="row"
+                      fxLayoutAlign="start center"
+                      fxLayoutGap="8px"
+                      class="mb-16"
+                    >
+                      <mat-icon color="accent">person</mat-icon>
+                      <span
+                        class="subtitle"
+                        *ngIf="getNbPassengers(cfarExercise.itinerary) <= 1"
+                      >
+                        {{
+                          'CFAR_EXERCISE_FLOW.PASSENGER'
+                            | translate
+                              : {
+                                  nbPassenger: getNbPassengers(
+                                    cfarExercise.itinerary
+                                  )
+                                }
+                        }}
+                      </span>
+                      <span
+                        class="subtitle"
+                        *ngIf="getNbPassengers(cfarExercise.itinerary) > 1"
+                      >
+                        {{
+                          'CFAR_EXERCISE_FLOW.PASSENGERS'
+                            | translate
+                              : {
+                                  nbPassenger: getNbPassengers(
+                                    cfarExercise.itinerary
+                                  )
+                                }
+                        }}
+                      </span>
+                    </div>
+
+                    <div class="ml-32">
+                      <p
+                        *ngFor="
+                          let passenger of getMapPassengers(
+                            cfarExercise.itinerary
+                          ) | keyvalue
+                        "
+                      >
+                        <b>{{
+                          'CFAR_EXERCISE_FLOW.PASSENGER_TYPE.' +
+                            passenger?.key?.toUpperCase() | translate
+                        }}</b>
+                        : {{ passenger?.value }}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <mat-divider></mat-divider>
+
+                <div
+                  fxFlex="100"
+                  fxLayout="row"
+                  fxLayoutAlign="start center"
+                  fxLayoutGap="8px"
+                  class="my-16"
+                >
+                  <mat-icon color="accent">monetization_on</mat-icon>
+                  <span class="subtitle">{{
+                    'CFAR_EXERCISE_FLOW.REFUND_METHOD' | translate
+                  }}</span>
+                </div>
+
+                <div
+                  fxFlex="100"
+                  fxLayout="row"
+                  fxLayoutAlign="start center"
+                  fxLayoutGap="8px"
+                  class="mb-16"
+                >
+                  <p>
+                    {{
+                      'CFAR_EXERCISE_FLOW.REFUND_DETAILS'
+                        | translate
+                          : {
+                              amount:
+                                cfarExercise.cashRefundAllowance
+                                | currency
+                                  : cfarExercise.hopperRefundCurrency
+                                  : 'symbol'
+                                  : undefined
+                                  : currentLang
+                            }
+                    }}
+                  </p>
+                </div>
+              </mat-step>
+              <!-- / STEP 4 -->
+            </mat-stepper>
+          </ng-container>
+        </ng-container>
+        <!-- / EXERCISE STEPPER -->
+      </ng-container>
+
+      <ng-container *ngIf="isLoading">
+        <div fxFlex="100" class="p-16" fxLayout="column">
+          <div
+            class="p-16"
+            ngClass.lt-md="px-16"
+            fxLayoutAlign="center center"
+            fxLayoutGap="16px"
+          >
+            <mat-spinner></mat-spinner>
+          </div>
+          <div
+            class="p-8"
+            ngClass.lt-md="px-8"
+            fxLayoutAlign="center center"
+            fxLayoutGap="16px"
+          >
+            <p>{{ 'CFAR_EXERCISE_FLOW.LOADING' | translate }}</p>
+          </div>
         </div>
-        
-    </mat-card>
-    
+      </ng-container>
+    </div>
+  </mat-card>
 </div>

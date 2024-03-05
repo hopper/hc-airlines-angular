@@ -1,12 +1,11 @@
-import { HttpClient } from "@angular/common/http";
-import { ErrorHandler } from "@angular/core";
-import { CustomerService } from "../apis/hopper-cloud-airline/v1";
+import { HttpClient } from '@angular/common/http';
+import { ErrorHandler } from '@angular/core';
+import { CustomerService } from '../apis/hopper-cloud-airline/v1';
 
 export class HopperProxyService extends ErrorHandler {
-
   constructor(
     protected _httpClient: HttpClient,
-    protected _customerService: CustomerService
+    protected _customerService: CustomerService,
   ) {
     super();
   }
@@ -14,20 +13,27 @@ export class HopperProxyService extends ErrorHandler {
   // ----------------------------------------------------------
   // PROTECTED METHODS
   // ----------------------------------------------------------
-  
-  protected _overrideConfiguration(basePath: string, hcSessionId?: string): void {
+
+  protected _overrideConfiguration(
+    basePath: string,
+    hcSessionId?: string,
+  ): void {
     if (hcSessionId !== undefined) {
       this._customerService = new CustomerService(this._httpClient, basePath, {
-        selectHeaderAccept: (accepts: ['application/json']) => 'application/json',
-        selectHeaderContentType: (contentsTypes: ['application/json']) => 'application/json',
+        selectHeaderAccept: (accepts: ['application/json']) =>
+          'application/json',
+        selectHeaderContentType: (contentsTypes: ['application/json']) =>
+          'application/json',
         isJsonMime: (mime: 'application/json') => true,
-        apiKeys: {"HC-Session-ID": hcSessionId}
+        apiKeys: { 'HC-Session-ID': hcSessionId },
       });
     } else {
       this._customerService = new CustomerService(this._httpClient, basePath, {
-        selectHeaderAccept: (accepts: ['application/json']) => 'application/json',
-        selectHeaderContentType: (contentsTypes: ['application/json']) => 'application/json',
-        isJsonMime: (mime: 'application/json') => true
+        selectHeaderAccept: (accepts: ['application/json']) =>
+          'application/json',
+        selectHeaderContentType: (contentsTypes: ['application/json']) =>
+          'application/json',
+        isJsonMime: (mime: 'application/json') => true,
       });
     }
   }

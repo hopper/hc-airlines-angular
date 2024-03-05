@@ -33,7 +33,7 @@ $light-blue-primary-palette: (
     A200: $dark-primary-text,
     A400: $light-primary-text,
     A700: $light-primary-text,
-  )
+  ),
 );
 
 $light-blue-accent-palette: (
@@ -66,17 +66,29 @@ $light-blue-accent-palette: (
     A200: $dark-primary-text,
     A400: $light-primary-text,
     A700: $light-primary-text,
-  )
+  ),
 );
 
-$light-blue-primary: mat.define-palette($light-blue-primary-palette, 500, 300, 700);
-$light-blue-accent: mat.define-palette($light-blue-accent-palette, 500, 300, 700);
+$light-blue-primary: mat.define-palette(
+  $light-blue-primary-palette,
+  500,
+  300,
+  700
+);
+$light-blue-accent: mat.define-palette(
+  $light-blue-accent-palette,
+  500,
+  300,
+  700
+);
 $light-blue-warn: mat.define-palette(mat.$red-palette);
 
-$light-blue-theme: mat.define-light-theme((
-  color: (
-    primary: $light-blue-primary,
-    accent: $light-blue-accent,
-    warn: $light-blue-warn,
+$light-blue-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $light-blue-primary,
+      accent: $light-blue-accent,
+      warn: $light-blue-warn,
+    ),
   )
-));
+);

@@ -1,13 +1,40 @@
-import { ChangeDetectorRef, Component, EventEmitter, HostListener, Input, OnInit, Output, ViewChild } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  EventEmitter,
+  HostListener,
+  Input,
+  OnInit,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import { take } from 'rxjs/operators';
-import { CfarStatus, CfarItinerary, CheckCfarContractExerciceVerificationCodeResponse, CheckCfarContractExerciseVerificationCodeRequest, CreateRefundAuthorizationRequest, CreateRefundRecipientRequest, InitiateRefundRequest, RefundAuthorization, RefundRecipient, GetCfarExerciseCustomerResponse, InitiateRefundResponse, ExerciseStepResult } from '../../apis/hopper-cloud-airline/v1';
+import {
+  CfarStatus,
+  CfarItinerary,
+  CheckCfarContractExerciceVerificationCodeResponse,
+  CheckCfarContractExerciseVerificationCodeRequest,
+  CreateRefundAuthorizationRequest,
+  CreateRefundRecipientRequest,
+  InitiateRefundRequest,
+  RefundAuthorization,
+  RefundRecipient,
+  GetCfarExerciseCustomerResponse,
+  InitiateRefundResponse,
+  ExerciseStepResult,
+} from '../../apis/hopper-cloud-airline/v1';
 import { GlobalEventComponent } from '../global-event.component';
 import { TranslateService } from '@ngx-translate/core';
-import { DateAdapter } from "@angular/material/core";
+import { DateAdapter } from '@angular/material/core';
 import { ApiTranslatorUtils } from '../../utils/api-translator.utils';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
-import { UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
+import {
+  UntypedFormBuilder,
+  UntypedFormControl,
+  UntypedFormGroup,
+  Validators,
+} from '@angular/forms';
 import { MatStepper } from '@angular/material/stepper';
 import { DatePipe } from '@angular/common';
 import { SendCfarContractExerciceVerificationCodeResponse } from '../../apis/hopper-cloud-airline/v1';
@@ -19,10 +46,12 @@ import { ErrorCode, ExerciseActionStep } from '../../enums';
 @Component({
   selector: 'hopper-cfar-exercise-flow',
   templateUrl: './cfar-exercise-flow.component.html',
-  styleUrls: ['./cfar-exercise-flow.component.scss']
+  styleUrls: ['./cfar-exercise-flow.component.scss'],
 })
-export class CfarExerciseFlowComponent extends GlobalEventComponent implements OnInit {
-
+export class CfarExerciseFlowComponent
+  extends GlobalEventComponent
+  implements OnInit
+{
   public selectedRefundMethod?: 'ftc' | 'cash';
   public cfarExercise!: GetCfarExerciseCustomerResponse;
   public isLoading!: boolean;
@@ -46,7 +75,8 @@ export class CfarExerciseFlowComponent extends GlobalEventComponent implements O
   @Output() stepCompleted = new EventEmitter();
 
   // Fake values
-  private _fakeVerificationTokenId: string = "1ed2d2bb-8885-67a4-968f-81c642e12735";
+  private _fakeVerificationTokenId: string =
+    '1ed2d2bb-8885-67a4-968f-81c642e12735';
   private _minLengthVerificationCode: number = 6;
 
   // Forms
@@ -67,14 +97,20 @@ export class CfarExerciseFlowComponent extends GlobalEventComponent implements O
     private _formBuilder: UntypedFormBuilder,
     private _datePipe: DatePipe,
   ) {
-    super(_adapter, _translateService, _hopperEventService, _cdRef, _loggerService);
+    super(
+      _adapter,
+      _translateService,
+      _hopperEventService,
+      _cdRef,
+      _loggerService,
+    );
 
     // Create material icon for refundable ticket
     this._matIconRegistry.addSvgIcon(
-      "refundable_ticket",
+      'refundable_ticket',
       this._domSanitizer.bypassSecurityTrustResourceUrl(
-        (this.imageBasePath || '') + "assets/refundable-ticket.svg"
-      )
+        (this.imageBasePath || '') + 'assets/refundable-ticket.svg',
+      ),
     );
   }
 
@@ -102,8 +138,10 @@ export class CfarExerciseFlowComponent extends GlobalEventComponent implements O
     let nbPassengers = 0;
 
     if (itinerary && itinerary?.passengerPricing) {
-      itinerary.passengerPricing.forEach(pp => nbPassengers += pp.passengerCount.count);
-    } 
+      itinerary.passengerPricing.forEach(
+        (pp) => (nbPassengers += pp.passengerCount.count),
+      );
+    }
 
     return nbPassengers;
   }
@@ -111,11 +149,14 @@ export class CfarExerciseFlowComponent extends GlobalEventComponent implements O
   public getMapPassengers(itinerary: CfarItinerary): Map<string, number> {
     const mapPassengers = new Map<string, number>();
 
-    itinerary.passengerPricing.forEach(pp => {
+    itinerary.passengerPricing.forEach((pp) => {
       const passengerType = pp.passengerCount.type;
       const passengerCount = pp.passengerCount.count;
 
-      mapPassengers.set(passengerType, passengerCount + (mapPassengers.get(passengerType) || 0));
+      mapPassengers.set(
+        passengerType,
+        passengerCount + (mapPassengers.get(passengerType) || 0),
+      );
     });
 
     return mapPassengers;
@@ -145,7 +186,7 @@ export class CfarExerciseFlowComponent extends GlobalEventComponent implements O
 
       setTimeout(() => {
         this.isLoadingHyperwallet = false;
-        this.userEmail = "sample@hopper.com";
+        this.userEmail = 'sample@hopper.com';
 
         // Go to the next step
         this._validCurrentStep();
@@ -155,12 +196,21 @@ export class CfarExerciseFlowComponent extends GlobalEventComponent implements O
       }, 2000);
     } else {
       this._hopperCfarService
-        .postRefundRecipients(this.basePath, this.hCSessionId, this._verificationCode, ApiTranslatorUtils.modelToSnakeCase(this._buildCreateRefundRecipientRequest()))
+        .postRefundRecipients(
+          this.basePath,
+          this.hCSessionId,
+          this._verificationCode,
+          ApiTranslatorUtils.modelToSnakeCase(
+            this._buildCreateRefundRecipientRequest(),
+          ),
+        )
         .pipe(take(1))
         .subscribe({
           next: (refundRecipient: RefundRecipient) => {
             // Events management
-            this.createCfarExerciseCustomerDataCompleteEvent(ExerciseStepResult.Success)
+            this.createCfarExerciseCustomerDataCompleteEvent(
+              ExerciseStepResult.Success,
+            );
 
             // this.isValidStep2 = true;
 
@@ -168,40 +218,54 @@ export class CfarExerciseFlowComponent extends GlobalEventComponent implements O
               // Go to the next step
               this._validCurrentStep();
             }, 0);
-            
+
             const userId = refundRecipient.id;
-            const url = this.hyperwalletUrl + userId + "/" + this.currentLang + ".v2_4_5.min.js";
+            const url =
+              this.hyperwalletUrl +
+              userId +
+              '/' +
+              this.currentLang +
+              '.v2_4_5.min.js';
             // const url = this.hyperwalletUrl + userId + "/" + this.currentLang + ".min.js";
             const mainScript = document.createElement('script');
-  
+
             mainScript.type = 'text/javascript';
             mainScript.async = true;
             mainScript.src = url;
             mainScript.onerror = (error) => {
               // Events management
-              this.createCfarExercisePortalCompleteEvent(ExerciseStepResult.TechnicalError);
+              this.createCfarExercisePortalCompleteEvent(
+                ExerciseStepResult.TechnicalError,
+              );
 
               // Datadog event
-              this._loggerService.error(`[Cfar Exercise Flow] - onSubmitStep2 / postRefundRecipients - error: ${error}`);
+              this._loggerService.error(
+                `[Cfar Exercise Flow] - onSubmitStep2 / postRefundRecipients - error: ${error}`,
+              );
 
               this.isLoadingHyperwallet = false;
               this.isErrorHyperwallet = true;
-            }
+            };
             mainScript.onload = () => {
               const request: CreateRefundAuthorizationRequest = {
-                userId: userId
+                userId: userId,
               };
-          
+
               this._hopperCfarService
-                .postRefundAuthorizations(this.basePath, this.hCSessionId, this._verificationCode, ApiTranslatorUtils.modelToSnakeCase(request))
+                .postRefundAuthorizations(
+                  this.basePath,
+                  this.hCSessionId,
+                  this._verificationCode,
+                  ApiTranslatorUtils.modelToSnakeCase(request),
+                )
                 .pipe(take(1))
                 .subscribe({
                   next: (authorization: RefundAuthorization) => {
                     const script = document.createElement('script');
-                      
+
                     script.type = 'text/javascript';
                     script.async = false;
-                    script.innerHTML =  `
+                    script.innerHTML = `
                       window.HWWidgets.initialize((onSuccess, onFailure) => {
                         onSuccess("${authorization.token}");
                       });
@@ -225,95 +289,118 @@ export class CfarExerciseFlowComponent extends GlobalEventComponent implements O
                         }
                       });
                     `;
-            
+
                     document.body.appendChild(script);
                     this.isLoadingHyperwallet = false;
-              
+
                     // Events management
-                    this.createCfarExercisePortalCompleteEvent(ExerciseStepResult.Success)
+                    this.createCfarExercisePortalCompleteEvent(
+                      ExerciseStepResult.Success,
+                    );
                   },
                   error: (error: any) => {
-                    this.handleApiError(error, "exercise")
+                    this.handleApiError(error, 'exercise');
 
                     this.isLoadingHyperwallet = false;
                     this.isErrorHyperwallet = true;
-              
+
                     // Events management
-                    this.createCfarExercisePortalCompleteEvent(ExerciseStepResult.TechnicalError);
-                    
-                    this._loggerService.error(`[Cfar Exercise Flow] - onSubmitStep2 / postRefundAuthorizations - error: ${error}`);
+                    this.createCfarExercisePortalCompleteEvent(
+                      ExerciseStepResult.TechnicalError,
+                    );
+
+                    this._loggerService.error(
+                      `[Cfar Exercise Flow] - onSubmitStep2 / postRefundAuthorizations - error: ${error}`,
+                    );
 
                     // Scroll on the error message
                     this.stepCompleted.emit(this._errorTimer);
-                  }
-              });
+                  },
+                });
             };
-  
+
             document.head.appendChild(mainScript);
           },
           error: (error: any) => {
-            this.handleApiError(error, "exercise")
-  
+            this.handleApiError(error, 'exercise');
+
             this.isLoadingHyperwallet = false;
             this.isErrorHyperwallet = true;
 
             // Events management
-            this.createCfarExerciseCustomerDataCompleteEvent(ExerciseStepResult.Failure)
-  
+            this.createCfarExerciseCustomerDataCompleteEvent(
+              ExerciseStepResult.Failure,
+            );
+
             // Scroll on the error message
             this.stepCompleted.emit(this._errorTimer);
-          }
+          },
         });
     }
   }
 
-  @HostListener('window:hopper-hyperwallet', ['$event']) 
+  @HostListener('window:hopper-hyperwallet', ['$event'])
   public checkHyperwalletCallback(event: CustomEvent): void {
     this._purgeErrorContext();
 
     // this.isValidHyperwalletSubmit = true;
 
     const request: InitiateRefundRequest = {
-      transferMethodId: event.detail.trmObject.token
+      transferMethodId: event.detail.trmObject.token,
     };
 
     this._hopperCfarService
-      .postInitiateRefund(this.basePath, this.hCSessionId, this._verificationCode, ApiTranslatorUtils.modelToSnakeCase(request))
+      .postInitiateRefund(
+        this.basePath,
+        this.hCSessionId,
+        this._verificationCode,
+        ApiTranslatorUtils.modelToSnakeCase(request),
+      )
       .pipe(take(1))
       .subscribe({
         next: (initiateRefundResponse: InitiateRefundResponse) => {
-          const result = ApiTranslatorUtils.modelToCamelCase(initiateRefundResponse) as InitiateRefundResponse;
+          const result = ApiTranslatorUtils.modelToCamelCase(
+            initiateRefundResponse,
+          ) as InitiateRefundResponse;
           const redirectionToken = result.redirectionToken;
 
           this.isLoadingHyperwallet = false;
           this.userEmail = event.detail.trmObject.email;
-          
+
           // Go to the next step
           this._validCurrentStep();
 
           // Events management
           if (redirectionToken !== null && redirectionToken.length > 0) {
-            this.createCfarExerciseCallbackLaunchedEvent(ExerciseStepResult.Success)
+            this.createCfarExerciseCallbackLaunchedEvent(
+              ExerciseStepResult.Success,
+            );
           } else {
-            this.createCfarExerciseCallbackLaunchedEvent(ExerciseStepResult.Failure)
+            this.createCfarExerciseCallbackLaunchedEvent(
+              ExerciseStepResult.Failure,
+            );
           }
 
           // The flow is completed
           this.flowCompleted.emit(redirectionToken);
         },
         error: (error) => {
-          this.handleApiError(error, "exercise")
-          
+          this.handleApiError(error, 'exercise');
+
           this.isLoadingHyperwallet = false;
 
           // Events management
-          this.createCfarExercisePortalCompleteEvent(ExerciseStepResult.TechnicalError);
+          this.createCfarExercisePortalCompleteEvent(
+            ExerciseStepResult.TechnicalError,
+          );
 
-          this._loggerService.error(`[Cfar Exercise Flow] - checkHyperwalletCallback - error: ${error}`);
+          this._loggerService.error(
+            `[Cfar Exercise Flow] - checkHyperwalletCallback - error: ${error}`,
+          );
 
           // Scroll on the error message
           this.stepCompleted.emit(this._errorTimer);
-        }
+        },
       });
   }
 
@@ -326,7 +413,9 @@ export class CfarExerciseFlowComponent extends GlobalEventComponent implements O
   }
 
   public isProcessCfarExerciseStep(): Boolean {
-    return this._navigationStep === ExerciseActionStep.PROCESS_CFAR_EXERCISE_STEP;
+    return (
+      this._navigationStep === ExerciseActionStep.PROCESS_CFAR_EXERCISE_STEP
+    );
   }
 
   public isCheckVerificationCodeFormValid(): boolean {
@@ -334,24 +423,35 @@ export class CfarExerciseFlowComponent extends GlobalEventComponent implements O
   }
 
   public isCfarContractExercised(): boolean {
-    return this.cfarExercise ? this.cfarExercise.status === CfarStatus.Confirmed : false;
+    return this.cfarExercise
+      ? this.cfarExercise.status === CfarStatus.Confirmed
+      : false;
   }
 
   public onSendVerificationCode(): void {
     this._purgeErrorContext();
 
     if (this.isFakeBackend) {
-      this.cfarContractUserEmail = "sample@hopper.com";
+      this.cfarContractUserEmail = 'sample@hopper.com';
       this._setStep(ExerciseActionStep.CHECK_VERIFICATION_STEP);
     } else {
       this.isLoading = true;
 
       this._hopperCfarService
-        .postSendCfarExerciseVerificationCode(this.basePath, this.hCSessionId, this.exerciseId, ApiTranslatorUtils.modelToSnakeCase({}))
+        .postSendCfarExerciseVerificationCode(
+          this.basePath,
+          this.hCSessionId,
+          this.exerciseId,
+          ApiTranslatorUtils.modelToSnakeCase({}),
+        )
         .pipe(take(1))
         .subscribe({
-          next: (sendVerificationCodeResult: SendCfarContractExerciceVerificationCodeResponse) => {
-            const result = ApiTranslatorUtils.modelToCamelCase(sendVerificationCodeResult) as SendCfarContractExerciceVerificationCodeResponse;
+          next: (
+            sendVerificationCodeResult: SendCfarContractExerciceVerificationCodeResponse,
+          ) => {
+            const result = ApiTranslatorUtils.modelToCamelCase(
+              sendVerificationCodeResult,
+            ) as SendCfarContractExerciceVerificationCodeResponse;
 
             this.exerciseId = result.exerciseId;
             this.cfarContractUserEmail = result.anonymizedEmailAddress;
@@ -362,7 +462,7 @@ export class CfarExerciseFlowComponent extends GlobalEventComponent implements O
             this.isLoading = false;
           },
           error: (error: any) => {
-            this.handleApiError(error, "exercise");
+            this.handleApiError(error, 'exercise');
 
             // Code already sent
             if (this.errorCode === ErrorCode.EX037) {
@@ -373,7 +473,7 @@ export class CfarExerciseFlowComponent extends GlobalEventComponent implements O
 
             // Scroll on the error message
             this.stepCompleted.emit(this._errorTimer);
-          }
+          },
         });
     }
   }
@@ -384,33 +484,49 @@ export class CfarExerciseFlowComponent extends GlobalEventComponent implements O
     if (this.isFakeBackend) {
       const request = this._buildCheckExerciseVerificationCodeRequest();
 
-      if (request.verificationCode && request.verificationCode?.length >= this._minLengthVerificationCode) {
+      if (
+        request.verificationCode &&
+        request.verificationCode?.length >= this._minLengthVerificationCode
+      ) {
         this._loadContractExercise();
       } else {
         // Invalid verification code
-        this.errorCode = ErrorCode.EX019;              
+        this.errorCode = ErrorCode.EX019;
       }
     } else {
       this.isLoading = true;
 
-      const request = ApiTranslatorUtils.modelToSnakeCase(this._buildCheckExerciseVerificationCodeRequest());
+      const request = ApiTranslatorUtils.modelToSnakeCase(
+        this._buildCheckExerciseVerificationCodeRequest(),
+      );
 
       this._hopperCfarService
-        .postCheckCfarExerciseVerificationCode(this.basePath, this.hCSessionId, this.exerciseId, request)
+        .postCheckCfarExerciseVerificationCode(
+          this.basePath,
+          this.hCSessionId,
+          this.exerciseId,
+          request,
+        )
         .pipe(take(1))
         .subscribe({
-          next: (checkVerificationCodeResult: CheckCfarContractExerciceVerificationCodeResponse) => {
-            const result = ApiTranslatorUtils.modelToCamelCase(checkVerificationCodeResult) as CheckCfarContractExerciceVerificationCodeResponse;
+          next: (
+            checkVerificationCodeResult: CheckCfarContractExerciceVerificationCodeResponse,
+          ) => {
+            const result = ApiTranslatorUtils.modelToCamelCase(
+              checkVerificationCodeResult,
+            ) as CheckCfarContractExerciceVerificationCodeResponse;
 
-            if (result.compliant) {                    
+            if (result.compliant) {
               this.exerciseId = result.exerciseId;
 
               // Save the verificationCode
-              this._verificationCode = this.checkVerificationCodeForm.get('verificationCode')?.value,
-
-              // Events management
-              this.updateCfarExerciseIdForEvent(this.exerciseId);
-              this.createCfarExerciseVerificationCompleteEvent(ExerciseStepResult.Success);
+              (this._verificationCode =
+                this.checkVerificationCodeForm.get('verificationCode')?.value),
+                // Events management
+                this.updateCfarExerciseIdForEvent(this.exerciseId);
+              this.createCfarExerciseVerificationCompleteEvent(
+                ExerciseStepResult.Success,
+              );
 
               // Load the contract and the associated exercise
               this._loadContractExercise();
@@ -420,20 +536,24 @@ export class CfarExerciseFlowComponent extends GlobalEventComponent implements O
               this.isLoading = false;
 
               // Events management
-              this.createCfarExerciseVerificationCompleteEvent(ExerciseStepResult.Failure)
-            }     
+              this.createCfarExerciseVerificationCompleteEvent(
+                ExerciseStepResult.Failure,
+              );
+            }
           },
           error: (error: any) => {
-            this.handleApiError(error, "exercise")
+            this.handleApiError(error, 'exercise');
 
             this.isLoading = false;
 
             // Events management
-            this.createCfarExerciseVerificationCompleteEvent(ExerciseStepResult.TechnicalError);
+            this.createCfarExerciseVerificationCompleteEvent(
+              ExerciseStepResult.TechnicalError,
+            );
 
             // Scroll on the error message
             this.stepCompleted.emit(this._errorTimer);
-          }
+          },
         });
     }
   }
@@ -453,24 +573,30 @@ export class CfarExerciseFlowComponent extends GlobalEventComponent implements O
 
       // Get the contract with the exercise
       this._hopperCfarService
-        .getCfarExercises(this.basePath, this.hCSessionId, this._verificationCode)
+        .getCfarExercises(
+          this.basePath,
+          this.hCSessionId,
+          this._verificationCode,
+        )
         .pipe(take(1))
         .subscribe({
           next: (cfarExercise: GetCfarExerciseCustomerResponse) => {
-            const result = ApiTranslatorUtils.modelToCamelCase(cfarExercise) as GetCfarExerciseCustomerResponse;
+            const result = ApiTranslatorUtils.modelToCamelCase(
+              cfarExercise,
+            ) as GetCfarExerciseCustomerResponse;
 
             this.cfarExercise = result;
 
             this.isLoading = false;
           },
           error: (error: any) => {
-            this.handleApiError(error, "exercise")
+            this.handleApiError(error, 'exercise');
 
             this.isLoading = false;
 
             // Scroll on the error message
             this.stepCompleted.emit(this._errorTimer);
-          }
+          },
         });
     }
   }
@@ -491,9 +617,12 @@ export class CfarExerciseFlowComponent extends GlobalEventComponent implements O
 
   private _initForms(): void {
     this._purgeErrorContext();
-    
+
     this.checkVerificationCodeForm = this._formBuilder.group({
-      verificationCode: [null, [Validators.pattern('[0-9]{6}'), Validators.required]]
+      verificationCode: [
+        null,
+        [Validators.pattern('[0-9]{6}'), Validators.required],
+      ],
     });
 
     this.step2Form = this._formBuilder.group({
@@ -506,7 +635,7 @@ export class CfarExerciseFlowComponent extends GlobalEventComponent implements O
       city: new UntypedFormControl(null, [Validators.required]),
       country: new UntypedFormControl(null, [Validators.required]),
       state: new UntypedFormControl(null, [Validators.required]),
-      zip: new UntypedFormControl(null, [Validators.required])
+      zip: new UntypedFormControl(null, [Validators.required]),
     });
   }
 
@@ -514,19 +643,27 @@ export class CfarExerciseFlowComponent extends GlobalEventComponent implements O
     return {
       firstName: this.step2Form.get('firstName')?.value,
       lastName: this.step2Form.get('lastName')?.value,
-      dateOfBirth: this._datePipe.transform(this.step2Form.get('dateOfBirth')?.value, 'yyyy-MM-dd') || '',
+      dateOfBirth:
+        this._datePipe.transform(
+          this.step2Form.get('dateOfBirth')?.value,
+          'yyyy-MM-dd',
+        ) || '',
       addressFirstLine: this.step2Form.get('addressLine1')?.value,
-      addressSecondLine: this.step2Form.get('addressLine2')?.value?.length > 0 ? this.step2Form.get('addressLine2')?.value : undefined,
+      addressSecondLine:
+        this.step2Form.get('addressLine2')?.value?.length > 0
+          ? this.step2Form.get('addressLine2')?.value
+          : undefined,
       city: this.step2Form.get('city')?.value,
       stateProvince: this.step2Form.get('state')?.value,
       country: this.step2Form.get('country')?.value,
-      postalCode: this.step2Form.get('zip')?.value
+      postalCode: this.step2Form.get('zip')?.value,
     };
   }
 
   private _buildCheckExerciseVerificationCodeRequest(): CheckCfarContractExerciseVerificationCodeRequest {
     return {
-      verificationCode: this.checkVerificationCodeForm.get('verificationCode')?.value
+      verificationCode:
+        this.checkVerificationCodeForm.get('verificationCode')?.value,
     };
   }
 

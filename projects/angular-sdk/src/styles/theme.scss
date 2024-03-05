@@ -1,10 +1,10 @@
 @use '@angular/material' as mat;
 
 // Import component mixins here to enable theming for them
-@import "../components/cfar-offer-banner/cfar-offer-banner.component.scss";
-@import "../components/cfar-offer-banner-large/cfar-offer-banner-large.component.scss";
-@import "../components/cfar-offer-dialog/cfar-offer-dialog.component.scss";
-@import "../components/cfar-exercise-flow/cfar-exercise-flow.component.scss";
+@import '../components/cfar-offer-banner/cfar-offer-banner.component.scss';
+@import '../components/cfar-offer-banner-large/cfar-offer-banner-large.component.scss';
+@import '../components/cfar-offer-dialog/cfar-offer-dialog.component.scss';
+@import '../components/cfar-exercise-flow/cfar-exercise-flow.component.scss';
 
 // Define a mixin for easier access
 @mixin hopper-cloud-airlines-angular-sdk-components-theme($theme) {
@@ -18,32 +18,38 @@
 // GLOBAL STYLE
 // ------------------------------------------
 
-.material-icons:before { display: none; }
+.material-icons:before {
+  display: none;
+}
 
 // ------------------------------------------
 // LIGHT BLUE THEME
 // ------------------------------------------
 
-@import "./themes/theme-light-blue.scss";
+@import './themes/theme-light-blue.scss';
 
 .theme-light-blue {
   // Apply the theme to all Angular Material Components
   @include mat.all-component-themes($light-blue-theme);
 
   // Apply the theme to the library components
-  @include hopper-cloud-airlines-angular-sdk-components-theme($light-blue-theme);
+  @include hopper-cloud-airlines-angular-sdk-components-theme(
+    $light-blue-theme
+  );
 }
 
 // ------------------------------------------
 // LIGHT YELLOW THEME
 // ------------------------------------------
 
-@import "./themes/theme-light-yellow.scss";
+@import './themes/theme-light-yellow.scss';
 
 .theme-light-yellow {
   // Apply the theme to all Angular Material Components
   @include mat.all-component-themes($light-yellow-theme);
 
   // Apply the theme to the library components
-  @include hopper-cloud-airlines-angular-sdk-components-theme($light-yellow-theme);
+  @include hopper-cloud-airlines-angular-sdk-components-theme(
+    $light-yellow-theme
+  );
 }
