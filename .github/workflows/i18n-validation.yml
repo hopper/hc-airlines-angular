@@ -2,7 +2,7 @@ name: Validate I18n JSONs
 
 on:
   pull_request:
-    branches: [master]
+    branches: [main]
 
 permissions:
   id-token: write
