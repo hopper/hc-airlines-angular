@@ -53,7 +53,7 @@ export class LayoutComponent implements OnInit, OnDestroy {
     this.version = environment.version;
 
     // The languages ​​available depend on the languages ​​supported by the API
-    this.languages = Locales.map(x => x.lang);
+    this.languages = Array.from(Locales.keys());
 
     this.themes = Object.values(Theme);
 
