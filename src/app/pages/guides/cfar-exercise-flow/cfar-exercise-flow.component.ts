@@ -72,7 +72,7 @@ export class CfarExerciseFlowPageComponent extends CommonGuidesComponent {
         name: 'currentLang',
         description: `
           The language to apply to the component. <br />
-          <b>Supported Languages</b> : ${Locales.map(x => ' ' + x.lang)} <br />
+          <b>Supported Languages</b> : ${Array.from(Locales.keys()).map(lang => ' ' + lang)} <br />
           <b>By default</b> : en
         `,
         required: false
