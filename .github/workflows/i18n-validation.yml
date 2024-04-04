@@ -1,0 +1,24 @@
+name: Validate I18n JSONs
+
+on:
+  pull_request:
+    branches: [main]
+
+permissions:
+  id-token: write
+  contents: read
+
+env:
+  BUILT_APP_DIR: dist/hc-airlines-angular
+
+jobs:
+  i18n-validation:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ./.github/actions/setup-node
+        with:
+          token: ${{ secrets.ACTION_READER_KEY }}
+
+      - name: Validate JSONs files
+        run: pnpm run check-i18n

@@ -1,11 +1,12 @@
 {
   "name": "@hopper-cloud-airlines/angular-sdk",
-  "version": "6.1.1",
+  "version": "6.2.O",
   "license": "Apache-2.0",
   "author": {
     "name": "HTS - Airlines Team",
     "url": "https://hts.hopper.com/"
   },
+  "packageManager": "pnpm@8.15.4",
   "peerDependencies": {
     "@angular/common": ">=15.2.9",
     "@angular/cdk": ">=15.2.9",
@@ -24,5 +25,8 @@
   "repository": {
     "type": "git",
     "url": "git@github.com:hopper/hc-airlines-angular.git"
+  },
+  "engines": {
+    "node": ">=18 <20"
   }
 }

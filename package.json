@@ -4,10 +4,12 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build"
+    "build": "ng build",
+    "check-i18n": "pnpm tsx projects/angular-sdk/src/i18n/i18n-validation.ts"
   },
   "private": true,
   "license": "Apache-2.0",
+  "packageManager": "pnpm@8.15.4",
   "dependencies": {
     "@angular/animations": "^15.2.9",
     "@angular/cdk": "^15.2.9",
@@ -40,6 +42,7 @@
     "@types/jasmine": "~3.6.0",
     "@types/lodash": "^4.14.182",
     "@types/node": "^12.11.1",
+    "ajv": "^8.12.0",
     "angular-cli-ghpages": "^1.0.0",
     "jasmine-core": "~3.6.0",
     "karma": "~6.4.0",
@@ -49,6 +52,7 @@
     "karma-jasmine-html-reporter": "~1.5.0",
     "ng-packagr": "^15.2.2",
     "prettier": "^3.2.5",
+    "tsx": "^4.7.1",
     "typescript": "4.9.5"
   }
 }

@@ -9,7 +9,6 @@ import {
 } from '@angular/core';
 import { Locales } from '../i18n';
 import { TranslateService } from '@ngx-translate/core';
-import { I18n } from '../i18n/i18n.interface';
 import { DateAdapter } from '@angular/material/core';
 import {
   CfarContractCustomer,
@@ -62,12 +61,12 @@ export class GlobalComponent implements OnChanges {
     protected _loggerService: LoggerService,
   ) {
     // Set Labels
-    Locales.forEach((locale: I18n) => {
-      this._translateService.setTranslation(locale.lang, locale.data, true);
+    Locales.forEach((data: Object, lang: string) => {
+      this._translateService.setTranslation(lang, data, true);
     });
 
     // Set availables languages
-    this._translateService.addLangs(Locales.map((i18n) => i18n.lang));
+    this._translateService.addLangs(Array.from(Locales.keys()));
 
     // Set default language
     this._translateService.use(this._translateService.getBrowserLang() || 'en');
