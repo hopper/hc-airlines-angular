@@ -21,12 +21,12 @@
   <mat-card
     fxFlex="100"
     *ngIf="cfarOffers"
-    class="p-16 m-16 pointer"
+    class="offers-container m-16 pointer"
     fxLayout="row wrap"
   >
     <div fxFlex="100" fxLayout="row wrap">
       <div fxFlex="100" fxLayout="row" fxLayoutAlign="start center">
-        <h4 class="offer-title px-16 m-0">
+        <h4 class="offer-title m-0">
           {{ 'CFAR_OFFER_BANNER_LARGE.TITLE' | translate }}
         </h4>
       </div>
@@ -39,23 +39,8 @@
         fxLayoutGap="16px"
       >
         <div
-          fxFlex="calc(20% - 16px)"
-          fxFlex.lt-md="calc(30% - 16px)"
-          fxHide.lt-sm
-          fxLayout="row"
-          fxLayoutAlign="center center"
-          class="p-16"
-          ngClass.lt-sm="px-0"
-        >
-          <img
-            class="responsive-image"
-            src="{{ imageBasePath || '' }}assets/offer-banner-icon.svg"
-          />
-        </div>
-
-        <div
-          fxFlex="80"
-          fxFlex.lt-md="70"
+          fxFlex="70"
+          fxFlex.lt-md="60"
           fxFlex.lt-sm="100"
           fxLayout="column"
           fxLayoutGap="16px"
@@ -87,14 +72,27 @@
               {{ 'COMMON.TERMS_LINK_TEXT' | translate }}
             </a>
           </div>
+      </div>
+
+        <div
+          fxFlex="calc(30% - 16px)"
+          fxFlex.lt-md="calc(40% - 16px)"
+          fxHide.lt-sm
+          fxLayout="row"
+          fxLayoutAlign="center center"
+          class="py-16"
+          ngClass.lt-sm="py-0"
+        >
+          <img
+            class="responsive-image"
+            src="{{ imageBasePath || '' }}assets/offer-banner-image.jpg"
+          />
         </div>
+        
       </div>
 
       <div
-        fxFlexOffset="20"
-        fxFlex="80"
-        fxFlexOffset.lt-md="0"
-        fxFlex.lt-md="100"
+        fxFlex="100"
         fxLayout="row wrap"
         class="mb-16"
         fxLayoutAlign="start center"
@@ -112,9 +110,9 @@
             fxFlex="100"
             fxLayout="row"
             fxLayoutGap="16px"
-            fxLayout.lt-md="column"
+            fxLayout.lt-sm="column"
             fxLayoutAlign="start center"
-            fxLayoutAlign.lt-md="center start"
+            fxLayoutAlign.lt-sm="center start"
           >
             <div
               fxFlex
