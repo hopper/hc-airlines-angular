@@ -1,3 +1,9 @@
+<a name="6.2.1"></a>
+
+# 6.2.1 (2024-04-18)
+
+- Redesign of the offer banner large.
+
 <a name="6.2.0"></a>
 
 # 6.2.0 (2024-03-28)
