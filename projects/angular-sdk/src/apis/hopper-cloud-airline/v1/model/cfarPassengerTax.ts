@@ -11,7 +11,16 @@
  */
 
 export interface CfarPassengerTax { 
+    /**
+     * Code of the tax
+     */
     code: string;
+    /**
+     * The amount of the tax
+     */
     amount: string;
+    /**
+     * The currency of the tax
+     */
     currency: string;
 }

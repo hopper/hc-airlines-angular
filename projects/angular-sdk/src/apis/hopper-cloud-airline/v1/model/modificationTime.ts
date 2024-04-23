@@ -11,11 +11,12 @@
  */
 
 /**
- * A create CFAR refund request
+ * The time at which the modification is requested
  */
-export interface InitiateRefundRequest { 
-    /**
-     * trm-286646a1-69f0-4926-a849-8fe8ad79756e
-     */
-    transferMethodId: string;
-}
+export type ModificationTime = 'after_departure' | 'anytime' | 'before_departure';
+
+export const ModificationTime = {
+    AfterDeparture: 'after_departure' as ModificationTime,
+    Anytime: 'anytime' as ModificationTime,
+    BeforeDeparture: 'before_departure' as ModificationTime
+};

@@ -2,11 +2,12 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import {
+  AnalyticsService,
+  CancelForAnyReasonCFARService,
   CfarContractCustomer,
   CfarOfferCustomer,
   CreateCfarContractCustomerRequest,
   CreateCfarOfferCustomerRequest,
-  CustomerService,
 } from '../apis/hopper-cloud-airline/v1';
 import { HopperProxyService } from './hopper-proxy.service';
 
@@ -14,9 +15,10 @@ import { HopperProxyService } from './hopper-proxy.service';
 export class HopperCfarService extends HopperProxyService {
   constructor(
     protected _httpClient: HttpClient,
-    protected _customerService: CustomerService,
+    protected _cancelForAnyReasonCFARService: CancelForAnyReasonCFARService,
+    protected _analyticsService: AnalyticsService,
   ) {
-    super(_httpClient, _customerService);
+    super(_httpClient, _cancelForAnyReasonCFARService, _analyticsService);
   }
 
   postCfarOffers(
@@ -28,7 +30,7 @@ export class HopperCfarService extends HopperProxyService {
     // Init services
     this._overrideConfiguration(basePath, hCSessionId);
 
-    return this._customerService.postCustomerCfarOffers(request, language);
+    return this._cancelForAnyReasonCFARService.postCustomerCfarOffers(request, language);
   }
 
   postCfarContracts(
@@ -40,6 +42,6 @@ export class HopperCfarService extends HopperProxyService {
     // Init services
     this._overrideConfiguration(basePath, hCSessionId);
 
-    return this._customerService.postCustomerCfarContracts(request, language);
+    return this._cancelForAnyReasonCFARService.postCustomerCfarContracts(request, language);
   }
 }

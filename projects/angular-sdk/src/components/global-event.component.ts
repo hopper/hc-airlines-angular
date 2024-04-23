@@ -2,7 +2,6 @@ import { ChangeDetectorRef, Directive } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { DateAdapter } from '@angular/material/core';
 import {
-  ExerciseStepResult,
   UiSource,
   UiVariant,
 } from '../apis/hopper-cloud-airline/v1';

@@ -9,26 +9,23 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
+import { FareRule } from './fareRule';
 
-export interface CfarTax { 
+export interface Fare { 
     /**
-     * Name of the tax
+     * The price of the slice for all the passengers with this fare
      */
-    name: string;
+    price?: string;
     /**
-     * The rate of the tax
+     * Name of the fare brand of this fare
      */
-    rate: string;
+    fareBrand?: string;
     /**
-     * The amount of the tax
+     * Code of the fare basis applied to this fare
      */
-    amount: string;
+    fareBasis?: string;
     /**
-     * True if the tax amount is estimated, the real amount will be known only at contract confirmation
+     * The fare rules associated to the fare
      */
-    estimated: boolean;
-    /**
-     * Registration number of the tax if applicable
-     */
-    registrationNumber?: string;
+    fareRules?: Array<FareRule>;
 }

@@ -10,10 +10,11 @@
  * Do not edit the class manually.
  */
 
-export type AncillaryType = 'travel_insurance' | 'cabin_bag' | 'checked_bag' | 'seat' | 'lounge' | 'meal' | 'fast_track' | 'pet' | 'other';
+export type AncillaryType = 'travel_insurance' | 'bag_insurance' | 'cabin_bag' | 'checked_bag' | 'seat' | 'lounge' | 'meal' | 'fast_track' | 'pet' | 'change' | 'bundle' | 'payment_fee' | 'other';
 
 export const AncillaryType = {
     TravelInsurance: 'travel_insurance' as AncillaryType,
+    BagInsurance: 'bag_insurance' as AncillaryType,
     CabinBag: 'cabin_bag' as AncillaryType,
     CheckedBag: 'checked_bag' as AncillaryType,
     Seat: 'seat' as AncillaryType,
@@ -21,5 +22,8 @@ export const AncillaryType = {
     Meal: 'meal' as AncillaryType,
     FastTrack: 'fast_track' as AncillaryType,
     Pet: 'pet' as AncillaryType,
+    Change: 'change' as AncillaryType,
+    Bundle: 'bundle' as AncillaryType,
+    PaymentFee: 'payment_fee' as AncillaryType,
     Other: 'other' as AncillaryType
 };

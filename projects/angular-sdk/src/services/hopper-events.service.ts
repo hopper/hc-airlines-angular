@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import {
-  CustomerService,
+  AnalyticsService,
   CfarOffersBannerDisplay,
   UiVariant,
   CfarOffersTakeoverDisplay,
@@ -10,6 +10,7 @@ import {
   CfarViewInfo,
   UiSource,
   CfarDenyPurchase,
+  CancelForAnyReasonCFARService
 } from '../apis/hopper-cloud-airline/v1';
 import { ApiTranslatorUtils } from '../utils/api-translator.utils';
 import { HopperProxyService } from './hopper-proxy.service';
@@ -18,9 +19,10 @@ import { HopperProxyService } from './hopper-proxy.service';
 export class HopperEventsService extends HopperProxyService {
   constructor(
     protected _httpClient: HttpClient,
-    protected _customerService: CustomerService,
+    protected _cancelForAnyReasonCFARService: CancelForAnyReasonCFARService,
+    protected _analyticsService: AnalyticsService,
   ) {
-    super(_httpClient, _customerService);
+    super(_httpClient, _cancelForAnyReasonCFARService, _analyticsService);
   }
 
   // -----------------------------------------------
@@ -35,7 +37,7 @@ export class HopperEventsService extends HopperProxyService {
     // Init services
     this._overrideConfiguration(basePath, hCSessionId);
 
-    return this._customerService.postCustomerEvents(
+    return this._analyticsService.postCustomerEvents(
       ApiTranslatorUtils.modelToSnakeCase(event),
     );
   }

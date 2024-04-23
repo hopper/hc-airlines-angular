@@ -10,9 +10,6 @@
  * Do not edit the class manually.
  */
 
-/**
- * The type of passenger:<br /> * adult - 12+ years of age<br /> * child - 2-11 years of age<br /> * seated_infant - < 2 years of age, in their own seat<br /> * lap_infant - < 2 years of age, not in their own seat
- */
 export type PassengerType = 'adult' | 'child' | 'seated_infant' | 'lap_infant';
 
 export const PassengerType = {

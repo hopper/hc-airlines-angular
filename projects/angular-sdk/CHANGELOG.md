@@ -1,3 +1,10 @@
+<a name="6.3.0"></a>
+
+# 6.3.0 (2024-04-23)
+
+- Removed the exercise flow. 
+- Code cleanup.
+
 <a name="6.2.1"></a>
 
 # 6.2.1 (2024-04-18)

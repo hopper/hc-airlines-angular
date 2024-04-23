@@ -12,7 +12,17 @@
 import { AncillaryType } from './ancillaryType';
 
 export interface Ancillary { 
+    /**
+     * Total price of ancillaries of this type
+     */
     totalPrice: string;
+    /**
+     * Unique reference of the passenger associated to this ancillary
+     */
     passengerReference?: string;
     type: AncillaryType;
+    /**
+     * Is this ancillary covered by the product. By default true if not specified
+     */
+    covered?: boolean;
 }

@@ -10,17 +10,40 @@
  * Do not edit the class manually.
  */
 import { CfarItinerarySliceSegment } from './cfarItinerarySliceSegment';
+import { Fare } from './fare';
+import { FareRule } from './fareRule';
+import { PassengerPricing } from './passengerPricing';
 
 /**
  * An object containing the list of flight segments for a fare slice
  */
 export interface CfarItinerarySlice { 
     /**
-     * A list of segments which make up the slice of the fare
+     * A list of segments which make up the slice
      */
     segments: Array<CfarItinerarySliceSegment>;
     /**
-     * Fare brand of the slice
+     * List of passengers type, count and pricing for the slice
+     */
+    passengerPricing?: Array<PassengerPricing>;
+    /**
+     * The price of the slice for all the passengers
+     */
+    totalPrice?: string;
+    /**
+     * Name of the fare brand applied to the slice
      */
     fareBrand?: string;
+    /**
+     * Code of the fare basis applied to the slice
+     */
+    fareBasis?: string;
+    /**
+     * The fare rules associated to the slice
+     */
+    fareRules?: Array<FareRule>;
+    /**
+     * Other available fares in the same cabin
+     */
+    otherFares?: Array<Fare>;
 }

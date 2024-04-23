@@ -9,19 +9,13 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { BookingConfirmed } from './bookingConfirmed';
+import { BookingConfirmed1 } from './bookingConfirmed1';
 import { CfarDenyPurchase } from './cfarDenyPurchase';
 import { CfarEventWithContract } from './cfarEventWithContract';
-import { CfarExerciseCallbackLaunched } from './cfarExerciseCallbackLaunched';
-import { CfarExerciseCustomerDataComplete } from './cfarExerciseCustomerDataComplete';
-import { CfarExercisePortalComplete } from './cfarExercisePortalComplete';
-import { CfarExercisePortalDisplay } from './cfarExercisePortalDisplay';
-import { CfarExerciseVerificationComplete } from './cfarExerciseVerificationComplete';
-import { CfarExerciseVerificationSent } from './cfarExerciseVerificationSent';
 import { CfarForcedChoiceWarning } from './cfarForcedChoiceWarning';
 import { CfarOffersBannerDisplay } from './cfarOffersBannerDisplay';
 import { CfarOffersTakeoverDisplay } from './cfarOffersTakeoverDisplay';
 import { CfarViewInfo } from './cfarViewInfo';
-import { OffersDisplayed } from './offersDisplayed';
+import { OffersDisplayed1 } from './offersDisplayed1';
 
-export type CfarEvent = BookingConfirmed | CfarDenyPurchase | CfarEventWithContract | CfarExerciseCallbackLaunched | CfarExerciseCustomerDataComplete | CfarExercisePortalComplete | CfarExercisePortalDisplay | CfarExerciseVerificationComplete | CfarExerciseVerificationSent | CfarForcedChoiceWarning | CfarOffersBannerDisplay | CfarOffersTakeoverDisplay | CfarViewInfo | OffersDisplayed;
+export type CfarEvent = BookingConfirmed1 | CfarDenyPurchase | CfarEventWithContract | CfarForcedChoiceWarning | CfarOffersBannerDisplay | CfarOffersTakeoverDisplay | CfarViewInfo | OffersDisplayed1;
