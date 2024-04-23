@@ -13,7 +13,6 @@ import { TranslateModule } from '@ngx-translate/core';
 
 import { CfarOfferBannerComponent } from './components/cfar-offer-banner/cfar-offer-banner.component';
 import { CfarOfferDialogComponent } from './components/cfar-offer-dialog/cfar-offer-dialog.component';
-import { CfarExerciseFlowComponent } from './components/cfar-exercise-flow/cfar-exercise-flow.component';
 
 import {
   MomentDateAdapter,
@@ -57,7 +56,6 @@ import { GlobalComponent } from './components/global.component';
 import { HopperCfarService } from './services/hopper-cfar.service';
 import { HopperEventsService } from './services/hopper-events.service';
 import { GlobalEventComponent } from './components/global-event.component';
-import { HopperErrorHandlerService } from './services/hopper-error-handler.service';
 import { LoggerService } from './services/logger.service';
 
 // Supported Languages for Datepicker
@@ -72,8 +70,7 @@ registerLocaleData(localeZh, 'zh', localeZhExtra);
     GlobalEventComponent,
     CfarOfferBannerComponent,
     CfarOfferBannerLargeComponent,
-    CfarOfferDialogComponent,
-    CfarExerciseFlowComponent,
+    CfarOfferDialogComponent
   ],
   imports: [
     // Angular Module
@@ -107,7 +104,6 @@ registerLocaleData(localeZh, 'zh', localeZhExtra);
     CfarOfferBannerComponent,
     CfarOfferBannerLargeComponent,
     CfarOfferDialogComponent,
-    CfarExerciseFlowComponent,
   ],
   providers: [
     {
@@ -116,7 +112,6 @@ registerLocaleData(localeZh, 'zh', localeZhExtra);
       deps: [MAT_DATE_LOCALE],
     },
     { provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS },
-    { provide: ErrorHandler, useClass: HopperErrorHandlerService },
     HopperCfarService,
     HopperEventsService,
     LoggerService,

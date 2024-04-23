@@ -14,12 +14,8 @@ import {
   CfarContractCustomer,
   CfarItinerary,
   CfarOfferCustomer,
-  CfarPriceType,
-  CfarStatus,
   CreateCfarContractCustomerRequest,
   CreateCfarOfferCustomerRequest,
-  GetCfarExerciseCustomerResponse,
-  PassengerType,
   RequestType,
   UiSource,
   UiVariant,
@@ -31,9 +27,7 @@ import { HcAirlinesError } from '../models/hc-airlines-error';
 import { Error } from '../apis/hopper-cloud-airline/v1';
 import { ErrorSdkModel } from '../models';
 import { LoggerService } from '../services/logger.service';
-import { CountryCode } from '../enums/country-code.enum';
 import { ErrorCode } from '../enums/error-code.enum';
-import { StateCode } from '../enums/state-code.enum';
 
 @Directive({
   selector: '[HopperGlobalComponent]',
@@ -51,8 +45,6 @@ export class GlobalComponent implements OnChanges {
 
   public errorCode?: string;
   public errorMessage?: string;
-  public mapCountries: Map<string, string>;
-  public mapStates!: Map<string, string>;
 
   constructor(
     protected _adapter: DateAdapter<any>,
@@ -73,10 +65,6 @@ export class GlobalComponent implements OnChanges {
 
     // Set default language for datepickers
     this._adapter.setLocale(this._translateService.getBrowserLang());
-
-    // Init map
-    this.mapCountries = new Map<string, string>();
-    this.mapStates = new Map<string, string>();
   }
 
   // -----------------------------------------------
@@ -91,9 +79,6 @@ export class GlobalComponent implements OnChanges {
     if (changes.currentLang && changes.currentLang.currentValue) {
       // Update languages
       this._updateLanguage(changes.currentLang.currentValue);
-
-      // Update Maps labels
-      this._setMapsLabels();
     }
   }
 
@@ -106,10 +91,6 @@ export class GlobalComponent implements OnChanges {
   // -----------------------------------------------
 
   protected _getDefaultOffer(offers: CfarOfferCustomer[]): CfarOfferCustomer {
-    // return offers.reduce((previous: CfarOfferCustomer, current: CfarOfferCustomer) => {
-    //     return +previous?.premium < +current?.premium ? previous : current;
-    // });
-
     return offers[0];
   }
 
@@ -119,37 +100,6 @@ export class GlobalComponent implements OnChanges {
 
     // Set language for datepickers
     this._adapter.setLocale(newLanguage);
-  }
-
-  protected _setMapsLabels(): void {
-    const countries = Object.keys(CountryCode);
-    const states = Object.keys(StateCode);
-
-    countries.forEach((countryCode) => {
-      // Get Label and fill the map
-      this._translateService
-        .get('COMMON.COUNTRY.' + countryCode)
-        .pipe(take(1))
-        .subscribe((label) => this.mapCountries.set(countryCode, label));
-    });
-
-    states.forEach((stateCode) => {
-      // Get Label and fill the map
-      this._translateService
-        .get('COMMON.STATE.' + stateCode)
-        .pipe(take(1))
-        .subscribe((label) => {
-          this.mapStates.set(stateCode, label);
-        });
-    });
-
-    // Sort the maps by label (alphabetical order)
-    this.mapCountries = new Map(
-      [...this.mapCountries.entries()].sort((a, b) => a[1].localeCompare(b[1])),
-    );
-    this.mapStates = new Map(
-      [...this.mapStates.entries()].sort((a, b) => a[1].localeCompare(b[1])),
-    );
   }
 
   protected _getHcAirlinesErrorResponse(
@@ -192,8 +142,7 @@ export class GlobalComponent implements OnChanges {
     };
   }
 
-  protected _fakeCfarContractId: string =
-    '1ecf85ab-211f-68b7-9bb3-4b1a314f1a42';
+  protected _fakeCfarContractId: string = '1ecf85ab-211f-68b7-9bb3-4b1a314f1a42';
 
   protected _buildFakePostCfarOffersResponse(): CfarOfferCustomer[] {
     return [
@@ -425,90 +374,7 @@ export class GlobalComponent implements OnChanges {
       premium: '10.00',
     };
   }
-
-  protected _fakeCfarContractExerciseId: string =
-    '1ecf85ab-211f-68b7-9bb3-f1d35b1c2045';
-
-  protected _buildFakeCfarExercisesResponse(): GetCfarExerciseCustomerResponse {
-    return {
-      id: this._fakeCfarContractExerciseId,
-      contractId: this._fakeCfarContractId,
-      itinerary: {
-        passengerPricing: [
-          {
-            passengerCount: {
-              count: 3,
-              type: PassengerType.Adult,
-            },
-            individualPrice: 'null',
-          },
-        ],
-        currency: 'CAD',
-        slices: [
-          {
-            segments: [
-              {
-                originAirport: 'YYZ',
-                destinationAirport: 'YUL',
-                departureDateTime: '2022-07-09T18:00',
-                arrivalDateTime: '2022-07-09T19:14',
-                flightNumber: '894',
-                validatingCarrierCode: 'AC',
-                fareClass: 'economy',
-              },
-              {
-                originAirport: 'YUL',
-                destinationAirport: 'NCE',
-                departureDateTime: '2022-07-09T20:50',
-                arrivalDateTime: '2022-07-10T10:25',
-                flightNumber: '878',
-                validatingCarrierCode: 'AC',
-                fareClass: 'economy',
-              },
-            ],
-          },
-          {
-            segments: [
-              {
-                originAirport: 'NCE',
-                destinationAirport: 'YUL',
-                departureDateTime: '2022-07-15T13:15',
-                arrivalDateTime: '2022-07-15T15:55',
-                flightNumber: '879',
-                validatingCarrierCode: 'AC',
-                fareClass: 'economy',
-              },
-              {
-                originAirport: 'YUL',
-                destinationAirport: 'YYZ',
-                departureDateTime: '2022-07-15T17:30',
-                arrivalDateTime: '2022-07-15T18:50',
-                flightNumber: '895',
-                validatingCarrierCode: 'AC',
-                fareClass: 'economy',
-              },
-            ],
-          },
-        ],
-        ancillaries: [],
-        totalPrice: '71.96',
-      },
-      cfarPrices: [
-        {
-          coverage: '19.26',
-          nbPax: 3,
-          passengerType: PassengerType.Adult,
-          premium: '8',
-          cfarPriceType: CfarPriceType.Ancillary,
-        },
-      ],
-      cashRefundAllowance: '57.78',
-      hopperRefundCurrency: 'CAD',
-      contractExpiryDateTime: new Date('2022-07-08T18:00Z'),
-      status: CfarStatus.Created,
-    };
-  }
-
+  
   // -----------------------------------------------
   // Public Methods
   // -----------------------------------------------

@@ -34,7 +34,6 @@ $light-primary-text: white;
 @import "./app/pages/guides/cfar-offer-banner/cfar-offer-banner.component.scss";
 @import "./app/pages/guides/cfar-offer-banner-large/cfar-offer-banner-large.component.scss";
 @import "./app/pages/guides/cfar-offer-dialog/cfar-offer-dialog.component.scss";
-@import "./app/pages/guides/cfar-exercise-flow/cfar-exercise-flow.component.scss";
 
 @import "./app/pages/not-found/not-found.component.scss";
 
@@ -50,7 +49,6 @@ $light-primary-text: white;
   @include cfar-offer-banner-page-component-theme($theme);
   @include cfar-offer-banner-large-page-component-theme($theme);
   @include cfar-offer-dialog-page-component-theme($theme);
-  @include cfar-exercise-flow-page-component-theme($theme);
 
   @include not-found-page-component-theme($theme);
 
@@ -184,17 +182,6 @@ $hopper-light-theme: mat.define-light-theme((
 
   // Apply the theme to the documentation components
   @include documentation-components-theme($light-blue-theme);
-}
-
-.theme-light-yellow {
-  // Apply the theme to all Angular Material Components
-  @include mat.all-component-themes($light-yellow-theme);
-
-  // Apply the theme to the library components
-  @include hopper-cloud-airlines-angular-sdk-components-theme($light-yellow-theme);
-
-  // Apply the theme to the documentation components
-  @include documentation-components-theme($light-yellow-theme);
 }
 
 // ------------------------------------------
