@@ -12,14 +12,12 @@
 import { Ancillary } from './ancillary';
 import { CfarItinerarySlice } from './cfarItinerarySlice';
 import { CfarPassenger } from './cfarPassenger';
+import { FareRule } from './fareRule';
 import { PassengerPricing } from './passengerPricing';
 
-/**
- * An object detailing the fare used to create a CFAR offer
- */
 export interface CfarItinerary { 
     /**
-     * List of pricing per passenger for a fare
+     * List of passengers type, count and pricing for the itinerary
      */
     passengerPricing: Array<PassengerPricing>;
     /**
@@ -27,13 +25,23 @@ export interface CfarItinerary {
      */
     currency: string;
     /**
-     * List of fare slices included in this fare; only 1 (one way) or 2 (round trip) slices are allowed
+     * List of slices of the itinerary; 1 (one way),  2 (round trip) or up to 10 (multi-destination) slices are allowed
      */
     slices: Array<CfarItinerarySlice>;
     /**
-     * Ancillaries attached to a fare and their prices
+     * Ancillaries attached to the itinerary and their prices. Only ancillaries covered by CFAR must be filled
      */
     ancillaries?: Array<Ancillary>;
-    totalPrice: string;
+    /**
+     * Total price to be covered by CFAR (including ancillaries if applicable)
+     */
+    totalPrice?: string;
+    /**
+     * Details of the passengers
+     */
     passengers?: Array<CfarPassenger>;
+    /**
+     * The fare rules associated to the itinerary. If different fare rules apply to different slices in the itinerary, indicate the most restrictive.
+     */
+    fareRules?: Array<FareRule>;
 }

@@ -10,6 +10,9 @@
  * Do not edit the class manually.
  */
 
+/**
+ * The gender of the passenger
+ */
 export type Gender = 'male' | 'female' | 'undisclosed' | 'unspecified';
 
 export const Gender = {

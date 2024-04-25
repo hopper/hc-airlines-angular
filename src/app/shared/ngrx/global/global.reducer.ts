@@ -5,20 +5,17 @@ import * as globalActions from './global.actions';
 export interface GlobalState {
     currentLang: string;
     currentTheme: string;
-    currentPartnerId: number;
 }
 
 const initialState: GlobalState = {
     currentLang: 'en',
-    currentTheme: Theme.THEME_LIGHT_HOPPER,
-    currentPartnerId: 0
+    currentTheme: Theme.THEME_LIGHT_HOPPER
 };
 
 const reducer = createReducer(
     initialState,
     on(globalActions.setCurrentLang, (state, { currentLang }) => ({ ...state, currentLang: currentLang })),
     on(globalActions.setCurrentTheme, (state, { currentTheme }) => ({ ...state, currentTheme: currentTheme })),
-    on(globalActions.setCurrentPartnerId, (state, { currentPartnerId }) => ({ ...state, currentPartnerId: currentPartnerId }))
 );
 
 export function globalReducer(state: GlobalState | undefined, action: Action): GlobalState {

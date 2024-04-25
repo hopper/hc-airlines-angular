@@ -4,14 +4,12 @@
 @import '../components/cfar-offer-banner/cfar-offer-banner.component.scss';
 @import '../components/cfar-offer-banner-large/cfar-offer-banner-large.component.scss';
 @import '../components/cfar-offer-dialog/cfar-offer-dialog.component.scss';
-@import '../components/cfar-exercise-flow/cfar-exercise-flow.component.scss';
 
 // Define a mixin for easier access
 @mixin hopper-cloud-airlines-angular-sdk-components-theme($theme) {
   @include cfar-offer-banner-theme($theme);
   @include cfar-offer-banner-large-theme($theme);
   @include cfar-offer-dialog-theme($theme);
-  @include cfar-exercise-flow-theme($theme);
 }
 
 // ------------------------------------------
@@ -35,21 +33,5 @@
   // Apply the theme to the library components
   @include hopper-cloud-airlines-angular-sdk-components-theme(
     $light-blue-theme
-  );
-}
-
-// ------------------------------------------
-// LIGHT YELLOW THEME
-// ------------------------------------------
-
-@import './themes/theme-light-yellow.scss';
-
-.theme-light-yellow {
-  // Apply the theme to all Angular Material Components
-  @include mat.all-component-themes($light-yellow-theme);
-
-  // Apply the theme to the library components
-  @include hopper-cloud-airlines-angular-sdk-components-theme(
-    $light-yellow-theme
   );
 }

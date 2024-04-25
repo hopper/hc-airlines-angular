@@ -7,7 +7,7 @@ import { AppState } from "src/app/shared/ngrx";
 import { getCurrentLang, getCurrentTheme } from "src/app/shared/ngrx/global/global.selectors";
 import { Clipboard } from '@angular/cdk/clipboard';
 import { MatSnackBar } from "@angular/material/snack-bar";
-import { CfarItinerary, PassengerPricing, UiVariant } from "projects/angular-sdk/src/apis/hopper-cloud-airline/v1";
+import { CfarItinerary, UiVariant } from "projects/angular-sdk/src/apis/hopper-cloud-airline/v1";
 
 @Directive({
   selector: '[CommonGuidesComponent]'
@@ -23,30 +23,21 @@ export abstract class CommonGuidesComponent implements OnInit, OnDestroy {
   public isFakeBackend!: boolean;
   public env: string = 'development';
 
-  protected _unsubcriber: Subject<any>;
-  
-  public abstract tsCode: string;
-  public abstract htmlCode: string;
-  
   // Parameters
   public hCSessionId = "b7c98b1c-00c3-4082-a72b-cce39a29a640";
-  public contractId = "1ed5f483-6287-6b77-acb5-9719296bfa70";
-  public exerciseId = "1ee262de-901f-6f60-af7f-1b34c81fb4d6";
   public currency = "EUR";
-  public passengers: PassengerPricing[] = [
-    {
-      passengerCount: {
-        count: 3,
-        type: "adult"
-      },
-      individualPrice: "50.10"
-    }
-  ];
-  public pnrReference = "123456";
   public itineraries: CfarItinerary[] = [
     {
       currency: this.currency,
-      passengerPricing: this.passengers,
+      passengerPricing: [
+        {
+          passengerCount: {
+            count: 3,
+            type: "adult"
+          },
+          individualPrice: "50.10"
+        }
+      ],
       slices: [
         {
           fareBrand: "comfort",
@@ -73,40 +64,14 @@ export abstract class CommonGuidesComponent implements OnInit, OnDestroy {
       ]
     }
   ];
-  public itinerary: CfarItinerary = {
-    currency: this.currency,
-    passengerPricing: this.passengers,
-    slices: [
-      {
-        fareBrand: "comfort",
-        segments: [
-          {
-            originAirport: "LGA",
-            destinationAirport: "BOS",
-            departureDateTime: "2023-11-01T18:34:30",
-            arrivalDateTime: "2023-11-02T19:12:30",
-            flightNumber: "JB776",
-            validatingCarrierCode: "B6",
-            fareClass: "economy",
-            fareBrand: "comfort"
-          }
-        ]
-      }
-    ],
-    totalPrice: "150.30",
-    ancillaries: [
-      {
-        totalPrice: "30.55",
-        type: "travel_insurance"
-      }
-    ]
-  };
-  public hyperwalletUrl: string = "https://uat-api.paylution.com/rest/widgets/transfer-methods/";
-  // public hyperwalletUrl: string = "https://api.paylution.com/rest/widgets/transfer-methods/";
-  public contactFormUrl: string = "https://www.google.com";
   public hasNoCoverageOption = false;
   public hasWarningCoverageMessage = true;
   public uiVariant = UiVariant.A;
+
+  protected _unsubcriber: Subject<any>;
+  
+  public abstract tsCode: string;
+  public abstract htmlCode: string;
   
   constructor(
     protected _store: Store<AppState>,

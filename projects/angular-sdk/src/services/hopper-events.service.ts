@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import {
-  CustomerService,
+  AnalyticsService,
   CfarOffersBannerDisplay,
   UiVariant,
   CfarOffersTakeoverDisplay,
@@ -10,13 +10,7 @@ import {
   CfarViewInfo,
   UiSource,
   CfarDenyPurchase,
-  CfarExercisePortalDisplay,
-  CfarExerciseVerificationSent,
-  CfarExerciseVerificationComplete,
-  ExerciseStepResult,
-  CfarExerciseCustomerDataComplete,
-  CfarExercisePortalComplete,
-  CfarExerciseCallbackLaunched,
+  CancelForAnyReasonCFARService
 } from '../apis/hopper-cloud-airline/v1';
 import { ApiTranslatorUtils } from '../utils/api-translator.utils';
 import { HopperProxyService } from './hopper-proxy.service';
@@ -25,9 +19,10 @@ import { HopperProxyService } from './hopper-proxy.service';
 export class HopperEventsService extends HopperProxyService {
   constructor(
     protected _httpClient: HttpClient,
-    protected _customerService: CustomerService,
+    protected _cancelForAnyReasonCFARService: CancelForAnyReasonCFARService,
+    protected _analyticsService: AnalyticsService,
   ) {
-    super(_httpClient, _customerService);
+    super(_httpClient, _cancelForAnyReasonCFARService, _analyticsService);
   }
 
   // -----------------------------------------------
@@ -42,18 +37,14 @@ export class HopperEventsService extends HopperProxyService {
     // Init services
     this._overrideConfiguration(basePath, hCSessionId);
 
-    return this._customerService.postCustomerEvents(
+    return this._analyticsService.postCustomerEvents(
       ApiTranslatorUtils.modelToSnakeCase(event),
     );
   }
 
   // -----------------------------------------------
   // Public Methods : CFAR UI events
-  // ----------------------------------------------------------
-
-  // *********************
-  // Cfar offers events
-  // *********************
+  // -----------------------------------------------
 
   postCreateCfarOffersBannerDisplay(
     basePath: string,
@@ -131,112 +122,6 @@ export class HopperEventsService extends HopperProxyService {
       cfarOffersIds: cfarOffersIds,
       uiSource: uiSource,
       type: 'cfar_deny_purchase',
-    };
-
-    return this._postCustomerEventRequest(basePath, hCSessionId, event);
-  }
-
-  // *********************
-  // Cfar purchase events
-  // *********************
-
-  // *********************
-  // Cfar exercise events
-  // *********************
-
-  postCreateCfarExercisePortalDisplay(
-    basePath: string,
-    hCSessionId: string,
-    cfarExerciseId: string,
-  ): Observable<any> {
-    // Build the event
-    let event: CfarExercisePortalDisplay = {
-      occurredDateTime: new Date(),
-      cfarExerciseId: cfarExerciseId,
-      type: 'cfar_exercise_portal_display',
-    };
-
-    return this._postCustomerEventRequest(basePath, hCSessionId, event);
-  }
-
-  postCreateCfarExerciseVerificationSent(
-    basePath: string,
-    hCSessionId: string,
-    cfarExerciseId: string,
-  ): Observable<any> {
-    // Build the event
-    let event: CfarExerciseVerificationSent = {
-      occurredDateTime: new Date(),
-      cfarExerciseId: cfarExerciseId,
-      type: 'cfar_exercise_verification_sent',
-    };
-
-    return this._postCustomerEventRequest(basePath, hCSessionId, event);
-  }
-
-  postCreateCfarExerciseVerificationComplete(
-    basePath: string,
-    hCSessionId: string,
-    cfarExerciseId: string,
-    exerciseStepResult: ExerciseStepResult,
-  ): Observable<any> {
-    // Build the event
-    let event: CfarExerciseVerificationComplete = {
-      occurredDateTime: new Date(),
-      cfarExerciseId: cfarExerciseId,
-      result: exerciseStepResult,
-      type: 'cfar_exercise_verification_complete',
-    };
-
-    return this._postCustomerEventRequest(basePath, hCSessionId, event);
-  }
-
-  postCreateCfarExerciseCustomerDataComplete(
-    basePath: string,
-    hCSessionId: string,
-    cfarExerciseId: string,
-    exerciseStepResult: ExerciseStepResult,
-  ): Observable<any> {
-    // Build the event
-    let event: CfarExerciseCustomerDataComplete = {
-      occurredDateTime: new Date(),
-      cfarExerciseId: cfarExerciseId,
-      result: exerciseStepResult,
-      type: 'cfar_exercise_customer_data_complete',
-    };
-
-    return this._postCustomerEventRequest(basePath, hCSessionId, event);
-  }
-
-  postCreateCfarExercisePortalComplete(
-    basePath: string,
-    hCSessionId: string,
-    cfarExerciseId: string,
-    exerciseStepResult: ExerciseStepResult,
-  ): Observable<any> {
-    // Build the event
-    let event: CfarExercisePortalComplete = {
-      occurredDateTime: new Date(),
-      cfarExerciseId: cfarExerciseId,
-      result: exerciseStepResult,
-      type: 'cfar_exercise_portal_complete',
-    };
-
-    return this._postCustomerEventRequest(basePath, hCSessionId, event);
-  }
-
-  postCreateCfarExerciseCallbackLaunched(
-    basePath: string,
-    hCSessionId: string,
-    cfarExerciseId: string,
-    exerciseStepResult: ExerciseStepResult,
-  ): Observable<any> {
-    // Build the event
-    let event: CfarExerciseCallbackLaunched = {
-      occurredDateTime: new Date(),
-      cfarExerciseId: cfarExerciseId,
-      result: exerciseStepResult,
-      type: 'cfar_exercise_callback_launched',
     };
 
     return this._postCustomerEventRequest(basePath, hCSessionId, event);

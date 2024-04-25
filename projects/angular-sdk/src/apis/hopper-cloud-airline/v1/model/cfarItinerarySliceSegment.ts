@@ -41,7 +41,7 @@ export interface CfarItinerarySliceSegment {
     validatingCarrierCode: string;
     fareClass: FareClass;
     /**
-     * Fare brand of the segment
+     * Name of the fare brand applied to the segment (if applicable)
      */
     fareBrand?: string;
 }

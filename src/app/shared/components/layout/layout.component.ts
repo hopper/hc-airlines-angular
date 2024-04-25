@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
-import { ActivatedRoute, Data } from "@angular/router";
+import { Data } from "@angular/router";
 import { select, Store } from "@ngrx/store";
 import { Subject } from "rxjs";
 import { takeUntil } from "rxjs/operators";
@@ -7,7 +7,7 @@ import { environment } from "src/environments/environment";
 import { AppState } from "../../ngrx";
 
 import { selectRouteData } from "../../ngrx/router/router.actions";
-import { getCurrentLang, getCurrentPartnerId, getCurrentTheme } from "../../ngrx/global/global.selectors";
+import { getCurrentLang, getCurrentTheme } from "../../ngrx/global/global.selectors";
 import * as globalActions from "../../ngrx/global/global.actions";
 import { MatDrawerMode } from "@angular/material/sidenav";
 import { Theme } from "../../enums";
@@ -40,15 +40,10 @@ export class LayoutComponent implements OnInit, OnDestroy {
 
   constructor(
     private _store: Store<AppState>,
-    private _route: ActivatedRoute,
     private _matIconRegistry: MatIconRegistry,
     private _breakpointObserver: BreakpointObserver,
     private _domSanitizer: DomSanitizer
   ) {
-    // Working items
-    if (!environment.production) {
-    }
-
     // Set the current version
     this.version = environment.version;
 
@@ -62,8 +57,20 @@ export class LayoutComponent implements OnInit, OnDestroy {
       this._matIconRegistry.addSvgIcon("flag_" + language, this._domSanitizer.bypassSecurityTrustResourceUrl("assets/flags/" + language + ".svg"));
     });
 
-    // Set the partnerId in the state
-    this._store.dispatch(globalActions.setCurrentPartnerId({ currentPartnerId: this._route.snapshot.params.partnerId }));
+    this.components = [
+      { 
+        name: 'CFAR Offer Banner',
+        link: 'cfar-offer-banner',
+      },
+      { 
+        name: 'CFAR Offer Banner Large',
+        link: 'cfar-offer-banner-large',
+      },
+      { 
+        name: 'CFAR Offer Dialog',
+        link: 'cfar-offer-dialog',
+      }
+    ];
   }
 
   // -------------------------------
@@ -76,12 +83,6 @@ export class LayoutComponent implements OnInit, OnDestroy {
       select(selectRouteData),
       takeUntil(this._unsubcriber)
     ).subscribe((data: Data) => this.selectedPath = data.path);
-
-    // Update the visibles components when the partnerId has changed
-    this._store.pipe(
-      select(getCurrentPartnerId),
-      takeUntil(this._unsubcriber)
-    ).subscribe((partnerId: number) => this._loadPartnerData(partnerId));
 
     // Update the current theme when it's changing
     this._store.pipe(
@@ -125,42 +126,5 @@ export class LayoutComponent implements OnInit, OnDestroy {
 
   onSetLanguage(newLanguage: string): void {
     this._store.dispatch(globalActions.setCurrentLang({ currentLang: newLanguage }));
-  }
-
-  // -------------------------------
-  // - PRIVATES METHODS
-  // -------------------------------
-
-  /**
-   * FIXME : Load config by partner ?
-   * @param partnerId 
-   */
-  private _loadPartnerData(partnerId: number): void {
-    var components = [];
-
-    this.currentPartnerId = partnerId;
-
-    if (partnerId == 0) {
-      this.onSetTheme(Theme.THEME_LIGHT_BLUE);
-
-      components.push({ name: 'CFAR Offer Banner', link: 'cfar-offer-banner' });
-      components.push({ name: 'CFAR Offer Banner Large', link: 'cfar-offer-banner-large' });
-      components.push({ name: 'CFAR Offer Dialog', link: 'cfar-offer-dialog' });
-      components.push({ name: 'CFAR Exercise Flow', link: 'cfar-exercise-flow' });
-    } else if (partnerId == 1) {
-      this.onSetTheme(Theme.THEME_LIGHT_YELLOW);
-
-      components.push({ name: 'CFAR Offer Dialog', link: 'cfar-offer-dialog' });
-      components.push({ name: 'CFAR Exercise Flow', link: 'cfar-exercise-flow' });
-    } else {
-      this.onSetTheme(Theme.THEME_LIGHT_HOPPER);
-      
-      components.push({ name: 'CFAR Offer Banner', link: 'cfar-offer-banner' });
-      components.push({ name: 'CFAR Offer Banner Large', link: 'cfar-offer-banner-large' });
-      components.push({ name: 'CFAR Offer Dialog', link: 'cfar-offer-dialog' });
-      components.push({ name: 'CFAR Exercise Flow', link: 'cfar-exercise-flow' });
-    }
-
-    this.components = components;
   }
 }

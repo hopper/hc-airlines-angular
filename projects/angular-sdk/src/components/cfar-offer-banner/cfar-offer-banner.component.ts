@@ -11,8 +11,6 @@ import {
   CfarContractCustomer,
   CfarItinerary,
   CfarOfferCustomer,
-  CreateCfarOfferCustomerRequest,
-  RequestType,
 } from '../../apis/hopper-cloud-airline/v1';
 import { GlobalComponent } from '../global.component';
 import { TranslateService } from '@ngx-translate/core';

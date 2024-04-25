@@ -1,11 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { ErrorHandler } from '@angular/core';
-import { CustomerService } from '../apis/hopper-cloud-airline/v1';
+import { AnalyticsService, CancelForAnyReasonCFARService } from '../apis/hopper-cloud-airline/v1';
 
 export class HopperProxyService extends ErrorHandler {
   constructor(
     protected _httpClient: HttpClient,
-    protected _customerService: CustomerService,
+    protected _cancelForAnyReasonCFARService: CancelForAnyReasonCFARService,
+    protected _analyticsService: AnalyticsService,
   ) {
     super();
   }
@@ -18,23 +19,22 @@ export class HopperProxyService extends ErrorHandler {
     basePath: string,
     hcSessionId?: string,
   ): void {
-    if (hcSessionId !== undefined) {
-      this._customerService = new CustomerService(this._httpClient, basePath, {
-        selectHeaderAccept: (accepts: ['application/json']) =>
-          'application/json',
-        selectHeaderContentType: (contentsTypes: ['application/json']) =>
-          'application/json',
-        isJsonMime: (mime: 'application/json') => true,
-        apiKeys: { 'HC-Session-ID': hcSessionId },
-      });
-    } else {
-      this._customerService = new CustomerService(this._httpClient, basePath, {
-        selectHeaderAccept: (accepts: ['application/json']) =>
-          'application/json',
-        selectHeaderContentType: (contentsTypes: ['application/json']) =>
-          'application/json',
-        isJsonMime: (mime: 'application/json') => true,
-      });
-    }
+    this._cancelForAnyReasonCFARService = new CancelForAnyReasonCFARService(this._httpClient, basePath, {
+      selectHeaderAccept: (accepts: ['application/json']) =>
+        'application/json',
+      selectHeaderContentType: (contentsTypes: ['application/json']) =>
+        'application/json',
+      isJsonMime: (mime: 'application/json') => true,
+      apiKeys: hcSessionId ? { 'HC-Session-ID': hcSessionId } : undefined
+    });
+
+    this._analyticsService = new AnalyticsService(this._httpClient, basePath, {
+      selectHeaderAccept: (accepts: ['application/json']) =>
+        'application/json',
+      selectHeaderContentType: (contentsTypes: ['application/json']) =>
+        'application/json',
+      isJsonMime: (mime: 'application/json') => true,
+      apiKeys: hcSessionId ? { 'HC-Session-ID': hcSessionId } : undefined
+    });
   }
 }

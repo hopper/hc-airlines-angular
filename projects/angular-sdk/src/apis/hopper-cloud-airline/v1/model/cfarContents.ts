@@ -12,6 +12,9 @@
 import { MapString } from './mapString';
 
 export interface CfarContents { 
+    /**
+     * An array containing the bullet points to be displayed
+     */
     bulletPoints: Array<string>;
     labels: MapString;
 }

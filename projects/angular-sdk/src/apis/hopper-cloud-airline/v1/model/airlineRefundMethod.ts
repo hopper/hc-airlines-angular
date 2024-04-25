@@ -10,9 +10,9 @@
  * Do not edit the class manually.
  */
 
-export type CfarPriceType = 'ticket' | 'ancillary';
+export type AirlineRefundMethod = 'ftc' | 'cash';
 
-export const CfarPriceType = {
-    Ticket: 'ticket' as CfarPriceType,
-    Ancillary: 'ancillary' as CfarPriceType
+export const AirlineRefundMethod = {
+    Ftc: 'ftc' as AirlineRefundMethod,
+    Cash: 'cash' as AirlineRefundMethod
 };

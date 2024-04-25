@@ -10,6 +10,12 @@
  * Do not edit the class manually.
  */
 
-export interface InitiateRefundResponse { 
-    redirectionToken: string;
-}
+/**
+ * The type of modifications in question in this fare rule
+ */
+export type ModificationType = 'cancellation' | 'change';
+
+export const ModificationType = {
+    Cancellation: 'cancellation' as ModificationType,
+    Change: 'change' as ModificationType
+};

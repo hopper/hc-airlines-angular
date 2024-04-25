@@ -16,10 +16,22 @@ import { PassengerType } from './passengerType';
  * An object detailing the Passenger Information
  */
 export interface CfarPassenger { 
+    /**
+     * Unique reference of the passenger
+     */
     passengerReference: string;
     passengerType: PassengerType;
+    /**
+     * Ancillaries attached to the itinerary and their prices
+     */
     firstName?: string;
+    /**
+     * Ancillaries attached to the itinerary and their prices
+     */
     lastName?: string;
+    /**
+     * The birth date in ISO Local Date format
+     */
     dateOfBirth?: string;
     gender?: Gender;
 }

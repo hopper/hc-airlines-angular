@@ -15,7 +15,6 @@ import { NotFoundPageComponent } from './not-found/not-found.component';
 import { CfarOfferDialogPageComponent } from './guides/cfar-offer-dialog/cfar-offer-dialog.component';
 import { PagesRoutingModule } from './pages-routing.module';
 import { CfarOfferBannerPageComponent } from './guides/cfar-offer-banner/cfar-offer-banner.component';
-import { CfarExerciseFlowPageComponent } from './guides/cfar-exercise-flow/cfar-exercise-flow.component';
 import { GuidesPageComponent } from './guides/guides.component';
 import { SharedModule } from '../shared/shared.module';
 import { MatCardModule } from '@angular/material/card';
@@ -29,8 +28,7 @@ import { HighlightJsModule } from 'ngx-highlight-js';
     GuidesPageComponent,
     CfarOfferDialogPageComponent,
     CfarOfferBannerPageComponent,
-    CfarOfferBannerLargePageComponent,
-    CfarExerciseFlowPageComponent
+    CfarOfferBannerLargePageComponent
   ],
   imports: [
     // Angular Module

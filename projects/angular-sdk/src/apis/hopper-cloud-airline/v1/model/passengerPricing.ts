@@ -15,8 +15,11 @@ import { PassengerCount } from './passengerCount';
 export interface PassengerPricing { 
     passengerCount: PassengerCount;
     /**
-     * Price per passenger
+     * Price per passenger (excluding ancillaries)
      */
     individualPrice: string;
+    /**
+     * Taxes applicable to this itinerary
+     */
     taxes?: Array<CfarPassengerTax>;
 }
