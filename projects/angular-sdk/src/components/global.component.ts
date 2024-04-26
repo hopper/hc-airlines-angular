@@ -9,7 +9,6 @@ import {
 } from '@angular/core';
 import { Locales } from '../i18n';
 import { TranslateService } from '@ngx-translate/core';
-import { DateAdapter } from '@angular/material/core';
 import {
   CfarContractCustomer,
   CfarItinerary,
@@ -28,6 +27,7 @@ import { Error } from '../apis/hopper-cloud-airline/v1';
 import { ErrorSdkModel } from '../models';
 import { LoggerService } from '../services/logger.service';
 import { ErrorCode } from '../enums/error-code.enum';
+import { registerLocaleData } from '@angular/common';
 
 @Directive({
   selector: '[HopperGlobalComponent]',
@@ -47,7 +47,6 @@ export class GlobalComponent implements OnChanges {
   public errorMessage?: string;
 
   constructor(
-    protected _adapter: DateAdapter<any>,
     protected _translateService: TranslateService,
     protected _cdRef: ChangeDetectorRef,
     protected _loggerService: LoggerService,
@@ -61,10 +60,7 @@ export class GlobalComponent implements OnChanges {
     this._translateService.addLangs(Array.from(Locales.keys()));
 
     // Set default language
-    this._translateService.use(this._translateService.getBrowserLang() || 'en');
-
-    // Set default language for datepickers
-    this._adapter.setLocale(this._translateService.getBrowserLang());
+    this._updateLanguage(this._translateService.getBrowserLang() || 'en');
   }
 
   // -----------------------------------------------
@@ -98,8 +94,12 @@ export class GlobalComponent implements OnChanges {
     // Set language for components
     this._translateService.use(newLanguage);
 
-    // Set language for datepickers
-    this._adapter.setLocale(newLanguage);
+    import(
+      /* webpackExclude: /\.d\.ts$/ */
+      /* webpackMode: "lazy-once" */
+      /* webpackChunkName: "i18n-extra" */
+      `@/../node_modules/@angular/common/locales/${newLanguage}.mjs`
+    ).then(module => registerLocaleData(module.default));
   }
 
   protected _getHcAirlinesErrorResponse(

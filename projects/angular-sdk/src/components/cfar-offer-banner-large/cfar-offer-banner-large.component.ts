@@ -15,7 +15,6 @@ import {
   UiVariant,
 } from '../../apis/hopper-cloud-airline/v1';
 import { TranslateService } from '@ngx-translate/core';
-import { DateAdapter } from '@angular/material/core';
 import { ApiTranslatorUtils } from '../../utils/api-translator.utils';
 import { HopperCfarService } from '../../services/hopper-cfar.service';
 import { HopperEventsService } from '../../services/hopper-events.service';
@@ -49,7 +48,6 @@ export class CfarOfferBannerLargeComponent
   private _contractsByChoiceIndex = new Map<number, CfarContractCustomer>();
 
   constructor(
-    protected override _adapter: DateAdapter<any>,
     protected override _translateService: TranslateService,
     protected override _hopperEventService: HopperEventsService,
     protected override _cdRef: ChangeDetectorRef,
@@ -57,7 +55,6 @@ export class CfarOfferBannerLargeComponent
     private _hopperCfarService: HopperCfarService,
   ) {
     super(
-      _adapter,
       _translateService,
       _hopperEventService,
       _cdRef,

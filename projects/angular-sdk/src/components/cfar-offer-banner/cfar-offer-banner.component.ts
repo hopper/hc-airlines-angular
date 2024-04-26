@@ -14,7 +14,6 @@ import {
 } from '../../apis/hopper-cloud-airline/v1';
 import { GlobalComponent } from '../global.component';
 import { TranslateService } from '@ngx-translate/core';
-import { DateAdapter } from '@angular/material/core';
 import { ApiTranslatorUtils } from '../../utils/api-translator.utils';
 import { HopperCfarService } from '../../services/hopper-cfar.service';
 import { MatDialog } from '@angular/material/dialog';
@@ -44,14 +43,13 @@ export class CfarOfferBannerComponent
   @Output() offersLoaded = new EventEmitter();
 
   constructor(
-    protected override _adapter: DateAdapter<any>,
     protected override _translateService: TranslateService,
     protected override _cdRef: ChangeDetectorRef,
     protected override _loggerService: LoggerService,
     private _hopperCfarService: HopperCfarService,
     private _dialog: MatDialog,
   ) {
-    super(_adapter, _translateService, _cdRef, _loggerService);
+    super(_translateService, _cdRef, _loggerService);
   }
 
   // -----------------------------------------------
