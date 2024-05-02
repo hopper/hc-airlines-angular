@@ -4,5 +4,6 @@
   "assets": ["**/*.scss", "./assets"],
   "lib": {
     "entryFile": "src/public-api.ts"
-  }
+  },
+  "allowedNonPeerDependencies": ["@datadog/browser-logs"]
 }
