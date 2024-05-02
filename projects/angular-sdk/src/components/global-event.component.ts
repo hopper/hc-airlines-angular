@@ -1,6 +1,5 @@
 import { ChangeDetectorRef, Directive } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { DateAdapter } from '@angular/material/core';
 import {
   UiSource,
   UiVariant,
@@ -21,13 +20,12 @@ export class GlobalEventComponent extends GlobalComponent {
   protected cfarExerciseId!: string;
 
   constructor(
-    protected _adapter: DateAdapter<any>,
     protected _translateService: TranslateService,
     protected _hopperEventService: HopperEventsService,
     protected _cdRef: ChangeDetectorRef,
     protected override _loggerService: LoggerService,
   ) {
-    super(_adapter, _translateService, _cdRef, _loggerService);
+    super(_translateService, _cdRef, _loggerService);
   }
 
   // ********** Cfar purchase events **********/

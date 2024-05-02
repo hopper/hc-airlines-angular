@@ -1,28 +1,16 @@
-import { ErrorHandler, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { HttpClientModule } from '@angular/common/http';
 import {
   CommonModule,
-  DatePipe,
   DecimalPipe,
-  registerLocaleData,
 } from '@angular/common';
 
 import { TranslateModule } from '@ngx-translate/core';
 
 import { CfarOfferBannerComponent } from './components/cfar-offer-banner/cfar-offer-banner.component';
 import { CfarOfferDialogComponent } from './components/cfar-offer-dialog/cfar-offer-dialog.component';
-
-import {
-  MomentDateAdapter,
-  MAT_MOMENT_DATE_FORMATS,
-} from '@angular/material-moment-adapter';
-import {
-  DateAdapter,
-  MAT_DATE_FORMATS,
-  MAT_DATE_LOCALE,
-} from '@angular/material/core';
 
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
@@ -35,21 +23,11 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { MatDatepickerModule } from '@angular/material/datepicker';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatRadioModule } from '@angular/material/radio';
 import { FormsModule } from '@angular/forms';
 
 import { ApiModule } from './apis/hopper-cloud-airline/v1';
-
-import localeFr from '@angular/common/locales/fr';
-import localeFrExtra from '@angular/common/locales/extra/fr';
-
-import localeEn from '@angular/common/locales/en';
-import localeEnExtra from '@angular/common/locales/extra/en';
-
-import localeZh from '@angular/common/locales/zh';
-import localeZhExtra from '@angular/common/locales/extra/zh';
 
 import { CfarOfferBannerLargeComponent } from './components/cfar-offer-banner-large/cfar-offer-banner-large.component';
 import { GlobalComponent } from './components/global.component';
@@ -57,11 +35,6 @@ import { HopperCfarService } from './services/hopper-cfar.service';
 import { HopperEventsService } from './services/hopper-events.service';
 import { GlobalEventComponent } from './components/global-event.component';
 import { LoggerService } from './services/logger.service';
-
-// Supported Languages for Datepicker
-registerLocaleData(localeFr, 'fr', localeFrExtra);
-registerLocaleData(localeEn, 'en', localeEnExtra);
-registerLocaleData(localeZh, 'zh', localeZhExtra);
 
 @NgModule({
   declarations: [
@@ -92,7 +65,6 @@ registerLocaleData(localeZh, 'zh', localeZhExtra);
     MatStepperModule,
     MatFormFieldModule,
     MatInputModule,
-    MatDatepickerModule,
     MatRadioModule,
     // APIs
     ApiModule,
@@ -106,16 +78,9 @@ registerLocaleData(localeZh, 'zh', localeZhExtra);
     CfarOfferDialogComponent,
   ],
   providers: [
-    {
-      provide: DateAdapter,
-      useClass: MomentDateAdapter,
-      deps: [MAT_DATE_LOCALE],
-    },
-    { provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS },
     HopperCfarService,
     HopperEventsService,
     LoggerService,
-    DatePipe,
     DecimalPipe,
   ],
 })

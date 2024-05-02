@@ -11,14 +11,9 @@ import {
   CfarContractCustomer,
   CfarItinerary,
   CfarOfferCustomer,
-  CreateCfarContractCustomerRequest,
-  CreateCfarOfferCustomerRequest,
-  RequestType,
   UiSource,
-  UiVariant,
 } from '../../apis/hopper-cloud-airline/v1';
 import { TranslateService } from '@ngx-translate/core';
-import { DateAdapter } from '@angular/material/core';
 import { GlobalComponent } from '../global.component';
 import { ApiTranslatorUtils } from '../../utils/api-translator.utils';
 import { HopperCfarService } from '../../services/hopper-cfar.service';
@@ -43,7 +38,6 @@ export class CfarOfferDialogComponent
   private _itineraries!: CfarItinerary[];
 
   constructor(
-    protected override _adapter: DateAdapter<any>,
     protected override _translateService: TranslateService,
     protected override _cdRef: ChangeDetectorRef,
     protected override _loggerService: LoggerService,
@@ -53,7 +47,7 @@ export class CfarOfferDialogComponent
     private _hopperEventService: HopperEventsService,
     private _decimalPipe: DecimalPipe,
   ) {
-    super(_adapter, _translateService, _cdRef, _loggerService);
+    super(_translateService, _cdRef, _loggerService);
 
     // Mandatory data
     this._hCSessionId = data.hCSessionId;
