@@ -2,6 +2,12 @@
 
 # 6.3.3 (2024-05-06)
 
+- Fix for datadog.
+
+<a name="6.3.3"></a>
+
+# 6.3.3 (2024-05-06)
+
 - Add support for Node v16.
 
 <a name="6.3.2"></a>

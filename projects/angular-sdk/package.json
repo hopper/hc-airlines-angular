@@ -1,6 +1,6 @@
 {
   "name": "@hopper-cloud-airlines/angular-sdk",
-  "version": "6.3.3",
+  "version": "6.3.4",
   "license": "Apache-2.0",
   "author": {
     "name": "HTS - Airlines Team",
@@ -16,10 +16,10 @@
     "@angular/platform-browser-dynamic": ">=15.2.9",
     "@angular/flex-layout": ">=15.0.0-beta.42",
     "@ngx-translate/core": ">=14.0.0",
-    "@datadog/browser-logs": "^5.5.0",
     "rxjs": ">=7.5.6"
   },
   "dependencies": {
+    "@datadog/browser-logs": "^5.5.0",
     "tslib": "^2.3.0"
   },
   "repository": {
