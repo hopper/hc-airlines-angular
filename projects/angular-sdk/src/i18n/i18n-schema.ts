@@ -12,12 +12,9 @@ export const I18N_SCHEMA = {
             },
             DATE: {
               type: 'string',
-            },
-            HOUR_AND_DATE: {
-              type: 'string',
-            },
+            }
           },
-          required: ['HOUR', 'DATE', 'HOUR_AND_DATE'],
+          required: ['HOUR', 'DATE'],
         },
         BUTTON: {
           type: 'object',
