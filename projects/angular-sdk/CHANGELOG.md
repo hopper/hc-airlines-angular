@@ -1,6 +1,12 @@
-<a name="6.3.3"></a>
+<a name="6.3.5"></a>
 
-# 6.3.3 (2024-05-06)
+# 6.3.5 (2024-05-21)
+
+- Various improvements in label management.
+
+<a name="6.3.4"></a>
+
+# 6.3.4 (2024-05-06)
 
 - Fix for datadog.
 

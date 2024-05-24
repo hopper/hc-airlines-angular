@@ -41,6 +41,8 @@ export class GlobalComponent implements OnChanges {
   @Input() isFakeBackend?: boolean;
   @Input() env?: string;
 
+  public currentCulturalLang!: string;
+
   @Output() errorOccurred = new EventEmitter();
 
   public errorCode?: string;
@@ -91,6 +93,8 @@ export class GlobalComponent implements OnChanges {
   }
 
   protected _updateLanguage(newLanguage: string): void {
+    this.currentCulturalLang = this._getCulturalLangFromLang(newLanguage);
+    
     // Set language for components
     this._translateService.use(newLanguage);
 
@@ -393,10 +397,6 @@ export class GlobalComponent implements OnChanges {
     return '';
   }
 
-  // *********************
-  // Errors
-  // *********************
-
   public handleApiError(error: any, errorEndPoint: string) {
     const builtError = this._getHcAirlinesErrorResponse(error);
 
@@ -453,5 +453,24 @@ export class GlobalComponent implements OnChanges {
           this.errorOccurred.emit(errorSdk);
         });
     }
+  }
+
+  // -----------------------------------------------
+  // Privates Methods
+  // -----------------------------------------------
+
+  private _getCulturalLangFromLang(lang: string): string {
+    let result = 'en_US';
+
+    switch(lang) {
+      case 'fr':
+        result = 'fr_CA';
+        break;
+      case 'zh': 
+        result = 'zh_CN';
+        break;
+    }
+
+    return result;
   }
 }

@@ -2,8 +2,7 @@
   "COMMON": {
     "DATE_FORMAT": {
       "HOUR": "hh:mm a",
-      "DATE": "ddMMM",
-      "HOUR_AND_DATE": "EEEE d MMMM y à H:mm z"
+      "DATE": "ddMMM"
     },
     "BUTTON": {
       "CLOSE": "Fermer"
