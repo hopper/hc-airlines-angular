@@ -1,9 +1,6 @@
 import { ChangeDetectorRef, Directive } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import {
-  UiSource,
-  UiVariant,
-} from '../apis/hopper-cloud-airline/v1';
+import { UiSource, UiVariant } from '../apis/hopper-cloud-airline/v1';
 import { take } from 'rxjs/operators';
 import { GlobalComponent } from './global.component';
 import { HopperEventsService } from '../services/hopper-events.service';
@@ -78,7 +75,11 @@ export class GlobalEventComponent extends GlobalComponent {
           }
         },
         error: (error) => {
-          console.error(error);
+          this._loggerService.error(
+            'failed to send banner display event',
+            {},
+            error,
+          );
         },
       });
   }
@@ -97,7 +98,11 @@ export class GlobalEventComponent extends GlobalComponent {
       .subscribe({
         next: () => {},
         error: (error) => {
-          console.error(error);
+          this._loggerService.error(
+            'failed to send warning message event',
+            {},
+            error,
+          );
         },
       });
   }
@@ -117,7 +122,7 @@ export class GlobalEventComponent extends GlobalComponent {
       .subscribe({
         next: () => {},
         error: (error) => {
-          console.error(error);
+          this._loggerService.error('failed to send t&c event', {}, error);
         },
       });
   }
@@ -137,7 +142,11 @@ export class GlobalEventComponent extends GlobalComponent {
       .subscribe({
         next: () => {},
         error: (error) => {
-          console.error(error);
+          this._loggerService.error(
+            'failed to send deny purchase event',
+            {},
+            error,
+          );
         },
       });
   }

@@ -27,7 +27,6 @@ import { Error } from '../apis/hopper-cloud-airline/v1';
 import { ErrorSdkModel } from '../models';
 import { LoggerService } from '../services/logger.service';
 import { ErrorCode } from '../enums/error-code.enum';
-import { registerLocaleData } from '@angular/common';
 
 @Directive({
   selector: '[HopperGlobalComponent]',
@@ -69,6 +68,7 @@ export class GlobalComponent implements OnChanges {
 
   ngOnInit(): void {
     this._loggerService.setEnv(this.env);
+    this._loggerService.info('sdk initialized');
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -93,13 +93,6 @@ export class GlobalComponent implements OnChanges {
   protected _updateLanguage(newLanguage: string): void {
     // Set language for components
     this._translateService.use(newLanguage);
-
-    import(
-      /* webpackExclude: /\.d\.ts$/ */
-      /* webpackMode: "lazy-once" */
-      /* webpackChunkName: "i18n-extra" */
-      `@/../node_modules/@angular/common/locales/${newLanguage}.mjs`
-    ).then(module => registerLocaleData(module.default));
   }
 
   protected _getHcAirlinesErrorResponse(
@@ -115,7 +108,6 @@ export class GlobalComponent implements OnChanges {
         mainApiError.code || ErrorCode.RF009,
       );
     } else {
-      console.error(apiError);
       return HcAirlinesError.buildDefault();
     }
   }
@@ -142,7 +134,8 @@ export class GlobalComponent implements OnChanges {
     };
   }
 
-  protected _fakeCfarContractId: string = '1ecf85ab-211f-68b7-9bb3-4b1a314f1a42';
+  protected _fakeCfarContractId: string =
+    '1ecf85ab-211f-68b7-9bb3-4b1a314f1a42';
 
   protected _buildFakePostCfarOffersResponse(): CfarOfferCustomer[] {
     return [
@@ -374,7 +367,7 @@ export class GlobalComponent implements OnChanges {
       premium: '10.00',
     };
   }
-  
+
   // -----------------------------------------------
   // Public Methods
   // -----------------------------------------------
@@ -397,8 +390,9 @@ export class GlobalComponent implements OnChanges {
   // Errors
   // *********************
 
-  public handleApiError(error: any, errorEndPoint: string) {
+  public handleApiError(error: HttpErrorResponse, errorEndPoint: string) {
     const builtError = this._getHcAirlinesErrorResponse(error);
+    this._loggerService.error(error.message, {}, error);
 
     if (builtError !== null) {
       this.errorCode = builtError.code;
