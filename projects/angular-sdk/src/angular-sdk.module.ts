@@ -2,10 +2,7 @@ import { NgModule } from '@angular/core';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { HttpClientModule } from '@angular/common/http';
-import {
-  CommonModule,
-  DecimalPipe,
-} from '@angular/common';
+import { CommonModule, DecimalPipe, registerLocaleData } from '@angular/common';
 
 import { TranslateModule } from '@ngx-translate/core';
 
@@ -36,6 +33,14 @@ import { HopperEventsService } from './services/hopper-events.service';
 import { GlobalEventComponent } from './components/global-event.component';
 import { LoggerService } from './services/logger.service';
 
+import localeFr from '@angular/common/locales/fr';
+import localeEn from '@angular/common/locales/en';
+import localeZh from '@angular/common/locales/zh';
+
+registerLocaleData(localeFr, 'fr');
+registerLocaleData(localeEn, 'en');
+registerLocaleData(localeZh, 'zh');
+
 @NgModule({
   declarations: [
     // Component
@@ -43,7 +48,7 @@ import { LoggerService } from './services/logger.service';
     GlobalEventComponent,
     CfarOfferBannerComponent,
     CfarOfferBannerLargeComponent,
-    CfarOfferDialogComponent
+    CfarOfferDialogComponent,
   ],
   imports: [
     // Angular Module

@@ -137,7 +137,7 @@ export class CfarOfferBannerComponent
           }
         },
         error: (error) => {
-          console.error(error);
+          this._loggerService.error('failed to close dialog', {}, error);
         },
       });
   }

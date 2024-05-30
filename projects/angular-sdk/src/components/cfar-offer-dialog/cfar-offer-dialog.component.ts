@@ -246,7 +246,11 @@ export class CfarOfferDialogComponent
       .subscribe({
         next: () => {},
         error: (error) => {
-          console.error(error);
+          this._loggerService.error(
+            'failed to send offer takeover display event',
+            {},
+            error,
+          );
         },
       });
   }
@@ -266,7 +270,7 @@ export class CfarOfferDialogComponent
       .subscribe({
         next: () => {},
         error: (error) => {
-          console.error(error);
+          this._loggerService.error('failed to send t&c event', {}, error);
         },
       });
   }
@@ -286,7 +290,11 @@ export class CfarOfferDialogComponent
       .subscribe({
         next: () => {},
         error: (error) => {
-          console.error(error);
+          this._loggerService.error(
+            'failed to send deny purchase event',
+            {},
+            error,
+          );
         },
       });
   }
