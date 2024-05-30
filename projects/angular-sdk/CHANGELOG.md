@@ -1,6 +1,18 @@
+<a name="6.3.6"></a>
+
+# 6.3.6 (2024-05-30)
+
+- Fix for inconsistent price display
+
+<a name="6.3.5"></a>
+
+# 6.3.5 (2024-05-24)
+
+- Internationalization improvements
+
 <a name="6.3.3"></a>
 
-# 6.3.3 (2024-05-06)
+# 6.3.4 (2024-05-06)
 
 - Fix for datadog.
 
