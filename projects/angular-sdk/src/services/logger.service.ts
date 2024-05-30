@@ -5,8 +5,6 @@ import {
   datadogLogs as datadog,
 } from '@datadog/browser-logs';
 
-import packageFile from '../../package.json';
-
 @Injectable()
 export class LoggerService {
   private _context: any = {};
@@ -21,7 +19,7 @@ export class LoggerService {
       forwardErrorsToLogs: true,
       sessionSampleRate: 100,
       silentMultipleInit: true,
-      version: packageFile.version,
+      version: '6.3.6',
     };
 
     datadog.init(_initConfig);
