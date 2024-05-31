@@ -68,7 +68,7 @@ export class GlobalComponent implements OnChanges {
 
   ngOnInit(): void {
     this._loggerService.setEnv(this.env);
-    this._loggerService.info('sdk initialized');
+    this._loggerService.info('sdk initialized, lang:' + this.currentLang);
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -91,6 +91,9 @@ export class GlobalComponent implements OnChanges {
   }
 
   protected _updateLanguage(newLanguage: string): void {
+    if (!Locales.has(newLanguage)) {
+      this._loggerService.warn('unexpected language ' + newLanguage);
+    }
     // Set language for components
     this._translateService.use(newLanguage);
   }

@@ -1,3 +1,9 @@
+<a name="6.3.7"></a>
+
+# 6.3.7 (2024-05-31)
+
+- Additional logging around language changes
+
 <a name="6.3.6"></a>
 
 # 6.3.6 (2024-05-30)
