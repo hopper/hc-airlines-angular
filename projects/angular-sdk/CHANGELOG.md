@@ -1,3 +1,9 @@
+<a name="6.3.8"></a>
+
+# 6.3.8 (2025-04-24)
+
+- Additional temporary logging (debugging console)
+
 <a name="6.3.7"></a>
 
 # 6.3.7 (2024-05-31)

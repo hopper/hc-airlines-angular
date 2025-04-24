@@ -54,12 +54,7 @@ export class CfarOfferBannerLargeComponent
     protected override _loggerService: LoggerService,
     private _hopperCfarService: HopperCfarService,
   ) {
-    super(
-      _translateService,
-      _hopperEventService,
-      _cdRef,
-      _loggerService,
-    );
+    super(_translateService, _hopperEventService, _cdRef, _loggerService);
   }
 
   // -----------------------------------------------
@@ -67,12 +62,16 @@ export class CfarOfferBannerLargeComponent
   // -----------------------------------------------
 
   ngOnInit(): void {
+    console.log('HTS > Widget initializing...');
+
     super.ngOnInit();
 
     if (this.isFakeBackend) {
       this.cfarOffers = this._buildFakePostCfarOffersResponse();
       this.selectedCfarOffer = this._getDefaultOffer(this.cfarOffers);
       this.offersLoaded.emit(this.cfarOffers);
+
+      console.log('HTS > Widget initialized');
     } else {
       this._initUiParameters();
       this.initCfarOffers();
@@ -84,6 +83,8 @@ export class CfarOfferBannerLargeComponent
   // -----------------------------------------------
 
   public onChooseCoverage(): void {
+    console.log('HTS > choosing a coverage contract...');
+
     // After the first choice, we force the display of the 'decline' option
     this.hasNoCoverageOption = true;
     // Update descriptions
@@ -95,14 +96,20 @@ export class CfarOfferBannerLargeComponent
     if (this.selectedChoice != -1) {
       if (this.isFakeBackend) {
         this.chooseCoverage.emit(this._buildFakePostCfarContractsResponse());
+        console.log('HTS > the chose coverage contract: ');
+        console.log(this._buildFakePostCfarContractsResponse());
       } else {
         // Emit the cached element
         if (this._contractsByChoiceIndex.has(this.selectedChoice)) {
+          console.log('HTS > retrieving coverage contract from cache...');
           this.chooseCoverage.emit(
             this._contractsByChoiceIndex.get(this.selectedChoice),
           );
+          console.log('HTS > the chose coverage contract: ');
+          console.log(this._contractsByChoiceIndex.get(this.selectedChoice));
           // Backend call
         } else {
+          console.log('HTS > creating coverage contract...');
           // Lock the checkboxes until the API response
           this.isLoadingContract = true;
 
@@ -130,6 +137,9 @@ export class CfarOfferBannerLargeComponent
 
                 this.chooseCoverage.emit(cfarContract);
 
+                console.log('HTS > the chose coverage contract: ');
+                console.log(cfarContract);
+
                 // Unlock the checkboxes
                 this.isLoadingContract = false;
               },
@@ -138,6 +148,11 @@ export class CfarOfferBannerLargeComponent
 
                 // Unlock the checkboxes
                 this.isLoadingContract = false;
+
+                console.error(
+                  'HTS > An error occurred while creating the coverage contract: ',
+                );
+                console.error(error);
               },
             });
         }
@@ -170,6 +185,8 @@ export class CfarOfferBannerLargeComponent
   // -----------------------------------------------
 
   protected initCfarOffers(): void {
+    console.log('HTS > fetching offers...');
+
     this._hopperCfarService
       .postCfarOffers(
         this.basePath,
@@ -205,10 +222,16 @@ export class CfarOfferBannerLargeComponent
             this.uiVariant,
           );
           this.createPurchaseEventsAfterInit(this.hasWarningCoverageMessage);
+
+          console.log('HTS > offers fetched');
+          console.log(this.cfarOffers);
         },
         error: (error) => {
           this.handleApiError(error, 'offers');
           this.offersLoaded.emit();
+
+          console.error('HTS > An error occurred while retrieving offers: ');
+          console.error(error);
         },
       });
   }
@@ -235,5 +258,7 @@ export class CfarOfferBannerLargeComponent
     } else {
       this.uiSource = UiSource.BannerVariantA;
     }
+
+    console.log('current variant: ' + this.uiSource);
   }
 }
