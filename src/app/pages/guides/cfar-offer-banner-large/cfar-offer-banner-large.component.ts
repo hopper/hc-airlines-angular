@@ -61,7 +61,7 @@ export class CfarOfferBannerLargePageComponent extends CommonGuidesComponent {
   }
 
   // -----------------------------------------------
-  // Publics Methods
+  // Public Methods
   // -----------------------------------------------
 
   public  getInputs(): InputModel[] {
@@ -121,8 +121,8 @@ export class CfarOfferBannerLargePageComponent extends CommonGuidesComponent {
       {
         name: 'uiVariant',
         description: `
-          Used to do AB testing with differents displays of the component. <br />
-          Possibles values: 'variant_a', 'variant_b' or 'variant_c'
+          Used to do AB testing with different displays of the component. <br />
+          Possible values: 'variant_a', 'variant_b' or 'variant_c'
         `,
         required: true
       },
@@ -130,7 +130,7 @@ export class CfarOfferBannerLargePageComponent extends CommonGuidesComponent {
         name: 'env',
         description: `
           Used for logging purpose. <br />
-          Possibles values: 'development', 'production'
+          Possible values: 'development', 'production'
           Default value: 'production'
         `,
         required: false
@@ -158,7 +158,7 @@ export class CfarOfferBannerLargePageComponent extends CommonGuidesComponent {
         name: 'errorOccurred',
         description: `
           Event triggered when an error occurs into the SDK<br />
-          Returns a ErrorSdkModel : { endpoint: string, errorCode: string, errorDescription?: string }
+          Returns an ErrorSdkModel : { endpoint: string, errorCode: string, errorDescription?: string }
         `
       }
     ];

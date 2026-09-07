@@ -79,7 +79,7 @@ export class CfarOfferBannerLargeComponent
   }
 
   // -----------------------------------------------
-  // Publics Methods
+  // Public Methods
   // -----------------------------------------------
 
   public onChooseCoverage(): void {
@@ -241,7 +241,7 @@ export class CfarOfferBannerLargeComponent
   }
 
   // -----------------------------------------------
-  // Privates Methods
+  // Private Methods
   // -----------------------------------------------
 
   /**

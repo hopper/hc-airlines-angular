@@ -111,7 +111,7 @@ export class CfarOfferBannerComponent
   }
 
   // -----------------------------------------------
-  // Publics Methods
+  // Public Methods
   // -----------------------------------------------
 
   public onSubmit(cfarOffer: CfarOfferCustomer): void {

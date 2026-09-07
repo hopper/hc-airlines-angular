@@ -1,5 +1,5 @@
 /**
- * Non exaustive list of error managed by the API
+ * Non exhaustive list of errors managed by the API
  */
 export enum ErrorCode {
   // The verification code is not valid.

@@ -15,7 +15,7 @@ export class HcAirlinesError implements Error {
   }
 
   public static buildDefault(): HcAirlinesError {
-    return new HcAirlinesError('An error occured', ErrorCode.RF009);
+    return new HcAirlinesError('An error occurred', ErrorCode.RF009);
   }
 
   public extractCode(): string {

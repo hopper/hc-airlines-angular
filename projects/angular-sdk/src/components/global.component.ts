@@ -55,7 +55,7 @@ export class GlobalComponent implements OnChanges {
       this._translateService.setTranslation(lang, data, true);
     });
 
-    // Set availables languages
+    // Set available languages
     this._translateService.addLangs(Array.from(Locales.keys()));
 
     // Set default language

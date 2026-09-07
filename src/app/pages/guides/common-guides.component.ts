@@ -108,7 +108,7 @@ export abstract class CommonGuidesComponent implements OnInit, OnDestroy {
   }
 
   // -----------------------------------------------
-  // Publics Methods
+  // Public Methods
   // -----------------------------------------------
 
   public abstract getInputs(): InputModel[];

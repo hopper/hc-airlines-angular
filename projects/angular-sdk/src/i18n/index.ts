@@ -4,7 +4,7 @@ import * as English from './locales/en.json';
 import * as French from './locales/fr.json';
 import * as Chinese from './locales/zh.json';
 
-// Availables Languages
+// Available Languages
 export const Locales: Map<string, Object> = new Map<string, Object>([
     ['en', English],
     ['fr', French],
