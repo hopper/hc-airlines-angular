@@ -90,7 +90,7 @@ export class CfarOfferDialogComponent
   }
 
   // -----------------------------------------------
-  // Publics Methods
+  // Public Methods
   // -----------------------------------------------
 
   public onClose(): void {

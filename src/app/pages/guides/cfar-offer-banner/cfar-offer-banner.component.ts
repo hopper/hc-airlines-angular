@@ -59,7 +59,7 @@ export class CfarOfferBannerPageComponent extends CommonGuidesComponent {
   }
 
   // -----------------------------------------------
-  // Publics Methods
+  // Public Methods
   // -----------------------------------------------
 
   public  getInputs(): InputModel[] {
@@ -113,7 +113,7 @@ export class CfarOfferBannerPageComponent extends CommonGuidesComponent {
         name: 'env',
         description: `
           Used for logging purpose. <br />
-          Possibles values: 'development', 'production'
+          Possible values: 'development', 'production'
           Default value: 'production'
         `,
         required: false
@@ -141,7 +141,7 @@ export class CfarOfferBannerPageComponent extends CommonGuidesComponent {
         name: 'errorOccurred',
         description: `
           Event triggered when an error occurs into the SDK<br />
-          Returns a ErrorSdkModel : { endpoint: string, errorCode: string, errorDescription?: string }
+          Returns an ErrorSdkModel : { endpoint: string, errorCode: string, errorDescription?: string }
         `
       }
     ];

@@ -80,7 +80,7 @@ export class YourModule { }
     ```
     - For other components :
 
-    Encapsulate each HTS components into an HTML element with the HTS theme class :
+    Encapsulate each HTS component into an HTML element with the HTS theme class :
 
     ```
     <div class="HOPPER-THEME-CLASS">

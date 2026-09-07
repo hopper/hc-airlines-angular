@@ -49,7 +49,7 @@ export class CfarOfferDialogPageComponent extends CommonGuidesComponent {
         basePath: this.basePath,
         imageBasePath: this.imageBasePath,
         hCSessionId: this.hCSessionId,
-        // Choice 1 : The component will create offers based of the itineraries
+        // Choice 1 : The component will create offers based on the itineraries
         itineraries: this.itineraries
         // Choice 2 : The component will load directly the offers
         cfarOffers: this.cfarOffers
@@ -77,7 +77,7 @@ export class CfarOfferDialogPageComponent extends CommonGuidesComponent {
           },
           error: (error) => console.log(error)
         })
-        // Add this block in case you have to unsubscribe to the event ErrorOccurred managed in the dialog      
+        // Add this block in case you have to unsubscribe from the event ErrorOccurred managed in the dialog      
         .add(() => {
           dialogErrorOccurredSubscription.unsubscribe();
         });
@@ -94,7 +94,7 @@ export class CfarOfferDialogPageComponent extends CommonGuidesComponent {
   }
 
   // -----------------------------------------------
-  // Publics Methods
+  // Public Methods
   // -----------------------------------------------
 
   public getInputs(): InputModel[] {
@@ -164,7 +164,7 @@ export class CfarOfferDialogPageComponent extends CommonGuidesComponent {
         name: 'env',
         description: `
           Used for logging purpose. <br />
-          Possibles values: 'development', 'production'
+          Possible values: 'development', 'production'
           Default value: 'production'
         `,
         required: false
@@ -190,7 +190,7 @@ export class CfarOfferDialogPageComponent extends CommonGuidesComponent {
         name: 'errorOccurred',
         description: `
           Event triggered when an error occurs into the SDK<br />
-          Returns a ErrorSdkModel : { endpoint: string, errorCode: string, errorDescription: string }<br />
+          Returns an ErrorSdkModel : { endpoint: string, errorCode: string, errorDescription: string }<br />
           If you want to subscribe to this event, you must implement this subscription into the component which opens the dialog component.
         `
       }

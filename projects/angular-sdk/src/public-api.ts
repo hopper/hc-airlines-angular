@@ -8,7 +8,7 @@ export * from './components/cfar-offer-banner/cfar-offer-banner.component';
 export * from './components/cfar-offer-banner-large/cfar-offer-banner-large.component';
 export * from './components/cfar-offer-dialog/cfar-offer-dialog.component';
 
-// UTILIY CLASSES
+// UTILITY CLASSES
 export * from './utils/dialog.utils';
 
 // MODELS
